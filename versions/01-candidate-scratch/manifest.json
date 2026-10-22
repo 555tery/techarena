@@ -1,0 +1,29 @@
+{
+  "rank_newest_first": 1,
+  "name": "candidate-scratch",
+  "original_directory": "prototypes/pipes_round3_20261022/candidate-scratch",
+  "original_source_mtime_local": "2026-10-22T23:57:45.077169+07:00",
+  "variants": [
+    {
+      "path": "uncached/solution.cj",
+      "source_sha256": "6e6eca55cfe54bd1878ecfda0344cf7f63169e988258e3a727bd7fa1550815fb",
+      "bytes": 1413043,
+      "original_path": "prototypes/pipes_round3_20261022/candidate-scratch/uncached/solution.cj",
+      "builds": []
+    }
+  ],
+  "test_summary": [
+    {
+      "source": "uncached/solution.cj",
+      "source_sha256": "6e6eca55cfe54bd1878ecfda0344cf7f63169e988258e3a727bd7fa1550815fb",
+      "successful_records": 0,
+      "distinct_checked_inputs": 0,
+      "failure_records": 0,
+      "max_observed_cpu_s": null,
+      "max_observed_rss_mib": null,
+      "scope": "historical measurements; CPP/Cj and batch/interactive must be compared within matching build and environment; no closed-runtime guarantee"
+    }
+  ],
+  "platform_records": [],
+  "all_record_count": 0
+}

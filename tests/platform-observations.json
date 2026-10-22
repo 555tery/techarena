@@ -1,0 +1,31 @@
+{
+  "observations": [
+    {
+      "submission_id": 1669133,
+      "source_sha256": "9360f94830f5556dbbeed937f4fc1930398ddb67d4efdbebe2f46ad5f0b8aafc",
+      "verdicts": "AAAAAAAAAAAAAAA",
+      "score": 30.05605
+    },
+    {
+      "submission_id": 1669215,
+      "source_sha256": "f1f6240fb7ca7e099408a02bb2aeb9926f4240425afbd7be4eebd25ee6a2ac4a",
+      "verdicts": "AAAAAAAAAAAAAAT",
+      "score": 20.50542
+    },
+    {
+      "submission_id": 1669221,
+      "source_sha256": "9360f94830f5556dbbeed937f4fc1930398ddb67d4efdbebe2f46ad5f0b8aafc",
+      "verdicts": "AAAAAAAAAAAAAAA",
+      "score": 30.05605
+    },
+    {
+      "submission_id": 1669236,
+      "source_sha256": null,
+      "verdicts": "AAAAAAAAAAAAAAT",
+      "score": 20.50542,
+      "note": "Last observed submission at23:57:55; exact server source not downloaded or hash-verified. Do not assign its verdict to a local candidate solely by time."
+    }
+  ],
+  "evidence": "NSUts results UI observed via Safari on2026-10-22/23; exact current closing-source status not independently retrieved again",
+  "accepted_cached_version": "9360f94830f5556dbbeed937f4fc1930398ddb67d4efdbebe2f46ad5f0b8aafc"
+}

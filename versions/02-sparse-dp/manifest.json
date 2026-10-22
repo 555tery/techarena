@@ -1,0 +1,60 @@
+{
+  "rank_newest_first": 2,
+  "name": "sparse-dp",
+  "original_directory": "prototypes/pipes_round3_20261022/sparse-dp",
+  "original_source_mtime_local": "2026-10-22T23:54:18.537503+07:00",
+  "variants": [
+    {
+      "path": "uncached/solution.cj",
+      "source_sha256": "29822682b49175c27941e3c808ec05b759855c2538d3a122ee4394796dee7693",
+      "bytes": 1417819,
+      "original_path": "prototypes/pipes_round3_20261022/sparse-dp/uncached/solution.cj",
+      "builds": [
+        {
+          "journal": "prototypes/pipes_round3_20261022/records.jsonl",
+          "line": 12382,
+          "record": {
+            "type": "build",
+            "kind": "sparse-dp",
+            "language": "cj-uncached",
+            "source": "/Users/555tery/techarena/prototypes/pipes_round3_20261022/sparse-dp/uncached/solution.cj",
+            "source_sha256": "29822682b49175c27941e3c808ec05b759855c2538d3a122ee4394796dee7693",
+            "binary": "/Users/555tery/techarena/prototypes/pipes_round3_20261022/bin/sparse-dp-cj-uncached",
+            "binary_sha256": "59800745813f8ba8a0da8bf8aee7aed75a0799f89cb18a25c945f33f717704b2",
+            "command": [
+              "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/toolchain105/cangjie/bin/cjc",
+              "-O0",
+              "-Woff",
+              "all",
+              "--set-runtime-rpath",
+              "--sysroot",
+              "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+              "-p",
+              "/Users/555tery/techarena/prototypes/pipes_round3_20261022/sparse-dp/uncached",
+              "-o",
+              "/Users/555tery/techarena/prototypes/pipes_round3_20261022/bin/sparse-dp-cj-uncached"
+            ],
+            "status": 0,
+            "stderr": "",
+            "parent_source_sha256": "f1f6240fb7ca7e099408a02bb2aeb9926f4240425afbd7be4eebd25ee6a2ac4a",
+            "output_cache": false
+          }
+        }
+      ]
+    }
+  ],
+  "test_summary": [
+    {
+      "source": "uncached/solution.cj",
+      "source_sha256": "29822682b49175c27941e3c808ec05b759855c2538d3a122ee4394796dee7693",
+      "successful_records": 24,
+      "distinct_checked_inputs": 21,
+      "failure_records": 0,
+      "max_observed_cpu_s": 3.15285,
+      "max_observed_rss_mib": 130.484375,
+      "scope": "historical measurements; CPP/Cj and batch/interactive must be compared within matching build and environment; no closed-runtime guarantee"
+    }
+  ],
+  "platform_records": [],
+  "all_record_count": 24
+}

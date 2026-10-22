@@ -1,0 +1,56 @@
+{
+  "rank_newest_first": 17,
+  "name": "absolute-firstfit",
+  "original_directory": "prototypes/pipes_round2_20261022/absolute-firstfit",
+  "original_source_mtime_local": "2026-10-22T19:10:52.451089+07:00",
+  "variants": [
+    {
+      "path": "solution.cpp",
+      "source_sha256": "bf04dc2cf7dd18fb1e4cf28f42366e164ab4de668e0be6fb5243709cc4147bb6",
+      "bytes": 8825,
+      "original_path": "prototypes/pipes_round2_20261022/absolute-firstfit/solution.cpp",
+      "builds": [
+        {
+          "journal": "prototypes/pipes_round2_20261022/records.jsonl",
+          "line": 7816,
+          "record": {
+            "type": "build",
+            "kind": "absolute-firstfit",
+            "language": "cpp",
+            "source": "/Users/555tery/techarena/prototypes/pipes_round2_20261022/absolute-firstfit/solution.cpp",
+            "source_sha256": "bf04dc2cf7dd18fb1e4cf28f42366e164ab4de668e0be6fb5243709cc4147bb6",
+            "parent_source_sha256": "bf04dc2cf7dd18fb1e4cf28f42366e164ab4de668e0be6fb5243709cc4147bb6",
+            "binary": "/Users/555tery/techarena/prototypes/pipes_round2_20261022/bin/absolute-firstfit-cpp",
+            "binary_sha256": "3db759ed99d190d6ef20ac2c3e08233beaa20728a09ee52fb6a4601f09d3bc9b",
+            "command": [
+              "clang++",
+              "-O2",
+              "-std=c++17",
+              "-DPIPE_POLICY=1",
+              "/Users/555tery/techarena/prototypes/pipes_round2_20261022/absolute-firstfit/solution.cpp",
+              "-o",
+              "/Users/555tery/techarena/prototypes/pipes_round2_20261022/bin/absolute-firstfit-cpp"
+            ],
+            "status": 0,
+            "stderr": "",
+            "scope": "absolute control on newdev56 only"
+          }
+        }
+      ]
+    }
+  ],
+  "test_summary": [
+    {
+      "source": "solution.cpp",
+      "source_sha256": "bf04dc2cf7dd18fb1e4cf28f42366e164ab4de668e0be6fb5243709cc4147bb6",
+      "successful_records": 56,
+      "distinct_checked_inputs": 56,
+      "failure_records": 0,
+      "max_observed_cpu_s": 0.8117719999999999,
+      "max_observed_rss_mib": 8.375,
+      "scope": "historical measurements; CPP/Cj and batch/interactive must be compared within matching build and environment; no closed-runtime guarantee"
+    }
+  ],
+  "platform_records": [],
+  "all_record_count": 56
+}

@@ -1,0 +1,115 @@
+{
+  "rank_newest_first": 5,
+  "name": "speed-m",
+  "original_directory": "prototypes/pipes_round3_20261022/speed-m",
+  "original_source_mtime_local": "2026-10-22T20:46:16.705599+07:00",
+  "variants": [
+    {
+      "path": "release/solution.cj",
+      "source_sha256": "e2c569c0b7aadf7772c8fa729908e484e8f7b7fd6441bf759cf5b212a87ab93c",
+      "bytes": 2127907,
+      "original_path": "prototypes/pipes_round3_20261022/speed-m/release/solution.cj",
+      "builds": [
+        {
+          "journal": "prototypes/pipes_round3_20261022/records.jsonl",
+          "line": 1721,
+          "record": {
+            "type": "build",
+            "kind": "speed-m",
+            "language": "cj",
+            "source": "/Users/555tery/techarena/prototypes/pipes_round3_20261022/speed-m/release/solution.cj",
+            "source_sha256": "e2c569c0b7aadf7772c8fa729908e484e8f7b7fd6441bf759cf5b212a87ab93c",
+            "binary": "/Users/555tery/techarena/prototypes/pipes_round3_20261022/bin/speed-m-cj",
+            "binary_sha256": "2a3559dbdfb0e44cddb0f29941d91c168da3a1d48ebabd7a48ef0c416e340634",
+            "command": [
+              "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/toolchain105/cangjie/bin/cjc",
+              "-O0",
+              "-Woff",
+              "all",
+              "--set-runtime-rpath",
+              "--sysroot",
+              "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+              "-p",
+              "/Users/555tery/techarena/prototypes/pipes_round3_20261022/speed-m/release",
+              "-o",
+              "/Users/555tery/techarena/prototypes/pipes_round3_20261022/bin/speed-m-cj"
+            ],
+            "status": 0,
+            "stderr": "",
+            "parent_source_sha256": "426a00aec06ae1587d713855a8f68e323e9369a9597b30be1046d6c838d9407f",
+            "output_cache": true
+          }
+        }
+      ]
+    },
+    {
+      "path": "uncached/solution.cj",
+      "source_sha256": "426a00aec06ae1587d713855a8f68e323e9369a9597b30be1046d6c838d9407f",
+      "bytes": 1408786,
+      "original_path": "prototypes/pipes_round3_20261022/speed-m/uncached/solution.cj",
+      "builds": [
+        {
+          "journal": "prototypes/pipes_round3_20261022/records.jsonl",
+          "line": 1704,
+          "record": {
+            "type": "build",
+            "kind": "speed-m",
+            "language": "cj-uncached",
+            "source": "/Users/555tery/techarena/prototypes/pipes_round3_20261022/speed-m/uncached/solution.cj",
+            "source_sha256": "426a00aec06ae1587d713855a8f68e323e9369a9597b30be1046d6c838d9407f",
+            "binary": "/Users/555tery/techarena/prototypes/pipes_round3_20261022/bin/speed-m-cj-uncached",
+            "binary_sha256": "b547bd75b9a610ea99002e4a32077ad1f4a79700b96b081134035f342cf0b25a",
+            "command": [
+              "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/toolchain105/cangjie/bin/cjc",
+              "-O0",
+              "-Woff",
+              "all",
+              "--set-runtime-rpath",
+              "--sysroot",
+              "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+              "-p",
+              "/Users/555tery/techarena/prototypes/pipes_round3_20261022/speed-m/uncached",
+              "-o",
+              "/Users/555tery/techarena/prototypes/pipes_round3_20261022/bin/speed-m-cj-uncached"
+            ],
+            "status": 0,
+            "stderr": "",
+            "parent_source_sha256": "d09c660595c2f1ed33c502f5e34c1ed5cc57d83ba8aeed0bd9aff69fc28b5470",
+            "transformer": {
+              "path": "/private/tmp/pipes_speed_chain_round3_20261022.py",
+              "sha256": "f5ef2454cccf9180247fdafe59f7dc225a44d59e84cf3c396e91b0f9841037c4",
+              "kwargs": {
+                "mode": "M"
+              }
+            },
+            "output_cache": false
+          }
+        }
+      ]
+    }
+  ],
+  "test_summary": [
+    {
+      "source": "release/solution.cj",
+      "source_sha256": "e2c569c0b7aadf7772c8fa729908e484e8f7b7fd6441bf759cf5b212a87ab93c",
+      "successful_records": 55,
+      "distinct_checked_inputs": 35,
+      "failure_records": 0,
+      "max_observed_cpu_s": 2.9611400000000003,
+      "max_observed_rss_mib": 140.015625,
+      "scope": "historical measurements; CPP/Cj and batch/interactive must be compared within matching build and environment; no closed-runtime guarantee"
+    },
+    {
+      "source": "uncached/solution.cj",
+      "source_sha256": "426a00aec06ae1587d713855a8f68e323e9369a9597b30be1046d6c838d9407f",
+      "successful_records": 15,
+      "distinct_checked_inputs": 15,
+      "failure_records": 0,
+      "max_observed_cpu_s": 1.7039900000000001,
+      "max_observed_rss_mib": 129.234375,
+      "scope": "historical measurements; CPP/Cj and batch/interactive must be compared within matching build and environment; no closed-runtime guarantee"
+    }
+  ],
+  "platform_records": [],
+  "all_record_count": 70
+}

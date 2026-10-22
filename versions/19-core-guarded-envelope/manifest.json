@@ -1,0 +1,99 @@
+{
+  "rank_newest_first": 19,
+  "name": "core-guarded-envelope",
+  "original_directory": "prototypes/pipes_round2_20261022/core-guarded-envelope",
+  "original_source_mtime_local": "2026-10-22T18:58:34.846704+07:00",
+  "variants": [
+    {
+      "path": "solution.cpp",
+      "source_sha256": "a54d443ae8fd052bd23ece9610533ca868af541e116686bece8ba5a11e7f5a76",
+      "bytes": 1254776,
+      "original_path": "prototypes/pipes_round2_20261022/core-guarded-envelope/solution.cpp",
+      "builds": [
+        {
+          "journal": "prototypes/pipes_round2_20261022/records.jsonl",
+          "line": 1673,
+          "record": {
+            "type": "build",
+            "kind": "core-guarded-envelope",
+            "language": "cpp",
+            "source": "/Users/555tery/techarena/prototypes/pipes_round2_20261022/core-guarded-envelope/solution.cpp",
+            "source_sha256": "a54d443ae8fd052bd23ece9610533ca868af541e116686bece8ba5a11e7f5a76",
+            "parent_source_sha256": "ae7e1e0a54510ee9a8d396670e2d40c2439d9286e8e13cd3ea93be8820b4c891",
+            "transformer": {
+              "path": "/private/tmp/pipes_core_guarded_envelope_round2_20261022.py",
+              "sha256": "72aba34f58594cd65934d55dd79fac450bda1f5f850cdbfbe4d6ae03a4ff9a19",
+              "kwargs": {}
+            },
+            "binary": "/Users/555tery/techarena/prototypes/pipes_round2_20261022/bin/core-guarded-envelope-cpp",
+            "binary_sha256": "15e936bc142bc9875aba605e9e92561a9ca3843eb116f82db458a4e0d35d3265",
+            "command": [
+              "clang++",
+              "-O2",
+              "-std=c++17",
+              "-DRESERVATION_POLICY=1",
+              "-DLAZY_SLAB=1",
+              "-DREPLAY_GUARD=5",
+              "/Users/555tery/techarena/prototypes/pipes_round2_20261022/core-guarded-envelope/solution.cpp",
+              "-o",
+              "/Users/555tery/techarena/prototypes/pipes_round2_20261022/bin/core-guarded-envelope-cpp"
+            ],
+            "status": 0,
+            "stderr": ""
+          }
+        },
+        {
+          "journal": "prototypes/pipes_round3_20261022/records.jsonl",
+          "line": 5224,
+          "record": {
+            "type": "build",
+            "kind": "sensitivity-e",
+            "language": "cpp",
+            "source": "/Users/555tery/techarena/prototypes/pipes_round2_20261022/core-guarded-envelope/solution.cpp",
+            "source_sha256": "a54d443ae8fd052bd23ece9610533ca868af541e116686bece8ba5a11e7f5a76",
+            "parent_source_sha256": "ae7e1e0a54510ee9a8d396670e2d40c2439d9286e8e13cd3ea93be8820b4c891",
+            "transformer": {
+              "path": "/private/tmp/pipes_core_guarded_envelope_round2_20261022.py",
+              "sha256": "72aba34f58594cd65934d55dd79fac450bda1f5f850cdbfbe4d6ae03a4ff9a19",
+              "kwargs": {}
+            },
+            "binary": "/Users/555tery/techarena/prototypes/pipes_round2_20261022/bin/core-guarded-envelope-cpp",
+            "binary_sha256": "15e936bc142bc9875aba605e9e92561a9ca3843eb116f82db458a4e0d35d3265",
+            "command": null,
+            "status": 0,
+            "stderr": "",
+            "alias_only": true,
+            "reference_build_kind": "core-guarded-envelope",
+            "reference_command": [
+              "clang++",
+              "-O2",
+              "-std=c++17",
+              "-DRESERVATION_POLICY=1",
+              "-DLAZY_SLAB=1",
+              "-DREPLAY_GUARD=5",
+              "/Users/555tery/techarena/prototypes/pipes_round2_20261022/core-guarded-envelope/solution.cpp",
+              "-o",
+              "/Users/555tery/techarena/prototypes/pipes_round2_20261022/bin/core-guarded-envelope-cpp"
+            ],
+            "reference_records": "/Users/555tery/techarena/prototypes/pipes_round2_20261022/records.jsonl",
+            "scope": "exact existing source/binary; no rebuild"
+          }
+        }
+      ]
+    }
+  ],
+  "test_summary": [
+    {
+      "source": "solution.cpp",
+      "source_sha256": "a54d443ae8fd052bd23ece9610533ca868af541e116686bece8ba5a11e7f5a76",
+      "successful_records": 3168,
+      "distinct_checked_inputs": 2953,
+      "failure_records": 0,
+      "max_observed_cpu_s": 1.4188429999999999,
+      "max_observed_rss_mib": 31.0625,
+      "scope": "historical measurements; CPP/Cj and batch/interactive must be compared within matching build and environment; no closed-runtime guarantee"
+    }
+  ],
+  "platform_records": [],
+  "all_record_count": 3168
+}

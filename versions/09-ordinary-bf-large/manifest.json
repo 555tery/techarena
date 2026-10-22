@@ -1,0 +1,62 @@
+{
+  "rank_newest_first": 9,
+  "name": "ordinary-bf-large",
+  "original_directory": "prototypes/pipes_round3_20261022/ordinary-bf-large",
+  "original_source_mtime_local": "2026-10-22T20:32:11.823506+07:00",
+  "variants": [
+    {
+      "path": "solution.cpp",
+      "source_sha256": "82b72043d9161e5b41e0bc3657bfb57458ac10eced035b01e428992dce698ec7",
+      "bytes": 1255386,
+      "original_path": "prototypes/pipes_round3_20261022/ordinary-bf-large/solution.cpp",
+      "builds": [
+        {
+          "journal": "prototypes/pipes_round3_20261022/records.jsonl",
+          "line": 835,
+          "record": {
+            "type": "build",
+            "kind": "ordinary-bf-large",
+            "language": "cpp",
+            "source": "/Users/555tery/techarena/prototypes/pipes_round3_20261022/ordinary-bf-large/solution.cpp",
+            "source_sha256": "82b72043d9161e5b41e0bc3657bfb57458ac10eced035b01e428992dce698ec7",
+            "parent_source_sha256": "1cb3af5bba22e7176d7533d2c20ff6dab5b96bc0cdf1c1ac3046b537ccdcd1b0",
+            "transformer": {
+              "path": "/private/tmp/pipes_ordinary_bestfit_large_round3_20261022.py",
+              "sha256": "c36edc5345102290810ddf2f1bd6d6363d1e37bd47e09e456a8d28ed86e9cf75",
+              "kwargs": {}
+            },
+            "binary": "/Users/555tery/techarena/prototypes/pipes_round3_20261022/bin/ordinary-bf-large-cpp",
+            "binary_sha256": "891fbe8bc154daf51ef33bb1a18ee115b0ab94126671436cf1137ac0fdb39aa4",
+            "command": [
+              "clang++",
+              "-O2",
+              "-std=c++17",
+              "-DRESERVATION_POLICY=1",
+              "-DLAZY_SLAB=1",
+              "-DREPLAY_GUARD=5",
+              "/Users/555tery/techarena/prototypes/pipes_round3_20261022/ordinary-bf-large/solution.cpp",
+              "-o",
+              "/Users/555tery/techarena/prototypes/pipes_round3_20261022/bin/ordinary-bf-large-cpp"
+            ],
+            "status": 0,
+            "stderr": ""
+          }
+        }
+      ]
+    }
+  ],
+  "test_summary": [
+    {
+      "source": "solution.cpp",
+      "source_sha256": "82b72043d9161e5b41e0bc3657bfb57458ac10eced035b01e428992dce698ec7",
+      "successful_records": 396,
+      "distinct_checked_inputs": 396,
+      "failure_records": 0,
+      "max_observed_cpu_s": 1.2658779999999998,
+      "max_observed_rss_mib": 30.265625,
+      "scope": "historical measurements; CPP/Cj and batch/interactive must be compared within matching build and environment; no closed-runtime guarantee"
+    }
+  ],
+  "platform_records": [],
+  "all_record_count": 396
+}
