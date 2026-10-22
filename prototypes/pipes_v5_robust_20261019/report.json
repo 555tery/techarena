@@ -1,0 +1,637 @@
+{
+  "primary_candidate": {
+    "name": "candidate-v3",
+    "source": "prototypes/pipes_v5_robust_20261019/candidate-v3/solution.cpp",
+    "source_sha256": "a3d414a4872796fb570753c0e61db5c80dc59c1b8cbd7ec57e95dec345aff53a",
+    "binary_sha256": "ae7f8ce0ef4902d8a40c6b459990c1b87128c5f0dc015af3b96753d5dde1d06d",
+    "Open15_score": 30.75747404826914,
+    "Open15_exact_score": "8753218892157372683/284588353335535200",
+    "open15_checks": 15,
+    "attack_wins_ties_losses": [
+      15,
+      9,
+      0
+    ],
+    "neutral_ties": 6,
+    "neutral_cases": 6,
+    "maximum_CPU_s": 1.134035,
+    "maximum_RSS_MiB": 8.03125
+  },
+  "new_test_count": 15,
+  "all_diagnostic_test_count": 24,
+  "actual_new_official_checks_this_task": 213,
+  "rows": [
+    {
+      "name": "attack-01-open3-p4",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-01-open3-p4.in",
+      "sha256": "4bb8597dd34f1aa188c46b1764a73e2bb6cb03f04422ecc0725095f74350050a",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.45,
+        "T": 40,
+        "F": 18
+      },
+      "candidate-v3": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "candidate-firstfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      }
+    },
+    {
+      "name": "attack-02-open6-p6",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-02-open6-p6.in",
+      "sha256": "8f0520b3c1e9abd5a23b40c52a420561f12b0f25da7fd594436b9b922033b290",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.45,
+        "T": 40,
+        "F": 18
+      },
+      "candidate-v3": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "candidate-firstfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      }
+    },
+    {
+      "name": "attack-03-open4-p11",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-03-open4-p11.in",
+      "sha256": "2641115c3bbc8cc2065247180f61b4650d4e99dcffce0630ba276aeb13d657f4",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.54,
+        "T": 100,
+        "F": 54
+      },
+      "candidate-v3": {
+        "KPI": 0.9,
+        "T": 60,
+        "F": 54
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 60,
+        "F": 54
+      },
+      "candidate-firstfit": {
+        "KPI": 0.9,
+        "T": 60,
+        "F": 54
+      }
+    },
+    {
+      "name": "attack-04-open12-p34",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-04-open12-p34.in",
+      "sha256": "f6f2c27497e5b3970e5e8e5e922007f480e289c3479dccf01772771d0043adab",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.6545454545454545,
+        "T": 220,
+        "F": 144
+      },
+      "candidate-v3": {
+        "KPI": 0.6545454545454545,
+        "T": 220,
+        "F": 144
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 160,
+        "F": 144
+      },
+      "candidate-firstfit": {
+        "KPI": 0.6545454545454545,
+        "T": 220,
+        "F": 144
+      }
+    },
+    {
+      "name": "attack-05-open1-p3",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-05-open1-p3.in",
+      "sha256": "4195c549112ba73de78c37807e8582dc4c5ba9b1ba3aaf2ca8324a0e868a8f7b",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.5,
+        "T": 40,
+        "F": 20
+      },
+      "candidate-v3": {
+        "KPI": 1.0,
+        "T": 20,
+        "F": 20
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 20,
+        "F": 20
+      },
+      "candidate-firstfit": {
+        "KPI": 1.0,
+        "T": 20,
+        "F": 20
+      }
+    },
+    {
+      "name": "attack-06-open3-p6",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-06-open3-p6.in",
+      "sha256": "09a0d12aec659c9f63037e444991c4312d0bfaeee33c0171cd915001da15ca4a",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.45,
+        "T": 40,
+        "F": 18
+      },
+      "candidate-v3": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "candidate-firstfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      }
+    },
+    {
+      "name": "attack-07-open3-p5",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-07-open3-p5.in",
+      "sha256": "c367f6c6db4cd072692c814b83c7599f847be3581b321442dabbb4ce547e7477",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.45,
+        "T": 40,
+        "F": 18
+      },
+      "candidate-v3": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "candidate-firstfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      }
+    },
+    {
+      "name": "attack-08-open3-p6",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-08-open3-p6.in",
+      "sha256": "a8fd70738322710576ffa73dc7c509b4ab86a08759e7511a49fe73f042d7e089",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.45,
+        "T": 40,
+        "F": 18
+      },
+      "candidate-v3": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "candidate-firstfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      }
+    },
+    {
+      "name": "attack-09-open6-p7",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-09-open6-p7.in",
+      "sha256": "be2450320341c80d6c71274179b11e05290cd6f9e927259bcd47a204b9118c07",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.45,
+        "T": 40,
+        "F": 18
+      },
+      "candidate-v3": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "candidate-firstfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      }
+    },
+    {
+      "name": "attack-10-open6-p8",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-10-open6-p8.in",
+      "sha256": "aaacdbe756703fb326b962a2db14e82ba9f9893d3091c2c3799312434ac89d2c",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.45,
+        "T": 40,
+        "F": 18
+      },
+      "candidate-v3": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      },
+      "candidate-firstfit": {
+        "KPI": 0.9,
+        "T": 20,
+        "F": 18
+      }
+    },
+    {
+      "name": "attack-extra-open5-p2",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-extra-open5-p2.in",
+      "sha256": "77d2bdb03cbac0abdbdcace4caafe6b9a98c669dc833f2e6100f5a208c3856e2",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.75,
+        "T": 80,
+        "F": 60
+      },
+      "candidate-v3": {
+        "KPI": 0.75,
+        "T": 80,
+        "F": 60
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 60,
+        "F": 60
+      }
+    },
+    {
+      "name": "attack-extra-open7-p3",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-extra-open7-p3.in",
+      "sha256": "391458b037399ee79a1ee4d7feffd29fb45ae633d333043d0d282bc521ecc8ee",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.6,
+        "T": 100,
+        "F": 60
+      },
+      "candidate-v3": {
+        "KPI": 1.0,
+        "T": 60,
+        "F": 60
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 60,
+        "F": 60
+      }
+    },
+    {
+      "name": "attack-extra-open9-p127",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-extra-open9-p127.in",
+      "sha256": "d7844575d71ca965c430920774865b157e0b4b3a220e57e88dc8174c4440f675",
+      "group": "new_attacks",
+      "v5": {
+        "KPI": 0.18,
+        "T": 1000,
+        "F": 180
+      },
+      "candidate-v3": {
+        "KPI": 0.18,
+        "T": 1000,
+        "F": 180
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 180,
+        "F": 180
+      }
+    },
+    {
+      "name": "counterattack-open10-p5-24",
+      "file": "prototypes/pipes_v5_robust_20261019/counterattacks/counterattack-open10-p5-24.in",
+      "sha256": "7307d6fb62bb76d9010f3556a2510d4a1adda85992b4f47bba114f974403cfca",
+      "group": "counterattacks",
+      "v5": {
+        "KPI": 0.0047169811320754715,
+        "T": 8480,
+        "F": 40
+      },
+      "candidate-v3": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      },
+      "candidate-firstfit": {
+        "KPI": 0.0047169811320754715,
+        "T": 8480,
+        "F": 40
+      }
+    },
+    {
+      "name": "counterattack-open2-p4-mixed-fill",
+      "file": "prototypes/pipes_v5_robust_20261019/counterattacks/counterattack-open2-p4-mixed-fill.in",
+      "sha256": "383e4729bf313c32b8aaeb288edf1c8c14cbc938c910a9dba4cf9ce2d5c2debc",
+      "group": "counterattacks",
+      "v5": {
+        "KPI": 0.5,
+        "T": 40,
+        "F": 20
+      },
+      "candidate-v3": {
+        "KPI": 0.5,
+        "T": 40,
+        "F": 20
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 20,
+        "F": 20
+      },
+      "candidate-firstfit": {
+        "KPI": 0.5,
+        "T": 40,
+        "F": 20
+      }
+    },
+    {
+      "name": "quiet-open1",
+      "file": "prototypes/pipes_v5_graves_20261019/suite/quiet-open1.in",
+      "sha256": "1e27964ac8c6957155ce394478defd3fb8ba02135cf7470269f0d86641f8608c",
+      "group": "known",
+      "v5": {
+        "KPI": 0.5,
+        "T": 40,
+        "F": 20
+      },
+      "candidate-v3": {
+        "KPI": 1.0,
+        "T": 20,
+        "F": 20
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 20,
+        "F": 20
+      },
+      "candidate-firstfit": {
+        "KPI": 1.0,
+        "T": 20,
+        "F": 20
+      }
+    },
+    {
+      "name": "quiet-open2-beam",
+      "file": "prototypes/pipes_v5_graves_20261019/suite/quiet-open2-beam.in",
+      "sha256": "28c36f42fd4ecb0f1b9d26f5180bdda0c2552fdcf985f8fe151b1bfec4d9e42d",
+      "group": "known",
+      "v5": {
+        "KPI": 0.25,
+        "T": 160,
+        "F": 40
+      },
+      "candidate-v3": {
+        "KPI": 0.25,
+        "T": 160,
+        "F": 40
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      },
+      "candidate-firstfit": {
+        "KPI": 0.6666666666666666,
+        "T": 60,
+        "F": 40
+      }
+    },
+    {
+      "name": "reserve-open08-p2",
+      "file": "prototypes/pipes_v5_graves_20261019/suite/reserve-open08-p2.in",
+      "sha256": "09f682b1edb0bde8ae691a61364cdc8b372613a5f7bbd2a14e66f5144152a21b",
+      "group": "known",
+      "v5": {
+        "KPI": 0.012903225806451613,
+        "T": 3100,
+        "F": 40
+      },
+      "candidate-v3": {
+        "KPI": 0.012903225806451613,
+        "T": 3100,
+        "F": 40
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      },
+      "candidate-firstfit": {
+        "KPI": 0.012903225806451613,
+        "T": 3100,
+        "F": 40
+      }
+    },
+    {
+      "name": "reserve-open10-p3",
+      "file": "prototypes/pipes_v5_graves_20261019/suite/reserve-open10-p3.in",
+      "sha256": "8841c1b48e149d7d214e48145ee16edb81f722e8cd665ed2c055671e4c9aefea",
+      "group": "known",
+      "v5": {
+        "KPI": 0.0047169811320754715,
+        "T": 8480,
+        "F": 40
+      },
+      "candidate-v3": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      },
+      "candidate-firstfit": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      }
+    },
+    {
+      "name": "reserve-open11-p2",
+      "file": "prototypes/pipes_v5_graves_20261019/suite/reserve-open11-p2.in",
+      "sha256": "abfa350bff4d60908a8a0fb276e232faf07825766e5601b9443e07a1bb39fa8d",
+      "group": "known",
+      "v5": {
+        "KPI": 0.0020491803278688526,
+        "T": 19520,
+        "F": 40
+      },
+      "candidate-v3": {
+        "KPI": 0.0020491803278688526,
+        "T": 19520,
+        "F": 40
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      },
+      "candidate-firstfit": {
+        "KPI": 0.0020491803278688526,
+        "T": 19520,
+        "F": 40
+      }
+    },
+    {
+      "name": "reserve-open14-p8",
+      "file": "prototypes/pipes_v5_graves_20261019/suite/reserve-open14-p8.in",
+      "sha256": "22092ce588749fc03f00bd73020b3d5c0c372e0cd418519df94f61c1bab14ef4",
+      "group": "known",
+      "v5": {
+        "KPI": 0.001936108422071636,
+        "T": 20660,
+        "F": 40
+      },
+      "candidate-v3": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      },
+      "candidate-firstfit": {
+        "KPI": 1.0,
+        "T": 40,
+        "F": 40
+      }
+    },
+    {
+      "name": "shape-case12-p34",
+      "file": "prototypes/pipes_v5_graves_20261019/suite/shape-case12-p34.in",
+      "sha256": "f76f802af0f2467c831529a7e6e4bcc7e15437a1a0f9cc5d8eb5ee3c22159d5f",
+      "group": "known",
+      "v5": {
+        "KPI": 0.6545454545454545,
+        "T": 220,
+        "F": 144
+      },
+      "candidate-v3": {
+        "KPI": 0.6545454545454545,
+        "T": 220,
+        "F": 144
+      },
+      "bestfit": {
+        "KPI": 0.9,
+        "T": 160,
+        "F": 144
+      },
+      "candidate-firstfit": {
+        "KPI": 0.6545454545454545,
+        "T": 220,
+        "F": 144
+      }
+    },
+    {
+      "name": "shape-case12-p6",
+      "file": "prototypes/pipes_v5_graves_20261019/suite/shape-case12-p6.in",
+      "sha256": "becbeb1117d6896d63a2a9ff246a17542c06d95157d5ac2425aa3653deb7ba7d",
+      "group": "known",
+      "v5": {
+        "KPI": 0.6642857142857143,
+        "T": 140,
+        "F": 93
+      },
+      "candidate-v3": {
+        "KPI": 0.6642857142857143,
+        "T": 140,
+        "F": 93
+      },
+      "bestfit": {
+        "KPI": 0.93,
+        "T": 100,
+        "F": 93
+      },
+      "candidate-firstfit": {
+        "KPI": 0.6642857142857143,
+        "T": 140,
+        "F": 93
+      }
+    },
+    {
+      "name": "shape-case4-p20",
+      "file": "prototypes/pipes_v5_graves_20261019/suite/shape-case4-p20.in",
+      "sha256": "12082401734dd12dbf64605f4b8bb36237ae2d985ef9b3c3bf4089b150c88c4c",
+      "group": "known",
+      "v5": {
+        "KPI": 0.6,
+        "T": 100,
+        "F": 60
+      },
+      "candidate-v3": {
+        "KPI": 1.0,
+        "T": 60,
+        "F": 60
+      },
+      "bestfit": {
+        "KPI": 1.0,
+        "T": 60,
+        "F": 60
+      },
+      "candidate-firstfit": {
+        "KPI": 1.0,
+        "T": 60,
+        "F": 60
+      }
+    }
+  ],
+  "platform_actions": 0,
+  "status": "local experimental candidate; frozen release unchanged",
+  "limits": "Selected adversarial inputs; no estimate of hidden-test distribution. Failures on Open8/11 reservations, Open2 geometry, Open12 remain. No universal robustness or impossibility theorem."
+}

@@ -1,0 +1,228 @@
+{
+  "purpose": "Compare generic history shrinkage/discounting variants with P4 and S50, without test-id or sequence recognition.",
+  "compiler": "clang++",
+  "compile_flags": [
+    "-O2",
+    "-std=c++20",
+    "-pipe"
+  ],
+  "selection_rule": {
+    "R_open": "weighted open score / 28.375837599373007",
+    "R_dev": "development score / 1.870543569789272",
+    "primary": "maximize min(R_open,R_dev); invalid candidates excluded",
+    "tie_break": "within 1e-9 in primary score, maximize sqrt(R_open*R_dev), then open score",
+    "frozen_sets": "excluded from candidate tuning and selection"
+  },
+  "test_sets": {
+    "official_open": [
+      {
+        "case": "1",
+        "sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+        "weight": 0.1,
+        "operations": 6
+      },
+      {
+        "case": "2",
+        "sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+        "weight": 1.0,
+        "operations": 18
+      },
+      {
+        "case": "3",
+        "sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+        "weight": 1.0,
+        "operations": 12
+      },
+      {
+        "case": "4",
+        "sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+        "weight": 1.0,
+        "operations": 20
+      },
+      {
+        "case": "5",
+        "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+        "weight": 1.0,
+        "operations": 7520
+      },
+      {
+        "case": "6",
+        "sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+        "weight": 1.0,
+        "operations": 11
+      },
+      {
+        "case": "7",
+        "sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+        "weight": 1.0,
+        "operations": 312
+      },
+      {
+        "case": "8",
+        "sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+        "weight": 1.0,
+        "operations": 6565
+      },
+      {
+        "case": "9",
+        "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+        "weight": 1.0,
+        "operations": 9000
+      },
+      {
+        "case": "10",
+        "sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+        "weight": 1.0,
+        "operations": 9997
+      },
+      {
+        "case": "11",
+        "sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+        "weight": 1.0,
+        "operations": 9999
+      },
+      {
+        "case": "12",
+        "sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+        "weight": 4.0,
+        "operations": 1501
+      },
+      {
+        "case": "13",
+        "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+        "weight": 4.0,
+        "operations": 9999
+      },
+      {
+        "case": "14",
+        "sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+        "weight": 4.0,
+        "operations": 25196
+      },
+      {
+        "case": "15",
+        "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+        "weight": 10.0,
+        "operations": 200000
+      }
+    ],
+    "development_synthetic": [
+      {
+        "case": "high-churn",
+        "sha256": "8ef0cbf49ef2797134070f5f69a3aa79ecbcd56d4eacbfb242cdad45624a113d",
+        "weight": 1.0,
+        "operations": 20000
+      },
+      {
+        "case": "long-heavy",
+        "sha256": "1da1dbfc55191b23cc83df486619f27d10090393de209adcf9b91ed3566355f3",
+        "weight": 1.0,
+        "operations": 30000
+      },
+      {
+        "case": "short-heavy",
+        "sha256": "9599429ab80c6368751bfc2ceaca8e46709eb1799cc2772102e994bb6eb80198",
+        "weight": 1.0,
+        "operations": 30000
+      },
+      {
+        "case": "uniform",
+        "sha256": "a8e9d056046bbb90d936b0c863eab67bb5c26fdbeaa7bbac4a5ce20a11a060c6",
+        "weight": 1.0,
+        "operations": 20000
+      }
+    ]
+  },
+  "source_hashes": {
+    "policy4": "a524195683fc0fb2aa4815faed12a0fea37df66dc6c4bdb1ffbf53de8d0e8ae3",
+    "recent_unfit_s50": "002f5bb77c131f829fc5ccfb0a310204113b6d8164d09d8dc7ed001e96833095",
+    "adaptive_allocator": "5b0067000157e1e3d464b66ae5e91c207e04a1663b0953d58aa2500e417efb20"
+  },
+  "candidates": [
+    {
+      "name": "policy4",
+      "kind": "control",
+      "source": "source/policy4.cpp",
+      "defines": []
+    },
+    {
+      "name": "recent_unfit_s50",
+      "kind": "control",
+      "source": "source/recent_unfit_s50.cpp",
+      "defines": [
+        "PIPES_STRATEGY=2",
+        "PIPES_HISTORY_WINDOW=128",
+        "PIPES_PENALTY_SCALE=50"
+      ]
+    },
+    {
+      "name": "s50_shrink_tau32",
+      "kind": "candidate",
+      "source": "source/adaptive_allocator.cpp",
+      "defines": [
+        "PIPES_STRATEGY=4",
+        "PIPES_HISTORY_WINDOW=128",
+        "PIPES_PENALTY_SCALE=50",
+        "PIPES_SHRINK_TAU=32"
+      ],
+      "formula": "score = slack*(n+32) + 50*misses"
+    },
+    {
+      "name": "s50_shrink_tau128",
+      "kind": "candidate",
+      "source": "source/adaptive_allocator.cpp",
+      "defines": [
+        "PIPES_STRATEGY=4",
+        "PIPES_HISTORY_WINDOW=128",
+        "PIPES_PENALTY_SCALE=50",
+        "PIPES_SHRINK_TAU=128"
+      ],
+      "formula": "score = slack*(n+128) + 50*misses"
+    },
+    {
+      "name": "s50_warmup32",
+      "kind": "candidate",
+      "source": "source/adaptive_allocator.cpp",
+      "defines": [
+        "PIPES_STRATEGY=5",
+        "PIPES_HISTORY_WINDOW=128",
+        "PIPES_PENALTY_SCALE=50",
+        "PIPES_WARMUP_THRESHOLD=32"
+      ],
+      "formula": "P4 while prior positive-history count < 32; then S50"
+    },
+    {
+      "name": "s50_window64",
+      "kind": "candidate",
+      "source": "source/adaptive_allocator.cpp",
+      "defines": [
+        "PIPES_STRATEGY=2",
+        "PIPES_HISTORY_WINDOW=64",
+        "PIPES_PENALTY_SCALE=50"
+      ],
+      "formula": "S50 with a 64-insertion sliding window"
+    },
+    {
+      "name": "s50_decay_hl32",
+      "kind": "candidate",
+      "source": "source/adaptive_allocator.cpp",
+      "defines": [
+        "PIPES_STRATEGY=6",
+        "PIPES_PENALTY_SCALE=50",
+        "PIPES_DECAY_LAMBDA=0.9785720620877001"
+      ],
+      "formula": "score = slack*sum(w) + 50*sum(w for requests > slack); half-life 32 insertions"
+    },
+    {
+      "name": "s50_decay_hl64",
+      "kind": "candidate",
+      "source": "source/adaptive_allocator.cpp",
+      "defines": [
+        "PIPES_STRATEGY=6",
+        "PIPES_PENALTY_SCALE=50",
+        "PIPES_DECAY_LAMBDA=0.9892280131939755"
+      ],
+      "formula": "score = slack*sum(w) + 50*sum(w for requests > slack); half-life 64 insertions"
+    }
+  ]
+}

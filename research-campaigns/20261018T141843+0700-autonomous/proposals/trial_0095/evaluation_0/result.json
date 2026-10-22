@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "evaluation_0",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0095/candidate_0.cpp",
+  "sha256": "e175af9ae6be1573ca47b4e0cb49f6df7cc9200e8ab3bab09f335d062253f5d7",
+  "idea": "Prequential backoff для существующего rollout: смешивать context orders 0–3 по качеству их предсказаний на уже поступивших операциях. Патч не запускался; улучшение score не заявляется.",
+  "parent": "trial_0022",
+  "weighted_score": 30.05552068373726,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4720,
+      "kpi": 0.9802966101694915,
+      "weighted_score": 0.980296610169492
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10340,
+      "kpi": 0.9911992263056093,
+      "weighted_score": 3.964796905222437
+    },
+    {
+      "case": "13",
+      "T": 3300,
+      "kpi": 0.9672727272727273,
+      "weighted_score": 3.869090909090909
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438060,
+      "kpi": 0.9559352600100443,
+      "weighted_score": 9.559352600100443
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0044691430340258595,
+    "worst_delta": -0.004395170835634787,
+    "wins": 17,
+    "regressions": 5,
+    "ties": 8,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_07_random_mixture",
+        "delta": -0.0009008672888014546,
+        "baseline_T": 42420,
+        "candidate_T": 42460
+      },
+      {
+        "case": "dev_08_cohort_release",
+        "delta": -0.0007322801833541392,
+        "baseline_T": 25140,
+        "candidate_T": 25200
+      },
+      {
+        "case": "dev_22_frames",
+        "delta": -0.0007154914946110313,
+        "baseline_T": 27180,
+        "candidate_T": 27200
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.0006137592848791673,
+        "baseline_T": 64880,
+        "candidate_T": 64920
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.81326763950563,
+  "max_cpu_s": 1.1528100000000001,
+  "max_rss_mib": 14.78125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0095/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0095/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792331665.2731788,
+  "balanced_gate": true
+}

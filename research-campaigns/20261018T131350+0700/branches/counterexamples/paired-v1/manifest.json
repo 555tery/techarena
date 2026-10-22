@@ -1,0 +1,8 @@
+{
+  "traces_sha256": "3b774726ea6d92254c064f69ccdc7212a12170fa91b35d35a7e3f67a4984ec80",
+  "pair_count": 32,
+  "case_count": 64,
+  "seed": 20261018,
+  "max_commands": 18,
+  "prefix_relation": "each pressure/light pair is byte-identical through command index 11"
+}

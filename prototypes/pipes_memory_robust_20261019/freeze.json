@@ -1,0 +1,36 @@
+{
+  "source_sha256": "ff6731052a6aa23dde9e7e4d91de9a868adc9fb587811ec20760967a6981dfed",
+  "binary_sha256": "f7f88b7c753f5736f947ec155ac57d5526fa405b73caffdeba29980d34e046f1",
+  "parent_source_sha256": "e7a88219417219faa925ec9d91641eb15d02aafeab76fdb9ef9d7144c7c25112",
+  "public_tables_unchanged": true,
+  "created_at": "2026-10-19T16:45:14.551921+00:00",
+  "arena_cap_MiB": 96,
+  "memo_table_MiB": 128,
+  "planner_CPU_budget_s": 3.4,
+  "process_CPU_search_stop_s": 4.1,
+  "scenarios": 64,
+  "horizon": 128,
+  "logical_event_budget": 12000000,
+  "scenario_mix": "40 historical blocks, 8 no-deletion bursts, 16 changed deletion-rank probes",
+  "acceptance": "no simulated final-trench regression on any paired scenario, >=3 historical wins, mean saving >=1m",
+  "workspace_release": "on exhausted search budget or physical scale limit; scale exit after allocation is permanent",
+  "causal_inputs": "only actual observed commands, physical coordinates and deletion ranks",
+  "frozen_at": "2026-10-19T16:46:25.243518+00:00",
+  "selection": "v7 policy, after predeclared calibration and independent core/resource review; resource-only cleanup; no final inputs evaluated",
+  "calibration": {
+    "count": 26,
+    "mean_KPI_delta": 0.0014263312958142152,
+    "wins_ties_losses": [
+      12,
+      7,
+      7
+    ],
+    "worst_KPI_delta": -0.009137947834451876
+  },
+  "calibration_summary_sha256": "03117834ba2c9030040a2d309d6fd011a3b3ae4bb0a6d980e548046830da1bc6",
+  "sealed_manifests_sha256": {
+    "sealed-final": "de98bcde7d67eab9ce1b8bada088de9e54fda1901946d55930217abac4dc9ab7",
+    "sealed-final-extra": "9c9673a6f8481918a92b41bcca585e5c8356760ced035398a0664f8bff9d4b3d"
+  },
+  "final_policy": "one paired final gate on all24 inputs; no source/threshold tuning after final scores"
+}

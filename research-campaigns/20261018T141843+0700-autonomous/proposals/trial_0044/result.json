@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0044",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0044/candidate_0.cpp",
+  "sha256": "ca11b3857ecfc753bbecd951900455494352706d21bf2e80f8cdccacfb300e12",
+  "idea": "Учитывать перераспределение спроса между оставшимися щелями: добавить к локальной Bellman cost производную общей packing value свободного пула.",
+  "parent": "trial_0032",
+  "weighted_score": 28.605763983440678,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4680,
+      "kpi": 0.9886752136752137,
+      "weighted_score": 0.988675213675214
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 15480,
+      "kpi": 0.7948320413436692,
+      "weighted_score": 0.794832041343669
+    },
+    {
+      "case": "11",
+      "T": 22520,
+      "kpi": 0.9041296625222025,
+      "weighted_score": 0.904129662522203
+    },
+    {
+      "case": "12",
+      "T": 10340,
+      "kpi": 0.9911992263056093,
+      "weighted_score": 3.964796905222437
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37820,
+      "kpi": 0.9969328397673188,
+      "weighted_score": 3.987731359069275
+    },
+    {
+      "case": "15",
+      "T": 438800,
+      "kpi": 0.9543231540565178,
+      "weighted_score": 9.543231540565177
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.006991641232466953,
+    "worst_delta": -0.004726124306626001,
+    "wins": 18,
+    "regressions": 3,
+    "ties": 9,
+    "worst_cases": [
+      {
+        "case": "dev_20_frames",
+        "delta": -0.004726124306626001,
+        "baseline_T": 87420,
+        "candidate_T": 87840
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.0035259000311017585,
+        "baseline_T": 90260,
+        "candidate_T": 90580
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.0015945539987669566,
+        "baseline_T": 24820,
+        "candidate_T": 24860
+      },
+      {
+        "case": "dev_12_large_recent",
+        "delta": 0.0,
+        "baseline_T": 14480,
+        "candidate_T": 14480
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": 0.0,
+        "baseline_T": 46460,
+        "candidate_T": 46460
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": 0.0,
+        "baseline_T": 64880,
+        "candidate_T": 64880
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.815790137704071,
+  "max_cpu_s": 0.949788,
+  "max_rss_mib": 11.453125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0044/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0044/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792319211.5249689,
+  "balanced_gate": true,
+  "hypothesis": "Parent использует rate[l]=(arrivals[l]+0.5)/N_l, но при выборе щели считает только V(c)-V(c-L). Если остаток r=c-L меньше l, число подходящих щелей N_l уменьшается: оставшиеся получают большую долю спроса. Предлагается сравнивать две лучшие ширины parent по первой производной общей potential Φ=ΣV(c). Для D_l(c)=∂V(c)/∂log(rate[l]) и Q_l=ΣD_l(c) поправка равна −Σ(Q_l−D_l(c)+D_l(r))*log(N_l/(N_l−1)) по r<l≤c, N_l>1. Производные выводятся непосредственно из существующего Bellman recurrence. Это отдельный эффект конкуренции всего пула за спрос; reward длин и lifetime model сохраняются.",
+  "causality": "Ожидаемый эффект — меньше завышать стоимость расходования щели, когда её спрос смогут обслужить другие щели. inventory_nonzero_credits показывает наличие поправки, inventory_overrides — фактическую смену ширины, inventory_predicted_gain — преимущество по новой potential. inventory_max_log_rate_step характеризует величину шага линеаризации. Проверять нужно final trench, общий score, fresh cases и CPU относительно предоставленного parent. Это приближение при замороженной модели, не bound для final trench. Инструменты не использовались; измеренного улучшения нет. Протокол, flush, рост секциями и существующий выбор endpoint сохраняются."
+}

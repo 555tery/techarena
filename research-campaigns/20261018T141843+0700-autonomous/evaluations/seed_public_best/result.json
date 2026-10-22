@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "seed_public_best",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/seeds/public_best.cpp",
+  "sha256": "c70ade5c1ecd48c8f74ed99582f974467bd2b1791a214d79ddf6e5df8729af29",
+  "idea": "seed public_best",
+  "parent": null,
+  "weighted_score": 30.078763164118683,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438620,
+      "kpi": 0.9547147872874014,
+      "weighted_score": 9.547147872874014
+    }
+  ],
+  "fresh": {
+    "mean_delta": -0.0003731549576381702,
+    "worst_delta": -0.004395170835634787,
+    "wins": 1,
+    "regressions": 7,
+    "ties": 22,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.002389908304422095,
+        "baseline_T": 24820,
+        "candidate_T": 24880
+      },
+      {
+        "case": "dev_14_large_recent",
+        "delta": -0.002296437965101261,
+        "baseline_T": 34560,
+        "candidate_T": 34640
+      },
+      {
+        "case": "dev_12_large_recent",
+        "delta": -0.0013733092017527149,
+        "baseline_T": 14480,
+        "candidate_T": 14500
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": -0.0008581598692828374,
+        "baseline_T": 46460,
+        "candidate_T": 46500
+      },
+      {
+        "case": "dev_15_large_recent",
+        "delta": -0.0007020498158557542,
+        "baseline_T": 28140,
+        "candidate_T": 28160
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.808425341513966,
+  "max_cpu_s": 1.035754,
+  "max_rss_mib": 12.796875,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/seed_public_best/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/seed_public_best/fresh_dev/harness/summary.json",
+  "finished_at": 1792308365.8240662,
+  "balanced_gate": true
+}

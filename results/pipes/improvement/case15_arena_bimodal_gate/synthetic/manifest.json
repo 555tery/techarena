@@ -1,0 +1,50 @@
+[
+  {
+    "name": "fresh_01",
+    "seed": 20261501,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "balanced separated bimodal demand, random deletions"
+  },
+  {
+    "name": "fresh_02",
+    "seed": 20261502,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "35/65 separated bimodal demand, FIFO deletions"
+  },
+  {
+    "name": "fresh_03",
+    "seed": 20261503,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "uniform 8-40 demand, LIFO deletions"
+  },
+  {
+    "name": "fresh_04",
+    "seed": 20261504,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 24400,
+    "description": "uniform 8-40 demand, 20% deletion churn control"
+  },
+  {
+    "name": "fresh_05",
+    "seed": 20261505,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 13734,
+    "description": "uniform -> bimodal -> uniform phases, FIFO/LIFO deletions"
+  },
+  {
+    "name": "fresh_06",
+    "seed": 20261506,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "bimodal -> uniform -> shifted bimodal phases, median/random deletions"
+  }
+]

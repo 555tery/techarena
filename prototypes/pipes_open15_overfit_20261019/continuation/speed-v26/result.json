@@ -1,0 +1,134 @@
+{
+  "status": "rejected",
+  "submission": 1666311,
+  "source_sha256": "ff9ae9b3a3c76ff31c538a625efd46de5f9601d13a865b71be26d1314be1274b",
+  "result": "RRRRRRRRRRRRRRR",
+  "accepted": 0,
+  "reason": "Preflight or configuration failed before first reply; archive contains checker log only, not solver stderr. Exact failed branch unavailable.",
+  "local_correctness": "160 checks passed under POSIX/mock WinAPI; real Windows configuration differs",
+  "archive_files": [
+    {
+      "name": "1.log",
+      "size": 39
+    },
+    {
+      "name": "1.out",
+      "size": 0
+    },
+    {
+      "name": "10.log",
+      "size": 39
+    },
+    {
+      "name": "10.out",
+      "size": 0
+    },
+    {
+      "name": "11.log",
+      "size": 39
+    },
+    {
+      "name": "11.out",
+      "size": 0
+    },
+    {
+      "name": "12.log",
+      "size": 39
+    },
+    {
+      "name": "12.out",
+      "size": 0
+    },
+    {
+      "name": "13.log",
+      "size": 39
+    },
+    {
+      "name": "13.out",
+      "size": 0
+    },
+    {
+      "name": "14.log",
+      "size": 39
+    },
+    {
+      "name": "14.out",
+      "size": 0
+    },
+    {
+      "name": "15.log",
+      "size": 39
+    },
+    {
+      "name": "15.out",
+      "size": 0
+    },
+    {
+      "name": "2.log",
+      "size": 39
+    },
+    {
+      "name": "2.out",
+      "size": 0
+    },
+    {
+      "name": "3.log",
+      "size": 39
+    },
+    {
+      "name": "3.out",
+      "size": 0
+    },
+    {
+      "name": "4.log",
+      "size": 39
+    },
+    {
+      "name": "4.out",
+      "size": 0
+    },
+    {
+      "name": "5.log",
+      "size": 39
+    },
+    {
+      "name": "5.out",
+      "size": 0
+    },
+    {
+      "name": "6.log",
+      "size": 39
+    },
+    {
+      "name": "6.out",
+      "size": 0
+    },
+    {
+      "name": "7.log",
+      "size": 39
+    },
+    {
+      "name": "7.out",
+      "size": 0
+    },
+    {
+      "name": "8.log",
+      "size": 39
+    },
+    {
+      "name": "8.out",
+      "size": 0
+    },
+    {
+      "name": "9.log",
+      "size": 39
+    },
+    {
+      "name": "9.out",
+      "size": 0
+    }
+  ],
+  "deploy": false,
+  "all_logs": "Unexpected end of file - int32 expected",
+  "restored_verified_submission": 1666313
+}

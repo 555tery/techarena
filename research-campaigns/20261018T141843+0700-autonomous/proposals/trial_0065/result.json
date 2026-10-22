@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0065",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0065/candidate_0.cpp",
+  "sha256": "1452112b93529afa3a159c16027e30db5a9cdd2aa2ae8ed54ed250d183128d1e",
+  "idea": "Сохранять rollout-бюджет для решений у границы расширения: пропускать сравнения, для которых строгий сертификат ёмкости гарантирует одинаковый trench во всех выбранных прогнозах.",
+  "parent": "trial_0022",
+  "weighted_score": 30.090967891345112,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438060,
+      "kpi": 0.9559352600100443,
+      "weighted_score": 9.559352600100443
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0005676619274031708,
+    "worst_delta": -0.02911255411255409,
+    "wins": 11,
+    "regressions": 4,
+    "ties": 15,
+    "worst_cases": [
+      {
+        "case": "dev_29_micro",
+        "delta": -0.02911255411255409,
+        "baseline_T": 420,
+        "candidate_T": 440
+      },
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.0006137592848791673,
+        "baseline_T": 64880,
+        "candidate_T": 64920
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.00022608306054439087,
+        "baseline_T": 87420,
+        "candidate_T": 87440
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 17640,
+        "candidate_T": 17640
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8093661583990073,
+  "max_cpu_s": 1.1925050000000001,
+  "max_rss_mib": 14.53125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0065/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0065/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792324326.030828,
+  "balanced_gate": false,
+  "hypothesis": "Часть первых 32 сравнений может расходоваться на ситуации, где ни один прогноз не требует новых секций. Их пропуск позволит существующему planner рассмотреть более поздние возможности без увеличения depth, trials или числа дорогих сравнений. Компиляция, CPU и score не проверены.",
+  "causality": "Используются текущие щели и те же 12 прогнозов из наблюдавшейся истории; последовательность RNG сохраняется. Для максимальной прогнозируемой длины M считаются ёмкости floor(gap/M) отдельно для shared и двух cohorts. После каждого кандидата shared + min(cohort0, cohort1) должно покрывать максимальное число прогнозируемых вставок. Каждая следующая вставка уменьшает эту величину максимум на один, удаления со слияниями её не уменьшают. Поэтому все сравниваемые rollout имеют текущий trench. Сертификат относится только к выбранным прогнозам. Диагностика различает пропуски, дополнительные сравнения после исходного бюджета и реально изменённые ими размещения."
+}

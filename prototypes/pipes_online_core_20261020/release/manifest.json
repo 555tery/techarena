@@ -1,0 +1,55 @@
+{
+  "created_at": "2026-10-19T20:04:03.298817+00:00",
+  "selected": "primal_recent",
+  "confirmation_passed": true,
+  "gates": {
+    "ordinary_positive": true,
+    "prefix_not_below_minus002": true,
+    "retention": true,
+    "positive_equal_stratum_mean": true,
+    "total_score_endpoints": true,
+    "official_valid_and_within_local_limits": true
+  },
+  "source_sha256": "57c047da7ae9939d9d86dfb050458f22e1a189ec43c5fb621c578bee324821d9",
+  "binary_sha256": "fcc6c32042f4cd2837e4ca885c65cd0cdf0334bb43d5cc4bf1d4c5c07120e591",
+  "previous_online_source_sha256": "12c976b59455f86d322413f55ffc4f16777c4cfa4393b933902d3fd89fa317c1",
+  "previous_hybrid_source_sha256": "48a44fb0ccad7e6560055245a3096f892c23b5a98c4ab77468c87968e23054c1",
+  "selection_freeze_sha256": "fd21c2818b385078a969f96fcb166703a5637b9f76d4409feca089ce72a432c7",
+  "official_runs": 652,
+  "selected_official_runs": 212,
+  "maximum_cpu_s": 1.296927,
+  "maximum_rss_mib": 21.203125,
+  "open15_scores": {
+    "baseline": 30.090967891345112,
+    "old_hybrid": 30.102711588824103,
+    "primal_recent": 30.01926429194345,
+    "hybrid_recent": 30.031007989422445
+  },
+  "scenario_gain_vs_controls": {
+    "baseline": {
+      "0": 0.5470540236925587,
+      "0.25": 0.5971341704183689,
+      "0.5": 0.6472143171441791,
+      "0.75": 0.6972944638699893,
+      "1": 0.7473746105957995
+    },
+    "old_hybrid": {
+      "0": 0.5353103262135677,
+      "0.25": 0.5634743118997034,
+      "0.5": 0.5916382975858392,
+      "0.75": 0.619802283271975,
+      "1": 0.6479662689581107
+    }
+  },
+  "native_windows_tested": false,
+  "target_g5420_tested": false,
+  "host": "macOS arm64; one solver worker; process CPU user+system",
+  "platform_actions": 0,
+  "canonical_changed": false,
+  "source_changed_after_final": false,
+  "independent_quality_inputs": 128,
+  "calibration_inputs": 64,
+  "predeclared_stress_inputs": 3,
+  "post_freeze_resource_inputs": 2,
+  "caveat": "Independent synthetic transfer, not a guarantee on official hidden tests. Resource-edge tests are post-freeze validation, not quality evidence."
+}

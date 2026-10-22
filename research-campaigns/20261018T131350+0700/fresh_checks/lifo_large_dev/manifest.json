@@ -1,0 +1,35 @@
+{
+  "design_sha256": "f684597a35640081f60a76f8afa8621c3b1fb989300c6e65f9dde5b26295a3d9",
+  "cases": [
+    {
+      "name": "large_dev_00",
+      "sha256": "6d3a0afa5f8ca269966c609ace62636ec7529095264330cda2140d1e1de486fc",
+      "operations": 30000
+    },
+    {
+      "name": "large_dev_01",
+      "sha256": "7d1d5f323de1396be274d85c6ffc1f0069d88c5cc26bc6809282a898bc0f1332",
+      "operations": 30000
+    },
+    {
+      "name": "large_dev_02",
+      "sha256": "87562eb4d5f20d6374550215106e92e54cb3ede6e8abbd61f60b67e736acbcf0",
+      "operations": 30000
+    },
+    {
+      "name": "large_dev_03",
+      "sha256": "c7d7eb32e0b29ca13510c9a0fe224d3a5e5d925e1ef773e94c255ebb131ac260",
+      "operations": 30000
+    },
+    {
+      "name": "large_dev_04",
+      "sha256": "55b5f8289a134b3c54ea30c8f964bb4266989ce0106d01777f9d80fe255481cd",
+      "operations": 30000
+    },
+    {
+      "name": "large_dev_05",
+      "sha256": "7969f00c8012763ea3341bb089ca41c5a8f474dcce5e10625f585cbf407d9c22",
+      "operations": 30000
+    }
+  ]
+}

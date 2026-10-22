@@ -1,0 +1,484 @@
+{
+  "cases": [
+    {
+      "id": "calibration-000",
+      "file": "calibration-000.in",
+      "sha256": "5a13c0e465d351ab6c2e1a6758e5895c2cf07bbb4502481c60caf1a094651613"
+    },
+    {
+      "id": "calibration-001",
+      "file": "calibration-001.in",
+      "sha256": "57f84fbbfcda95b146bc955be9143b457f7714e1c41e2eb72c44f8043e379108"
+    },
+    {
+      "id": "calibration-002",
+      "file": "calibration-002.in",
+      "sha256": "fd9ab4e9a2e12377c5d7c172937b7700cc63d9beeededd564ff6f5b949c386c4"
+    },
+    {
+      "id": "calibration-003",
+      "file": "calibration-003.in",
+      "sha256": "14cd15fccca7744f8443a11c1d41b3872e4d21f303410ea42f54712634dd9033"
+    },
+    {
+      "id": "calibration-004",
+      "file": "calibration-004.in",
+      "sha256": "723aa1e96e1a24a2e3437178c32c2af4c161cfe29f692c3d2f8fb091a1ef26db"
+    },
+    {
+      "id": "calibration-005",
+      "file": "calibration-005.in",
+      "sha256": "dc4224cb3fe3cf9e51a806c49e4f482fcb6be5d99ccadba8fe95cfba4a468dba"
+    },
+    {
+      "id": "calibration-006",
+      "file": "calibration-006.in",
+      "sha256": "94da323ed372ffdbd6bedefc160d3f606afd367a686933ac0ec25eb561999c88"
+    },
+    {
+      "id": "calibration-007",
+      "file": "calibration-007.in",
+      "sha256": "b8d171feb69308edb06d1fdda6213a56663ce1a4eaaa8986d732483e76c4629a"
+    },
+    {
+      "id": "calibration-008",
+      "file": "calibration-008.in",
+      "sha256": "c8f0af4dbfebbe60385f24d580994d901bda8326ff32b1cc49048830bdbd302b"
+    },
+    {
+      "id": "calibration-009",
+      "file": "calibration-009.in",
+      "sha256": "b31e4db345d87a8f08db3ada01e35033352938a614058c8e6d1f6766ee112e56"
+    },
+    {
+      "id": "calibration-010",
+      "file": "calibration-010.in",
+      "sha256": "9985a038ed8fe246315768ebf5363826a06204314949dc6f23af0a58c666bb32"
+    },
+    {
+      "id": "calibration-011",
+      "file": "calibration-011.in",
+      "sha256": "e1811ca07ecd9cd0b9efcfe3310bbd419bf2e330c6a6e5893bc7f1c3755ae7c0"
+    },
+    {
+      "id": "calibration-012",
+      "file": "calibration-012.in",
+      "sha256": "68179ed344bd119520b732d998dd00a7fd204092934c72ee3666bb2a07a2c8b1"
+    },
+    {
+      "id": "calibration-013",
+      "file": "calibration-013.in",
+      "sha256": "9da3fbf36ca404f940536edd6e0a2c019a0d365e3bf62d42331dd2e2c0e28934"
+    },
+    {
+      "id": "calibration-014",
+      "file": "calibration-014.in",
+      "sha256": "1f36e06a2772f0f582023cdf0f6fff8b28b420b77e8ce23220be5e9ceaa18e4b"
+    },
+    {
+      "id": "calibration-015",
+      "file": "calibration-015.in",
+      "sha256": "f15443b3598dbba91556d9ad74a15495f0b0173cefd7c908d9a63fd477327e57"
+    },
+    {
+      "id": "calibration-016",
+      "file": "calibration-016.in",
+      "sha256": "27c4c55e53ea77b01881864dd87cadf207d5ffdacf358f11447ec23bf5339657"
+    },
+    {
+      "id": "calibration-017",
+      "file": "calibration-017.in",
+      "sha256": "8c190e453f5506e7177969fd52c33f3a369046d3c8070aa275078fbff5318d55"
+    },
+    {
+      "id": "calibration-018",
+      "file": "calibration-018.in",
+      "sha256": "ebc65e3de360bbfb6bef39ba44959f2579abb70796fa8a09d0914283b6f05c21"
+    },
+    {
+      "id": "calibration-019",
+      "file": "calibration-019.in",
+      "sha256": "c75ad0bfea9741b20215e2c94e0065fe9190f93afdf764aedd6ada651af0f9cf"
+    },
+    {
+      "id": "calibration-020",
+      "file": "calibration-020.in",
+      "sha256": "d4fa63556fef8743d0f5198a13328381220de4a0919526fcf43e6b6397ac2d58"
+    },
+    {
+      "id": "calibration-021",
+      "file": "calibration-021.in",
+      "sha256": "800e46db414f94752637833c021e83e50bcee386ee8c84c4baffd39e3f227db9"
+    },
+    {
+      "id": "calibration-022",
+      "file": "calibration-022.in",
+      "sha256": "371cbaa34db3d83a76ccc4a760f3be95e3954b7d654c7cf94c75d2f42fd414a9"
+    },
+    {
+      "id": "calibration-023",
+      "file": "calibration-023.in",
+      "sha256": "fe942d3dfb5983d2cf4c155894d84bb8cb0c02a100476e58e17e017bc0cd5be2"
+    },
+    {
+      "id": "calibration-024",
+      "file": "calibration-024.in",
+      "sha256": "b994352f78e5f079241d56d1e97a964ecd28d63aeae6a22df503e72989f96085"
+    },
+    {
+      "id": "calibration-025",
+      "file": "calibration-025.in",
+      "sha256": "873cc97a3cf76e81b6ba6164a9f078b3aac57f682597e2fbff8477653a00fb4d"
+    },
+    {
+      "id": "calibration-026",
+      "file": "calibration-026.in",
+      "sha256": "5a77d1dbc7ae816434e5a0020b974e85c3908e993625945d5657406f596123f8"
+    },
+    {
+      "id": "calibration-027",
+      "file": "calibration-027.in",
+      "sha256": "c282547e8ea59a3bd5e581a555101d2573b13324600818c5afb4dc44fde6bc73"
+    },
+    {
+      "id": "calibration-028",
+      "file": "calibration-028.in",
+      "sha256": "040e5c3424678e4c49c99aebc5d88f788df164af00f161d31cccb314bce13162"
+    },
+    {
+      "id": "calibration-029",
+      "file": "calibration-029.in",
+      "sha256": "4bc98b615e85a2799dd91d90aabc52f2cb97fefcc71194395b3fd10c54e90990"
+    },
+    {
+      "id": "calibration-030",
+      "file": "calibration-030.in",
+      "sha256": "73460e08027aebd637f743d62706993f62cc0e734c8b3b39b148bc83f9951b8b"
+    },
+    {
+      "id": "calibration-031",
+      "file": "calibration-031.in",
+      "sha256": "18e3481a77d9ca67f179da78a1db831f33f37ab3fd390aee5e779f2e34e0ee93"
+    },
+    {
+      "id": "calibration-032",
+      "file": "calibration-032.in",
+      "sha256": "03b4b4275635508ac1099d441c61e08e03b1d691f85e53cc3385f988e4d23d37"
+    },
+    {
+      "id": "calibration-033",
+      "file": "calibration-033.in",
+      "sha256": "d65f595cc1bf765f193c4db81fdca3ce1a77a8227900a28a3cf9551fffe36dc8"
+    },
+    {
+      "id": "calibration-034",
+      "file": "calibration-034.in",
+      "sha256": "f4364d28f9a4e5bf0d5a8e0266d792f01e47b74f53cde2eca981ba6c1f51a44a"
+    },
+    {
+      "id": "calibration-035",
+      "file": "calibration-035.in",
+      "sha256": "6ec263fdfcea47617a531e1d6ae7bc9908dd5586d1e47fa5f1446b5ca120601e"
+    },
+    {
+      "id": "calibration-036",
+      "file": "calibration-036.in",
+      "sha256": "2ca11d8251dbb3d77bf7c8e92e10aa98f87671d663acfd1cdf78321e682dda3e"
+    },
+    {
+      "id": "calibration-037",
+      "file": "calibration-037.in",
+      "sha256": "14666a26c89a05281832947c67f15a4d16cebf5940e3a82015c2d3a381f84f55"
+    },
+    {
+      "id": "calibration-038",
+      "file": "calibration-038.in",
+      "sha256": "37a9289bd532ed549408fd00b9df56c02a56a27ad84fe88ff9c9a0f305dbe5a1"
+    },
+    {
+      "id": "calibration-039",
+      "file": "calibration-039.in",
+      "sha256": "dae12977349871c580c8502822ddd6a1e7866515fee5a9c54e149dd1dbb74cc7"
+    },
+    {
+      "id": "calibration-040",
+      "file": "calibration-040.in",
+      "sha256": "823a8d6b7f42762907dd229eb7a71279bc97119aba757439ff62eacf02f6d032"
+    },
+    {
+      "id": "calibration-041",
+      "file": "calibration-041.in",
+      "sha256": "05c797e3e9e05bfc4252b414b2b0d03c9ff68fd155e0b241bc0988cb73d1914f"
+    },
+    {
+      "id": "calibration-042",
+      "file": "calibration-042.in",
+      "sha256": "94418a5c2195121949efc3c559774914855a60b1b00568f49e7914ecfbd87faf"
+    },
+    {
+      "id": "calibration-043",
+      "file": "calibration-043.in",
+      "sha256": "a3754c1a9aa97257e4aac3392ebad9ad0775dd5143809c8c352ba05e00b2ea75"
+    },
+    {
+      "id": "calibration-044",
+      "file": "calibration-044.in",
+      "sha256": "d759ae8966bfa366da191acbd461451141598e109093e8164571e12542cd47b9"
+    },
+    {
+      "id": "calibration-045",
+      "file": "calibration-045.in",
+      "sha256": "cc1e330d7bfec68608c61f23c8c25c60bfd66e485b8989ddf0261a563d520cc1"
+    },
+    {
+      "id": "calibration-046",
+      "file": "calibration-046.in",
+      "sha256": "77657d672ae6943e5f1ea1d521a700c9a3cc40e55b0f79c9afd16be8448efc5d"
+    },
+    {
+      "id": "calibration-047",
+      "file": "calibration-047.in",
+      "sha256": "3ec5292ae3777db20d1eec956d27d3c83cb1cb94a30a8fa7c192b230a696e17c"
+    },
+    {
+      "id": "calibration-048",
+      "file": "calibration-048.in",
+      "sha256": "f2eee07653c552adf2e8992e463f52f5c0113b38fcad311c162e000cd41bbfa8"
+    },
+    {
+      "id": "calibration-049",
+      "file": "calibration-049.in",
+      "sha256": "c271b6376a51e5829916c8c3b93cdb40c209f54069a9d34b6f6eddc84ad2775d"
+    },
+    {
+      "id": "calibration-050",
+      "file": "calibration-050.in",
+      "sha256": "d2388c7c5b21f0ecfee4b2a5246c1d00f4c48a921c4f64d69bc616b12ba97419"
+    },
+    {
+      "id": "calibration-051",
+      "file": "calibration-051.in",
+      "sha256": "9942bb5b151b6a63da4fe77824c67dbc3c192d49a648e03ced1ef4232b0fc306"
+    },
+    {
+      "id": "calibration-052",
+      "file": "calibration-052.in",
+      "sha256": "1c7f063249b9911cdcf322f150a77f140f3ec515c39b63bbf714a40198cd0799"
+    },
+    {
+      "id": "calibration-053",
+      "file": "calibration-053.in",
+      "sha256": "1d9e13eb38234f7a9fcda61574723b9c2b2039abaa33dc4598458f88029cb58d"
+    },
+    {
+      "id": "calibration-054",
+      "file": "calibration-054.in",
+      "sha256": "769f8fad9e06c9ebac7dcd754d80f96e2b26f2d46625fcc6222dada1a719f372"
+    },
+    {
+      "id": "calibration-055",
+      "file": "calibration-055.in",
+      "sha256": "20b2e568e2666e8c544cc3b6e0f2488e6930c584493ae87510cb854cee5d2013"
+    },
+    {
+      "id": "calibration-056",
+      "file": "calibration-056.in",
+      "sha256": "c2203579a145670137b6cdf2a58434d16eacf0d6171323111a5d5a847b084f2d"
+    },
+    {
+      "id": "calibration-057",
+      "file": "calibration-057.in",
+      "sha256": "8d775a1bd38670186bdd98a3a029289f3d041e00f0585442d7480bb6c2dca048"
+    },
+    {
+      "id": "calibration-058",
+      "file": "calibration-058.in",
+      "sha256": "440799f2b545eb0b7865d30fc3d9190f3e8b2dd105bd62e778c8245f49627f90"
+    },
+    {
+      "id": "calibration-059",
+      "file": "calibration-059.in",
+      "sha256": "b3afe372d9ecb7db7d8a0411e22d5b2b8a9f3a1b1bfb60846f8a06d383317a85"
+    },
+    {
+      "id": "calibration-060",
+      "file": "calibration-060.in",
+      "sha256": "9f40134ca6144d8314f272bcb77a86cfe747e6a4e06dcfcf840f332e5342c06e"
+    },
+    {
+      "id": "calibration-061",
+      "file": "calibration-061.in",
+      "sha256": "85b6895a1e26bd3aff9a6cbffbad9d00c6e32bc58da986c8acd5fefcacaf09eb"
+    },
+    {
+      "id": "calibration-062",
+      "file": "calibration-062.in",
+      "sha256": "e92e7ab3fd20fcded79075b5f639ee0ce9ae0e178d11e94fefb4bf51e710da97"
+    },
+    {
+      "id": "calibration-063",
+      "file": "calibration-063.in",
+      "sha256": "324aa9eaeeb6e507d0ceb1128f07be0f38ee3549d206ecd14738f1e7a75dab09"
+    },
+    {
+      "id": "calibration-064",
+      "file": "calibration-064.in",
+      "sha256": "f5172563731456cfb783873225b5634d4173b5b2d0078bf516de3b6429befd55"
+    },
+    {
+      "id": "calibration-065",
+      "file": "calibration-065.in",
+      "sha256": "d72a1342e16d596851185451d70fb7357c30a384aab0bab15c63bed39d7aab7a"
+    },
+    {
+      "id": "calibration-066",
+      "file": "calibration-066.in",
+      "sha256": "9bf81c0b726b3dd84fb7f17bc528ffa922059cfb40cc64e66c4a0861eb0fe02c"
+    },
+    {
+      "id": "calibration-067",
+      "file": "calibration-067.in",
+      "sha256": "032b9a82028676f884672a95abc8095d0aef719cbad374cb696a64a22e0694ad"
+    },
+    {
+      "id": "calibration-068",
+      "file": "calibration-068.in",
+      "sha256": "7cf536397398b6ae248d4d253e9937f9563d4b751de3dff3d263150104812696"
+    },
+    {
+      "id": "calibration-069",
+      "file": "calibration-069.in",
+      "sha256": "9347a11e064f22f132a77588b735589849875947d87d1b3dac0ce2dab2167884"
+    },
+    {
+      "id": "calibration-070",
+      "file": "calibration-070.in",
+      "sha256": "7245d38776cc1e341835531852e644c4dc2eb2caee7b852cb4ea2c10b6e12ab4"
+    },
+    {
+      "id": "calibration-071",
+      "file": "calibration-071.in",
+      "sha256": "afa749d46ad702e6c2e804385ff6f59c3ba5525e6aa88b151271d10c41ab0455"
+    },
+    {
+      "id": "calibration-072",
+      "file": "calibration-072.in",
+      "sha256": "a42cbf063c9b9e52d968130cd21cc7439ac7618b3ce5533b7dd88af7b074abb5"
+    },
+    {
+      "id": "calibration-073",
+      "file": "calibration-073.in",
+      "sha256": "fa7f230020944261219a085194baf986255365b5c1e8217125add01a70398614"
+    },
+    {
+      "id": "calibration-074",
+      "file": "calibration-074.in",
+      "sha256": "1753c9bf5230c3f45888596db8c296f532c33e04fe78952ced6745a9eb60dff3"
+    },
+    {
+      "id": "calibration-075",
+      "file": "calibration-075.in",
+      "sha256": "c40eb2ea6df3c6fe2cd3c214eee543224eeae9c9e9452f2771f743e2927e6e35"
+    },
+    {
+      "id": "calibration-076",
+      "file": "calibration-076.in",
+      "sha256": "bb177d0b872ba794517e35152a597944bf37f115ad83e119239699313b0d37dd"
+    },
+    {
+      "id": "calibration-077",
+      "file": "calibration-077.in",
+      "sha256": "fbf79b71a507e5c9c1badd0a252d2435c1ec10e8aecc94a6437e8403868bea26"
+    },
+    {
+      "id": "calibration-078",
+      "file": "calibration-078.in",
+      "sha256": "4ef45be2af58c1198d3c3bb3788bef3a2bdf26fc55463cb1f9a3b322fa9d6227"
+    },
+    {
+      "id": "calibration-079",
+      "file": "calibration-079.in",
+      "sha256": "7726af1a1ebf98bfdd44d231280db2aab38561a021c518e574626fff84548569"
+    },
+    {
+      "id": "calibration-080",
+      "file": "calibration-080.in",
+      "sha256": "000ce6b0d683ea3a0c284df52eecea41e3ed9b9080d10c50acfe9582579b15e8"
+    },
+    {
+      "id": "calibration-081",
+      "file": "calibration-081.in",
+      "sha256": "654031f628a4e9955016f643fa01bcb07600215528f4b28629fe631455cf4fdd"
+    },
+    {
+      "id": "calibration-082",
+      "file": "calibration-082.in",
+      "sha256": "7a35f3a6401062b843185eb6fdeb15f34392237f63864215c3c176199a252861"
+    },
+    {
+      "id": "calibration-083",
+      "file": "calibration-083.in",
+      "sha256": "de8437eb3e85b91e609d858a20f3c6889af4daa7c7d85358df0940cc67149610"
+    },
+    {
+      "id": "calibration-084",
+      "file": "calibration-084.in",
+      "sha256": "c63e8c7435a912283712841fdc7b10774202ab274e6368f61e9d8dd082f9a563"
+    },
+    {
+      "id": "calibration-085",
+      "file": "calibration-085.in",
+      "sha256": "97da7c0ecf6a6ed9372fdaef5332501fe5e0d7aaadaf6445791fa408c1f9e289"
+    },
+    {
+      "id": "calibration-086",
+      "file": "calibration-086.in",
+      "sha256": "afd413b88d88dcbd01e39c34a5c3971bdd6762a7ab197d03265ba825dab1dc21"
+    },
+    {
+      "id": "calibration-087",
+      "file": "calibration-087.in",
+      "sha256": "6a9f2347ba1b3d8dd6f29792bdb66d00e5cf9faec26755e7fed86f22fb84076c"
+    },
+    {
+      "id": "calibration-088",
+      "file": "calibration-088.in",
+      "sha256": "a574d8bb98e11d5c64421ed9935f5f63537d13c0375bc997f8ef5d2a3e02c95a"
+    },
+    {
+      "id": "calibration-089",
+      "file": "calibration-089.in",
+      "sha256": "43e6d84cfd5a87fffb8c5c7f52da15540fabe8e08830f95ca1b1f80b825c22bd"
+    },
+    {
+      "id": "calibration-090",
+      "file": "calibration-090.in",
+      "sha256": "68a99082a1bf42016e5e5104c41903a859b8908b20fb79cb442a014d51f431de"
+    },
+    {
+      "id": "calibration-091",
+      "file": "calibration-091.in",
+      "sha256": "fa6707bed4f8d93d69c88769b30f9cb62f58c0702bfddb6872178a53e046f195"
+    },
+    {
+      "id": "calibration-092",
+      "file": "calibration-092.in",
+      "sha256": "2ee9681c778d4fcf24c2d4ddaebb4725edcbee83ffee3f3d9580058e4aa49bc7"
+    },
+    {
+      "id": "calibration-093",
+      "file": "calibration-093.in",
+      "sha256": "d7c3c7194e045f2fbd89a7ca5c218f694139ecafae2a8ad68173b8758c828451"
+    },
+    {
+      "id": "calibration-094",
+      "file": "calibration-094.in",
+      "sha256": "c66130d58ce7e617926dbe526f2c5bdb54a1fd8f01e5369df4befb09c9973bab"
+    },
+    {
+      "id": "calibration-095",
+      "file": "calibration-095.in",
+      "sha256": "233a0da39eb2ea8f9e5c6d84f3dfd1c821932c4feb1a84b541db6d51cc34fea9"
+    }
+  ]
+}

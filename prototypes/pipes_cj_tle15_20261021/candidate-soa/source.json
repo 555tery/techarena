@@ -1,0 +1,10 @@
+{
+  "base_sha256": "734021762a8aad25795cca0e989c27d0feb57301847bbfd647bf146d31a50781",
+  "source_sha256": "d5064af1f3574aec251426e8c6d7011c2ed82384d21a15f70b339d715a84d862",
+  "changes": [
+    "Lifetime scalar numeric storage, no managed struct arrays or per-cell wrappers.",
+    "Same event/age-bin updates, FP formulas/loop order/rounding points; fixed buffer borrows fenced after last use.",
+    "Dynamic record buffers borrowed only in advance, which never adds records.",
+    "Integer bounds from <=200000 commands,<=40 length; worst cumulative exposure and birthsum <40000000000."
+  ]
+}

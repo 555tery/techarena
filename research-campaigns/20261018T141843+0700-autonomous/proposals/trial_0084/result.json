@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0084",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0084/candidate_0.cpp",
+  "sha256": "75926e1248ca0bae7abf2b77744b62842d4bd74638a36deabb0cd2311cba884c",
+  "idea": "Complementary gaps с точным Pareto certificate: использовать большую щель, только если сохраняется ёмкость для каждого размера 1..40 и строго расширяется множество размещаемых пар запросов.",
+  "parent": "seed_standalone",
+  "weighted_score": 28.378416060664165,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4720,
+      "kpi": 0.9802966101694915,
+      "weighted_score": 0.980296610169492
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 18460,
+      "kpi": 0.666522210184182,
+      "weighted_score": 0.666522210184182
+    },
+    {
+      "case": "11",
+      "T": 22600,
+      "kpi": 0.900929203539823,
+      "weighted_score": 0.900929203539823
+    },
+    {
+      "case": "12",
+      "T": 10360,
+      "kpi": 0.9892857142857143,
+      "weighted_score": 3.957142857142857
+    },
+    {
+      "case": "13",
+      "T": 3300,
+      "kpi": 0.9672727272727273,
+      "weighted_score": 3.869090909090909
+    },
+    {
+      "case": "14",
+      "T": 37820,
+      "kpi": 0.9969328397673188,
+      "weighted_score": 3.987731359069275
+    },
+    {
+      "case": "15",
+      "T": 441400,
+      "kpi": 0.9487018577254192,
+      "weighted_score": 9.487018577254192
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.005460459296564179,
+    "worst_delta": -0.008109194485342641,
+    "wins": 16,
+    "regressions": 7,
+    "ties": 7,
+    "worst_cases": [
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.008109194485342641,
+        "baseline_T": 94540,
+        "candidate_T": 95360
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.006835560457223,
+        "baseline_T": 30480,
+        "candidate_T": 30700
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.006291471684383265,
+        "baseline_T": 87420,
+        "candidate_T": 87980
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.005060659564315673,
+        "baseline_T": 90260,
+        "candidate_T": 90720
+      },
+      {
+        "case": "dev_22_frames",
+        "delta": -0.0007154914946110313,
+        "baseline_T": 27180,
+        "candidate_T": 27200
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.0006137592848791673,
+        "baseline_T": 64880,
+        "candidate_T": 64920
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8142589557681683,
+  "max_cpu_s": 0.716397,
+  "max_rss_mib": 5.90625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0084/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0084/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792329011.532407,
+  "balanced_gate": true,
+  "hypothesis": "Для щелей g<h после размещения L сравниваются состояния (g-L,h) и (g,h-L). Потеря homogeneous capacity проверяется сразу для всех размеров: floor(g/s)-floor((g-L)/s)=floor(L/s)+[g%s<L%s]. Поэтому достаточно включения соответствующих 40-битных масок. Дополнительный точный критерий требует сохранения всех размещаемых пар размеров 1..40 и появления хотя бы одной новой пары. Это distribution-free certificate, отличающийся от scalar pair Markov ranking. Он может уменьшить образование несовместимых остатков; гарантии для длинных смешанных последовательностей с удалениями нет.",
+  "causality": "Изолированный патч к указанному exact parent с Best-Fit; перенос donor не выполняется. Используются текущие свободные интервалы и арифметические таблицы, построенные из диапазона 1..40. Дополнительная память около 27 KiB, поиск проверяет менее 80 размеров без дополнительных обходов дерева для каждого кандидата. Счётчики показывают сравнения, pair certificates, homogeneous vetoes, реальные изменения и первое изменение prefix. Нулевой changed означает неактивный эксперимент; одинаковый final T при changed>0 означает активную ничью. Компиляция, CPU и score не измерялись."
+}

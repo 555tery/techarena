@@ -1,0 +1,134 @@
+{
+  "result": "screen_negative_stop",
+  "screen_only": true,
+  "gate": "Proceed to full Open15, holdout-v2 and >=10 new independent synthetic streams only if candidate weighted score sum on cases 5/9/15 is strictly greater than baseline.",
+  "baseline_weighted_score_sum": 10.859085056537428,
+  "candidate_weighted_score_sum": 10.837873618108107,
+  "delta_weighted_score_sum": -0.021211438429320495,
+  "weight_sum": 12.0,
+  "cases": [
+    {
+      "case": 5,
+      "official_weight": 1.0,
+      "input_sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+      "status_baseline": "ok",
+      "status_candidate": "ok",
+      "baseline": {
+        "kpi": 0.8100701083492671,
+        "weighted_score": 0.810070108349267,
+        "occupied_length_m": 50840,
+        "trench_length_m": 62760,
+        "solver_cpu_total_s": 0.11346099999999999,
+        "solver_peak_rss_mb": 3.140625,
+        "wall_orchestration_s": 1.7236073339590803,
+        "judge_output_sha256": "e78bb7900ad184037e578f13012eaae1cb8d854700ee7ddc520ac6c8a113bb63",
+        "interactor_stderr_sha256": "dfdc884b03bed6f6e0b9676bb5b64c873e68982fd215e7a918ff440eecaa6677"
+      },
+      "candidate": {
+        "kpi": 0.8062163019346654,
+        "weighted_score": 0.806216301934665,
+        "occupied_length_m": 50840,
+        "trench_length_m": 63060,
+        "solver_cpu_total_s": 0.112856,
+        "solver_peak_rss_mb": 3.015625,
+        "wall_orchestration_s": 1.682059249957092,
+        "judge_output_sha256": "042d9420fad2146573ab9ab04e9304ba21127e90526510697717df5781b3f061",
+        "interactor_stderr_sha256": "f7ef3d6c04d7081b60df1d990f4d872fd4d464b0689a524c704bbe4a13678f5a"
+      },
+      "delta_weighted_score": -0.003853806414601979,
+      "delta_trench_m": 300
+    },
+    {
+      "case": 9,
+      "official_weight": 1.0,
+      "input_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+      "status_baseline": "ok",
+      "status_candidate": "ok",
+      "baseline": {
+        "kpi": 0.5083925112976113,
+        "weighted_score": 0.508392511297611,
+        "occupied_length_m": 31500,
+        "trench_length_m": 61960,
+        "solver_cpu_total_s": 0.14168199999999997,
+        "solver_peak_rss_mb": 3.09375,
+        "wall_orchestration_s": 1.8453239999944344,
+        "judge_output_sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f",
+        "interactor_stderr_sha256": "e21eb20fcb07cc85e099698d3bc9a4f47bd3adf1c541dee572cf5b7907f5d775"
+      },
+      "candidate": {
+        "kpi": 0.5083925112976113,
+        "weighted_score": 0.508392511297611,
+        "occupied_length_m": 31500,
+        "trench_length_m": 61960,
+        "solver_cpu_total_s": 0.139751,
+        "solver_peak_rss_mb": 2.59375,
+        "wall_orchestration_s": 1.9872840840835124,
+        "judge_output_sha256": "472e4329fc695e876a426e7eae7604f6f1679cff7c544ee04d1e7b414781ac66",
+        "interactor_stderr_sha256": "e21eb20fcb07cc85e099698d3bc9a4f47bd3adf1c541dee572cf5b7907f5d775"
+      },
+      "delta_weighted_score": 0.0,
+      "delta_trench_m": 0
+    },
+    {
+      "case": 15,
+      "official_weight": 10.0,
+      "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+      "status_baseline": "ok",
+      "status_candidate": "ok",
+      "baseline": {
+        "kpi": 0.9540622436890549,
+        "weighted_score": 9.54062243689055,
+        "occupied_length_m": 418757,
+        "trench_length_m": 438920,
+        "solver_cpu_total_s": 2.557056,
+        "solver_peak_rss_mb": 5.34375,
+        "wall_orchestration_s": 49.1740506660426,
+        "judge_output_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e",
+        "interactor_stderr_sha256": "f41d1634ebee6002db068895bd7f6dd3fef179c512b959a2feda4845b19f0686"
+      },
+      "candidate": {
+        "kpi": 0.9523264804875831,
+        "weighted_score": 9.523264804875831,
+        "occupied_length_m": 418757,
+        "trench_length_m": 439720,
+        "solver_cpu_total_s": 2.86231,
+        "solver_peak_rss_mb": 5.578125,
+        "wall_orchestration_s": 43.91146062500775,
+        "judge_output_sha256": "b3055a023294b298c0153a948455486c2f0cb0ec77a24518a41003b85a9f9a1a",
+        "interactor_stderr_sha256": "032c90131923781fc54d7f601061addaa89e0915a8d49a03927e4f221ec5a1d3"
+      },
+      "delta_weighted_score": -0.017357632014718405,
+      "delta_trench_m": 800
+    }
+  ],
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python_version": "3.14.5",
+    "compiler": "Apple clang 17.0.0 (clang-1700.0.13.5), arm64-apple-darwin25.6.0",
+    "compile_flags": [
+      "-O2",
+      "-std=c++20",
+      "-pipe",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-pedantic",
+      "-Werror"
+    ],
+    "build_status": "both sources built successfully under strict flags",
+    "cpu_limit_s": 5,
+    "memory_limit_mb": 256,
+    "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d"
+  },
+  "sources": {
+    "frozen_final_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "baseline_copy_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "candidate_source_sha256": "5c8a30dc8a768234de811299c90fd850d7eeacc81e066be77b1476746e8dfcb8",
+    "baseline_binary_sha256": "ee9ae15f8f4879eaca8da9a0c5fdb1caeb05311893279a4eaf0734c167427290",
+    "candidate_binary_sha256": "176089c44a5a3b52acd0f01080d8e67611319eef895d7c0f4b0149db4f1b8767",
+    "src_pipes_cpp_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "followup": "No full Open15, holdout-v2, or synthetic regression gate was run because the predeclared screen gate failed. No canonical source or platform submission was changed."
+}

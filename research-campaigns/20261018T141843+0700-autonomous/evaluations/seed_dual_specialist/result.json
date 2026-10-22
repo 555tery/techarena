@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "seed_dual_specialist",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/seeds/dual_specialist.cpp",
+  "sha256": "57902648341516f2c441a0be6ece20d427823a508302951062536919f3d9898d",
+  "idea": "seed dual_specialist",
+  "parent": null,
+  "weighted_score": 28.429797442428814,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4680,
+      "kpi": 0.9886752136752137,
+      "weighted_score": 0.988675213675214
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 18460,
+      "kpi": 0.666522210184182,
+      "weighted_score": 0.666522210184182
+    },
+    {
+      "case": "11",
+      "T": 22500,
+      "kpi": 0.9049333333333334,
+      "weighted_score": 0.904933333333333
+    },
+    {
+      "case": "12",
+      "T": 10360,
+      "kpi": 0.9892857142857143,
+      "weighted_score": 3.957142857142857
+    },
+    {
+      "case": "13",
+      "T": 3320,
+      "kpi": 0.9614457831325302,
+      "weighted_score": 3.845783132530121
+    },
+    {
+      "case": "14",
+      "T": 37820,
+      "kpi": 0.9969328397673188,
+      "weighted_score": 3.987731359069275
+    },
+    {
+      "case": "15",
+      "T": 438520,
+      "kpi": 0.9549325002280398,
+      "weighted_score": 9.549325002280398
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0034379634444080703,
+    "worst_delta": -0.05569358178053829,
+    "wins": 19,
+    "regressions": 4,
+    "ties": 7,
+    "worst_cases": [
+      {
+        "case": "dev_29_micro",
+        "delta": -0.05569358178053829,
+        "baseline_T": 420,
+        "candidate_T": 460
+      },
+      {
+        "case": "dev_25_micro",
+        "delta": -0.053333333333333344,
+        "baseline_T": 200,
+        "candidate_T": 240
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.0031557792405475515,
+        "baseline_T": 87420,
+        "candidate_T": 87700
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.002426735378667333,
+        "baseline_T": 90260,
+        "candidate_T": 90480
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": 0.0,
+        "baseline_T": 46460,
+        "candidate_T": 46460
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": 0.0,
+        "baseline_T": 24820,
+        "candidate_T": 24820
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8122364599160122,
+  "max_cpu_s": 0.837893,
+  "max_rss_mib": 10.125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/seed_dual_specialist/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/seed_dual_specialist/fresh_dev/harness/summary.json",
+  "finished_at": 1792308373.3034291,
+  "balanced_gate": false
+}

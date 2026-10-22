@@ -1,0 +1,281 @@
+{
+  "experiment": "Integration check: confidence-gated case11 high-side lane on the case5 Open15 leader",
+  "date": "2026-10-17",
+  "scope": "Local harness only; no platform, Docker, canonical source, or frozen source changed.",
+  "finding": "The supplied leader source already contains the previously validated case11 policy. A matched ablation removes only that high-side lane and keeps the shared deletion-rank history and LIFO-confidence function used by the independent expansion gate.",
+  "scores": {
+    "case11_with_policy": 0.904933333333333,
+    "case11_without_policy": 0.900132625994695,
+    "case11_delta": 0.004800707338638022,
+    "open15_with_policy": 30.071629211228668,
+    "open15_without_policy": 30.06682850389003,
+    "open15_delta": 0.004800707338638688,
+    "open15_weight_sum": 32.1,
+    "open15_ok_cases": 15,
+    "fresh_lifo_count": 7,
+    "fresh_lifo_with_policy_sum": 6.938392704431063,
+    "fresh_lifo_without_policy_sum": 6.938392704431063,
+    "fresh_lifo_all_exact_ties": true
+  },
+  "case11": {
+    "test_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "trench_m_with_policy": 22500,
+    "trench_m_without_policy": 22620,
+    "kpi_with_policy": 0.9049333333333334,
+    "kpi_without_policy": 0.900132625994695
+  },
+  "open15_per_case": [
+    {
+      "case": 1,
+      "weight": 0.1,
+      "kpi_with_policy": 0.9,
+      "kpi_without_policy": 0.9,
+      "trench_m_with_policy": 20,
+      "trench_m_without_policy": 20,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d"
+    },
+    {
+      "case": 2,
+      "weight": 1.0,
+      "kpi_with_policy": 1.0,
+      "kpi_without_policy": 1.0,
+      "trench_m_with_policy": 20,
+      "trench_m_without_policy": 20,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923"
+    },
+    {
+      "case": 3,
+      "weight": 1.0,
+      "kpi_with_policy": 0.75,
+      "kpi_without_policy": 0.75,
+      "trench_m_with_policy": 20,
+      "trench_m_without_policy": 20,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494"
+    },
+    {
+      "case": 4,
+      "weight": 1.0,
+      "kpi_with_policy": 0.6666666666666666,
+      "kpi_without_policy": 0.6666666666666666,
+      "trench_m_with_policy": 60,
+      "trench_m_without_policy": 60,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f"
+    },
+    {
+      "case": 5,
+      "weight": 1.0,
+      "kpi_with_policy": 0.9338721528288023,
+      "kpi_without_policy": 0.9338721528288023,
+      "trench_m_with_policy": 54440,
+      "trench_m_without_policy": 54440,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+    },
+    {
+      "case": 6,
+      "weight": 1.0,
+      "kpi_with_policy": 0.9,
+      "kpi_without_policy": 0.9,
+      "trench_m_with_policy": 20,
+      "trench_m_without_policy": 20,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd"
+    },
+    {
+      "case": 7,
+      "weight": 1.0,
+      "kpi_with_policy": 0.9864705882352941,
+      "kpi_without_policy": 0.9864705882352941,
+      "trench_m_with_policy": 1700,
+      "trench_m_without_policy": 1700,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd"
+    },
+    {
+      "case": 8,
+      "weight": 1.0,
+      "kpi_with_policy": 0.984468085106383,
+      "kpi_without_policy": 0.984468085106383,
+      "trench_m_with_policy": 4700,
+      "trench_m_without_policy": 4700,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7"
+    },
+    {
+      "case": 9,
+      "weight": 1.0,
+      "kpi_with_policy": 0.6598240469208211,
+      "kpi_without_policy": 0.6598240469208211,
+      "trench_m_with_policy": 47740,
+      "trench_m_without_policy": 47740,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+    },
+    {
+      "case": 10,
+      "weight": 1.0,
+      "kpi_with_policy": 0.8,
+      "kpi_without_policy": 0.8,
+      "trench_m_with_policy": 15380,
+      "trench_m_without_policy": 15380,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b"
+    },
+    {
+      "case": 11,
+      "weight": 1.0,
+      "kpi_with_policy": 0.9049333333333334,
+      "kpi_without_policy": 0.900132625994695,
+      "trench_m_with_policy": 22500,
+      "trench_m_without_policy": 22620,
+      "weighted_score_delta": 0.004800707338638022,
+      "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c"
+    },
+    {
+      "case": 12,
+      "weight": 4.0,
+      "kpi_with_policy": 0.9931201550387597,
+      "kpi_without_policy": 0.9931201550387597,
+      "trench_m_with_policy": 10320,
+      "trench_m_without_policy": 10320,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984"
+    },
+    {
+      "case": 13,
+      "weight": 4.0,
+      "kpi_with_policy": 0.973170731707317,
+      "kpi_without_policy": 0.973170731707317,
+      "trench_m_with_policy": 3280,
+      "trench_m_without_policy": 3280,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+    },
+    {
+      "case": 14,
+      "weight": 4.0,
+      "kpi_with_policy": 0.9958795562599049,
+      "kpi_without_policy": 0.9958795562599049,
+      "trench_m_with_policy": 37860,
+      "trench_m_without_policy": 37860,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d"
+    },
+    {
+      "case": 15,
+      "weight": 10.0,
+      "kpi_with_policy": 0.9546712566113441,
+      "kpi_without_policy": 0.9546712566113441,
+      "trench_m_with_policy": 438640,
+      "trench_m_without_policy": 438640,
+      "weighted_score_delta": 0.0,
+      "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    }
+  ],
+  "fresh_lifo_per_case": [
+    {
+      "name": "l01_pool256_uniform_5_8",
+      "operations": 10256,
+      "input_sha256": "f8896aea65e5dd6cf9d61e0ebbe68ae4e1eea3a51e8e0438925cccc86963c92e",
+      "trench_m_with_policy": 1700,
+      "trench_m_without_policy": 1700,
+      "score_with_policy": 0.9882352941176471,
+      "score_without_policy": 0.9882352941176471
+    },
+    {
+      "name": "l02_pool768_weighted_5_8",
+      "operations": 14768,
+      "input_sha256": "8d2dde99d79173815f4266664791731712ad67976a615d0dff13695442c1922d",
+      "trench_m_with_policy": 4780,
+      "trench_m_without_policy": 4780,
+      "score_with_policy": 0.998326359832636,
+      "score_without_policy": 0.998326359832636
+    },
+    {
+      "name": "l03_pool320_sparse_anchor_deletes",
+      "operations": 12320,
+      "input_sha256": "a471b7080d0f7a237a33ac9dbc06129432a073b0cd3e22f4ca6e2b0a073d3afd",
+      "trench_m_with_policy": 2000,
+      "trench_m_without_policy": 2000,
+      "score_with_policy": 0.9825,
+      "score_without_policy": 0.9825
+    },
+    {
+      "name": "l04_lifo_then_fifo_transition",
+      "operations": 13184,
+      "input_sha256": "73be96d673e39e2f4a86d30accaba2d67c76e32bd383d6876eeda52bd9133927",
+      "trench_m_with_policy": 2540,
+      "trench_m_without_policy": 2540,
+      "score_with_policy": 0.9811023622047244,
+      "score_without_policy": 0.9811023622047244
+    },
+    {
+      "name": "l05_lifo_size_phase_shift",
+      "operations": 12512,
+      "input_sha256": "43cdfa762f984a3a24bf9f10cc039f1993c987e0d2716fbf32e9d699eb7b4173",
+      "trench_m_with_policy": 2820,
+      "trench_m_without_policy": 2820,
+      "score_with_policy": 0.99822695035461,
+      "score_without_policy": 0.99822695035461
+    },
+    {
+      "name": "l06_lifo_alternating_sizes",
+      "operations": 10256,
+      "input_sha256": "929998a1916233256c7361fbd5fabbff80439d4f96622517e33197bb0480f810",
+      "trench_m_with_policy": 1680,
+      "trench_m_without_policy": 1680,
+      "score_with_policy": 0.9904761904761905,
+      "score_without_policy": 0.9904761904761905
+    },
+    {
+      "name": "l07_pool4205_scale_guard",
+      "operations": 9005,
+      "input_sha256": "94144cb8cfa57e593aeebe659f7bcc7d3ae03d63f70c75d34ae040423070e1a3",
+      "trench_m_with_policy": 27400,
+      "trench_m_without_policy": 27400,
+      "score_with_policy": 0.9995255474452555,
+      "score_without_policy": 0.9995255474452555
+    }
+  ],
+  "resources": {
+    "max_solver_cpu_s_with_policy_open15": 2.714521,
+    "max_solver_rss_mib_with_policy_open15": 8.390625,
+    "max_solver_cpu_s_with_policy_including_synthetics": 2.714521,
+    "max_solver_rss_mib_with_policy_including_synthetics": 8.390625,
+    "limits": {
+      "cpu_s": 5,
+      "rss_mib": 256
+    }
+  },
+  "hashes_sha256": {
+    "leader_original": "b1712f18ff3ecfb1e63e86eed038dea32e1b597c94b0d54a7d07f5836c120bf5",
+    "leader_with_policy_copy": "b1712f18ff3ecfb1e63e86eed038dea32e1b597c94b0d54a7d07f5836c120bf5",
+    "leader_without_case11_policy_ablation": "5df8d25239d4aa10ceb2cc94bdadab9f524f55d878b3491cbf5054ba5d293c9a",
+    "binary_with_policy": "62fc74c71c0a400238cc9bed391cf43200278fb493c5035db3496d17245186e9",
+    "binary_without_policy": "5891de4189e48518db8249c89c03396a2c52dd3eff6f7e5abaf9a5acc90c6077",
+    "generator": "2717cb57159c0c94437bc728ee96c5bfee4eb40c90dace6721aad81c64db9074",
+    "harness": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "open15_cases_csv_with_policy": "1548a3bc8388276f1d3d28a2c2f4f10555440f7f5a6c8871692c7bc3d7c94867",
+    "open15_cases_csv_without_policy": "6e99f8a81e94bd0cf15c9dee9ce85e02751832c841c451eaf5748d8fae1fcd4e",
+    "fresh_lifo_cases_csv_with_policy": "7c367a5c5c189c6422e16d1eb8f5b1c2c18312e010a5f794e31513bb35dfa43a",
+    "fresh_lifo_cases_csv_without_policy": "8131907086e84abdaffdd8692eb0b651961db291f1f5d0d5378ae69a20232146"
+  },
+  "run_commands": [
+    "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic results/pipes/improvement/case11_on_case5_leader/src/leader_with_case11_policy.cpp -o results/pipes/improvement/case11_on_case5_leader/bin/with_policy",
+    "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic results/pipes/improvement/case11_on_case5_leader/src/leader_without_case11_policy.cpp -o results/pipes/improvement/case11_on_case5_leader/bin/without_policy",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case11_on_case5_leader/bin/with_policy --interactor tools/interactor --tests data/pipes/open --out results/pipes/improvement/case11_on_case5_leader/runs/with_open15 --name leader-with-case11-open15 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 180",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case11_on_case5_leader/bin/without_policy --interactor tools/interactor --tests data/pipes/open --out results/pipes/improvement/case11_on_case5_leader/runs/without_open15 --name leader-without-case11-open15 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 180",
+    "python3 results/pipes/improvement/case11_on_case5_leader/generate_fresh_lifo.py",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case11_on_case5_leader/bin/with_policy --interactor tools/interactor --tests results/pipes/improvement/case11_on_case5_leader/synthetic_fresh_lifo --out results/pipes/improvement/case11_on_case5_leader/runs/with_fresh_lifo --name leader-with-case11-fresh-lifo --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 180",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case11_on_case5_leader/bin/without_policy --interactor tools/interactor --tests results/pipes/improvement/case11_on_case5_leader/synthetic_fresh_lifo --out results/pipes/improvement/case11_on_case5_leader/runs/without_fresh_lifo --name leader-without-case11-fresh-lifo --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 180"
+  ],
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "compiler": "Apple clang 17.0.0"
+  }
+}

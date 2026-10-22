@@ -1,0 +1,105 @@
+{
+  "status": "source frozen before independent validation",
+  "candidate_source": {
+    "path": "results/pipes/improvement/policy_conditioned_candidate/src/policy_conditioned.cpp",
+    "sha256": "7d6c6ddaa482b4ab2f92bd0c7a9f94c78481deff5aa44214d57430302aa13086"
+  },
+  "baseline_source": {
+    "path": "results/pipes/final/solution.cpp",
+    "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+  },
+  "canonical_source": {
+    "path": "src/pipes.cpp",
+    "sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "interactor_source": {
+    "path": "vendor/pipes_official/interactor.cpp",
+    "sha256": "85672e4c3ad9fdcb97d8b601758de1f1d1b5e86d6dd20252e0f72acdb9cb122a"
+  },
+  "validation_input_manifest": {
+    "path": "results/pipes/improvement/policy_conditioned_candidate/inputs/validation_manifest.json",
+    "sha256": "3dc061c2ed6740d508082495be58fd40964f2a0158ac9aa646244e0fad458e83"
+  },
+  "binaries": {
+    "frozen_final_linux": {
+      "path": "results/pipes/improvement/policy_conditioned_candidate/bin/frozen_final_linux",
+      "sha256": "d01a9bd6569b3e2e1cf0ba993b9465c170e9ca493b425b0bf59346ff1ee66be3"
+    },
+    "policy_conditioned_linux": {
+      "path": "results/pipes/improvement/policy_conditioned_candidate/bin/policy_conditioned_linux",
+      "sha256": "48cd3c8b2bce75af0f24bdc0af621e055a516f4601ddeaa350341c301eb58895"
+    },
+    "policy_conditioned_linux_diag": {
+      "path": "results/pipes/improvement/policy_conditioned_candidate/bin/policy_conditioned_linux_diag",
+      "sha256": "183390d96abd73fad888825c5114e9ddffb8e464e0e01610350ebafa0d64c289"
+    },
+    "interactor_linux": {
+      "path": "results/pipes/improvement/policy_conditioned_candidate/bin/interactor_linux",
+      "sha256": "785574199a5123fe70a40575e69d849301987c7d4a118cfcd73bdc090333f119"
+    }
+  },
+  "build": {
+    "image": "agentic-scientist/pipes-cpp:2b8aa392",
+    "target": "Linux 6.10.14-linuxkit aarch64",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "candidate_flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror",
+    "baseline_flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic",
+    "interactor_flags": "-O2 -std=c++17 -pipe"
+  },
+  "policy": {
+    "decision_rule": "Use P4 iff paired 16-scenario mean terminal trench delta versus baseline is strictly negative.",
+    "history_only": true,
+    "test_ids_or_future_commands_used": false,
+    "cadence_commands": 60,
+    "maximum_selector_decisions": 8,
+    "selector_starts_only_after_frozen_MC_budget_spent": true,
+    "no_threshold_calibration_on_validation_or_Open15": true
+  },
+  "qualification": {
+    "synthetic_preflight": "completed; one fresh 200k stream used only for smoke/telemetry, never threshold calibration",
+    "independent_validation": "completed on 18 fresh paired streams; all 18/18 transcripts accepted",
+    "quality_gate": "failed: paired whole-stream bootstrap 95% intervals include zero; mean trench delta is positive (candidate worse)",
+    "branch_decision": "no-go; do not proceed to Open15, holdout-v2, platform, or leaderboard",
+    "open15": "not run due failed independent quality gate",
+    "holdout_v2": "not run",
+    "platform_or_leaderboard": "not accessed",
+    "validation_matrix": {
+      "manifest": "results/pipes/improvement/policy_conditioned_candidate/inputs/validation_manifest.json",
+      "manifest_sha256": "3dc061c2ed6740d508082495be58fd40964f2a0158ac9aa646244e0fad458e83",
+      "paired_case_csv": "results/pipes/improvement/policy_conditioned_candidate/validation/per_case.csv",
+      "paired_bootstrap": "results/pipes/improvement/policy_conditioned_candidate/validation/paired_bootstrap.json",
+      "mean_delta_kpi": 0.00014359735376408742,
+      "delta_kpi_95_ci": [
+        -0.0007865356494682402,
+        0.001107523147433293
+      ],
+      "mean_delta_trench_m": 8.88888888888889,
+      "delta_trench_95_ci_m": [
+        -51.111111111111114,
+        71.11111111111111
+      ]
+    },
+    "resource_gate": {
+      "provisional_cpu_max_s": 4.5,
+      "provisional_rss_max_mib": 230.0,
+      "basis": "10% margin from official 5s/256MiB limits; adopted after an intermediate 4.407s measurement and before the final matrix case completed",
+      "max_candidate_cpu_s": 4.407242,
+      "max_candidate_rss_mib": 35.19921875,
+      "harness_cpu_violations": 0,
+      "harness_memory_violations": 0
+    },
+    "transcripts": {
+      "accepted_pairs": 18,
+      "total_expected_replies": 1947456,
+      "candidate_max_cpu_s": 4.407242,
+      "candidate_max_rss_mib": 35.19921875
+    }
+  },
+  "research_scripts": {
+    "build_linux.sh": "3696f984f7089bd6177a85be2465d42c97650b723364864ce56273e66b80cd82",
+    "generate_validation.py": "bdb9e31467b8cdaa7b3bbe501fb6c9e2238f43cbe984971c3eb54543e41407a3",
+    "run_validation.py": "1916c5601a53c410000b418ced53392aef704fd397d4338286e89fc1848baca9",
+    "analyze_validation.py": "e101883e31c0348149d7c9d4fb4a5ef619057fa34e41afa73ab41f910562aa5d",
+    "verify_python_rng.py": "3ecf1e048215fc67e69ed8158a82414f2a164ca46438b61ed0d540d5a095d937"
+  }
+}

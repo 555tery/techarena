@@ -1,0 +1,328 @@
+{
+  "experiment": "case13 causal policy probes",
+  "scope": "Local target case and eight fresh synthetic streams only; no site, Docker, canonical/frozen source, or Open15 candidate run.",
+  "baseline": {
+    "source": "results/pipes/improvement/case13_push_20261018/src/baseline.cpp",
+    "source_sha256": "4ac5d5c36220fc10610d82ce092e77907f80a1a1c425332d25f59316fa21d450",
+    "copied_from": "results/pipes/improvement/case14_suppress_parity_composition_20261018/src/relative_cohort_plus_scale_gate_unit_suppression.cpp",
+    "source_expected_sha256": "4ac5d5c36220fc10610d82ce092e77907f80a1a1c425332d25f59316fa21d450",
+    "binary": "results/pipes/improvement/case13_push_20261018/bin/baseline",
+    "binary_sha256": "6939e7bc46801547b661b06859c4f8bfd9b3759bb8576ce96e49356a4fdef321"
+  },
+  "target_input": {
+    "path": "data/pipes/open/13.in",
+    "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+  },
+  "build": {
+    "compiler": "Apple clang++ 17",
+    "flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic -DMC_ROLLOUT_DIAGNOSTICS"
+  },
+  "harness": {
+    "path": "tools/pipes_harness.py",
+    "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor": "tools/interactor",
+    "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "limits": {
+      "cpu_seconds": 5,
+      "memory_mib": 256
+    }
+  },
+  "target_case13": {
+    "comparator": {
+      "trench_m": 3280,
+      "weighted_score": 3.892682926829268,
+      "cpu_s": 0.08394399999999999,
+      "rss_mib": 2.796875
+    },
+    "policy1_near_exact_tail_exchange": {
+      "source": "results/pipes/improvement/case13_push_20261018/src/tail_exact_exchange.cpp",
+      "source_sha256": "9b0532635c86e1883353220f25eb6eb1e84ff47c58ec257b54218581f2c46f10",
+      "binary": "results/pipes/improvement/case13_push_20261018/bin/tail_exact_exchange",
+      "binary_sha256": "56b8df7c0ecca891a6878596b24a9c24639db9cea31e41231492f2a6d6c06587",
+      "trench_m": 3340,
+      "weighted_score": 3.822754491017964,
+      "delta_trench_m": 60,
+      "cpu_s": 0.120167,
+      "rss_mib": 2.765625,
+      "cases_csv_sha256": "ca0c0886aedd3d6179bd6ac08efe1a01bc6f1051dec008f3ec1700b0f57175ed"
+    },
+    "trace_sha256": "e5da020ce8a522213ae26acc8d03d03b4dbf657a767f9eeba4503a2740f55ef6",
+    "policy2_lifo_boundary_remainder_matched": {
+      "status": "valid corrected/matched run",
+      "source": "results/pipes/improvement/case13_push_20261018/src/lifo_boundary_remainder_matched.cpp",
+      "source_sha256": "0bb26887d9f6341e02e1533f499079811e07ba117dc2b70c0b3c30e9e9b2fa42",
+      "binary": "results/pipes/improvement/case13_push_20261018/bin/lifo_boundary_remainder_matched",
+      "binary_sha256": "081594f74706e4469d5d9e86aaec7e03ad6ad8232e305730d1796e0a57a1aaff",
+      "trench_m": 3360,
+      "weighted_score": 3.8,
+      "delta_trench_m": 80,
+      "cpu_s": 0.077686,
+      "rss_mib": 2.84375,
+      "policy_fires": 136,
+      "cases_csv_sha256": "35f8720d385a4614dab45bcffebb67f636ae8662b8f698afc0603d00984cd3cd",
+      "summary_sha256": "0eac1080bfc9ebf920cbefdb8b6c9cd5b818ecc3fadf2260a8208ab28a1be5b5"
+    }
+  },
+  "synthetic_suite": {
+    "manifest": "results/pipes/improvement/case13_push_20261018/synthetic/eight_fresh/manifest.json",
+    "manifest_sha256": "13248dd311b335c5a574373bf88061478c96b4ef52ad932322876db2d643e18c",
+    "generator": "results/pipes/improvement/case13_push_20261018/generate_screen.py",
+    "generator_sha256": "5053189e4a0f6488c1a6b927dc14d2e6ef8f5aea92431432d792ca2adc49560e",
+    "operation_count_per_stream": 5400,
+    "placements_per_stream": 3000,
+    "deletions_per_stream": 2400,
+    "valid_candidate_source": "results/pipes/improvement/case13_push_20261018/src/lifo_boundary_remainder_matched.cpp",
+    "valid_candidate_source_sha256": "0bb26887d9f6341e02e1533f499079811e07ba117dc2b70c0b3c30e9e9b2fa42",
+    "valid_candidate_binary": "results/pipes/improvement/case13_push_20261018/bin/lifo_boundary_remainder_matched",
+    "valid_candidate_binary_sha256": "081594f74706e4469d5d9e86aaec7e03ad6ad8232e305730d1796e0a57a1aaff",
+    "candidate_run_directory": "results/pipes/improvement/case13_push_20261018/runs/eight_lifo_boundary_remainder_matched",
+    "baseline_weighted_score_sum": 30.169672427501823,
+    "candidate_weighted_score_sum": 30.11815727775597,
+    "weighted_score_delta": -0.05151514974585325,
+    "wins": 1,
+    "ties": 5,
+    "regressions": 2,
+    "per_stream": [
+      {
+        "case": "alternating_lifo_20261026",
+        "input_sha256": "080d4b0670f8ecb9158a0eaaa973672c73e5ac3e7c09ad3e27ff73152871ce06",
+        "baseline_trench_m": 4720,
+        "candidate_trench_m": 4720,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 3.956779661016949,
+        "candidate_weighted_score": 3.956779661016949,
+        "policy_fires": 42
+      },
+      {
+        "case": "bursty_5_10_lifo_20261030",
+        "input_sha256": "5b555ef69edb18e45690e4189d70c810eaaf073aec8090e247363a7a3ab65b02",
+        "baseline_trench_m": 4640,
+        "candidate_trench_m": 4640,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 4.0,
+        "candidate_weighted_score": 4.0,
+        "policy_fires": 27
+      },
+      {
+        "case": "class_mixture_fifo_20261031",
+        "input_sha256": "247fca23ab3b3a3155c74de9dfecc682e7d3bf4a34d165ebfd89fc493ffacc63",
+        "baseline_trench_m": 7860,
+        "candidate_trench_m": 7860,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 3.955725190839695,
+        "candidate_weighted_score": 3.955725190839695,
+        "policy_fires": 0
+      },
+      {
+        "case": "random_walk_top20_delete_20261032",
+        "input_sha256": "cfde329503c2e82756123b8830a4f59bd6b46df84acdb8fd30a3040f942faf1e",
+        "baseline_trench_m": 8000,
+        "candidate_trench_m": 7980,
+        "trench_delta_m": -20,
+        "baseline_weighted_score": 3.9375,
+        "candidate_weighted_score": 3.947368421052631,
+        "policy_fires": 452
+      },
+      {
+        "case": "small_large_phase_shift_20261028",
+        "input_sha256": "e26111e954b5dbed593ce4660f8a22445be0403473bf68db9d840f1242ee3fd4",
+        "baseline_trench_m": 12820,
+        "candidate_trench_m": 12900,
+        "trench_delta_m": 80,
+        "baseline_weighted_score": 3.657098283931357,
+        "candidate_weighted_score": 3.634418604651163,
+        "policy_fires": 2
+      },
+      {
+        "case": "three_phase_mixed_delete_20261033",
+        "input_sha256": "b67bfb53f8a59694850ee5c7ed221d1832bfb047b163fe8027770e9cea8c2167",
+        "baseline_trench_m": 18360,
+        "candidate_trench_m": 18560,
+        "trench_delta_m": 200,
+        "baseline_weighted_score": 3.591721132897603,
+        "candidate_weighted_score": 3.55301724137931,
+        "policy_fires": 168
+      },
+      {
+        "case": "uniform_mixed_lifo_20261027",
+        "input_sha256": "ae2ad2aa3382cc19072d450a53802f8f457d817c79fdb90e95dc19404d70ac9a",
+        "baseline_trench_m": 8320,
+        "candidate_trench_m": 8320,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 3.574519230769231,
+        "candidate_weighted_score": 3.574519230769231,
+        "policy_fires": 38
+      },
+      {
+        "case": "uniform_random_delete_20261029",
+        "input_sha256": "f40e537b5c6e33964021cdca565e3d6c2e9b16964643bd140653fc9289eb9c95",
+        "baseline_trench_m": 13620,
+        "candidate_trench_m": 13620,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 3.49632892804699,
+        "candidate_weighted_score": 3.49632892804699,
+        "policy_fires": 0
+      }
+    ],
+    "baseline_cases_csv_sha256": "937a083115da199c0b424fe059ac1a45d15b0307dab68aec7a2e9459a9fc5a6b",
+    "candidate_cases_csv_sha256": "e5094dee88450c3314b40a95a7e82719b0741210d41c0973ed8077bc2aaaf9b6",
+    "candidate_summary_sha256": "cb513078c402cf345f4476bb1d904cc7cadeb72ce65502c3c4bbcf235764da27"
+  },
+  "open15": {
+    "status": "not run; neither valid policy improved target case 13"
+  },
+  "runs": {
+    "baseline_case13_summary_sha256": "003b8d1e944324698f367f70a144f9213edd0740b9b78ef15780512d1a80fb3b",
+    "baseline_case13_cases_sha256": "1d77782aaaa86ddba618a079489179671a337b7ec1be9fb14f4ca4661628f333",
+    "policy1_case13_summary_sha256": "88399998c933228c6044d6bb86ccddfb6f286bf2d52124e91f6cd040f3965702",
+    "policy2_case13_summary_sha256": "0eac1080bfc9ebf920cbefdb8b6c9cd5b818ecc3fadf2260a8208ab28a1be5b5",
+    "synthetic_baseline_summary_sha256": "d54d746fdb146d3792c18f1bac8f834e87f04f49bce5206cb58a0b64af19b159",
+    "synthetic_candidate_summary_sha256": "b81bd8c74e5bfc090cd38cbc84b90095b61451957dc74f99e2a47a2b7315a4ab",
+    "policy2_case13_cases_sha256": "35f8720d385a4614dab45bcffebb67f636ae8662b8f698afc0603d00984cd3cd",
+    "synthetic_corrected_summary_sha256": "cb513078c402cf345f4476bb1d904cc7cadeb72ce65502c3c4bbcf235764da27",
+    "synthetic_corrected_cases_sha256": "e5094dee88450c3314b40a95a7e82719b0741210d41c0973ed8077bc2aaaf9b6",
+    "superseded_invalid_policy2_case13_summary_sha256": "740ede61bf33ebadc34789746a31a5218b83058cecbe8783c4a85f9c308da521",
+    "superseded_invalid_policy2_case13_cases_sha256": "1016b2438072daa2ed2c60a6d1cf65b6cd4be69c52e1aa5351aceffcd79f935c"
+  },
+  "reproduction": "python3 tools/pipes_harness.py --solver <binary> --tests <input-or-directory> --out <run-dir> --cpu-limit 5 --memory-limit-mb 256",
+  "diagnostic_top5_gate": {
+    "description": "Same LIFO boundary-side idea, original top-5% deletion gate; no policy activations and exact target tie. Kept as gate validation, not counted as an additional policy.",
+    "source": "results/pipes/improvement/case13_push_20261018/src/lifo_boundary_remainder.cpp",
+    "source_sha256": "953361fd0b49a0753f4f447f5d6208f303ec9a193ababe818152ce46432634d9",
+    "binary": "results/pipes/improvement/case13_push_20261018/bin/lifo_boundary_remainder",
+    "binary_sha256": "98f6c4fddf177bf46b249267ba09931dc05a717f40e4de591fbd139e888f2221",
+    "policy_fires": 0,
+    "target_cases_csv_sha256": "4cb2660a0efaa6d5e3419bbd71a37fdd02096d1dd70ad5e8a848cb07abdece1a",
+    "target_summary_sha256": "ff5f19a25504a8c14f4557af0e3cdf52aa42e6671b2786f60f2042437eccd609"
+  },
+  "preservation_checks": {
+    "frozen_source": "results/pipes/final/solution.cpp",
+    "frozen_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical_source": "src/pipes.cpp",
+    "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "commands": [
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_push_20261018/bin/baseline --tests data/pipes/open/13.in --out results/pipes/improvement/case13_push_20261018/runs/baseline_case13 --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_push_20261018/bin/tail_exact_exchange --tests data/pipes/open/13.in --out results/pipes/improvement/case13_push_20261018/runs/tail_exact_exchange_case13 --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_push_20261018/bin/lifo_boundary_remainder_matched --tests data/pipes/open/13.in --out results/pipes/improvement/case13_push_20261018/runs/lifo_boundary_remainder_matched_case13 --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_push_20261018/bin/baseline --tests results/pipes/improvement/case13_push_20261018/synthetic/eight_fresh --out results/pipes/improvement/case13_push_20261018/runs/eight_baseline --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_push_20261018/bin/lifo_boundary_remainder_matched --tests results/pipes/improvement/case13_push_20261018/synthetic/eight_fresh --out results/pipes/improvement/case13_push_20261018/runs/eight_lifo_boundary_remainder_matched --cpu-limit 5 --memory-limit-mb 256"
+  ],
+  "superseded_invalid_trial": {
+    "status": "invalid; retained for audit only; excluded from conclusions",
+    "invalidity_reason": "Side rule used boundary PID ranks from the pre-rollout interval even though rollout could select another interval. The feature therefore did not describe the action ultimately applied.",
+    "target_policy": {
+      "source": "results/pipes/improvement/case13_push_20261018/src/lifo_boundary_remainder_top20.cpp",
+      "source_sha256": "d61da53c03625eeb6006b44ec23bb11c11d1105fb0f7706260e1c8a32f976716",
+      "binary": "results/pipes/improvement/case13_push_20261018/bin/lifo_boundary_remainder_top20",
+      "binary_sha256": "a590131cb99f9227404bea416a5b3b595ce8ff98f52e00ab9e786b82feeeef16",
+      "trench_m": 3360,
+      "weighted_score": 3.8,
+      "delta_trench_m": 80,
+      "cpu_s": 0.07439,
+      "rss_mib": 2.8125,
+      "policy_fires": 136,
+      "cases_csv_sha256": "1016b2438072daa2ed2c60a6d1cf65b6cd4be69c52e1aa5351aceffcd79f935c"
+    },
+    "target_run": {
+      "summary_sha256": "740ede61bf33ebadc34789746a31a5218b83058cecbe8783c4a85f9c308da521",
+      "cases_csv_sha256": "1016b2438072daa2ed2c60a6d1cf65b6cd4be69c52e1aa5351aceffcd79f935c",
+      "run_directory": "results/pipes/improvement/case13_push_20261018/runs/lifo_boundary_remainder_top20_case13"
+    },
+    "synthetic_run": {
+      "manifest": "results/pipes/improvement/case13_push_20261018/synthetic/eight_fresh/manifest.json",
+      "manifest_sha256": "13248dd311b335c5a574373bf88061478c96b4ef52ad932322876db2d643e18c",
+      "generator": "results/pipes/improvement/case13_push_20261018/generate_screen.py",
+      "generator_sha256": "5053189e4a0f6488c1a6b927dc14d2e6ef8f5aea92431432d792ca2adc49560e",
+      "operation_count_per_stream": 5400,
+      "placements_per_stream": 3000,
+      "deletions_per_stream": 2400,
+      "baseline_weighted_score_sum": 30.169672427501823,
+      "candidate_weighted_score_sum": 30.11815727775597,
+      "weighted_score_delta": -0.05151514974585325,
+      "wins": 1,
+      "ties": 5,
+      "regressions": 2,
+      "per_stream": [
+        {
+          "case": "alternating_lifo_20261026",
+          "input_sha256": "080d4b0670f8ecb9158a0eaaa973672c73e5ac3e7c09ad3e27ff73152871ce06",
+          "baseline_trench_m": 4720,
+          "candidate_trench_m": 4720,
+          "trench_delta_m": 0,
+          "baseline_weighted_score": 3.956779661016949,
+          "candidate_weighted_score": 3.956779661016949
+        },
+        {
+          "case": "bursty_5_10_lifo_20261030",
+          "input_sha256": "5b555ef69edb18e45690e4189d70c810eaaf073aec8090e247363a7a3ab65b02",
+          "baseline_trench_m": 4640,
+          "candidate_trench_m": 4640,
+          "trench_delta_m": 0,
+          "baseline_weighted_score": 4.0,
+          "candidate_weighted_score": 4.0
+        },
+        {
+          "case": "class_mixture_fifo_20261031",
+          "input_sha256": "247fca23ab3b3a3155c74de9dfecc682e7d3bf4a34d165ebfd89fc493ffacc63",
+          "baseline_trench_m": 7860,
+          "candidate_trench_m": 7860,
+          "trench_delta_m": 0,
+          "baseline_weighted_score": 3.955725190839695,
+          "candidate_weighted_score": 3.955725190839695
+        },
+        {
+          "case": "random_walk_top20_delete_20261032",
+          "input_sha256": "cfde329503c2e82756123b8830a4f59bd6b46df84acdb8fd30a3040f942faf1e",
+          "baseline_trench_m": 8000,
+          "candidate_trench_m": 7980,
+          "trench_delta_m": -20,
+          "baseline_weighted_score": 3.9375,
+          "candidate_weighted_score": 3.947368421052631
+        },
+        {
+          "case": "small_large_phase_shift_20261028",
+          "input_sha256": "e26111e954b5dbed593ce4660f8a22445be0403473bf68db9d840f1242ee3fd4",
+          "baseline_trench_m": 12820,
+          "candidate_trench_m": 12900,
+          "trench_delta_m": 80,
+          "baseline_weighted_score": 3.657098283931357,
+          "candidate_weighted_score": 3.634418604651163
+        },
+        {
+          "case": "three_phase_mixed_delete_20261033",
+          "input_sha256": "b67bfb53f8a59694850ee5c7ed221d1832bfb047b163fe8027770e9cea8c2167",
+          "baseline_trench_m": 18360,
+          "candidate_trench_m": 18560,
+          "trench_delta_m": 200,
+          "baseline_weighted_score": 3.591721132897603,
+          "candidate_weighted_score": 3.55301724137931
+        },
+        {
+          "case": "uniform_mixed_lifo_20261027",
+          "input_sha256": "ae2ad2aa3382cc19072d450a53802f8f457d817c79fdb90e95dc19404d70ac9a",
+          "baseline_trench_m": 8320,
+          "candidate_trench_m": 8320,
+          "trench_delta_m": 0,
+          "baseline_weighted_score": 3.574519230769231,
+          "candidate_weighted_score": 3.574519230769231
+        },
+        {
+          "case": "uniform_random_delete_20261029",
+          "input_sha256": "f40e537b5c6e33964021cdca565e3d6c2e9b16964643bd140653fc9289eb9c95",
+          "baseline_trench_m": 13620,
+          "candidate_trench_m": 13620,
+          "trench_delta_m": 0,
+          "baseline_weighted_score": 3.49632892804699,
+          "candidate_weighted_score": 3.49632892804699
+        }
+      ],
+      "baseline_cases_csv_sha256": "937a083115da199c0b424fe059ac1a45d15b0307dab68aec7a2e9459a9fc5a6b",
+      "candidate_cases_csv_sha256": "c47a3f4f4a1d52b49b2d1deb8bf98e522fb32d85818f8f8031c222716de4dada"
+    },
+    "commands": [
+      "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_push_20261018/bin/lifo_boundary_remainder_top20 --tests data/pipes/open/13.in --out results/pipes/improvement/case13_push_20261018/runs/lifo_boundary_remainder_top20_case13 --cpu-limit 5 --memory-limit-mb 256",
+      "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_push_20261018/bin/lifo_boundary_remainder_top20 --tests results/pipes/improvement/case13_push_20261018/synthetic/eight_fresh --out results/pipes/improvement/case13_push_20261018/runs/eight_lifo_boundary_remainder --cpu-limit 5 --memory-limit-mb 256"
+    ]
+  }
+}

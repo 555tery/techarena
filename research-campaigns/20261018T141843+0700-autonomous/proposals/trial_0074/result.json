@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0074",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0074/candidate_0.cpp",
+  "sha256": "3e1369498b9babaf7feebe07254c24271b06f58006b48cf01a50c745ab8e437c",
+  "idea": "Survival-weighted Bellman reward: учитывать lifetime будущих заполнителей щели, сохраняя родительскую поправку на её соседей.",
+  "parent": "trial_0040",
+  "weighted_score": 30.086759207418346,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37880,
+      "kpi": 0.9953537486800422,
+      "weighted_score": 3.981414994720169
+    },
+    {
+      "case": "15",
+      "T": 438060,
+      "kpi": 0.9559352600100443,
+      "weighted_score": 9.559352600100443
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0005670795068291675,
+    "worst_delta": -0.004395170835634787,
+    "wins": 9,
+    "regressions": 2,
+    "ties": 19,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.00030697421243719436,
+        "baseline_T": 64880,
+        "candidate_T": 64900
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 17640,
+        "candidate_T": 17640
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 21700,
+        "candidate_T": 21700
+      },
+      {
+        "case": "dev_05_fifo_size_drift",
+        "delta": 0.0,
+        "baseline_T": 54820,
+        "candidate_T": 54820
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8093655759784333,
+  "max_cpu_s": 1.168927,
+  "max_rss_mib": 14.578125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0074/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0074/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792326483.4055748,
+  "balanced_gate": true,
+  "hypothesis": "Reward=L может переоценивать размеры, которые часто поступают, но быстро удаляются. В локальной модели с горизонтом Exp(δ) и hazard μ_L=δ*r_L/2 вероятность сохранения равна s_L=2/(2+r_L). Новый DP использует reward=L*s_L/среднее(s), нормированное по потоку объёма. При одинаковых hazards поправка отключается. К родительскому score добавляется разность новых и прежних marginal costs; это приближение, а не доказательство улучшения F/T.",
+  "causality": "r_L берётся из существующей censored lifetime model, λ и δ остаются родительскими. Используются только уже наблюдавшиеся события и текущие щели. Сравниваются те же два финалиста; exact-fit, cohort/slab/trend routing и протокол сохраняются. Диагностика считает поддержанные модели, сравнения и фактические изменения выбранной щели относительно родительского решения в текущем состоянии. Добавляется один ленивый DP и менее 5 KiB состояния. Кандидат не запускался; score и CPU не измерены."
+}

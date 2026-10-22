@@ -1,0 +1,13 @@
+{
+  "verified_files": 582606,
+  "entry_kinds": {
+    "file": 222499,
+    "hardlink": 360065,
+    "symlink": 42
+  },
+  "all_source_hashes_and_hardlink_targets_match": true,
+  "known_credential_absent_from_all_entries": true,
+  "compressed_parts_verified": 8,
+  "archive_sha256": "a420628f84fcb9a20b6b052ed4626c7da80e18bc12121a108335460585add2ac",
+  "elapsed_s": 32.59001660346985
+}

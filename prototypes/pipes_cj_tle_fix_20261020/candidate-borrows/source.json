@@ -1,0 +1,7 @@
+{
+  "parent_sha256": "e6b496538a61c7885d9a22a320c23ff6f0be25b027f04515221045e884403e47",
+  "source_sha256": "ee12e7ee8cf506eacbe3558e218af92c6f7a76a13f74604aa49706cbe2d5a8d0",
+  "change": "Borrow stable owned CPointer once per bounded DP; replace per-cell wrapper calls with equivalent pointer read/write.",
+  "bounds": "maxGap in [0,512], requests in [1,min(gap,40)], offset in {0,513}; rate scan [0,40].",
+  "ownership": "Allocator is used after both recurrences and retains all fixed native owners; no free or reallocation within borrow."
+}

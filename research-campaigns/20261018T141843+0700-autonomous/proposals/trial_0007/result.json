@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0007",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0007/candidate_0.cpp",
+  "sha256": "4c21d6ee4f050a40f4b464957fdc246738933bce68e2f56c03ea734bf709253a",
+  "idea": "Обучаемая co-deletion affinity: уплотнять соседние по insertion order трубы, только когда наблюдавшиеся удаления подтверждают такую связь относительно дальнего контроля.",
+  "parent": "seed_public_best",
+  "weighted_score": 30.056168084025614,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22520,
+      "kpi": 0.9041296625222025,
+      "weighted_score": 0.904129662522203
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37860,
+      "kpi": 0.9958795562599049,
+      "weighted_score": 3.983518225039619
+    },
+    {
+      "case": "15",
+      "T": 439340,
+      "kpi": 0.9531501798151774,
+      "weighted_score": 9.531501798151773
+    }
+  ],
+  "fresh": {
+    "mean_delta": -0.0005099272458077298,
+    "worst_delta": -0.004395170835634787,
+    "wins": 5,
+    "regressions": 11,
+    "ties": 14,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.0031839849324777347,
+        "baseline_T": 24820,
+        "candidate_T": 24900
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.002497045526377306,
+        "baseline_T": 30480,
+        "candidate_T": 30560
+      },
+      {
+        "case": "dev_14_large_recent",
+        "delta": -0.002296437965101261,
+        "baseline_T": 34560,
+        "candidate_T": 34640
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.0021894132152460166,
+        "baseline_T": 94540,
+        "candidate_T": 94760
+      },
+      {
+        "case": "dev_12_large_recent",
+        "delta": -0.0013733092017527149,
+        "baseline_T": 14480,
+        "candidate_T": 14500
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8082885692257964,
+  "max_cpu_s": 1.156579,
+  "max_rss_mib": 12.890625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0007/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0007/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792310689.052199,
+  "balanced_gate": false,
+  "hypothesis": "Если близкие по порядку вставки трубы часто удаляются за следующие 64 операции после удаления одной из них, их пространственное соседство должно давать более крупные освобождающиеся промежутки. Порядок удаления внутри группы может быть произвольным. Кандидат меняет endpoint и выбор среди щелей того же размера; использует исходный parent без crossover. Компиляция, время работы и score не проверены.",
+  "causality": "После удаления сохраняются снимки живых соседей в шести диапазонах PID-distance; через 64 завершённые операции фиксируется фактически наблюдавшееся удаление каждого sampled объекта. Последний диапазон служит дальним контролем. Используются последние 256 исходов на диапазон, минимум 64 наблюдения и разделение Wilson bounds с z=3; веса образуют невозрастающий по расстоянию kernel. Этот gate эвристический: выборки зависимы, age effects полностью не устранены. При выборе размещения проверяются оба endpoint исходной щели и щели возле восьми последних живых труб, строго сохраняя размер исходной щели. Специализированные ветки сохраняют приоритет; механизм работает при превышении лимитов MC. Диагностика показывает исходы, изменения размещений и первую изменённую операцию для проверки влияния на ранний prefix."
+}

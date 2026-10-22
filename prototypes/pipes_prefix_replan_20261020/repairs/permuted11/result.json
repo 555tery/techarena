@@ -1,0 +1,63 @@
+{
+  "success": true,
+  "source": "prototypes/pipes_prefix_replan_20261020/exchange2/solution.cpp",
+  "cases": [
+    11,
+    15
+  ],
+  "component_count": 49836,
+  "changes": 36672,
+  "max_ratio": 5.125,
+  "audits": [
+    {
+      "case": 11,
+      "T": 20760,
+      "F": 20361,
+      "peak": 20759,
+      "ratio": 5.125,
+      "ratio_exact": "41/8",
+      "worst_step": 194,
+      "first_positions": [
+        0,
+        3,
+        3,
+        5,
+        8,
+        15,
+        22,
+        26,
+        29,
+        33,
+        39,
+        42
+      ],
+      "physical_replay": "all intervals nonoverlapping, valid deletions"
+    },
+    {
+      "case": 15,
+      "T": 418780,
+      "F": 418757,
+      "peak": 418768,
+      "ratio": 5.125,
+      "ratio_exact": "41/8",
+      "worst_step": 194,
+      "first_positions": [
+        0,
+        3,
+        3,
+        5,
+        8,
+        15,
+        22,
+        26,
+        29,
+        33,
+        39,
+        42
+      ],
+      "physical_replay": "all intervals nonoverlapping, valid deletions"
+    }
+  ],
+  "elapsed": 5.800703875022009,
+  "scope": "safe static component permutation after lifetime moves, prefix T never above input source"
+}

@@ -1,0 +1,229 @@
+{
+  "schema": "bounded-oracle-report-v1",
+  "diagnostic_only": true,
+  "future_information_used_by_oracle": true,
+  "production_policy_changes": 0,
+  "trace_suite_sha256": "4092a40af0006bcffaade86000dbc9253b38ed902a77e2823d6ba6d0bb057807",
+  "rows": [
+    {
+      "name": "repeat-00-pressure",
+      "pair_id": "repeat-00",
+      "suffix_kind": "pressure",
+      "seed": 20261018,
+      "parameters": {
+        "a": 6,
+        "b": 7,
+        "c": 4,
+        "d": 3,
+        "e": 14,
+        "f": 7
+      },
+      "commands": [
+        6,
+        7,
+        4,
+        3,
+        -1,
+        -2,
+        -3,
+        -4,
+        6,
+        7,
+        4,
+        3,
+        -5,
+        14,
+        -7,
+        7,
+        -6,
+        1
+      ],
+      "decision_command_index": 11,
+      "shared_prefix_through_decision": 12,
+      "prefix_signal": "the exact positive-length motif [a,b,c,d] occurred once already",
+      "provenance": "seeded synthetic paired-prefix variation; no contest input copied",
+      "reference_trench_m": 60,
+      "status": "optimal",
+      "optimality_proven": true,
+      "best_feasible_trench_m": 40,
+      "volume_lower_bound_m": 40,
+      "gap_to_volume_bound_m": 0,
+      "visited_states": 63,
+      "legal_placement_edges": 40,
+      "state_cap": 100000,
+      "timeout_s": 2.0,
+      "elapsed_s": 0.000651,
+      "reason": "volume lower bound attained by feasible witness",
+      "oracle_witness_path": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          0,
+          17
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          6
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          1,
+          20
+        ],
+        [
+          0,
+          23
+        ],
+        [
+          0,
+          13
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "oracle_witness_responses": [
+        "1 0",
+        "0 6",
+        "0 13",
+        "0 17",
+        "0",
+        "6",
+        "13",
+        "17",
+        "0 0",
+        "0 6",
+        "0 13",
+        "1 20",
+        "0",
+        "0 23",
+        "13",
+        "0 13",
+        "6",
+        "0 0"
+      ],
+      "known_feasible_witness_responses": [
+        "1 0",
+        "0 6",
+        "0 16",
+        "0 13",
+        "0",
+        "6",
+        "16",
+        "13",
+        "0 0",
+        "0 6",
+        "0 16",
+        "0 13",
+        "0",
+        "1 20",
+        "16",
+        "1 34",
+        "6",
+        "0 59"
+      ],
+      "initial_greedy_trench_m": 60,
+      "external_incumbent_m": 60,
+      "gap_reference_to_best_m": 20
+    },
+    {
+      "name": "repeat-00-light",
+      "pair_id": "repeat-00",
+      "suffix_kind": "light",
+      "seed": 20261018,
+      "parameters": {
+        "a": 6,
+        "b": 7,
+        "c": 4,
+        "d": 3,
+        "e": 14,
+        "f": 7
+      },
+      "commands": [
+        6,
+        7,
+        4,
+        3,
+        -1,
+        -2,
+        -3,
+        -4,
+        6,
+        7,
+        4,
+        3,
+        -5,
+        1,
+        -7,
+        1,
+        -6,
+        1
+      ],
+      "decision_command_index": 11,
+      "shared_prefix_through_decision": 12,
+      "prefix_signal": "the exact positive-length motif [a,b,c,d] occurred once already",
+      "provenance": "seeded synthetic paired-prefix variation; no contest input copied",
+      "reference_trench_m": 20,
+      "status": "optimal",
+      "optimality_proven": true,
+      "best_feasible_trench_m": 20,
+      "volume_lower_bound_m": 20,
+      "gap_to_volume_bound_m": 0,
+      "visited_states": 0,
+      "legal_placement_edges": 0,
+      "state_cap": 100000,
+      "timeout_s": 2.0,
+      "elapsed_s": 1e-06,
+      "reason": "volume lower bound attained by feasible witness",
+      "oracle_witness_path": null,
+      "oracle_witness_responses": null,
+      "known_feasible_witness_responses": [
+        "1 0",
+        "0 6",
+        "0 16",
+        "0 13",
+        "0",
+        "6",
+        "16",
+        "13",
+        "0 0",
+        "0 6",
+        "0 16",
+        "0 13",
+        "0",
+        "0 5",
+        "16",
+        "0 4",
+        "6",
+        "0 12"
+      ],
+      "initial_greedy_trench_m": 20,
+      "external_incumbent_m": 20,
+      "gap_reference_to_best_m": 0
+    }
+  ],
+  "limitations": [
+    "proves only the exact optimum for the listed finite trace and integer coordinates",
+    "oracle has the full future command suffix and cannot be copied into online policy",
+    "state/time capped rows are unknown, even when a lower gap looks small",
+    "synthetic mechanisms do not establish contest-table or hidden-test improvement"
+  ]
+}

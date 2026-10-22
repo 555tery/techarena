@@ -1,0 +1,156 @@
+{
+  "status": "completed",
+  "id": "external_196fd18ed2d07723",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/mature_endpoint_evidence/solution.cpp",
+  "sha256": "196fd18ed2d07723a10bf07ccfbbd923ecb89590ed01926fe890320a35268748",
+  "idea": "Mature-state evidence for short-pipe high-side preference: retain parent warm-up and structured routes; require observed deletion confidence after128 live pipes.",
+  "parent": "trial_0022",
+  "weighted_score": 29.962583611869128,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 18320,
+      "kpi": 0.6716157205240174,
+      "weighted_score": 0.671615720524017
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438060,
+      "kpi": 0.9559352600100443,
+      "weighted_score": 9.559352600100443
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0010205379239771255,
+    "worst_delta": -0.004395170835634787,
+    "wins": 13,
+    "regressions": 5,
+    "ties": 12,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_07_random_mixture",
+        "delta": -0.003145627062706269,
+        "baseline_T": 42420,
+        "candidate_T": 42560
+      },
+      {
+        "case": "dev_09_cohort_release",
+        "delta": -0.0004670164917541242,
+        "baseline_T": 11500,
+        "candidate_T": 11600
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.00030697421243719436,
+        "baseline_T": 64880,
+        "candidate_T": 64900
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.00022608306054439087,
+        "baseline_T": 87420,
+        "candidate_T": 87440
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8098190343955812,
+  "max_cpu_s": 1.2072479999999999,
+  "max_rss_mib": 14.515625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_196fd18ed2d07723/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_196fd18ed2d07723/fresh_dev/harness/summary.json",
+  "finished_at": 1792317730.545469,
+  "balanced_gate": true,
+  "hypothesis": "Short length alone need not justify high-side placement after a mature population exists. Keep cold-start, parity, alternating-delete and long-run routes, but require the existing observed LIFO evidence for the unstructured short-pipe high-side preference after the parent confidence model becomes eligible. Candidate domain and value formulas stay, while side/address tie preference may change. This can reduce isolated residual gaps; no gain measured yet.",
+  "causality": "Only current live population, current request length and existing rolling past deletion/profile evidence. Reuses parent128 live-population threshold; no new numeric sweep. No stream N, test identifiers, fingerprints, future input or external state. Parent source frozen SHA verified; strict C++20 Wall Wextra Werror syntax compile passed. Actual nonexact endpoint changes have separate diagnostics; rollout forecast implementation retained and must be judged by full checks.",
+  "origin": "independent branch inbox"
+}

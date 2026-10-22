@@ -1,0 +1,279 @@
+{
+  "task": "Open15 case11 immortal-PID1 cyclic rotations and conditioned suffix search",
+  "offline_future_deletions_used": true,
+  "source_plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/future/2/11.txt",
+  "source_plan_sha256": "9f6e5f8d9ab832478f5ce9e87905dcb2af6e90e50e5677847dcca6547e6e594b",
+  "case11_input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+  "case15_input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+  "source_case11_replay": {
+    "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "pipes": 6493,
+    "insertions": 6493,
+    "deletions": 3506,
+    "survivors": 2987,
+    "extent": 20811,
+    "trench_score": 20820,
+    "volume_lower_bound": 20759,
+    "valid": true
+  },
+  "pid1": {
+    "length": 3,
+    "birth_command": 0,
+    "death_command": 9999,
+    "final_time": 9999,
+    "immortal": true,
+    "source_cut": 20358,
+    "other_pipes_cross_cut": 0
+  },
+  "common_prefix": {
+    "commands": 4999,
+    "insertions": 4006
+  },
+  "variants": [
+    {
+      "variant": {
+        "name": "mode2-H20811-direct.txt",
+        "H": 20811,
+        "reflected_before_rotation": false,
+        "cut_before_rotation": 20358,
+        "pid1_after_rotation": 0,
+        "sha256": "e4c914dff3d0f2bc2e761d79db029998cbd3b87b21aac5683789d91419289eb1",
+        "case11_replay": {
+          "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+          "pipes": 6493,
+          "insertions": 6493,
+          "deletions": 3506,
+          "survivors": 2987,
+          "extent": 20811,
+          "trench_score": 20820,
+          "volume_lower_bound": 20759,
+          "valid": true
+        },
+        "case11_T": 20820,
+        "canonical_copy_sha256": "e4c914dff3d0f2bc2e761d79db029998cbd3b87b21aac5683789d91419289eb1"
+      },
+      "pins_sha256": "188a4aa7395b1a24f4fa1fd90a773f913aa51f7a2f59e76c6037ac61a4d4a2f2",
+      "pair": {
+        "11": {
+          "T": 20820,
+          "method": "rotated raw mode2",
+          "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20811-direct.txt",
+          "sha256": "e4c914dff3d0f2bc2e761d79db029998cbd3b87b21aac5683789d91419289eb1",
+          "replay": {
+            "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+            "pipes": 6493,
+            "insertions": 6493,
+            "deletions": 3506,
+            "survivors": 2987,
+            "extent": 20811,
+            "trench_score": 20820,
+            "volume_lower_bound": 20759,
+            "valid": true
+          }
+        },
+        "15": {
+          "T": 419060,
+          "method": "conditioned_reverse",
+          "mode": 1,
+          "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20811-direct/case15-conditioned_reverse-1.txt",
+          "sha256": "53422ea5c71940c5977365d29cfe857bbcbe016fad769a64196e2f856e6f760c",
+          "replay": {
+            "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+            "pipes": 130255,
+            "insertions": 130255,
+            "deletions": 69745,
+            "survivors": 60510,
+            "extent": 419059,
+            "trench_score": 419060,
+            "volume_lower_bound": 418768,
+            "valid": true
+          }
+        },
+        "score": 10.970723422299201
+      }
+    },
+    {
+      "variant": {
+        "name": "mode2-H20811-reflected.txt",
+        "H": 20811,
+        "reflected_before_rotation": true,
+        "cut_before_rotation": 450,
+        "pid1_after_rotation": 0,
+        "sha256": "af7872e581c2a67b05808280cdeac6e4dcab2174fb8975c297db9112d43625c4",
+        "case11_replay": {
+          "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+          "pipes": 6493,
+          "insertions": 6493,
+          "deletions": 3506,
+          "survivors": 2987,
+          "extent": 20811,
+          "trench_score": 20820,
+          "volume_lower_bound": 20759,
+          "valid": true
+        },
+        "case11_T": 20820
+      },
+      "pins_sha256": "05e929acab900a1b82c34669d334f47fe9d34407016c1b77f171bcb2a0337bef",
+      "pair": {
+        "11": {
+          "T": 20820,
+          "method": "rotated raw mode2",
+          "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20811-reflected.txt",
+          "sha256": "af7872e581c2a67b05808280cdeac6e4dcab2174fb8975c297db9112d43625c4",
+          "replay": {
+            "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+            "pipes": 6493,
+            "insertions": 6493,
+            "deletions": 3506,
+            "survivors": 2987,
+            "extent": 20811,
+            "trench_score": 20820,
+            "volume_lower_bound": 20759,
+            "valid": true
+          }
+        },
+        "15": {
+          "T": 419020,
+          "method": "conditioned_reverse",
+          "mode": 2,
+          "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20811-reflected/case15-conditioned_reverse-2.txt",
+          "sha256": "482bd9b04ecfbf4847e0f5b127c7382ce4e7bbfdd13b496c549ac76d63e26cef",
+          "replay": {
+            "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+            "pipes": 130255,
+            "insertions": 130255,
+            "deletions": 69745,
+            "survivors": 60510,
+            "extent": 419015,
+            "trench_score": 419020,
+            "volume_lower_bound": 418768,
+            "valid": true
+          }
+        },
+        "score": 10.97167734044457
+      }
+    },
+    {
+      "variant": {
+        "name": "mode2-H20820-direct.txt",
+        "H": 20820,
+        "reflected_before_rotation": false,
+        "cut_before_rotation": 20358,
+        "pid1_after_rotation": 0,
+        "sha256": "e2ad6210ae99d202931ba29cb658588a4e27de982bad8eb41681c61a8ac24466",
+        "case11_replay": {
+          "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+          "pipes": 6493,
+          "insertions": 6493,
+          "deletions": 3506,
+          "survivors": 2987,
+          "extent": 20820,
+          "trench_score": 20820,
+          "volume_lower_bound": 20759,
+          "valid": true
+        },
+        "case11_T": 20820
+      },
+      "pins_sha256": "6ce9822230c497c9499681087134a9da728d7e7e108b2ff50cd0242f2c15dfa6",
+      "pair": {
+        "11": {
+          "T": 20820,
+          "method": "rotated raw mode2",
+          "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20820-direct.txt",
+          "sha256": "e2ad6210ae99d202931ba29cb658588a4e27de982bad8eb41681c61a8ac24466",
+          "replay": {
+            "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+            "pipes": 6493,
+            "insertions": 6493,
+            "deletions": 3506,
+            "survivors": 2987,
+            "extent": 20820,
+            "trench_score": 20820,
+            "volume_lower_bound": 20759,
+            "valid": true
+          }
+        },
+        "15": {
+          "T": 419060,
+          "method": "conditioned_reverse",
+          "mode": 1,
+          "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20820-direct/case15-conditioned_reverse-1.txt",
+          "sha256": "8c1f8f492d38fcb784617c77b4e595063685fcd97b3364c557935379d285d47b",
+          "replay": {
+            "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+            "pipes": 130255,
+            "insertions": 130255,
+            "deletions": 69745,
+            "survivors": 60510,
+            "extent": 419059,
+            "trench_score": 419060,
+            "volume_lower_bound": 418768,
+            "valid": true
+          }
+        },
+        "score": 10.970723422299201
+      }
+    },
+    {
+      "variant": {
+        "name": "mode2-H20820-reflected.txt",
+        "H": 20820,
+        "reflected_before_rotation": true,
+        "cut_before_rotation": 459,
+        "pid1_after_rotation": 0,
+        "sha256": "610942987205f1967ff72e57dcf24a06c7e5461c4ad6d949e1d1fc18ceac2221",
+        "case11_replay": {
+          "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+          "pipes": 6493,
+          "insertions": 6493,
+          "deletions": 3506,
+          "survivors": 2987,
+          "extent": 20820,
+          "trench_score": 20820,
+          "volume_lower_bound": 20759,
+          "valid": true
+        },
+        "case11_T": 20820
+      },
+      "pins_sha256": "8d4ff342fe14fd4657c56c440d6d70663a3b556113d181eb6dedba5f26f33023",
+      "pair": {
+        "11": {
+          "T": 20820,
+          "method": "rotated raw mode2",
+          "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20820-reflected.txt",
+          "sha256": "610942987205f1967ff72e57dcf24a06c7e5461c4ad6d949e1d1fc18ceac2221",
+          "replay": {
+            "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+            "pipes": 6493,
+            "insertions": 6493,
+            "deletions": 3506,
+            "survivors": 2987,
+            "extent": 20820,
+            "trench_score": 20820,
+            "volume_lower_bound": 20759,
+            "valid": true
+          }
+        },
+        "15": {
+          "T": 419020,
+          "method": "conditioned_reverse",
+          "mode": 2,
+          "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20820-reflected/case15-conditioned_reverse-2.txt",
+          "sha256": "817deee7c9982432c8787361bfe600990e450b13be603091560860ddad5f159c",
+          "replay": {
+            "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+            "pipes": 130255,
+            "insertions": 130255,
+            "deletions": 69745,
+            "survivors": 60510,
+            "extent": 419015,
+            "trench_score": 419020,
+            "volume_lower_bound": 418768,
+            "valid": true
+          }
+        },
+        "score": 10.97167734044457
+      }
+    }
+  ]
+}

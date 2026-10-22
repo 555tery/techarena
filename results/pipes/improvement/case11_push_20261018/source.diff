@@ -1,0 +1,137 @@
+--- results/pipes/improvement/case11_push_20261018/src/parent_baseline.cpp
++++ results/pipes/improvement/case11_push_20261018/src/mixed_phase_coalescence.cpp
+@@ -427,6 +427,9 @@
+     std::set<std::pair<std::int64_t, std::int64_t>> freeBySizeShared;
+     std::vector<Pipe> pipes{Pipe{}};  // PID is the vector index.
+     std::int64_t trenchLength = 0;
++    bool narrowSizeRegimeObserved = false;
++    std::uint64_t mixedPhasePolicyChecks = 0;
++    std::uint64_t mixedPhasePolicyOverrides = 0;
+     std::deque<std::pair<int, int>> completedPlacementRuns;
+     int observedRunLength = -1;
+     int observedRunCount = 0;
+@@ -529,6 +532,82 @@
+         return it != activeByEnd.end() && rankFromNewestPermille(it->second) <= 50;
+     }
+ 
++    bool hasNarrowToWideLifoPhase() const {
++        if (!narrowSizeRegimeObserved || recentLengths.size() < 256 ||
++            recentDeleteRanksPermille.size() < 48) return false;
++        std::size_t wideCount = 0;
++        std::array<bool, 41> seen{};
++        std::size_t uniqueCount = 0;
++        auto lengthIt = recentLengths.rbegin();
++        for (std::size_t i = 0; i < 256; ++i, ++lengthIt) {
++            if (*lengthIt > 8) ++wideCount;
++            auto& wasSeen = seen[static_cast<std::size_t>(*lengthIt)];
++            if (!wasSeen) { wasSeen = true; ++uniqueCount; }
++        }
++        if (wideCount < 64 || uniqueCount < 12) return false;
++        std::size_t newestFifth = 0;
++        for (int rank : recentDeleteRanksPermille) {
++            if (rank <= 200) ++newestFifth;
++        }
++        return newestFifth * 100 >= recentDeleteRanksPermille.size() * 75;
++    }
++
++    int atRiskAdjacentPipes(std::int64_t gapStart, std::int64_t gapEnd) const {
++        int result = 0;
++        const auto left = activeByEnd.find(gapStart);
++        if (left != activeByEnd.end() &&
++            rankFromNewestPermille(left->second) <= 200) {
++            ++result;
++        }
++        const auto right = activeByEnd.upper_bound(gapEnd);
++        if (right != activeByEnd.end()) {
++            const Pipe& pipe = pipes[static_cast<std::size_t>(right->second)];
++            if (pipe.start == gapEnd && rankFromNewestPermille(right->second) <= 200) {
++                ++result;
++            }
++        }
++        return result;
++    }
++
++    std::int64_t chooseCoalescenceAlignedGap(
++        int length, int sizeCohort, bool highSide, std::int64_t rolloutStart) {
++        ++mixedPhasePolicyChecks;
++        const auto selected = freeByStart.find(rolloutStart);
++        if (selected == freeByStart.end()) return rolloutStart;
++        const std::int64_t selectedScore =
++            scoreGap(selected->second - selected->first, length);
++        const std::int64_t allowance =
++            std::max<std::int64_t>(1, static_cast<std::int64_t>(recentLengths.size()));
++        const int selectedRisk = atRiskAdjacentPipes(selected->first, selected->second);
++        if (selectedRisk == 2) return rolloutStart;
++
++        std::int64_t bestStart = rolloutStart;
++        std::int64_t bestScore = selectedScore;
++        int bestRisk = selectedRisk;
++        for (auto it = freeByStart.begin(); it != freeByStart.end(); ++it) {
++            const std::int64_t gapLength = it->second - it->first;
++            if (gapLength < length) continue;
++            if (parityCohortMode) {
++                const int owner = gapCohort.at(it->first);
++                if (owner >= 0 && owner != sizeCohort) continue;
++            }
++            const std::int64_t score = scoreGap(gapLength, length);
++            if (score > selectedScore + allowance) continue;
++            const int risk = atRiskAdjacentPipes(it->first, it->second);
++            if (risk > bestRisk ||
++                (risk == bestRisk && risk > 0 && score < bestScore) ||
++                (risk == bestRisk && risk > 0 && score == bestScore &&
++                 ((highSide && it->first > bestStart) ||
++                  (!highSide && it->first < bestStart)))) {
++                bestStart = it->first;
++                bestScore = score;
++                bestRisk = risk;
++            }
++        }
++        if (bestStart != rolloutStart) ++mixedPhasePolicyOverrides;
++        return bestStart;
++    }
++
+     std::uint64_t expansionGateOpportunities = 0;
+     std::uint64_t expansionGatePasses = 0;
+     std::uint64_t unitProfileSuppressedExpansions = 0;
+@@ -677,9 +756,14 @@
+             if (lifoStackLane) highSide = true;
+             // The rollout does not model the L+1 endpoint objective, so do not
+             // let it override this causally triggered action.
+-            const std::int64_t selectedStart = additiveNextAlignment
++                std::int64_t selectedStart = additiveNextAlignment
+                 ? gap->first
+                 : chooseGapWithRollout(length, highSide, sizeCohort, gap);
++            if (!additiveNextAlignment && !geometricLaneActive &&
++                selectedStart >= 0 && hasNarrowToWideLifoPhase()) {
++                selectedStart = chooseCoalescenceAlignedGap(
++                    length, sizeCohort, highSide, selectedStart);
++            }
+             if (selectedStart >= 0) gap = freeByStart.find(selectedStart);
+             start = consumeAtSide(gap, length, highSide);
+         }
+@@ -1265,6 +1349,14 @@
+             --recentFrequency[static_cast<std::size_t>(recentLengths.front())];
+             recentLengths.pop_front();
+         }
++        if (!narrowSizeRegimeObserved && recentLengths.size() >= 256) {
++            std::size_t narrowCount = 0;
++            auto it = recentLengths.rbegin();
++            for (std::size_t i = 0; i < 256; ++i, ++it) {
++                if (*it <= 8) ++narrowCount;
++            }
++            if (narrowCount * 100 >= 90U * 256U) narrowSizeRegimeObserved = true;
++        }
+     }
+ 
+     void eraseGap(StartIter it) {
+@@ -1339,7 +1431,9 @@
+                       << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                       << " expansion_gate_passes=" << allocator.expansionGatePasses
+                       << " unit_profile_suppressed_expansions="
+-                      << allocator.unitProfileSuppressedExpansions << '\n';
++                      << allocator.unitProfileSuppressedExpansions
++                      << " mixed_phase_policy_checks=" << allocator.mixedPhasePolicyChecks
++                      << " mixed_phase_policy_overrides=" << allocator.mixedPhasePolicyOverrides << '\n';
+ #endif
+             return 0;
+         }

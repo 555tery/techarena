@@ -1,0 +1,212 @@
+{
+  "experiment": "case15 causal local coalescence option-value screen",
+  "date_local": "2026-10-18",
+  "scope": "Local case15 and eight fixed-seed synthetic streams; no full Open15, platform, or Docker.",
+  "baseline_comparator": {
+    "open15_score_from_parent_manifest": 30.044966195,
+    "source": "results/pipes/improvement/case15_expansion_edge_cf/source/lifo_young_offset_scale_gt4096.cpp",
+    "source_sha256": "a280146cdc55c0fe8fbb6d4b7fda158f4e2189fa3463ce9d046f02a070a3571a",
+    "binary": "results/pipes/improvement/case15_fresh_policy_20261018/bin/baseline_scale_offset",
+    "binary_sha256": "8e92e705d54cde60a7a5076032763215703d70989d570361a28e4be00e807054",
+    "case15_run": "results/pipes/improvement/case15_fresh_policy_20261018/runs/baseline_case15",
+    "case15_trench_m": 438640,
+    "synthetic8_run": "results/pipes/improvement/case15_fresh_policy_20261018/runs/baseline_synthetic8",
+    "synthetic8_score_sum": 7.562443081077915
+  },
+  "candidate": {
+    "source": "results/pipes/improvement/case15_fresh_policy_20261018/source/coalescence_option_value.cpp",
+    "source_sha256": "19fad019ea38074d9df8c996912079c07330513556abc8221a14e7934567c7e7",
+    "binary": "results/pipes/improvement/case15_fresh_policy_20261018/bin/coalescence_option_value",
+    "binary_sha256": "252189da4b71b36d47e15235f01d66a1cfcbcd0cde418b7bbcd239ce423e1534",
+    "policy": "At most two best-fit candidates may be skipped when a newest-5%-boundary pipe has a causal near-LIFO coalescence option whose observed demand value exceeds the extra base gap cost.",
+    "case15_run": "results/pipes/improvement/case15_fresh_policy_20261018/runs/candidate_case15",
+    "case15_trench_m": 439160,
+    "case15_cpu_s": 2.632275,
+    "case15_rss_mib": 12.546875,
+    "case15_records": [
+      {
+        "case": "15",
+        "status": "ok",
+        "trench_m": 439160,
+        "kpi": 0.9535408507150014,
+        "solver_cpu_s": 2.632275,
+        "solver_rss_mib": 12.546875,
+        "candidate_stderr": "mc_decisions=32 mc_rollouts=1020 expansion_gate_opportunities=17661 expansion_gate_passes=11259 coalescence_checks=151535 coalescence_protected=84684 coalescence_skips=67559",
+        "answer_sha256": "b144aa30da64917c1a92140d14519e19a2a6e896defe7652a5eb2ff087b17905"
+      }
+    ],
+    "synthetic8_run": "results/pipes/improvement/case15_fresh_policy_20261018/runs/candidate_synthetic8",
+    "synthetic8_score_sum": 7.561781214061357,
+    "synthetic8_records": [
+      {
+        "case": "fresh_01",
+        "status": "ok",
+        "trench_m": 17520,
+        "kpi": 0.784703196347032,
+        "solver_cpu_s": 0.592055,
+        "solver_rss_mib": 3.203125,
+        "candidate_stderr": "mc_decisions=32 mc_rollouts=840 expansion_gate_opportunities=605 expansion_gate_passes=0 coalescence_checks=20095 coalescence_protected=0 coalescence_skips=0",
+        "answer_sha256": "9b9688f7acbc6afd08a93b64032a964d77654b345e693a6b845bc1dea3b3fb26"
+      },
+      {
+        "case": "fresh_02",
+        "status": "ok",
+        "trench_m": 14140,
+        "kpi": 0.9937057991513437,
+        "solver_cpu_s": 0.607511,
+        "solver_rss_mib": 3.03125,
+        "candidate_stderr": "mc_decisions=32 mc_rollouts=864 expansion_gate_opportunities=521 expansion_gate_passes=0 coalescence_checks=20179 coalescence_protected=15 coalescence_skips=0",
+        "answer_sha256": "a8749c32a8eeb9801618ff62c918dd66977aab1415f643134354e1ae967ac96b"
+      },
+      {
+        "case": "fresh_03",
+        "status": "ok",
+        "trench_m": 3300,
+        "kpi": 0.973030303030303,
+        "solver_cpu_s": 0.55213,
+        "solver_rss_mib": 3.34375,
+        "candidate_stderr": "mc_decisions=32 mc_rollouts=876 expansion_gate_opportunities=164 expansion_gate_passes=0 coalescence_checks=20536 coalescence_protected=67 coalescence_skips=0",
+        "answer_sha256": "aa5b47d0c00c58c37b1c5e640e964b6a95de12c20e49bf40f4648ce670e492f3"
+      },
+      {
+        "case": "fresh_04",
+        "status": "ok",
+        "trench_m": 11600,
+        "kpi": 0.9152586206896551,
+        "solver_cpu_s": 0.530725,
+        "solver_rss_mib": 3.125,
+        "candidate_stderr": "mc_decisions=32 mc_rollouts=876 expansion_gate_opportunities=344 expansion_gate_passes=0 coalescence_checks=20356 coalescence_protected=0 coalescence_skips=0",
+        "answer_sha256": "12e6c6a30e849551454867de1521621e421505912e3c66100387c9ba0d553cbb"
+      },
+      {
+        "case": "fresh_05",
+        "status": "ok",
+        "trench_m": 286740,
+        "kpi": 0.9990200181348957,
+        "solver_cpu_s": 0.520165,
+        "solver_rss_mib": 3.84375,
+        "candidate_stderr": "mc_decisions=32 mc_rollouts=768 expansion_gate_opportunities=8565 expansion_gate_passes=0 coalescence_checks=18802 coalescence_protected=0 coalescence_skips=0",
+        "answer_sha256": "7dcf6e31171023e720bcadbb4b885b5f7182f2a3a69d2677cce712258f04598e"
+      },
+      {
+        "case": "fresh_06",
+        "status": "ok",
+        "trench_m": 14900,
+        "kpi": 0.9226174496644295,
+        "solver_cpu_s": 0.497499,
+        "solver_rss_mib": 3.921875,
+        "candidate_stderr": "mc_decisions=32 mc_rollouts=876 expansion_gate_opportunities=663 expansion_gate_passes=0 coalescence_checks=20554 coalescence_protected=1359 coalescence_skips=517",
+        "answer_sha256": "db6a55b16b492471791dfa21c28579eb8d7c4a280273f9936e79ace068c55b2e"
+      },
+      {
+        "case": "fresh_07",
+        "status": "ok",
+        "trench_m": 180480,
+        "kpi": 0.9947861258865248,
+        "solver_cpu_s": 0.560987,
+        "solver_rss_mib": 4.6875,
+        "candidate_stderr": "mc_decisions=32 mc_rollouts=840 expansion_gate_opportunities=5317 expansion_gate_passes=0 coalescence_checks=22823 coalescence_protected=8440 coalescence_skips=5846",
+        "answer_sha256": "4485dca7f93745096fcf764a51099c063558d71699dfff23171253b5cf0cc92f"
+      },
+      {
+        "case": "fresh_08",
+        "status": "ok",
+        "trench_m": 178020,
+        "kpi": 0.9786597011571734,
+        "solver_cpu_s": 0.542113,
+        "solver_rss_mib": 4.5625,
+        "candidate_stderr": "mc_decisions=32 mc_rollouts=792 expansion_gate_opportunities=4934 expansion_gate_passes=0 coalescence_checks=19766 coalescence_protected=0 coalescence_skips=0",
+        "answer_sha256": "8316c86a2ecb311e1661782f3225a1cb126d9f04a808deee2a1699a0b9178bc9"
+      }
+    ]
+  },
+  "inputs": {
+    "case15": {
+      "path": "results/pipes/improvement/case15_fresh_policy_20261018/tests/case15/15.in",
+      "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+      "operations": 200000
+    },
+    "synthetics": [
+      {
+        "path": "results/pipes/improvement/case15_fresh_policy_20261018/synthetic/fresh_01.in",
+        "sha256": "e25e9f6e5c978abf7c4936830a6c1c04bc57eca8e851943e72d4f6b4539a9bb5"
+      },
+      {
+        "path": "results/pipes/improvement/case15_fresh_policy_20261018/synthetic/fresh_02.in",
+        "sha256": "fe3a1469f5f0046ef30209c79c5f8dd594685ec35730e6211ea2813b45f724d2"
+      },
+      {
+        "path": "results/pipes/improvement/case15_fresh_policy_20261018/synthetic/fresh_03.in",
+        "sha256": "dbe9aac4e2445a826d88d82efec1221a5312b893c31d2cd33a069f18a290c55b"
+      },
+      {
+        "path": "results/pipes/improvement/case15_fresh_policy_20261018/synthetic/fresh_04.in",
+        "sha256": "ca21ca9c913b6ec8db13e16508f52c0bf86c9c116e459f0cb4c89bc2c2ed0c38"
+      },
+      {
+        "path": "results/pipes/improvement/case15_fresh_policy_20261018/synthetic/fresh_05.in",
+        "sha256": "23abdbe56adc28e7e85c5ac4992ed178d6f402c534bd1d9c061a338c86bc206e"
+      },
+      {
+        "path": "results/pipes/improvement/case15_fresh_policy_20261018/synthetic/fresh_06.in",
+        "sha256": "f17dcb05737d94cbf485fc2995a038354c3f1f56be985cef3063731472b5dd60"
+      },
+      {
+        "path": "results/pipes/improvement/case15_fresh_policy_20261018/synthetic/fresh_07.in",
+        "sha256": "582d5cf228ac6a764a11f67710dc3816475e61be3d16dd6009578fb70459a516"
+      },
+      {
+        "path": "results/pipes/improvement/case15_fresh_policy_20261018/synthetic/fresh_08.in",
+        "sha256": "3afb04c957931df10b77f4325976d68c67d24bbb85eb50cbbacdb9c691f8f71e"
+      }
+    ],
+    "generator": {
+      "path": "results/pipes/improvement/case15_fresh_policy_20261018/generate_synthetics.py",
+      "sha256": "b959f65db667079284e770ec02feb211c5449573b08e1fee4efab21e560ca889",
+      "seed_base": 2026101800,
+      "initial_active": 700,
+      "events_per_stream": 40000
+    }
+  },
+  "reproduction": {
+    "prepare_script": {
+      "path": "results/pipes/improvement/case15_fresh_policy_20261018/prepare_candidate.py",
+      "sha256": "2de51d50bca2dd788c69857ce94b6839d00f4f015c01c24c43c294431e2db099"
+    },
+    "harness": "tools/pipes_harness.py",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor": "results/pipes/final/bin/interactor",
+    "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+    "build_flags": "-std=c++20 -O2 -DNDEBUG -Wall -Wextra -Werror -pedantic -DMC_ROLLOUT_DIAGNOSTICS",
+    "cpu_limit_s": 5,
+    "memory_limit_mib": 256,
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+  },
+  "frozen_and_canonical": {
+    "frozen_final_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "runs": {
+    "baseline_case15": {
+      "summary_sha256": "f5240724f8d54d4b8b0fdbe53f7f3b695f25a62716c671693ffe88e1ddef6407",
+      "cases_sha256": "9184bcc6903cf56e4cd13bf113274438b24754b9b881d339cd24aa211c5b93a4",
+      "all_ok": true
+    },
+    "candidate_case15": {
+      "summary_sha256": "7c723d904ab101e43655cbbef5d980a34a2b7c62eae83cccdc2521004e9d304d",
+      "cases_sha256": "5bff6407d74693ce0c33ebbda8a6650933e738ab46c652acd0126a5e66d0e554",
+      "all_ok": true
+    },
+    "baseline_synthetic8": {
+      "summary_sha256": "80eb9b573b0a5e3bd6812c6dc4199e104518759d3c83d00e7ab212b66ee6c6e2",
+      "cases_sha256": "fc1e36a17b2ba4f68c09097103d75414fbb941f65856b9e1df6babacce347363",
+      "all_ok": true
+    },
+    "candidate_synthetic8": {
+      "summary_sha256": "dd76173fa13ed31e6dd98b4f678669f6cb3e775c47c1971ee6a611e4dbbe64d8",
+      "cases_sha256": "6738069b62d96849d3d79e4aac15efcde8e4050f041e3f86f8a8da85aa6f5271",
+      "all_ok": true
+    }
+  }
+}

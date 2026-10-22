@@ -1,0 +1,61 @@
+{
+  "purpose": "correctness/resource diagnostics, not neutral selection data",
+  "tests": [
+    {
+      "file": "prototypes/pipes_robust_round2_20261019/safety/safety-open15-p4999.in",
+      "sha256": "30f26e9a0e10e46e67f5356052ad6026946b3269d0a78accaefcd0c3c02df6fc",
+      "prefix_length": 4999,
+      "case": 15,
+      "weight": 1.0,
+      "test_sha256": "30f26e9a0e10e46e67f5356052ad6026946b3269d0a78accaefcd0c3c02df6fc",
+      "operation_count": 5200,
+      "placement_count": 4139,
+      "peak_live_pipe_length_m": 14217,
+      "minimum_trench_lower_bound_m": 14220,
+      "final_occupied_length_m": 14210,
+      "kpi_upper_bound_from_live_volume": 0.9992967651195499
+    },
+    {
+      "file": "prototypes/pipes_robust_round2_20261019/safety/safety-open15-p199950.in",
+      "sha256": "95986f373125b94f6390deab253a856a52a9861a8bb12853bfe9ec21c0c9bd86",
+      "prefix_length": 199950,
+      "case": 15,
+      "weight": 1.0,
+      "test_sha256": "95986f373125b94f6390deab253a856a52a9861a8bb12853bfe9ec21c0c9bd86",
+      "operation_count": 200000,
+      "placement_count": 130261,
+      "peak_live_pipe_length_m": 419058,
+      "minimum_trench_lower_bound_m": 419060,
+      "final_occupied_length_m": 419058,
+      "kpi_upper_bound_from_live_volume": 0.9999952274137355
+    },
+    {
+      "file": "prototypes/pipes_robust_round2_20261019/safety/safety-open8-p388.in",
+      "sha256": "8523450caec0affb3fba0fd66a53b2845581168d1c7870cb2b17af1a69dd7867",
+      "prefix_length": 388,
+      "case": 8,
+      "weight": 1.0,
+      "test_sha256": "8523450caec0affb3fba0fd66a53b2845581168d1c7870cb2b17af1a69dd7867",
+      "operation_count": 1000,
+      "placement_count": 617,
+      "peak_live_pipe_length_m": 4011,
+      "minimum_trench_lower_bound_m": 4020,
+      "final_occupied_length_m": 3971,
+      "kpi_upper_bound_from_live_volume": 0.9878109452736319
+    },
+    {
+      "file": "prototypes/pipes_robust_round2_20261019/safety/safety-open11-p5000.in",
+      "sha256": "335e60a552fc362d6e8202f38bd790b7dfa7bb2c19bf053c540e1ae298bf1b99",
+      "prefix_length": 5000,
+      "case": 11,
+      "weight": 1.0,
+      "test_sha256": "335e60a552fc362d6e8202f38bd790b7dfa7bb2c19bf053c540e1ae298bf1b99",
+      "operation_count": 6000,
+      "placement_count": 4673,
+      "peak_live_pipe_length_m": 22229,
+      "minimum_trench_lower_bound_m": 22240,
+      "final_occupied_length_m": 22229,
+      "kpi_upper_bound_from_live_volume": 0.9995053956834532
+    }
+  ]
+}

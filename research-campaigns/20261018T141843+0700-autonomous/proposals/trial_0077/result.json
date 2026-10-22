@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0077",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0077/candidate_0.cpp",
+  "sha256": "a1ffd8f7d95bcfdb670f9c028cd7a14f546ac2b873036d28375ab15faa1ec1de",
+  "idea": "Matched-risk paired frontier: обучаться совместным удалениям непересекающихся пар последовательных вставок и размещать подтверждённые пары вплотную.",
+  "parent": "trial_0040",
+  "weighted_score": 30.090967891345112,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438060,
+      "kpi": 0.9559352600100443,
+      "weighted_score": 9.559352600100443
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0005488525874410215,
+    "worst_delta": -0.004395170835634787,
+    "wins": 8,
+    "regressions": 3,
+    "ties": 19,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.0006137592848791673,
+        "baseline_T": 64880,
+        "candidate_T": 64920
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.00022608306054439087,
+        "baseline_T": 87420,
+        "candidate_T": 87440
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 17640,
+        "candidate_T": 17640
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 21700,
+        "candidate_T": 21700
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8093473490590452,
+  "max_cpu_s": 1.208109,
+  "max_rss_mib": 22.9375,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0077/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0077/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792327406.500562,
+  "balanced_gate": true,
+  "hypothesis": "Связь между двумя объектами одного эпизода может сохраняться при отложенных и non-LIFO удалениях. После первого удаления пары сравнивается удаление второго участника за 64 операции с удалением живого control того же размера и близкого возраста из другого эпизода. При устойчивом преимуществе второй объект новой пары получает физическое продолжение первого. Допустимая надбавка marginal DP cost ограничивается наблюдаемым преимуществом, умноженным на меньшую длину пары; это эвристический budget, не доказанная выгода. Exact-fit сохраняется. Кандидат не компилировался и не измерялся; прирост score неизвестен.",
+  "causality": "Пары формируются только из уже поступивших последовательных вставок, без предположений о длине эпизода. Обучение использует полностью завершившиеся окна, включая отрицательные исходы; порядок удаления участников произволен. Control выбирается из текущего live set по размеру, возрасту и принадлежности другому эпизоду. Действие выполняется после родительского выбора только в обычном large mode, через существующий consumeAtSide, без reservations или дополнительного digging. Добавлены отдельные счётчики обучающих окон и фактических изменений размещения. Protocol, flush и structural routes сохранены."
+}

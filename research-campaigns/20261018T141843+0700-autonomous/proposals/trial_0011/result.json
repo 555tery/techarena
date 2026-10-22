@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0011",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0011/candidate_0.cpp",
+  "sha256": "5e4780a169ee3b425fc872a2fc618255d212b4c79200ecb846203afe5b9af95a",
+  "idea": "Retained-skeleton pocket minimization: менять геометрию размещения среди щелей того же размера, сохраняя выбор размера родительским алгоритмом.",
+  "parent": "external_3aa24d9bb7b16520",
+  "weighted_score": 30.068102187623897,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37900,
+      "kpi": 0.9948284960422163,
+      "weighted_score": 3.979313984168865
+    },
+    {
+      "case": "15",
+      "T": 438820,
+      "kpi": 0.9542796590857299,
+      "weighted_score": 9.542796590857298
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0005694154798050872,
+    "worst_delta": -0.004395170835634787,
+    "wins": 9,
+    "regressions": 2,
+    "ties": 19,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.0004520627215641726,
+        "baseline_T": 87420,
+        "candidate_T": 87460
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 17640,
+        "candidate_T": 17640
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 21700,
+        "candidate_T": 21700
+      },
+      {
+        "case": "dev_04_fifo_size_drift",
+        "delta": 0.0,
+        "baseline_T": 103520,
+        "candidate_T": 103520
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8093679119514092,
+  "max_cpu_s": 1.198865,
+  "max_rss_mib": 15.734375,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0011/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0011/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792311702.116689,
+  "balanced_gate": true,
+  "hypothesis": "При удалениях преимущественно молодых труб новая труба может стать барьером внутри области, которая позднее освободится целиком. Предлагается условно убрать молодые трубы, найти границы между уже пережившими наблюдаемое окно удалений трубами и минимизировать меньшую часть области, отсекаемую новой трубой. Это учитывает целую цепочку молодых труб и щелей, а не только непосредственных соседей.",
+  "causality": "Окно определяется 80-м процентилем возраста последних 64 фактических удалений. Пережившие такое окно трубы становятся наблюдаемыми anchors; при удалении anchor снимается. Механизм включается при подтверждённых recent deletions, вне cohort и длинных одинаковых runs, после отключения малого rollout по масштабу. Размер выбранной щели и непосредственный размер остатка сохраняются; меняются только адрес и endpoint. Проверять first_change_event, gap_changes, side_changes, projected_pocket_before/after и anchor_removals/anchor_marks, затем фактический T и fresh score. Уменьшение внутреннего potential само по себе не доказывает улучшение. Проверки не запускались; прирост score и соблюдение 5s не подтверждены. Поиск ограничен 32 щелями на решение, созревание проходит каждый PID не более одного раза."
+}

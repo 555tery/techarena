@@ -1,0 +1,46 @@
+{
+  "decision": "no-go",
+  "scope": "read-only archive inventory and leaderboard inspection; no solver tests or platform actions",
+  "leaderboard": {
+    "page": "https://olympic.nsu.ru/nsuts-new/ranking",
+    "last_update_shown": "03:08:15",
+    "team": "бюро 67",
+    "rank": 16,
+    "score": 29.79021957,
+    "leader": "OPZ",
+    "leader_score": 30.27796507,
+    "team_per_case_scores": [0.09, 1.0, 0.75, 0.66666667, 0.81188119, 0.9, 0.98647059, 0.98446809, 0.50708306, 0.8, 0.90013263, 3.97248062, 3.89268293, 3.98773136, 9.54062244]
+  },
+  "archive_inventory": {
+    "cases_csv_scanned": 759,
+    "filter": "15 successful rows with exact hashes of the saved Open15 inputs",
+    "distinct_archived_result_above_run48": 1,
+    "candidate": "results/pipes/improvement/case9_next/preliminary_pid_lane_excluded/source/proactive_pid_lanes_preprobe.cpp",
+    "candidate_sha256": "1a643a2b8a560de5c7dfd7efe0b288dc93785e96400d2ae6fd4ec7eea5f55f59",
+    "candidate_open15_score": 29.791529008363593,
+    "run48_open15_score": 29.7902195621014,
+    "delta": 0.001309446262195979,
+    "only_changed_case": 9,
+    "case9_trench_m_run48": 62120,
+    "case9_trench_m_candidate": 61960,
+    "independent_gate_for_candidate": false,
+    "prior_manifest_exclusion": "PID-parity-trigger preprobe was excluded by task constraint; do not treat as selected candidate."
+  },
+  "independent_gated_candidate": {
+    "name": "size-cohort-lanes",
+    "source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "open15_score": 29.789717928594,
+    "holdout_v2": "neutral",
+    "delta_vs_run48": -0.000501633507,
+    "qualifies": false
+  },
+  "protected_hashes": {
+    "results/pipes/final/solution.cpp": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "src/pipes.cpp": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "evidence_hashes": {
+    "run48_qualification/qualification.json": "df673baa52f39de1775dbcd5994eba8370184cc0b614bad4ae206b268ee096a4",
+    "run48_synthetic_independent/comparison.json": "6a46a72080c0de2e24f17b05ec6c975ab8242c1704bfa5261072674b63cc398b",
+    "pid_lane_preprobe/cases.csv": "a17cd31b221501ea49720e35319fd65abf1ea336ac62ad238f67af655d40e0c0"
+  }
+}

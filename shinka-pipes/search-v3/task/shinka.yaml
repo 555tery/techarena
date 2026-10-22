@@ -1,0 +1,69 @@
+evo:
+  language: cpp
+  job_type: local
+  llm_models:
+    - headless/codex@gpt-6-astra?effort=xhigh
+  llm_dynamic_selection: fixed
+  llm_kwargs:
+    temperatures: [0.0]
+    max_tokens: 16384
+  embedding_model: null
+  meta_rec_interval: null
+  novelty_llm_models: null
+  evolve_prompts: false
+  enable_wandb_logging: false
+  use_text_feedback: true
+  patch_types: [diff, full]
+  patch_type_probs: [0.8, 0.2]
+  max_patch_resamples: 1
+  max_patch_attempts: 3
+  max_novelty_attempts: 1
+  task_sys_msg: |
+    Improve a causal online dynamic storage allocator in self-contained C++20.
+    Propose code in your response; do not edit files or run tools/experiments.
+    Change only EVOLVE-BLOCK regions. Preserve immediate flushing and the protocol.
+    Inserts have exact length 1..40; deletes name a live PID; 0 exits.
+    Live pipes never move; trench grows in sections of 20 and never shrinks.
+    Use only past observations: no future commands, test IDs, fingerprints,
+    raw inputs, filesystem, network, subprocesses or other project results.
+    Every case must be correct with solver CPU <5 seconds and RSS <256 MiB.
+
+    Fitness is the arithmetic mean of F/T on the fixed SEARCH-v3 MAIN corpus:
+    128 cases, 16 equally weighted families with 8 equally weighted cases each.
+    F is final live pipe length; T is the actual final trench length.
+    B=20*ceil(peak_live_volume/20) is a volume lower bound, not the optimum.
+    B/T and T/B-1 are diagnostic only and must not replace the F/T objective.
+    CPU is recorded separately and has no penalty term in this fitness.
+    Main traces have F/B>=0.95 and end at a natural point after substantial churn.
+    Re-evaluate the eventual selected seed on this entire corpus before evolution.
+    Scores from earlier corpora cannot be carried over.
+
+    STRESS is a separate diagnostic corpus. It is excluded from fitness,
+    selection, archive decisions and model feedback, and is not run automatically.
+    Validation and Open15 are also excluded. Do not inspect their files/results.
+    This is a search corpus, not evidence of hidden-test generalization.
+
+    Propose one algorithmic mechanism per candidate. Explain its overlap with
+    the supplied parent, complexity, failure mode and a same-parent ablation.
+    Parameter tuning alone does not satisfy this research objective. Prepared
+    literature and malloc/jemalloc/mimalloc hypotheses may motivate mechanisms;
+    they do not establish improvements. Keep global fitting-gap fallback before
+    growth and exact pipe lengths; avoid speculative reserved trench.
+
+    If a patch fails to apply, use exact error feedback and return the complete
+    corrected proposal for the SAME parent and hypothesis, including all blocks.
+    Preserve exact SEARCH whitespace. At most three total apply attempts stay
+    within one generation. Failed apply attempts must not enter the archive or
+    consume a generation. Exhaustion stops the future runner for diagnosis.
+db:
+  num_islands: 2
+  archive_size: 20
+  num_archive_inspirations: 1
+  num_top_k_inspirations: 1
+job:
+  time: 02:00:00
+  numeric_threads_per_job: 1
+max_evaluation_jobs: 1
+max_proposal_jobs: 1
+max_db_workers: 1
+verbose: true

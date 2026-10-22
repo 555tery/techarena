@@ -1,0 +1,126 @@
+{
+  "campaign": "20261018T141843+0700-autonomous",
+  "branch": "packing_structure",
+  "experiment": "adaptive-fit-demand-shift-v1",
+  "idea": "Reset only the fit-scoring request-length histogram after a strongly evidenced online distribution change.",
+  "causal_basis": {
+    "detector": "Compare the last 64 observed placements with the preceding 256 placements using a symmetric Dirichlet(1/2) integrated-likelihood Bayes factor.",
+    "activation_rule": "Reset at BF >= 100:1; retain the latest 64 observations and wait for 256 further placements before testing again.",
+    "state_isolation": "Does not modify the 2048-placement history used by cohort, parity, trend, deletion, or policy gates. Rollout states copy and update the same fit-only profile. The current request enters the profile only after its allocation decision."
+  },
+  "source": {
+    "path": "branches/packing_structure/adaptive_demand_shift.cpp",
+    "sha256": "ae8b05fb6a6a521dc7f3eeec480dba66bdbea05b5e4cdd26dfadfbc82908f185",
+    "base_seed": "seeds/public_best.cpp",
+    "base_seed_sha256": "c70ade5c1ecd48c8f74ed99582f974467bd2b1791a214d79ddf6e5df8729af29"
+  },
+  "per_case": {
+    "11": {
+      "baseline": {
+        "run": "eval_case11_baseline",
+        "status": "completed",
+        "valid": true,
+        "source_sha256": "c70ade5c1ecd48c8f74ed99582f974467bd2b1791a214d79ddf6e5df8729af29",
+        "summary_sha256": "f47703aecb7afa055bf43cc6c504f3305c1661df9ed6d3ca8aa5504b03e095eb",
+        "trench_m": 22400,
+        "weighted_score": 0.908973214285714,
+        "cpu_s": 0.070783,
+        "rss_mib": 3.21875,
+        "stderr": "recency_different_selections=0\n"
+      },
+      "candidate": {
+        "run": "eval_case11_adaptive",
+        "status": "completed",
+        "valid": true,
+        "source_sha256": "ae8b05fb6a6a521dc7f3eeec480dba66bdbea05b5e4cdd26dfadfbc82908f185",
+        "summary_sha256": "a698e2006414e6a272f29f6094f6cf8ee20329d5ab5064e3963f451de4a782b3",
+        "trench_m": 22480,
+        "weighted_score": 0.905738434163701,
+        "cpu_s": 0.090648,
+        "rss_mib": 3.265625,
+        "stderr": "DEMAND_PROFILE_RESET count=1 placements=4029 log_bf=5.95135\nrecency_different_selections=0\n",
+        "profile_resets": [
+          {
+            "count": 1,
+            "placement": 4029,
+            "log_bayes_factor": 5.95135
+          }
+        ]
+      },
+      "delta_candidate_minus_baseline": {
+        "trench_m": 80,
+        "weighted_score": -0.003234780122012948
+      }
+    },
+    "13": {
+      "baseline": {
+        "run": "eval_case13_baseline",
+        "status": "completed",
+        "valid": true,
+        "source_sha256": "c70ade5c1ecd48c8f74ed99582f974467bd2b1791a214d79ddf6e5df8729af29",
+        "summary_sha256": "f23ced4a5e434c348f9394ea699b51e03dd4651b8a733cdd7e7ce16a1d3f4081",
+        "trench_m": 3280,
+        "weighted_score": 3.892682926829268,
+        "cpu_s": 0.06155,
+        "rss_mib": 2.8125,
+        "stderr": "recency_different_selections=0\n"
+      },
+      "candidate": {
+        "run": "eval_case13_adaptive",
+        "status": "completed",
+        "valid": true,
+        "source_sha256": "ae8b05fb6a6a521dc7f3eeec480dba66bdbea05b5e4cdd26dfadfbc82908f185",
+        "summary_sha256": "56f516ee7ce27cf68731b556b58727ff15defaaf48f1b4e8a670172f2100e1fd",
+        "trench_m": 3340,
+        "weighted_score": 3.822754491017964,
+        "cpu_s": 0.086552,
+        "rss_mib": 2.96875,
+        "stderr": "DEMAND_PROFILE_RESET count=1 placements=320 log_bf=59.3021\nDEMAND_PROFILE_RESET count=2 placements=604 log_bf=6.12\nrecency_different_selections=0\n",
+        "profile_resets": [
+          {
+            "count": 1,
+            "placement": 320,
+            "log_bayes_factor": 59.3021
+          },
+          {
+            "count": 2,
+            "placement": 604,
+            "log_bayes_factor": 6.12
+          }
+        ]
+      },
+      "delta_candidate_minus_baseline": {
+        "trench_m": 60,
+        "weighted_score": -0.06992843581130437
+      }
+    }
+  },
+  "target_subset_weighted_delta": -0.07316321593331732,
+  "decision": "no-go: both target cases regressed; do not proceed to full Open15 from this candidate.",
+  "limitations": [
+    "Only official open cases 11 and 13 were evaluated; no full Open15, fresh synthetic suite, validation, hidden tests, or platform was accessed.",
+    "The observed gains/changes are target-set evidence only and do not establish hidden-test transfer.",
+    "A single BF-triggered reset in case 11 was followed by an 80 m regression; case 13 also regressed by 60 m. The detector threshold was not swept."
+  ],
+  "quota_snapshot": {
+    "buckets": [
+      {
+        "limit_id": "codex",
+        "limit_name": null,
+        "windows": [
+          {
+            "name": "primary",
+            "remaining_percent": 83.0,
+            "resets_at": 1792874438.0,
+            "used_percent": 17.0,
+            "window_duration_mins": 10080.0
+          }
+        ]
+      }
+    ],
+    "captured_at": 1792308589.925233,
+    "min_remaining_percent": 83.0,
+    "protocol": "codex-quota-guard-v1",
+    "source": "account/rateLimits/read"
+  }
+}

@@ -1,0 +1,323 @@
+{
+  "master_seed": 63419087,
+  "operation_count": 30000,
+  "max_live": 600,
+  "phase_length": 5000,
+  "policy_cycle": [
+    "fifo",
+    "lifo",
+    "random"
+  ],
+  "streams": [
+    {
+      "name": "uniform",
+      "file": "alternating_uniform_30k.in",
+      "seed": 63419087,
+      "sha256": "2705682ae08d742923834183437593b01702bc3380aeaeefc054056ce17483f8",
+      "operation_count": 30000,
+      "max_live": 600,
+      "size_distribution": "sample_uniform",
+      "policy_phase_length": 5000,
+      "policy_cycle": [
+        "fifo",
+        "lifo",
+        "random"
+      ],
+      "phases": [
+        {
+          "start_operation_1based": 1,
+          "end_operation_1based": 5000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 5001,
+          "end_operation_1based": 10000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 10001,
+          "end_operation_1based": 15000,
+          "policy": "random"
+        },
+        {
+          "start_operation_1based": 15001,
+          "end_operation_1based": 20000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 20001,
+          "end_operation_1based": 25000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 25001,
+          "end_operation_1based": 30000,
+          "policy": "random"
+        }
+      ],
+      "policy_counts_by_policy": {
+        "fifo": {
+          "placements": 5296,
+          "deletions": 4704
+        },
+        "lifo": {
+          "placements": 5001,
+          "deletions": 4999
+        },
+        "random": {
+          "placements": 5001,
+          "deletions": 4999
+        }
+      },
+      "purpose": "new exploratory diagnostic only; not a holdout and not used to tune candidate"
+    },
+    {
+      "name": "short_skew",
+      "file": "alternating_short_skew_30k.in",
+      "seed": 63419088,
+      "sha256": "d0a60e82d77a7b49961a71956ca73b3cd4887bd4102d399e843018b12e352077",
+      "operation_count": 30000,
+      "max_live": 600,
+      "size_distribution": "sample_short_skew",
+      "policy_phase_length": 5000,
+      "policy_cycle": [
+        "fifo",
+        "lifo",
+        "random"
+      ],
+      "phases": [
+        {
+          "start_operation_1based": 1,
+          "end_operation_1based": 5000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 5001,
+          "end_operation_1based": 10000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 10001,
+          "end_operation_1based": 15000,
+          "policy": "random"
+        },
+        {
+          "start_operation_1based": 15001,
+          "end_operation_1based": 20000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 20001,
+          "end_operation_1based": 25000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 25001,
+          "end_operation_1based": 30000,
+          "policy": "random"
+        }
+      ],
+      "policy_counts_by_policy": {
+        "fifo": {
+          "placements": 5287,
+          "deletions": 4713
+        },
+        "lifo": {
+          "placements": 5005,
+          "deletions": 4995
+        },
+        "random": {
+          "placements": 5008,
+          "deletions": 4992
+        }
+      },
+      "purpose": "new exploratory diagnostic only; not a holdout and not used to tune candidate"
+    },
+    {
+      "name": "long_skew",
+      "file": "alternating_long_skew_30k.in",
+      "seed": 63419089,
+      "sha256": "2d7a06fd63c1cc89be649be000fb8088a04709cfd46bd342b52b73e9b966b51f",
+      "operation_count": 30000,
+      "max_live": 600,
+      "size_distribution": "sample_long_skew",
+      "policy_phase_length": 5000,
+      "policy_cycle": [
+        "fifo",
+        "lifo",
+        "random"
+      ],
+      "phases": [
+        {
+          "start_operation_1based": 1,
+          "end_operation_1based": 5000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 5001,
+          "end_operation_1based": 10000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 10001,
+          "end_operation_1based": 15000,
+          "policy": "random"
+        },
+        {
+          "start_operation_1based": 15001,
+          "end_operation_1based": 20000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 20001,
+          "end_operation_1based": 25000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 25001,
+          "end_operation_1based": 30000,
+          "policy": "random"
+        }
+      ],
+      "policy_counts_by_policy": {
+        "fifo": {
+          "placements": 5304,
+          "deletions": 4696
+        },
+        "lifo": {
+          "placements": 4996,
+          "deletions": 5004
+        },
+        "random": {
+          "placements": 5000,
+          "deletions": 5000
+        }
+      },
+      "purpose": "new exploratory diagnostic only; not a holdout and not used to tune candidate"
+    },
+    {
+      "name": "bimodal",
+      "file": "alternating_bimodal_30k.in",
+      "seed": 63419090,
+      "sha256": "998e7446f2e3eaca61f6ea0a482a2e5a528fe15404a636b93253b6a2ce34f40a",
+      "operation_count": 30000,
+      "max_live": 600,
+      "size_distribution": "sample_bimodal",
+      "policy_phase_length": 5000,
+      "policy_cycle": [
+        "fifo",
+        "lifo",
+        "random"
+      ],
+      "phases": [
+        {
+          "start_operation_1based": 1,
+          "end_operation_1based": 5000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 5001,
+          "end_operation_1based": 10000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 10001,
+          "end_operation_1based": 15000,
+          "policy": "random"
+        },
+        {
+          "start_operation_1based": 15001,
+          "end_operation_1based": 20000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 20001,
+          "end_operation_1based": 25000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 25001,
+          "end_operation_1based": 30000,
+          "policy": "random"
+        }
+      ],
+      "policy_counts_by_policy": {
+        "fifo": {
+          "placements": 5299,
+          "deletions": 4701
+        },
+        "lifo": {
+          "placements": 4999,
+          "deletions": 5001
+        },
+        "random": {
+          "placements": 4999,
+          "deletions": 5001
+        }
+      },
+      "purpose": "new exploratory diagnostic only; not a holdout and not used to tune candidate"
+    },
+    {
+      "name": "cycle",
+      "file": "alternating_cycle_30k.in",
+      "seed": 63419091,
+      "sha256": "245e1ab5f3add6a51b019395f5a7ce1fc89afe6959aba3dfa40fe9c1a24f27de",
+      "operation_count": 30000,
+      "max_live": 600,
+      "size_distribution": "sample_cycle",
+      "policy_phase_length": 5000,
+      "policy_cycle": [
+        "fifo",
+        "lifo",
+        "random"
+      ],
+      "phases": [
+        {
+          "start_operation_1based": 1,
+          "end_operation_1based": 5000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 5001,
+          "end_operation_1based": 10000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 10001,
+          "end_operation_1based": 15000,
+          "policy": "random"
+        },
+        {
+          "start_operation_1based": 15001,
+          "end_operation_1based": 20000,
+          "policy": "fifo"
+        },
+        {
+          "start_operation_1based": 20001,
+          "end_operation_1based": 25000,
+          "policy": "lifo"
+        },
+        {
+          "start_operation_1based": 25001,
+          "end_operation_1based": 30000,
+          "policy": "random"
+        }
+      ],
+      "policy_counts_by_policy": {
+        "fifo": {
+          "placements": 5300,
+          "deletions": 4700
+        },
+        "lifo": {
+          "placements": 4990,
+          "deletions": 5010
+        },
+        "random": {
+          "placements": 5007,
+          "deletions": 4993
+        }
+      },
+      "purpose": "new exploratory diagnostic only; not a holdout and not used to tune candidate"
+    }
+  ]
+}

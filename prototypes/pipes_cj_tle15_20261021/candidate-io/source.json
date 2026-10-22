@@ -1,0 +1,9 @@
+{
+  "base_sha256": "15a212f220ad2131977daa3db565a8979f37f4f27fc97cba2719733c551bb754",
+  "source_sha256": "69dd5ba54fdcdd142738c093aa79a6edc12a9e5800017d22213f81fc676f2c3e",
+  "changes": [
+    "Native 64-byte output owner, exactly same decimal/newline formatting.",
+    "Send every reply immediately via normal blocking write/_write; retry partial remainder and EINTR. No response batching.",
+    "Windows binary mode retains LF bytes; strongly hold owner until write completes."
+  ]
+}

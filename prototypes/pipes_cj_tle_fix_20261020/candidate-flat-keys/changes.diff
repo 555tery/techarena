@@ -1,0 +1,103 @@
+--- candidate-borrows/solution.cj
++++ candidate-flat-keys/solution.cj
+@@ -96,44 +96,78 @@
+ }
+ 
+ public class FastKeyVector {
+-    private let first = FastIntVector()
+-    private let second = FastIntVector()
+-    private let third = FastIntVector()
+-
+-    public init() {}
+-    public prop size: Int64 { get() { first.size } }
++    private var data: CPointer<Int64>
++    private var capacity: Int64 = 16
++    private var used: Int64 = 0
++
++    public init() {
++        data = LibC.malloc<Int64>(count: 48)
++        if (data.isNull()) { throw IllegalMemoryException("Key vector allocation failed") }
++    }
++
++    ~init() { unsafe { LibC.free(data) } }
++
++    public prop size: Int64 { get() { used } }
+ 
+     public operator func [](index: Int64): Key {
+-        return Key(first[index], second[index], third[index])
++        if (index < 0 || index >= used) { throw IndexOutOfBoundsException("Key vector index") }
++        let offset = index * 3
++        return unsafe { Key(data.read(offset), data.read(offset + 1), data.read(offset + 2)) }
+     }
+ 
+     public operator func [](index: Int64, value!: Key): Unit {
+-        first[index] = value.a
+-        second[index] = value.b
+-        third[index] = value.c
++        if (index < 0 || index >= used) { throw IndexOutOfBoundsException("Key vector index") }
++        let offset = index * 3
++        unsafe {
++            data.write(offset, value.a)
++            data.write(offset + 1, value.b)
++            data.write(offset + 2, value.c)
++        }
++    }
++
++    private func reserveForAdd(): Unit {
++        if (used < capacity) { return }
++        if (capacity > Int64.Max / 2) { throw IllegalMemoryException("Key capacity overflow") }
++        let expandedCapacity = capacity * 2
++        if (expandedCapacity > Int64.Max / 3) { throw IllegalMemoryException("Key payload overflow") }
++        let expanded = LibC.malloc<Int64>(count: expandedCapacity * 3)
++        if (expanded.isNull()) { throw IllegalMemoryException("Key vector expansion failed") }
++        unsafe {
++            for (i in 0..(used * 3)) { expanded.write(i, data.read(i)) }
++        }
++        let previous = data
++        data = expanded
++        capacity = expandedCapacity
++        unsafe { LibC.free(previous) }
+     }
+ 
+     public func add(value: Key): Unit {
+-        first.reserveForAdd()
+-        second.reserveForAdd()
+-        third.reserveForAdd()
+-        first.add(value.a)
+-        second.add(value.b)
+-        third.add(value.c)
++        reserveForAdd()
++        let offset = used * 3
++        unsafe {
++            data.write(offset, value.a)
++            data.write(offset + 1, value.b)
++            data.write(offset + 2, value.c)
++        }
++        used++
+     }
+ 
+     public func remove(at!: Int64): Key {
+-        if (size == 0 || at != size - 1) { throw IndexOutOfBoundsException("Only last-key removal is supported") }
+-        let value = this[at]
+-        first.remove(at: at)
+-        second.remove(at: at)
+-        third.remove(at: at)
++        if (used == 0 || at != used - 1) { throw IndexOutOfBoundsException("Only last-key removal is supported") }
++        let offset = at * 3
++        let value = unsafe { Key(data.read(offset), data.read(offset + 1), data.read(offset + 2)) }
++        used--
++        unsafe {
++            data.write(offset, 0)
++            data.write(offset + 1, 0)
++            data.write(offset + 2, 0)
++        }
+         return value
+     }
+ 
+     public func clone(): FastKeyVector {
+         let result = FastKeyVector()
+-        for (i in 0..size) { result.add(this[i]) }
++        for (i in 0..used) { result.add(this[i]) }
+         return result
+     }
+ }

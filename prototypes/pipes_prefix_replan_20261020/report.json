@@ -1,0 +1,80 @@
+{
+  "selected": null,
+  "evaluated_candidate": "conservative",
+  "recommended_source": "prototypes/pipes_g5420_cpu_20261020/cache32/solution.cpp",
+  "source_sha256": "819ef39377a3cd8d9017691b86d7c376bcc368fdd75865820c5cf6c50c3a5186",
+  "binary_sha256": "a3a2d5a90575b2c00b6f46e6cfa40ac91253c62b0e468ead1acd5456556e0dfc",
+  "status": "experimental; no-loss gate failed",
+  "gate_passed": false,
+  "Open15_score": 30.75747404826914,
+  "Open15_exact": "8753218892157372683/284588353335535200",
+  "runtime_unchanged": true,
+  "individual_block_changes": 9,
+  "public_prefix_excavation_never_increased": true,
+  "regressions": {
+    "regression": {
+      "wins": 2,
+      "ties": 79,
+      "losses": 0,
+      "mean_delta": 0.021604938271604937,
+      "worst_delta": 0.0,
+      "best_delta": 0.9166666666666666
+    },
+    "prior-confirmation": {
+      "wins": 1,
+      "ties": 23,
+      "losses": 0,
+      "mean_delta": 2.4647121216238763e-06,
+      "worst_delta": 0.0,
+      "best_delta": 5.915309091897303e-05
+    },
+    "round1-regression": {
+      "wins": 0,
+      "ties": 24,
+      "losses": 0,
+      "mean_delta": 0.0,
+      "worst_delta": 0.0,
+      "best_delta": 0.0
+    }
+  },
+  "fresh_confirmation": {
+    "wins": 0,
+    "ties": 22,
+    "losses": 2,
+    "mean_delta": -0.0014090232661997382,
+    "worst_delta": -0.018281789990281405,
+    "best_delta": 0.0
+  },
+  "first_round_confirmation": {
+    "wins": 0,
+    "ties": 23,
+    "losses": 1,
+    "mean_delta": -0.00016563867805108323,
+    "worst_delta": -0.003975328273225998,
+    "best_delta": 0.0
+  },
+  "first_round_status": "not promoted; one fresh loss",
+  "fresh_loss_first_round": [
+    {
+      "id": "P0204",
+      "baseline": 0.8964365256124721,
+      "candidate": 0.8924611973392461,
+      "delta": -0.003975328273225998
+    }
+  ],
+  "maximum_official_CPU_s": 3.8511059999999997,
+  "maximum_official_RSS_MiB": 128.015625,
+  "official_candidate_checks": 46,
+  "host": "macOS arm64",
+  "target_hardware_run": false,
+  "platform_actions": 0,
+  "limits": [
+    "Fresh streams are new seeds/inputs of known directed mechanisms, not a hidden-distribution sample.",
+    "The first24 fresh inputs became reused diagnostic data in the second round, never fresh again.",
+    "No-observed-loss is finite empirical evidence; table changes do not prove final-KPI dominance on arbitrary continuations.",
+    "Open8-p402 coordinated exchange remains experimental: first-round fresh loss. Conservative retains its old KPI.",
+    "Public prefix failures remain: the post-freeze Open11-p8 and Open8-p410 counterexamples still break replay.",
+    "CPU/RSS checks are local macOS measurements, not native Windows/G5420 certification.",
+    "CPU-budget-dependent planner trajectories can vary between runs and hardware; tiny score differences are not stable proof."
+  ]
+}

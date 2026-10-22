@@ -1,0 +1,1260 @@
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+namespace {
+
+constexpr std::int64_t kDigLength = 20;
+constexpr std::size_t kHistoryWindow = 2048;
+constexpr std::int64_t kUnfitPenaltyScale = 60;
+constexpr int kRightEdgeMaxPipeLength = 4;
+constexpr std::size_t kSameLengthRightRun = 46;
+constexpr std::size_t kMcHistory = 256;
+constexpr std::size_t kMcDepth = 4;
+[[maybe_unused]] constexpr std::size_t kMcTrials = 12;
+[[maybe_unused]] constexpr std::size_t kMcDecisionBudget = 32;
+[[maybe_unused]] constexpr std::size_t kMcMaxGaps = 64;
+[[maybe_unused]] constexpr std::size_t kMcMaxActivePipes = 4096;
+[[maybe_unused]] constexpr std::int64_t kMcMinimumMeanSavingM = 1;
+constexpr std::size_t kPolicyHistory = 32;
+constexpr std::size_t kPolicyDepth = 16;
+constexpr std::size_t kPolicyTrials = 16;
+constexpr std::size_t kPolicyCadence = 60;
+constexpr std::size_t kPolicyDecisionBudget = 8;
+constexpr std::size_t kPolicyMaxGaps = 64;
+constexpr std::size_t kPolicyMaxActivePipes = 1024;
+
+// Python's random.Random uses MT19937 plus init_by_array for integer seeds.
+// Matching its small ``choice`` sampler makes policy scenarios reproducible
+// against the depth-16 research probe, rather than merely distributionally equal.
+class PythonRandom {
+public:
+    void seed(std::uint32_t value) {
+        initializeSingleWord(19650218U);
+        std::size_t i = 1;
+        std::size_t j = 0;
+        std::size_t remaining = state_.size();
+        while (remaining > 0) {
+            const std::uint32_t previous = state_[i - 1];
+            state_[i] = (state_[i] ^ ((previous ^ (previous >> 30U)) * 1664525U)) +
+                value + static_cast<std::uint32_t>(j);
+            ++i;
+            ++j;
+            if (i >= state_.size()) {
+                state_[0] = state_.back();
+                i = 1;
+            }
+            if (j >= 1) j = 0;
+            --remaining;
+        }
+        remaining = state_.size() - 1;
+        while (remaining > 0) {
+            const std::uint32_t previous = state_[i - 1];
+            state_[i] = (state_[i] ^ ((previous ^ (previous >> 30U)) * 1566083941U)) -
+                static_cast<std::uint32_t>(i);
+            ++i;
+            if (i >= state_.size()) {
+                state_[0] = state_.back();
+                i = 1;
+            }
+            --remaining;
+        }
+        state_[0] = 0x80000000U;
+        index_ = state_.size();
+    }
+
+    std::size_t choiceIndex(std::size_t count) {
+        std::size_t bits = 0;
+        for (std::size_t value = count; value != 0; value >>= 1U) ++bits;
+        while (true) {
+            const std::uint32_t value = nextUInt32() >> (32U - bits);
+            if (static_cast<std::size_t>(value) < count) {
+                return static_cast<std::size_t>(value);
+            }
+        }
+    }
+
+private:
+    std::array<std::uint32_t, 624> state_{};
+    std::size_t index_ = 624;
+
+    void initializeSingleWord(std::uint32_t value) {
+        state_[0] = value;
+        for (index_ = 1; index_ < state_.size(); ++index_) {
+            state_[index_] = 1812433253U *
+                (state_[index_ - 1] ^ (state_[index_ - 1] >> 30U)) +
+                static_cast<std::uint32_t>(index_);
+        }
+    }
+
+    std::uint32_t nextUInt32() {
+        if (index_ >= state_.size()) {
+            constexpr std::uint32_t upperMask = 0x80000000U;
+            constexpr std::uint32_t lowerMask = 0x7fffffffU;
+            constexpr std::uint32_t matrixA = 0x9908b0dfU;
+            for (std::size_t i = 0; i < state_.size(); ++i) {
+                const std::uint32_t joined =
+                    (state_[i] & upperMask) | (state_[(i + 1) % state_.size()] & lowerMask);
+                state_[i] = state_[(i + 397) % state_.size()] ^ (joined >> 1U) ^
+                    ((joined & 1U) != 0U ? matrixA : 0U);
+            }
+            index_ = 0;
+        }
+        std::uint32_t value = state_[index_++];
+        value ^= value >> 11U;
+        value ^= (value << 7U) & 0x9d2c5680U;
+        value ^= (value << 15U) & 0xefc60000U;
+        value ^= value >> 18U;
+        return value;
+    }
+};
+
+struct Observation {
+    // kind=1 is a placement and value is its length; kind=-1 is a removal and
+    // value is the removed pipe's rank from newest, scaled to [0, 1000].
+    int kind = 0;
+    int value = 0;
+};
+
+struct SimPipe {
+    int pid = 0;
+    std::int64_t start = 0;
+    int length = 0;
+    int sizeCohort = 0;
+};
+
+struct SimGap {
+    std::int64_t end = 0;
+    int cohort = -1;
+};
+
+struct GapCandidate {
+    std::int64_t start = 0;
+    std::int64_t score = 0;
+};
+
+// A bounded clone used by the frozen four-event MC gap selector and by the
+// policy-conditioned 16-event comparison below. Both forecasts replay only
+// history-derived events; neither searches arbitrary future command streams.
+struct RolloutState {
+    std::map<std::int64_t, SimGap> gaps;
+    std::vector<SimPipe> active;
+    std::int64_t trenchLength = 0;
+    int nextPid = 1;
+    std::deque<int> recentLengths;
+    std::array<int, 41> recentFrequency{};
+    std::array<std::int64_t, 41> lengthOccurrenceCount{};
+    std::array<std::array<std::int64_t, 2>, 41> removedLengthCohort{};
+    bool parityCohortMode = false;
+    bool runLeftDisabledBySmoothTrend = false;
+    bool alternatingDeleteMode = false;
+    int predictedDeletedParity = 1;
+    int lastDeletedPid = -1;
+    int lastDeletedLength = -1;
+    std::size_t strideTwoDeleteTransitions = 0;
+
+    bool hasSteadySizeTrend() const {
+        if (recentLengths.size() < 128) return false;
+        std::array<int, 3> distinctLengths{};
+        std::size_t distinctCount = 0;
+        int previous = -1;
+        for (auto it = recentLengths.rbegin(); it != recentLengths.rend(); ++it) {
+            if (*it == previous) continue;
+            distinctLengths[distinctCount] = *it;
+            ++distinctCount;
+            previous = *it;
+            if (distinctCount == distinctLengths.size()) break;
+        }
+        if (distinctCount < distinctLengths.size()) return false;
+        const int recentStep = distinctLengths[0] - distinctLengths[1];
+        const int previousStep = distinctLengths[1] - distinctLengths[2];
+        return recentStep == previousStep;
+    }
+
+    bool hasSameLengthRecentRun(int length) const {
+        if (recentLengths.size() < kSameLengthRightRun) return false;
+        auto it = recentLengths.rbegin();
+        for (std::size_t seen = 0; seen < kSameLengthRightRun; ++seen, ++it) {
+            if (*it != length) return false;
+        }
+        return true;
+    }
+
+    bool hasSmoothSizeTrendWith(int currentLength) const {
+        if (recentLengths.empty()) return false;
+        const bool currentRunAlreadyInHistory = recentLengths.back() == currentLength;
+        std::array<int, 2> priorRunLengths{};
+        std::size_t distinctCount = 0;
+        bool firstRun = true;
+        int lastRunLength = -1;
+        for (auto it = recentLengths.rbegin(); it != recentLengths.rend(); ++it) {
+            if (firstRun) {
+                firstRun = false;
+                lastRunLength = *it;
+                if (!currentRunAlreadyInHistory) {
+                    priorRunLengths[distinctCount++] = *it;
+                }
+                continue;
+            }
+            if (*it == lastRunLength) continue;
+            lastRunLength = *it;
+            priorRunLengths[distinctCount++] = *it;
+            if (distinctCount == priorRunLengths.size()) break;
+        }
+        if (distinctCount < priorRunLengths.size()) return false;
+        return currentLength - priorRunLengths[0] ==
+            priorRunLengths[0] - priorRunLengths[1];
+    }
+
+    std::int64_t placementStart(const SimGap& gap, std::int64_t start,
+                                int length, bool highSide) const {
+        return highSide ? gap.end - static_cast<std::int64_t>(length) : start;
+    }
+
+    void addFreeGap(std::int64_t start, std::int64_t end, int cohort) {
+        if (start >= end) return;
+        auto it = gaps.lower_bound(start);
+        if (it != gaps.begin()) {
+            auto previous = std::prev(it);
+            if (previous->second.end >= start) {
+                if (previous->second.cohort != cohort) cohort = -1;
+                start = previous->first;
+                end = std::max(end, previous->second.end);
+                gaps.erase(previous);
+                it = gaps.lower_bound(start);
+            }
+        }
+        while (it != gaps.end() && it->first <= end) {
+            if (it->second.cohort != cohort) cohort = -1;
+            end = std::max(end, it->second.end);
+            it = gaps.erase(it);
+        }
+        gaps.emplace(start, SimGap{end, cohort});
+    }
+
+    void splitGap(std::int64_t gapStart, int length, bool highSide) {
+        const auto it = gaps.find(gapStart);
+        if (it == gaps.end()) return;
+        const std::int64_t start = it->first;
+        const SimGap gap = it->second;
+        const std::int64_t pipeStart = placementStart(gap, start, length, highSide);
+        gaps.erase(it);
+        if (start < pipeStart) addFreeGap(start, pipeStart, gap.cohort);
+        const std::int64_t pipeEnd = pipeStart + static_cast<std::int64_t>(length);
+        if (pipeEnd < gap.end) addFreeGap(pipeEnd, gap.end, gap.cohort);
+    }
+
+    void recordLength(int length) {
+        recentLengths.push_back(length);
+        ++recentFrequency[static_cast<std::size_t>(length)];
+        if (recentLengths.size() > kHistoryWindow) {
+            --recentFrequency[static_cast<std::size_t>(recentLengths.front())];
+            recentLengths.pop_front();
+        }
+    }
+
+    std::int64_t fitScore(std::int64_t gapLength, int length) const {
+        const std::int64_t slack = gapLength - static_cast<std::int64_t>(length);
+        std::int64_t score = slack * static_cast<std::int64_t>(recentLengths.size());
+        if (slack > 0 && slack <= 40) {
+            int misses = 0;
+            for (int request = static_cast<int>(slack) + 1; request <= 40; ++request) {
+                misses += recentFrequency[static_cast<std::size_t>(request)];
+            }
+            score += kUnfitPenaltyScale * misses;
+        }
+        return score;
+    }
+
+    std::optional<std::int64_t> bestGap(int length, bool highSide, int sizeCohort) const {
+        bool hasPreferred = false;
+        if (parityCohortMode) {
+            for (const auto& [start, gap] : gaps) {
+                (void)start;
+                if (gap.end - start >= length && gap.cohort == sizeCohort) {
+                    hasPreferred = true;
+                    break;
+                }
+            }
+        }
+        bool found = false;
+        std::int64_t bestStart = 0;
+        std::int64_t bestScore = std::numeric_limits<std::int64_t>::max();
+        // The real allocator indexes free spans by (length, start) and
+        // evaluates only the lowest-address span for each distinct length.
+        // This simulator is keyed by start, so suppress later equal-length
+        // spans after seeing their first eligible (lowest-address) member.
+        std::set<std::int64_t> consideredLengths;
+        for (const auto& [start, gap] : gaps) {
+            const std::int64_t gapLength = gap.end - start;
+            if (gapLength < length) continue;
+            if (parityCohortMode &&
+                (hasPreferred ? gap.cohort != sizeCohort : gap.cohort >= 0)) continue;
+            if (!consideredLengths.insert(gapLength).second) continue;
+            const std::int64_t score = fitScore(gapLength, length);
+            if (!found || score < bestScore ||
+                (score == bestScore &&
+                 ((highSide && start > bestStart) || (!highSide && start < bestStart)))) {
+                found = true;
+                bestStart = start;
+                bestScore = score;
+            }
+        }
+        if (!found) return std::nullopt;
+        return bestStart;
+    }
+
+    void appendPipe(int length, std::int64_t start, int sizeCohort) {
+        active.push_back(SimPipe{nextPid++, start, length, sizeCohort});
+        ++lengthOccurrenceCount[static_cast<std::size_t>(length)];
+        recordLength(length);
+    }
+
+    void placeAtCandidate(std::int64_t gapStart, int length, bool highSide) {
+        const auto it = gaps.find(gapStart);
+        if (it == gaps.end()) return;
+        const int sizeCohort = static_cast<int>(
+            lengthOccurrenceCount[static_cast<std::size_t>(length)] % 2);
+        const std::int64_t start = placementStart(it->second, gapStart, length, highSide);
+        const int cohort = it->second.cohort;
+        splitGap(gapStart, length, highSide);
+        appendPipe(length, start, sizeCohort);
+        (void)cohort;
+    }
+
+    std::optional<std::int64_t> bestP4Gap(int length) const {
+        bool found = false;
+        std::int64_t bestStart = 0;
+        std::int64_t bestLength = std::numeric_limits<std::int64_t>::max();
+        for (const auto& [start, gap] : gaps) {
+            const std::int64_t gapLength = gap.end - start;
+            if (gapLength < length) continue;
+            if (!found || gapLength < bestLength ||
+                (gapLength == bestLength && start < bestStart)) {
+                found = true;
+                bestStart = start;
+                bestLength = gapLength;
+            }
+        }
+        if (!found) return std::nullopt;
+        return bestStart;
+    }
+
+    void placeP4AtCandidate(std::int64_t gapStart, int length) {
+        placeAtCandidate(gapStart, length, false);
+    }
+
+    void placeP4(int length) {
+        const int sizeCohort = static_cast<int>(
+            lengthOccurrenceCount[static_cast<std::size_t>(length)] % 2);
+        const auto gapStart = bestP4Gap(length);
+        std::int64_t start = -1;
+        if (gapStart.has_value()) {
+            start = *gapStart;
+            splitGap(*gapStart, length, false);
+        } else {
+            auto tail = gaps.end();
+            if (!gaps.empty()) {
+                auto last = std::prev(gaps.end());
+                if (last->second.end == trenchLength) tail = last;
+            }
+            const std::int64_t tailStart = tail == gaps.end() ? trenchLength : tail->first;
+            const std::int64_t tailLength = trenchLength - tailStart;
+            const std::int64_t deficit = std::max<std::int64_t>(
+                0, static_cast<std::int64_t>(length) - tailLength);
+            const std::int64_t digs = (deficit + kDigLength - 1) / kDigLength;
+            if (tail != gaps.end()) gaps.erase(tail);
+            trenchLength += digs * kDigLength;
+            start = tailStart;
+            const std::int64_t remainderStart = start + length;
+            if (remainderStart < trenchLength) addFreeGap(remainderStart, trenchLength, -1);
+        }
+        appendPipe(length, start, sizeCohort);
+    }
+
+    void place(int length) {
+        const int sizeCohort = static_cast<int>(
+            lengthOccurrenceCount[static_cast<std::size_t>(length)] % 2);
+        if (hasSmoothSizeTrendWith(length)) runLeftDisabledBySmoothTrend = true;
+        const bool runLeftActive = !runLeftDisabledBySmoothTrend &&
+            hasSameLengthRecentRun(length);
+        // A long observed run of one size is split into two spatial lanes by
+        // that size's placement-occurrence cohort, without using PID parity or
+        // a predicted deletion pattern.
+        bool highSide = runLeftActive
+            ? (sizeCohort != 0)
+            : (alternatingDeleteMode
+                ? ((nextPid & 1) != predictedDeletedParity)
+                : (parityCohortMode
+                    ? sizeCohort == 0
+                    : (length <= kRightEdgeMaxPipeLength || hasSameLengthRecentRun(length))));
+        std::int64_t start = -1;
+        const auto gapStart = bestGap(length, highSide, sizeCohort);
+        if (gapStart.has_value()) {
+            const auto it = gaps.find(*gapStart);
+            const int cohort = it->second.cohort;
+            start = placementStart(it->second, *gapStart, length, highSide);
+            splitGap(*gapStart, length, highSide);
+            (void)cohort;
+        }
+
+        if (start < 0) {
+            auto tail = gaps.end();
+            if (!gaps.empty()) {
+                auto last = std::prev(gaps.end());
+                if (last->second.end == trenchLength) tail = last;
+            }
+            int tailCohort = parityCohortMode ? sizeCohort : -1;
+            bool preserveForeignTail = false;
+            if (parityCohortMode && tail != gaps.end()) {
+                tailCohort = tail->second.cohort;
+                preserveForeignTail = tailCohort >= 0 && tailCohort != sizeCohort;
+                if (preserveForeignTail) tailCohort = sizeCohort;
+            }
+            const std::int64_t tailStart =
+                tail == gaps.end() || preserveForeignTail ? trenchLength : tail->first;
+            const std::int64_t tailLength = trenchLength - tailStart;
+            const std::int64_t deficit = std::max<std::int64_t>(0, length - tailLength);
+            const std::int64_t digs = (deficit + kDigLength - 1) / kDigLength;
+            trenchLength += digs * kDigLength;
+            if (tail != gaps.end() && !preserveForeignTail) gaps.erase(tail);
+            if (parityCohortMode && highSide && !preserveForeignTail) {
+                start = trenchLength - length;
+                if (tailStart < start) addFreeGap(tailStart, start, tailCohort);
+            } else {
+                start = tailStart;
+                const std::int64_t remainderStart = start + length;
+                if (remainderStart < trenchLength) {
+                    addFreeGap(remainderStart, trenchLength, tailCohort);
+                }
+            }
+        }
+        appendPipe(length, start, sizeCohort);
+    }
+
+    void recordDeletionPattern(int pid, int length) {
+        if (lastDeletedPid >= 0 && lastDeletedLength == length &&
+            pid == lastDeletedPid + 2) {
+            ++strideTwoDeleteTransitions;
+        } else {
+            strideTwoDeleteTransitions = 0;
+            alternatingDeleteMode = false;
+        }
+        if (strideTwoDeleteTransitions >= 7) {
+            alternatingDeleteMode = true;
+            predictedDeletedParity = pid & 1;
+        }
+        lastDeletedPid = pid;
+        lastDeletedLength = length;
+    }
+
+    void removeByRank(int rankFromNewestPermille) {
+        if (active.empty()) return;
+        const std::size_t n = active.size();
+        const std::size_t rankFromNewest = n <= 1 ? 0 :
+            static_cast<std::size_t>(rankFromNewestPermille) * (n - 1) / 1000;
+        const std::size_t index = n - 1 - std::min(rankFromNewest, n - 1);
+        const SimPipe pipe = active[index];
+        active.erase(active.begin() + static_cast<std::ptrdiff_t>(index));
+        addFreeGap(pipe.start, pipe.start + pipe.length, pipe.sizeCohort);
+        recordDeletionPattern(pipe.pid, pipe.length);
+        const std::size_t lengthIndex = static_cast<std::size_t>(pipe.length);
+        ++removedLengthCohort[lengthIndex][static_cast<std::size_t>(pipe.sizeCohort)];
+        const std::int64_t totalForLength =
+            removedLengthCohort[lengthIndex][0] + removedLengthCohort[lengthIndex][1];
+        const std::int64_t dominantForLength = std::max(
+            removedLengthCohort[lengthIndex][0], removedLengthCohort[lengthIndex][1]);
+        if (totalForLength >= 8 && dominantForLength * 100 >= totalForLength * 85 &&
+            hasSteadySizeTrend()) {
+            parityCohortMode = true;
+        }
+    }
+
+    void apply(const Observation& event) {
+        if (event.kind > 0) place(event.value);
+        else if (event.kind < 0) removeByRank(event.value);
+    }
+
+    void applyP4(const Observation& event) {
+        if (event.kind > 0) placeP4(event.value);
+        else if (event.kind < 0) removeByRank(event.value);
+    }
+};
+
+struct Pipe {
+    std::int64_t start = 0;
+    int length = 0;
+    bool active = false;
+    int sizeCohort = 0;
+};
+
+class Allocator {
+public:
+    // Free spans are half-open [start, end). The map supports merging after a
+    // removal; the set chooses the shortest fitting span, then the lowest start.
+    std::map<std::int64_t, std::int64_t> freeByStart;
+    std::set<std::pair<std::int64_t, std::int64_t>> freeBySize;
+    std::map<std::int64_t, int> gapCohort;
+    std::array<std::set<std::pair<std::int64_t, std::int64_t>>, 2> freeBySizeCohort;
+    std::set<std::pair<std::int64_t, std::int64_t>> freeBySizeShared;
+    std::vector<Pipe> pipes{Pipe{}};  // PID is the vector index.
+    std::int64_t trenchLength = 0;
+    std::deque<int> recentLengths;
+    std::array<int, 41> recentFrequency{};
+    std::array<std::int64_t, 41> lengthOccurrenceCount{};
+    std::array<std::array<std::int64_t, 2>, 41> removedLengthCohort{};
+    bool parityCohortMode = false;
+    bool runLeftDisabledBySmoothTrend = false;
+    bool alternatingDeleteMode = false;
+    int predictedDeletedParity = 1;
+    int lastDeletedPid = -1;
+    int lastDeletedLength = -1;
+    std::size_t strideTwoDeleteTransitions = 0;
+    std::vector<int> activeFenwick = std::vector<int>(200001, 0);
+    std::size_t activePipeCount = 0;
+    std::deque<Observation> observedHistory;
+    std::size_t mcDecisionsUsed = 0;
+    std::size_t mcRolloutsRun = 0;
+    std::size_t operationsSeen = 0;
+    std::size_t policyCalls = 0;
+    std::size_t policyDecisionsUsed = 0;
+    std::size_t policyEvaluationsRun = 0;
+    std::size_t policyP4Choices = 0;
+    std::size_t policyNoPairFallbacks = 0;
+    std::size_t policyMeanNoImprovementFallbacks = 0;
+    std::size_t policyMcBudgetSkips = 0;
+    std::size_t policyCadenceSkips = 0;
+    std::size_t policyDecisionBudgetSkips = 0;
+    std::size_t policyHistorySkips = 0;
+    std::size_t policyGapLimitSkips = 0;
+    std::size_t policyActiveLimitSkips = 0;
+    std::size_t policySameActionSkips = 0;
+
+    void place(int length) {
+        ++operationsSeen;
+        const bool mcBudgetSpentAtEntry = mcDecisionsUsed >= kMcDecisionBudget;
+        const int sizeCohort = static_cast<int>(
+            lengthOccurrenceCount[static_cast<std::size_t>(length)] % 2);
+        if (hasSmoothSizeTrendWith(length)) runLeftDisabledBySmoothTrend = true;
+        const bool runLeftActive = !runLeftDisabledBySmoothTrend &&
+            hasSameLengthRecentRun(length);
+        // Split a long observed same-size run by size-local occurrence cohort.
+        // The policy is causal and does not inspect deletions or future input.
+        bool highSide = runLeftActive
+            ? (sizeCohort != 0)
+            : (alternatingDeleteMode
+                ? ((static_cast<int>(pipes.size()) & 1) != predictedDeletedParity)
+                : (parityCohortMode
+                    ? sizeCohort == 0
+                    : (length <= kRightEdgeMaxPipeLength || hasSameLengthRecentRun(length))));
+        std::int64_t start = -1;
+        auto gap = bestFittingGap(length, highSide, sizeCohort);
+        if (gap != freeByStart.end()) {
+            const std::int64_t selectedStart = chooseGapWithRollout(
+                length, highSide, sizeCohort, gap);
+            if (selectedStart >= 0) gap = freeByStart.find(selectedStart);
+            const auto p4GapStart = choosePolicyConditionedGap(
+                length, highSide, gap, mcBudgetSpentAtEntry);
+            if (p4GapStart.has_value()) {
+                gap = freeByStart.find(*p4GapStart);
+                highSide = false;
+                ++policyP4Choices;
+            }
+            start = consumeAtSide(gap, length, highSide);
+        }
+
+        std::int64_t digs = 0;
+        if (start < 0) {
+            // No existing span fits. Continue from the left edge of the free
+            // tail, retaining its unused part as the new expandable tail.
+            auto tail = tailGap();
+            int tailCohort = parityCohortMode ? sizeCohort : -1;
+            bool preserveForeignTail = false;
+            if (parityCohortMode && tail != freeByStart.end()) {
+                tailCohort = gapCohort.at(tail->first);
+                preserveForeignTail = tailCohort >= 0 && tailCohort != sizeCohort;
+                if (preserveForeignTail) tailCohort = sizeCohort;
+            }
+            const std::int64_t tailStart =
+                tail == freeByStart.end() || preserveForeignTail
+                    ? trenchLength : tail->first;
+            const std::int64_t tailLength = trenchLength - tailStart;
+            const std::int64_t deficit = std::max<std::int64_t>(0, length - tailLength);
+            digs = (deficit + kDigLength - 1) / kDigLength;
+
+            // At most 200,000 commands can arrive. Each pipe has length at most
+            // 40 m, so it can require at most two 20 m sections: total digging
+            // is at most 8,000,000 m, below the 100,000,000 m contest cap.
+            const std::int64_t newLength = trenchLength + digs * kDigLength;
+            if (tail != freeByStart.end() && !preserveForeignTail) eraseGap(tail);
+            trenchLength = newLength;
+            if (parityCohortMode && highSide && !preserveForeignTail) {
+                start = trenchLength - length;
+                if (tailStart < start) addFreeGap(tailStart, start, tailCohort);
+            } else {
+                start = tailStart;
+                const std::int64_t remainderStart = start + length;
+                if (remainderStart < trenchLength) {
+                    addFreeGap(remainderStart, trenchLength, tailCohort);
+                }
+            }
+        }
+
+        printPlacement(digs, start);
+        const int pid = static_cast<int>(pipes.size());
+        pipes.push_back(Pipe{start, length, true, sizeCohort});
+        fenwickAdd(pid, 1);
+        ++activePipeCount;
+        ++lengthOccurrenceCount[static_cast<std::size_t>(length)];
+        recordLength(length);
+        recordObservation(Observation{1, length});
+    }
+
+    void remove(std::int64_t pid) {
+        ++operationsSeen;
+        if (pid <= 0) {
+            printInvalidPidFallback();
+            return;
+        }
+        const std::uint64_t unsignedPid = static_cast<std::uint64_t>(pid);
+        if (unsignedPid >= static_cast<std::uint64_t>(pipes.size())) {
+            printInvalidPidFallback();
+            return;
+        }
+        // The range check above makes this signed-to-unsigned index conversion safe.
+        const std::size_t index = static_cast<std::size_t>(unsignedPid);
+        if (!pipes[index].active) {
+            printInvalidPidFallback();
+            return;
+        }
+
+        const int rankPermille = rankFromNewestPermille(static_cast<int>(index));
+
+        const Pipe pipe = pipes[index];
+        std::cout << pipe.start << '\n' << std::flush;
+        pipes[index].active = false;
+        fenwickAdd(static_cast<int>(index), -1);
+        --activePipeCount;
+        addFreeGap(pipe.start, pipe.start + pipe.length, pipe.sizeCohort);
+        recordDeletionPattern(static_cast<int>(index), pipe.length);
+        const std::size_t lengthIndex = static_cast<std::size_t>(pipe.length);
+        ++removedLengthCohort[lengthIndex][static_cast<std::size_t>(pipe.sizeCohort)];
+        const std::int64_t totalForLength =
+            removedLengthCohort[lengthIndex][0] + removedLengthCohort[lengthIndex][1];
+        const std::int64_t dominantForLength = std::max(
+            removedLengthCohort[lengthIndex][0], removedLengthCohort[lengthIndex][1]);
+        if (totalForLength >= 8 && dominantForLength * 100 >= totalForLength * 85 &&
+            hasSteadySizeTrend()) {
+            parityCohortMode = true;
+        }
+        recordObservation(Observation{-1, rankPermille});
+    }
+
+private:
+    using StartIter = std::map<std::int64_t, std::int64_t>::iterator;
+
+    void fenwickAdd(int index, int delta) {
+        const int limit = static_cast<int>(activeFenwick.size());
+        for (int position = index; position < limit; position += position & -position) {
+            activeFenwick[static_cast<std::size_t>(position)] += delta;
+        }
+    }
+
+    int fenwickPrefix(int index) const {
+        int sum = 0;
+        for (int position = index; position > 0; position -= position & -position) {
+            sum += activeFenwick[static_cast<std::size_t>(position)];
+        }
+        return sum;
+    }
+
+    int rankFromNewestPermille(int pid) const {
+        if (activePipeCount <= 1) return 0;
+        const std::size_t newer = activePipeCount -
+            static_cast<std::size_t>(fenwickPrefix(pid));
+        const std::size_t denominator = activePipeCount - 1;
+        return static_cast<int>(newer * 1000U / denominator);
+    }
+
+    void recordDeletionPattern(int pid, int length) {
+        if (lastDeletedPid >= 0 && lastDeletedLength == length &&
+            pid == lastDeletedPid + 2) {
+            ++strideTwoDeleteTransitions;
+        } else {
+            strideTwoDeleteTransitions = 0;
+            alternatingDeleteMode = false;
+        }
+        if (strideTwoDeleteTransitions >= 7) {
+            alternatingDeleteMode = true;
+            predictedDeletedParity = pid & 1;
+        }
+        lastDeletedPid = pid;
+        lastDeletedLength = length;
+    }
+
+    void recordObservation(const Observation& event) {
+        observedHistory.push_back(event);
+        if (observedHistory.size() > kMcHistory) observedHistory.pop_front();
+    }
+
+    std::int64_t scoreGap(std::int64_t gapLength, int length) const {
+        const std::int64_t slack = gapLength - static_cast<std::int64_t>(length);
+        std::int64_t score = slack * static_cast<std::int64_t>(recentLengths.size());
+        if (slack > 0 && slack <= 40) {
+            int misses = 0;
+            for (int request = static_cast<int>(slack) + 1; request <= 40; ++request) {
+                misses += recentFrequency[static_cast<std::size_t>(request)];
+            }
+            score += kUnfitPenaltyScale * misses;
+        }
+        return score;
+    }
+
+    bool observationKeyEqual(const Observation& lhs, const Observation& rhs) const {
+        if (lhs.kind != rhs.kind) return false;
+        return lhs.kind <= 0 || lhs.value == rhs.value;
+    }
+
+    std::uint32_t nextRandom(std::uint32_t& state) const {
+        state ^= state << 13U;
+        state ^= state >> 17U;
+        state ^= state << 5U;
+        return state;
+    }
+
+    std::array<Observation, kMcDepth> sampleScenario(std::uint32_t& randomState) const {
+        std::array<Observation, kMcDepth> result{};
+        const std::size_t n = observedHistory.size();
+        const std::size_t minStart = n > 128 ? n - 128 : 0;
+        std::vector<std::size_t> starts;
+        const std::size_t maxStart = n >= kMcDepth ? n - kMcDepth : 0;
+        if (n < kMcDepth + 2) return result;
+
+        const std::size_t maxContext = std::min<std::size_t>(3, n - 1);
+        for (std::size_t context = maxContext; context > 0 && starts.empty(); --context) {
+            const std::size_t contextBegin = n - context;
+            for (std::size_t start = minStart + context; start <= maxStart; ++start) {
+                bool matches = true;
+                for (std::size_t offset = 0; offset < context; ++offset) {
+                    if (!observationKeyEqual(observedHistory[contextBegin + offset],
+                                             observedHistory[start - context + offset])) {
+                        matches = false;
+                        break;
+                    }
+                }
+                if (matches) starts.push_back(start);
+            }
+        }
+        if (starts.empty()) {
+            for (std::size_t start = minStart; start <= maxStart; ++start) {
+                starts.push_back(start);
+            }
+        }
+        if (starts.empty()) return result;
+
+        const std::size_t start = starts[static_cast<std::size_t>(
+            nextRandom(randomState) % static_cast<std::uint32_t>(starts.size()))];
+        for (std::size_t offset = 0; offset < kMcDepth; ++offset) {
+            result[offset] = observedHistory[start + offset];
+        }
+        return result;
+    }
+
+    RolloutState makeRolloutState() const {
+        RolloutState state;
+        for (const auto& [start, end] : freeByStart) {
+            state.gaps.emplace(start, SimGap{end, gapCohort.at(start)});
+        }
+        state.trenchLength = trenchLength;
+        state.nextPid = static_cast<int>(pipes.size());
+        state.recentLengths = recentLengths;
+        state.recentFrequency = recentFrequency;
+        state.lengthOccurrenceCount = lengthOccurrenceCount;
+        state.removedLengthCohort = removedLengthCohort;
+        state.parityCohortMode = parityCohortMode;
+        state.runLeftDisabledBySmoothTrend = runLeftDisabledBySmoothTrend;
+        state.alternatingDeleteMode = alternatingDeleteMode;
+        state.predictedDeletedParity = predictedDeletedParity;
+        state.lastDeletedPid = lastDeletedPid;
+        state.lastDeletedLength = lastDeletedLength;
+        state.strideTwoDeleteTransitions = strideTwoDeleteTransitions;
+        state.active.reserve(activePipeCount + 1);
+        for (std::size_t pid = 1; pid < pipes.size(); ++pid) {
+            if (!pipes[pid].active) continue;
+            const Pipe& pipe = pipes[pid];
+            state.active.push_back(SimPipe{static_cast<int>(pid), pipe.start,
+                                           pipe.length, pipe.sizeCohort});
+        }
+        return state;
+    }
+
+    std::vector<GapCandidate> topGapCandidates(
+        int length, bool highSide, int sizeCohort) const {
+        const std::set<std::pair<std::int64_t, std::int64_t>>* index = &freeBySize;
+        if (parityCohortMode) {
+            const auto& preferred = freeBySizeCohort[static_cast<std::size_t>(sizeCohort)];
+            auto it = preferred.lower_bound({length, 0});
+            if (it != preferred.end()) index = &preferred;
+            else index = &freeBySizeShared;
+        }
+
+        std::vector<GapCandidate> candidates;
+        auto it = index->lower_bound({length, 0});
+        while (it != index->end()) {
+            const std::int64_t gapLength = it->first;
+            const std::int64_t slack = gapLength - length;
+            if (slack > 40) break;
+            candidates.push_back(GapCandidate{it->second, scoreGap(gapLength, length)});
+            ++it;
+        }
+        std::sort(candidates.begin(), candidates.end(), [highSide](
+            const GapCandidate& lhs, const GapCandidate& rhs) {
+            if (lhs.score != rhs.score) return lhs.score < rhs.score;
+            return highSide ? lhs.start > rhs.start : lhs.start < rhs.start;
+        });
+        if (candidates.size() > 3) candidates.resize(3);
+        return candidates;
+    }
+
+    std::int64_t chooseGapWithRollout(
+        int length, bool highSide, int sizeCohort, StartIter baselineGap) {
+#if defined(MC_ROLLOUT_DISABLED)
+        (void)length;
+        (void)highSide;
+        (void)sizeCohort;
+        return baselineGap->first;
+#else
+        if (mcDecisionsUsed >= kMcDecisionBudget ||
+            observedHistory.size() < 32 || freeByStart.size() > kMcMaxGaps ||
+            activePipeCount > kMcMaxActivePipes) {
+            return baselineGap->first;
+        }
+        const auto candidates = topGapCandidates(length, highSide, sizeCohort);
+        if (candidates.size() < 2 || candidates.front().start != baselineGap->first) {
+            return baselineGap->first;
+        }
+
+        ++mcDecisionsUsed;
+        const RolloutState base = makeRolloutState();
+        std::uint32_t randomState = 0x9e3779b9U ^
+            static_cast<std::uint32_t>(pipes.size() * 0x85ebca6bU) ^
+            (static_cast<std::uint32_t>(length) * 0xc2b2ae35U) ^
+            static_cast<std::uint32_t>(trenchLength);
+        if (randomState == 0) randomState = 1;
+
+        std::array<std::array<Observation, kMcDepth>, kMcTrials> scenarios{};
+        for (std::size_t trial = 0; trial < kMcTrials; ++trial) {
+            scenarios[trial] = sampleScenario(randomState);
+        }
+
+        std::array<std::int64_t, 3> totalTrench{};
+        for (std::size_t candidate = 0; candidate < candidates.size(); ++candidate) {
+            for (std::size_t trial = 0; trial < kMcTrials; ++trial) {
+                RolloutState simulation = base;
+                simulation.placeAtCandidate(candidates[candidate].start, length, highSide);
+                for (const auto& event : scenarios[trial]) simulation.apply(event);
+                totalTrench[candidate] += simulation.trenchLength;
+                ++mcRolloutsRun;
+            }
+        }
+        std::size_t best = 0;
+        for (std::size_t candidate = 1; candidate < candidates.size(); ++candidate) {
+            if (totalTrench[candidate] < totalTrench[best]) best = candidate;
+        }
+        if (best != 0 && totalTrench[best] +
+            static_cast<std::int64_t>(kMcTrials) * kMcMinimumMeanSavingM <= totalTrench[0]) {
+            return candidates[best].start;
+        }
+        return baselineGap->first;
+#endif
+    }
+
+    StartIter bestP4FittingGap(int length) {
+        auto it = freeBySize.lower_bound({length, 0});
+        return it == freeBySize.end() ? freeByStart.end() : freeByStart.find(it->second);
+    }
+
+    std::array<Observation, kPolicyDepth> samplePolicyScenario(
+        PythonRandom& random) const {
+        std::array<Observation, kPolicyDepth> result{};
+        const std::size_t n = observedHistory.size();
+        const std::size_t minStart = n > 128 ? n - 128 : 0;
+        if (n < kPolicyDepth + 2) return result;
+        const std::size_t maxStart = n - kPolicyDepth;
+        std::vector<std::size_t> starts;
+        const std::size_t maxContext = std::min<std::size_t>(3, n - 1);
+        for (std::size_t context = maxContext; context > 0 && starts.empty(); --context) {
+            const std::size_t contextBegin = n - context;
+            for (std::size_t start = minStart + context; start <= maxStart; ++start) {
+                bool matches = true;
+                for (std::size_t offset = 0; offset < context; ++offset) {
+                    if (!observationKeyEqual(observedHistory[contextBegin + offset],
+                                             observedHistory[start - context + offset])) {
+                        matches = false;
+                        break;
+                    }
+                }
+                if (matches) starts.push_back(start);
+            }
+        }
+        if (starts.empty()) {
+            for (std::size_t start = minStart; start <= maxStart; ++start) {
+                starts.push_back(start);
+            }
+        }
+        if (starts.empty()) return result;
+        const std::size_t start = starts[random.choiceIndex(starts.size())];
+        for (std::size_t offset = 0; offset < kPolicyDepth; ++offset) {
+            result[offset] = observedHistory[start + offset];
+        }
+        return result;
+    }
+
+    std::uint64_t policyScenarioHash(
+        const std::array<Observation, kPolicyDepth>& scenario) const {
+        std::uint64_t hash = 1469598103934665603ULL;
+        for (const Observation& event : scenario) {
+            hash ^= static_cast<std::uint32_t>(event.kind);
+            hash *= 1099511628211ULL;
+            hash ^= static_cast<std::uint32_t>(event.value);
+            hash *= 1099511628211ULL;
+        }
+        return hash;
+    }
+
+    std::optional<std::int64_t> choosePolicyConditionedGap(
+        int length, bool highSide, StartIter baselineGap, bool mcBudgetSpentAtEntry) {
+        ++policyCalls;
+        // The depth-16 ranking evidence was collected without nested MC. Wait
+        // until the frozen solver's shared 32-decision MC budget is spent; from
+        // then its real action and baseline continuation are exactly no-MC.
+        if (!mcBudgetSpentAtEntry) {
+            ++policyMcBudgetSkips;
+            return std::nullopt;
+        }
+        if (operationsSeen <= 180 || (operationsSeen - 1) % kPolicyCadence != 0) {
+            ++policyCadenceSkips;
+            return std::nullopt;
+        }
+        if (policyDecisionsUsed >= kPolicyDecisionBudget) {
+            ++policyDecisionBudgetSkips;
+            return std::nullopt;
+        }
+        if (observedHistory.size() < kPolicyHistory) {
+            ++policyHistorySkips;
+            return std::nullopt;
+        }
+        if (freeByStart.size() > kPolicyMaxGaps) {
+            ++policyGapLimitSkips;
+            return std::nullopt;
+        }
+        if (activePipeCount > kPolicyMaxActivePipes) {
+            ++policyActiveLimitSkips;
+            return std::nullopt;
+        }
+        ++policyDecisionsUsed;
+        const StartIter p4Gap = bestP4FittingGap(length);
+        if (baselineGap == freeByStart.end() || p4Gap == freeByStart.end()) {
+            ++policyNoPairFallbacks;
+            return std::nullopt;
+        }
+        if (baselineGap->first == p4Gap->first && !highSide) {
+            ++policySameActionSkips;
+            return std::nullopt;
+        }
+
+        const std::uint32_t randomSeed =
+            static_cast<std::uint32_t>(operationsSeen) * 0x85ebca6bU ^
+            (static_cast<std::uint32_t>(length) * 0xc2b2ae35U) ^
+            static_cast<std::uint32_t>(trenchLength) ^ 0x9e3779b9U;
+        PythonRandom random;
+        random.seed(randomSeed);
+        std::array<std::array<Observation, kPolicyDepth>, kPolicyTrials> scenarios{};
+        std::set<std::uint64_t> uniqueScenarios;
+        for (std::size_t trial = 0; trial < kPolicyTrials; ++trial) {
+            scenarios[trial] = samplePolicyScenario(random);
+            uniqueScenarios.insert(policyScenarioHash(scenarios[trial]));
+        }
+
+        ++policyEvaluationsRun;
+        const RolloutState base = makeRolloutState();
+        std::array<std::int64_t, kPolicyTrials> pairedDelta{};
+        std::size_t wins = 0;
+        std::size_t losses = 0;
+        for (std::size_t trial = 0; trial < kPolicyTrials; ++trial) {
+            RolloutState baseline = base;
+            RolloutState p4 = base;
+            baseline.placeAtCandidate(baselineGap->first, length, highSide);
+            p4.placeP4AtCandidate(p4Gap->first, length);
+            for (const Observation& event : scenarios[trial]) {
+                baseline.apply(event);
+                p4.applyP4(event);
+            }
+            pairedDelta[trial] = p4.trenchLength - baseline.trenchLength;
+            if (pairedDelta[trial] < 0) ++wins;
+            else if (pairedDelta[trial] > 0) ++losses;
+        }
+        std::int64_t totalDelta = 0;
+        for (const std::int64_t delta : pairedDelta) totalDelta += delta;
+
+        // Match the depth-16 probe's fixed ranking rule: choose P4 exactly when
+        // its paired mean terminal trench is smaller. The shared history-only
+        // samples, depth and action-conditional continuations are identical.
+        const bool chooseP4 = totalDelta < 0;
+#if defined(POLICY_SELECTOR_DIAGNOSTICS)
+        const std::int64_t baselineStart = highSide
+            ? baselineGap->second - static_cast<std::int64_t>(length)
+            : baselineGap->first;
+        const std::int64_t p4Start = p4Gap->first;
+        std::cerr << "policy_eval op=" << operationsSeen
+                  << " baseline_start=" << baselineStart
+                  << " p4_start=" << p4Start
+                  << " unique=" << uniqueScenarios.size()
+                  << " wins=" << wins
+                  << " losses=" << losses
+                  << " delta_sum_m=" << totalDelta
+                  << " choose_p4=" << (chooseP4 ? 1 : 0) << '\n';
+#endif
+        if (!chooseP4) {
+            ++policyMeanNoImprovementFallbacks;
+            return std::nullopt;
+        }
+        return p4Gap->first;
+    }
+
+    bool hasSteadySizeTrend() const {
+        if (recentLengths.size() < 128) return false;
+        std::array<int, 3> distinctLengths{};
+        std::size_t distinctCount = 0;
+        int previous = -1;
+        for (auto it = recentLengths.rbegin(); it != recentLengths.rend(); ++it) {
+            if (*it == previous) continue;
+            distinctLengths[distinctCount] = *it;
+            ++distinctCount;
+            previous = *it;
+            if (distinctCount == distinctLengths.size()) break;
+        }
+        if (distinctCount < distinctLengths.size()) return false;
+        const int recentStep = distinctLengths[0] - distinctLengths[1];
+        const int previousStep = distinctLengths[1] - distinctLengths[2];
+        return recentStep == previousStep;
+    }
+
+    StartIter tailGap() {
+        if (freeByStart.empty()) return freeByStart.end();
+        auto it = std::prev(freeByStart.end());
+        return it->second == trenchLength ? it : freeByStart.end();
+    }
+
+    StartIter bestFittingGap(int length, bool highSide, int sizeCohort) {
+        if (parityCohortMode) {
+            const auto& cohortGaps = freeBySizeCohort[static_cast<std::size_t>(sizeCohort)];
+            StartIter preferred = bestFittingGapFromSet(cohortGaps, length, highSide);
+            if (preferred != freeByStart.end()) return preferred;
+            StartIter shared = bestFittingGapFromSet(freeBySizeShared, length, highSide);
+            if (shared != freeByStart.end()) return shared;
+            return freeByStart.end();
+        }
+        return bestFittingGapFromSet(freeBySize, length, highSide);
+    }
+
+    StartIter bestFittingGapFromSet(
+        const std::set<std::pair<std::int64_t, std::int64_t>>& gaps,
+        int length,
+        bool highSide) {
+        auto it = gaps.lower_bound({length, 0});
+        if (it == gaps.end()) return freeByStart.end();
+        if (recentLengths.empty()) return freeByStart.find(it->second);
+
+        const std::int64_t historySize = static_cast<std::int64_t>(recentLengths.size());
+        std::int64_t bestScore = std::numeric_limits<std::int64_t>::max();
+        StartIter best = freeByStart.end();
+        while (it != gaps.end()) {
+            const std::int64_t gapLength = it->first;
+            const std::int64_t slack = gapLength - length;
+            std::int64_t score = slack * historySize;
+            if (slack > 0 && slack <= 40) {
+                int misses = 0;
+                for (int request = static_cast<int>(slack) + 1; request <= 40; ++request) {
+                    misses += recentFrequency[static_cast<std::size_t>(request)];
+                }
+                score += kUnfitPenaltyScale * misses;
+            }
+
+            // Iteration is by size and then start, so keeping the first tie
+            // implements the smaller-gap, then lower-address tie-break.
+            if (score < bestScore ||
+                (score == bestScore && best != freeByStart.end() &&
+                 ((highSide && it->second > best->first) ||
+                  (!highSide && it->second < best->first)))) {
+                bestScore = score;
+                best = freeByStart.find(it->second);
+            }
+            if (slack > 40) break;
+            const std::int64_t currentSize = it->first;
+            it = gaps.upper_bound({currentSize, std::numeric_limits<std::int64_t>::max()});
+        }
+        return best;
+    }
+
+    bool hasSameLengthRecentRun(int length) const {
+        if (recentLengths.size() < kSameLengthRightRun) return false;
+        auto it = recentLengths.rbegin();
+        for (std::size_t seen = 0; seen < kSameLengthRightRun; ++seen, ++it) {
+            if (*it != length) return false;
+        }
+        return true;
+    }
+
+    bool hasSmoothSizeTrendWith(int currentLength) const {
+        if (recentLengths.empty()) return false;
+        const bool currentRunAlreadyInHistory = recentLengths.back() == currentLength;
+        std::array<int, 2> priorRunLengths{};
+        std::size_t distinctCount = 0;
+        bool firstRun = true;
+        int lastRunLength = -1;
+        for (auto it = recentLengths.rbegin(); it != recentLengths.rend(); ++it) {
+            if (firstRun) {
+                firstRun = false;
+                lastRunLength = *it;
+                if (!currentRunAlreadyInHistory) {
+                    priorRunLengths[distinctCount++] = *it;
+                }
+                continue;
+            }
+            if (*it == lastRunLength) continue;
+            lastRunLength = *it;
+            priorRunLengths[distinctCount++] = *it;
+            if (distinctCount == priorRunLengths.size()) break;
+        }
+        if (distinctCount < priorRunLengths.size()) return false;
+        return currentLength - priorRunLengths[0] ==
+            priorRunLengths[0] - priorRunLengths[1];
+    }
+
+    std::int64_t consumeAtSide(StartIter it, int length, bool highSide) {
+        const std::int64_t start = it->first;
+        const std::int64_t end = it->second;
+        const int cohort = gapCohort.at(start);
+        const std::int64_t placementStart = highSide
+            ? end - static_cast<std::int64_t>(length) : start;
+        eraseGap(it);
+        if (start < placementStart) addFreeGap(start, placementStart, cohort);
+        const std::int64_t placementEnd = placementStart + static_cast<std::int64_t>(length);
+        if (placementEnd < end) addFreeGap(placementEnd, end, cohort);
+        return placementStart;
+    }
+
+    void recordLength(int length) {
+        recentLengths.push_back(length);
+        ++recentFrequency[static_cast<std::size_t>(length)];
+        if (recentLengths.size() > kHistoryWindow) {
+            --recentFrequency[static_cast<std::size_t>(recentLengths.front())];
+            recentLengths.pop_front();
+        }
+    }
+
+    void eraseGap(StartIter it) {
+        const std::int64_t start = it->first;
+        const std::int64_t end = it->second;
+        const std::int64_t gapLength = end - start;
+        const int cohort = gapCohort.at(start);
+        freeBySize.erase({gapLength, start});
+        if (cohort >= 0 && cohort <= 1) {
+            freeBySizeCohort[static_cast<std::size_t>(cohort)].erase({gapLength, start});
+        } else {
+            freeBySizeShared.erase({gapLength, start});
+        }
+        gapCohort.erase(start);
+        freeByStart.erase(it);
+    }
+
+    void addFreeGap(std::int64_t start, std::int64_t end, int cohort) {
+        if (start >= end) return;
+        auto it = freeByStart.lower_bound(start);
+        if (it != freeByStart.begin()) {
+            auto previous = std::prev(it);
+            if (previous->second >= start) {
+                if (gapCohort.at(previous->first) != cohort) cohort = -1;
+                start = previous->first;
+                end = std::max(end, previous->second);
+                eraseGap(previous);
+                it = freeByStart.lower_bound(start);
+            }
+        }
+        while (it != freeByStart.end() && it->first <= end) {
+            if (gapCohort.at(it->first) != cohort) cohort = -1;
+            end = std::max(end, it->second);
+            auto next = it++;
+            eraseGap(next);
+        }
+        freeByStart.emplace(start, end);
+        const std::int64_t gapLength = end - start;
+        freeBySize.emplace(gapLength, start);
+        gapCohort.emplace(start, cohort);
+        if (cohort >= 0 && cohort <= 1) {
+            freeBySizeCohort[static_cast<std::size_t>(cohort)].emplace(gapLength, start);
+        } else {
+            freeBySizeShared.emplace(gapLength, start);
+        }
+    }
+
+    static void printPlacement(std::int64_t digs, std::int64_t start) {
+        std::cout << digs << ' ' << start << '\n' << std::flush;
+    }
+
+    static void printInvalidPidFallback() {
+        // Contest inputs guarantee an active PID. This keeps a malformed input
+        // from causing an out-of-bounds access while preserving protocol shape.
+        std::cout << 0 << '\n' << std::flush;
+    }
+};
+
+}  // namespace
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS) || defined(POLICY_SELECTOR_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " policy_calls=" << allocator.policyCalls
+                      << " policy_checks=" << allocator.policyDecisionsUsed
+                      << " policy_evaluations=" << allocator.policyEvaluationsRun
+                      << " policy_p4_choices=" << allocator.policyP4Choices
+                      << " policy_no_pair=" << allocator.policyNoPairFallbacks
+                      << " policy_nonimproving=" << allocator.policyMeanNoImprovementFallbacks
+                      << " policy_same_action=" << allocator.policySameActionSkips
+                      << " policy_skip_mc=" << allocator.policyMcBudgetSkips
+                      << " policy_skip_cadence=" << allocator.policyCadenceSkips
+                      << " policy_skip_budget=" << allocator.policyDecisionBudgetSkips
+                      << " policy_skip_history=" << allocator.policyHistorySkips
+                      << " policy_skip_gaps=" << allocator.policyGapLimitSkips
+                      << " policy_skip_active=" << allocator.policyActiveLimitSkips
+                      << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}

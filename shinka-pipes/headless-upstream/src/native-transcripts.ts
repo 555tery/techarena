@@ -1,0 +1,657 @@
+import { closeSync, constants, existsSync, openSync, readFileSync, readSync, readdirSync, realpathSync, statSync } from "node:fs";
+import { join } from "node:path";
+import { spawnSync } from "node:child_process";
+
+import {
+  assertSafeDockerAntigravityState,
+  assertSafeDockerFile,
+  assertSafeDockerOpenCodeDatabase,
+  assertSafeDockerTree,
+} from "./docker-transcript-safety.js";
+import { extractFinalMessage } from "./output.js";
+import type { NativeTranscript } from "./runs.js";
+import type { AgentName, Env } from "./types.js";
+export { deriveNativeTranscriptActivity } from "./native-activity.js";
+export type { NativeActivityStatus, NativeTranscriptActivity, NativeTranscriptActivityOptions } from "./native-activity.js";
+
+export interface NativeAssistantCompletion {
+  message: string;
+  source: "native-transcript";
+  path: string;
+}
+
+interface ResolveLatestOptions {
+  antigravityScope?: "workspace" | "all";
+  dockerSessionRoot?: string;
+}
+
+export function resolveNativeTranscript(
+  agent: AgentName,
+  nativeId: string | undefined,
+  workDir: string | undefined,
+  env: Env,
+  partial: Partial<NativeTranscript> = {},
+): NativeTranscript | undefined {
+  if (!nativeId) return undefined;
+
+  const path =
+    agent === "claude"
+      ? claudeTranscriptPath(nativeId, workDir, env)
+      : agent === "antigravity"
+        ? antigravityTranscriptPath(nativeId, env)
+      : agent === "codex"
+        ? findFileContaining(codexSessionsRoot(env), nativeId)
+        : agent === "cursor"
+          ? cursorTranscriptPath(nativeId, workDir, env)
+          : agent === "gemini"
+            ? geminiTranscriptPath(nativeId, workDir, env)
+            : agent === "opencode"
+              ? opencodeDatabasePath(env)
+              : agent === "pi"
+                ? piTranscriptPath(nativeId, workDir, env)
+                : undefined;
+
+  if (!path || !existsSync(path)) return undefined;
+  const kind = agent === "opencode" ? "sqlite" : "jsonl";
+  return {
+    kind,
+    path,
+    sessionId: nativeId,
+    ...partial,
+    endOffset: kind === "jsonl" ? statSync(path).size : partial.endOffset,
+  };
+}
+
+export function beginNativeTranscript(
+  agent: AgentName,
+  nativeId: string | undefined,
+  workDir: string | undefined,
+  env: Env,
+): NativeTranscript | undefined {
+  const startedAt = new Date().toISOString();
+  const transcript = resolveNativeTranscript(agent, nativeId, workDir, env, { startedAt });
+  if (!transcript || transcript.kind !== "jsonl") {
+    return transcript ?? (agent === "opencode" ? resolveNativeTranscript(agent, nativeId, workDir, env, { startedAt }) : undefined);
+  }
+  return { ...transcript, startOffset: transcript.endOffset, endOffset: undefined };
+}
+
+export function finalizeNativeTranscript(
+  agent: AgentName,
+  nativeId: string | undefined,
+  workDir: string | undefined,
+  env: Env,
+  started?: NativeTranscript,
+): NativeTranscript | undefined {
+  const completedAt = new Date().toISOString();
+  const transcript = resolveNativeTranscript(agent, nativeId, workDir, env, {
+    ...started,
+    completedAt,
+    startOffset: started?.startOffset,
+  });
+  if (transcript || !started?.path || !existsSync(started.path)) return transcript;
+  return {
+    ...started,
+    completedAt,
+    endOffset: started.kind === "jsonl" ? statSync(started.path).size : started.endOffset,
+  };
+}
+
+export function resolveLatestNativeTranscript(
+  agent: AgentName,
+  workDir: string | undefined,
+  env: Env,
+  partial: Partial<NativeTranscript> = {},
+  options: ResolveLatestOptions = {},
+): NativeTranscript | undefined {
+  return resolveLatestNativeTranscripts(agent, workDir, env, partial, 1, options)[0];
+}
+
+export function resolveLatestNativeTranscripts(
+  agent: AgentName,
+  workDir: string | undefined,
+  env: Env,
+  partial: Partial<NativeTranscript> = {},
+  limit = 20,
+  options: ResolveLatestOptions = {},
+): NativeTranscript[] {
+  const workspace = realWorkspace(workDir);
+  if (!workspace) return [];
+  if (agent === "opencode") {
+    return latestOpenCodeTranscripts(workspace, workDir, env, partial, limit, options.dockerSessionRoot);
+  }
+
+  const paths =
+    agent === "claude"
+      ? latestFiles(claudeProjectRoot(workspace, env), partial)
+      : agent === "antigravity"
+        ? latestAntigravityTranscripts(workspace, workDir, env, partial, options.antigravityScope ?? "workspace", options.dockerSessionRoot)
+      : agent === "codex"
+        ? latestWorkspaceFiles(codexSessionsRoot(env), workspace, workDir, partial)
+        : agent === "cursor"
+          ? latestFiles(cursorTranscriptsRoot(workspace, env), partial)
+          : agent === "gemini"
+            ? latestGeminiTranscripts(workspace, env, partial, options.dockerSessionRoot)
+            : agent === "pi"
+              ? latestPiTranscripts(workspace, env, partial, options.dockerSessionRoot)
+              : [];
+  return paths.slice(0, Math.max(0, limit)).map((path) => ({
+    kind: "jsonl",
+    path,
+    sessionId: nativeIdFromPath(agent, path),
+    ...partial,
+    endOffset: statSync(path).size,
+  }));
+}
+
+export function nativeTranscriptKey(transcript: NativeTranscript): string {
+  return [transcript.kind, transcript.path, transcript.sessionId ?? "", transcript.startOffset ?? "", transcript.endOffset ?? ""].join("\t");
+}
+
+export function indexNativeAssistantCompletion(
+  agent: AgentName,
+  transcript: NativeTranscript | undefined,
+): NativeAssistantCompletion | undefined {
+  if (!transcript || !existsSync(transcript.path)) return undefined;
+  const message =
+    transcript.kind === "sqlite"
+      ? indexOpenCodeCompletion(transcript)
+      : extractFinalMessage(agent, readTranscriptSlice(transcript));
+  if (!message) return undefined;
+  return { message, source: "native-transcript", path: transcript.path };
+}
+
+export function nativeTranscriptIncludesText(transcript: NativeTranscript | undefined, text: string): boolean {
+  if (!transcript || !text || !existsSync(transcript.path)) return false;
+  return transcript.kind === "sqlite" ? openCodeTranscriptIncludesText(transcript, text) : readTranscriptSlice(transcript).includes(text);
+}
+
+function readTranscriptSlice(transcript: NativeTranscript): string {
+  const bytes = readFileSync(transcript.path);
+  const start = transcript.startOffset ?? 0;
+  const end = transcript.endOffset ?? bytes.length;
+  return bytes.subarray(start, end).toString("utf8");
+}
+
+function indexOpenCodeCompletion(transcript: NativeTranscript): string {
+  if (!transcript.sessionId || !/^[A-Za-z0-9_.:-]+$/.test(transcript.sessionId)) return "";
+  const startedAtMs = transcript.startedAt ? Date.parse(transcript.startedAt) : Number.NaN;
+  const sqlite = spawnSync(
+    "sqlite3",
+    [
+      transcript.path,
+      [
+        "select json_extract(part.data, '$.text')",
+        "from part",
+        "join message on message.id = part.message_id",
+        `where part.session_id = '${transcript.sessionId.replaceAll("'", "''")}'`,
+        "and json_extract(part.data, '$.type') = 'text'",
+        "and json_extract(message.data, '$.role') = 'assistant'",
+        ...(Number.isFinite(startedAtMs) ? [`and part.time_created >= ${Math.floor(startedAtMs)}`] : []),
+        "order by json_extract(part.data, '$.metadata.openai.phase') = 'final_answer' desc, part.time_created desc",
+        "limit 1;",
+      ].join("\n"),
+    ],
+    { encoding: "utf8" },
+  );
+  if (sqlite.status !== 0) return "";
+  return sqlite.stdout.trim();
+}
+
+function openCodeTranscriptIncludesText(transcript: NativeTranscript, text: string): boolean {
+  if (!transcript.sessionId || !/^[A-Za-z0-9_.:-]+$/.test(transcript.sessionId)) return false;
+  const sqlite = spawnSync(
+    "sqlite3",
+    [
+      "-json",
+      transcript.path,
+      [
+        "select part.data as part_data",
+        "from part",
+        `where part.session_id = '${transcript.sessionId.replaceAll("'", "''")}'`,
+        "order by part.time_created asc;",
+      ].join("\n"),
+    ],
+    { encoding: "utf8" },
+  );
+  if (sqlite.status !== 0 || !sqlite.stdout.trim()) return false;
+  try {
+    const rows = JSON.parse(sqlite.stdout) as unknown;
+    return Array.isArray(rows) && rows.some((row) => asString(asRecord(row).part_data).includes(text));
+  } catch {
+    return false;
+  }
+}
+
+function claudeTranscriptPath(nativeId: string, workDir: string | undefined, env: Env): string | undefined {
+  const root = env.CLAUDE_CONFIG_DIR ?? (env.HOME ? join(env.HOME, ".claude") : undefined);
+  const workspace = realWorkspace(workDir);
+  return root && workspace ? join(claudeProjectRoot(workspace, env) ?? root, `${nativeId}.jsonl`) : undefined;
+}
+
+function claudeProjectRoot(workspace: string, env: Env): string | undefined {
+  const root = env.CLAUDE_CONFIG_DIR ?? (env.HOME ? join(env.HOME, ".claude") : undefined);
+  return root ? join(root, "projects", claudeProjectKey(workspace)) : undefined;
+}
+
+function antigravityRoot(env: Env): string | undefined {
+  return env.ANTIGRAVITY_HOME ?? env.AGY_HOME ?? (env.HOME ? join(env.HOME, ".gemini", "antigravity-cli") : undefined);
+}
+
+function antigravityTranscriptPath(nativeId: string, env: Env): string | undefined {
+  if (!/^[A-Za-z0-9_.:-]+$/.test(nativeId)) return undefined;
+  const root = antigravityRoot(env);
+  return root ? join(root, "brain", nativeId, ".system_generated", "logs", "transcript.jsonl") : undefined;
+}
+
+function codexSessionsRoot(env: Env): string | undefined {
+  return env.CODEX_HOME ? join(env.CODEX_HOME, "sessions") : env.HOME ? join(env.HOME, ".codex", "sessions") : undefined;
+}
+
+function cursorTranscriptPath(nativeId: string, workDir: string | undefined, env: Env): string | undefined {
+  const workspace = realWorkspace(workDir);
+  return workspace
+    ? join(cursorTranscriptsRoot(workspace, env) ?? "", nativeId, `${nativeId}.jsonl`)
+    : undefined;
+}
+
+function cursorTranscriptsRoot(workspace: string, env: Env): string | undefined {
+  const root = env.CURSOR_HOME ?? (env.HOME ? join(env.HOME, ".cursor") : undefined);
+  return root ? join(root, "projects", cursorProjectKey(workspace), "agent-transcripts") : undefined;
+}
+
+function geminiTranscriptPath(nativeId: string, workDir: string | undefined, env: Env): string | undefined {
+  const root = env.GEMINI_HOME ?? (env.HOME ? join(env.HOME, ".gemini") : undefined);
+  const workspace = realWorkspace(workDir);
+  if (!root || !workspace) return undefined;
+  const projectSlot = geminiProjectSlot(root, workspace);
+  if (!projectSlot) return undefined;
+  return findFileContaining(join(root, "tmp", projectSlot, "chats"), nativeId.slice(0, 8));
+}
+
+function opencodeDatabasePath(env: Env): string | undefined {
+  return env.OPENCODE_DATA_HOME
+    ? join(env.OPENCODE_DATA_HOME, "opencode.db")
+    : env.HOME
+      ? join(env.HOME, ".local", "share", "opencode", "opencode.db")
+      : undefined;
+}
+
+function piTranscriptPath(nativeId: string, workDir: string | undefined, env: Env): string | undefined {
+  if (nativeId.endsWith(".jsonl")) return nativeId;
+  const workspace = realWorkspace(workDir);
+  return workspace ? findFileContaining(piProjectRoot(workspace, env), nativeId) : undefined;
+}
+
+function piProjectRoot(workspace: string, env: Env): string | undefined {
+  const root = env.PI_CODING_AGENT_HOME ?? (env.HOME ? join(env.HOME, ".pi", "agent") : undefined);
+  return root ? join(root, "sessions", piProjectKey(workspace)) : undefined;
+}
+
+function geminiProjectSlot(root: string, workspace: string, dockerSession = false): string {
+  const projectsPath = join(root, "projects.json");
+  if (!existsSync(projectsPath)) return "";
+  try {
+    const config = JSON.parse(readFileSync(projectsPath, "utf8")) as Record<string, unknown>;
+    const projects = isRecord(config.projects) ? config.projects : config;
+    const direct = projects[workspace];
+    if (typeof direct === "string") return dockerSession ? safePathSegment(direct) : direct;
+    if (dockerSession) return "";
+    for (const [key, value] of Object.entries(projects)) {
+      if (realWorkspace(key) === workspace && typeof value === "string") return value;
+    }
+  } catch {
+    return "";
+  }
+  return "";
+}
+
+function safePathSegment(value: string): string {
+  return value !== "." && value !== ".." && /^[A-Za-z0-9._-]+$/.test(value) ? value : "";
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+function asRecord(value: unknown): Record<string, unknown> {
+  return isRecord(value) ? value : {};
+}
+
+function findFileContaining(root: string | undefined, text: string): string | undefined {
+  if (!root || !text || !existsSync(root)) return undefined;
+  const stack = [root];
+  while (stack.length > 0) {
+    const dir = stack.pop() as string;
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(path);
+      } else if (entry.isFile() && entry.name.includes(text)) {
+        return path;
+      }
+    }
+  }
+  return undefined;
+}
+
+function latestGeminiTranscripts(
+  workspace: string,
+  env: Env,
+  partial: Partial<NativeTranscript>,
+  dockerSessionRoot?: string,
+): string[] {
+  const root = env.GEMINI_HOME ?? (env.HOME ? join(env.HOME, ".gemini") : undefined);
+  if (!root) return [];
+  if (dockerSessionRoot && root) {
+    assertSafeDockerFile(dockerSessionRoot, join(root, "projects.json"), 1024 * 1024);
+  }
+  const projectSlot = geminiProjectSlot(root, workspace, Boolean(dockerSessionRoot));
+  const chatsRoot = projectSlot ? join(root, "tmp", projectSlot, "chats") : undefined;
+  if (dockerSessionRoot && chatsRoot) {
+    assertSafeDockerTree(dockerSessionRoot, chatsRoot);
+  }
+  return chatsRoot ? latestFiles(chatsRoot, partial) : [];
+}
+
+function latestAntigravityTranscripts(
+  workspace: string,
+  workDir: string | undefined,
+  env: Env,
+  partial: Partial<NativeTranscript>,
+  scope: "workspace" | "all",
+  dockerSessionRoot?: string,
+): string[] {
+  const root = antigravityRoot(env);
+  const brainRoot = root ? join(root, "brain") : undefined;
+  if (!brainRoot || !existsSync(brainRoot)) return [];
+  if (dockerSessionRoot && root) {
+    assertSafeDockerAntigravityState(dockerSessionRoot, root, brainRoot);
+  }
+  const startedAtMs = partial.startedAt ? Date.parse(partial.startedAt) : Number.NaN;
+  const candidates = readdirSync(brainRoot, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .flatMap((entry) => [
+      join(brainRoot, entry.name, ".system_generated", "logs", "transcript.jsonl"),
+      join(brainRoot, entry.name, "transcript.jsonl"),
+    ])
+    .filter((path, index, paths) => paths.indexOf(path) === index)
+    .filter((path) => {
+      if (!existsSync(path)) return false;
+      const stat = statSync(path);
+      return !Number.isFinite(startedAtMs) || stat.mtimeMs >= startedAtMs;
+    })
+    .sort((left, right) => statSync(right).mtimeMs - statSync(left).mtimeMs || right.localeCompare(left));
+  if (scope === "all") return candidates;
+  const needles = uniqueStrings([workspace, workDir].filter((value): value is string => Boolean(value)));
+  const dockerSession = Boolean(dockerSessionRoot);
+  const mappedIds = antigravityConversationIdsForWorkspace(root, needles, dockerSession);
+  const statuses = new Map(candidates.map((path) => [path, fileWorkspaceCwdStatus(path, needles, dockerSession)]));
+  const mapped = candidates.filter((path) => {
+    const nativeId = nativeIdFromPath("antigravity", path);
+    return Boolean(nativeId && mappedIds.includes(nativeId) && statuses.get(path) !== "mismatch");
+  });
+  const fromTranscript = candidates.filter((path) => statuses.get(path) === "match");
+  return uniqueStrings([...mapped, ...fromTranscript]);
+}
+
+function antigravityConversationIdsForWorkspace(
+  root: string | undefined,
+  needles: string[],
+  dockerSession: boolean,
+): string[] {
+  if (!root) return [];
+  const cachePath = join(root, "cache", "last_conversations.json");
+  try {
+    const values = JSON.parse(readFileSync(cachePath, "utf8")) as Record<string, unknown>;
+    return uniqueStrings(
+      Object.entries(values)
+        .filter(([key]) => {
+          if (needles.includes(key)) return true;
+          if (dockerSession) return false;
+          const realKey = realWorkspace(key);
+          return Boolean(realKey && needles.includes(realKey));
+        })
+        .map(([, value]) => (typeof value === "string" && /^[A-Za-z0-9_.:-]+$/.test(value) ? value : ""))
+        .filter(Boolean),
+    );
+  } catch {
+    return [];
+  }
+}
+
+function latestOpenCodeTranscripts(
+  workspace: string,
+  workDir: string | undefined,
+  env: Env,
+  partial: Partial<NativeTranscript>,
+  limit: number,
+  dockerSessionRoot?: string,
+): NativeTranscript[] {
+  const path = opencodeDatabasePath(env);
+  if (!path || !existsSync(path)) return [];
+  let databasePath = path;
+  if (dockerSessionRoot) {
+    assertSafeDockerOpenCodeDatabase(dockerSessionRoot, path);
+    databasePath = realpathSync(path);
+  }
+  const directories = uniqueStrings([workspace, workDir].filter((value): value is string => Boolean(value)));
+  const startedAtMs = partial.startedAt ? Date.parse(partial.startedAt) : Number.NaN;
+  const whereDirectory = directories.map((directory) => `'${directory.replaceAll("'", "''")}'`).join(", ");
+  const sqlite = spawnSync(
+    "sqlite3",
+    [
+      ...(dockerSessionRoot ? ["-batch", "-nofollow", "-readonly", "-safe"] : []),
+      databasePath,
+      [
+        "select id",
+        "from session",
+        `where directory in (${whereDirectory})`,
+        ...(Number.isFinite(startedAtMs) ? [`and time_updated >= ${Math.floor(startedAtMs)}`] : []),
+        "order by time_updated desc",
+        `limit ${Math.max(0, limit)};`,
+      ].join("\n"),
+    ],
+    {
+      encoding: "utf8",
+      ...(dockerSessionRoot ? { maxBuffer: 1024 * 1024, timeout: 5_000 } : {}),
+    },
+  );
+  const sessionIds = sqlite.status === 0
+    ? sqlite.stdout
+      .split(/\r?\n/)
+      .map((line) => line.trim())
+      .filter(
+        (sessionId) =>
+          Boolean(sessionId) && (!dockerSessionRoot || /^[A-Za-z0-9_.:-]{1,256}$/.test(sessionId)),
+      )
+    : [];
+  return sessionIds.map((sessionId) => ({ kind: "sqlite", path: databasePath, sessionId, ...partial }));
+}
+
+function latestPiTranscripts(
+  workspace: string,
+  env: Env,
+  partial: Partial<NativeTranscript>,
+  dockerSessionRoot?: string,
+): string[] {
+  const root = piProjectRoot(workspace, env);
+  if (dockerSessionRoot && root) {
+    assertSafeDockerTree(dockerSessionRoot, root);
+  }
+  return latestFiles(root, partial);
+}
+
+// Resolve the opencode session whose `title` equals a caller-assigned unique
+// value (the `tag` wait tier). Scoped to the workspace and to sessions updated
+// after the run started, newest first, so a reused title can't match a stale row.
+export function resolveOpencodeTranscriptByTitle(
+  workDir: string | undefined,
+  env: Env,
+  title: string,
+  partial: Partial<NativeTranscript> = {},
+): NativeTranscript | undefined {
+  const path = opencodeDatabasePath(env);
+  const workspace = realWorkspace(workDir);
+  if (!path || !existsSync(path) || !workspace || !title) return undefined;
+  const directories = uniqueStrings([workspace, workDir].filter((value): value is string => Boolean(value)));
+  const startedAtMs = partial.startedAt ? Date.parse(partial.startedAt) : Number.NaN;
+  const whereDirectory = directories.map((directory) => `'${directory.replaceAll("'", "''")}'`).join(", ");
+  const sqlite = spawnSync(
+    "sqlite3",
+    [
+      path,
+      [
+        "select id",
+        "from session",
+        `where directory in (${whereDirectory})`,
+        `and title = '${title.replaceAll("'", "''")}'`,
+        ...(Number.isFinite(startedAtMs) ? [`and time_updated >= ${Math.floor(startedAtMs)}`] : []),
+        "order by time_updated desc",
+        "limit 1;",
+      ].join("\n"),
+    ],
+    { encoding: "utf8" },
+  );
+  const sessionId = sqlite.status === 0 ? sqlite.stdout.split(/\r?\n/).map((line) => line.trim()).find(Boolean) : undefined;
+  return sessionId ? { kind: "sqlite", path, sessionId, ...partial } : undefined;
+}
+
+// Resolve the single transcript pi wrote into a unique per-run --session-dir
+// (the `dir` wait tier). Because the directory is exclusive to this run, the
+// newest .jsonl in it is unambiguously this run's transcript.
+export function resolvePiTranscriptInDir(
+  sessionDir: string,
+  env: Env,
+  partial: Partial<NativeTranscript> = {},
+): NativeTranscript | undefined {
+  const path = latestFiles(sessionDir, partial)[0];
+  return path ? { kind: "jsonl", path, sessionId: nativeIdFromPath("pi", path), ...partial, endOffset: statSync(path).size } : undefined;
+}
+
+function latestWorkspaceFiles(
+  root: string | undefined,
+  workspace: string,
+  workDir: string | undefined,
+  partial: Partial<NativeTranscript>,
+): string[] {
+  const candidates = latestFiles(root, partial);
+  const needles = uniqueStrings([workspace, workDir].filter((value): value is string => Boolean(value)));
+  return candidates.filter((path) => fileHasWorkspaceCwd(path, needles));
+}
+
+function latestFiles(root: string | undefined, partial: Partial<NativeTranscript>): string[] {
+  if (!root || !existsSync(root)) return [];
+  const startedAtMs = partial.startedAt ? Date.parse(partial.startedAt) : Number.NaN;
+  const files: Array<{ path: string; mtimeMs: number }> = [];
+  const stack = [root];
+  while (stack.length > 0) {
+    const dir = stack.pop() as string;
+    for (const entry of readdirSync(dir, { withFileTypes: true })) {
+      const path = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        stack.push(path);
+        continue;
+      }
+      if (!entry.isFile() || !entry.name.endsWith(".jsonl")) continue;
+      const stat = statSync(path);
+      if (Number.isFinite(startedAtMs) && stat.mtimeMs < startedAtMs) continue;
+      files.push({ path, mtimeMs: stat.mtimeMs });
+    }
+  }
+  return files.sort((left, right) => right.mtimeMs - left.mtimeMs || right.path.localeCompare(left.path)).map((file) => file.path);
+}
+
+function fileHasWorkspaceCwd(path: string, needles: string[]): boolean {
+  return fileWorkspaceCwdStatus(path, needles) === "match";
+}
+
+function fileWorkspaceCwdStatus(
+  path: string,
+  needles: string[],
+  dockerSession = false,
+): "match" | "mismatch" | "unknown" {
+  let sawCwd = false;
+  try {
+    const contents = dockerSession ? readFilePrefix(path, 64 * 1024) : readFileSync(path, "utf8");
+    for (const line of contents.split(/\r?\n/).slice(0, 40)) {
+      if (!line.trim()) continue;
+      const record = JSON.parse(line) as Record<string, unknown>;
+      const cwd = cwdFromRecord(record);
+      if (cwd) sawCwd = true;
+      if (cwd && needles.includes(cwd)) return "match";
+      if (dockerSession) continue;
+      const realCwd = realWorkspace(cwd);
+      if (realCwd && needles.includes(realCwd)) return "match";
+    }
+  } catch {
+    return "unknown";
+  }
+  return sawCwd ? "mismatch" : "unknown";
+}
+
+function readFilePrefix(path: string, maxBytes: number): string {
+  const descriptor = openSync(path, constants.O_RDONLY | constants.O_NOFOLLOW);
+  try {
+    const buffer = Buffer.allocUnsafe(maxBytes);
+    const bytesRead = readSync(descriptor, buffer, 0, maxBytes, 0);
+    return buffer.subarray(0, bytesRead).toString("utf8");
+  } finally {
+    closeSync(descriptor);
+  }
+}
+
+function cwdFromRecord(record: Record<string, unknown>): string {
+  const payload = isRecord(record.payload) ? record.payload : undefined;
+  const path = isRecord(record.path) ? record.path : undefined;
+  return asString(record.cwd) || asString(payload?.cwd) || asString(path?.cwd);
+}
+
+function asString(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
+function nativeIdFromPath(agent: AgentName, path: string): string | undefined {
+  if (agent === "antigravity") {
+    const parts = path.split("/");
+    const brainIndex = parts.lastIndexOf("brain");
+    const nativeId = brainIndex >= 0 ? parts[brainIndex + 1] : undefined;
+    return nativeId && /^[A-Za-z0-9_.:-]+$/.test(nativeId) ? nativeId : undefined;
+  }
+  const name = path.split("/").at(-1)?.replace(/\.jsonl$/, "");
+  if (!name) return undefined;
+  if (agent === "codex") {
+    const match = /([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.exec(name);
+    return match?.[1] ?? name;
+  }
+  if (agent === "gemini") {
+    const match = /session-[^-]+-[^-]+-(.+)$/.exec(name);
+    return match?.[1] ?? name;
+  }
+  return name;
+}
+
+function uniqueStrings(values: string[]): string[] {
+  return [...new Set(values)];
+}
+
+function realWorkspace(workDir: string | undefined): string | undefined {
+  if (!workDir) return undefined;
+  try {
+    return realpathSync(workDir);
+  } catch {
+    return workDir;
+  }
+}
+
+function claudeProjectKey(workspace: string): string {
+  return workspace.replace(/\//g, "-");
+}
+
+function cursorProjectKey(workspace: string): string {
+  return workspace.replace(/^\/+/, "").replace(/[^A-Za-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+function piProjectKey(workspace: string): string {
+  return `--${workspace.replace(/^\/+/, "").replace(/[\\/]+/g, "-")}--`;
+}

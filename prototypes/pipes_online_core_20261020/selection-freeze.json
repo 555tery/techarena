@@ -1,0 +1,752 @@
+{
+  "created_at": "2026-10-19T19:57:46.361031+00:00",
+  "selected": "primal_recent",
+  "core": "primal_recent",
+  "hybrid": "hybrid_recent",
+  "final_names": [
+    "baseline",
+    "old_hybrid",
+    "handoff_exact",
+    "primal_recent",
+    "hybrid_recent"
+  ],
+  "sources": {
+    "baseline": "12c976b59455f86d322413f55ffc4f16777c4cfa4393b933902d3fd89fa317c1",
+    "old_hybrid": "48a44fb0ccad7e6560055245a3096f892c23b5a98c4ab77468c87968e23054c1",
+    "handoff_exact": "e00fe692b4e8be5f8f851e837c69f77b50796400ec3209f5658ba16376aa1352",
+    "primal_recent": "57c047da7ae9939d9d86dfb050458f22e1a189ec43c5fb621c578bee324821d9",
+    "hybrid_recent": "c7b5435c9996b432f7e5d2de5869d5709b7e16388161ca33b80cdd90793720ea"
+  },
+  "binaries": {
+    "baseline": "d8c8c324580bcc834571cb9759e90c193f343a47c8271ae6800ae1cfabeab6b5",
+    "old_hybrid": "d5e163edf91c7f367bd945344c80ca4cca131bcf1a5acf0eb22e598afacb1ffe",
+    "handoff_exact": "c1bb4e0213db08dfc2d767c2dc4c2800391c1c635be4904de3098e686afd478d",
+    "primal_recent": "fcc6c32042f4cd2837e4ca885c65cd0cdf0334bb43d5cc4bf1d4c5c07120e591",
+    "hybrid_recent": "866fc23162cfc033fde751f09d6feadf44f3aff86858e7baf5b2ee23c2999e56"
+  },
+  "experiment_sha256": "f4306d15ec283aed601a9c1b3743f067c30328763dd9166ee6e2299b4e03b3bf",
+  "manifests": {
+    "calibration": "3f9301c41b861207eb2b900830f84a60cb5cb281c0b550ee10ffdea005686fcb",
+    "final": "23d95ac1af10bd70f68a024b919559b4d4b203ab9b773bff0d3931f03e07269f",
+    "stress": "71a3f567692b38b2a287dbca20c36007fc1cf7a4fba903604263dff95924d6b1"
+  },
+  "calibration_statistics": {
+    "baseline": {
+      "n": 64,
+      "macro": {
+        "prefix": 0.8956238432641022,
+        "ordinary": 0.8779596590780422
+      },
+      "by_stratum": {
+        "prefix": {
+          "n": 32,
+          "family_macro_delta": 0.0,
+          "mean_delta": 0.0,
+          "family_bootstrap95": [
+            0.0,
+            0.0
+          ],
+          "wins": 0,
+          "ties": 32,
+          "losses": 0
+        },
+        "ordinary": {
+          "n": 32,
+          "family_macro_delta": 0.0,
+          "mean_delta": 0.0,
+          "family_bootstrap95": [
+            0.0,
+            0.0
+          ],
+          "wins": 0,
+          "ties": 32,
+          "losses": 0
+        }
+      },
+      "mean": 0.89057022444988,
+      "mean_delta": 0.0,
+      "wins": 0,
+      "ties": 64,
+      "losses": 0,
+      "min_retention": 1.0,
+      "worst": [
+        {
+          "id": "calibration-000",
+          "delta": 0.0,
+          "old_T": 6220,
+          "new_T": 6220
+        },
+        {
+          "id": "calibration-001",
+          "delta": 0.0,
+          "old_T": 7820,
+          "new_T": 7820
+        },
+        {
+          "id": "calibration-002",
+          "delta": 0.0,
+          "old_T": 3740,
+          "new_T": 3740
+        },
+        {
+          "id": "calibration-003",
+          "delta": 0.0,
+          "old_T": 40500,
+          "new_T": 40500
+        },
+        {
+          "id": "calibration-004",
+          "delta": 0.0,
+          "old_T": 5220,
+          "new_T": 5220
+        },
+        {
+          "id": "calibration-005",
+          "delta": 0.0,
+          "old_T": 40280,
+          "new_T": 40280
+        },
+        {
+          "id": "calibration-006",
+          "delta": 0.0,
+          "old_T": 13580,
+          "new_T": 13580
+        },
+        {
+          "id": "calibration-007",
+          "delta": 0.0,
+          "old_T": 16820,
+          "new_T": 16820
+        }
+      ],
+      "weighted_score": 56.99649436479232,
+      "max_cpu": 0.04,
+      "max_rss": 3.3125,
+      "resources_ok": true
+    },
+    "old_hybrid": {
+      "n": 64,
+      "macro": {
+        "prefix": 0.894754208135432,
+        "ordinary": 0.8779596590780422
+      },
+      "by_stratum": {
+        "prefix": {
+          "n": 32,
+          "family_macro_delta": -0.0008696351286701252,
+          "mean_delta": -0.000978339519753891,
+          "family_bootstrap95": [
+            -0.0021658571295526674,
+            -4.50638427472172e-05
+          ],
+          "wins": 1,
+          "ties": 28,
+          "losses": 3
+        },
+        "ordinary": {
+          "n": 32,
+          "family_macro_delta": 0.0,
+          "mean_delta": 0.0,
+          "family_bootstrap95": [
+            0.0,
+            0.0
+          ],
+          "wins": 0,
+          "ties": 32,
+          "losses": 0
+        }
+      },
+      "mean": 0.890081054690003,
+      "mean_delta": -0.0004891697598769455,
+      "wins": 1,
+      "ties": 60,
+      "losses": 3,
+      "min_retention": 0.9759036144578314,
+      "worst": [
+        {
+          "id": "calibration-034",
+          "delta": -0.021820615796519394,
+          "old_T": 3240,
+          "new_T": 3320
+        },
+        {
+          "id": "calibration-060",
+          "delta": -0.006930309096816689,
+          "old_T": 10660,
+          "new_T": 10740
+        },
+        {
+          "id": "calibration-045",
+          "delta": -0.00302276043873273,
+          "old_T": 5820,
+          "new_T": 5840
+        },
+        {
+          "id": "calibration-000",
+          "delta": 0.0,
+          "old_T": 6220,
+          "new_T": 6220
+        },
+        {
+          "id": "calibration-001",
+          "delta": 0.0,
+          "old_T": 7820,
+          "new_T": 7820
+        },
+        {
+          "id": "calibration-002",
+          "delta": 0.0,
+          "old_T": 3740,
+          "new_T": 3740
+        },
+        {
+          "id": "calibration-003",
+          "delta": 0.0,
+          "old_T": 40500,
+          "new_T": 40500
+        },
+        {
+          "id": "calibration-004",
+          "delta": 0.0,
+          "old_T": 5220,
+          "new_T": 5220
+        }
+      ],
+      "weighted_score": 56.96518750016019,
+      "max_cpu": 0.05,
+      "max_rss": 11.46875,
+      "resources_ok": true
+    },
+    "handoff_exact": {
+      "n": 64,
+      "macro": {
+        "prefix": 0.894754208135432,
+        "ordinary": 0.8779596590780422
+      },
+      "by_stratum": {
+        "prefix": {
+          "n": 32,
+          "family_macro_delta": -0.0008696351286701252,
+          "mean_delta": -0.000978339519753891,
+          "family_bootstrap95": [
+            -0.0021658571295526674,
+            -4.50638427472172e-05
+          ],
+          "wins": 1,
+          "ties": 28,
+          "losses": 3
+        },
+        "ordinary": {
+          "n": 32,
+          "family_macro_delta": 0.0,
+          "mean_delta": 0.0,
+          "family_bootstrap95": [
+            0.0,
+            0.0
+          ],
+          "wins": 0,
+          "ties": 32,
+          "losses": 0
+        }
+      },
+      "mean": 0.890081054690003,
+      "mean_delta": -0.0004891697598769455,
+      "wins": 1,
+      "ties": 60,
+      "losses": 3,
+      "min_retention": 0.9759036144578314,
+      "worst": [
+        {
+          "id": "calibration-034",
+          "delta": -0.021820615796519394,
+          "old_T": 3240,
+          "new_T": 3320
+        },
+        {
+          "id": "calibration-060",
+          "delta": -0.006930309096816689,
+          "old_T": 10660,
+          "new_T": 10740
+        },
+        {
+          "id": "calibration-045",
+          "delta": -0.00302276043873273,
+          "old_T": 5820,
+          "new_T": 5840
+        },
+        {
+          "id": "calibration-000",
+          "delta": 0.0,
+          "old_T": 6220,
+          "new_T": 6220
+        },
+        {
+          "id": "calibration-001",
+          "delta": 0.0,
+          "old_T": 7820,
+          "new_T": 7820
+        },
+        {
+          "id": "calibration-002",
+          "delta": 0.0,
+          "old_T": 3740,
+          "new_T": 3740
+        },
+        {
+          "id": "calibration-003",
+          "delta": 0.0,
+          "old_T": 40500,
+          "new_T": 40500
+        },
+        {
+          "id": "calibration-004",
+          "delta": 0.0,
+          "old_T": 5220,
+          "new_T": 5220
+        }
+      ],
+      "weighted_score": 56.96518750016019,
+      "max_cpu": 0.03,
+      "max_rss": 11.125,
+      "resources_ok": true
+    },
+    "primal_observed": {
+      "n": 64,
+      "macro": {
+        "prefix": 0.9010518432211687,
+        "ordinary": 0.8981148280367257
+      },
+      "by_stratum": {
+        "prefix": {
+          "n": 32,
+          "family_macro_delta": 0.005427999957066477,
+          "mean_delta": 0.005499451073938198,
+          "family_bootstrap95": [
+            0.001237523621917665,
+            0.010191155117588306
+          ],
+          "wins": 13,
+          "ties": 15,
+          "losses": 4
+        },
+        "ordinary": {
+          "n": 32,
+          "family_macro_delta": 0.020155168958683523,
+          "mean_delta": 0.020155168958683523,
+          "family_bootstrap95": [
+            0.0011859690551876585,
+            0.04984966942178518
+          ],
+          "wins": 16,
+          "ties": 8,
+          "losses": 8
+        }
+      },
+      "mean": 0.9033975344661909,
+      "mean_delta": 0.01282731001631086,
+      "wins": 29,
+      "ties": 23,
+      "losses": 12,
+      "min_retention": 0.981578947368421,
+      "worst": [
+        {
+          "id": "calibration-055",
+          "delta": -0.01038097925779602,
+          "old_T": 7460,
+          "new_T": 7600
+        },
+        {
+          "id": "calibration-046",
+          "delta": -0.00801350750192098,
+          "old_T": 6260,
+          "new_T": 6320
+        },
+        {
+          "id": "calibration-018",
+          "delta": -0.007266445550027645,
+          "old_T": 2680,
+          "new_T": 2700
+        },
+        {
+          "id": "calibration-017",
+          "delta": -0.005395847246675967,
+          "old_T": 3620,
+          "new_T": 3640
+        },
+        {
+          "id": "calibration-060",
+          "delta": -0.0034781083971874294,
+          "old_T": 10660,
+          "new_T": 10700
+        },
+        {
+          "id": "calibration-003",
+          "delta": -0.002947717781789705,
+          "old_T": 40500,
+          "new_T": 40620
+        },
+        {
+          "id": "calibration-029",
+          "delta": -0.002854793756967622,
+          "old_T": 11960,
+          "new_T": 12000
+        },
+        {
+          "id": "calibration-054",
+          "delta": -0.0022181997219647975,
+          "old_T": 16600,
+          "new_T": 16640
+        }
+      ],
+      "weighted_score": 57.817442205836215,
+      "max_cpu": 0.05,
+      "max_rss": 3.4375,
+      "resources_ok": true
+    },
+    "primal_recent": {
+      "n": 64,
+      "macro": {
+        "prefix": 0.9031246603456579,
+        "ordinary": 0.8986029138980088
+      },
+      "by_stratum": {
+        "prefix": {
+          "n": 32,
+          "family_macro_delta": 0.007500817081555599,
+          "mean_delta": 0.007676325160318239,
+          "family_bootstrap95": [
+            0.001884694148288602,
+            0.014311455380802817
+          ],
+          "wins": 13,
+          "ties": 15,
+          "losses": 4
+        },
+        "ordinary": {
+          "n": 32,
+          "family_macro_delta": 0.020643254819966636,
+          "mean_delta": 0.020643254819966636,
+          "family_bootstrap95": [
+            0.0008784315235964256,
+            0.051802290172289794
+          ],
+          "wins": 17,
+          "ties": 8,
+          "losses": 7
+        }
+      },
+      "mean": 0.9047300144400224,
+      "mean_delta": 0.014159789990142438,
+      "wins": 30,
+      "ties": 23,
+      "losses": 11,
+      "min_retention": 0.9893899204244031,
+      "worst": [
+        {
+          "id": "calibration-018",
+          "delta": -0.007266445550027645,
+          "old_T": 2680,
+          "new_T": 2700
+        },
+        {
+          "id": "calibration-055",
+          "delta": -0.005979192297025371,
+          "old_T": 7460,
+          "new_T": 7540
+        },
+        {
+          "id": "calibration-017",
+          "delta": -0.005395847246675967,
+          "old_T": 3620,
+          "new_T": 3640
+        },
+        {
+          "id": "calibration-013",
+          "delta": -0.004976438593941257,
+          "old_T": 13740,
+          "new_T": 13820
+        },
+        {
+          "id": "calibration-054",
+          "delta": -0.003323305225704787,
+          "old_T": 16600,
+          "new_T": 16660
+        },
+        {
+          "id": "calibration-045",
+          "delta": -0.00302276043873273,
+          "old_T": 5820,
+          "new_T": 5840
+        },
+        {
+          "id": "calibration-003",
+          "delta": -0.002947717781789705,
+          "old_T": 40500,
+          "new_T": 40620
+        },
+        {
+          "id": "calibration-029",
+          "delta": -0.002854793756967622,
+          "old_T": 11960,
+          "new_T": 12000
+        }
+      ],
+      "weighted_score": 57.902720924161436,
+      "max_cpu": 0.04,
+      "max_rss": 3.3125,
+      "resources_ok": true
+    },
+    "hybrid_observed": {
+      "n": 64,
+      "macro": {
+        "prefix": 0.9004276504385323,
+        "ordinary": 0.8981148280367257
+      },
+      "by_stratum": {
+        "prefix": {
+          "n": 32,
+          "family_macro_delta": 0.004803807174430204,
+          "mean_delta": 0.004797234193472392,
+          "family_bootstrap95": [
+            0.001023070923856169,
+            0.0091200343247333
+          ],
+          "wins": 13,
+          "ties": 13,
+          "losses": 6
+        },
+        "ordinary": {
+          "n": 32,
+          "family_macro_delta": 0.020155168958683523,
+          "mean_delta": 0.020155168958683523,
+          "family_bootstrap95": [
+            0.0011859690551876585,
+            0.04984966942178518
+          ],
+          "wins": 16,
+          "ties": 8,
+          "losses": 8
+        }
+      },
+      "mean": 0.903046426025958,
+      "mean_delta": 0.012476201576077957,
+      "wins": 29,
+      "ties": 21,
+      "losses": 14,
+      "min_retention": 0.981578947368421,
+      "worst": [
+        {
+          "id": "calibration-055",
+          "delta": -0.01038097925779602,
+          "old_T": 7460,
+          "new_T": 7600
+        },
+        {
+          "id": "calibration-046",
+          "delta": -0.00801350750192098,
+          "old_T": 6260,
+          "new_T": 6320
+        },
+        {
+          "id": "calibration-018",
+          "delta": -0.007266445550027645,
+          "old_T": 2680,
+          "new_T": 2700
+        },
+        {
+          "id": "calibration-034",
+          "delta": -0.005555555555555536,
+          "old_T": 3240,
+          "new_T": 3260
+        },
+        {
+          "id": "calibration-017",
+          "delta": -0.005395847246675967,
+          "old_T": 3620,
+          "new_T": 3640
+        },
+        {
+          "id": "calibration-060",
+          "delta": -0.005207429083475601,
+          "old_T": 10660,
+          "new_T": 10720
+        },
+        {
+          "id": "calibration-003",
+          "delta": -0.002947717781789705,
+          "old_T": 40500,
+          "new_T": 40620
+        },
+        {
+          "id": "calibration-029",
+          "delta": -0.002854793756967622,
+          "old_T": 11960,
+          "new_T": 12000
+        }
+      ],
+      "weighted_score": 57.79497126566131,
+      "max_cpu": 0.03,
+      "max_rss": 10.234375,
+      "resources_ok": true
+    },
+    "hybrid_recent": {
+      "n": 64,
+      "macro": {
+        "prefix": 0.9023039522406078,
+        "ordinary": 0.8986029138980088
+      },
+      "by_stratum": {
+        "prefix": {
+          "n": 32,
+          "family_macro_delta": 0.006680108976505559,
+          "mean_delta": 0.006753028542136944,
+          "family_bootstrap95": [
+            0.0012288236204514118,
+            0.013253110718134661
+          ],
+          "wins": 11,
+          "ties": 15,
+          "losses": 6
+        },
+        "ordinary": {
+          "n": 32,
+          "family_macro_delta": 0.020643254819966636,
+          "mean_delta": 0.020643254819966636,
+          "family_bootstrap95": [
+            0.0008784315235964256,
+            0.051802290172289794
+          ],
+          "wins": 17,
+          "ties": 8,
+          "losses": 7
+        }
+      },
+      "mean": 0.9042683661309318,
+      "mean_delta": 0.01369814168105179,
+      "wins": 28,
+      "ties": 23,
+      "losses": 13,
+      "min_retention": 0.9893899204244031,
+      "worst": [
+        {
+          "id": "calibration-060",
+          "delta": -0.00864678435174393,
+          "old_T": 10660,
+          "new_T": 10760
+        },
+        {
+          "id": "calibration-018",
+          "delta": -0.007266445550027645,
+          "old_T": 2680,
+          "new_T": 2700
+        },
+        {
+          "id": "calibration-055",
+          "delta": -0.005979192297025371,
+          "old_T": 7460,
+          "new_T": 7540
+        },
+        {
+          "id": "calibration-034",
+          "delta": -0.005555555555555536,
+          "old_T": 3240,
+          "new_T": 3260
+        },
+        {
+          "id": "calibration-017",
+          "delta": -0.005395847246675967,
+          "old_T": 3620,
+          "new_T": 3640
+        },
+        {
+          "id": "calibration-013",
+          "delta": -0.004976438593941257,
+          "old_T": 13740,
+          "new_T": 13820
+        },
+        {
+          "id": "calibration-054",
+          "delta": -0.003323305225704787,
+          "old_T": 16600,
+          "new_T": 16660
+        },
+        {
+          "id": "calibration-045",
+          "delta": -0.00302276043873273,
+          "old_T": 5820,
+          "new_T": 5840
+        }
+      ],
+      "weighted_score": 57.87317543237963,
+      "max_cpu": 0.03,
+      "max_rss": 9.78125,
+      "resources_ok": true
+    }
+  },
+  "open15_scores": {
+    "baseline": 30.090967891345112,
+    "old_hybrid": 30.102711588824103,
+    "handoff_exact": 30.102711588824103,
+    "primal_observed": 30.057604916795054,
+    "primal_recent": 30.01926429194345,
+    "hybrid_observed": 30.06934861427405,
+    "hybrid_recent": 30.031007989422445
+  },
+  "ineligibility_reasons": {
+    "baseline": [
+      "ordinary improvement <0.001"
+    ],
+    "old_hybrid": [
+      "ordinary improvement <0.001"
+    ],
+    "handoff_exact": [
+      "ordinary improvement <0.001"
+    ],
+    "primal_observed": [],
+    "primal_recent": [],
+    "hybrid_observed": [],
+    "hybrid_recent": []
+  },
+  "scenarios": {
+    "baseline": {
+      "0": 103.83957925390067,
+      "1": 105.3233707255297
+    },
+    "old_hybrid": {
+      "0": 103.85132295137966,
+      "1": 105.2620650722004
+    },
+    "handoff_exact": {
+      "0": 103.85132295137966,
+      "1": 105.2620650722004
+    },
+    "primal_observed": {
+      "0": 105.49925047188002,
+      "1": 105.74595974737323
+    },
+    "primal_recent": {
+      "0": 105.5019090593762,
+      "1": 105.8817357609787
+    },
+    "hybrid_observed": {
+      "0": 105.51099416935901,
+      "1": 105.70527125111076
+    },
+    "hybrid_recent": {
+      "0": 105.5136527568552,
+      "1": 105.8245399776335
+    }
+  },
+  "max_regret": {
+    "baseline": 1.6740735029545277,
+    "old_hybrid": 1.6623298054755367,
+    "handoff_exact": 1.6623298054755367,
+    "primal_observed": 0.1357760136054651,
+    "primal_recent": 0.011743697478991066,
+    "hybrid_observed": 0.17646450986794093,
+    "hybrid_recent": 0.05719578334519326
+  },
+  "criterion": "Ordinary gain>=0.001, prefix>=-0.002, all retention>=0.85; minimax regret of Open15+84*macro across prefix share0/1, tie0.05 favors pure online.",
+  "final_rule": "No retuning. Confirm ordinary macro>0, prefix delta>=-0.002, retention>=0.85, positive equal-stratum mean and both total-score endpoint deltas vs baseline>0; valid/limits in official protocol. Otherwise no promotion.",
+  "caveat": "Scenario totals are sensitivity calculations, not estimates of official hidden score."
+}

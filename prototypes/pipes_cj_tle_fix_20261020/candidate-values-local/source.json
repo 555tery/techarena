@@ -1,0 +1,42 @@
+{
+  "baseline": "candidate-histograms/solution.cj",
+  "baseline_sha256": "69b968a9e05e139e376cf1591b9c0013f303d1f86e8fed0a98b5068cd21c3777",
+  "source_sha256": "0881056a9c7c5700ace41d85633560cda9e9f009f8817d60093b76bf0163fedf",
+  "generator_sha256": "92e6dc95d084370540d3a54c7b7c9f191971599cdb90292ab4e6141590f66511",
+  "changes": [
+    "Flat lifetime cells/rates328 use ordinary Array rather than class-field VArray copies.",
+    "Primal DP uses local VArray513 value; commits primalGapValue once before causalRequestRate assignment.",
+    "Primal gapCounts514 and recentRequests41 are immutable local snapshots during the rebuild.",
+    "Causal DP reads local requestRates41 and writes local gapValues1026; commits field once after both rows.",
+    "primalGapLoss reads one local snapshot513 for its two operands."
+  ],
+  "aliasing_review": [
+    "Primal rebuild neither mutates gapCounts/recentRequests fields nor calls other stateful methods before their final use.",
+    "Primal value field is not observed during DP; only scalar helpers run. Commit still precedes lifetimeModel.fit.",
+    "Causal rebuild uses scalar helpers only; gapValues is unobservable until the method returns.",
+    "Both causal rows still copy all513 elements including the zero tail; snapshots preserve old row values until overwritten.",
+    "Lifetime structs still use local struct-copy/mutate/write-back, without reference members.",
+    "primalGapLoss has no mutation or callback between its two field reads."
+  ],
+  "scope_caveat": "Single-access causalValueAt snapshots would still copy the full table once per call; unchanged to avoid signature/caller expansion. Other small8/41/256-element fields are unchanged outside the named methods.",
+  "policy": "Same FP expressions, loop order, thresholds, comparisons and DP iteration order; only storage and field commit timing within non-reentrant methods change.",
+  "compile_executed": false,
+  "solver_executed": false,
+  "exact_declaration_edits": [
+    {
+      "old": "private var cells = VArray<LifetimeCell, $328>(repeat: LifetimeCell())",
+      "new": "private var cells = Array<LifetimeCell>(328, repeat: LifetimeCell())",
+      "occurrences": 1
+    },
+    {
+      "old": "private var rates = VArray<LifetimeEstimate, $328>(repeat: LifetimeEstimate())",
+      "new": "private var rates = Array<LifetimeEstimate>(328, repeat: LifetimeEstimate())",
+      "occurrences": 1
+    },
+    {
+      "old": "    public func primalGapLoss(gapLength: Int64, length: Int64): Float64 { return primalGapValue[gapLength] - primalGapValue[gapLength - length] }",
+      "new": "    public func primalGapLoss(gapLength: Int64, length: Int64): Float64 {\n        let value = primalGapValue\n        return value[gapLength] - value[gapLength - length]\n    }",
+      "occurrences": 1
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-values-local/solution.cj
++++ prototypes/pipes_cj_tle_fix_20261020/candidate-fast/solution.cj
+@@ -150,6 +150,7 @@
+     private func rebalance(start: Int64): Unit {
+         var node = start
+         while (node != 0) {
++            let oldHeight = heights[node]
+             fixHeight(node)
+             let balance = heights[left[node]] - heights[right[node]]
+             if (balance > 1) {
+@@ -161,6 +162,9 @@
+                 if (heights[right[child]] < heights[left[child]]) { rotateRight(child) }
+                 node = rotateLeft(node)
+             }
++            // The repaired subtree has the same height as before the
++            // mutation. Ancestors retain their heights and balances.
++            if (heights[node] == oldHeight) { break }
+             node = parent[node]
+         }
+     }
+@@ -359,6 +363,7 @@
+     private func rebalance(start: Int64): Unit {
+         var node = start
+         while (node != 0) {
++            let oldHeight = heights[node]
+             fixHeight(node)
+             let balance = heights[left[node]] - heights[right[node]]
+             if (balance > 1) {
+@@ -370,6 +375,9 @@
+                 if (heights[right[child]] < heights[left[child]]) { rotateRight(child) }
+                 node = rotateLeft(node)
+             }
++            // The repaired subtree has the same height as before the
++            // mutation. Ancestors retain their heights and balances.
++            if (heights[node] == oldHeight) { break }
+             node = parent[node]
+         }
+     }

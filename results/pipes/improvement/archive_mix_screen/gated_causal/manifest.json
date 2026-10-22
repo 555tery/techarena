@@ -1,0 +1,42 @@
+{
+  "candidate_source": "results/pipes/improvement/archive_mix_screen/gated_causal/pid46_rearm_geometric_gate1.cpp",
+  "candidate_source_sha256": "89f7173f61fba3710e752607df4fec83195abe88a14a51b75ff7a710ed6d1982",
+  "candidate_binary": "results/pipes/improvement/archive_mix_screen/gated_causal/pid46_rearm_geometric_gate1",
+  "candidate_binary_sha256": "77116793bc43a22c219244a3218eed26630980fb9e97ccd0eaa601332ab25fe7",
+  "base_source": "results/pipes/improvement/case9_next/preliminary_pid_lane_excluded/source/proactive_pid_lanes_preprobe.cpp",
+  "base_source_sha256": "1a643a2b8a560de5c7dfd7efe0b288dc93785e96400d2ae6fd4ec7eea5f55f59",
+  "frozen_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+  "component_sources": {
+    "case5_rearm_sha256": "88cdde2fe63a3681292ff1f06c201a087707379fa7d4060b462beb558ffa0ba4",
+    "case9_geometric_sha256": "4d0eada1669b9a757b2d09bc82f46b3b7ef60f95f73f5f4e6d0c77ca00d95a8d"
+  },
+  "policy": "Reverse re-arm only with observed smooth-size veto, same-size run, and stable +2 deletion mode; geometric alignment only in same-size run before smooth-trend veto.",
+  "open15": {
+    "status": "15/15",
+    "score": 29.79317535716961,
+    "baseline_score_pid46": 29.791529008363593,
+    "delta": 0.0016463488060159959,
+    "summary": "results/pipes/improvement/archive_mix_screen/gated_causal/pid46-open15/summary.json",
+    "cases_csv": "results/pipes/improvement/archive_mix_screen/gated_causal/pid46-open15/cases.csv",
+    "summary_sha256": "c24d7fcc04b9d5ac09e80083d4549836922b7b70d21c41b1496647698733afaf",
+    "cases_csv_sha256": "85c3e8a39a1e570dd7c5db553bc1c272a780056e5101df2337393331ba19b77e",
+    "max_solver_cpu_s": 0.956874,
+    "max_solver_rss_mib": 7.125
+  },
+  "holdout_v2": {
+    "status": "12/12",
+    "score": 5.13526432428047,
+    "pid46_score": 5.13526432428047,
+    "transcripts_byte_equal_to_pid46": true,
+    "summary": "results/pipes/improvement/archive_mix_screen/gated_causal/pid46-holdout-v2/summary.json",
+    "cases_csv": "results/pipes/improvement/archive_mix_screen/gated_causal/pid46-holdout-v2/cases.csv",
+    "summary_sha256": "3d9fcc3cecc220e6c7daab05588bc3ffade04750959b7f9d317e26e527fdf705",
+    "cases_csv_sha256": "5287cbab9c62fd0d4c37f96fc1ec7a5cf9b3f6b622b0911bdaff48d7310a1259",
+    "max_solver_cpu_s": 0.182657,
+    "max_solver_rss_mib": 4.265625
+  },
+  "platform_or_docker_used": false,
+  "promoted_to_frozen_or_canonical": false,
+  "report": "results/pipes/improvement/archive_mix_screen/gated_causal/REPORT.md"
+}

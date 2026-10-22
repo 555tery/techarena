@@ -1,0 +1,352 @@
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+// EVOLVE-BLOCK-START
+namespace {
+/*
+NAME: coalescence_loss_tiebreak
+DESCRIPTION:
+Базовый выбор сохраняет tail_growth_regret: best fit с возможной заменой
+хвоста внутренним интервалом по прогнозу роста для следующей вставки.
+Если выбран внутренний интервал, рассматриваются до восьми внутренних
+интервалов того же размера. Выбирается интервал с минимальной оценкой
+утраченного спроса после удаления одного из его соседей.
+Оценка сравнивает объединение при сохранении дыры и после её заполнения,
+учитывая свободное место за соседом и сторону фактического остатка.
+Веса спроса и частоты удалений берутся из существующей затухающей истории.
+При равной оценке сохраняется меньшая координата; до 12 затухших удалений
+сохраняется базовый выбор. Решение о хвосте не меняется.
+Объединение свободных интервалов, preferRight(), точные длины и минимальное
+расширение после глобального поиска подходящего интервала сохраняются.
+Сложность команды: O(40 + log(H + 1)), H — число свободных интервалов.
+Память: O(Q), дополнительная временная память — O(40).
+Возможный недостаток: оценки удаления могут запаздывать; локальная модель
+не учитывает последовательности нескольких удалений и вставок.
+Ablation: chooseFit() возвращает chooseBaseFit(length), сохраняя
+сбор истории, preferRight() и остальной алгоритм.
+*/
+class Allocator {
+    struct Node {
+        int start;
+        int length;
+        int previous;
+        int next;
+        int pid;
+    };
+    struct FreeKey {
+        int length;
+        int start;
+        int node;
+    };
+    struct FreeOrder {
+        bool operator()(const FreeKey& a, const FreeKey& b) const {
+            if (a.length != b.length) return a.length < b.length;
+            if (a.start != b.start) return a.start < b.start;
+            return a.node < b.node;
+        }
+    };
+    // Node 0 is the sentinel of the physical interval list.
+    std::vector<Node> nodes_;
+    std::vector<int> pidNode_;
+    std::set<FreeKey, FreeOrder> freeBySize_;
+    std::array<int, 41> liveByLength_{};
+    std::array<double, 41> requestMass_{};
+    std::array<double, 41> exposure_{};
+    std::array<double, 41> deaths_{};
+    int liveCount_ = 0;
+    int trenchLength_ = 0;
+    double totalExposure_ = 0.0;
+    double totalDeaths_ = 0.0;
+    void advanceHistory() {
+        // Effective history length is approximately 4000 commands.
+        constexpr double decay = 0.99975;
+        for (int length = 1; length <= 40; ++length) {
+            requestMass_[length] *= decay;
+            exposure_[length] =
+                decay * exposure_[length] + liveByLength_[length];
+            deaths_[length] *= decay;
+        }
+        totalExposure_ = decay * totalExposure_ + liveCount_;
+        totalDeaths_ *= decay;
+    }
+    int linkBetween(int previous, int next, int start, int length, int pid) {
+        const int id = static_cast<int>(nodes_.size());
+        nodes_.push_back(Node{start, length, previous, next, pid});
+        nodes_[previous].next = id;
+        nodes_[next].previous = id;
+        return id;
+    }
+    void indexFree(int id) {
+        freeBySize_.insert(
+            FreeKey{nodes_[id].length, nodes_[id].start, id});
+    }
+    void unindexFree(int id) {
+        freeBySize_.erase(
+            FreeKey{nodes_[id].length, nodes_[id].start, id});
+    }
+    auto chooseBaseFit(int length) const {
+        const auto fit =
+            freeBySize_.lower_bound(FreeKey{length, -1, -1});
+        if (fit == freeBySize_.end() ||
+            fit->node != nodes_[0].previous) {
+            return fit;
+        }
+        // There is only one physical tail, so the next fit is internal.
+        const auto interior = std::next(fit);
+        if (interior == freeBySize_.end()) return fit;
+        int otherMaximum = 0;
+        for (auto it = freeBySize_.rbegin();
+             it != freeBySize_.rend(); ++it) {
+            if (it->node != fit->node && it->node != interior->node) {
+                otherMaximum = it->length;
+                break;
+            }
+        }
+        const int tailLength = fit->length;
+        const int tailAfter = tailLength - length;
+        const int bestMaximum =
+            std::max(otherMaximum, interior->length);
+        // Best fit already accommodates every possible next length.
+        if (bestMaximum >= 40) return fit;
+        const int interiorMaximum = std::max(
+            std::max(otherMaximum, tailLength),
+            interior->length - length);
+        double advantage = 0.0;
+        for (int request = 1; request <= 40; ++request) {
+            const int bestGrowth = request <= bestMaximum
+                ? 0 : (request - tailAfter + 19) / 20;
+            const int interiorGrowth = request <= interiorMaximum
+                ? 0 : (request - tailLength + 19) / 20;
+            advantage += (1.0 + requestMass_[request]) *
+                         (bestGrowth - interiorGrowth);
+        }
+        return advantage > 0.0 ? interior : fit;
+    }
+    auto chooseFit(int length) const {
+        const auto base = chooseBaseFit(length);
+        const int tail = nodes_[0].previous;
+        if (base == freeBySize_.end() || base->node == tail ||
+            totalDeaths_ < 12.0) {
+            return base;
+        }
+        const auto second = std::next(base);
+        if (second == freeBySize_.end() ||
+            second->length != base->length) {
+            return base;
+        }
+        std::array<double, 41> demandPrefix{};
+        for (int request = 1; request <= 40; ++request) {
+            demandPrefix[request] = demandPrefix[request - 1] +
+                                    1.0 + requestMass_[request];
+        }
+        constexpr double priorEvents = 3.0;
+        const double priorExposure =
+            priorEvents * (totalExposure_ + 1.0) / (totalDeaths_ + 1.0);
+        const auto coalescenceLoss = [&](int hole) {
+            const int gapLength = nodes_[hole].length;
+            const int remainder = gapLength - length;
+            const bool fromRight = remainder > 0 && preferRight(hole);
+            const std::array<int, 2> neighbors{
+                nodes_[hole].previous, nodes_[hole].next};
+            double loss = 0.0;
+            for (int side = 0; side < 2; ++side) {
+                const int neighbor = neighbors[side];
+                if (neighbor == 0 || nodes_[neighbor].pid <= 0) {
+                    continue;
+                }
+                const int neighborLength = nodes_[neighbor].length;
+                const int outside = side == 0
+                    ? nodes_[neighbor].previous : nodes_[neighbor].next;
+                int released = neighborLength;
+                if (outside != 0 && nodes_[outside].pid == 0) {
+                    released += nodes_[outside].length;
+                }
+                const bool remainderTouches =
+                    side == 0 ? fromRight : !fromRight;
+                const int before = std::min(40, released + gapLength);
+                const int after = std::min(
+                    40, released + (remainderTouches ? remainder : 0));
+                const double rate =
+                    (deaths_[neighborLength] + priorEvents) /
+                    (exposure_[neighborLength] + priorExposure);
+                loss += rate * (demandPrefix[before] - demandPrefix[after]);
+            }
+            return loss;
+        };
+        auto best = base;
+        double bestLoss = coalescenceLoss(base->node);
+        if (bestLoss == 0.0) return base;
+        constexpr int candidateLimit = 8;
+        int examined = 1;
+        for (auto it = second;
+             it != freeBySize_.end() && it->length == base->length &&
+             examined < candidateLimit; ++it) {
+            if (it->node == tail) continue;
+            ++examined;
+            const double loss = coalescenceLoss(it->node);
+            if (loss < bestLoss) {
+                best = it;
+                bestLoss = loss;
+                if (bestLoss == 0.0) break;
+            }
+        }
+        return best;
+    }
+    bool preferRight(int hole) const {
+        const int left = nodes_[hole].previous;
+        const int right = nodes_[hole].next;
+        // Boundary holes are filled from their left edge.
+        if (left == 0 || right == 0 || totalDeaths_ < 12.0) {
+            return false;
+        }
+        if (nodes_[left].pid <= 0 || nodes_[right].pid <= 0) {
+            return false;
+        }
+        const int leftLength = nodes_[left].length;
+        const int rightLength = nodes_[right].length;
+        if (leftLength == rightLength) return false;
+        // Three pseudo-events shrink each estimate toward the global rate.
+        constexpr double priorEvents = 3.0;
+        const double priorExposure =
+            priorEvents * (totalExposure_ + 1.0) / (totalDeaths_ + 1.0);
+        const double leftNumerator = deaths_[leftLength] + priorEvents;
+        const double rightNumerator = deaths_[rightLength] + priorEvents;
+        const double leftDenominator = exposure_[leftLength] + priorExposure;
+        const double rightDenominator = exposure_[rightLength] + priorExposure;
+        // Place against the right neighbor when the left neighbor has a
+        // sufficiently higher estimated deletion rate.
+        return leftNumerator * rightDenominator >
+               1.25 * rightNumerator * leftDenominator;
+    }
+public:
+    // Required compatibility counters; they may stay zero.
+    std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+    std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+    std::uint64_t unitProfileSuppressedExpansions = 0;
+    Allocator() {
+        nodes_.reserve(400001);
+        pidNode_.reserve(200001);
+        nodes_.push_back(Node{0, 0, 0, 0, -1});
+        pidNode_.push_back(0);
+    }
+    void place(int length) {
+        advanceHistory();
+        requestMass_[length] += 1.0;
+        int sections = 0;
+        int hole = 0;
+        const auto fit = chooseFit(length);
+        if (fit != freeBySize_.end()) {
+            hole = fit->node;
+            freeBySize_.erase(fit);
+        } else {
+            const int tail = nodes_[0].previous;
+            const bool freeTail = tail != 0 && nodes_[tail].pid == 0;
+            const int available = freeTail ? nodes_[tail].length : 0;
+            sections = (length - available + 19) / 20;
+            const int added = sections * 20;
+            if (freeTail) {
+                unindexFree(tail);
+                nodes_[tail].length += added;
+                hole = tail;
+            } else {
+                hole = linkBetween(tail, 0, trenchLength_, added, 0);
+            }
+            trenchLength_ += added;
+        }
+        const int pid = static_cast<int>(pidNode_.size());
+        const int originalStart = nodes_[hole].start;
+        const int remainder = nodes_[hole].length - length;
+        const int previous = nodes_[hole].previous;
+        const int next = nodes_[hole].next;
+        const bool fromRight = remainder > 0 && preferRight(hole);
+        nodes_[hole].pid = pid;
+        nodes_[hole].length = length;
+        if (fromRight) {
+            nodes_[hole].start = originalStart + remainder;
+            const int freeNode =
+                linkBetween(previous, hole, originalStart, remainder, 0);
+            indexFree(freeNode);
+        } else if (remainder > 0) {
+            const int freeNode =
+                linkBetween(hole, next, originalStart + length, remainder, 0);
+            indexFree(freeNode);
+        }
+        pidNode_.push_back(hole);
+        ++liveByLength_[length];
+        ++liveCount_;
+        std::cout << sections << ' ' << nodes_[hole].start
+                  << '\n' << std::flush;
+    }
+    void remove(std::int64_t pid) {
+        advanceHistory();
+        const std::size_t ordinal = static_cast<std::size_t>(pid);
+        const int id = pidNode_[ordinal];
+        const int originalStart = nodes_[id].start;
+        const int length = nodes_[id].length;
+        deaths_[length] += 1.0;
+        totalDeaths_ += 1.0;
+        --liveByLength_[length];
+        --liveCount_;
+        pidNode_[ordinal] = 0;
+        nodes_[id].pid = 0;
+        const int left = nodes_[id].previous;
+        if (left != 0 && nodes_[left].pid == 0) {
+            unindexFree(left);
+            const int previous = nodes_[left].previous;
+            nodes_[id].start = nodes_[left].start;
+            nodes_[id].length += nodes_[left].length;
+            nodes_[id].previous = previous;
+            nodes_[previous].next = id;
+        }
+        const int right = nodes_[id].next;
+        if (right != 0 && nodes_[right].pid == 0) {
+            unindexFree(right);
+            const int next = nodes_[right].next;
+            nodes_[id].length += nodes_[right].length;
+            nodes_[id].next = next;
+            nodes_[next].previous = id;
+        }
+        indexFree(id);
+        std::cout << originalStart << '\n' << std::flush;
+    }
+};
+}
+// EVOLVE-BLOCK-END
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                      << " expansion_gate_passes=" << allocator.expansionGatePasses
+                      << " unit_profile_suppressed_expansions="
+                      << allocator.unitProfileSuppressedExpansions << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}

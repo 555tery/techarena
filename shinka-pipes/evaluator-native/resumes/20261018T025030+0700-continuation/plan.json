@@ -1,0 +1,33 @@
+{
+  "run_dir": "/Users/555tery/techarena/shinka-pipes/search-v2/runs/20261018T025030+0700-native",
+  "native_root": "/Users/555tery/techarena/shinka-pipes/evaluator-native",
+  "suite": "search-v2",
+  "workers": 2,
+  "target_generations": 30,
+  "first_generation": 5,
+  "recovered_generation": -1,
+  "native_sha256": {
+    "cache.py": "802ca1332584a16167a032022084e198fcff3caa96866cef963cec222b6d33c7",
+    "native_harness.py": "8672dd34e31b3a91a2edd057598429f236044fa0c2ec092761c48ad93a8d0d71",
+    "evaluate_native.py": "ee7fd8c42d223434dbdaad4215a3476da05244ea358214a6a5d8db0698f47695",
+    "resume_search_v2.py": "1dcbbd2b1574e9c746c26cfdb2776d3f1def42219b22259749c39ba88d41ff1f",
+    "evaluate.py": "9e03e2f1f40b5440ff0552dc946b6f00e29278dc7c44aa26965e658601a2315c",
+    "test_native.py": "574cc944c59576d04aafdfccefcfd40d47a23c5787404c7958237f5a4c4ad52f",
+    "shinka_evaluate.py": "c9a00d2bcfd508c7746116f46f6bffbf45ce1c493e631741e2fc619ba7079eac",
+    "test_shinka_resume.py": "e78e3501c6854bfa9dd71a5e81f0fa32d9468fc1d9d046384e59cb6b4bcab562",
+    "build_native.py": "484ac4a7aa9de86db5588f604def8527792e849b2e8b1eb167fd3f492f6648ae",
+    "continue_native.py": "b7ef33defcaab8544b6179e963d253f15555577aca1b560c264cec2f1d5781a1",
+    "native_runner.cpp": "888510550ce8eabc315fb5c5de2ad4345ca98797c89830404070cc2dc256e5a8"
+  },
+  "created_at": "2026-10-18T02:50:33.127052+07:00",
+  "continuation_of": "/Users/555tery/techarena/shinka-pipes/search-v2/runs/20261018T011836+0700-084000",
+  "preserved_generations": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "remaining_generation_slots": 25,
+  "failed_generation5_artifacts_preserved": "/Users/555tery/techarena/shinka-pipes/search-v2/runs/20261018T011836+0700-084000/gen_5"
+}

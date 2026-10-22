@@ -1,0 +1,154 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-support/solution.cj
++++ prototypes/pipes_cj_tle_fix_20261020/candidate-combined/solution.cj
+@@ -31,17 +31,124 @@
+ // AVL tree with stable node IDs. Erasing a node transplants its successor;
+ // it never swaps another live node's key or payload into the erased node ID.
+ // Arrays and recycled node slots avoid one managed allocation per tree node.
++// Native backing vectors for AVL storage. Each Int64 allocation has one
++// FastIntVector owner; no managed-array pinning or exported pointer is used.
++public class FastIntVector {
++    private var data: CPointer<Int64>
++    private var capacity: Int64 = 16
++    private var used: Int64 = 0
++
++    public init() {
++        data = LibC.malloc<Int64>(count: 16)
++        if (data.isNull()) { throw IllegalMemoryException("Integer vector allocation failed") }
++    }
++
++    ~init() { unsafe { LibC.free(data) } }
++
++    public prop size: Int64 { get() { used } }
++
++    public operator func [](index: Int64): Int64 {
++        if (index < 0 || index >= used) { throw IndexOutOfBoundsException("Integer vector index") }
++        return unsafe { data.read(index) }
++    }
++
++    public operator func [](index: Int64, value!: Int64): Unit {
++        if (index < 0 || index >= used) { throw IndexOutOfBoundsException("Integer vector index") }
++        unsafe { data.write(index, value) }
++    }
++
++    // Package-internal so FastKeyVector can reserve all three columns before
++    // committing any component. Failed reservation leaves all sizes intact.
++    func reserveForAdd(): Unit {
++        if (used < capacity) { return }
++        if (capacity > Int64.Max / 2) { throw IllegalMemoryException("Integer vector capacity overflow") }
++        let expandedCapacity = capacity * 2
++        let expanded = LibC.malloc<Int64>(count: expandedCapacity)
++        if (expanded.isNull()) { throw IllegalMemoryException("Integer vector expansion failed") }
++        unsafe {
++            for (i in 0..used) { expanded.write(i, data.read(i)) }
++        }
++        let previous = data
++        data = expanded
++        capacity = expandedCapacity
++        unsafe { LibC.free(previous) }
++    }
++
++    public func add(value: Int64): Unit {
++        reserveForAdd()
++        unsafe { data.write(used, value) }
++        used++
++    }
++
++    public func remove(at!: Int64): Int64 {
++        if (used == 0 || at != used - 1) { throw IndexOutOfBoundsException("Only last-element removal is supported") }
++        let value = unsafe { data.read(at) }
++        used--
++        unsafe { data.write(used, 0) }
++        return value
++    }
++
++    public func clone(): FastIntVector {
++        let result = FastIntVector()
++        for (i in 0..used) { result.add(unsafe { data.read(i) }) }
++        return result
++    }
++}
++
++public class FastKeyVector {
++    private let first = FastIntVector()
++    private let second = FastIntVector()
++    private let third = FastIntVector()
++
++    public init() {}
++    public prop size: Int64 { get() { first.size } }
++
++    public operator func [](index: Int64): Key {
++        return Key(first[index], second[index], third[index])
++    }
++
++    public operator func [](index: Int64, value!: Key): Unit {
++        first[index] = value.a
++        second[index] = value.b
++        third[index] = value.c
++    }
++
++    public func add(value: Key): Unit {
++        first.reserveForAdd()
++        second.reserveForAdd()
++        third.reserveForAdd()
++        first.add(value.a)
++        second.add(value.b)
++        third.add(value.c)
++    }
++
++    public func remove(at!: Int64): Key {
++        if (size == 0 || at != size - 1) { throw IndexOutOfBoundsException("Only last-key removal is supported") }
++        let value = this[at]
++        first.remove(at: at)
++        second.remove(at: at)
++        third.remove(at: at)
++        return value
++    }
++
++    public func clone(): FastKeyVector {
++        let result = FastKeyVector()
++        for (i in 0..size) { result.add(this[i]) }
++        return result
++    }
++}
++
+ public class OrderedMap<V> {
+     private let zero: V
+     private var root: Int64 = 0
+     private var count: Int64 = 0
+-    private var left = ArrayList<Int64>()
+-    private var right = ArrayList<Int64>()
+-    private var parent = ArrayList<Int64>()
+-    private var heights = ArrayList<Int64>()
+-    private var keys = ArrayList<Key>()
++    private var left = FastIntVector()
++    private var right = FastIntVector()
++    private var parent = FastIntVector()
++    private var heights = FastIntVector()
++    private var keys = FastKeyVector()
+     private var values = ArrayList<V>()
+-    private var vacant = ArrayList<Int64>()
++    private var vacant = FastIntVector()
+ 
+     public init(defaultValue: V) {
+         zero = defaultValue
+@@ -248,13 +355,13 @@
+     private let zero: Int64
+     private var root: Int64 = 0
+     private var count: Int64 = 0
+-    private var left = ArrayList<Int64>()
+-    private var right = ArrayList<Int64>()
+-    private var parent = ArrayList<Int64>()
+-    private var heights = ArrayList<Int64>()
+-    private var keys = ArrayList<Key>()
+-    private var values = ArrayList<Int64>()
+-    private var vacant = ArrayList<Int64>()
++    private var left = FastIntVector()
++    private var right = FastIntVector()
++    private var parent = FastIntVector()
++    private var heights = FastIntVector()
++    private var keys = FastKeyVector()
++    private var values = FastIntVector()
++    private var vacant = FastIntVector()
+ 
+     public init(defaultValue: Int64) {
+         zero = defaultValue

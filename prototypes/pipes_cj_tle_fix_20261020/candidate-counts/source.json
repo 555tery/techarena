@@ -1,0 +1,61 @@
+{
+  "baseline": "candidate-fast/solution.cj",
+  "baseline_sha256": "a2b415c6b98ab7c1d2bcce1d7c0935dd3b3fad69a2b3598f3a7443dbc1ba16a7",
+  "source_sha256": "85fa2c3efef59dc00a4fe59b5c346374e39549bf6a0eea0817acd1c67a7eebdf",
+  "generator_sha256": "2d7bde4b5da09342c3ca97427e615b4019fedef48850f4c538ceed472fb5cf58",
+  "changes": [
+    {
+      "old": "    public var recentFrequency = VArray<Int64, $41>(repeat: 0)",
+      "new": "    public var recentFrequency = VArray<Int64, $41>(repeat: 0)\n    public var recentDistinctCount: Int64 = 0\n    public var recentShortCount: Int64 = 0",
+      "occurrences": 2
+    },
+    {
+      "old": "    public func recordLength(length: Int64): Unit {\n        recentLengths.pushBack(length)\n        recentFrequency[length]++\n        if (recentLengths.size > kHistoryWindow) { recentFrequency[recentLengths.get(0)]--; recentLengths.popFront() }\n    }",
+      "new": "    public func recordLength(length: Int64): Unit {\n        recentLengths.pushBack(length)\n        if (recentFrequency[length] == 0) { recentDistinctCount++ }\n        if (length <= 8) { recentShortCount++ }\n        recentFrequency[length]++\n        if (recentLengths.size > kHistoryWindow) {\n            let oldest = recentLengths.get(0)\n            recentFrequency[oldest]--\n            if (recentFrequency[oldest] == 0) { recentDistinctCount-- }\n            if (oldest <= 8) { recentShortCount-- }\n            recentLengths.popFront()\n        }\n    }",
+      "occurrences": 1,
+      "same_replacement_multiple_spellings": true
+    },
+    {
+      "old": "    public func recordLength(length: Int64): Unit {\n        recentLengths.pushBack(length)\n        recentFrequency[length]++\n        if (recentLengths.size > kHistoryWindow) {\n            recentFrequency[recentLengths.get(0)]--\n            recentLengths.popFront()\n        }\n    }",
+      "new": "    public func recordLength(length: Int64): Unit {\n        recentLengths.pushBack(length)\n        if (recentFrequency[length] == 0) { recentDistinctCount++ }\n        if (length <= 8) { recentShortCount++ }\n        recentFrequency[length]++\n        if (recentLengths.size > kHistoryWindow) {\n            let oldest = recentLengths.get(0)\n            recentFrequency[oldest]--\n            if (recentFrequency[oldest] == 0) { recentDistinctCount-- }\n            if (oldest <= 8) { recentShortCount-- }\n            recentLengths.popFront()\n        }\n    }",
+      "occurrences": 1,
+      "same_replacement_multiple_spellings": true
+    },
+    {
+      "old": "        copy.recentFrequency = recentFrequency\n",
+      "new": "        copy.recentFrequency = recentFrequency\n        copy.recentDistinctCount = recentDistinctCount\n        copy.recentShortCount = recentShortCount\n",
+      "occurrences": 1
+    },
+    {
+      "old": "        state.recentFrequency = recentFrequency\n",
+      "new": "        state.recentFrequency = recentFrequency\n        state.recentDistinctCount = recentDistinctCount\n        state.recentShortCount = recentShortCount\n",
+      "occurrences": 1
+    },
+    {
+      "old": "        var availableSizes: Int64 = 0\n        for (size in 1..=40) { if (recentFrequency[size] > 0) { availableSizes++ } }",
+      "new": "        var availableSizes: Int64 = recentDistinctCount",
+      "occurrences": 4
+    },
+    {
+      "old": "        var shortPlacements: Int64 = 0\n        for (size in 1..=8) { shortPlacements += recentFrequency[size] }\n        return recentLengths.size >= 64 && shortPlacements * 100 >= recentLengths.size * 90",
+      "new": "        return recentLengths.size >= 64 && recentShortCount * 100 >= recentLengths.size * 90",
+      "occurrences": 2
+    }
+  ],
+  "invariants": [
+    "recentDistinctCount equals number of positive recentFrequency[1..40] entries.",
+    "recentShortCount equals sum(recentFrequency[1..8]).",
+    "Both start at0 beside empty histories. Both recordLength hooks update them on append and exact same front eviction at2048.",
+    "When old/new sizes coincide, append+evict deltas cancel correctly; when one unique class disappears and another appears, both transitions are counted.",
+    "RolloutState.deepCopy and Allocator.makeRolloutState copy both counters together with cloned history and copied histogram.",
+    "Import uses the same recordLength hook for every accepted placement. Replay shadow runs ordinary place/remove. Physical replay does not own these counters.",
+    "No other source assignment modifies history/histogram independently; deletions do not alter placement history."
+  ],
+  "policy": "Only exact cached bookkeeping and its query/copy sites; detector thresholds and remaining scans, maps, rings, DP, replay, GC, I/O, parity and action choices unchanged.",
+  "literal_edits_reverse_exactly_to_baseline": true,
+  "compile_executed": false,
+  "solver_executed": false,
+  "caveats": [
+    "Cangjie1.0.5 transcript parity and resource measurements require parent verification."
+  ]
+}

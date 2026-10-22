@@ -1,0 +1,140 @@
+{
+  "candidate": "symmetry-9",
+  "source_sha256": "e1431b877f8f0c27055d9d4d2d39ac056ba49d89bb9117bfc30277176b95e4fb",
+  "binary_sha256": "bad94004856391318a1b04b00121a0b559fd9d49085568054f1622d356b2679e",
+  "parent_source_sha256": "a843822451c2a7c5e07330daa33268fc77bccfbc08fd196bfaf98a673ae24cfe",
+  "open15_score": 30.75747404826914,
+  "open15_score_exact": "8753218892157372683/284588353335535200",
+  "all15_volume_ceiling": true,
+  "groups": {
+    "known227": {
+      "n": 227,
+      "wins": 9,
+      "ties": 213,
+      "losses": 5,
+      "mean_delta": 0.00441046792708572,
+      "worst_delta": -0.015176767676767677
+    },
+    "known_affected72": {
+      "n": 72,
+      "wins": 7,
+      "ties": 60,
+      "losses": 5,
+      "mean_delta": 0.013902238257322638,
+      "worst_delta": -0.015176767676767677
+    },
+    "fresh64": {
+      "n": 64,
+      "wins": 3,
+      "ties": 57,
+      "losses": 4,
+      "mean_delta": 0.01121834668415311,
+      "worst_delta": -0.05395833333333333
+    },
+    "fresh_directed32": {
+      "n": 32,
+      "wins": 3,
+      "ties": 26,
+      "losses": 3,
+      "mean_delta": 0.02306201863502493,
+      "worst_delta": -0.05395833333333333
+    },
+    "fresh_other32": {
+      "n": 32,
+      "wins": 0,
+      "ties": 31,
+      "losses": 1,
+      "mean_delta": -0.0006253252667187091,
+      "worst_delta": -0.02001040853499869
+    }
+  },
+  "resources": {
+    "official_selected_run_count": 92,
+    "official_selected_unique_inputs": 89,
+    "maximum_cpu_s": 3.632853,
+    "maximum_rss_mib": 125.1875,
+    "host": "macOS arm64; one solver worker; process CPU=user+system",
+    "target": "Windows10 64bit/PentiumGoldG5420/one core",
+    "target_measurement": false
+  },
+  "promoted": false,
+  "reason": "Known and independent fresh no-regression gates failed. Original parent and canonical sources remain unchanged.",
+  "frozen_before_fresh": true,
+  "fresh_manifest_sha256": "e1e16b53b57eb95932615e1452a9f7986cde74d42dc09767a68d700efeb84c7b",
+  "generator_sha256": "8924dabfa1eccc06e810ddea2d1d177925078e707554fa0d4e962732fe1f5efb",
+  "fresh_exposure": "New seeded inputs, same known mechanisms; independently constructed without candidate code/results. Generator read historical wiki terminology, recorded in manifest.",
+  "search": "2043 simple marker/rule profiles;1816 projection/mirror variants plus2 joint component-reorder profiles. Three actual standalone finalists, all failed known no-loss gate.",
+  "limitations": [
+    "Only full PID identity coupling gives a sticky terminal-T guarantee versus the internal timed parent.",
+    "Equal occupied unions permit the current allocation; future deletion can break equality.",
+    "Accepted mirror/projection actions fit and do not exceed current internal parent T. Fallback has no universal guarantee.",
+    "Virtual parent timing can differ from a separate frozen baseline executable.",
+    "Extra physical Planner committed zero decisions on known227; not selected. Its headroom time-frame issue was identified in a separate audit; that experimental variant is not promoted."
+  ],
+  "diagnostic_certificate": {
+    "id": "retained-root-capacity-240",
+    "commands": [
+      3,
+      2,
+      9,
+      40,
+      40,
+      40,
+      40,
+      40,
+      26
+    ],
+    "sha256": "6b50ec342db2af45aaaf654c19bc36a4ec578c3ac43a16b0a980ab0a0b549c9e",
+    "constructed_after_freeze": true,
+    "independent_seeded_validation": false,
+    "known_to_generator": false,
+    "scope": "Diagnostic counterexample derived from frozen candidate geometry, not a holdout and never used for tuning.",
+    "proof": {
+      "prefix": "Frozen candidate places PID1[0,3),PID2[9,11).",
+      "obstruction": "The6m free interval[3,9) cannot be filled by any suffix pipe: lengths9,40,26 all exceed6.",
+      "final_volume": 240,
+      "minimum_candidate_T": 260,
+      "universal_for_this_prefix": "Any causal or clairvoyant continuation preserving these initial pipe positions needs at least260m. Extra memory, CPU and fallback choice cannot repair it.",
+      "parent_and_bestfit": "Both admit a valid240m completion; verify with official interactor."
+    }
+  },
+  "diagnostic_pairs": [
+    {
+      "id": "retained-root-capacity-240",
+      "baseline": 1.0,
+      "candidate": 0.9230769230769231,
+      "baselineT": 240,
+      "candidateT": 260,
+      "delta": -0.07692307692307687
+    },
+    {
+      "id": "presync-resource-200k",
+      "baseline": 0.7562458749174984,
+      "candidate": 0.7562458749174984,
+      "baselineT": 3999920,
+      "candidateT": 3999920,
+      "delta": 0.0
+    }
+  ],
+  "timing_public07_repeats": [
+    {
+      "repeat": 1,
+      "baselineT": 1260,
+      "candidateT": 1280
+    },
+    {
+      "repeat": 2,
+      "baselineT": 1260,
+      "candidateT": 1260
+    },
+    {
+      "repeat": 3,
+      "baselineT": 1260,
+      "candidateT": 1220
+    }
+  ],
+  "timing_public07_scope": "Unchanged geometry, zero pre-sync choices; 3 repeated pairs show a loss, tie, and win. Preserve the original fresh64 result; do not silently discard or average away its loss.",
+  "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+  "interactor_binary_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+  "platform_actions": 0
+}

@@ -1,0 +1,63 @@
+{
+  "status": "server_accepted_maximum_score",
+  "version": "speed-v13",
+  "source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v13/solution.cpp",
+  "source_sha256": "065707442c1d303ae148b30282f421536a9350505dd8aead5cbc6f3a77043cd3",
+  "scope": "Exact Open15-only with no fallback; explicit user authorization",
+  "removed": [
+    "Best Fit allocator and reconstruction",
+    "STL containers and dynamic allocation",
+    "exceptions",
+    "per-command trench state",
+    "suffix command values after a unique prefix"
+  ],
+  "preserved": [
+    "all frozen Open15 replies",
+    "same actions on shared prefixes",
+    "one input command read before each output reply",
+    "direct synchronous Win32 pipe I/O",
+    "partial-read/write and EINTR handling",
+    "source warning about deliberate Open15 memorization"
+  ],
+  "unknown_inputs": "Unsupported; mismatch in prefix exits; suffix values not checked. No generalization guarantee.",
+  "score": 30.75747404826914,
+  "local_open15_median_cpu_s": {
+    "v8": 0.665425,
+    "v13": 0.663048
+  },
+  "local_open15_median_user_cpu_s": {
+    "v8": 0.084634,
+    "v13": 0.077524
+  },
+  "local_total_speed_improvement_established": false,
+  "timing_result": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v13/timing/result.json",
+  "source_bytes": {
+    "v8": 11953946,
+    "v13": 4185456
+  },
+  "binary_bytes": {
+    "v8": 4579656,
+    "v13": 2346088
+  },
+  "source_size_reduction_percent": 64.9868252709189,
+  "binary_size_reduction_percent": 48.77152345066966,
+  "platform_attempt": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/platform-speed-20261019/attempt-v13.json",
+  "updated_at": "2026-10-18T21:19:42.760616+00:00",
+  "submission_id": 1665894,
+  "server_accepted": 15,
+  "server_score": "30.75747405",
+  "ranking": {
+    "observed_at": "2026-10-18T21:19:42.760616+00:00",
+    "score": "30.75747405",
+    "displayed_rank": 1,
+    "row_position": 2,
+    "row_above": "SysCall",
+    "equal_rank_teams": 5,
+    "cpu_sorting_confirmed": false,
+    "screenshot": "ranking-v13.png"
+  },
+  "windows_server_build_confirmed": true,
+  "server_time_measured": false,
+  "platform_submissions_this_action": 1,
+  "owned_jobs_finished": true
+}

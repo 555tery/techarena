@@ -1,0 +1,113 @@
+{
+  "baseline": "candidate-v1/solution.cj",
+  "baseline_sha256": "83e2e6852e51955e6ec05eee5cf87800c6e7e528f662336d550518cd556e10ab",
+  "source_sha256": "24acac5c2e3499973c38b8c24d390b8e96345bd4f1e9ac93275f324742b8772c",
+  "generator_sha256": "432f66f72182bfa711b62b7807e10ec68ab0cd7e1a1f3a570894d195f55ac5f3",
+  "official_105_varray_documentation": "https://github.com/cangjielanguage/cangjie_docs/blob/f8f8cd75a336e23785a4c57bd6091b2adf1e0302/docs/dev-guide/source_zh_cn/basic_data_type/array.md",
+  "changes": [
+    {
+      "old": "private let lower: Array<Int64> = [0, 16, 64, 256, 1024, 4096, 16384, 65536]",
+      "new": "private let lower: VArray<Int64, $8> = [0, 16, 64, 256, 1024, 4096, 16384, 65536]",
+      "occurrences": 1
+    },
+    {
+      "old": "private var cells = Array<Array<LifetimeCell>>(41, { _ => Array<LifetimeCell>(8, repeat: LifetimeCell()) })",
+      "new": "private var cells = VArray<LifetimeCell, $328>(repeat: LifetimeCell())",
+      "occurrences": 1
+    },
+    {
+      "old": "private var rates = Array<Array<LifetimeEstimate>>(41, { _ => Array<LifetimeEstimate>(8, repeat: LifetimeEstimate()) })",
+      "new": "private var rates = VArray<LifetimeEstimate, $328>(repeat: LifetimeEstimate())",
+      "occurrences": 1
+    },
+    {
+      "old": "private var nextCrossing = Array<Int64>(8, repeat: 1)",
+      "new": "private var nextCrossing = VArray<Int64, $8>(repeat: 1)",
+      "occurrences": 1
+    },
+    {
+      "old": "public var primalGapCounts = Array<Int64>(kPrimalGapValueCap + 2, repeat: 0)",
+      "new": "public var primalGapCounts = VArray<Int64, $514>(repeat: 0)",
+      "occurrences": 1
+    },
+    {
+      "old": "public var primalEventHistory = Array<Int64>(256, repeat: 0)",
+      "new": "public var primalEventHistory = VArray<Int64, $256>(repeat: 0)",
+      "occurrences": 1
+    },
+    {
+      "old": "public var primalRecentRequests = Array<Int64>(41, repeat: 0)",
+      "new": "public var primalRecentRequests = VArray<Int64, $41>(repeat: 0)",
+      "occurrences": 1
+    },
+    {
+      "old": "public var primalGapValue = Array<Float64>(kPrimalGapValueCap + 1, repeat: 0.0)",
+      "new": "public var primalGapValue = VArray<Float64, $513>(repeat: 0.0)",
+      "occurrences": 1
+    },
+    {
+      "old": "public var causalRequestRate = Array<Float64>(41, repeat: 0.0)",
+      "new": "public var causalRequestRate = VArray<Float64, $41>(repeat: 0.0)",
+      "occurrences": 1
+    },
+    {
+      "old": "public var causalGapValue = Array<Array<Float64>>(2, {_ => Array<Float64>(kPrimalGapValueCap + 1, repeat: 0.0)})",
+      "new": "public var causalGapValue = VArray<Float64, $1026>(repeat: 0.0)",
+      "occurrences": 1
+    },
+    {
+      "old": "        let rate = Array<Float64>(41, repeat: 0.0)",
+      "new": "        var rate = VArray<Float64, $41>(repeat: 0.0)",
+      "occurrences": 1
+    },
+    {
+      "old": "        primalGapValue = Array<Float64>(kPrimalGapValueCap + 1, repeat: 0.0)",
+      "new": "        primalGapValue = VArray<Float64, $513>(repeat: 0.0)",
+      "occurrences": 1
+    },
+    {
+      "old": "            let reward = Array<Float64>(41, repeat: 0.0)",
+      "new": "            var reward = VArray<Float64, $41>(repeat: 0.0)",
+      "occurrences": 2
+    },
+    {
+      "old": "            let value = Array<Float64>(kPrimalGapValueCap + 1, repeat: 0.0)",
+      "new": "            var value = VArray<Float64, $513>(repeat: 0.0)",
+      "occurrences": 1
+    },
+    {
+      "old": "            causalGapValue[model] = value",
+      "new": "            for (cell in 0..513) { causalGapValue[model * 513 + cell] = value[cell] }",
+      "occurrences": 1
+    },
+    {
+      "old": "causalGapValue[0][gap]",
+      "new": "causalGapValue[gap]",
+      "occurrences": 1
+    },
+    {
+      "old": "causalGapValue[1][gap]",
+      "new": "causalGapValue[513 + gap]",
+      "occurrences": 1
+    }
+  ],
+  "flat_lifetime_index_changes": {
+    "cells": 10,
+    "rates": 2
+  },
+  "aliasing_review": [
+    "LifetimeCell and LifetimeEstimate contain only numeric fields; existing local-copy/writeback remains.",
+    "causalRequestRate = rate becomes a value copy; no later mutation of local rate exists.",
+    "causalGapValue commits all 513 entries of each local value row, including the zero tail.",
+    "No clone calls involve converted fields; other clone calls are untouched."
+  ],
+  "policy": "Storage-only changes; same floating-point arithmetic order, comparison thresholds and policy loops.",
+  "caveats": [
+    "Not compiled and not executed, as requested.",
+    "VArray copying may cost time at -O0; acceleration is a hypothesis pending parent measurements.",
+    "Largest VArray has1026 Float64 elements; no large200001 array conversion.",
+    "Flattened row commit adds513 non-FP element copies per model, replacing reference assignment."
+  ],
+  "compile_executed": false,
+  "solver_executed": false
+}

@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "evaluation_0",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0051/candidate_0.cpp",
+  "sha256": "9d5836db95b5b2d2176d58d7f8d33fab167a7652dfe2e22957d29c2fb9b5b941",
+  "idea": "Survivor-conditioned rank erosion: выбирать край уже выбранной внутренней щели по двум наблюдавшимся ранговым траекториям. Проекция учитывает удаление самой новой трубы и последовательное исчезновение нескольких соседей.",
+  "parent": "seed_baseline",
+  "weighted_score": 30.03689411810126,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4720,
+      "kpi": 0.9802966101694915,
+      "weighted_score": 0.980296610169492
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22480,
+      "kpi": 0.905738434163701,
+      "weighted_score": 0.905738434163701
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3300,
+      "kpi": 0.9672727272727273,
+      "weighted_score": 3.869090909090909
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 439120,
+      "kpi": 0.9536277099653853,
+      "weighted_score": 9.536277099653853
+    }
+  ],
+  "fresh": {
+    "mean_delta": 6.427404977303505e-05,
+    "worst_delta": -0.002103162001542369,
+    "wins": 7,
+    "regressions": 7,
+    "ties": 16,
+    "worst_cases": [
+      {
+        "case": "dev_15_large_recent",
+        "delta": -0.002103162001542369,
+        "baseline_T": 28140,
+        "candidate_T": 28200
+      },
+      {
+        "case": "dev_19_frames",
+        "delta": -0.002041008749874229,
+        "baseline_T": 9760,
+        "candidate_T": 9780
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.0007979189293346733,
+        "baseline_T": 24820,
+        "candidate_T": 24840
+      },
+      {
+        "case": "dev_14_large_recent",
+        "delta": -0.0005751056326713799,
+        "baseline_T": 34560,
+        "candidate_T": 34580
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.0004520627215641726,
+        "baseline_T": 87420,
+        "candidate_T": 87460
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": -0.00042926456456160444,
+        "baseline_T": 46460,
+        "candidate_T": 46480
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8088627705213772,
+  "max_cpu_s": 0.9373969999999999,
+  "max_rss_mib": 12.53125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0051/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0051/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792321120.561464,
+  "balanced_gate": true
+}

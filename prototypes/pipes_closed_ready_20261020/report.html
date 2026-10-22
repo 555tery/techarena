@@ -1,0 +1,46 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pipes: online, replay и осторожный гибрид</title>
+<style>body{font:16px/1.55 system-ui,sans-serif;background:#f4f6f8;color:#172433;margin:0}main{max-width:1120px;margin:auto;padding:30px 24px 80px}h1{line-height:1.15;font-size:34px}h2{font-size:23px;margin-top:32px}table{border-collapse:collapse;width:100%;background:white}td,th{padding:10px 12px;border-bottom:1px solid #dae0e6;text-align:left}.scroll{overflow:auto}.verdict{padding:18px;border-left:4px solid #21766a;background:#e7f4ef}.note{color:#536477}code{overflow-wrap:anywhere}a{color:#225fa8}.metric{font-size:20px}input{width:300px;max-width:100%}small{color:#536477}</style><main>
+<small>Локальная проверка · 20 октября 2026 · три заранее заданные стратегии</small>
+<h1>Подготовка к закрытым тестам</h1>
+<p class="verdict"><b>Рекомендован: Осторожный гибрид.</b> Выбор на 64 тестах: Осторожный гибрид;
+независимая проверка условий принятия: пройдена.
+Готовы <a href="release/solution.cpp">исходник</a>, <a href="closed-ready.zip">пакет для Windows</a> и <a href="release/README.md">инструкция</a>.</p>
+<p>Общий online-core — trial22. Полный replay использует публичные координаты до первого расхождения,
+затем продолжает тем же ядром из фактической геометрии. Осторожный гибрид дополнительно требует:
+траншея не длиннее online-shadow и размещение на краю свободного промежутка. При отказе replay прекращается навсегда.</p>
+<p>При импорте восстанавливаются история команд, lifetime/cohort/run/Fenwick-модели и физические промежутки.
+Чужие резервации снимаются, ownership свободных промежутков становится shared, их age задаётся последней эпохой удаления.
+Это одинаковая политика продолжения у full и hybrid; состояние закономерно отличается от online с начала.</p>
+<h2>Независимые 128 тестов</h2><p>64 обычных потока с сочетаниями режимов и 64 потока с общим публичным префиксом.
+Средний KPI ниже — сначала среднее внутри семейства, затем по семействам. Изменения считаются относительно online.</p>
+<div class="scroll"><table><tr><th>Вариант</th><th>Open15, баллы</th><th>Обычные, KPI</th><th>Префиксы, KPI</th><th>Префиксы: лучше / равно / хуже</th><th>Худшая ΔKPI</th></tr><tr><td>Online</td><td>30.09096789</td><td>0.875895</td><td>0.821344</td><td>0 / 64 / 0</td><td>+0.000000</td></tr><tr><td>Полный replay + online</td><td>30.75747405</td><td>0.876194</td><td>0.776798</td><td>14 / 27 / 23</td><td>-0.780504</td></tr><tr><td>Осторожный гибрид</td><td>30.10271159</td><td>0.875866</td><td>0.820964</td><td>7 / 52 / 5</td><td>-0.038585</td></tr></table></div>
+<p class="note">Это не настоящие закрытые тесты и не оценка их вероятностного распределения. Префиксы намеренно повторяют открытые данные.
+Новые композиции и seeds дают независимую проверку кандидата, но не доказывают универсальное обобщение.</p>
+<h2>Что меняет разбалловка</h2><p>Открытая часть имеет сумму весов 32,1, закрытая — 84.
+Ниже только анализ чувствительности: условно считаем, что доля <i>p</i> закрытого веса ведёт себя как наши prefix-тесты,
+а остальное — как ordinary. Это сценарий, не прогноз финального счёта.</p>
+<label>Условная доля prefix: <b id="pvalue">50%</b><br><input id="mix" type="range" min="0" max="100" value="50"></label>
+<div id="scenario" class="metric"></div>
+<h2>Самые заметные потери относительно online</h2><div class="scroll"><table><tr><th>Вариант</th><th>Тест</th><th>Семейство</th><th>Online KPI</th><th>Вариант KPI</th><th>ΔKPI</th></tr><tr><td>Полный replay + online</td><td>final-071</td><td>public_prefix/stop_after_prefix</td><td>0.982857</td><td>0.202353</td><td>-0.780504</td></tr><tr><td>Полный replay + online</td><td>final-127</td><td>public_prefix/stop_after_prefix</td><td>0.999710</td><td>0.568831</td><td>-0.430879</td></tr><tr><td>Полный replay + online</td><td>final-091</td><td>public_prefix/near_public_perturbation</td><td>0.927778</td><td>0.535256</td><td>-0.392521</td></tr><tr><td>Полный replay + online</td><td>final-119</td><td>public_prefix/stop_after_prefix</td><td>0.999213</td><td>0.705794</td><td>-0.293420</td></tr><tr><td>Полный replay + online</td><td>final-078</td><td>public_prefix/lifetime_inversion</td><td>0.679041</td><td>0.491766</td><td>-0.187275</td></tr><tr><td>Полный replay + online</td><td>final-118</td><td>public_prefix/lifetime_inversion</td><td>0.788020</td><td>0.749435</td><td>-0.038585</td></tr><tr><td>Полный replay + online</td><td>final-125</td><td>public_prefix/retained_anchors</td><td>0.946862</td><td>0.927459</td><td>-0.019403</td></tr><tr><td>Полный replay + online</td><td>final-087</td><td>public_prefix/stop_after_prefix</td><td>0.831000</td><td>0.814706</td><td>-0.016294</td></tr><tr><td>Осторожный гибрид</td><td>final-118</td><td>public_prefix/lifetime_inversion</td><td>0.788020</td><td>0.749435</td><td>-0.038585</td></tr><tr><td>Осторожный гибрид</td><td>final-081</td><td>public_prefix/bursts</td><td>0.834422</td><td>0.830250</td><td>-0.004172</td></tr><tr><td>Осторожный гибрид</td><td>final-105</td><td>public_prefix/bursts</td><td>0.943188</td><td>0.939349</td><td>-0.003839</td></tr><tr><td>Осторожный гибрид</td><td>final-054</td><td>rising_trend+cohort_lifetimes/composition3</td><td>0.994562</td><td>0.991192</td><td>-0.003369</td></tr><tr><td>Осторожный гибрид</td><td>final-126</td><td>public_prefix/lifetime_inversion</td><td>0.960482</td><td>0.959711</td><td>-0.000771</td></tr><tr><td>Осторожный гибрид</td><td>final-120</td><td>public_prefix/fills</td><td>0.997849</td><td>0.997157</td><td>-0.000692</td></tr><tr><td>Осторожный гибрид</td><td>final-000</td><td>iid_churn+waves/composition0</td><td>0.970581</td><td>0.970581</td><td>+0.000000</td></tr><tr><td>Осторожный гибрид</td><td>final-001</td><td>fifo+rising_trend/composition0</td><td>0.986107</td><td>0.986107</td><td>+0.000000</td></tr></table></div>
+<h2>Корректность и ресурсы</h2><p>630 официальных интерактивных запусков исходных трёх вариантов: 192 calibration, 384 final, 45 Open15 и 9 stress.
+Все входы проверены, в каждом запуске работает один solver. Бинарники сравниваемых политик после выбора не изменялись.
+Таблица ниже относится к исходному вводу/выводу.</p>
+<div class="scroll"><table><tr><th>Вариант</th><th>Запуски</th><th>Максимум CPU, с</th><th>Максимум RSS, MiB</th></tr><tr><td>Online</td><td>210</td><td>4.711127</td><td>14.219</td></tr><tr><td>Полный replay + online</td><td>210</td><td>3.115617</td><td>17.281</td></tr><tr><td>Осторожный гибрид</td><td>210</td><td>4.798273</td><td>15.312</td></tr></table></div>
+<p><b>В выпуске ускорен только ввод/вывод.</b> Побайтное совпадение ответов подтверждено на 210 входах / 1551638 командах.
+Дополнительно выполнено 210 официальных интерактивных запусков итогового исходника:
+максимум <b>1.304361 с CPU / 27.547 MiB RSS</b>.
+Это изменение не использовалось для настройки решений по финальным данным.</p>
+<p><b>Замеры сделаны на macOS arm64.</b> Windows10/G5420 не измерялся. В комплекте runner для одного CPU с user+kernel time;
+нативная проверка остаётся обязательным этапом перед финальной отправкой. Платформа не использовалась.</p>
+<h2>Выбор и воспроизводимость</h2><p>До результатов заданы три политики и наборы 64/128. Допуск:
+family-macro каждой группы не ниже online более чем на 0,002, ordinary retention каждого теста не ниже 80%,
+корректность и лимиты. Среди допущенных выбран минимальный максимальный regret условных сценариев p=0 и p=1 с учётом Open15.
+При провале независимого подтверждения предусмотрен возврат к online; никакой последующей подстройки.</p>
+<p>SHA256 выбранного исходника: <code>48a44fb0ccad7e6560055245a3096f892c23b5a98c4ab77468c87968e23054c1</code>.</p>
+<p><a href="experiment.json">Предварительный план</a> · <a href="selection-freeze.json">Фиксация выбора</a> ·
+<a href="analysis-calibration.json">Calibration</a> · <a href="analysis-final.json">Final</a> ·
+<a href="metrics-final.csv">Покейсовые результаты</a> · <a href="evaluation/generation-summary.json">Происхождение тестов</a> ·
+<a href="candidates/AUDIT.md">Аудит общего ядра</a></p>
+<script>const data={"online": {"open": 30.090967891345112, "ordinary": 0.8758946615985584, "prefix": 0.8213444657526261}, "full": {"open": 30.75747404826914, "ordinary": 0.8761941361929532, "prefix": 0.7767983614125354}, "hybrid": {"open": 30.102711588824103, "ordinary": 0.8758657392441028, "prefix": 0.8209638731448061}},names={"online": "Online", "full": "Полный replay + online", "hybrid": "Осторожный гибрид"};
+const slider=document.getElementById('mix');function update(){let p=slider.value/100;document.getElementById('pvalue').textContent=slider.value+'%';document.getElementById('scenario').textContent=Object.entries(data).map(([n,v])=>names[n]+': '+(v.open+84*((1-p)*v.ordinary+p*v.prefix)).toFixed(3)).join(' · ');}slider.addEventListener('input',update);update();</script></main></html>

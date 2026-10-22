@@ -1,0 +1,168 @@
+{
+  "status": "protocol stop: candidate no-go; 16/18 accepted, two unrun",
+  "candidate_source": {
+    "path": "results/pipes/improvement/policy_conditioned_unique8/src/policy_conditioned.cpp",
+    "sha256": "365e0967b2687ec71619f0cd38df95480a34b8f03e165a5e5ab75c6a0c0edfe7"
+  },
+  "baseline_source": {
+    "path": "results/pipes/final/solution.cpp",
+    "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+  },
+  "canonical_source": {
+    "path": "src/pipes.cpp",
+    "sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "interactor_source": {
+    "path": "vendor/pipes_official/interactor.cpp",
+    "sha256": "85672e4c3ad9fdcb97d8b601758de1f1d1b5e86d6dd20252e0f72acdb9cb122a"
+  },
+  "input_manifest": {
+    "path": "results/pipes/improvement/policy_conditioned_unique8/inputs/validation_manifest.json",
+    "sha256": "4b2802956338d624cbb6e681ea37b80ee9a437b138e0942eec9043b86d2b7a14"
+  },
+  "binaries": {
+    "frozen_final_linux": {
+      "path": "results/pipes/improvement/policy_conditioned_unique8/bin/frozen_final_linux",
+      "sha256": "d01a9bd6569b3e2e1cf0ba993b9465c170e9ca493b425b0bf59346ff1ee66be3"
+    },
+    "policy_conditioned_linux": {
+      "path": "results/pipes/improvement/policy_conditioned_unique8/bin/policy_conditioned_linux",
+      "sha256": "6c3efa6f53f7c2da7aef0e15098815daa9fcda08c9422d463e2997c26ef46814"
+    },
+    "policy_conditioned_linux_diag": {
+      "path": "results/pipes/improvement/policy_conditioned_unique8/bin/policy_conditioned_linux_diag",
+      "sha256": "277db22c234b4e1356d0e87f4e2458b04ee410a483056f0b32da83f6cea4841d"
+    },
+    "interactor_linux": {
+      "path": "results/pipes/improvement/policy_conditioned_unique8/bin/interactor_linux",
+      "sha256": "785574199a5123fe70a40575e69d849301987c7d4a118cfcd73bdc090333f119"
+    }
+  },
+  "policy_change": {
+    "only_algorithmic_change": "Require at least 8 distinct exact event sequences among the 16 history-only scenarios before evaluating or selecting P4.",
+    "scenario_identity": "Exact equality over all 16 (kind,value) observations; duplicates remain in the paired 16-sample score after the unique-count gate passes.",
+    "no_other_thresholds_changed": true,
+    "no_previous_validation_streams_used": true
+  },
+  "predeclared_gate": {
+    "overall_delta_kpi_paired_stream_bootstrap_95_ci_strictly_positive": true,
+    "overall_delta_trench_paired_stream_bootstrap_95_ci_strictly_negative": true,
+    "short_heavy_200000_no_systematic_regression": "mean delta KPI >= 0 and fewer than 2 of 3 streams have worse KPI",
+    "maximum_cpu_s": 4.5,
+    "maximum_rss_mib": 230.0,
+    "all_18_paired_transcripts_accepted": true,
+    "bootstrap_replicates": 50000,
+    "bootstrap_stream_weighting": "equal weight per independent stream"
+  },
+  "build": {
+    "image": "agentic-scientist/pipes-cpp:2b8aa392",
+    "target": "Linux aarch64",
+    "compiler": "GCC 14.2.0",
+    "candidate_flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror",
+    "baseline_flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic",
+    "interactor_flags": "-O2 -std=c++17 -pipe",
+    "harness_parallel_pairs": 1
+  },
+  "qualification": {
+    "independent_validation": "protocol stop after 16/18 accepted pairs; remaining long-heavy/oldest and long-heavy/newest were not run",
+    "paired_bootstrap": "not computed; incomplete set and hard quality/resource gates already failed",
+    "selector_telemetry": "not collected; diagnostic replay was not run to avoid replaying accepted streams",
+    "Open15": "not run as part of the synthetic unique-8 qualification protocol; a separate descriptive native macOS post-hoc comparison is recorded under validation/posthoc_macos_open15_holdout_20261017",
+    "holdout_v2": "not run as part of the synthetic unique-8 qualification protocol; a separate descriptive native macOS post-hoc comparison is recorded under validation/posthoc_macos_open15_holdout_20261017",
+    "platform_or_leaderboard": "not accessed"
+  },
+  "posthoc_local_evaluation": {
+    "status": "completed descriptive only; does not qualify candidate or change protocol stop",
+    "output_root": "validation/posthoc_macos_open15_holdout_20261017",
+    "report": "validation/posthoc_macos_open15_holdout_20261017/REPORT.md",
+    "comparison_csv": "validation/posthoc_macos_open15_holdout_20261017/comparison.csv",
+    "run_manifest": "validation/posthoc_macos_open15_holdout_20261017/run_manifest.json",
+    "candidate_source_sha256": "365e0967b2687ec71619f0cd38df95480a34b8f03e165a5e5ab75c6a0c0edfe7",
+    "open15": {
+      "accepted_baseline_and_candidate": "15/15 each",
+      "identical_answer_transcripts": "15/15",
+      "baseline_and_candidate_weighted_score_sum": 29.789717928594047,
+      "mean_delta_kpi": 0.0,
+      "mean_delta_trench_m": 0.0
+    },
+    "holdout_v2": {
+      "accepted_baseline_and_candidate": "12/12 each",
+      "identical_answer_transcripts": "11/12",
+      "baseline_weighted_score_sum": 5.13526432428047,
+      "candidate_weighted_score_sum": 5.135143185587327,
+      "mean_delta_kpi": -0.00001009489109528768,
+      "mean_delta_trench_m": 3.3333333333333335,
+      "case_01_delta_kpi": -0.00012113869314345216,
+      "case_01_delta_trench_m": 40
+    },
+    "environment": "macOS 26.6.2 arm64, Apple Clang 17.0.0; CPU measurements are not comparable to Linux limits"
+  },
+  "execution_failure": {
+    "session_id": 29642,
+    "case": "200000_long-heavy_random",
+    "runner_exit_code": 1,
+    "reason": "Candidate transcript was accepted, but harness returned nonzero after solver CPU exceeded its 5s limit.",
+    "candidate_cpu_s": 6.145912,
+    "candidate_cpu_limit_s": 5.0,
+    "candidate_rss_mib": 35.40625,
+    "action": "Recovered the accepted pair from summaries without rerun; protocol stop before final two cases."
+  },
+  "recovered_pair_outputs": {
+    "200000_short-heavy_oldest": {
+      "output_root": "validation/recovery_docker_eof_20261017",
+      "baseline_summary": "validation/recovery_docker_eof_20261017/runs/200000_short-heavy_oldest/frozen-final/summary.json",
+      "candidate_summary": "validation/recovery_docker_eof_20261017/runs/200000_short-heavy_oldest/policy-conditioned/summary.json",
+      "seed": 2000000013,
+      "input_sha256": "49349c4359d962d6750cc40e65e9a9ab179c63375aba8ea00de44d7ed92a2431"
+    },
+    "200000_short-heavy_newest": {
+      "output_root": "validation",
+      "baseline_summary": "validation/runs/200000_short-heavy_newest/frozen-final/summary.json",
+      "candidate_summary": "validation/runs/200000_short-heavy_newest/policy-conditioned/summary.json",
+      "seed": 2000000014,
+      "input_sha256": "0ac5f34ae2b2fd74c55c28bbcc2439943df8b5937338b70924d404a602da0e45"
+    },
+    "200000_long-heavy_random": {
+      "output_root": "validation/runs",
+      "baseline_summary": "validation/runs/200000_long-heavy_random/frozen-final/summary.json",
+      "candidate_summary": "validation/runs/200000_long-heavy_random/policy-conditioned/summary.json",
+      "seed": 2000000015,
+      "input_sha256": "16cc88e14b092b1d91b542c52d221857da615350bcfa8432ddef6963fdc0abcc",
+      "recovery_note": "Both summaries accept 200001 commands; candidate harness returned nonzero due solver CPU limit exceeded; recovered without rerun."
+    }
+  },
+  "protocol_stop": {
+    "reason": "short-heavy 200k has two KPI regressions and one tie; one accepted 200k long-heavy/random candidate transcript exceeded solver CPU limit and the 4.50s safe gate",
+    "short_heavy_200k_mean_delta_kpi": -0.0010212044685152428,
+    "short_heavy_200k_regressed_streams": 2,
+    "cpu_failure_case": "200000_long-heavy_random",
+    "candidate_cpu_s": 6.145912,
+    "cpu_limit_s": 5.0,
+    "safe_gate_s": 4.5,
+    "candidate_rss_mib": 35.40625,
+    "rss_gate_mib": 230,
+    "accepted_pairs": 16,
+    "planned_pairs": 18,
+    "not_run_pairs": [
+      "200000_long-heavy_oldest",
+      "200000_long-heavy_newest"
+    ],
+    "paired_bootstrap": "not run; no incomplete-set CI will be used to claim quality"
+  },
+  "execution_failure_history": [
+    {
+      "session_id": 42440,
+      "exit_code": 125,
+      "error": "Docker wait error: unexpected EOF",
+      "completed_pairs_at_failure": 13,
+      "recovery": "resumed only the previously not_run case set"
+    },
+    {
+      "session_id": 29642,
+      "exit_code": 1,
+      "case": "200000_long-heavy_random",
+      "reason": "Harness returned nonzero because solver CPU limit was exceeded; both summaries/transcripts are accepted and preserved",
+      "subsequent_action": "recover pair row from summaries, do not rerun; stop before last two cases"
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "status": "completed",
+  "id": "external_86b23f747fd69181",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/exact_slot_growth/solution.cpp",
+  "sha256": "86b23f747fd69181f9797db7297fc96fdc87154544616949ea235a08403bd0c3",
+  "idea": "Exact-size freed-footprint recycling during observed young-deletion net growth; share unassigned dig padding and abandon separation on drift.",
+  "parent": "external_3aa24d9bb7b16520",
+  "weighted_score": 29.881620570045072,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 5080,
+      "kpi": 0.9108267716535433,
+      "weighted_score": 0.910826771653543
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22600,
+      "kpi": 0.900929203539823,
+      "weighted_score": 0.900929203539823
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3380,
+      "kpi": 0.9443786982248521,
+      "weighted_score": 3.777514792899408
+    },
+    {
+      "case": "14",
+      "T": 37880,
+      "kpi": 0.9953537486800422,
+      "weighted_score": 3.981414994720169
+    },
+    {
+      "case": "15",
+      "T": 438440,
+      "kpi": 0.9551067420855761,
+      "weighted_score": 9.55106742085576
+    }
+  ],
+  "fresh": {
+    "mean_delta": -0.00671074184107587,
+    "worst_delta": -0.0790157136621562,
+    "wins": 3,
+    "regressions": 15,
+    "ties": 12,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.0790157136621562,
+        "baseline_T": 8700,
+        "candidate_T": 9480
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": -0.03973084886128364,
+        "baseline_T": 17640,
+        "candidate_T": 18400
+      },
+      {
+        "case": "dev_10_repeated_sizes",
+        "delta": -0.035296233733733806,
+        "baseline_T": 159840,
+        "candidate_T": 165760
+      },
+      {
+        "case": "dev_18_frames",
+        "delta": -0.023033309709425853,
+        "baseline_T": 1660,
+        "candidate_T": 1700
+      },
+      {
+        "case": "dev_22_frames",
+        "delta": -0.016194337157333427,
+        "baseline_T": 27180,
+        "candidate_T": 27640
+      },
+      {
+        "case": "dev_11_repeated_sizes",
+        "delta": -0.011078037845794975,
+        "baseline_T": 161120,
+        "candidate_T": 162940
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8020877546305283,
+  "max_cpu_s": 1.080241,
+  "max_rss_mib": 13.171875,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_86b23f747fd69181/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_86b23f747fd69181/fresh_dev/harness/summary.json",
+  "finished_at": 1792314346.0442722,
+  "balanced_gate": false,
+  "hypothesis": "Avoid creating variable-size residual holes during growing loads by restoring exact released footprints. If no such footprint is currently free, append one object at the highest previously allocated endpoint, sharing section padding. Use only observed young deletion ranks and net growth; release this policy under unit domination, older deletions, non-growth, or protected structural routing. This is not permanent class reservation: general allocator can reclaim all gaps after drift. No performance measured yet.",
+  "causality": "Observed placement/removal history and current free intervals only. Cached footprints revalidated against current coalesced interval before every reuse; stale entries discarded. Frontier is maximum actually placed endpoint, updated on both parent placement paths, and contains no future reservation or input. New ranges are beyond every previously placed endpoint. Parent structural routes retained. Source reviewed, strict C++20 Wall Wextra Werror syntax compile passed.",
+  "origin": "independent branch inbox"
+}

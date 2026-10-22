@@ -1,0 +1,19 @@
+{
+  "objective": "Reduce directed public-prefix traps while retaining the exact Open15 maximum",
+  "authorization": "User request to continue local directed-trap improvements, 2026-10-20",
+  "parent": "prototypes/pipes_g5420_cpu_20261020/cache32/solution.cpp",
+  "parent_source_sha256": "a843822451c2a7c5e07330daa33268fc77bccfbc08fd196bfaf98a673ae24cfe",
+  "scope": "Bounded public-lifetime repair; unchanged online fallback and hardware budget",
+  "selection_inputs": "Open15 commands/lifetimes and known regression diagnostics",
+  "selection_gate": {
+    "Open15": "All15 exact volume lower bounds, valid common prefixes",
+    "prefix_excavation": "Never exceeds the parent on any full public prefix",
+    "known_81": "No individual KPI loss against the hardware parent",
+    "prior_confirmation_24": "Report paired deltas; this is reused regression data",
+    "resources": "Official local interactor: CPU<5s, RSS<256MiB; actual G5420 remains unmeasured"
+  },
+  "fresh_confirmation": "24 streams produced independently from public inputs, opened only once after source/binary freeze; report every loss, no tuning after observation",
+  "promotion": "Separate local candidate, never overwrite frozen parent or canonical source",
+  "platform_actions": 0,
+  "limitations": "Finite directed tests do not imply hidden-distribution or universal no-regression guarantees"
+}

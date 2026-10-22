@@ -1,0 +1,1010 @@
+{
+  "candidate_id": "age-tiebreak-oldest-within-length-v1",
+  "decision": "NO-GO: paired Open-15 weighted score regressed; candidate remains isolated",
+  "candidate_locked_before_open15": true,
+  "policy": "Within the existing eligible cohort lane, among same-length candidate gaps select the greatest current age (smallest birth operation); preserve the original side/address tie-break when ages match. Other scoring and policy logic unchanged.",
+  "causal_state": "Age is operation_index - birth_op for the current free interval and is reset whenever addFreeGap creates a new interval after a placement split, deletion or merge.",
+  "candidate_source_sha256": "0d04f01a9b5021e0ab28871ddcd33a68cd9f94f06731ec8011348374e1f7bbae",
+  "candidate_binary_sha256": "4d5bc4415b0cd6858ad01fc7f749277d07f84ddd9c254a088b646069bec1c553",
+  "baseline_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "frozen_final_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "baseline_copy_matches_frozen_final": true,
+  "compiler": {
+    "identity": "Apple clang 17.0.0.13",
+    "command": "c++ -std=c++17 -O2 -DNDEBUG SOURCE -o BINARY",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "linux_gcc_verified": false
+  },
+  "age_feature_screen": {
+    "shadowed_rows": 31719,
+    "unmatched_exact_representatives": 0,
+    "target_older_rows": 29383,
+    "equal_age_rows": 0,
+    "target_younger_rows": 2336,
+    "target_older_fraction": 0.9263532898262871,
+    "target_minus_representative_age_ops": {
+      "min": -13378,
+      "median": 2425,
+      "p90_nearest_lower": 9288,
+      "max": 14431
+    },
+    "target_lineage_mask_rows": {
+      "2": 16310,
+      "3": 15409
+    },
+    "age_definition": "operation_index - current_gap_birth_op; age resets on interval split/merge",
+    "selection_bias_note": "Targets were selected retrospectively by EOF survival and prior fitting demand; age contrast is a hypothesis screen, not causal evidence."
+  },
+  "case15_screen": {
+    "baseline": {
+      "trench_length_m": 438920,
+      "kpi": 0.9540622436890549,
+      "solver_cpu_total_s": 1.056182,
+      "solver_peak_rss_mb": 7.6875,
+      "status": "ok"
+    },
+    "candidate": {
+      "trench_length_m": 438780,
+      "kpi": 0.954366652992388,
+      "solver_cpu_total_s": 1.267843,
+      "solver_peak_rss_mb": 6.328125,
+      "status": "ok"
+    },
+    "trench_delta_candidate_minus_baseline_m": -140,
+    "kpi_delta_candidate_minus_baseline": 0.00030440930333308636
+  },
+  "previously_used_final_holdout_v2_auxiliary": {
+    "baseline": {
+      "weighted_score_sum": 5.13526432428047,
+      "weight_sum": 12.0,
+      "mean_kpi": 0.4279386936900392,
+      "records": [
+        {
+          "case": "case-01",
+          "status": "ok",
+          "trench_length_m": 330080,
+          "kpi": 0.9997576345128454
+        },
+        {
+          "case": "case-02",
+          "status": "ok",
+          "trench_length_m": 480,
+          "kpi": 0.014583333333333334
+        },
+        {
+          "case": "case-03",
+          "status": "ok",
+          "trench_length_m": 360,
+          "kpi": 0.14444444444444443
+        },
+        {
+          "case": "case-04",
+          "status": "ok",
+          "trench_length_m": 315260,
+          "kpi": 0.9999429042694918
+        },
+        {
+          "case": "case-05",
+          "status": "ok",
+          "trench_length_m": 300,
+          "kpi": 0.32
+        },
+        {
+          "case": "case-06",
+          "status": "ok",
+          "trench_length_m": 300,
+          "kpi": 0.10333333333333333
+        },
+        {
+          "case": "case-07",
+          "status": "ok",
+          "trench_length_m": 467960,
+          "kpi": 0.9949461492435251
+        },
+        {
+          "case": "case-08",
+          "status": "ok",
+          "trench_length_m": 820,
+          "kpi": 0.2646341463414634
+        },
+        {
+          "case": "case-09",
+          "status": "ok",
+          "trench_length_m": 300,
+          "kpi": 0.09333333333333334
+        },
+        {
+          "case": "case-10",
+          "status": "ok",
+          "trench_length_m": 192660,
+          "kpi": 0.9992473788020346
+        },
+        {
+          "case": "case-11",
+          "status": "ok",
+          "trench_length_m": 180,
+          "kpi": 0.11666666666666667
+        },
+        {
+          "case": "case-12",
+          "status": "ok",
+          "trench_length_m": 320,
+          "kpi": 0.084375
+        }
+      ]
+    },
+    "candidate": {
+      "weighted_score_sum": 5.135667747505519,
+      "weight_sum": 12.0,
+      "mean_kpi": 0.42797231229212657,
+      "records": [
+        {
+          "case": "case-01",
+          "status": "ok",
+          "trench_length_m": 330100,
+          "kpi": 0.9996970614965162
+        },
+        {
+          "case": "case-02",
+          "status": "ok",
+          "trench_length_m": 460,
+          "kpi": 0.015217391304347827
+        },
+        {
+          "case": "case-03",
+          "status": "ok",
+          "trench_length_m": 360,
+          "kpi": 0.14444444444444443
+        },
+        {
+          "case": "case-04",
+          "status": "ok",
+          "trench_length_m": 315260,
+          "kpi": 0.9999429042694918
+        },
+        {
+          "case": "case-05",
+          "status": "ok",
+          "trench_length_m": 300,
+          "kpi": 0.32
+        },
+        {
+          "case": "case-06",
+          "status": "ok",
+          "trench_length_m": 300,
+          "kpi": 0.10333333333333333
+        },
+        {
+          "case": "case-07",
+          "status": "ok",
+          "trench_length_m": 468040,
+          "kpi": 0.9947760875138877
+        },
+        {
+          "case": "case-08",
+          "status": "ok",
+          "trench_length_m": 820,
+          "kpi": 0.2646341463414634
+        },
+        {
+          "case": "case-09",
+          "status": "ok",
+          "trench_length_m": 300,
+          "kpi": 0.09333333333333334
+        },
+        {
+          "case": "case-10",
+          "status": "ok",
+          "trench_length_m": 192660,
+          "kpi": 0.9992473788020346
+        },
+        {
+          "case": "case-11",
+          "status": "ok",
+          "trench_length_m": 180,
+          "kpi": 0.11666666666666667
+        },
+        {
+          "case": "case-12",
+          "status": "ok",
+          "trench_length_m": 320,
+          "kpi": 0.084375
+        }
+      ]
+    },
+    "scope_note": "Previously used final-holdout-v2; auxiliary screen only, excluded from the fresh independent gate."
+  },
+  "paired_open15": {
+    "baseline_weighted_score_sum": 29.789717928594047,
+    "candidate_weighted_score_sum": 29.741489050316083,
+    "weighted_score_delta_candidate_minus_baseline": -0.04822887827796407,
+    "baseline_weight_sum": 32.1,
+    "candidate_weight_sum": 32.1,
+    "all_runs_ok": true,
+    "max_candidate_cpu_s": 1.107216,
+    "max_candidate_rss_mib": 7.546875,
+    "per_case": [
+      {
+        "case": "1",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 20,
+        "candidate_trench_m": 20,
+        "trench_delta_candidate_minus_baseline_m": 0,
+        "baseline_kpi": 0.9,
+        "candidate_kpi": 0.9,
+        "kpi_delta_candidate_minus_baseline": 0.0,
+        "candidate_cpu_s": 0.004812,
+        "candidate_rss_mib": 2.140625
+      },
+      {
+        "case": "2",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 20,
+        "candidate_trench_m": 20,
+        "trench_delta_candidate_minus_baseline_m": 0,
+        "baseline_kpi": 1.0,
+        "candidate_kpi": 1.0,
+        "kpi_delta_candidate_minus_baseline": 0.0,
+        "candidate_cpu_s": 0.002284,
+        "candidate_rss_mib": 2.171875
+      },
+      {
+        "case": "3",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 20,
+        "candidate_trench_m": 20,
+        "trench_delta_candidate_minus_baseline_m": 0,
+        "baseline_kpi": 0.75,
+        "candidate_kpi": 0.75,
+        "kpi_delta_candidate_minus_baseline": 0.0,
+        "candidate_cpu_s": 0.0020819999999999996,
+        "candidate_rss_mib": 2.15625
+      },
+      {
+        "case": "4",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 60,
+        "candidate_trench_m": 60,
+        "trench_delta_candidate_minus_baseline_m": 0,
+        "baseline_kpi": 0.6666666666666666,
+        "candidate_kpi": 0.6666666666666666,
+        "kpi_delta_candidate_minus_baseline": 0.0,
+        "candidate_cpu_s": 0.003072,
+        "candidate_rss_mib": 2.1875
+      },
+      {
+        "case": "5",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 62760,
+        "candidate_trench_m": 62740,
+        "trench_delta_candidate_minus_baseline_m": -20,
+        "baseline_kpi": 0.8100701083492671,
+        "candidate_kpi": 0.8103283391775582,
+        "kpi_delta_candidate_minus_baseline": 0.0002582308282911283,
+        "candidate_cpu_s": 0.057644,
+        "candidate_rss_mib": 3.265625
+      },
+      {
+        "case": "6",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 20,
+        "candidate_trench_m": 20,
+        "trench_delta_candidate_minus_baseline_m": 0,
+        "baseline_kpi": 0.9,
+        "candidate_kpi": 0.9,
+        "kpi_delta_candidate_minus_baseline": 0.0,
+        "candidate_cpu_s": 0.002078,
+        "candidate_rss_mib": 2.140625
+      },
+      {
+        "case": "7",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 1700,
+        "candidate_trench_m": 1700,
+        "trench_delta_candidate_minus_baseline_m": 0,
+        "baseline_kpi": 0.9864705882352941,
+        "candidate_kpi": 0.9864705882352941,
+        "kpi_delta_candidate_minus_baseline": 0.0,
+        "candidate_cpu_s": 0.0055249999999999995,
+        "candidate_rss_mib": 2.671875
+      },
+      {
+        "case": "8",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 4700,
+        "candidate_trench_m": 4720,
+        "trench_delta_candidate_minus_baseline_m": 20,
+        "baseline_kpi": 0.984468085106383,
+        "candidate_kpi": 0.9802966101694915,
+        "kpi_delta_candidate_minus_baseline": -0.004171474936891406,
+        "candidate_cpu_s": 0.042774999999999994,
+        "candidate_rss_mib": 2.6875
+      },
+      {
+        "case": "9",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 61960,
+        "candidate_trench_m": 61960,
+        "trench_delta_candidate_minus_baseline_m": 0,
+        "baseline_kpi": 0.5083925112976113,
+        "candidate_kpi": 0.5083925112976113,
+        "kpi_delta_candidate_minus_baseline": 0.0,
+        "candidate_cpu_s": 0.07854,
+        "candidate_rss_mib": 3.390625
+      },
+      {
+        "case": "10",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 15380,
+        "candidate_trench_m": 15380,
+        "trench_delta_candidate_minus_baseline_m": 0,
+        "baseline_kpi": 0.8,
+        "candidate_kpi": 0.8,
+        "kpi_delta_candidate_minus_baseline": 0.0,
+        "candidate_cpu_s": 0.054331,
+        "candidate_rss_mib": 2.9375
+      },
+      {
+        "case": "11",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 22620,
+        "candidate_trench_m": 22780,
+        "trench_delta_candidate_minus_baseline_m": 160,
+        "baseline_kpi": 0.900132625994695,
+        "candidate_kpi": 0.8938103599648815,
+        "kpi_delta_candidate_minus_baseline": -0.006322266029813561,
+        "candidate_cpu_s": 0.074788,
+        "candidate_rss_mib": 3.09375
+      },
+      {
+        "case": "12",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 10320,
+        "candidate_trench_m": 10360,
+        "trench_delta_candidate_minus_baseline_m": 40,
+        "baseline_kpi": 0.9931201550387597,
+        "candidate_kpi": 0.9892857142857143,
+        "kpi_delta_candidate_minus_baseline": -0.0038344407530453983,
+        "candidate_cpu_s": 0.017507999999999996,
+        "candidate_rss_mib": 2.671875
+      },
+      {
+        "case": "13",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 3280,
+        "candidate_trench_m": 3300,
+        "trench_delta_candidate_minus_baseline_m": 20,
+        "baseline_kpi": 0.973170731707317,
+        "candidate_kpi": 0.9672727272727273,
+        "kpi_delta_candidate_minus_baseline": -0.005898004434589765,
+        "candidate_cpu_s": 0.050546999999999995,
+        "candidate_rss_mib": 2.859375
+      },
+      {
+        "case": "14",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 37820,
+        "candidate_trench_m": 37840,
+        "trench_delta_candidate_minus_baseline_m": 20,
+        "baseline_kpi": 0.9969328397673188,
+        "candidate_kpi": 0.9964059196617336,
+        "kpi_delta_candidate_minus_baseline": -0.0005269201055851935,
+        "candidate_cpu_s": 0.13266699999999998,
+        "candidate_rss_mib": 4.046875
+      },
+      {
+        "case": "15",
+        "status_baseline": "ok",
+        "status_candidate": "ok",
+        "baseline_trench_m": 438920,
+        "candidate_trench_m": 438780,
+        "trench_delta_candidate_minus_baseline_m": -140,
+        "baseline_kpi": 0.9540622436890549,
+        "candidate_kpi": 0.954366652992388,
+        "kpi_delta_candidate_minus_baseline": 0.00030440930333308636,
+        "candidate_cpu_s": 1.107216,
+        "candidate_rss_mib": 7.546875
+      }
+    ]
+  },
+  "new_causal_synthetic_gate": {
+    "status": "not_run",
+    "reason": "pre-registered stop rule: full Open-15 score regressed; no new synthetic inputs were generated"
+  },
+  "artifacts": [
+    {
+      "path": "results/pipes/final/solution.cpp",
+      "size_bytes": 38729,
+      "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+    },
+    {
+      "path": "src/pipes.cpp",
+      "size_bytes": 8204,
+      "sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/baseline.cpp",
+      "size_bytes": 38729,
+      "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/age_tiebreak.cpp",
+      "size_bytes": 41131,
+      "sha256": "0d04f01a9b5021e0ab28871ddcd33a68cd9f94f06731ec8011348374e1f7bbae"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/baseline",
+      "size_bytes": 75272,
+      "sha256": "e636a151e1a2e104b0654df29c8b940580d44670c32f432a5e7386ed7911347b"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/age_tiebreak",
+      "size_bytes": 77024,
+      "sha256": "4d5bc4415b0cd6858ad01fc7f749277d07f84ddd9c254a088b646069bec1c553"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/feature_screen.py",
+      "size_bytes": 2780,
+      "sha256": "c0292abc05fb8d9f4d94d3d1f3268ae5031c4cb289d0a0e12ca07c4fce061f05"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/feature_screen.json",
+      "size_bytes": 667,
+      "sha256": "757ee770982c9ca8c4efebefea5265b164e8a867b3c172ead0ba51b586693adf"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/REPORT.md",
+      "size_bytes": 5173,
+      "sha256": "37dca62872930408f919ebb7ecc31bd9d944bc294febcabfb292851f5227ddde"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/case15_baseline/summary.json",
+      "size_bytes": 3297,
+      "sha256": "dd2561149cc92910363552321859098b44fed2b037264408c12ba8cf492e24c4"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/case15_baseline/cases.csv",
+      "size_bytes": 1608,
+      "sha256": "08d65073ff3f13fec286a1c77a9a77eb8b35ce5e1e8fb700edda5ac609523ace"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/case15_candidate/summary.json",
+      "size_bytes": 3331,
+      "sha256": "9eeabe62cd838bf83e5d4c0d2de5d3cbc18b7a69fab813cc3b1cf24a07697bf9"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/case15_candidate/cases.csv",
+      "size_bytes": 1634,
+      "sha256": "ed7785b28bc492a91dd5b4fa4d16b00967e26334139ffafec8639d4e3a9d54d9"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/holdout_baseline/summary.json",
+      "size_bytes": 27220,
+      "sha256": "d8150972fb5a1c4d393c3461b1963e084b877f4a513c725ace069f73c0873f43"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/holdout_baseline/cases.csv",
+      "size_bytes": 11550,
+      "sha256": "6afe89b958d4006816ca159c32a885536446b852217f434390c0199ba6590190"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/holdout_candidate/summary.json",
+      "size_bytes": 27382,
+      "sha256": "d65531d32edb610c90c20e4ecd83ed76c7478e8c42002f323276b56c4b0e4015"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/holdout_candidate/cases.csv",
+      "size_bytes": 11678,
+      "sha256": "df06457b5485bf07546674bdd728792983b827d86c978ecdb10f9dd9d6a5254b"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/summary.json",
+      "size_bytes": 32380,
+      "sha256": "33efeb5b67fba5b678331978c2ed80da3e37db647f3e68785f28d4fcdfb4b552"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/cases.csv",
+      "size_bytes": 13278,
+      "sha256": "52030296e2ad8e2d6969759a182aebb2c039f2d68bc1cb4dccadaa02d1c7c7f0"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/summary.json",
+      "size_bytes": 32502,
+      "sha256": "f542eb4a268f8d830a4394a6e599c25e9b8d0f6ad937a74977593faed1272948"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/cases.csv",
+      "size_bytes": 13393,
+      "sha256": "4b32bb02a976e7fc37c4e161b09be6d5946b0541fc035a7be7b3b0d45a575e5d"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/targets.tsv",
+      "size_bytes": 1314963,
+      "sha256": "fe5862a120409195fd9b153c4e8e9a394b3612ae19cb6170d8deae80f405894f"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/run_exact/runs/15/solver_stderr.txt",
+      "size_bytes": 4637286,
+      "sha256": "15ea5d5ab3596e8d4165657fe42683aeb59759bae19771ec70ccdcab41ef3ed2"
+    },
+    {
+      "path": "results/pipes/improvement/case15_interval_lineage/replay/current_gaps.csv",
+      "size_bytes": 403072,
+      "sha256": "d3d293c92cb11816f522e7af2070d93f6624fa7d33b213638767174e1e233517"
+    },
+    {
+      "path": "results/pipes/improvement/case15_interval_lineage/replay/gap_episodes.csv",
+      "size_bytes": 16285323,
+      "sha256": "a54e55e760a2e2793339da4fe0414788e717cac77e7e30c7439f8db86c005f11"
+    },
+    {
+      "path": "data/pipes/SHA256SUMS",
+      "size_bytes": 4005,
+      "sha256": "3ff1632b576932abc46a2c21eca69c380658a5fe34e3e703f4afec270dcef29a"
+    },
+    {
+      "path": "tools/pipes_harness.py",
+      "size_bytes": 25883,
+      "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d"
+    },
+    {
+      "path": "tools/interactor",
+      "size_bytes": 234952,
+      "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+    },
+    {
+      "path": "data/pipes/open/1.in",
+      "size_bytes": 31,
+      "sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d"
+    },
+    {
+      "path": "data/pipes/open/2.in",
+      "size_bytes": 67,
+      "sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923"
+    },
+    {
+      "path": "data/pipes/open/3.in",
+      "size_bytes": 49,
+      "sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494"
+    },
+    {
+      "path": "data/pipes/open/4.in",
+      "size_bytes": 76,
+      "sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f"
+    },
+    {
+      "path": "data/pipes/open/5.in",
+      "size_bytes": 35968,
+      "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+    },
+    {
+      "path": "data/pipes/open/6.in",
+      "size_bytes": 46,
+      "sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd"
+    },
+    {
+      "path": "data/pipes/open/7.in",
+      "size_bytes": 1247,
+      "sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd"
+    },
+    {
+      "path": "data/pipes/open/8.in",
+      "size_bytes": 33198,
+      "sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7"
+    },
+    {
+      "path": "data/pipes/open/9.in",
+      "size_bytes": 40456,
+      "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+    },
+    {
+      "path": "data/pipes/open/10.in",
+      "size_bytes": 41673,
+      "sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b"
+    },
+    {
+      "path": "data/pipes/open/11.in",
+      "size_bytes": 45984,
+      "sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c"
+    },
+    {
+      "path": "data/pipes/open/12.in",
+      "size_bytes": 6344,
+      "sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984"
+    },
+    {
+      "path": "data/pipes/open/13.in",
+      "size_bytes": 51093,
+      "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+    },
+    {
+      "path": "data/pipes/open/14.in",
+      "size_bytes": 79838,
+      "sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d"
+    },
+    {
+      "path": "data/pipes/open/15.in",
+      "size_bytes": 1016108,
+      "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/manifest.json",
+      "size_bytes": 5216,
+      "sha256": "5c275428ff6404b16899ce56aacd053b7db06c11e6cfe894f3e8bc35984df0a3"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-01.in",
+      "size_bytes": 150604,
+      "sha256": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-02.in",
+      "size_bytes": 174580,
+      "sha256": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-03.in",
+      "size_bytes": 185594,
+      "sha256": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-04.in",
+      "size_bytes": 157678,
+      "sha256": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-05.in",
+      "size_bytes": 174433,
+      "sha256": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-06.in",
+      "size_bytes": 185552,
+      "sha256": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-07.in",
+      "size_bytes": 156654,
+      "sha256": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-08.in",
+      "size_bytes": 174478,
+      "sha256": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-09.in",
+      "size_bytes": 185503,
+      "sha256": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-10.in",
+      "size_bytes": 156954,
+      "sha256": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-11.in",
+      "size_bytes": 174563,
+      "sha256": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46"
+    },
+    {
+      "path": "data/pipes/synthetic/final-holdout-v2/case-12.in",
+      "size_bytes": 185481,
+      "sha256": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/1/judge_output.txt",
+      "size_bytes": 23,
+      "sha256": "0c17f2e9efc8a8f9a376c8bd7f26d940ee3fe78feacc07dac0608b508b63590d"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/10/judge_output.txt",
+      "size_bytes": 66283,
+      "sha256": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/11/judge_output.txt",
+      "size_bytes": 68013,
+      "sha256": "d0bab50f3326e0580365ee83233cba73e0537e8b14d614e2200dc93dbf31b4be"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/12/judge_output.txt",
+      "size_bytes": 9657,
+      "sha256": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/13/judge_output.txt",
+      "size_bytes": 57146,
+      "sha256": "e5da020ce8a522213ae26acc8d03d03b4dbf657a767f9eeba4503a2740f55ef6"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/14/judge_output.txt",
+      "size_bytes": 191115,
+      "sha256": "a8dfb6dc9d17d6ddbbb36d673ecd002170b3137a589f364150c5d73ef932ac2a"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/15/judge_output.txt",
+      "size_bytes": 1613182,
+      "sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/2/judge_output.txt",
+      "size_bytes": 72,
+      "sha256": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/3/judge_output.txt",
+      "size_bytes": 43,
+      "sha256": "14f51309b18138cfc8c504ebeb4bf9f136d509fe4af3a83d917b408f1f74264d"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/4/judge_output.txt",
+      "size_bytes": 80,
+      "sha256": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/5/judge_output.txt",
+      "size_bytes": 50569,
+      "sha256": "e78bb7900ad184037e578f13012eaae1cb8d854700ee7ddc520ac6c8a113bb63"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/6/judge_output.txt",
+      "size_bytes": 45,
+      "sha256": "c44b9007a27cf242dd34a06e4b0bafa2bfa5570e70cebc7ffa578f5505c96b05"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/7/judge_output.txt",
+      "size_bytes": 1701,
+      "sha256": "e93d243bb723f5c4d3951824be0d63cc283607cf0422fe3a6ccd8db289ce8979"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/8/judge_output.txt",
+      "size_bytes": 36693,
+      "sha256": "a86800267292840409a96208bfeeb69c2eb787b30cdbed16e34b4199345c3cad"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/9/judge_output.txt",
+      "size_bytes": 58472,
+      "sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/1/score.txt",
+      "size_bytes": 5,
+      "sha256": "dd5cad0057323f0aea84ecfb602c6fdf49b6a699783a508069133cf510de37bb"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/10/score.txt",
+      "size_bytes": 4,
+      "sha256": "fdf276f0183c71742823b061f7342d581e56de0af10648339b525249e26ee94f"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/11/score.txt",
+      "size_bytes": 12,
+      "sha256": "ee16e6f98edb10df3f1fa42d853931d5d1a73f946aaa4496c707d0ca1c8ae95c"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/12/score.txt",
+      "size_bytes": 11,
+      "sha256": "586193f5c1e09d036a662c287d2686e41ffa2d4e7d68167a180ddfe249e77419"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/13/score.txt",
+      "size_bytes": 11,
+      "sha256": "86db693ecbb371717127478c4c364fab2d6bfd812a16bbdfa1141bbe303e741b"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/14/score.txt",
+      "size_bytes": 11,
+      "sha256": "c10df21f2494923e8ae517178c894c97fa0889d6be8987907158195b8c8a7ebd"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/15/score.txt",
+      "size_bytes": 11,
+      "sha256": "76d1e745d1e70c8ffdfabcc50c45cc3c82c9edf4c065ad81093e1f9fbd20dc30"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/2/score.txt",
+      "size_bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/3/score.txt",
+      "size_bytes": 5,
+      "sha256": "1b91a96cee07bc9fc45509911d7c3f2404576fee1f35375b6e739e6f43c157a1"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/4/score.txt",
+      "size_bytes": 12,
+      "sha256": "ae4c93374f40e34d7bd1abdb3dfc8e9863239f663a37d7b64e3df3310b8e019e"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/5/score.txt",
+      "size_bytes": 12,
+      "sha256": "fdfdf07cc7a3da7cf49c35f5750267a2ef24157d2576f161c13d405b36ade81a"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/6/score.txt",
+      "size_bytes": 4,
+      "sha256": "a839ab0447b2d415fe1732387938b5e06aa9d5aba7ed0f0c927837f0e77027f2"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/7/score.txt",
+      "size_bytes": 12,
+      "sha256": "ff5cd5e711e09a52689662a574086d0156e00b27e59990d22e2c04380b2279f4"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/8/score.txt",
+      "size_bytes": 12,
+      "sha256": "4c912e5e897d261478598359ac535e1d7fa2d9b5cd0ffc45b36241f902d28b20"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_baseline/runs/9/score.txt",
+      "size_bytes": 12,
+      "sha256": "b0c310c79f6f2e773e5df985d81e9e8909f338eb0c4f5a4ab08ff9f3413f2d61"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/1/judge_output.txt",
+      "size_bytes": 23,
+      "sha256": "0c17f2e9efc8a8f9a376c8bd7f26d940ee3fe78feacc07dac0608b508b63590d"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/10/judge_output.txt",
+      "size_bytes": 66283,
+      "sha256": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/11/judge_output.txt",
+      "size_bytes": 68070,
+      "sha256": "6de6b9949d56a441fdc254dd48112c0517999603e3f065a85274c1a6d50a8c6f"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/12/judge_output.txt",
+      "size_bytes": 9655,
+      "sha256": "c958c314479f12b742678ee4c553fc941d62e333cdedae06eb698dab605ce38a"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/13/judge_output.txt",
+      "size_bytes": 57695,
+      "sha256": "3fdf8448aa367503225c202fb75f5138c0c3c40fd795919ccb5cc2001545cbf0"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/14/judge_output.txt",
+      "size_bytes": 191115,
+      "sha256": "52a414e77603cad686aff43c50fa079b17b75fc191a31608a40360f4210877f5"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/15/judge_output.txt",
+      "size_bytes": 1613181,
+      "sha256": "853f6ff828edde99776920559d907a21bd13c78c0490228647f130190388ec5b"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/2/judge_output.txt",
+      "size_bytes": 72,
+      "sha256": "8dbdaa13bcf0f3b31317bde4ee02865ff1023680a6f893ae1eb179a75342f816"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/3/judge_output.txt",
+      "size_bytes": 43,
+      "sha256": "14f51309b18138cfc8c504ebeb4bf9f136d509fe4af3a83d917b408f1f74264d"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/4/judge_output.txt",
+      "size_bytes": 80,
+      "sha256": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/5/judge_output.txt",
+      "size_bytes": 50542,
+      "sha256": "5fa3b0e4426698e5f877729aec39c6caf06939df41ea63e51e262fffac2913bd"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/6/judge_output.txt",
+      "size_bytes": 45,
+      "sha256": "c44b9007a27cf242dd34a06e4b0bafa2bfa5570e70cebc7ffa578f5505c96b05"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/7/judge_output.txt",
+      "size_bytes": 1701,
+      "sha256": "535e28932058e3502b882cf05d00affe8e2a4c36a29c6f4e0e8e9ea0b4bb7108"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/8/judge_output.txt",
+      "size_bytes": 36988,
+      "sha256": "4ad5ccecf346ca6204c840c56cffea50cc684bf2b44b62bb973b09fa2cef9268"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/9/judge_output.txt",
+      "size_bytes": 58472,
+      "sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/1/score.txt",
+      "size_bytes": 5,
+      "sha256": "dd5cad0057323f0aea84ecfb602c6fdf49b6a699783a508069133cf510de37bb"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/10/score.txt",
+      "size_bytes": 4,
+      "sha256": "fdf276f0183c71742823b061f7342d581e56de0af10648339b525249e26ee94f"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/11/score.txt",
+      "size_bytes": 11,
+      "sha256": "d8826a90033ba418ca4119253eb44aa0d93ac27c622b547964a8c209229e6010"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/12/score.txt",
+      "size_bytes": 11,
+      "sha256": "f73ef7e93d670377933da38aa3e4c5259ff0c931c3b27874262a63afe4cc5902"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/13/score.txt",
+      "size_bytes": 11,
+      "sha256": "73f34100df2f9234214c51a4f6abc99ce28a0a8e8849206533598e846a49b3a2"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/14/score.txt",
+      "size_bytes": 11,
+      "sha256": "883d18d1af8d95f88480bb89367f066a0a49d13bc8a966f31e5251c5a38b8174"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/15/score.txt",
+      "size_bytes": 11,
+      "sha256": "2621ef4a4f36ea4446c076e13776fc97138778fd9ba53a424202746fd56c3f40"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/2/score.txt",
+      "size_bytes": 2,
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/3/score.txt",
+      "size_bytes": 5,
+      "sha256": "1b91a96cee07bc9fc45509911d7c3f2404576fee1f35375b6e739e6f43c157a1"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/4/score.txt",
+      "size_bytes": 12,
+      "sha256": "ae4c93374f40e34d7bd1abdb3dfc8e9863239f663a37d7b64e3df3310b8e019e"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/5/score.txt",
+      "size_bytes": 12,
+      "sha256": "60fec41e5b4f048b99d57c30ced1454626d8e02feb1b5c6f41296f5b664541a3"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/6/score.txt",
+      "size_bytes": 4,
+      "sha256": "a839ab0447b2d415fe1732387938b5e06aa9d5aba7ed0f0c927837f0e77027f2"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/7/score.txt",
+      "size_bytes": 12,
+      "sha256": "ff5cd5e711e09a52689662a574086d0156e00b27e59990d22e2c04380b2279f4"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/8/score.txt",
+      "size_bytes": 11,
+      "sha256": "6d6acaa604d0c5903c85cc57e985f05814b4b70455560d95c2ebb64c32c02fb1"
+    },
+    {
+      "path": "results/pipes/improvement/case15_age_tiebreak/open15_candidate/runs/9/score.txt",
+      "size_bytes": 12,
+      "sha256": "b0c310c79f6f2e773e5df985d81e9e8909f338eb0c4f5a4ab08ff9f3413f2d61"
+    }
+  ]
+}

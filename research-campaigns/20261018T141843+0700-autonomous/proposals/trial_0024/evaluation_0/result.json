@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "evaluation_0",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0024/candidate_0.cpp",
+  "sha256": "0a0e6be2ea4a62f43a67aafadf04d5d5a82db800dba8315a1e2e3349125c1901",
+  "idea": "Добавить к предоставленному best-fit оценку packing opportunity cost через primal stochastic knapsack, сохранив слияние щелей, адресные ties и протокол.",
+  "parent": "seed_standalone",
+  "weighted_score": 28.542659068610675,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1740,
+      "kpi": 0.9637931034482758,
+      "weighted_score": 0.963793103448276
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 15480,
+      "kpi": 0.7948320413436692,
+      "weighted_score": 0.794832041343669
+    },
+    {
+      "case": "11",
+      "T": 22600,
+      "kpi": 0.900929203539823,
+      "weighted_score": 0.900929203539823
+    },
+    {
+      "case": "12",
+      "T": 10340,
+      "kpi": 0.9911992263056093,
+      "weighted_score": 3.964796905222437
+    },
+    {
+      "case": "13",
+      "T": 3300,
+      "kpi": 0.9672727272727273,
+      "weighted_score": 3.869090909090909
+    },
+    {
+      "case": "14",
+      "T": 37860,
+      "kpi": 0.9958795562599049,
+      "weighted_score": 3.983518225039619
+    },
+    {
+      "case": "15",
+      "T": 438500,
+      "kpi": 0.9549760547320411,
+      "weighted_score": 9.54976054732041
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.006753431197682056,
+    "worst_delta": -0.00450209583557315,
+    "wins": 19,
+    "regressions": 3,
+    "ties": 8,
+    "worst_cases": [
+      {
+        "case": "dev_20_frames",
+        "delta": -0.00450209583557315,
+        "baseline_T": 87420,
+        "candidate_T": 87820
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.004184234658764496,
+        "baseline_T": 90260,
+        "candidate_T": 90640
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.002389908304422095,
+        "baseline_T": 24820,
+        "candidate_T": 24880
+      },
+      {
+        "case": "dev_12_large_recent",
+        "delta": 0.0,
+        "baseline_T": 14480,
+        "candidate_T": 14480
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": 0.0,
+        "baseline_T": 46460,
+        "candidate_T": 46460
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": 0.0,
+        "baseline_T": 64880,
+        "candidate_T": 64880
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8155519276692862,
+  "max_cpu_s": 0.7809790000000001,
+  "max_rss_mib": 5.8125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0024/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0024/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792314763.200089,
+  "balanced_gate": true
+}

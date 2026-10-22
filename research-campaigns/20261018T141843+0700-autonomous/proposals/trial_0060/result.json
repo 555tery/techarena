@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0060",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0060/candidate_0.cpp",
+  "sha256": "b7eb0fb4cc982910fd864bacad031e4cc06e5e0a42d54e6e65cffc59741edadd",
+  "idea": "Выбирать между Best-Fit и address-ordered First-Fit по trench двух виртуальных раскладок, обрабатывающих тот же причинный префикс команд.",
+  "parent": "seed_standalone",
+  "weighted_score": 28.501326114503954,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4720,
+      "kpi": 0.9802966101694915,
+      "weighted_score": 0.980296610169492
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 15400,
+      "kpi": 0.798961038961039,
+      "weighted_score": 0.798961038961039
+    },
+    {
+      "case": "11",
+      "T": 22560,
+      "kpi": 0.9025265957446809,
+      "weighted_score": 0.902526595744681
+    },
+    {
+      "case": "12",
+      "T": 10360,
+      "kpi": 0.9892857142857143,
+      "weighted_score": 3.957142857142857
+    },
+    {
+      "case": "13",
+      "T": 3300,
+      "kpi": 0.9672727272727273,
+      "weighted_score": 3.869090909090909
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 441820,
+      "kpi": 0.9478000090534607,
+      "weighted_score": 9.478000090534607
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.00533266591675534,
+    "worst_delta": -0.007520570693995032,
+    "wins": 16,
+    "regressions": 8,
+    "ties": 6,
+    "worst_cases": [
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.007520570693995032,
+        "baseline_T": 94540,
+        "candidate_T": 95300
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.0060681557068898995,
+        "baseline_T": 87420,
+        "candidate_T": 87960
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.005060659564315673,
+        "baseline_T": 90260,
+        "candidate_T": 90720
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.00498105165052809,
+        "baseline_T": 30480,
+        "candidate_T": 30640
+      },
+      {
+        "case": "dev_22_frames",
+        "delta": -0.0014299315689508818,
+        "baseline_T": 27180,
+        "candidate_T": 27220
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.0007979189293346733,
+        "baseline_T": 24820,
+        "candidate_T": 24840
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8141311623883595,
+  "max_cpu_s": 0.8630800000000001,
+  "max_rss_mib": 11.578125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0060/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0060/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792323156.293677,
+  "balanced_gate": true,
+  "hypothesis": "First-Fit может уменьшать фрагментацию при коррелированных удалениях. Полные виртуальные раскладки позволяют наблюдать его преимущество без прогнозов lifetime. Это непроверенный кандидат для предоставленного Best-Fit: преимущество виртуальной раскладки не гарантирует улучшение реальной смешанной раскладки. Score и соблюдение лимита 5s требуют измерения.",
+  "causality": "Наблюдаемые сигналы — текущая прочитанная команда, свободные интервалы и накопленные T_BF/T_FF. First-Fit включается только при T_FF<T_BF; равенство сохраняет Best-Fit. Каждая щель хранится ровно в одной корзине min(length,40), поэтому поиск First-Fit просматривает максимум 40 корзин. Реальные трубы неподвижны; рост сохраняет исходное правило секций по 20 м. Память O(Q), операции O(40+log Q). Проверять нужно также число фактических отличий адреса от Best-Fit: виртуальное преимущество само по себе не является результатом."
+}

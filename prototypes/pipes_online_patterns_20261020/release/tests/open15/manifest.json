@@ -1,0 +1,79 @@
+{
+  "cases": [
+    {
+      "id": "open01",
+      "file": "open01.in",
+      "sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d"
+    },
+    {
+      "id": "open02",
+      "file": "open02.in",
+      "sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923"
+    },
+    {
+      "id": "open03",
+      "file": "open03.in",
+      "sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494"
+    },
+    {
+      "id": "open04",
+      "file": "open04.in",
+      "sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f"
+    },
+    {
+      "id": "open05",
+      "file": "open05.in",
+      "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+    },
+    {
+      "id": "open06",
+      "file": "open06.in",
+      "sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd"
+    },
+    {
+      "id": "open07",
+      "file": "open07.in",
+      "sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd"
+    },
+    {
+      "id": "open08",
+      "file": "open08.in",
+      "sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7"
+    },
+    {
+      "id": "open09",
+      "file": "open09.in",
+      "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+    },
+    {
+      "id": "open10",
+      "file": "open10.in",
+      "sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b"
+    },
+    {
+      "id": "open11",
+      "file": "open11.in",
+      "sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c"
+    },
+    {
+      "id": "open12",
+      "file": "open12.in",
+      "sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984"
+    },
+    {
+      "id": "open13",
+      "file": "open13.in",
+      "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+    },
+    {
+      "id": "open14",
+      "file": "open14.in",
+      "sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d"
+    },
+    {
+      "id": "open15",
+      "file": "open15.in",
+      "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "created_at": "2026-10-19T20:00:10.151210+00:00",
+  "purpose": "Resource and correctness only, generated after final score results and candidate freeze; not independent quality evidence.",
+  "selection_freeze_sha256": "fd21c2818b385078a969f96fcb166703a5637b9f76d4409feca089ce72a432c7",
+  "cases": [
+    {
+      "id": "moderate_churn",
+      "file": "moderate_churn.in",
+      "sha256": "dc651675fe997aff84b10007140cf13e9418b6a7d87ae0e4111a64a590aa0c7e",
+      "n": 200000,
+      "population": 512,
+      "seed": 87002011,
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "dc651675fe997aff84b10007140cf13e9418b6a7d87ae0e4111a64a590aa0c7e",
+        "operation_count": 200000,
+        "placement_count": 100256,
+        "peak_live_pipe_length_m": 10099,
+        "minimum_trench_lower_bound_m": 10100,
+        "final_occupied_length_m": 9452,
+        "kpi_upper_bound_from_live_volume": 0.9358415841584159
+      }
+    },
+    {
+      "id": "scale_boundary",
+      "file": "scale_boundary.in",
+      "sha256": "5a09869a07f34c1c0d4821f5edb96c9f61f0c22fdb2f459fd351982446d77a93",
+      "n": 200000,
+      "population": 4099,
+      "seed": 87002012,
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "5a09869a07f34c1c0d4821f5edb96c9f61f0c22fdb2f459fd351982446d77a93",
+        "operation_count": 200000,
+        "placement_count": 102050,
+        "peak_live_pipe_length_m": 75359,
+        "minimum_trench_lower_bound_m": 75360,
+        "final_occupied_length_m": 72083,
+        "kpi_upper_bound_from_live_volume": 0.9565153927813164
+      }
+    }
+  ]
+}

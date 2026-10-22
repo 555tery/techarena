@@ -1,0 +1,306 @@
+--- candidate-key-search/solution.cj
++++ candidate-length-history/solution.cj
+@@ -684,6 +684,89 @@
+     }
+ }
+ 
++// The ring stores the exact current window. Scalar counters retain the
++// full last three pushed runs; runCount clips them to the current suffix size.
++public class LengthHistory {
++    private let zero: Int64
++    private var data: IntRing
++    private var length0: Int64 = 0
++    private var length1: Int64 = 0
++    private var length2: Int64 = 0
++    private var count0: Int64 = 0
++    private var count1: Int64 = 0
++    private var count2: Int64 = 0
++
++    public init(defaultValue: Int64) { zero = defaultValue; data = IntRing(defaultValue) }
++    public prop size: Int64 { get() { data.size } }
++    public func get(index: Int64): Int64 { data.get(index) }
++    public func back(): Int64 { data.back() }
++
++    public func runLength(index: Int64): Int64 {
++        if (index == 0) { return length0 }
++        if (index == 1) { return length1 }
++        if (index == 2) { return length2 }
++        throw IndexOutOfBoundsException("Length run index")
++    }
++
++    public func runCount(index: Int64): Int64 {
++        let newest = iMin(count0, data.size)
++        if (index == 0) { return newest }
++        let second = iMin(count1, data.size - newest)
++        if (index == 1) { return second }
++        if (index == 2) { return iMin(count2, data.size - newest - second) }
++        throw IndexOutOfBoundsException("Length run index")
++    }
++
++    public func pushBack(value: Int64): Unit {
++        // Mutate the ring first, so a failed ring expansion cannot alter cache.
++        data.pushBack(value)
++        if (data.size == 1) {
++            length0 = value; count0 = 1
++            length1 = 0; count1 = 0; length2 = 0; count2 = 0
++        } else if (value == length0) { count0++ }
++        else {
++            length2 = length1; count2 = count1
++            length1 = length0; count1 = count0
++            length0 = value; count0 = 1
++        }
++    }
++
++    public func popFront(): Unit {
++        data.popFront()
++        // Otherwise clipping by current size handles all front deletions.
++        if (data.size == 0) {
++            length0 = 0; length1 = 0; length2 = 0
++            count0 = 0; count1 = 0; count2 = 0
++        }
++    }
++
++    // No current recentLengths callsite uses popBack. Keep exact API semantics
++    // with a rare fallback scan, because removing a newest run can expose run4.
++    public func popBack(): Unit {
++        data.popBack()
++        length0 = 0; length1 = 0; length2 = 0
++        count0 = 0; count1 = 0; count2 = 0
++        var index = data.size - 1
++        for (run in 0..3) {
++            if (index < 0) { break }
++            let value = data.get(index)
++            var count: Int64 = 0
++            while (index >= 0 && data.get(index) == value) { count++; index-- }
++            if (run == 0) { length0 = value; count0 = count }
++            else if (run == 1) { length1 = value; count1 = count }
++            else { length2 = value; count2 = count }
++        }
++    }
++
++    public func clone(): LengthHistory {
++        let result = LengthHistory(zero)
++        result.data = data.clone()
++        result.length0 = length0; result.length1 = length1; result.length2 = length2
++        result.count0 = count0; result.count1 = count1; result.count2 = count2
++        return result
++    }
++}
++
+ // Source: models.cj
+ public let kDigLength: Int64 = 20
+ public let kHistoryWindow: Int64 = 2048
+@@ -743,28 +826,13 @@
+     }
+ }
+ 
+-public func predictNextGeometricSize(history: IntRing, currentLength: Int64): Int64 {
++public func predictNextGeometricSize(history: LengthHistory, currentLength: Int64): Int64 {
+     if (history.size == 0 || history.back() != currentLength) { return 0 }
+-    var index = history.size - 1
+-    let runSizes = Array<Int64>(3, repeat: 0)
+-    let runCounts = Array<Int64>(3, repeat: 0)
+-    var runIndex: Int64 = 0
+-    while (index >= 0 && runIndex < 3) {
+-        let size = history.get(index)
+-        var count: Int64 = 0
+-        while (index >= 0 && history.get(index) == size) {
+-            count++
+-            index--
+-        }
+-        runSizes[runIndex] = size
+-        runCounts[runIndex] = count
+-        runIndex++
+-    }
+-    if (runIndex < 3 || runSizes[0] != currentLength ||
+-        runCounts[0] < kSameLengthRightRun || runCounts[1] < kSameLengthRightRun ||
+-        runCounts[2] < kSameLengthRightRun) { return 0 }
+-    let previous = runSizes[1]
+-    let beforePrevious = runSizes[2]
++    if (history.runCount(2) == 0 || history.runLength(0) != currentLength ||
++        history.runCount(0) < kSameLengthRightRun || history.runCount(1) < kSameLengthRightRun ||
++        history.runCount(2) < kSameLengthRightRun) { return 0 }
++    let previous = history.runLength(1)
++    let beforePrevious = history.runLength(2)
+     if (!(beforePrevious < previous && previous < currentLength)) { return 0 }
+     let observed = currentLength * beforePrevious
+     let expected = previous * previous
+@@ -775,7 +843,7 @@
+     return predicted
+ }
+ 
+-public func trendAlignedHighSide(history: IntRing, currentLength: Int64,
++public func trendAlignedHighSide(history: LengthHistory, currentLength: Int64,
+     gapStart: Int64, gapEnd: Int64, fallbackHighSide: Bool): Bool {
+     let predictedLength = predictNextGeometricSize(history, currentLength)
+     if (predictedLength <= currentLength || gapEnd - gapStart <= currentLength) {
+@@ -795,7 +863,7 @@
+     public var active = ArrayList<SimPipe>()
+     public var trenchLength: Int64 = 0
+     public var nextPid: Int64 = 1
+-    public var recentLengths = IntRing(0)
++    public var recentLengths = LengthHistory(0)
+     public var recentFrequency = VArray<Int64, $41>(repeat: 0)
+     public var recentDistinctCount: Int64 = 0
+     public var recentShortCount: Int64 = 0
+@@ -841,21 +909,11 @@
+         if (recentLengths.size < 128) { return false }
+         var availableSizes: Int64 = recentDistinctCount
+         if (availableSizes < 3) { return false }
+-        var distinctLengths = VArray<Int64, $3>(repeat: 0)
+-        var distinctCount: Int64 = 0
+-        var previous: Int64 = -1
+-        var index = recentLengths.size - 1
+-        while (index >= 0) {
+-            let length = recentLengths.get(index)
+-            index--
+-            if (length == previous) { continue }
+-            distinctLengths[distinctCount] = length
+-            distinctCount++
+-            previous = length
+-            if (distinctCount == 3) { break }
+-        }
+-        if (distinctCount < 3) { return false }
+-        return distinctLengths[0] - distinctLengths[1] == distinctLengths[1] - distinctLengths[2]
++        if (recentLengths.runCount(2) == 0) { return false }
++        let newest = recentLengths.runLength(0)
++        let previous = recentLengths.runLength(1)
++        let beforePrevious = recentLengths.runLength(2)
++        return newest - previous == previous - beforePrevious
+     }
+ 
+     public func hasSameLengthRecentRun(length: Int64): Bool {
+@@ -872,31 +930,11 @@
+         if (recentFrequency[currentLength] == 0) { availableSizes++ }
+         if (availableSizes < 3) { return false }
+         let currentRunAlreadyInHistory = recentLengths.back() == currentLength
+-        var priorRunLengths = VArray<Int64, $2>(repeat: 0)
+-        var distinctCount: Int64 = 0
+-        var firstRun = true
+-        var lastRunLength: Int64 = -1
+-        var index = recentLengths.size - 1
+-        while (index >= 0) {
+-            let length = recentLengths.get(index)
+-            index--
+-            if (firstRun) {
+-                firstRun = false
+-                lastRunLength = length
+-                if (!currentRunAlreadyInHistory) {
+-                    priorRunLengths[distinctCount] = length
+-                    distinctCount++
+-                }
+-                continue
+-            }
+-            if (length == lastRunLength) { continue }
+-            lastRunLength = length
+-            priorRunLengths[distinctCount] = length
+-            distinctCount++
+-            if (distinctCount == 2) { break }
+-        }
+-        if (distinctCount < 2) { return false }
+-        return currentLength - priorRunLengths[0] == priorRunLengths[0] - priorRunLengths[1]
++        let firstPrior: Int64 = if (currentRunAlreadyInHistory) { 1 } else { 0 }
++        if (recentLengths.runCount(firstPrior + 1) == 0) { return false }
++        let previous = recentLengths.runLength(firstPrior)
++        let beforePrevious = recentLengths.runLength(firstPrior + 1)
++        return currentLength - previous == previous - beforePrevious
+     }
+ 
+     public func placementStart(gap: SimGap, start: Int64, length: Int64, highSide: Bool): Int64 {
+@@ -1391,7 +1429,7 @@
+     public var cohortSlabUsed: Int64 = 0
+     public var cohortSlabBase: Int64 = 0
+     public var cohortSlabEnd: Int64 = 0
+-    public var recentLengths = IntRing(0)
++    public var recentLengths = LengthHistory(0)
+     public var recentFrequency = VArray<Int64, $41>(repeat: 0)
+     public var recentDistinctCount: Int64 = 0
+     public var recentShortCount: Int64 = 0
+@@ -1447,20 +1485,12 @@
+ 
+     public func hasLongAdditiveSizeTrend(currentLength: Int64): Bool {
+         if (currentLength < 3 || currentLength >= 40 || observedRunCount < 46) { return false }
+-        let sizes = Array<Int64>(3, repeat: 0)
+-        let counts = Array<Int64>(3, repeat: 0)
+-        sizes[0] = currentLength
+-        counts[0] = observedRunCount
+-        var i = recentLengths.size - 1
+-        while (i >= 0 && recentLengths.get(i) == currentLength) { i-- }
+-        for (run in 1..3) {
+-            if (i < 0) { return false }
+-            let size = recentLengths.get(i)
+-            sizes[run] = size
+-            while (i >= 0 && recentLengths.get(i) == size) { counts[run]++; i-- }
+-            if (counts[run] < 46) { return false }
+-        }
+-        return sizes[0] == sizes[1] + 1 && sizes[1] == sizes[2] + 1
++        let firstPrior: Int64 = if (recentLengths.size > 0 && recentLengths.back() == currentLength) { 1 } else { 0 }
++        if (recentLengths.runCount(firstPrior) < 46) { return false }
++        if (recentLengths.runCount(firstPrior + 1) < 46) { return false }
++        let previous = recentLengths.runLength(firstPrior)
++        let beforePrevious = recentLengths.runLength(firstPrior + 1)
++        return currentLength == previous + 1 && previous == beforePrevious + 1
+     }
+ 
+     public func alignForNextAdditiveSize(length: Int64, gapStart: Int64, fallbackHighSide: Bool): Bool {
+@@ -2154,21 +2184,11 @@
+         if (recentLengths.size < 128) { return false }
+         var availableSizes: Int64 = recentDistinctCount
+         if (availableSizes < 3) { return false }
+-        var distinctLengths = VArray<Int64, $3>(repeat: 0)
+-        var distinctCount: Int64 = 0
+-        var previous: Int64 = -1
+-        var i = recentLengths.size - 1
+-        while (i >= 0) {
+-            let length = recentLengths.get(i)
+-            i--
+-            if (length == previous) { continue }
+-            distinctLengths[distinctCount] = length
+-            distinctCount++
+-            previous = length
+-            if (distinctCount == 3) { break }
+-        }
+-        if (distinctCount < 3) { return false }
+-        return distinctLengths[0] - distinctLengths[1] == distinctLengths[1] - distinctLengths[2]
++        if (recentLengths.runCount(2) == 0) { return false }
++        let newest = recentLengths.runLength(0)
++        let previous = recentLengths.runLength(1)
++        let beforePrevious = recentLengths.runLength(2)
++        return newest - previous == previous - beforePrevious
+     }
+ 
+     public func tailGap(): Int64 {
+@@ -2372,28 +2392,11 @@
+         if (recentFrequency[currentLength] == 0) { availableSizes++ }
+         if (availableSizes < 3) { return false }
+         let currentRunAlreadyInHistory = recentLengths.back() == currentLength
+-        var priorRunLengths = VArray<Int64, $2>(repeat: 0)
+-        var distinctCount: Int64 = 0
+-        var firstRun = true
+-        var lastRunLength: Int64 = -1
+-        var i = recentLengths.size - 1
+-        while (i >= 0) {
+-            let length = recentLengths.get(i)
+-            i--
+-            if (firstRun) {
+-                firstRun = false
+-                lastRunLength = length
+-                if (!currentRunAlreadyInHistory) { priorRunLengths[distinctCount] = length; distinctCount++ }
+-                continue
+-            }
+-            if (length == lastRunLength) { continue }
+-            lastRunLength = length
+-            priorRunLengths[distinctCount] = length
+-            distinctCount++
+-            if (distinctCount == 2) { break }
+-        }
+-        if (distinctCount < 2) { return false }
+-        return currentLength - priorRunLengths[0] == priorRunLengths[0] - priorRunLengths[1]
++        let firstPrior: Int64 = if (currentRunAlreadyInHistory) { 1 } else { 0 }
++        if (recentLengths.runCount(firstPrior + 1) == 0) { return false }
++        let previous = recentLengths.runLength(firstPrior)
++        let beforePrevious = recentLengths.runLength(firstPrior + 1)
++        return currentLength - previous == previous - beforePrevious
+     }
+ 
+     public func consumeAtSide(it: Int64, length: Int64, highSide: Bool): Int64 {

@@ -1,0 +1,122 @@
+{
+  "baseline_binary": {
+    "path": "results/pipes/improvement/case9_causal_profiles/bin/champion_cohort_slabs",
+    "sha256": "e4b79d8eb55a1fdc03a8c62505142ee615304401e821895bf6ab7f3712e54049"
+  },
+  "baseline_source": {
+    "path": "results/pipes/improvement/case9_causal_profiles/source/champion_cohort_slabs.cpp",
+    "sha256": "43bfbdadbae18ac180d1e59b6631342cfe1bef99190a449838f0470d6f220200"
+  },
+  "candidate": "local opportunity-loss cost overlay; not promoted",
+  "candidate_binary": {
+    "path": "results/pipes/improvement/case15_opportunity_loss/bin/opportunity_loss",
+    "sha256": "fe449fcc30456362fb8cfa37de07a861d1004122a42433e89c38f536765dcc78"
+  },
+  "candidate_source": {
+    "path": "results/pipes/improvement/case15_opportunity_loss/source/opportunity_loss.cpp",
+    "sha256": "e327ada2e7463206235dcd9b0934b298629618e02dc86d634be6ac8be38e0059"
+  },
+  "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+  "case15_baseline_trench_m": 438920,
+  "case15_candidate_status": "ok",
+  "case15_candidate_trench_m": 441740,
+  "case15_delta_trench_m": 2820,
+  "case15_input": {
+    "path": "data/pipes/open/15.in",
+    "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+  },
+  "case15_outputs": {
+    "baseline_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e",
+    "candidate_sha256": "8bd15f0911ec47a54f89febcb5738643b4137fd8587ee42adb625bfee1aaa895"
+  },
+  "commands": [
+    "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic results/pipes/improvement/case15_opportunity_loss/source/opportunity_loss.cpp -o results/pipes/improvement/case15_opportunity_loss/bin/opportunity_loss",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case15_opportunity_loss/bin/opportunity_loss --name opportunity_loss_case15 --interactor results/pipes/final/bin/interactor --tests results/pipes/improvement/case15_opportunity_loss/tests --out results/pipes/improvement/case15_opportunity_loss/runs/case15 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 results/pipes/improvement/case15_opportunity_loss/generate_synthetic.py",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_causal_profiles/bin/champion_cohort_slabs --name champion_fresh_synthetic --interactor results/pipes/final/bin/interactor --tests results/pipes/improvement/case15_opportunity_loss/synthetic --out results/pipes/improvement/case15_opportunity_loss/runs/champion_synthetic --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case15_opportunity_loss/bin/opportunity_loss --name opportunity_loss_fresh_synthetic --interactor results/pipes/final/bin/interactor --tests results/pipes/improvement/case15_opportunity_loss/synthetic --out results/pipes/improvement/case15_opportunity_loss/runs/candidate_synthetic --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic results/pipes/improvement/case15_opportunity_loss/trace_features.cpp -o results/pipes/improvement/case15_opportunity_loss/bin/trace_features",
+    "results/pipes/improvement/case15_opportunity_loss/bin/trace_features data/pipes/open/15.in results/pipes/improvement/case9_causal_profiles/runs/champion-cohort-slabs-open15/runs/15/judge_output.txt results/pipes/improvement/case15_opportunity_loss/runs/baseline_features.csv",
+    "python3 results/pipes/improvement/case15_opportunity_loss/analyze_liquidity.py"
+  ],
+  "fresh_synthetic": {
+    "generator": "generate_synthetic.py",
+    "operations_per_trace": 40000,
+    "paired_results": [
+      {
+        "baseline_kpi": 0.9805467577929655,
+        "baseline_output_sha256": "03110d1a6de214e0daa67d5f9171ae75f6286ac5abc41445c0eed8358d67b31f",
+        "baseline_status": "ok",
+        "baseline_trench_m": 119980,
+        "candidate_kpi": 0.9882896505376344,
+        "candidate_output_sha256": "4705ebedafd53aa59760e68b3b62de65c62f435ac08b9e7b1a9305900c8c4efa",
+        "candidate_status": "ok",
+        "candidate_trench_m": 119040,
+        "delta_trench_m": -940,
+        "input_sha256": "b8e65f87f698141d9d00e94502e6a9be2d38f097cc7276e5d97ee99512d92797",
+        "name": "short_to_bimodal_old_deletes"
+      },
+      {
+        "baseline_kpi": 0.9775645560665016,
+        "baseline_output_sha256": "f3863f2cbd0fba7b1c373863152bfc3dcec7c91f712acb67a0e99b894d97baf0",
+        "baseline_status": "ok",
+        "baseline_trench_m": 113080,
+        "candidate_kpi": 0.9689954417952314,
+        "candidate_output_sha256": "a4655ecce9a6ee54fdd9834c907578e0ed6d4fd5b70462d159fdc52516dc77ad",
+        "candidate_status": "ok",
+        "candidate_trench_m": 114080,
+        "delta_trench_m": 1000,
+        "input_sha256": "6ba927bc026dfe77bee33f32fe487056a2126519d2ba2625cf68827a90293b46",
+        "name": "short_to_wide_random"
+      },
+      {
+        "baseline_kpi": 0.9879779186260479,
+        "baseline_output_sha256": "ca45f7e80e01daae2c09a7053e56af7ed25f4aa3ae86924ee3ca230c7423d999",
+        "baseline_status": "ok",
+        "baseline_trench_m": 97820,
+        "candidate_kpi": 0.9869689542483661,
+        "candidate_output_sha256": "5fb2dcd3dfe6ca7b30fa7ad0149c8c42b964c078fe74368ed96cf84ba57cd6d3",
+        "candidate_status": "ok",
+        "candidate_trench_m": 97920,
+        "delta_trench_m": 100,
+        "input_sha256": "cb5610a48dc64e96ca0cd6d47a1d8785250ae990fe9508d15f99864cb024b62a",
+        "name": "stationary_wide_recent_deletes"
+      },
+      {
+        "baseline_kpi": 0.3996934604904632,
+        "baseline_output_sha256": "5be161e7824c39c7da1af666c19d9b9caee0619c2956ee5065b0b6fe82761348",
+        "baseline_status": "ok",
+        "baseline_trench_m": 58720,
+        "candidate_kpi": 0.398336727766463,
+        "candidate_output_sha256": "55fb0a07f9fd503251fdb09d5b79e82e9025ee796649490f1f0701ecf66c273f",
+        "candidate_status": "ok",
+        "candidate_trench_m": 58920,
+        "delta_trench_m": 200,
+        "input_sha256": "03d9d9488fd626f70871e3c0b43a8f2d16045c9b78d46c3fc58089bd79b4fffc",
+        "name": "wide_to_short_random"
+      }
+    ],
+    "seed": 913733
+  },
+  "frozen_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "interactor": {
+    "path": "results/pipes/final/bin/interactor",
+    "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+  },
+  "liquidity_diagnostic": {
+    "features_csv_sha256": "998995b8d07a9faf30ac0e891f7301bba8cd8c936af345a16cc89733b3b9cfcb",
+    "missing_share_top_vs_bottom_decile_next_8_placements": {
+      "recent_long_share_at_least_0_5": {
+        "bottom": 0.24514320048067295,
+        "top": 0.9036651311836571
+      }
+    },
+    "single_case_exploratory_only": true,
+    "summary_sha256": "108644f0c61c0075daa9106aba2567d2da17253a786abfef6a34a41a6594c516",
+    "trace_binary_sha256": "c73dafd8e2d13acd71ae9ec11f92e829528c4f29ca8b00943d86772bc259d595",
+    "trace_source_sha256": "79de0ecd8eab783f64ad8ec03ec26e0ae03daab6fa30648f74d1e1d8b3cbe186"
+  },
+  "open15_baseline_score": 29.932085817214,
+  "open15_run": "not run; case15 gate failed",
+  "status": "NO-GO; local only"
+}

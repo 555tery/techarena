@@ -1,0 +1,120 @@
+{
+  "experiment": "case5 relative parity + scale-gated expansion composition",
+  "date": "2026-10-18",
+  "scope": "Local-only; no website or Docker. No canonical/frozen/wiki files changed.",
+  "mechanism": "Composition copied the parity-only source and transplanted the unchanged scale-gated expansion rule. No new gate tuning.",
+  "hashes_sha256": {
+    "A+B ancestor": "4c3a3590eb1ad4251640af32f10f7e5b506b8cfac8ee6b9d0edaa6d4e231caae",
+    "parity_only": "efa587a7181ba4098b3d656fa26c9f681aff4603dd7d16d42ca20c543779b86d",
+    "scale_gate": "a280146cdc55c0fe8fbb6d4b7fda158f4e2189fa3463ce9d046f02a070a3571a",
+    "composition": "b1712f18ff3ecfb1e63e86eed038dea32e1b597c94b0d54a7d07f5836c120bf5",
+    "binary_parity_only": "62966a3aad4425474e77aee9dca402ba258bcb7754a3e9cdd5ef2e21790992ca",
+    "binary_scale_gate": "885ea18bfef6ec0e65843659ce5e424ae26dcfdfd077dd9eb29f8448245b3419",
+    "binary_composition": "f7ec39aa5a419d0dadb40a754326eea6a6277fcca49290c89d7080205477228c",
+    "harness": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "v2_manifest": "c9f02cf67dddfbd4e662493f112db6907da9f091ae79c531e85a3fcd7069c918"
+  },
+  "build": {
+    "compiler": "Apple clang 17.0.0 (clang-1700.0.13.5)",
+    "command": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic results/pipes/improvement/case5_push_20261018/src/relative_cohort_plus_scale_gate.cpp -o results/pipes/improvement/case5_push_20261018/bin/relative_cohort_plus_scale_gate"
+  },
+  "commands": [
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_push_20261018/bin/relative_cohort_plus_scale_gate --tests data/pipes/open/14.in --out results/pipes/improvement/case5_push_20261018/runs/composition_case14 --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_push_20261018/bin/relative_cohort_plus_scale_gate --tests data/pipes/open/15.in --out results/pipes/improvement/case5_push_20261018/runs/composition_case15 --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_push_20261018/bin/relative_cohort_plus_scale_gate --tests data/pipes/open --out results/pipes/improvement/case5_push_20261018/runs/composition_open15 --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_push_20261018/bin/relative_cohort_plus_scale_gate --tests results/pipes/improvement/case5_push_20261018/synthetic/relative_parity_v2 --out results/pipes/improvement/case5_push_20261018/runs/composition_relative_v2 --cpu-limit 5 --memory-limit-mb 256"
+  ],
+  "comparison": {
+    "open15_weighted_score_sum": 30.071629211228668,
+    "weight_sum": 32.1,
+    "ok_count": 15,
+    "delta_vs_parity_only": 0.0018769951932355866,
+    "delta_vs_scale_gate_leader": 0.02666301649761138,
+    "target_30_3_gap": 0.22837078877133266,
+    "max_solver_cpu_s_open15": 1.743995,
+    "max_solver_rss_mib_open15": 9.75,
+    "case_deltas_vs_parity_only": {
+      "5": {
+        "parity_only_trench_m": 54440,
+        "composition_trench_m": 54440,
+        "trench_delta_m": 0,
+        "weighted_score_delta": 0.0
+      },
+      "14": {
+        "parity_only_trench_m": 37820,
+        "composition_trench_m": 37860,
+        "trench_delta_m": 40,
+        "weighted_score_delta": -0.004213134029655841
+      },
+      "15": {
+        "parity_only_trench_m": 438920,
+        "composition_trench_m": 438640,
+        "trench_delta_m": -280,
+        "weighted_score_delta": 0.006090129222892315
+      }
+    },
+    "standalone_case14": {
+      "kpi": 0.9958795562599049,
+      "trench_m": 37860,
+      "cpu_s": 0.397587,
+      "rss_mib": 3.375
+    },
+    "standalone_case15": {
+      "kpi": 0.9546712566113441,
+      "trench_m": 438640,
+      "cpu_s": 2.001397,
+      "rss_mib": 8.421875
+    }
+  },
+  "open15_inputs_sha256": {
+    "1": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+    "2": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+    "3": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+    "4": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+    "5": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+    "6": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+    "7": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+    "8": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+    "9": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+    "10": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+    "11": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "12": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+    "13": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+    "14": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+    "15": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+  },
+  "v2_synthetic": {
+    "manifest_sha256": "c9f02cf67dddfbd4e662493f112db6907da9f091ae79c531e85a3fcd7069c918",
+    "parity_predictor_cohort_start_counts": {
+      "early_stop_rel1": 7,
+      "even_count_rel0_full": 5,
+      "late_stop_rel0": 9,
+      "odd_count_rel0_full": 5,
+      "odd_count_rel1_full": 15,
+      "phase_shift_varcounts_rel1": 9,
+      "two_phase_rel0": 4,
+      "varcounts_rel0_full": 5
+    },
+    "composition_delta_vs_parity_only_weighted_score_sum": 0.0,
+    "composition_ties_all_cases": true,
+    "input_sha256": {
+      "early_stop_rel1": "4ab22b369110a0d500f2fd7828c49001677011bce1528aaf239b11a9c0764bdc",
+      "even_count_rel0_full": "fad3714a89b09155c32f4ddd7c94b5bb99a94e752d5c0f7f79fb9266ffa596a8",
+      "late_stop_rel0": "b252e2ee79e9fb4e5312f5778f361d5aa29edab972c8c7995ca7ff46e5bddd1f",
+      "odd_count_rel0_full": "19ec4d9ae17eb48785752ad94ca34e12915c51fe8d782d93231e957126e62841",
+      "odd_count_rel1_full": "0d0703d27a2737f631a4afb5cb76c55a74748200b3849090867a913f6b54d460",
+      "phase_shift_varcounts_rel1": "8fb1410e7f0c199515737a454fa7d6c583457ec0e5cd19a263afdb9f2f4407ad",
+      "two_phase_rel0": "1ded8303997369c3ff60a5162e67023a845a05237960e302b51c990afff3e58c",
+      "varcounts_rel0_full": "c7c8518fca90b1200c6cdf1e99a3360a8b8c5315bd1bf387b6bb593d2766c0fb"
+    },
+    "delta_vs_AB_existing_v2_suite": -0.11429711113564434
+  },
+  "artifacts": {
+    "report": "results/pipes/improvement/case5_push_20261018/REPORT.md",
+    "composition_open15": "results/pipes/improvement/case5_push_20261018/runs/composition_open15/{summary.json,cases.csv}",
+    "composition_case14": "results/pipes/improvement/case5_push_20261018/runs/composition_case14/{summary.json,cases.csv}",
+    "composition_case15": "results/pipes/improvement/case5_push_20261018/runs/composition_case15/{summary.json,cases.csv}",
+    "composition_v2": "results/pipes/improvement/case5_push_20261018/runs/composition_relative_v2/{summary.json,cases.csv}"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "frozen_at": "2026-10-18T20:51:30.560261+00:00",
+  "candidate": {
+    "baseline_source_sha256": "a3d414a4872796fb570753c0e61db5c80dc59c1b8cbd7ec57e95dec345aff53a",
+    "online_source": "research-campaigns/20261018T141843+0700-autonomous/releases/988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4/solution.cpp",
+    "online_source_sha256": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+    "source_sha256": "c03ddb2ccfef3b3b0018d727703d34d869ef891efd2394a52339a5ed1b9b2354",
+    "binary_sha256": "2699db3f00ab0c6626f5d188961371d0faeebc0282272f7264dc48b1247df79d",
+    "tables_unchanged": true,
+    "handoff": "actual positions, trench and PIDs; observed history only; free cohorts conservatively unknown"
+  },
+  "scope": "one bounded online-fallback candidate; no fitting to new tests",
+  "promotion_gate": {
+    "Open15": "all15 peak-volume ceilings, valid, CPU<5,RSS<256",
+    "known24": "no KPI loss",
+    "new_attacks": "no KPI loss relative to frozen candidate-v3",
+    "fresh_neutral": "mean gain >=0 and no individual KPI loss >0.03"
+  },
+  "not_claimed": "hidden-distribution evidence; a gate pass covers this finite suite only"
+}

@@ -1,0 +1,550 @@
+--- candidate-exact-fast/solution.cj
++++ candidate-avl-borrows/solution.cj
+@@ -46,6 +46,10 @@
+     ~init() { unsafe { LibC.free(data) } }
+ 
+     public prop size: Int64 { get() { used } }
++
++    // Package-internal, transient read-only borrows; callers retain this owner
++    // and finish the borrow before add/reserve can replace the allocation.
++    func borrowData(): CPointer<Int64> { data }
+ 
+     public operator func [](index: Int64): Int64 {
+         if (index < 0 || index >= used) { throw IndexOutOfBoundsException("Integer vector index") }
+@@ -108,6 +112,10 @@
+     ~init() { unsafe { LibC.free(data) } }
+ 
+     public prop size: Int64 { get() { used } }
++
++    // Package-internal, transient read-only borrows; callers retain this owner
++    // and finish the borrow before add/reserve can replace the allocation.
++    func borrowData(): CPointer<Int64> { data }
+ 
+     public operator func [](index: Int64): Key {
+         if (index < 0 || index >= used) { throw IndexOutOfBoundsException("Key vector index") }
+@@ -211,65 +219,186 @@
+ 
+     public func first(): Int64 {
+         var node = root
+-        while (node != 0 && left[node] != 0) { node = left[node] }
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        unsafe {
++            let edgeData = left.borrowData()
++            while (node != 0) {
++                let child = edgeData.read(node)
++                if (child == 0) { break }
++                node = child
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (node < 0 || node >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
+         return node
+     }
+     public func last(): Int64 {
+         var node = root
+-        while (node != 0 && right[node] != 0) { node = right[node] }
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        unsafe {
++            let edgeData = right.borrowData()
++            while (node != 0) {
++                let child = edgeData.read(node)
++                if (child == 0) { break }
++                node = child
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (node < 0 || node >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
+         return node
+     }
+     public func next(node: Int64): Int64 {
+         if (node == 0) { return 0 }
+-        var cur = node
+-        if (right[cur] != 0) {
+-            cur = right[cur]
+-            while (left[cur] != 0) { cur = left[cur] }
+-            return cur
+-        }
+-        var p = parent[cur]
+-        while (p != 0 && cur == right[p]) { cur = p; p = parent[cur] }
+-        return p
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        var answer: Int64 = 0
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let parentData = parent.borrowData()
++            var cur = node
++            let child = rightData.read(cur)
++            if (child != 0) {
++                cur = child
++                while (true) {
++                    let following = leftData.read(cur)
++                    if (following == 0) { break }
++                    cur = following
++                }
++                answer = cur
++            } else {
++                var p = parentData.read(cur)
++                while (p != 0 && cur == rightData.read(p)) { cur = p; p = parentData.read(cur) }
++                answer = p
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (answer < 0 || answer >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
++        return answer
+     }
+     public func prev(node: Int64): Int64 {
+         if (node == 0) { return last() }
+-        var cur = node
+-        if (left[cur] != 0) {
+-            cur = left[cur]
+-            while (right[cur] != 0) { cur = right[cur] }
+-            return cur
+-        }
+-        var p = parent[cur]
+-        while (p != 0 && cur == left[p]) { cur = p; p = parent[cur] }
+-        return p
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        var answer: Int64 = 0
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let parentData = parent.borrowData()
++            var cur = node
++            let child = leftData.read(cur)
++            if (child != 0) {
++                cur = child
++                while (true) {
++                    let following = rightData.read(cur)
++                    if (following == 0) { break }
++                    cur = following
++                }
++                answer = cur
++            } else {
++                var p = parentData.read(cur)
++                while (p != 0 && cur == leftData.read(p)) { cur = p; p = parentData.read(cur) }
++                answer = p
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (answer < 0 || answer >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
++        return answer
+     }
+     public func find(wanted: Key): Int64 {
+         var node = root
+-        while (node != 0) {
+-            let order = keys.compareAt(node, wanted)
+-            if (order == 0) { return node }
+-            node = if (order < 0) { left[node] } else { right[node] }
+-        }
+-        return 0
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let keyData = keys.borrowData()
++            while (node != 0) {
++                let offset = node * 3
++                let first = keyData.read(offset)
++                var keyOrder: Int64 = 0
++                if (wanted.a != first) { keyOrder = if (wanted.a < first) { -1 } else { 1 } }
++                else {
++                    let second = keyData.read(offset + 1)
++                    if (wanted.b != second) { keyOrder = if (wanted.b < second) { -1 } else { 1 } }
++                    else {
++                        let third = keyData.read(offset + 2)
++                        if (wanted.c != third) { keyOrder = if (wanted.c < third) { -1 } else { 1 } }
++                    }
++                }
++                let order = keyOrder
++                if (order == 0) { break }
++                node = if (order < 0) { leftData.read(node) } else { rightData.read(node) }
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (node < 0 || node >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
++        return node
+     }
+     public func lower(wanted: Key): Int64 {
+         var node = root
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
+         var answer: Int64 = 0
+-        while (node != 0) {
+-            if (keys.compareAt(node, wanted) <= 0) {
+-                answer = node; node = left[node]
+-            } else { node = right[node] }
+-        }
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let keyData = keys.borrowData()
++            while (node != 0) {
++                let offset = node * 3
++                let first = keyData.read(offset)
++                var keyOrder: Int64 = 0
++                if (wanted.a != first) { keyOrder = if (wanted.a < first) { -1 } else { 1 } }
++                else {
++                    let second = keyData.read(offset + 1)
++                    if (wanted.b != second) { keyOrder = if (wanted.b < second) { -1 } else { 1 } }
++                    else {
++                        let third = keyData.read(offset + 2)
++                        if (wanted.c != third) { keyOrder = if (wanted.c < third) { -1 } else { 1 } }
++                    }
++                }
++                let order = keyOrder
++                if (order <= 0) {
++                    answer = node; node = leftData.read(node)
++                } else { node = rightData.read(node) }
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (answer < 0 || answer >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
+         return answer
+     }
+     public func upper(wanted: Key): Int64 {
+         var node = root
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
+         var answer: Int64 = 0
+-        while (node != 0) {
+-            if (keys.compareAt(node, wanted) < 0) {
+-                answer = node; node = left[node]
+-            } else { node = right[node] }
+-        }
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let keyData = keys.borrowData()
++            while (node != 0) {
++                let offset = node * 3
++                let first = keyData.read(offset)
++                var keyOrder: Int64 = 0
++                if (wanted.a != first) { keyOrder = if (wanted.a < first) { -1 } else { 1 } }
++                else {
++                    let second = keyData.read(offset + 1)
++                    if (wanted.b != second) { keyOrder = if (wanted.b < second) { -1 } else { 1 } }
++                    else {
++                        let third = keyData.read(offset + 2)
++                        if (wanted.c != third) { keyOrder = if (wanted.c < third) { -1 } else { 1 } }
++                    }
++                }
++                let order = keyOrder
++                if (order < 0) {
++                    answer = node; node = leftData.read(node)
++                } else { node = rightData.read(node) }
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (answer < 0 || answer >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
+         return answer
+     }
+     private func fixHeight(node: Int64): Unit {
+@@ -341,12 +470,33 @@
+         var node = root
+         var p: Int64 = 0
+         var order: Int64 = 0
+-        while (node != 0) {
+-            order = keys.compareAt(node, k)
+-            if (order == 0) { values[node] = v; return node }
+-            p = node
+-            node = if (order < 0) { left[node] } else { right[node] }
+-        }
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        // This scope ends before values writes, newNode, append, or rebalance.
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let keyData = keys.borrowData()
++            while (node != 0) {
++                let offset = node * 3
++                let first = keyData.read(offset)
++                var keyOrder: Int64 = 0
++                if (k.a != first) { keyOrder = if (k.a < first) { -1 } else { 1 } }
++                else {
++                    let second = keyData.read(offset + 1)
++                    if (k.b != second) { keyOrder = if (k.b < second) { -1 } else { 1 } }
++                    else {
++                        let third = keyData.read(offset + 2)
++                        if (k.c != third) { keyOrder = if (k.c < third) { -1 } else { 1 } }
++                    }
++                }
++                order = keyOrder
++                if (order == 0) { break }
++                p = node
++                node = if (order < 0) { leftData.read(node) } else { rightData.read(node) }
++            }
++        }
++        if (node != 0) { values[node] = v; return node }
+         let added = newNode(k, v, p)
+         if (p == 0) { root = added }
+         else if (order < 0) { left[p] = added }
+@@ -424,65 +574,186 @@
+ 
+     public func first(): Int64 {
+         var node = root
+-        while (node != 0 && left[node] != 0) { node = left[node] }
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        unsafe {
++            let edgeData = left.borrowData()
++            while (node != 0) {
++                let child = edgeData.read(node)
++                if (child == 0) { break }
++                node = child
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (node < 0 || node >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
+         return node
+     }
+     public func last(): Int64 {
+         var node = root
+-        while (node != 0 && right[node] != 0) { node = right[node] }
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        unsafe {
++            let edgeData = right.borrowData()
++            while (node != 0) {
++                let child = edgeData.read(node)
++                if (child == 0) { break }
++                node = child
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (node < 0 || node >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
+         return node
+     }
+     public func next(node: Int64): Int64 {
+         if (node == 0) { return 0 }
+-        var cur = node
+-        if (right[cur] != 0) {
+-            cur = right[cur]
+-            while (left[cur] != 0) { cur = left[cur] }
+-            return cur
+-        }
+-        var p = parent[cur]
+-        while (p != 0 && cur == right[p]) { cur = p; p = parent[cur] }
+-        return p
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        var answer: Int64 = 0
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let parentData = parent.borrowData()
++            var cur = node
++            let child = rightData.read(cur)
++            if (child != 0) {
++                cur = child
++                while (true) {
++                    let following = leftData.read(cur)
++                    if (following == 0) { break }
++                    cur = following
++                }
++                answer = cur
++            } else {
++                var p = parentData.read(cur)
++                while (p != 0 && cur == rightData.read(p)) { cur = p; p = parentData.read(cur) }
++                answer = p
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (answer < 0 || answer >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
++        return answer
+     }
+     public func prev(node: Int64): Int64 {
+         if (node == 0) { return last() }
+-        var cur = node
+-        if (left[cur] != 0) {
+-            cur = left[cur]
+-            while (right[cur] != 0) { cur = right[cur] }
+-            return cur
+-        }
+-        var p = parent[cur]
+-        while (p != 0 && cur == left[p]) { cur = p; p = parent[cur] }
+-        return p
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        var answer: Int64 = 0
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let parentData = parent.borrowData()
++            var cur = node
++            let child = leftData.read(cur)
++            if (child != 0) {
++                cur = child
++                while (true) {
++                    let following = rightData.read(cur)
++                    if (following == 0) { break }
++                    cur = following
++                }
++                answer = cur
++            } else {
++                var p = parentData.read(cur)
++                while (p != 0 && cur == leftData.read(p)) { cur = p; p = parentData.read(cur) }
++                answer = p
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (answer < 0 || answer >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
++        return answer
+     }
+     public func find(wanted: Key): Int64 {
+         var node = root
+-        while (node != 0) {
+-            let order = keys.compareAt(node, wanted)
+-            if (order == 0) { return node }
+-            node = if (order < 0) { left[node] } else { right[node] }
+-        }
+-        return 0
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let keyData = keys.borrowData()
++            while (node != 0) {
++                let offset = node * 3
++                let first = keyData.read(offset)
++                var keyOrder: Int64 = 0
++                if (wanted.a != first) { keyOrder = if (wanted.a < first) { -1 } else { 1 } }
++                else {
++                    let second = keyData.read(offset + 1)
++                    if (wanted.b != second) { keyOrder = if (wanted.b < second) { -1 } else { 1 } }
++                    else {
++                        let third = keyData.read(offset + 2)
++                        if (wanted.c != third) { keyOrder = if (wanted.c < third) { -1 } else { 1 } }
++                    }
++                }
++                let order = keyOrder
++                if (order == 0) { break }
++                node = if (order < 0) { leftData.read(node) } else { rightData.read(node) }
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (node < 0 || node >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
++        return node
+     }
+     public func lower(wanted: Key): Int64 {
+         var node = root
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
+         var answer: Int64 = 0
+-        while (node != 0) {
+-            if (keys.compareAt(node, wanted) <= 0) {
+-                answer = node; node = left[node]
+-            } else { node = right[node] }
+-        }
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let keyData = keys.borrowData()
++            while (node != 0) {
++                let offset = node * 3
++                let first = keyData.read(offset)
++                var keyOrder: Int64 = 0
++                if (wanted.a != first) { keyOrder = if (wanted.a < first) { -1 } else { 1 } }
++                else {
++                    let second = keyData.read(offset + 1)
++                    if (wanted.b != second) { keyOrder = if (wanted.b < second) { -1 } else { 1 } }
++                    else {
++                        let third = keyData.read(offset + 2)
++                        if (wanted.c != third) { keyOrder = if (wanted.c < third) { -1 } else { 1 } }
++                    }
++                }
++                let order = keyOrder
++                if (order <= 0) {
++                    answer = node; node = leftData.read(node)
++                } else { node = rightData.read(node) }
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (answer < 0 || answer >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
+         return answer
+     }
+     public func upper(wanted: Key): Int64 {
+         var node = root
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
+         var answer: Int64 = 0
+-        while (node != 0) {
+-            if (keys.compareAt(node, wanted) < 0) {
+-                answer = node; node = left[node]
+-            } else { node = right[node] }
+-        }
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let keyData = keys.borrowData()
++            while (node != 0) {
++                let offset = node * 3
++                let first = keyData.read(offset)
++                var keyOrder: Int64 = 0
++                if (wanted.a != first) { keyOrder = if (wanted.a < first) { -1 } else { 1 } }
++                else {
++                    let second = keyData.read(offset + 1)
++                    if (wanted.b != second) { keyOrder = if (wanted.b < second) { -1 } else { 1 } }
++                    else {
++                        let third = keyData.read(offset + 2)
++                        if (wanted.c != third) { keyOrder = if (wanted.c < third) { -1 } else { 1 } }
++                    }
++                }
++                let order = keyOrder
++                if (order < 0) {
++                    answer = node; node = leftData.read(node)
++                } else { node = rightData.read(node) }
++            }
++        }
++        // Keep this Map and its vector owners live through the final read.
++        if (answer < 0 || answer >= this.keys.size) { throw IndexOutOfBoundsException("AVL node index") }
+         return answer
+     }
+     private func fixHeight(node: Int64): Unit {
+@@ -554,12 +825,33 @@
+         var node = root
+         var p: Int64 = 0
+         var order: Int64 = 0
+-        while (node != 0) {
+-            order = keys.compareAt(node, k)
+-            if (order == 0) { values[node] = v; return node }
+-            p = node
+-            node = if (order < 0) { left[node] } else { right[node] }
+-        }
++        let nodeSlots = keys.size
++        if (node < 0 || node >= nodeSlots) { throw IndexOutOfBoundsException("AVL node index") }
++        // This scope ends before values writes, newNode, append, or rebalance.
++        unsafe {
++            let leftData = left.borrowData()
++            let rightData = right.borrowData()
++            let keyData = keys.borrowData()
++            while (node != 0) {
++                let offset = node * 3
++                let first = keyData.read(offset)
++                var keyOrder: Int64 = 0
++                if (k.a != first) { keyOrder = if (k.a < first) { -1 } else { 1 } }
++                else {
++                    let second = keyData.read(offset + 1)
++                    if (k.b != second) { keyOrder = if (k.b < second) { -1 } else { 1 } }
++                    else {
++                        let third = keyData.read(offset + 2)
++                        if (k.c != third) { keyOrder = if (k.c < third) { -1 } else { 1 } }
++                    }
++                }
++                order = keyOrder
++                if (order == 0) { break }
++                p = node
++                node = if (order < 0) { leftData.read(node) } else { rightData.read(node) }
++            }
++        }
++        if (node != 0) { values[node] = v; return node }
+         let added = newNode(k, v, p)
+         if (p == 0) { root = added }
+         else if (order < 0) { left[p] = added }

@@ -1,0 +1,30 @@
+{
+  "frozen_at": "2026-10-19T19:12:47.335613+00:00",
+  "candidate": "tail-transport",
+  "source_sha256": "edfc4c8bc05a6d5dabd2c845d7710c6c5417efb1e73c841d1b4e6dde3a573dbe",
+  "binary_sha256": "f38540b05971193e32ee502b61759f0945f673089fadb681c686444858e46f7a",
+  "parent_source_sha256": "a843822451c2a7c5e07330daa33268fc77bccfbc08fd196bfaf98a673ae24cfe",
+  "fresh_sets": [
+    {
+      "prefix": "base64-",
+      "manifest": "evaluation/fresh/manifest.json",
+      "manifest_sha256": "474285df698a2735a672e96507e2c503abdde4f7fd819bed40702e9dcb46dc47",
+      "generator": "evaluation/generate_fresh.py",
+      "generator_sha256": "b9b9253a98f6b8fd8e516e7244562ce294b794b8926760bba3b4c3568fb53d3f"
+    },
+    {
+      "prefix": "late32-",
+      "manifest": "evaluation/fresh-late/manifest.json",
+      "manifest_sha256": "0c12bd0d3894277eb6de5354abaa3fe630102b1d8fa716f91fdbe356aa5e02f0",
+      "generator": "evaluation/generate_fresh_late.py",
+      "generator_sha256": "ea83c3d1e781ba7e3fb66e0940430d272787979517498568ad04ec68d3002df3"
+    }
+  ],
+  "screen_known_result": {
+    "wins": 4,
+    "ties": 286,
+    "losses": 3
+  },
+  "reason": "Only profile with a stable pre-sync win and no loss on affected causal reference traces. Known complete screen has CPU-sensitive non-geometric losses: strict gate not passed; fresh run diagnostic, not automatic promotion.",
+  "no_tuning": "No changes or candidate switching after reading fresh outcomes. Newly observed inputs become regression data."
+}

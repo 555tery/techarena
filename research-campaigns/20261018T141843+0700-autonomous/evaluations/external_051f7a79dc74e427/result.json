@@ -1,0 +1,156 @@
+{
+  "status": "completed",
+  "id": "external_051f7a79dc74e427",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/exact_slot_growth/sticky_solution.cpp",
+  "sha256": "051f7a79dc74e427e202f658e9be78ea7bfcc873ca0544bd1995e91fe1be8cff",
+  "idea": "Committed exact-size recycling epoch with one-way retirement on observed demand drift or non-growth; eliminate per-decision rank-window policy mixing.",
+  "parent": "external_86b23f747fd69181",
+  "weighted_score": 29.772793377706172,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 5060,
+      "kpi": 0.9144268774703558,
+      "weighted_score": 0.914426877470356
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22600,
+      "kpi": 0.900929203539823,
+      "weighted_score": 0.900929203539823
+    },
+    {
+      "case": "12",
+      "T": 10500,
+      "kpi": 0.9760952380952381,
+      "weighted_score": 3.904380952380953
+    },
+    {
+      "case": "13",
+      "T": 3420,
+      "kpi": 0.9333333333333333,
+      "weighted_score": 3.733333333333333
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438640,
+      "kpi": 0.9546712566113441,
+      "weighted_score": 9.546712566113442
+    }
+  ],
+  "fresh": {
+    "mean_delta": -0.007706361688623246,
+    "worst_delta": -0.07715243857986442,
+    "wins": 3,
+    "regressions": 14,
+    "ties": 13,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.07715243857986442,
+        "baseline_T": 8700,
+        "candidate_T": 9460
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "delta": -0.050525426116354466,
+        "baseline_T": 21700,
+        "candidate_T": 22900
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": -0.04471557271557269,
+        "baseline_T": 17640,
+        "candidate_T": 18500
+      },
+      {
+        "case": "dev_10_repeated_sizes",
+        "delta": -0.035296233733733806,
+        "baseline_T": 159840,
+        "candidate_T": 165760
+      },
+      {
+        "case": "dev_22_frames",
+        "delta": -0.016194337157333427,
+        "baseline_T": 27180,
+        "candidate_T": 27640
+      },
+      {
+        "case": "dev_18_frames",
+        "delta": -0.011653757888697602,
+        "baseline_T": 1660,
+        "candidate_T": 1680
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8010921347829809,
+  "max_cpu_s": 1.047434,
+  "max_rss_mib": 14.28125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_051f7a79dc74e427/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_051f7a79dc74e427/fresh_dev/harness/summary.json",
+  "finished_at": 1792314772.482954,
+  "balanced_gate": false,
+  "hypothesis": "The preceding exact-slot candidate interleaves normal allocation and size-owned recycling, leaving29318 stale cached footprints in case15. Keep the same entrance evidence but commit to one recycling epoch; retire permanently after observed unit domination or loss of net growth. This tests coherent slot ownership, not another numeric threshold sweep. Structural cohort/trend routing remains protected. No measured gain claimed.",
+  "causality": "Only prior operation ranks, current window counts, current free intervals and observed allocation frontier. Same strict current-footprint revalidation as the audited parent. No test IDs, future reads, saved answers or external state. Only adds two boolean mode states and diagnostic timestamps; all numeric thresholds unchanged. Strict C++20 Wall Wextra Werror syntax compile passed.",
+  "origin": "independent branch inbox"
+}

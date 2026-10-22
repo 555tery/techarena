@@ -1,0 +1,665 @@
+{
+  "created_utc": "2026-10-20T14:38:20.128253+00:00",
+  "status": "local_validation_complete; server_14_accepted_tle15",
+  "source": "release/solution.cj",
+  "source_sha256": "308d230d99b4bfd52838b9f0ff1086c8838c2ff3e05ea296903c78f1947b14cc",
+  "source_bytes": 1378454,
+  "previous_submission": {
+    "id": 1667192,
+    "score": 15.85787,
+    "accepted": 12,
+    "tle": [
+      9,
+      14,
+      15
+    ],
+    "source_sha256": "fd5fe184cb85bf47c18085a3ef12ceb36ae20168398dd00d8983f16165b8fc9a"
+  },
+  "protocol": {
+    "compiler": "Official Cangjie 1.0.5, cjnative aarch64-apple-darwin",
+    "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "workers": 1,
+    "cjProcessorNum": 1,
+    "cpu": "Whole solver process user+system CPU, including all runtime threads",
+    "memory": "Peak process RSS, including native allocations",
+    "limits": {
+      "cpu_s": 5,
+      "rss_mib": 256
+    },
+    "hard_cpu_affinity": false,
+    "limitations": [
+      "Local macOS/M1 timings are not Windows10/Pentium G5420 timings.",
+      "The server's Cangjie optimization flags and exact CPU/RSS were not available.",
+      "Only a new server submission can confirm that the competition TLE is resolved."
+    ]
+  },
+  "corpus": {
+    "total": 2637,
+    "archive": 2537,
+    "fresh": 96,
+    "open15_extra": 4
+  },
+  "measurements": {
+    "o0": {
+      "completed": 2637,
+      "response_and_kpi_matches": 2637,
+      "resource_failures": 2,
+      "cpu_total_s": 1615.744626,
+      "cpu_max_s": 5.901387,
+      "rss_max_mib": 184.046875,
+      "open15_score": 30.05605802561868,
+      "open15": [
+        {
+          "test": 1,
+          "cpu_s": 0.090694,
+          "rss_mib": 19.40625,
+          "kpi": 0.9,
+          "score": 0.09,
+          "response_sha256": "51a96e4d7cf19f307db4536b036a7df113914d5f778015538395657751a74d95",
+          "within_limits": true
+        },
+        {
+          "test": 2,
+          "cpu_s": 0.05188,
+          "rss_mib": 21.125,
+          "kpi": 1.0,
+          "score": 1.0,
+          "response_sha256": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2",
+          "within_limits": true
+        },
+        {
+          "test": 3,
+          "cpu_s": 0.049273,
+          "rss_mib": 19.421875,
+          "kpi": 0.75,
+          "score": 0.75,
+          "response_sha256": "f67a3e6b63e6c24698ff43481b4fbaaad28bf7c021acfead07414bba708c5f20",
+          "within_limits": true
+        },
+        {
+          "test": 4,
+          "cpu_s": 0.048417999999999996,
+          "rss_mib": 19.46875,
+          "kpi": 0.6666666666666666,
+          "score": 0.666666666666667,
+          "response_sha256": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b",
+          "within_limits": true
+        },
+        {
+          "test": 5,
+          "cpu_s": 0.259644,
+          "rss_mib": 126.75,
+          "kpi": 0.9338721528288023,
+          "score": 0.933872152828802,
+          "response_sha256": "8a37fb4d81a30a7fe9924d5e4798869342f4939971313b8346671ed7cb09893b",
+          "within_limits": true
+        },
+        {
+          "test": 6,
+          "cpu_s": 0.048964,
+          "rss_mib": 19.4375,
+          "kpi": 0.9,
+          "score": 0.9,
+          "response_sha256": "139b1d9c7612b2e72a081dbb575c6f1f469f3bbaf449a2a9cc1f3b94fff265fe",
+          "within_limits": true
+        },
+        {
+          "test": 7,
+          "cpu_s": 0.120953,
+          "rss_mib": 89.96875,
+          "kpi": 0.9982142857142857,
+          "score": 0.998214285714286,
+          "response_sha256": "0096fb61ccd4b4684831638ba1cdf07ee49cf090d47b7af07cba276610cc782e",
+          "within_limits": true
+        },
+        {
+          "test": 8,
+          "cpu_s": 0.271537,
+          "rss_mib": 133.25,
+          "kpi": 0.9802966101694915,
+          "score": 0.980296610169492,
+          "response_sha256": "483eecbd87b1d2a75efbba22a03d87de7737957a14d84fe3f78b0dd9f41d4035",
+          "within_limits": true
+        },
+        {
+          "test": 9,
+          "cpu_s": 0.758719,
+          "rss_mib": 137.515625,
+          "kpi": 0.6598240469208211,
+          "score": 0.659824046920821,
+          "response_sha256": "f6190855746e12ad466d94251e0b813e3fb97e70c1231245c52729d502880e2b",
+          "within_limits": true
+        },
+        {
+          "test": 10,
+          "cpu_s": 0.17133900000000002,
+          "rss_mib": 42.625,
+          "kpi": 0.8,
+          "score": 0.8,
+          "response_sha256": "d415657174726711f6ecfd1e5c41bf1d3074d693c5a3c803bd94e68af9efa85e",
+          "within_limits": true
+        },
+        {
+          "test": 11,
+          "cpu_s": 0.24973800000000002,
+          "rss_mib": 111.609375,
+          "kpi": 0.9049333333333334,
+          "score": 0.904933333333333,
+          "response_sha256": "30e2bdf3c66a8685f9ef60db3ee832f80052c00db1b6d64f74b549310475854f",
+          "within_limits": true
+        },
+        {
+          "test": 12,
+          "cpu_s": 0.206816,
+          "rss_mib": 128.953125,
+          "kpi": 0.9911992263056093,
+          "score": 3.964796905222437,
+          "response_sha256": "5e03c66ad298736ddd17fd300b382f466a9b03c079c99d0988cd7f91a2b43f0e",
+          "within_limits": true
+        },
+        {
+          "test": 13,
+          "cpu_s": 0.323303,
+          "rss_mib": 129.453125,
+          "kpi": 0.9672727272727273,
+          "score": 3.869090909090909,
+          "response_sha256": "80cbb817bdc267b7c5fbdd8f5fa106ecc024cea5b5bcfd9d7a01bb5c6c582379",
+          "within_limits": true
+        },
+        {
+          "test": 14,
+          "cpu_s": 0.489249,
+          "rss_mib": 132.140625,
+          "kpi": 0.9969328397673188,
+          "score": 3.987731359069275,
+          "response_sha256": "49624f54a92413cc34cde752abfa1bb94c02430a4dae0bdc9d05b88401d6eabf",
+          "within_limits": true
+        },
+        {
+          "test": 15,
+          "cpu_s": 3.40731,
+          "rss_mib": 114.125,
+          "kpi": 0.9550631756602654,
+          "score": 9.550631756602655,
+          "response_sha256": "60befe3158ee22519fad2d47dae38714e37c59d99ad7782ccaf60df17617b8da",
+          "within_limits": true
+        }
+      ],
+      "slowest": [
+        {
+          "id": "a60a69f623f4a603a3c897664a1f228b56458df052d1fc08397d842e163f6b5d",
+          "origin": "prototypes/pipes_open15_overfit_20261019/continuation/speed-custom-review-20261019/fallback-inputs/fifo.in",
+          "cpu_s": 5.901387,
+          "rss_mib": 132.828125
+        },
+        {
+          "id": "c51a00bd865e7242d2d1b923f87bb20f235941c391f5a7db0cf9f5a98a2905a8",
+          "origin": "results/pipes/improvement/paired_full_suffix_ranker/inputs/validation/2026101952_200000_long-heavy_oldest_steady.in",
+          "cpu_s": 5.0835859999999995,
+          "rss_mib": 91.875
+        },
+        {
+          "id": "01e2f6fbf401aa5f13f98ca8e2da46bdf52ade5a6e835a7b95a3ab8ac610c568",
+          "origin": "results/pipes/improvement/case15_coalescence_local_20261017/validation/inputs/sealed_validation/seal08.in",
+          "cpu_s": 4.900831,
+          "rss_mib": 124.53125
+        },
+        {
+          "id": "94a6eee97e7700178bb0ad44694ef1dea859f13b47165564894bac8adfa278b9",
+          "origin": "results/pipes/improvement/policy_conditioned_unique8/inputs/validation/200000_long-heavy_oldest.in",
+          "cpu_s": 4.834935000000001,
+          "rss_mib": 87.09375
+        },
+        {
+          "id": "071a9071e4ef638b1e1f27cc91862331d0631b01f352bca691605eb7fa4fb9d1",
+          "origin": "shinka-pipes/search-v3/task/data/search/s3_107_additive_cohorts.in",
+          "cpu_s": 4.774668,
+          "rss_mib": 68.046875
+        },
+        {
+          "id": "34ff4e1bb0bab96a17f6ae72b430ff762ecf48f8143104259c26b5c5cc0835dc",
+          "origin": "results/pipes/improvement/learned_gap_value/inputs/validation/200000_long-heavy_oldest_0.in",
+          "cpu_s": 4.75067,
+          "rss_mib": 91.90625
+        },
+        {
+          "id": "6c04fb4db56cff2851ae292e6436639fcae58cd82f4322beacfbe8d7ed3c685b",
+          "origin": "results/pipes/improvement/learned_gap_value/inputs/qualification_confirmatory/200000_long-heavy_oldest_steady.in",
+          "cpu_s": 4.740436,
+          "rss_mib": 85.5
+        },
+        {
+          "id": "6dfd9b85394cb600ec751fbc04d1816a66e36478dcc1d07e6040ffad4cf1a0b1",
+          "origin": "results/pipes/improvement/paired_full_suffix_ranker/inputs/validation/2026101958_200000_long-heavy_longest_steady.in",
+          "cpu_s": 4.600315999999999,
+          "rss_mib": 99.578125
+        },
+        {
+          "id": "873e4c11e659aa2ea6f028c33c5094c424786133c31dccce4368ae3bf2f20a4a",
+          "origin": "prototypes/pipes_cangjie_port_20261020/release/tests/stress/stress-001.in",
+          "cpu_s": 4.571534,
+          "rss_mib": 106.40625
+        },
+        {
+          "id": "26b87847de6788ee0ace0bb770d13a14c47333a0147c22a037b57f57fbde1b2c",
+          "origin": "prototypes/pipes_architecture_v2_20261018/data/final/heavy_tail_rank_03.in",
+          "cpu_s": 4.562041,
+          "rss_mib": 103.53125
+        }
+      ],
+      "build": {
+        "command": [
+          "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/toolchain105/cangjie/bin/cjc",
+          "-O0",
+          "--set-runtime-rpath",
+          "-p",
+          "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-final",
+          "-o",
+          "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/bin/candidate-final-o0"
+        ],
+        "sdk_version": "Cangjie Compiler: 1.0.5 (cjnative)\nTarget: aarch64-apple-darwin\n",
+        "returncode": 0,
+        "duration_s": 3.0893430709838867,
+        "source_sha256": {
+          "solution.cj": "308d230d99b4bfd52838b9f0ff1086c8838c2ff3e05ea296903c78f1947b14cc"
+        },
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+        "binary_sha256": "3229f25152eaa29242e5d46e172349a299cdeca99de50cd439443c2008300311"
+      },
+      "manifest": {
+        "binary": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/bin/candidate-final-o0",
+        "binary_sha256": "3229f25152eaa29242e5d46e172349a299cdeca99de50cd439443c2008300311",
+        "source": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-final/solution.cj",
+        "source_sha256": "308d230d99b4bfd52838b9f0ff1086c8838c2ff3e05ea296903c78f1947b14cc",
+        "baseline_freeze_sha256": "36eaf4aa8dd92f3654bda3aad114b7e3f6d208da446db5100a4de55310c35488",
+        "baseline_records_sha256": "cbce687947c02d7ac650540ff53927335f4758a21733d2cbd69e63b666d44131",
+        "runner_sha256": "20b2714fa2a8e0fee1fae27595db5d4917140202a4d6ef379f1b7637a84cc151",
+        "workers": 1,
+        "cjProcessorNum": 1,
+        "cpu_limit_s": 5,
+        "memory_limit_mib": 256,
+        "measurement": "Whole solver process CPU user+system; macOS arm64; no hard CPU affinity"
+      },
+      "records_sha256": "5a6378e9dcf1994604ff68d8e73a82312a01d0969f4352ff536d35fdc215b2ec"
+    },
+    "o2": {
+      "completed": 2637,
+      "response_and_kpi_matches": 2637,
+      "resource_failures": 0,
+      "cpu_total_s": 543.702912,
+      "cpu_max_s": 1.774827,
+      "rss_max_mib": 148.640625,
+      "open15_score": 30.05605802561868,
+      "open15": [
+        {
+          "test": 1,
+          "cpu_s": 0.032684,
+          "rss_mib": 10.625,
+          "kpi": 0.9,
+          "score": 0.09,
+          "response_sha256": "51a96e4d7cf19f307db4536b036a7df113914d5f778015538395657751a74d95",
+          "within_limits": true
+        },
+        {
+          "test": 2,
+          "cpu_s": 0.023373,
+          "rss_mib": 10.828125,
+          "kpi": 1.0,
+          "score": 1.0,
+          "response_sha256": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2",
+          "within_limits": true
+        },
+        {
+          "test": 3,
+          "cpu_s": 0.018193,
+          "rss_mib": 10.609375,
+          "kpi": 0.75,
+          "score": 0.75,
+          "response_sha256": "f67a3e6b63e6c24698ff43481b4fbaaad28bf7c021acfead07414bba708c5f20",
+          "within_limits": true
+        },
+        {
+          "test": 4,
+          "cpu_s": 0.01551,
+          "rss_mib": 10.578125,
+          "kpi": 0.6666666666666666,
+          "score": 0.666666666666667,
+          "response_sha256": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b",
+          "within_limits": true
+        },
+        {
+          "test": 5,
+          "cpu_s": 0.067394,
+          "rss_mib": 50.75,
+          "kpi": 0.9338721528288023,
+          "score": 0.933872152828802,
+          "response_sha256": "8a37fb4d81a30a7fe9924d5e4798869342f4939971313b8346671ed7cb09893b",
+          "within_limits": true
+        },
+        {
+          "test": 6,
+          "cpu_s": 0.015389,
+          "rss_mib": 10.609375,
+          "kpi": 0.9,
+          "score": 0.9,
+          "response_sha256": "139b1d9c7612b2e72a081dbb575c6f1f469f3bbaf449a2a9cc1f3b94fff265fe",
+          "within_limits": true
+        },
+        {
+          "test": 7,
+          "cpu_s": 0.047527,
+          "rss_mib": 53.453125,
+          "kpi": 0.9982142857142857,
+          "score": 0.998214285714286,
+          "response_sha256": "0096fb61ccd4b4684831638ba1cdf07ee49cf090d47b7af07cba276610cc782e",
+          "within_limits": true
+        },
+        {
+          "test": 8,
+          "cpu_s": 0.057169,
+          "rss_mib": 44.640625,
+          "kpi": 0.9802966101694915,
+          "score": 0.980296610169492,
+          "response_sha256": "483eecbd87b1d2a75efbba22a03d87de7737957a14d84fe3f78b0dd9f41d4035",
+          "within_limits": true
+        },
+        {
+          "test": 9,
+          "cpu_s": 0.13753200000000002,
+          "rss_mib": 141.578125,
+          "kpi": 0.6598240469208211,
+          "score": 0.659824046920821,
+          "response_sha256": "f6190855746e12ad466d94251e0b813e3fb97e70c1231245c52729d502880e2b",
+          "within_limits": true
+        },
+        {
+          "test": 10,
+          "cpu_s": 0.060577,
+          "rss_mib": 19.234375,
+          "kpi": 0.8,
+          "score": 0.8,
+          "response_sha256": "d415657174726711f6ecfd1e5c41bf1d3074d693c5a3c803bd94e68af9efa85e",
+          "within_limits": true
+        },
+        {
+          "test": 11,
+          "cpu_s": 0.082383,
+          "rss_mib": 50.328125,
+          "kpi": 0.9049333333333334,
+          "score": 0.904933333333333,
+          "response_sha256": "30e2bdf3c66a8685f9ef60db3ee832f80052c00db1b6d64f74b549310475854f",
+          "within_limits": true
+        },
+        {
+          "test": 12,
+          "cpu_s": 0.039106,
+          "rss_mib": 44.984375,
+          "kpi": 0.9911992263056093,
+          "score": 3.964796905222437,
+          "response_sha256": "5e03c66ad298736ddd17fd300b382f466a9b03c079c99d0988cd7f91a2b43f0e",
+          "within_limits": true
+        },
+        {
+          "test": 13,
+          "cpu_s": 0.070253,
+          "rss_mib": 44.25,
+          "kpi": 0.9672727272727273,
+          "score": 3.869090909090909,
+          "response_sha256": "80cbb817bdc267b7c5fbdd8f5fa106ecc024cea5b5bcfd9d7a01bb5c6c582379",
+          "within_limits": true
+        },
+        {
+          "test": 14,
+          "cpu_s": 0.14474199999999998,
+          "rss_mib": 71.671875,
+          "kpi": 0.9969328397673188,
+          "score": 3.987731359069275,
+          "response_sha256": "49624f54a92413cc34cde752abfa1bb94c02430a4dae0bdc9d05b88401d6eabf",
+          "within_limits": true
+        },
+        {
+          "test": 15,
+          "cpu_s": 1.276088,
+          "rss_mib": 54.4375,
+          "kpi": 0.9550631756602654,
+          "score": 9.550631756602655,
+          "response_sha256": "60befe3158ee22519fad2d47dae38714e37c59d99ad7782ccaf60df17617b8da",
+          "within_limits": true
+        }
+      ],
+      "slowest": [
+        {
+          "id": "9f770ebec7f3df8688448589815cc3a5b6ef26fe2ad462fe7790cf49767f4bdf",
+          "origin": "shinka-pipes/search-v3/task/data/search/s3_121_size_biased_deletion.in",
+          "cpu_s": 1.774827,
+          "rss_mib": 77.578125
+        },
+        {
+          "id": "071a9071e4ef638b1e1f27cc91862331d0631b01f352bca691605eb7fa4fb9d1",
+          "origin": "shinka-pipes/search-v3/task/data/search/s3_107_additive_cohorts.in",
+          "cpu_s": 1.7078,
+          "rss_mib": 43.359375
+        },
+        {
+          "id": "5a8e86c3f1c842db9b051caf8ed39e6b4c675d179373521853c93396fe39da6a",
+          "origin": "shinka-pipes/search-v3/task/data/search/s3_119_large_live_set.in",
+          "cpu_s": 1.68879,
+          "rss_mib": 76.078125
+        },
+        {
+          "id": "e5dc7556532aff4c44bc8a6076ff510a636e8c1203591fdfb663bdd3ad437082",
+          "origin": "prototypes/pipes_cangjie_port_20261020/fresh_tests/port-04-3.in",
+          "cpu_s": 1.657124,
+          "rss_mib": 46.03125
+        },
+        {
+          "id": "307c2f35b676ebe998e8acf03b513beedb80aed7893f609ac6875f2609e6b2a4",
+          "origin": "prototypes/pipes_g5420_cpu_20261020/tests/stress/f05-stress-200k-high-live-set.in",
+          "cpu_s": 1.654212,
+          "rss_mib": 72.390625
+        },
+        {
+          "id": "01e2f6fbf401aa5f13f98ca8e2da46bdf52ade5a6e835a7b95a3ab8ac610c568",
+          "origin": "results/pipes/improvement/case15_coalescence_local_20261017/validation/inputs/sealed_validation/seal08.in",
+          "cpu_s": 1.645947,
+          "rss_mib": 47.46875
+        },
+        {
+          "id": "b1d093e6f87ad445f72fc183f536c31a67bbb8872ef7a4c82779189e919b2385",
+          "origin": "prototypes/pipes_architecture_v2_20261018/data/final/delayed_echo_03.in",
+          "cpu_s": 1.64412,
+          "rss_mib": 55.59375
+        },
+        {
+          "id": "873e4c11e659aa2ea6f028c33c5094c424786133c31dccce4368ae3bf2f20a4a",
+          "origin": "prototypes/pipes_cangjie_port_20261020/release/tests/stress/stress-001.in",
+          "cpu_s": 1.642652,
+          "rss_mib": 50.625
+        },
+        {
+          "id": "ac3e082d342e95a733b70e17b1d0d2b9bb1bfe40d193bfaa1beed0f44b81dd1b",
+          "origin": "prototypes/pipes_memory_robust_20261019/evaluation/confirmation/b21-stress-200k-high-live.in",
+          "cpu_s": 1.638185,
+          "rss_mib": 81.640625
+        },
+        {
+          "id": "c0b2c16245d1c60c9f6e3912deff54ea60dd26785aa81920a004d3dff6ddaa30",
+          "origin": "shinka-pipes/task-synthetic/data/search/s029_large_live_set.in",
+          "cpu_s": 1.637723,
+          "rss_mib": 50.65625
+        }
+      ],
+      "build": {
+        "command": [
+          "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/toolchain105/cangjie/bin/cjc",
+          "-O2",
+          "--set-runtime-rpath",
+          "-p",
+          "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-final",
+          "-o",
+          "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/bin/candidate-final-o2"
+        ],
+        "sdk_version": "Cangjie Compiler: 1.0.5 (cjnative)\nTarget: aarch64-apple-darwin\n",
+        "returncode": 0,
+        "duration_s": 5.139364719390869,
+        "source_sha256": {
+          "solution.cj": "308d230d99b4bfd52838b9f0ff1086c8838c2ff3e05ea296903c78f1947b14cc"
+        },
+        "SDKROOT": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
+        "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+        "binary_sha256": "1cafe39b4cfcfb914ab2bacb61cb04eebe4b5abfaa47833261abcc407b7a2521"
+      },
+      "manifest": {
+        "binary": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/bin/candidate-final-o2",
+        "binary_sha256": "1cafe39b4cfcfb914ab2bacb61cb04eebe4b5abfaa47833261abcc407b7a2521",
+        "source": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-final/solution.cj",
+        "source_sha256": "308d230d99b4bfd52838b9f0ff1086c8838c2ff3e05ea296903c78f1947b14cc",
+        "baseline_freeze_sha256": "36eaf4aa8dd92f3654bda3aad114b7e3f6d208da446db5100a4de55310c35488",
+        "baseline_records_sha256": "cbce687947c02d7ac650540ff53927335f4758a21733d2cbd69e63b666d44131",
+        "runner_sha256": "20b2714fa2a8e0fee1fae27595db5d4917140202a4d6ef379f1b7637a84cc151",
+        "workers": 1,
+        "cjProcessorNum": 1,
+        "cpu_limit_s": 5,
+        "memory_limit_mib": 256,
+        "measurement": "Whole solver process CPU user+system; macOS arm64; no hard CPU affinity"
+      },
+      "records_sha256": "89bcd2a24e8bf948f1ed77d7383aad9e8e0a6f79eaa5c5696f2ec21b620d7152"
+    }
+  },
+  "open_failures_before_after_o0": [
+    {
+      "test": 9,
+      "baseline_cpu_s": 2.677166,
+      "candidate_cpu_s": 0.758719,
+      "speedup": 3.528534279489508,
+      "baseline_rss_mib": 151.828125,
+      "candidate_rss_mib": 137.515625
+    },
+    {
+      "test": 14,
+      "baseline_cpu_s": 4.206157999999999,
+      "candidate_cpu_s": 0.489249,
+      "speedup": 8.59717240096556,
+      "baseline_rss_mib": 134.625,
+      "candidate_rss_mib": 132.140625
+    },
+    {
+      "test": 15,
+      "baseline_cpu_s": 25.125709999999998,
+      "candidate_cpu_s": 3.40731,
+      "speedup": 7.374060475859255,
+      "baseline_rss_mib": 129.078125,
+      "candidate_rss_mib": 114.125
+    }
+  ],
+  "changes": [
+    "Exact concrete Int64 collections remove generic overhead in integer hot paths.",
+    "Incremental counters replace repeated scans of unchanged recent history.",
+    "The exact last three run lengths/counts replace repeated scans of the 2048-entry window; counts are clipped to the current suffix.",
+    "AVL repair stops only when the subtree height is unchanged.",
+    "Fixed native numeric buffers remove large VArray copies at -O0.",
+    "DP keeps all FP updates in the same order, excluding only exactly-zero rate sizes.",
+    "The minimum active reward skips only elimination passes that would perform no FP update.",
+    "Integer overflow traps are removed only from the two explicitly bounded DP methods.",
+    "Bounded DP borrows stable numeric buffers to avoid per-cell wrapper overhead.",
+    "Native numeric tree storage, contiguous Key triples and direct comparisons retain the same indexed AVL sequence.",
+    "Transient AVL pointer borrows keep their strong owner alive with public std.runtime.blackBox; no borrow crosses a reallocation.",
+    "Small AVL height/parent helpers are expanded with the same integer reads and writes.",
+    "Eight ordered lifetime age bins use an exactly equivalent comparison tree.",
+    "Large-gap DP request loops are expanded in ascending size order; small-gap loops and every FP accumulation remain unchanged.",
+    "Lifetime fit expands exposure formulas, avoids duplicate cell reads and reuses identical borrowed-exposure quotients; accumulation order is unchanged.",
+    "Both DP methods explicitly keep their fixed-buffer owners strongly reachable after the last raw access with blackBox(this)."
+  ],
+  "unchanged": [
+    "Replay tables and guards, policy thresholds, rollout depth and budgets",
+    "Deterministic random sequence, floating-point recurrence and tie breaking",
+    "Interactive response protocol with immediate flush"
+  ],
+  "audit_files": [
+    "audit/age-bin-tree-equivalence.json",
+    "audit/avl-borrows-fenced.json",
+    "audit/avl-borrows.json",
+    "audit/avl-early-stop.json",
+    "audit/avl-inline-equivalence.json",
+    "audit/avl-mutation-borrows.json",
+    "audit/cached-counts.json",
+    "audit/candidate-v1-equivalence.json",
+    "audit/dp-flat-equivalence.json",
+    "audit/dp-min-bound-equivalence.json",
+    "audit/dp-owner-fences.json",
+    "audit/dp-scalars-equivalence.json",
+    "audit/dp-support.json",
+    "audit/dp-unrolled-equivalence.json",
+    "audit/exact-fast-perf-static.json",
+    "audit/final-portability.json",
+    "audit/fit-inline-equivalence.json",
+    "audit/flat-keys-equivalence.json",
+    "audit/key-compare-equivalence.json",
+    "audit/lifetime-native.json",
+    "audit/native-dp-equivalence.json",
+    "audit/native-maps-storage.json",
+    "audit/primal-int-equivalence.json",
+    "audit/runtime_io_review.json",
+    "audit/storage105.json",
+    "audit/version105.json"
+  ],
+  "rejected_experiments": [
+    "Native wrappers for lifetime structs regressed -O0 CPU and are not included.",
+    "DP scalar rate/reward storage regressed the focused timings and is not included.",
+    "Diagnostic DP memoization opportunity was too small on the measured heavy streams; no memoization was added.",
+    "The if(true)-scoped unroll triggered Cangjie 1.0.5 unreachable warnings; the selected source uses independently checked unique local names."
+  ],
+  "server": {
+    "user_authorized_resubmission": true,
+    "source_sha256": "308d230d99b4bfd52838b9f0ff1086c8838c2ff3e05ea296903c78f1947b14cc",
+    "source": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/release/solution.cj",
+    "upload_file": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/release/solution-upload.txt",
+    "browser": "Safari",
+    "checked_utc": "2026-10-20T15:09:41.011506+00:00",
+    "status": "tested",
+    "status_string": "AAAAAAAAAAAAAAT",
+    "submitted": true,
+    "submission_id": 1667365,
+    "submitted_at_site": "2026-10-20 22:06:59",
+    "compiler": "Cangjie 1.0.5",
+    "task": "Трубопровод",
+    "result_url": "https://olympic.nsu.ru/nsuts-new/solution?id=1667365",
+    "waiting_for_user_result": false,
+    "polling_stopped": true,
+    "server_source_bytes_verified": false,
+    "submission_action": "Submission appeared after manual UI intervention; final submit click was not performed or observed by the agent.",
+    "evidence": "observed-1667365.txt",
+    "next_action": "Continue the authorized exact-output-preserving TLE15 fix locally; submit only after validation.",
+    "accepted_tests": 14,
+    "time_limit_tests": [
+      15
+    ],
+    "visible_score": 20.50542,
+    "last_observed_at": "2026-10-21T10:25:51.775722+00:00",
+    "outputs_archive": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/platform/archive_1667365",
+    "outputs_match": true,
+    "remaining_test_prefix_match": true,
+    "complete_commands_on_test15": 88477
+  },
+  "archive_limit_comparison_o0": [
+    {
+      "id": "a60a69f623f4a603a3c897664a1f228b56458df052d1fc08397d842e163f6b5d",
+      "origin": "prototypes/pipes_open15_overfit_20261019/continuation/speed-custom-review-20261019/fallback-inputs/fifo.in",
+      "baseline_cpu_s": 29.345227,
+      "candidate_cpu_s": 5.901387,
+      "baseline_within_limits": false,
+      "candidate_within_limits": false,
+      "response_and_kpi_equal": true
+    },
+    {
+      "id": "c51a00bd865e7242d2d1b923f87bb20f235941c391f5a7db0cf9f5a98a2905a8",
+      "origin": "results/pipes/improvement/paired_full_suffix_ranker/inputs/validation/2026101952_200000_long-heavy_oldest_steady.in",
+      "baseline_cpu_s": 18.781068,
+      "candidate_cpu_s": 5.0835859999999995,
+      "baseline_within_limits": false,
+      "candidate_within_limits": false,
+      "response_and_kpi_equal": true
+    }
+  ]
+}

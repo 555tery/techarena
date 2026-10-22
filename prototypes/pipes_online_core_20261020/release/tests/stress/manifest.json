@@ -1,0 +1,19 @@
+{
+  "cases": [
+    {
+      "id": "stress-000",
+      "file": "stress-000.in",
+      "sha256": "1b84a93583c818da03650ed3fd71175e7d5507e010c17951644aa30bc74dcd34"
+    },
+    {
+      "id": "stress-001",
+      "file": "stress-001.in",
+      "sha256": "ca14c288ae12d129ffbed4586314e8ee1d20c54b142961a66ae94b27ef6cb0af"
+    },
+    {
+      "id": "stress-002",
+      "file": "stress-002.in",
+      "sha256": "36054ed773b9c134b1802b68c471ec50f6da60625ffe1a185fe754686d74e5e9"
+    }
+  ]
+}

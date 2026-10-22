@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "evaluation_0",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0005/candidate_0.cpp",
+  "sha256": "d6b0cc6e40ad942dcc3b492aae6609708c6caefd7a00cebfdd55d1bcb63fb8f2",
+  "idea": "Section-opportunity tie-break: при равном dual-loss учитывать точную стоимость ближайшего расширения секциями по 20 м.",
+  "parent": "seed_dual_specialist",
+  "weighted_score": 28.446926913164152,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 18460,
+      "kpi": 0.666522210184182,
+      "weighted_score": 0.666522210184182
+    },
+    {
+      "case": "11",
+      "T": 22540,
+      "kpi": 0.9033274179236912,
+      "weighted_score": 0.903327417923691
+    },
+    {
+      "case": "12",
+      "T": 10360,
+      "kpi": 0.9892857142857143,
+      "weighted_score": 3.957142857142857
+    },
+    {
+      "case": "13",
+      "T": 3300,
+      "kpi": 0.9672727272727273,
+      "weighted_score": 3.869090909090909
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438440,
+      "kpi": 0.9551067420855761,
+      "weighted_score": 9.55106742085576
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.002510160447646938,
+    "worst_delta": -0.05569358178053829,
+    "wins": 17,
+    "regressions": 4,
+    "ties": 9,
+    "worst_cases": [
+      {
+        "case": "dev_29_micro",
+        "delta": -0.05569358178053829,
+        "baseline_T": 420,
+        "candidate_T": 460
+      },
+      {
+        "case": "dev_25_micro",
+        "delta": -0.053333333333333344,
+        "baseline_T": 200,
+        "candidate_T": 240
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.0029310348606526038,
+        "baseline_T": 87420,
+        "candidate_T": 87680
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.0019863889203856067,
+        "baseline_T": 90260,
+        "candidate_T": 90440
+      },
+      {
+        "case": "dev_05_fifo_size_drift",
+        "delta": 0.0,
+        "baseline_T": 54820,
+        "candidate_T": 54820
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": 0.0,
+        "baseline_T": 46460,
+        "candidate_T": 46460
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8113086569192511,
+  "max_cpu_s": 0.810718,
+  "max_rss_mib": 10.09375,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0005/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0005/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792310188.9439669,
+  "balanced_gate": false
+}

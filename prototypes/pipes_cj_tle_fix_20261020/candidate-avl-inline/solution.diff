@@ -1,0 +1,112 @@
+--- /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-avl-direct-fenced/solution.cj
++++ /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-avl-inline/solution.cj
+@@ -448,14 +448,20 @@
+         let navLeft = left.borrowData()
+         let navRight = right.borrowData()
+         let navParent = parent.borrowData()
++        let navHeights = heights.borrowData()
+         unsafe {
+             let top = navRight.read(node)
+             let middle = navLeft.read(top)
+-            replaceAtParent(node, top)
++            let rotationParent = navParent.read(node)
++            if (rotationParent == 0) { root = top }
++            else if (navLeft.read(rotationParent) == node) { navLeft.write(rotationParent, top) }
++            else { navRight.write(rotationParent, top) }
++            if (top != 0) { navParent.write(top, rotationParent) }
+             navLeft.write(top, node); navParent.write(node, top)
+             navRight.write(node, middle)
+             if (middle != 0) { navParent.write(middle, node) }
+-            fixHeight(node); fixHeight(top)
++            navHeights.write(node, 1 + iMax(navHeights.read(navLeft.read(node)), navHeights.read(navRight.read(node))))
++            navHeights.write(top, 1 + iMax(navHeights.read(navLeft.read(top)), navHeights.read(navRight.read(top))))
+             // No helper below resizes these vectors. The owner check
+             // after the final pointer use keeps all buffers reachable.
+             blackBox(this)
+@@ -469,14 +475,20 @@
+         let navLeft = left.borrowData()
+         let navRight = right.borrowData()
+         let navParent = parent.borrowData()
++        let navHeights = heights.borrowData()
+         unsafe {
+             let top = navLeft.read(node)
+             let middle = navRight.read(top)
+-            replaceAtParent(node, top)
++            let rotationParent = navParent.read(node)
++            if (rotationParent == 0) { root = top }
++            else if (navLeft.read(rotationParent) == node) { navLeft.write(rotationParent, top) }
++            else { navRight.write(rotationParent, top) }
++            if (top != 0) { navParent.write(top, rotationParent) }
+             navRight.write(top, node); navParent.write(node, top)
+             navLeft.write(node, middle)
+             if (middle != 0) { navParent.write(middle, node) }
+-            fixHeight(node); fixHeight(top)
++            navHeights.write(node, 1 + iMax(navHeights.read(navLeft.read(node)), navHeights.read(navRight.read(node))))
++            navHeights.write(top, 1 + iMax(navHeights.read(navLeft.read(top)), navHeights.read(navRight.read(top))))
+             // No helper below resizes these vectors. The owner check
+             // after the final pointer use keeps all buffers reachable.
+             blackBox(this)
+@@ -496,7 +508,7 @@
+             var node = start
+             while (node != 0) {
+                 let oldHeight = navHeights.read(node)
+-                fixHeight(node)
++                navHeights.write(node, 1 + iMax(navHeights.read(navLeft.read(node)), navHeights.read(navRight.read(node))))
+                 let balance = navHeights.read(navLeft.read(node)) - navHeights.read(navRight.read(node))
+                 if (balance > 1) {
+                     let child = navLeft.read(node)
+@@ -884,14 +896,20 @@
+         let navLeft = left.borrowData()
+         let navRight = right.borrowData()
+         let navParent = parent.borrowData()
++        let navHeights = heights.borrowData()
+         unsafe {
+             let top = navRight.read(node)
+             let middle = navLeft.read(top)
+-            replaceAtParent(node, top)
++            let rotationParent = navParent.read(node)
++            if (rotationParent == 0) { root = top }
++            else if (navLeft.read(rotationParent) == node) { navLeft.write(rotationParent, top) }
++            else { navRight.write(rotationParent, top) }
++            if (top != 0) { navParent.write(top, rotationParent) }
+             navLeft.write(top, node); navParent.write(node, top)
+             navRight.write(node, middle)
+             if (middle != 0) { navParent.write(middle, node) }
+-            fixHeight(node); fixHeight(top)
++            navHeights.write(node, 1 + iMax(navHeights.read(navLeft.read(node)), navHeights.read(navRight.read(node))))
++            navHeights.write(top, 1 + iMax(navHeights.read(navLeft.read(top)), navHeights.read(navRight.read(top))))
+             // No helper below resizes these vectors. The owner check
+             // after the final pointer use keeps all buffers reachable.
+             blackBox(this)
+@@ -905,14 +923,20 @@
+         let navLeft = left.borrowData()
+         let navRight = right.borrowData()
+         let navParent = parent.borrowData()
++        let navHeights = heights.borrowData()
+         unsafe {
+             let top = navLeft.read(node)
+             let middle = navRight.read(top)
+-            replaceAtParent(node, top)
++            let rotationParent = navParent.read(node)
++            if (rotationParent == 0) { root = top }
++            else if (navLeft.read(rotationParent) == node) { navLeft.write(rotationParent, top) }
++            else { navRight.write(rotationParent, top) }
++            if (top != 0) { navParent.write(top, rotationParent) }
+             navRight.write(top, node); navParent.write(node, top)
+             navLeft.write(node, middle)
+             if (middle != 0) { navParent.write(middle, node) }
+-            fixHeight(node); fixHeight(top)
++            navHeights.write(node, 1 + iMax(navHeights.read(navLeft.read(node)), navHeights.read(navRight.read(node))))
++            navHeights.write(top, 1 + iMax(navHeights.read(navLeft.read(top)), navHeights.read(navRight.read(top))))
+             // No helper below resizes these vectors. The owner check
+             // after the final pointer use keeps all buffers reachable.
+             blackBox(this)
+@@ -932,7 +956,7 @@
+             var node = start
+             while (node != 0) {
+                 let oldHeight = navHeights.read(node)
+-                fixHeight(node)
++                navHeights.write(node, 1 + iMax(navHeights.read(navLeft.read(node)), navHeights.read(navRight.read(node))))
+                 let balance = navHeights.read(navLeft.read(node)) - navHeights.read(navRight.read(node))
+                 if (balance > 1) {
+                     let child = navLeft.read(node)

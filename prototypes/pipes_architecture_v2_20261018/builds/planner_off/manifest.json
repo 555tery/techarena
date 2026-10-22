@@ -1,0 +1,33 @@
+{
+  "label": "planner_off",
+  "spec": {
+    "directory": "planner",
+    "entry": "solver.cpp",
+    "defines": [
+      "PLANNER_ENABLED=0"
+    ]
+  },
+  "source_files_sha256": {
+    "selftest.cpp": "4f94128016e46c6bacddeb5e50d994e6ef44a862aee13590474b5d13173449ce",
+    "allocator.hpp": "ec65465a12d5ac6081e032123b617b2c78b6e9de65eca016fb105abae7d9f4d6",
+    "scenario_planner.hpp": "4e0ebd61c0ba310175a3cbebcbd2d1fa91c3374d8d8a7da1a1996cd27e190d6d",
+    "solver.cpp": "48cf27334a8b60be6d7916963dc50e69c069915f6cc0627969016082d4b519d9"
+  },
+  "compile_command": [
+    "/usr/bin/clang++",
+    "-std=c++20",
+    "-O2",
+    "-pipe",
+    "-Wall",
+    "-Wextra",
+    "-DPLANNER_ENABLED=0",
+    "-I",
+    "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/builds/planner_off/source",
+    "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/builds/planner_off/source/solver.cpp",
+    "-o",
+    "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/builds/planner_off/solver"
+  ],
+  "returncode": 0,
+  "created_at": 1792341491.958223,
+  "binary_sha256": "bccb04279c8a72f02c084ce3fb7a93f3efa72fa1cf794a467fc481ea6d47e34d"
+}

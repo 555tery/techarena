@@ -1,0 +1,506 @@
+{
+  "status": "verified_Open15_mathematical_ceiling",
+  "scope": "intentional_complete_Open15_overfit",
+  "platform_submissions": 2,
+  "canonical_trial22_changed": false,
+  "public_future_used_offline": true,
+  "hidden_generalization_claim": false,
+  "mathematical_optimum_reached": true,
+  "score": 30.75747404826914,
+  "score_exact": "8753218892157372683/284588353335535200",
+  "volume_ceiling": 30.75747404826914,
+  "volume_ceiling_exact": "8753218892157372683/284588353335535200",
+  "remaining_gap": 0.0,
+  "trial22_local_score": 30.090967891345,
+  "correctness_checks": 60,
+  "repeat_answers_identical": true,
+  "all_shared_prefix_actions_consistent": true,
+  "independent_actual_output_replay": [
+    {
+      "case": "1",
+      "commands": 6,
+      "T": 20,
+      "F": 18,
+      "volume_lower_T": 20,
+      "answers_sha256": "9523a42972a550ee7f7363021304d7105cbb6aec6fdffce1f0fb03f2982d1e73",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "2",
+      "commands": 18,
+      "T": 20,
+      "F": 20,
+      "volume_lower_T": 20,
+      "answers_sha256": "cacd51b09341d2381887eeca9263ca26dbd853f8afa9b5583e888bfbffe58e50",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "3",
+      "commands": 12,
+      "T": 20,
+      "F": 15,
+      "volume_lower_T": 20,
+      "answers_sha256": "f2fe5c87963dbd40530db469bc5d63664d6603fbd631dfac45993706ae55ede3",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "4",
+      "commands": 20,
+      "T": 60,
+      "F": 40,
+      "volume_lower_T": 60,
+      "answers_sha256": "a359ee4a7bf79ed03a4390e5a051df9caf566034ee3250ca3304f695a8a077f6",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "5",
+      "commands": 7520,
+      "T": 53360,
+      "F": 50840,
+      "volume_lower_T": 53360,
+      "answers_sha256": "9b420f0e7657c42234dde7cb47d02eaf4797fecfde276b9e379b736510b20d49",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "6",
+      "commands": 11,
+      "T": 20,
+      "F": 18,
+      "volume_lower_T": 20,
+      "answers_sha256": "ae944eae54a526d3ed6d36ec6615c4b8cb39b1dc11ad90e41336d2e3fe57e0c4",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "7",
+      "commands": 312,
+      "T": 1680,
+      "F": 1677,
+      "volume_lower_T": 1680,
+      "answers_sha256": "89458e86e0107eb32bcc6a5c179f892a728916a52da49e84422b652ed30d4e65",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "8",
+      "commands": 6565,
+      "T": 4640,
+      "F": 4627,
+      "volume_lower_T": 4640,
+      "answers_sha256": "eb1297b98e967cb92e4892c793776bd2681d0ea3e2e978586b2dd2ad9394d493",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "9",
+      "commands": 9000,
+      "T": 47500,
+      "F": 31500,
+      "volume_lower_T": 47500,
+      "answers_sha256": "a6cf350b1373b8ceb2fe9daaad033e2fe2e14b31b5688feabe6735c1b6fa93c5",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "10",
+      "commands": 9997,
+      "T": 15380,
+      "F": 12304,
+      "volume_lower_T": 15380,
+      "answers_sha256": "1067d848b4261f9e92c750008e8c686a42b5f0b1791c7502221846abb9afe86f",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "11",
+      "commands": 9999,
+      "T": 20760,
+      "F": 20361,
+      "volume_lower_T": 20760,
+      "answers_sha256": "fdfbd4fe15c234c18f0c66db1b882972664641a2978f814abb462b639edfbbb2",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "12",
+      "commands": 1501,
+      "T": 10260,
+      "F": 10249,
+      "volume_lower_T": 10260,
+      "answers_sha256": "44bdfb50608edbe7dc37ae202b8170e5d7d1444136b98504b3f85f5c01bee2e0",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "13",
+      "commands": 9999,
+      "T": 3220,
+      "F": 3192,
+      "volume_lower_T": 3220,
+      "answers_sha256": "0b3605f2c11cae47d31b14ad2062d25397872c326238c75cc51c07a4bb053b9d",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "14",
+      "commands": 25196,
+      "T": 37720,
+      "F": 37704,
+      "volume_lower_T": 37720,
+      "answers_sha256": "d14509d2f0feb3fd92e38c5151548d0fca297b3b8ec6201ee68b83bc22eff8e4",
+      "physical_cell_replay": true
+    },
+    {
+      "case": "15",
+      "commands": 200000,
+      "T": 418780,
+      "F": 418757,
+      "volume_lower_T": 418780,
+      "answers_sha256": "f18975cf4401d7bb269162cc6f5640573820ea37c8bc60ace95d5dcc4dec3571",
+      "physical_cell_replay": true
+    }
+  ],
+  "cases": [
+    {
+      "case": 1,
+      "F": 18,
+      "T": 20,
+      "lower_T": 20,
+      "weighted_score": 0.09,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/conditioned-plans/1/best.txt",
+      "plan_sha256": "d9d1ca268c8ae85892a456397594943857ee164146aee245a494445d4eaa3ada",
+      "input_sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d"
+    },
+    {
+      "case": 2,
+      "F": 20,
+      "T": 20,
+      "lower_T": 20,
+      "weighted_score": 1.0,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/conditioned-plans/2/best.txt",
+      "plan_sha256": "9e932122b70185a21852b85d8f4d58abdfb9b19827ea3fa281649f8816ea29ad",
+      "input_sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923"
+    },
+    {
+      "case": 3,
+      "F": 15,
+      "T": 20,
+      "lower_T": 20,
+      "weighted_score": 0.75,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/conditioned-plans/3/best.txt",
+      "plan_sha256": "e6527b7d0e065b1d70a9c8cf7660b4f375b5795bfcf34b3b71f6872fd57c1157",
+      "input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494"
+    },
+    {
+      "case": 4,
+      "F": 40,
+      "T": 60,
+      "lower_T": 60,
+      "weighted_score": 0.6666666666666666,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/conditioned-plans/4/best.txt",
+      "plan_sha256": "ad372148bc58cce18647f68d158778693143190772588b778b710ef49f6204cc",
+      "input_sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f"
+    },
+    {
+      "case": 5,
+      "F": 50840,
+      "T": 53360,
+      "lower_T": 53360,
+      "weighted_score": 0.9527736131934033,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case5_9/case5_positions.txt",
+      "plan_sha256": "4c886a091303de6ae3cd442d99bdc055b7a87919f490cfb03c232a73dd6b828c",
+      "input_sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+    },
+    {
+      "case": 6,
+      "F": 18,
+      "T": 20,
+      "lower_T": 20,
+      "weighted_score": 0.9,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/conditioned-plans/6/best.txt",
+      "plan_sha256": "5aa5b83f9bd203add09951c4a13198461c864b62f83a85ea4e28e6b7615f1f9c",
+      "input_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd"
+    },
+    {
+      "case": 7,
+      "F": 1677,
+      "T": 1680,
+      "lower_T": 1680,
+      "weighted_score": 0.9982142857142857,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/conditioned-plans/7/best.txt",
+      "plan_sha256": "f29f3edaf50ae3248d8c72a9e87ea3e878f1edace3e26ca271b2d0746ccc03af",
+      "input_sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd"
+    },
+    {
+      "case": 8,
+      "F": 4627,
+      "T": 4640,
+      "lower_T": 4640,
+      "weighted_score": 0.997198275862069,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/knapsack-refined/8/best.txt",
+      "plan_sha256": "4bb8038b7bce74baefcb446446d91a1ad599b8c20d3212f17f78de2f8b784f4c",
+      "input_sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7"
+    },
+    {
+      "case": 9,
+      "F": 31500,
+      "T": 47500,
+      "lower_T": 47500,
+      "weighted_score": 0.6631578947368421,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case5_9/case9_knapsack2000_positions.txt",
+      "plan_sha256": "07f26ced8b18e98724d621911c63e1b6e9ad6be522e035d9dbc612e6eeac9955",
+      "input_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+    },
+    {
+      "case": 10,
+      "F": 12304,
+      "T": 15380,
+      "lower_T": 15380,
+      "weighted_score": 0.8,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/conditioned-plans/10/best.txt",
+      "plan_sha256": "15d88f186b6f23f04f6440c8e72e394d735ce4c9f74d673558e70599895685c9",
+      "input_sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b"
+    },
+    {
+      "case": 11,
+      "F": 20361,
+      "T": 20760,
+      "lower_T": 20760,
+      "weighted_score": 0.9807803468208093,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/pool-order/joint-best.txt",
+      "plan_sha256": "4e843f995e6c7ec664114b386a79cc2850b8b11e96765d70ad01a4530f59d10a",
+      "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c"
+    },
+    {
+      "case": 12,
+      "F": 10249,
+      "T": 10260,
+      "lower_T": 10260,
+      "weighted_score": 3.9957115009746587,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/conditioned-plans/12/best.txt",
+      "plan_sha256": "b79dad16b7534bbd3f6dc3e9ad836cb5601cbb5f3658649f7c185ee3c1b0fba5",
+      "input_sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984"
+    },
+    {
+      "case": 13,
+      "F": 3192,
+      "T": 3220,
+      "lower_T": 3220,
+      "weighted_score": 3.965217391304348,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case13/positions.txt",
+      "plan_sha256": "8d1b6cc85e63bc1d431f99324283feef85789a2d4f4bb6cea5da1894c1a5a309",
+      "input_sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+    },
+    {
+      "case": 14,
+      "F": 37704,
+      "T": 37720,
+      "lower_T": 37720,
+      "weighted_score": 3.9983032873807,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/conditioned-plans/14/best.txt",
+      "plan_sha256": "64714ffde5c2a84448400344c11934519ca6ef78f9ae038e07bb248350b201ff",
+      "input_sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d"
+    },
+    {
+      "case": 15,
+      "F": 418757,
+      "T": 418780,
+      "lower_T": 418780,
+      "weighted_score": 9.999450785615359,
+      "plan": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/pool-order/joint-15/reserve-future/15-shift12.txt",
+      "plan_sha256": "c8f51946e0d4d0a499c86c95f39130d535e95ccafa9b6193cf901f34a109bf07",
+      "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    }
+  ],
+  "max_cpu_s": 0.625483,
+  "max_rss_mib": 7.953125,
+  "source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/release-v5/solution.cpp",
+  "source_sha256": "7fe4d9430d708021f602ebb2333564ebb8c1e0b0ac5b1355855c4a18155c011f",
+  "source_bytes": 1139271,
+  "binary_sha256": "b7f5d62587e197ed9fe838630954fea959040999ecc3c7bf6d55401adab3c521",
+  "processes_alive_at_finish": [],
+  "continuation_authorization": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/authorization.json",
+  "updated_at": "2026-10-19T18:51:09.845009+07:00",
+  "remaining_excess_m": {},
+  "research_limits": "All 15 peak-volume lower bounds are achieved by one executable with consistent shared-prefix actions. This proves the maximum only for these fixed Open15 inputs and the stated weighted F/T metric; no hidden-test quality or server acceptance is claimed.",
+  "independent_plan_and_ceiling_audit": {
+    "path": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/ceiling-independent-audit.json",
+    "sha256": "db321535ecb64f951322f63b863176ff2bf384517a43ae73cd212496bf0bb42e",
+    "verified": true
+  },
+  "speed_update": {
+    "report": "continuation/speed-review2-20261019/report.json",
+    "fastest_measured": "continuation/speed-v6/solution.cpp",
+    "compact": "continuation/speed-v5/solution.cpp",
+    "scope": "Original fields describe frozen release-v5; speed artifacts have separate verification."
+  },
+  "platform_update": {
+    "updated_at": "2026-10-19T18:51:09.845009+07:00",
+    "status": "accepted_maximum_score_row_two",
+    "submissions_by_agent_this_action": [
+      1666292,
+      1666294
+    ],
+    "current_submission": 1666294,
+    "current_source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v20/solution.cpp",
+    "current_source_sha256": "62d2bb957b908f8660ae7e271f355e3f677840bf821729a44d56fd6e8575d624",
+    "compiler": "GCC C++14.2 (64-bit, C++20, msys2)",
+    "accepted": 15,
+    "tests": 15,
+    "local_score": 30.75747404826914,
+    "ranking": {
+      "observed_at": "2026-10-19T18:51:09.845009+07:00",
+      "score": "30.75747405",
+      "displayed_rank": 1,
+      "row_position": 2,
+      "row_above": "SysCall",
+      "equal_rank_teams": 6,
+      "cpu_sorting_confirmed": false,
+      "screenshot": "ranking-v20.png"
+    },
+    "local_checks": 183,
+    "change": "Exact same speed-v20 restored after one controlled rank-order test. No new optimizer selected in this action.",
+    "server_windows_build_confirmed": true,
+    "server_cpu_time_available": false,
+    "first_row_achieved": false,
+    "hidden_generalization_claim": false,
+    "owned_local_jobs_finished": true,
+    "unknown_input_support": false,
+    "constraints": "Read one command before each reply. Deliberate public memorization banner retained. Unknown test streams unsupported by user-authorized design.",
+    "speed_evidence": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v20/result.json",
+    "total_speed_improvement_established": false,
+    "proofs": [
+      "../speed-rank-control-20261019/restored-v20-accepted.jpg",
+      "../speed-rank-control-20261019/experiment.json",
+      "server-v20-answer-audit.json",
+      "../speed-v20/verification-summary.json"
+    ],
+    "previous_verified_submission": 1666267,
+    "rank_control_report": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-rank-control-20261019/experiment.json"
+  },
+  "platform_submissions_scope": "Latest Open15-only action: one submission1665894. Earlier speed actions and ceiling history preserved in dated backups.",
+  "custom_runtime_review": {
+    "status": "completed_no_promotion",
+    "updated_at": "2026-10-18T21:11:53.524127+00:00",
+    "scope": "Runtime optimization only; same full-overfit plans, score and BF policy",
+    "score": 30.75747404826914,
+    "platform_submissions_this_action": 0,
+    "platform_current_source_unchanged": "speed-v8",
+    "new_open15_variants": [
+      {
+        "candidate": "speed-v9",
+        "idea": "Compressed shared-prefix trie and smaller records",
+        "source_sha256": "9891e4573b694d5e5a9b9ea9258bb18cb3b6547045095db70ceec2413a484a86",
+        "pairs": 7,
+        "baseline_median": 0.819828,
+        "candidate_median": 0.8570989999999999,
+        "median_cpu_reduction_percent": -4.5461974950843365,
+        "faster_pairs": 1,
+        "paired_mean_saved_seconds": -0.05473328571428574,
+        "paired_bootstrap_95_ci_seconds": [
+          -0.10278828571428579,
+          -0.013581714285714244
+        ],
+        "all_answers_identical": true,
+        "promotion": "no_confirmed_speed_gain",
+        "evidence": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v9/timing/result.json"
+      },
+      {
+        "candidate": "speed-v10",
+        "idea": "Fixed matcher arrays, unique-table hot path, parser branch simplification",
+        "source_sha256": "9e27479b22f51b179c0e392a089e726aaab9c68dd005a7b36f45b7065e110698",
+        "pairs": 7,
+        "baseline_median": 0.782206,
+        "candidate_median": 0.803329,
+        "median_cpu_reduction_percent": -2.700439526160636,
+        "faster_pairs": 2,
+        "paired_mean_saved_seconds": -0.01753257142857142,
+        "paired_bootstrap_95_ci_seconds": [
+          -0.034825714285714224,
+          0.0027444285714285366
+        ],
+        "all_answers_identical": true,
+        "promotion": "no_confirmed_speed_gain",
+        "evidence": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v10/timing/result.json"
+      },
+      {
+        "candidate": "speed-v11",
+        "idea": "Fixed matcher arrays, no exceptions/new/STL containers, fixed BSS Best-Fit treaps",
+        "source_sha256": "e3b13cdea1a712bf0b6e8a705829d629c03c6a7b902acd42116f51df8b713052",
+        "pairs": 7,
+        "baseline_median": 0.682706,
+        "candidate_median": 0.680384,
+        "median_cpu_reduction_percent": 0.3401171221580124,
+        "faster_pairs": 2,
+        "paired_mean_saved_seconds": -0.014786857142857117,
+        "paired_bootstrap_95_ci_seconds": [
+          -0.04435542857142855,
+          0.015380857142857196
+        ],
+        "all_answers_identical": true,
+        "promotion": "no_confirmed_speed_gain",
+        "evidence": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v11/timing/result.json"
+      }
+    ],
+    "conclusion": "No candidate established a total interactive Open15 speed improvement. Custom BF reduces local user CPU, but mixed total timings do not justify replacing accepted v8. Server speed and CPU leaderboard sorting remain unverified. Retain exact Open15 score and one-command/one-response protocol.",
+    "report": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-custom-review-20261019/result.json"
+  },
+  "open15_only_speed_update": {
+    "status": "server_accepted_maximum_score",
+    "version": "speed-v13",
+    "source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v13/solution.cpp",
+    "source_sha256": "065707442c1d303ae148b30282f421536a9350505dd8aead5cbc6f3a77043cd3",
+    "scope": "Exact Open15-only with no fallback; explicit user authorization",
+    "removed": [
+      "Best Fit allocator and reconstruction",
+      "STL containers and dynamic allocation",
+      "exceptions",
+      "per-command trench state",
+      "suffix command values after a unique prefix"
+    ],
+    "preserved": [
+      "all frozen Open15 replies",
+      "same actions on shared prefixes",
+      "one input command read before each output reply",
+      "direct synchronous Win32 pipe I/O",
+      "partial-read/write and EINTR handling",
+      "source warning about deliberate Open15 memorization"
+    ],
+    "unknown_inputs": "Unsupported; mismatch in prefix exits; suffix values not checked. No generalization guarantee.",
+    "score": 30.75747404826914,
+    "local_open15_median_cpu_s": {
+      "v8": 0.665425,
+      "v13": 0.663048
+    },
+    "local_open15_median_user_cpu_s": {
+      "v8": 0.084634,
+      "v13": 0.077524
+    },
+    "local_total_speed_improvement_established": false,
+    "timing_result": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v13/timing/result.json",
+    "source_bytes": {
+      "v8": 11953946,
+      "v13": 4185456
+    },
+    "binary_bytes": {
+      "v8": 4579656,
+      "v13": 2346088
+    },
+    "source_size_reduction_percent": 64.9868252709189,
+    "binary_size_reduction_percent": 48.77152345066966,
+    "platform_attempt": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/platform-speed-20261019/attempt-v13.json",
+    "updated_at": "2026-10-18T21:19:42.760616+00:00",
+    "submission_id": 1665894,
+    "server_accepted": 15,
+    "server_score": "30.75747405",
+    "ranking": {
+      "observed_at": "2026-10-18T21:19:42.760616+00:00",
+      "score": "30.75747405",
+      "displayed_rank": 1,
+      "row_position": 2,
+      "row_above": "SysCall",
+      "equal_rank_teams": 5,
+      "cpu_sorting_confirmed": false,
+      "screenshot": "ranking-v13.png"
+    },
+    "windows_server_build_confirmed": true,
+    "server_time_measured": false,
+    "platform_submissions_this_action": 1,
+    "owned_jobs_finished": true
+  },
+  "cpu_optimization_update": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/cpu-optimization-20261019/result.json",
+  "latest_cpu_update": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v20/result.json",
+  "ranking_control_update": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-rank-control-20261019/experiment.json"
+}

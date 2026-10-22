@@ -1,0 +1,109 @@
+{
+  "command": "python3 results/pipes/improvement/neighbor_parity_recheck/analyze_paired_controls.py",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python": "3.14.5",
+  "elapsed_wall_seconds": 28.066835874924436,
+  "user_cpu_seconds": 22.880944,
+  "system_cpu_seconds": 0.448789,
+  "max_rss_raw": 70025216,
+  "max_rss_units": "bytes on macOS; KiB on Linux",
+  "bootstrap_draws_per_interval": 200000,
+  "seed_by_metric": {
+    "parity": 2026101701,
+    "model_minus_age": 2026101702,
+    "model_minus_baseline": 2026101703,
+    "predicted_side_gain": 2026101704,
+    "decisive_model_minus_age": 2026101705,
+    "decisive_model_minus_baseline": 2026101706,
+    "decisive_predicted_side_gain": 2026101707
+  },
+  "baseline_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "canonical_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+  "final_run_manifest_sha256": "e38a8bcc529929dc7f18f159d626b092cb35d6c1b2e6a2863197087f1dff5537",
+  "audit_script_sha256": "a404a3024a4ddd40d63a586763928b53d4597fc152d7c3acf53fba180f1223f4",
+  "analysis_script_sha256": "69dcb2a728b38d558564ec70eb3b93bfdc8b6de56ee0eee12f81189dfc23bb30",
+  "input_sha256": {
+    "case-01.in": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683",
+    "case-02.in": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899",
+    "case-03.in": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b",
+    "case-04.in": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83",
+    "case-05.in": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2",
+    "case-06.in": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661",
+    "case-07.in": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a",
+    "case-08.in": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1",
+    "case-09.in": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f",
+    "case-10.in": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c",
+    "case-11.in": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46",
+    "case-12.in": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce"
+  },
+  "baseline_answer_sha256": {
+    "case-01/judge_output.txt": "53f9f03e9f4bb0817cc06ecd9c893b3e25c0c6f4750efa6e33076c68eaf5298a",
+    "case-02/judge_output.txt": "6bbb1958c575695df0a42979d2db8bf11843629b86940faba202bb8406d4da3e",
+    "case-03/judge_output.txt": "47b1c8dcd4961e69cb17ce2325b9162249943c08ef1faa50777b73b79c05dba4",
+    "case-04/judge_output.txt": "4e44d1598df5b8e569a019e17aab3d547a3b86c58d039111edddb99411bd02db",
+    "case-05/judge_output.txt": "aa5130ddeab73e09f4713274ab5c49913c66e160bbb0c268f8aac47645fa0a21",
+    "case-06/judge_output.txt": "2db8ba402e64fb80f9ee1280e0696e4614f302a8d34020cdc69df01f951f21db",
+    "case-07/judge_output.txt": "3a66c66e6e10386fe1f35947fdf7dbc5c720baea491c5e0ba0342f4174608e81",
+    "case-08/judge_output.txt": "ec56206dd135291c850e7b60d6b0663bc70eb0f548f49c69c0e5f4746cf3cacf",
+    "case-09/judge_output.txt": "24c957731274b3128d349993e16d1bd379170ff8a86d038246bbf100071d6772",
+    "case-10/judge_output.txt": "899fd7fc5020624b8e72dda46157a154a13b117a958b02d5453f22690f32a91d",
+    "case-11/judge_output.txt": "f3ec01414e167860f82217e389a16737ea658d73e0257252bd94b2c7098baf26",
+    "case-12/judge_output.txt": "b80227efc5b0c9110fda0ee220a64b077c759d597342444f6ac8ba9b03f108aa"
+  },
+  "case_sizes": {
+    "case-01": {
+      "operations": 40000,
+      "validation_pairs": 0
+    },
+    "case-02": {
+      "operations": 40000,
+      "validation_pairs": 4461
+    },
+    "case-03": {
+      "operations": 40000,
+      "validation_pairs": 350
+    },
+    "case-04": {
+      "operations": 40000,
+      "validation_pairs": 47
+    },
+    "case-05": {
+      "operations": 40000,
+      "validation_pairs": 5411
+    },
+    "case-06": {
+      "operations": 40000,
+      "validation_pairs": 240
+    },
+    "case-07": {
+      "operations": 40000,
+      "validation_pairs": 0
+    },
+    "case-08": {
+      "operations": 40000,
+      "validation_pairs": 3825
+    },
+    "case-09": {
+      "operations": 40000,
+      "validation_pairs": 267
+    },
+    "case-10": {
+      "operations": 40000,
+      "validation_pairs": 162
+    },
+    "case-11": {
+      "operations": 40000,
+      "validation_pairs": 3528
+    },
+    "case-12": {
+      "operations": 40000,
+      "validation_pairs": 530
+    }
+  },
+  "output_files": [
+    "summary.json",
+    "per_case.csv",
+    "REPORT.md",
+    "run.json"
+  ]
+}

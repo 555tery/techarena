@@ -1,0 +1,8 @@
+{
+  "name": "techarena-shinka-headless",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@roberttlange/headless": "git+https://github.com/RobertTLange/headless-cli.git#93cd9b06b85f848af1308c41e018991b33907c5e"
+  }
+}

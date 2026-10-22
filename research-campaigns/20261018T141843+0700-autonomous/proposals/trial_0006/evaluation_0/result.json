@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "evaluation_0",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0006/candidate_0.cpp",
+  "sha256": "630fe3e29a3e7adc8f73f277195bd591d00fed83711b1f3ffae1d7d9f40a2ef3",
+  "idea": "Общие страницы с выбором размера по фактическим освобождениям: soft slabs без резервирования ёмкости.",
+  "parent": "seed_standalone",
+  "weighted_score": 28.38314688274811,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4720,
+      "kpi": 0.9802966101694915,
+      "weighted_score": 0.980296610169492
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 18460,
+      "kpi": 0.666522210184182,
+      "weighted_score": 0.666522210184182
+    },
+    {
+      "case": "11",
+      "T": 22600,
+      "kpi": 0.900929203539823,
+      "weighted_score": 0.900929203539823
+    },
+    {
+      "case": "12",
+      "T": 10360,
+      "kpi": 0.9892857142857143,
+      "weighted_score": 3.957142857142857
+    },
+    {
+      "case": "13",
+      "T": 3300,
+      "kpi": 0.9672727272727273,
+      "weighted_score": 3.869090909090909
+    },
+    {
+      "case": "14",
+      "T": 37820,
+      "kpi": 0.9969328397673188,
+      "weighted_score": 3.987731359069275
+    },
+    {
+      "case": "15",
+      "T": 441180,
+      "kpi": 0.9491749399338139,
+      "weighted_score": 9.491749399338138
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.005416855914617587,
+    "worst_delta": -0.00745212024278219,
+    "wins": 17,
+    "regressions": 6,
+    "ties": 7,
+    "worst_cases": [
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.00745212024278219,
+        "baseline_T": 30480,
+        "candidate_T": 30720
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.0061442285572413935,
+        "baseline_T": 94540,
+        "candidate_T": 95160
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.004726124306626001,
+        "baseline_T": 87420,
+        "candidate_T": 87840
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.0033062612993166596,
+        "baseline_T": 90260,
+        "candidate_T": 90560
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.0006137592848791673,
+        "baseline_T": 64880,
+        "candidate_T": 64920
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": -0.00042926456456160444,
+        "baseline_T": 46460,
+        "candidate_T": 46480
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8142153523862218,
+  "max_cpu_s": 0.744821,
+  "max_rss_mib": 5.953125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0006/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0006/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792310496.240753,
+  "balanced_gate": true
+}

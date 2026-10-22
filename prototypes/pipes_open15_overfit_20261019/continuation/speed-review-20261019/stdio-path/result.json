@@ -1,0 +1,23 @@
+{
+  "status": "verified",
+  "source_sha256": "01e1c58621276de7b04b3dd1138c3549fc85934b3eb422f8f8cedc887d319368",
+  "checks": 55,
+  "results": [
+    {
+      "suite": "open",
+      "checks": 15,
+      "exact_answer_parity": true
+    },
+    {
+      "suite": "positive-divergence",
+      "checks": 30,
+      "exact_answer_parity": true
+    },
+    {
+      "suite": "delete-divergence",
+      "checks": 10,
+      "exact_answer_parity": true
+    }
+  ],
+  "limitation": "Original scanf branch tested on macOS using PIPES_STDIO_INPUT, not a Windows build or Windows CPU measurement."
+}

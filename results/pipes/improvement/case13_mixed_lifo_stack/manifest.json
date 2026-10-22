@@ -1,0 +1,85 @@
+{
+  "experiment": "case13_mixed_lifo_rightmost_policy",
+  "decision": "no-go: rightmost 5-20m policy regressed case13 by 280m; 9-20m policy regressed case13 by 40m and one of four synthetics by 20m",
+  "baseline_open15_score": 29.947761251325,
+  "baseline_source_sha256": "5cc564ca88d8ae3be941ca2c3dab252e0836fa8d93e937dec4c32b5168b2aa9a",
+  "compiler": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic",
+  "harness": "python3 tools/pipes_harness.py with tools/interactor; CPU 5 seconds; memory 256 MiB",
+  "commands": [
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts_plus_lifo_gate --interactor tools/interactor --tests data/pipes/open/13.in --out results/pipes/improvement/case13_mixed_lifo_stack/runs/baseline_case13 --name composite_baseline_case13 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 180",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_mixed_lifo_stack/bin/mixed_lifo_rightmost --interactor tools/interactor --tests data/pipes/open/13.in --out results/pipes/improvement/case13_mixed_lifo_stack/runs/candidate_case13_v2 --name mixed_lifo_rightmost_case13_v2 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 180",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_mixed_lifo_stack/bin/mixed_lifo_medium_rightmost --interactor tools/interactor --tests data/pipes/open/13.in --out results/pipes/improvement/case13_mixed_lifo_stack/runs/candidate_case13_medium --name mixed_lifo_medium_rightmost_case13 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 180",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts_plus_lifo_gate --interactor tools/interactor --tests results/pipes/improvement/case13_mixed_lifo_stack/synthetic --out results/pipes/improvement/case13_mixed_lifo_stack/runs/synthetic_baseline --name composite_synthetic_baseline --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 180",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case13_mixed_lifo_stack/bin/mixed_lifo_medium_rightmost --interactor tools/interactor --tests results/pipes/improvement/case13_mixed_lifo_stack/synthetic --out results/pipes/improvement/case13_mixed_lifo_stack/runs/synthetic_candidate_medium --name mixed_lifo_medium_rightmost_synthetic --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 180"
+  ],
+  "files": {
+    "baseline_source": {
+      "path": "results/pipes/improvement/case9_hole_first_cohorts/source/hole_first_survivor_cohorts_plus_lifo_gate.cpp",
+      "sha256": "5cc564ca88d8ae3be941ca2c3dab252e0836fa8d93e937dec4c32b5168b2aa9a"
+    },
+    "case13_input": {
+      "path": "data/pipes/open/13.in",
+      "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+    },
+    "wide_source": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/source/mixed_lifo_rightmost.cpp",
+      "sha256": "80b781441f5d7058208549ee80190de26d994d86b59ae0c21e32fb68e4713c12"
+    },
+    "wide_binary": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/bin/mixed_lifo_rightmost",
+      "sha256": "7aa211e39ec353797caadd0fe663bdbe810e872138332f300b5be8b099820e7f"
+    },
+    "medium_source": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/source/mixed_lifo_medium_rightmost.cpp",
+      "sha256": "bb94351705e7ced354b52d0a6cfd50567935c126c5689ffe8087a8adc7e194f6"
+    },
+    "medium_binary": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/bin/mixed_lifo_medium_rightmost",
+      "sha256": "1a15d9d02867d17b0cfeadb3f8ad2777bf93513307234a52badd82b41348a77f"
+    },
+    "generator": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/generate_synthetic.py",
+      "sha256": "9dfa7d9fc23e8d90124011329096dafda24a5a27a1eb481450b8aaf37330a3c5"
+    },
+    "case13_baseline_csv": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/runs/baseline_case13/cases.csv",
+      "sha256": "84b568497ebde98de7bb995d7d60ff0b3384e24ee221f060a76f3e25ec508416"
+    },
+    "case13_wide_csv": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/runs/candidate_case13_v2/cases.csv",
+      "sha256": "d00ea050e0bf2c87149d87299a02fb25fa9d1ee4b400394f2270f260c9f07b7c"
+    },
+    "case13_medium_csv": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/runs/candidate_case13_medium/cases.csv",
+      "sha256": "7ef88536c90b7d6fcf7044fd4e23108021fe32b3ca2fa415af8842170969e6b9"
+    },
+    "synthetic_baseline_csv": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/runs/synthetic_baseline/cases.csv",
+      "sha256": "59471a44553455290cc2d03005707e605ce38a48362922c7b35a6853dbb28178"
+    },
+    "synthetic_candidate_csv": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/runs/synthetic_candidate_medium/cases.csv",
+      "sha256": "efbc9919b2c7a8bd4d48d007608aa3425b63dd6f595bb09ebf5f2c1dc2ee45d5"
+    },
+    "input_fresh_20261022_alternating_lifo": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/synthetic/fresh_20261022_alternating_lifo.in",
+      "sha256": "32e759a24a4b905f05dd43c192fe3a984eac055639cf8611b4130bd60d8070d1"
+    },
+    "input_fresh_20261023_lifo_phase_shift": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/synthetic/fresh_20261023_lifo_phase_shift.in",
+      "sha256": "7926dc7a107a9a44fe98e608f8ad6945de8ecdd9198c529ad647670d0701693f"
+    },
+    "input_fresh_20261024_fifo": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/synthetic/fresh_20261024_fifo.in",
+      "sha256": "eb2ffe5f747febc165325734a48684bba976b2f4a2dc0b7f27197430b94e5393"
+    },
+    "input_fresh_20261025_random": {
+      "path": "results/pipes/improvement/case13_mixed_lifo_stack/synthetic/fresh_20261025_random.in",
+      "sha256": "93ce0505d6e4b0f8234840da81b5a99bf57aefa64b20facf34aa9779fb78c899"
+    }
+  },
+  "not_run": [
+    "full Open15",
+    "holdout-v2"
+  ]
+}

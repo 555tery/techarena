@@ -1,0 +1,247 @@
+--- /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-combined/solution.cj
++++ /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-borrows/solution.cj
+@@ -1299,6 +1299,10 @@
+             for (i in 0..size) { data.write(i, value) }
+         }
+     }
++
++    // Borrow only while the owning Allocator remains live. The native
++    // allocation is fixed-size and cannot move during Cangjie GC.
++    func borrowData(): CPointer<Float64> { data }
+ 
+     public func copyFrom(other: FastFloatBuffer): Unit {
+         if (other.size != size) { throw IllegalArgumentException("Numeric buffer copy size") }
+@@ -1766,104 +1770,45 @@
+     }
+ 
+     public func rebuildPrimalGapValues(maxGap: Int64): Unit {
+-        let gapCounts = primalGapCounts
+-        let recentRequests = primalRecentRequests
+-        let rate = causalRequestRate
+-        rate.fill(0.0)
+-        var fitting = gapCounts[kPrimalGapValueCap + 1]
+-        var gap = kPrimalGapValueCap
+-        while (gap >= 1) {
+-            fitting += gapCounts[gap]
+-            if (gap <= 40) { rate[gap] = Float64(recentRequests[gap]) / Float64(iMax(1, fitting)) }
+-            gap--
+-        }
+-        var lastRequest: Int64 = 40
+-        while (lastRequest > 0 && rate[lastRequest] == 0.0) { lastRequest-- }
+-        var firstRequest: Int64 = 1
+-        while (firstRequest <= lastRequest && rate[firstRequest] == 0.0) { firstRequest++ }
+-        let expiry = 2.0 * Float64(primalRecentDeletes) / Float64(iMax(1, activePipeCount))
+-        let value = primalGapValue
+-        value.fill(0.0)
+-        for (g in 1..=maxGap) {
+-            let top = iMin(g, lastRequest)
+-            if (expiry == 0.0) {
+-                for (request in firstRequest..=top) {
+-                    if (rate[request] > 0.0) { value[g] = fMax(value[g], Float64(request) + value[g - request]) }
++        if (maxGap < 0 || maxGap > kPrimalGapValueCap) { throw IndexOutOfBoundsException("DP limit") }
++        // All indices are within rates/reward[0..40], value[0..512]
++        // or causal rows[0..1025]; this owns every buffer throughout.
++        unsafe {
++            let gapCounts = primalGapCounts
++            let recentRequests = primalRecentRequests
++            let rate = causalRequestRate.borrowData()
++            causalRequestRate.fill(0.0)
++            var fitting = gapCounts[kPrimalGapValueCap + 1]
++            var gap = kPrimalGapValueCap
++            while (gap >= 1) {
++                fitting += gapCounts[gap]
++                if (gap <= 40) { rate.write(gap, Float64(recentRequests[gap]) / Float64(iMax(1, fitting))) }
++                gap--
++            }
++            var lastRequest: Int64 = 40
++            while (lastRequest > 0 && rate.read(lastRequest) == 0.0) { lastRequest-- }
++            var firstRequest: Int64 = 1
++            while (firstRequest <= lastRequest && rate.read(firstRequest) == 0.0) { firstRequest++ }
++            let expiry = 2.0 * Float64(primalRecentDeletes) / Float64(iMax(1, activePipeCount))
++            let value = primalGapValue.borrowData()
++            primalGapValue.fill(0.0)
++            for (g in 1..=maxGap) {
++                let top = iMin(g, lastRequest)
++                if (expiry == 0.0) {
++                    for (request in firstRequest..=top) {
++                        if (rate.read(request) > 0.0) { value.write(g, fMax(value.read(g), Float64(request) + value.read(g - request))) }
++                    }
++                    continue
+                 }
+-                continue
+-            }
+-            let reward = dpRewardScratch
+-            var active: Int64 = 0
+-            var numerator: Float64 = 0.0
+-            var denominator = expiry
+-            for (request in firstRequest..=top) {
+-                let requestRate = rate[request]
+-                if (requestRate == 0.0) { continue }
+-                let requestReward = Float64(request) + value[g - request]
+-                reward[request] = requestReward
+-                numerator += requestRate * requestReward
+-                denominator += requestRate
+-                active = active | (1 << request)
+-            }
+-            var estimate = numerator / denominator
+-            while (true) {
+-                var removed = false
+-                for (request in firstRequest..=top) {
+-                    let bit: Int64 = 1 << request
+-                    if ((active & bit) != 0) {
+-                        let rr = reward[request]
+-                        if (rr < estimate) {
+-                            let requestRate = rate[request]
+-                            numerator -= requestRate * rr
+-                            denominator -= requestRate
+-                            active = active & (!bit)
+-                            removed = true
+-                        }
+-                    }
+-                }
+-                if (!removed) { break }
+-                estimate = numerator / denominator
+-            }
+-            value[g] = fMin(fMax(estimate, 0.0), Float64(g))
+-        }
+-        causalBaseExpiry = expiry
+-        causalComputedLimit = 0
+-        causalRiskReady = !parityCohortMode && activePipeCount > kMcMaxActivePipes && expiry > 0.0 &&
+-            lifetimeModel.fit(expiry / (2.0 * Float64(primalEventHistory.size)))
+-        primalModelStep = primalStep
+-        primalComputedLimit = maxGap
+-        primalModelDirty = false
+-        primalModelRebuilds++
+-    }
+-
+-    public func ensurePrimalGapValues(maxGap: Int64): Bool {
+-        if (maxGap <= 0 || maxGap > kPrimalGapValueCap) { return false }
+-        if (primalModelDirty || primalStep - primalModelStep >= 64 || maxGap > primalComputedLimit) { rebuildPrimalGapValues(maxGap) }
+-        return hasRecentPrimalDemand()
+-    }
+-
+-    public func rebuildCausalGapValues(maxGap: Int64): Unit {
+-        let requestRates = causalRequestRate
+-        var lastRequest: Int64 = 40
+-        while (lastRequest > 0 && requestRates[lastRequest] == 0.0) { lastRequest-- }
+-        var firstRequest: Int64 = 1
+-        while (firstRequest <= lastRequest && requestRates[firstRequest] == 0.0) { firstRequest++ }
+-        let gapValues = causalGapValue
+-        gapValues.fill(0.0)
+-        for (model in 0..2) {
+-            let offset: Int64 = model * 513
+-            let expiry = causalBaseExpiry * (if (model == 0) { 0.5 } else { 2.0 })
+-            for (gap in 1..=maxGap) {
+-                let top = iMin(gap, lastRequest)
+-                let reward = dpRewardScratch
++                let reward = dpRewardScratch.borrowData()
+                 var active: Int64 = 0
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry
+                 for (request in firstRequest..=top) {
+-                    let requestRate = requestRates[request]
++                    let requestRate = rate.read(request)
+                     if (requestRate == 0.0) { continue }
+-                    let requestReward = Float64(request) + gapValues[offset + gap - request]
+-                    reward[request] = requestReward
++                    let requestReward = Float64(request) + value.read(g - request)
++                    reward.write(request, requestReward)
+                     numerator += requestRate * requestReward
+                     denominator += requestRate
+                     active = active | (1 << request)
+@@ -1874,9 +1819,9 @@
+                     for (request in firstRequest..=top) {
+                         let bit: Int64 = 1 << request
+                         if ((active & bit) != 0) {
+-                            let rr = reward[request]
++                            let rr = reward.read(request)
+                             if (rr < estimate) {
+-                                let requestRate = requestRates[request]
++                                let requestRate = rate.read(request)
+                                 numerator -= requestRate * rr
+                                 denominator -= requestRate
+                                 active = active & (!bit)
+@@ -1887,10 +1832,79 @@
+                     if (!removed) { break }
+                     estimate = numerator / denominator
+                 }
+-                gapValues[offset + gap] = fMin(fMax(estimate, 0.0), Float64(gap))
+-            }
+-        }
+-        causalComputedLimit = maxGap
++                value.write(g, fMin(fMax(estimate, 0.0), Float64(g)))
++            }
++            causalBaseExpiry = expiry
++            causalComputedLimit = 0
++            causalRiskReady = !parityCohortMode && activePipeCount > kMcMaxActivePipes && expiry > 0.0 &&
++                lifetimeModel.fit(expiry / (2.0 * Float64(primalEventHistory.size)))
++            primalModelStep = primalStep
++            primalComputedLimit = maxGap
++            primalModelDirty = false
++            primalModelRebuilds++
++        }
++    }
++
++    public func ensurePrimalGapValues(maxGap: Int64): Bool {
++        if (maxGap <= 0 || maxGap > kPrimalGapValueCap) { return false }
++        if (primalModelDirty || primalStep - primalModelStep >= 64 || maxGap > primalComputedLimit) { rebuildPrimalGapValues(maxGap) }
++        return hasRecentPrimalDemand()
++    }
++
++    public func rebuildCausalGapValues(maxGap: Int64): Unit {
++        if (maxGap < 0 || maxGap > kPrimalGapValueCap) { throw IndexOutOfBoundsException("DP limit") }
++        // All indices are within rates/reward[0..40], value[0..512]
++        // or causal rows[0..1025]; this owns every buffer throughout.
++        unsafe {
++            let requestRates = causalRequestRate.borrowData()
++            var lastRequest: Int64 = 40
++            while (lastRequest > 0 && requestRates.read(lastRequest) == 0.0) { lastRequest-- }
++            var firstRequest: Int64 = 1
++            while (firstRequest <= lastRequest && requestRates.read(firstRequest) == 0.0) { firstRequest++ }
++            let gapValues = causalGapValue.borrowData()
++            causalGapValue.fill(0.0)
++            for (model in 0..2) {
++                let offset: Int64 = model * 513
++                let expiry = causalBaseExpiry * (if (model == 0) { 0.5 } else { 2.0 })
++                for (gap in 1..=maxGap) {
++                    let top = iMin(gap, lastRequest)
++                    let reward = dpRewardScratch.borrowData()
++                    var active: Int64 = 0
++                    var numerator: Float64 = 0.0
++                    var denominator = expiry
++                    for (request in firstRequest..=top) {
++                        let requestRate = requestRates.read(request)
++                        if (requestRate == 0.0) { continue }
++                        let requestReward = Float64(request) + gapValues.read(offset + gap - request)
++                        reward.write(request, requestReward)
++                        numerator += requestRate * requestReward
++                        denominator += requestRate
++                        active = active | (1 << request)
++                    }
++                    var estimate = numerator / denominator
++                    while (true) {
++                        var removed = false
++                        for (request in firstRequest..=top) {
++                            let bit: Int64 = 1 << request
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(request)
++                                if (rr < estimate) {
++                                    let requestRate = requestRates.read(request)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                }
++                            }
++                        }
++                        if (!removed) { break }
++                        estimate = numerator / denominator
++                    }
++                    gapValues.write(offset + gap, fMin(fMax(estimate, 0.0), Float64(gap)))
++                }
++            }
++            causalComputedLimit = maxGap
++        }
+     }
+ 
+     public func causalValueAt(gap: Int64, expiryFactor: Float64): Float64 {

@@ -1,0 +1,211 @@
+{
+  "created_at": "2026-10-20T11:27:50.801423+00:00",
+  "source": "/Users/555tery/techarena/prototypes/pipes_current_hybrid_cj_20261020/release/solution.cj",
+  "source_sha256": "fd5fe184cb85bf47c18085a3ef12ceb36ae20168398dd00d8983f16165b8fc9a",
+  "size_bytes": 1222071,
+  "authorization": "User explicitly asked to upload the code to the competition site in this turn.",
+  "intended_platform": "https://olympic.nsu.ru/nsuts-new/submit",
+  "intended_task": "Pipes",
+  "intended_language": "Cangjie",
+  "state": "tested",
+  "submission_confirmed": true,
+  "previous_submission": {
+    "id": 1667180,
+    "compiler": "Cangjie 1.0.5",
+    "status": "AAAAAAAATAAAATT",
+    "score": 15.85787
+  },
+  "observed_compiler": "Cangjie 1.0.5",
+  "submission_id": 1667192,
+  "submitted_at_site": "2026-10-20 18:32:44",
+  "compiler": "Cangjie 1.0.5",
+  "uploaded_filename": "solution-upload.txt",
+  "last_observed_at": "2026-10-20T11:34:14.692990+00:00",
+  "status_string": "AAAAAAAATAAAATT",
+  "accepted_tests": 12,
+  "time_limit_tests": [
+    9,
+    14,
+    15
+  ],
+  "visible_score": 15.85787,
+  "outputs": [
+    {
+      "test": 1,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 10,
+      "local_tokens": 10,
+      "server_sha256": "312d897e48736ba2461f4bb58c1193c5c920f4831828702c9c325db305fb01fa",
+      "local_kpi": 0.9,
+      "local_cpu_total_s": 0.017605
+    },
+    {
+      "test": 2,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 32,
+      "local_tokens": 32,
+      "server_sha256": "77b5c4a0ba4a79d56f8cd0d0e630d91aa9b03357c3d10b8fb78d3acbdce998cb",
+      "local_kpi": 1.0,
+      "local_cpu_total_s": 0.017174000000000002
+    },
+    {
+      "test": 3,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 20,
+      "local_tokens": 20,
+      "server_sha256": "14e0b8693c02620e695dde65e1355c15802c180eb962818b37994536b79821cb",
+      "local_kpi": 0.75,
+      "local_cpu_total_s": 0.017471999999999998
+    },
+    {
+      "test": 4,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 33,
+      "local_tokens": 33,
+      "server_sha256": "5eabeb29ec37234c02334dc78a56ceb83cdd2967e1abc7ed8f2c9fccda6bef6e",
+      "local_kpi": 0.6666666666666666,
+      "local_cpu_total_s": 0.017157000000000002
+    },
+    {
+      "test": 5,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 12520,
+      "local_tokens": 12520,
+      "server_sha256": "73ee5baf015ce9fdfc071df5645a2b5d9406d6381bd3082f2901c87d99bc9b89",
+      "local_kpi": 0.9338721528288023,
+      "local_cpu_total_s": 0.069637
+    },
+    {
+      "test": 6,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 19,
+      "local_tokens": 19,
+      "server_sha256": "38aa1139be7316a59294ec3cb9902b557fe44885d4236157fea80290cada0ad5",
+      "local_kpi": 0.9,
+      "local_cpu_total_s": 0.017369
+    },
+    {
+      "test": 7,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 546,
+      "local_tokens": 546,
+      "server_sha256": "0bf4138847f968c92b68d1a1489f395d22c4e913e960833a5e15bd6f57490b4e",
+      "local_kpi": 0.9982142857142857,
+      "local_cpu_total_s": 0.029326
+    },
+    {
+      "test": 8,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 10023,
+      "local_tokens": 10023,
+      "server_sha256": "e1a40cf5569755a9125cd04b1271784dc34058f6eeca825ddf55d4d714981e10",
+      "local_kpi": 0.9802966101694915,
+      "local_cpu_total_s": 0.055949
+    },
+    {
+      "test": 9,
+      "server_status": "Time Limit",
+      "normalized_output_equal": false,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 2936,
+      "local_tokens": 15000,
+      "server_sha256": "7ba9eef9874a4d4b023b0ed7151a3488c930be379b4b5a66dbdfd4bdd0ed558d",
+      "local_kpi": 0.6598240469208211,
+      "local_cpu_total_s": 0.151015
+    },
+    {
+      "test": 10,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 16918,
+      "local_tokens": 16918,
+      "server_sha256": "a4e7f46abf546dafb29cc3db514bbc7edc0698776a80e6c9f43e6b6085fe8364",
+      "local_kpi": 0.8,
+      "local_cpu_total_s": 0.066528
+    },
+    {
+      "test": 11,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 16492,
+      "local_tokens": 16492,
+      "server_sha256": "2699f55c0227195f984e70fb34b97bc62009fd41979537b31f7c0c5680709ef7",
+      "local_kpi": 0.9049333333333334,
+      "local_cpu_total_s": 0.08614
+    },
+    {
+      "test": 12,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 2636,
+      "local_tokens": 2636,
+      "server_sha256": "3e1a51ae952057d664a6359761903c9bc4eb6e5909778a83d1d7af55aa59a730",
+      "local_kpi": 0.9911992263056093,
+      "local_cpu_total_s": 0.035905
+    },
+    {
+      "test": 13,
+      "server_status": "Accepted",
+      "normalized_output_equal": true,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 15157,
+      "local_tokens": 15157,
+      "server_sha256": "5474588d0d2645ad7886df37d6e63e07e0834169e367f659d56049bd57afa13f",
+      "local_kpi": 0.9672727272727273,
+      "local_cpu_total_s": 0.074301
+    },
+    {
+      "test": 14,
+      "server_status": "Time Limit",
+      "normalized_output_equal": false,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 31736,
+      "local_tokens": 49726,
+      "server_sha256": "5061e81696eab8f76959d33656a2b28c775c766c20559f98d2504d2c097dc4b8",
+      "local_kpi": 0.9969328397673188,
+      "local_cpu_total_s": 0.22100799999999998
+    },
+    {
+      "test": 15,
+      "server_status": "Time Limit",
+      "normalized_output_equal": false,
+      "server_output_is_local_prefix": true,
+      "server_tokens": 19098,
+      "local_tokens": 330255,
+      "server_sha256": "e0274ce0dcd17cb91f15f9909f8fe0a8da731b70b825982bc663cc15f5df9f35",
+      "local_kpi": 0.9550631756602654,
+      "local_cpu_total_s": 1.8074469999999998
+    }
+  ],
+  "completed_outputs_match_local": true,
+  "all_output_prefixes_match_local": true,
+  "platform_truncated_logs": {
+    "9": "Unexpected end of file - int32 expected",
+    "14": "Unexpected end of file - int32 expected",
+    "15": "Unexpected end of file - int32 expected"
+  },
+  "precise_server_cpu_and_memory_available": false,
+  "local_score_without_failed_tests": 15.857870863025926,
+  "note": "The site verdict is T on tests 9,14,15. Logs say unexpected EOF. CPU saturation versus I/O/runtime waiting is not established.",
+  "result_url": "https://olympic.nsu.ru/nsuts-new/new_report",
+  "archive_download_url": "https://olympic.nsu.ru/nsuts-new/show.cgi?details=1667192"
+}

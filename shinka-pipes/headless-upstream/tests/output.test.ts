@@ -1,0 +1,924 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+
+import { extractAgentError, extractFinalMessage, extractUsageSummary, priceUsageSummary } from "../src/output.ts";
+import { extractRunNodeMetrics } from "../src/run-metrics.ts";
+import type { AgentName } from "../src/types.ts";
+
+test("extracts final Codex assistant message from JSONL trace", () => {
+  const trace = [
+    JSON.stringify({
+      type: "response_item",
+      payload: {
+        type: "message",
+        role: "assistant",
+        content: [{ type: "output_text", text: "older answer" }],
+      },
+    }),
+    JSON.stringify({
+      type: "response_item",
+      payload: {
+        type: "message",
+        role: "assistant",
+        content: [{ type: "output_text", text: "final codex answer" }],
+      },
+    }),
+  ].join("\n");
+
+  assert.equal(extractFinalMessage("codex", trace), "final codex answer");
+});
+
+test("extracts final Codex agent_message from item.completed trace", () => {
+  const trace = [
+    JSON.stringify({ type: "thread.started", thread_id: "thread-1" }),
+    JSON.stringify({ type: "turn.started" }),
+    JSON.stringify({
+      type: "item.completed",
+      item: {
+        id: "item_0",
+        type: "agent_message",
+        text: "final codex agent message",
+      },
+    }),
+    JSON.stringify({ type: "turn.completed" }),
+  ].join("\n");
+
+  assert.equal(extractFinalMessage("codex", trace), "final codex agent message");
+});
+
+test("extracts final Claude assistant message from stream JSON trace", () => {
+  const trace = JSON.stringify({
+    type: "assistant",
+    message: {
+      role: "assistant",
+      content: [{ type: "text", text: "final claude answer" }],
+    },
+  });
+
+  assert.equal(extractFinalMessage("claude", trace), "final claude answer");
+});
+
+test("extracts final Claude assistant message from result JSON trace", () => {
+  const trace = JSON.stringify({
+    type: "result",
+    subtype: "success",
+    result: "final claude result answer",
+  });
+
+  assert.equal(extractFinalMessage("claude", trace), "final claude result answer");
+});
+
+test("extracts final Cursor assistant message from stream JSON trace", () => {
+  const trace = JSON.stringify({
+    type: "assistant",
+    message: {
+      role: "assistant",
+      content: [{ type: "text", text: "final cursor answer" }],
+    },
+  });
+
+  assert.equal(extractFinalMessage("cursor", trace), "final cursor answer");
+});
+
+test("extracts Antigravity final message from plain text output", () => {
+  assert.equal(extractFinalMessage("antigravity", "\nfinal antigravity answer\n"), "final antigravity answer");
+});
+
+test("extracts Antigravity JSON-shaped plain text answers", () => {
+  assert.equal(extractFinalMessage("antigravity", '{"ok":true}\n'), '{"ok":true}');
+  assert.equal(extractFinalMessage("antigravity", "[1,2,3]\n"), "[1,2,3]");
+});
+
+test("extracts the latest Antigravity response from mixed trace and plain output", () => {
+  assert.equal(
+    extractFinalMessage(
+      "antigravity",
+      [
+        "startup warning",
+        JSON.stringify({ type: "PLANNER_RESPONSE", status: "DONE", content: "native final" }),
+        "",
+      ].join("\n"),
+    ),
+    "native final",
+  );
+  assert.equal(
+    extractFinalMessage(
+      "antigravity",
+      [
+        JSON.stringify({ type: "SESSION_META", conversation_id: "agy-run" }),
+        "first line",
+        "",
+        "  indented line",
+        "",
+      ].join("\n"),
+    ),
+    "first line\n\n  indented line",
+  );
+  assert.equal(
+    extractFinalMessage(
+      "antigravity",
+      ["startup warning", JSON.stringify({ type: "SESSION_META", conversation_id: "agy-run" }), ""].join("\n"),
+    ),
+    "",
+  );
+  assert.equal(
+    extractFinalMessage(
+      "antigravity",
+      [
+        JSON.stringify({ type: "SESSION_META", conversation_id: "agy-run" }),
+        "plain final",
+        JSON.stringify({ type: "SESSION_META", conversation_id: "agy-run" }),
+        "",
+      ].join("\n"),
+    ),
+    "plain final",
+  );
+});
+
+test("extracts Antigravity final message from native transcript records", () => {
+  assert.equal(
+    extractFinalMessage(
+      "antigravity",
+      [
+        JSON.stringify({ type: "USER_INPUT", content: "hello" }),
+        JSON.stringify({ type: "PLANNER_RESPONSE", status: "DONE", content: "final antigravity transcript answer" }),
+        "",
+      ].join("\n"),
+    ),
+    "final antigravity transcript answer",
+  );
+  assert.equal(
+    extractFinalMessage(
+      "antigravity",
+      [
+        JSON.stringify({ type: "USER_INPUT", content: "hello" }),
+        JSON.stringify({ type: "ASSISTANT_RESPONSE", status: "COMPLETED", content: "completed antigravity answer" }),
+        "",
+      ].join("\n"),
+    ),
+    "completed antigravity answer",
+  );
+});
+
+test("does not expose raw Antigravity JSON records without a final message", () => {
+  assert.equal(
+    extractFinalMessage("antigravity", JSON.stringify({ type: "SESSION_META", payload: { cwd: "/secret/workspace" } })),
+    "",
+  );
+});
+
+test("extracts final Gemini assistant message from JSON object trace", () => {
+  const trace = JSON.stringify({
+    type: "model",
+    content: {
+      parts: [{ text: "final gemini answer" }],
+    },
+  });
+
+  assert.equal(extractFinalMessage("gemini", trace), "final gemini answer");
+});
+
+test("extracts final Gemini assistant message from response JSON trace", () => {
+  const trace = JSON.stringify({
+    response: "final gemini response answer",
+  });
+
+  assert.equal(extractFinalMessage("gemini", trace), "final gemini response answer");
+});
+
+test("concatenates Gemini assistant delta messages", () => {
+  const trace = [
+    JSON.stringify({ type: "message", role: "assistant", content: "Hello! I", delta: true }),
+    JSON.stringify({
+      type: "message",
+      role: "assistant",
+      content: "'m ready to help.",
+      delta: true,
+    }),
+    JSON.stringify({ type: "result", status: "success" }),
+  ].join("\n");
+
+  assert.equal(extractFinalMessage("gemini", trace), "Hello! I'm ready to help.");
+});
+
+test("extracts final OpenCode assistant message from JSON event trace", () => {
+  const trace = JSON.stringify({
+    role: "assistant",
+    parts: [{ type: "text", text: "final opencode answer" }],
+  });
+
+  assert.equal(extractFinalMessage("opencode", trace), "final opencode answer");
+});
+
+test("extracts final OpenCode text part event", () => {
+  const trace = JSON.stringify({
+    type: "text",
+    part: {
+      type: "text",
+      text: "final opencode text part",
+    },
+  });
+
+  assert.equal(extractFinalMessage("opencode", trace), "final opencode text part");
+});
+
+test("extracts OpenCode provider error events", () => {
+  const trace = JSON.stringify({
+    type: "error",
+    error: {
+      name: "ProviderAuthError",
+      data: {
+        providerID: "gemini",
+        message:
+          "Google Generative AI API key is missing. Pass it using the 'apiKey' parameter or the GOOGLE_GENERATIVE_AI_API_KEY environment variable.",
+      },
+    },
+  });
+
+  assert.equal(
+    extractAgentError("opencode", trace),
+    "opencode error: ProviderAuthError: Google Generative AI API key is missing. Pass it using the 'apiKey' parameter or the GOOGLE_GENERATIVE_AI_API_KEY environment variable.",
+  );
+});
+
+test("extracts final Pi assistant message from JSONL trace", () => {
+  const trace = JSON.stringify({
+    type: "message",
+    message: {
+      role: "assistant",
+      content: [{ type: "text", text: "final pi answer" }],
+    },
+  });
+
+  assert.equal(extractFinalMessage("pi", trace), "final pi answer");
+});
+
+test("ignores tool results and returns empty string when no assistant text exists", () => {
+  const trace = JSON.stringify({
+    type: "message",
+    message: {
+      role: "toolresult",
+      content: [{ type: "text", text: "tool output only" }],
+    },
+  });
+
+  assert.equal(extractFinalMessage("pi", trace), "");
+});
+
+test("extracts Codex usage from turn completed trace and prices with models.dev data", () => {
+  const trace = JSON.stringify({
+    type: "turn.completed",
+    usage: {
+      input_tokens: 1000,
+      cached_input_tokens: 400,
+      output_tokens: 100,
+      reasoning_output_tokens: 25,
+    },
+  });
+
+  const summary = priceUsageSummary(
+    extractUsageSummary("codex", trace, { provider: "openai", model: "gpt-5" }),
+    pricingFixture(),
+  );
+
+  assert.deepEqual(summary, {
+    agent: "codex",
+    provider: "openai",
+    model: "gpt-5",
+    inputTokens: 600,
+    cacheReadTokens: 400,
+    cacheWriteTokens: 0,
+    outputTokens: 100,
+    reasoningOutputTokens: 25,
+    totalTokens: 1100,
+    usageStatus: "reported",
+    cost: {
+      input: 0.00075,
+      cacheRead: 0.00005,
+      cacheWrite: 0,
+      output: 0.001,
+      total: 0.0018,
+    },
+    costBasis: "api-list-price-estimate",
+    pricingSource: "models.dev",
+    pricingStatus: "priced",
+  });
+});
+
+test("does not report non-finite list-price estimates", () => {
+  const trace = JSON.stringify({
+    type: "turn.completed",
+    usage: { input_tokens: Number.MAX_VALUE, output_tokens: 1 },
+  });
+  const summary = priceUsageSummary(
+    extractUsageSummary("codex", trace, { provider: "openai", model: "gpt-test" }),
+    {
+      openai: {
+        models: {
+          "gpt-test": { cost: { input: Number.MAX_VALUE, output: 1 } },
+        },
+      },
+    },
+  );
+
+  assert.equal(summary.cost, null);
+  assert.equal(summary.pricingStatus, "missing");
+});
+
+test("extracts Antigravity turn usage from the latest status payload and prices its API equivalent", () => {
+  const trace = [
+    JSON.stringify({
+      type: "headless.antigravity.usage",
+      model: { id: "Gemini 3.5 Flash (Low)" },
+      context_window: { total_input_tokens: 153, current_usage: {} },
+    }),
+    JSON.stringify({
+      type: "headless.antigravity.usage",
+      model: { id: "Gemini 3.5 Flash (Low)" },
+      context_window: {
+        total_input_tokens: 153,
+        current_usage: {
+          input_tokens: 1000,
+          output_tokens: 50,
+          cache_creation_input_tokens: 100,
+          cache_read_input_tokens: 200,
+        },
+      },
+    }),
+  ].join("\n");
+
+  const summary = priceUsageSummary(extractUsageSummary("antigravity", trace), {
+    google: {
+      models: {
+        "gemini-3.5-flash": {
+          cost: { input: 1.5, cache_read: 0.15, cache_write: 1.5, output: 9 },
+        },
+      },
+    },
+  });
+
+  assert.deepEqual(summary, {
+    agent: "antigravity",
+    provider: "google",
+    model: "Gemini 3.5 Flash (Low)",
+    inputTokens: 1000,
+    cacheReadTokens: 200,
+    cacheWriteTokens: 100,
+    outputTokens: 50,
+    reasoningOutputTokens: 0,
+    totalTokens: 1350,
+    usageStatus: "reported",
+    cost: {
+      input: 0.0015,
+      cacheRead: 0.00003,
+      cacheWrite: 0.00015,
+      output: 0.00045,
+      total: 0.00213,
+    },
+    costBasis: "api-list-price-estimate",
+    pricingSource: "models.dev",
+    pricingStatus: "priced",
+  });
+});
+
+test("does not guess an Antigravity API-equivalent price for an unmapped model", () => {
+  const trace = JSON.stringify({
+    type: "headless.antigravity.usage",
+    model: { id: "GPT-OSS 120B (Medium)" },
+    context_window: {
+      current_usage: {
+        input_tokens: 1000,
+        output_tokens: 50,
+        cache_creation_input_tokens: 0,
+        cache_read_input_tokens: 0,
+      },
+    },
+  });
+  const summary = priceUsageSummary(extractUsageSummary("antigravity", trace), {
+    arbitraryGateway: {
+      models: {
+        "gpt-oss-120b": { name: "GPT OSS 120B", cost: { input: 1, output: 2 } },
+      },
+    },
+  });
+
+  assert.equal(summary.model, "GPT-OSS 120B (Medium)");
+  assert.equal(summary.provider, null);
+  assert.equal(summary.totalTokens, 1050);
+  assert.equal(summary.cost, null);
+  assert.equal(summary.pricingStatus, "missing");
+});
+
+test("extracts Claude usage and preserves native cost", () => {
+  const trace = JSON.stringify({
+    type: "result",
+    total_cost_usd: 0.18331675,
+    usage: {
+      input_tokens: 3,
+      cache_creation_input_tokens: 29231,
+      cache_read_input_tokens: 0,
+      output_tokens: 8,
+    },
+    modelUsage: {
+      "claude-opus-4-6": {
+        inputTokens: 3,
+        outputTokens: 8,
+        cacheReadInputTokens: 0,
+        cacheCreationInputTokens: 29231,
+        costUSD: 0.18331675,
+      },
+    },
+  });
+
+  assert.deepEqual(extractUsageSummary("claude", trace), {
+    agent: "claude",
+    provider: "anthropic",
+    model: "claude-opus-4-6",
+    inputTokens: 3,
+    cacheReadTokens: 0,
+    cacheWriteTokens: 29231,
+    outputTokens: 8,
+    reasoningOutputTokens: 0,
+    totalTokens: 29242,
+    usageStatus: "reported",
+    cost: {
+      input: null,
+      cacheRead: null,
+      cacheWrite: null,
+      output: null,
+      total: 0.18331675,
+    },
+    costBasis: "native-reported",
+    pricingSource: "native",
+    pricingStatus: "native",
+  });
+});
+
+test("extracts run node metrics from Claude result traces", () => {
+  const trace = JSON.stringify({
+    type: "result",
+    duration_ms: 123456,
+    duration_api_ms: 100000,
+    num_turns: 3,
+    total_cost_usd: 0.18331675,
+    usage: {
+      input_tokens: 3,
+      cache_creation_input_tokens: 29231,
+      cache_read_input_tokens: 0,
+      output_tokens: 8,
+    },
+  });
+
+  assert.deepEqual(extractRunNodeMetrics("claude", trace), {
+    turns: 3,
+    durationMs: 123456,
+    apiDurationMs: 100000,
+    totalCostUsd: 0.18331675,
+    inputTokens: 3,
+    cacheWriteTokens: 29231,
+    outputTokens: 8,
+    totalTokens: 29242,
+  });
+});
+
+test("extracts Claude usage with requested model when modelUsage includes sidecars", () => {
+  const trace = JSON.stringify({
+    type: "result",
+    total_cost_usd: 0.0930365,
+    usage: {
+      input_tokens: 3,
+      cache_creation_input_tokens: 13246,
+      cache_read_input_tokens: 15130,
+      output_tokens: 90,
+    },
+    modelUsage: {
+      "claude-haiku-4-5-20251001": {
+        inputTokens: 353,
+        outputTokens: 11,
+        cacheReadInputTokens: 0,
+        cacheCreationInputTokens: 0,
+        costUSD: 0.000408,
+      },
+      "claude-opus-4-6": {
+        inputTokens: 3,
+        outputTokens: 90,
+        cacheReadInputTokens: 15130,
+        cacheCreationInputTokens: 13246,
+        costUSD: 0.0926285,
+      },
+    },
+  });
+
+  const summary = extractUsageSummary("claude", trace, { provider: "anthropic", model: "claude-opus-4-6" });
+
+  assert.equal(summary.model, "claude-opus-4-6");
+  assert.equal(summary.cost?.total, 0.0930365);
+  assert.equal(summary.pricingStatus, "native");
+});
+
+test("extracts Cursor usage and returns null cost when model pricing is missing", () => {
+  const trace = JSON.stringify({
+    type: "result",
+    usage: {
+      inputTokens: 3705,
+      outputTokens: 43,
+      cacheReadTokens: 5216,
+      cacheWriteTokens: 0,
+    },
+    model: "Composer 2 Fast",
+  });
+
+  const summary = priceUsageSummary(extractUsageSummary("cursor", trace), pricingFixture());
+
+  assert.equal(summary.inputTokens, 3705);
+  assert.equal(summary.cacheReadTokens, 5216);
+  assert.equal(summary.outputTokens, 43);
+  assert.equal(summary.model, "Composer 2 Fast");
+  assert.equal(summary.cost, null);
+  assert.equal(summary.costBasis, null);
+  assert.equal(summary.pricingStatus, "missing");
+});
+
+test("does not price missing usage as zero", () => {
+  const summary = priceUsageSummary(
+    extractUsageSummary("codex", JSON.stringify({ type: "thread.started" }), {
+      provider: "openai",
+      model: "gpt-5",
+    }),
+    pricingFixture(),
+  );
+
+  assert.equal(summary.usageStatus, "missing");
+  assert.equal(summary.cost, null);
+  assert.equal(summary.costBasis, null);
+  assert.equal(summary.pricingStatus, "missing");
+});
+
+test("classifies malformed usage-shaped records as missing", () => {
+  const cases: Array<[AgentName, unknown]> = [
+    ["antigravity", { type: "headless.antigravity.usage", context_window: { current_usage: { unexpected: true } } }],
+    ["claude", { type: "result", usage: { unexpected: true } }],
+    ["codex", { type: "turn.completed", usage: { unexpected: true } }],
+    ["cursor", { type: "result", usage: { unexpected: true } }],
+    ["gemini", { type: "result", stats: { unexpected: true } }],
+    ["opencode", { type: "step_finish", part: { tokens: { unexpected: true } } }],
+    ["pi", { type: "message_end", message: { role: "assistant", usage: { unexpected: true } } }],
+  ];
+
+  for (const [agent, record] of cases) {
+    const summary = extractUsageSummary(agent, JSON.stringify(record), { model: "test-model" });
+    assert.equal(summary.usageStatus, "missing", agent);
+    assert.equal(summary.cost, null, agent);
+  }
+});
+
+test("preserves valid native zero-cost reports", () => {
+  const cases: Array<[AgentName, unknown]> = [
+    ["claude", { type: "result", total_cost_usd: 0, usage: { input_tokens: 0 } }],
+    ["opencode", { type: "step_finish", part: { cost: 0, tokens: { input: 0 } } }],
+    [
+      "pi",
+      {
+        type: "message_end",
+        message: {
+          role: "assistant",
+          usage: { input: 0, output: 0, cacheRead: 0, cacheWrite: 0, cost: { total: 0 } },
+        },
+      },
+    ],
+  ];
+
+  for (const [agent, record] of cases) {
+    const summary = extractUsageSummary(agent, JSON.stringify(record), { model: "test-model" });
+    assert.equal(summary.usageStatus, "reported", agent);
+    assert.equal(summary.cost?.total, 0, agent);
+    assert.equal(summary.costBasis, "native-reported", agent);
+    assert.equal(summary.pricingSource, "native", agent);
+    assert.equal(summary.pricingStatus, "native", agent);
+  }
+});
+
+test("prices Cursor effort model variants with base model rates", () => {
+  const trace = JSON.stringify({
+    type: "result",
+    usage: {
+      inputTokens: 1000,
+      outputTokens: 20,
+      cacheReadTokens: 400,
+      cacheWriteTokens: 0,
+    },
+  });
+
+  const summary = priceUsageSummary(
+    extractUsageSummary("cursor", trace, { model: "gpt-5.5-extra-high" }),
+    {
+      openai: {
+        models: {
+          "gpt-5.5": {
+            cost: {
+              input: 2,
+              cache_read: 0.2,
+              output: 20,
+            },
+          },
+        },
+      },
+    },
+  );
+
+  assert.equal(summary.model, "gpt-5.5-extra-high");
+  assert.deepEqual(summary.cost, {
+    input: 0.002,
+    cacheRead: 0.00008,
+    cacheWrite: 0,
+    output: 0.0004,
+    total: 0.00248,
+  });
+  assert.equal(summary.costBasis, "api-list-price-estimate");
+  assert.equal(summary.pricingStatus, "priced");
+});
+
+test("extracts Gemini multi-model usage and sums priced costs", () => {
+  const trace = JSON.stringify({
+    type: "result",
+    stats: {
+      models: {
+        "gemini-2.5-flash-lite": {
+          input_tokens: 1000,
+          output_tokens: 40,
+          cached: 200,
+        },
+        "gemini-3-flash-preview": {
+          input_tokens: 2000,
+          output_tokens: 4,
+          cached: 0,
+        },
+      },
+    },
+  });
+
+  const summary = priceUsageSummary(extractUsageSummary("gemini", trace), pricingFixture());
+
+  assert.equal(summary.inputTokens, 2800);
+  assert.equal(summary.cacheReadTokens, 200);
+  assert.equal(summary.outputTokens, 44);
+  assert.equal(summary.provider, "google");
+  assert.equal(summary.model, "mixed");
+  assert.deepEqual(summary.cost, {
+    input: 0.00108,
+    cacheRead: 0.000005,
+    cacheWrite: 0,
+    output: 0.000028,
+    total: 0.001113,
+  });
+  assert.equal(summary.costBasis, "api-list-price-estimate");
+  assert.equal(summary.pricingStatus, "priced");
+});
+
+test("extracts OpenCode native usage cost", () => {
+  const trace = JSON.stringify({
+    type: "step_finish",
+    part: {
+      tokens: {
+        input: 15777,
+        output: 24,
+        reasoning: 192,
+        cache: { read: 0, write: 0 },
+      },
+      cost: 0.00087525,
+    },
+  });
+
+  const summary = extractUsageSummary("opencode", trace, { provider: "openai", model: "gpt-5-nano" });
+
+  assert.equal(summary.inputTokens, 15777);
+  assert.equal(summary.outputTokens, 24);
+  assert.equal(summary.reasoningOutputTokens, 192);
+  assert.equal(summary.totalTokens, 15993);
+  assert.deepEqual(summary.cost, {
+    input: null,
+    cacheRead: null,
+    cacheWrite: null,
+    output: null,
+    total: 0.00087525,
+  });
+  assert.equal(summary.costBasis, "native-reported");
+  assert.equal(summary.pricingStatus, "native");
+});
+
+test("extracts Pi usage and native cost", () => {
+  const trace = JSON.stringify({
+    type: "message_end",
+    message: {
+      role: "assistant",
+      provider: "amazon-bedrock",
+      model: "global.anthropic.claude-opus-4-6-v1",
+      usage: {
+        input: 2310,
+        output: 7,
+        cacheRead: 10,
+        cacheWrite: 20,
+        cost: {
+          input: 0.01155,
+          output: 0.000175,
+          cacheRead: 0.000005,
+          cacheWrite: 0.000125,
+          total: 0.011855,
+        },
+      },
+    },
+  });
+
+  assert.deepEqual(extractUsageSummary("pi", trace), {
+    agent: "pi",
+    provider: "amazon-bedrock",
+    model: "global.anthropic.claude-opus-4-6-v1",
+    inputTokens: 2310,
+    cacheReadTokens: 10,
+    cacheWriteTokens: 20,
+    outputTokens: 7,
+    reasoningOutputTokens: 0,
+    totalTokens: 2347,
+    usageStatus: "reported",
+    cost: {
+      input: 0.01155,
+      output: 0.000175,
+      cacheRead: 0.000005,
+      cacheWrite: 0.000125,
+      total: 0.011855,
+    },
+    costBasis: "native-reported",
+    pricingSource: "native",
+    pricingStatus: "native",
+  });
+});
+
+test("aggregates Pi usage and native cost across assistant turns", () => {
+  const trace = [
+    {
+      type: "message_end",
+      message: {
+        role: "assistant",
+        provider: "openai",
+        model: "gpt-5.5",
+        usage: {
+          input: 100,
+          output: 10,
+          cacheRead: 20,
+          cacheWrite: 5,
+          cost: { input: 0.1, output: 0.2, cacheRead: 0.01, cacheWrite: 0.02, total: 0.33 },
+        },
+      },
+    },
+    {
+      type: "message_end",
+      message: {
+        role: "assistant",
+        provider: "openai",
+        model: "gpt-5.5",
+        usage: {
+          input: 200,
+          output: 20,
+          cacheRead: 40,
+          cacheWrite: 10,
+          cost: { input: 0.2, output: 0.4, cacheRead: 0.02, cacheWrite: 0.04, total: 0.66 },
+        },
+      },
+    },
+  ]
+    .map((record) => JSON.stringify(record))
+    .join("\n");
+
+  const summary = extractUsageSummary("pi", trace);
+
+  assert.equal(summary.inputTokens, 300);
+  assert.equal(summary.cacheReadTokens, 60);
+  assert.equal(summary.cacheWriteTokens, 15);
+  assert.equal(summary.outputTokens, 30);
+  assert.equal(summary.totalTokens, 405);
+  assert.deepEqual(summary.cost, {
+    input: 0.3,
+    output: 0.6,
+    cacheRead: 0.03,
+    cacheWrite: 0.06,
+    total: 0.99,
+  });
+  assert.equal(summary.costBasis, "native-reported");
+  assert.equal(summary.pricingStatus, "native");
+});
+
+test("does not report partial Pi cost when one assistant turn lacks cost", () => {
+  const trace = [
+    {
+      type: "message_end",
+      message: {
+        role: "assistant",
+        usage: { input: 100, output: 10, cacheRead: 0, cacheWrite: 0, cost: { total: 0.3 } },
+      },
+    },
+    {
+      type: "message_end",
+      message: { role: "assistant", usage: { input: 200, output: 20, cacheRead: 0, cacheWrite: 0 } },
+    },
+  ]
+    .map((record) => JSON.stringify(record))
+    .join("\n");
+
+  const summary = extractUsageSummary("pi", trace, { provider: "openai", model: "gpt-5.5" });
+
+  assert.equal(summary.inputTokens, 300);
+  assert.equal(summary.outputTokens, 30);
+  assert.equal(summary.cost, null);
+  assert.equal(summary.costBasis, null);
+  assert.equal(summary.pricingStatus, "missing");
+});
+
+test("counts only canonical Pi assistant message-end usage", () => {
+  const assistant = {
+    role: "assistant",
+    provider: "openai",
+    model: "gpt-5.5",
+    usage: { input: 100, output: 10, cacheRead: 0, cacheWrite: 0, cost: { total: 0.3 } },
+  };
+  const trace = [
+    { type: "message_start", message: assistant },
+    { type: "message_end", message: assistant },
+    { type: "turn_end", message: assistant },
+    {
+      type: "message_end",
+      message: {
+        role: "toolResult",
+        usage: { input: 900, output: 90, cacheRead: 0, cacheWrite: 0, cost: { total: 9 } },
+      },
+    },
+  ]
+    .map((record) => JSON.stringify(record))
+    .join("\n");
+
+  const summary = extractUsageSummary("pi", trace);
+
+  assert.equal(summary.inputTokens, 100);
+  assert.equal(summary.outputTokens, 10);
+  assert.equal(summary.cost?.total, 0.3);
+});
+
+test("marks Pi usage missing when any assistant turn is malformed", () => {
+  const trace = [
+    {
+      type: "message_end",
+      message: {
+        role: "assistant",
+        usage: { input: 100, output: 10, cacheRead: 0, cacheWrite: 0, cost: { total: 0.3 } },
+      },
+    },
+    {
+      type: "message_end",
+      message: {
+        role: "assistant",
+        usage: { input: 200, output: "invalid", cacheRead: 0, cacheWrite: 0, cost: { total: 0.6 } },
+      },
+    },
+  ]
+    .map((record) => JSON.stringify(record))
+    .join("\n");
+
+  const summary = extractUsageSummary("pi", trace);
+
+  assert.equal(summary.usageStatus, "missing");
+  assert.equal(summary.cost, null);
+  assert.equal(summary.costBasis, null);
+});
+
+function pricingFixture() {
+  return {
+    openai: {
+      models: {
+        "gpt-5": {
+          cost: {
+            input: 1.25,
+            cache_read: 0.125,
+            output: 10,
+          },
+        },
+      },
+    },
+    google: {
+      models: {
+        "gemini-2.5-flash-lite": {
+          cost: {
+            input: 0.1,
+            cache_read: 0.025,
+            output: 0.4,
+          },
+        },
+        "gemini-3-flash-preview": {
+          cost: {
+            input: 0.5,
+            cache_read: 0.05,
+            output: 3,
+          },
+        },
+      },
+    },
+  };
+}

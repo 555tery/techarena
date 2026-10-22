@@ -1,0 +1,31 @@
+{
+  "created_at": 1792344640.73357,
+  "artifact_sha256": {
+    "implementation/policy.hpp": "e6c0bbf377091a8ed427b889d26c77b2ec7b42912ed0f1f77835c1c6faade7dd",
+    "implementation/smoke_report.json": "3714d2427d3346927b4cd6c45affb6db123dd3dfd98ba89ef4a88129d4358da1",
+    "implementation/allocator.hpp": "ec65465a12d5ac6081e032123b617b2c78b6e9de65eca016fb105abae7d9f4d6",
+    "implementation/model.hpp": "9969ee6a4fe8748d12562efc41cf175e4e208a939421d440749d164238763690",
+    "implementation/README.md": "0736d02157a3d0debe97d91cdf85cb84d880eb725b71c1fce07b1e7ecb02ee31",
+    "implementation/train.py": "f96a1e3beff4becf8ad675bcd4c4ef24908b3649d24484dccb9bf6619736cd58",
+    "implementation/manifest.json": "230b70fae74eb9a39bfa187868447c71ec78d210243b55e04c43bef4a6a46629",
+    "implementation/teacher.cpp": "50a18b375de72d696ec7d0de42671bab79d098c48581fab9f11102af0acf499b",
+    "implementation/solver.cpp": "90ef3c635bc256c37d233e82f84a3e3272ffe008c29e169f6e4d9cabfb513175",
+    "model/model.hpp": "c9b9a72a567b483ea4bb6306347171755f5298fe91bce6b237ff172dd3a52290",
+    "model/fit.json": "24a6756120966ae8d9d9eaf682ab5b11b0beea3051f2d5d36c3f934308313cc3",
+    "model/manifest.json": "6ca4c7459a650cb76c537a6c2c76406f22f431a1c8ef4faaa25e75a194ceb5fc",
+    "dataset/generate.py": "e1e5e735ae8383e0e1fdf0c75bb783383a13b4f22d10167eadeeec64745425b5",
+    "controls/pipes_exact.cpp": "5957ac938c5c2addc3dd7a1eaa06dbb8914a00ada576b666e319eee1be328836",
+    "incumbent/solution.cpp": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+    "protocol.json": "3bdacd278a85dc4d6d0b42d4a566172327ab1bbc6217b35886b15d6cf038105a",
+    "evaluate.py": "72a3f715b4e436e06102f5b434e442b5a37bd4e1c70cc05e0b18223704c2b7e8",
+    "variants.json": "6d000a6099dde305120f529965dfb1e3fa2455121d88b851f0e81561f006a0cf"
+  },
+  "binary_sha256": {
+    "candidate": "ebd8091e0717b2e2bdb8367d45622bd1d42e061c0b991e506fc1c4e39248ce3c",
+    "kernel_bf": "81cdcedf5ff4830e8ae78aec6b48e3953093c399ea6e8bd4293307902ba08997",
+    "bf": "1651689abc6c9b356a6e97aa15121f71f67d4f7b3550e1a66cd45b804099e8d3",
+    "ss": "a5b8c197a8194996cb125b815eca6c03a909c1228c87d42d40ee3aac8c7c73bb",
+    "trial22": "a3918d0d89f9901694a21baa0137d26405685d090e2f5b645882aae2eda72bd6"
+  },
+  "reason": "One fixed student; no selection from dev results."
+}

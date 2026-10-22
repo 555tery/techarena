@@ -1,0 +1,50 @@
+[
+  {
+    "scenario": 1,
+    "seed": 20261018,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "short-to-long abrupt with LIFO deletion"
+  },
+  {
+    "scenario": 2,
+    "seed": 20261019,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "long-to-short abrupt with FIFO deletion"
+  },
+  {
+    "scenario": 3,
+    "seed": 20261020,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "medium-to-bimodal abrupt with random deletion"
+  },
+  {
+    "scenario": 4,
+    "seed": 20261021,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "alternating short/long phases with 500-pair FIFO/LIFO switches"
+  },
+  {
+    "scenario": 5,
+    "seed": 20261022,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "persistent bimodal plus medium phase with alternating FIFO/LIFO/random deletion"
+  },
+  {
+    "scenario": 6,
+    "seed": 20261023,
+    "commands": 40400,
+    "initial_live": 400,
+    "final_live": 400,
+    "description": "gradual length drift with median-rank purge"
+  }
+]

@@ -1,0 +1,95 @@
+{
+  "artifact": "Policy-conditioned rollout versus baseline-continuation probe",
+  "status": "no-go at fresh synthetic validation gate",
+  "scope": {
+    "official_open_or_holdout_tests_run": false,
+    "site_or_leaderboard_accessed": false,
+    "official_inputs_used": false,
+    "solver_candidate_created": false,
+    "protected_sources_modified": false
+  },
+  "protected_sources": {
+    "frozen_final": {
+      "path": "results/pipes/final/solution.cpp",
+      "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+    },
+    "canonical": {
+      "path": "src/pipes.cpp",
+      "sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+    },
+    "P4": {
+      "path": "results/pipes/improvement/strategies/policy4_baseline.cpp",
+      "sha256": "a524195683fc0fb2aa4815faed12a0fea37df66dc6c4bdb1ffbf53de8d0e8ae3"
+    }
+  },
+  "data": {
+    "design": "9 train and 18 validation whole streams; 1800 operations; 3 length profiles x 3 deletion policies; churn 0.48",
+    "all_input_hashes_verified": true,
+    "manifest": "results/pipes/improvement/policy_conditioned_rollout/input_manifest.json",
+    "manifest_sha256": "e3951bba2066d45a916394fb9a35bd424dfc55f82c152306ba655175dffbe353",
+    "generator": "tools/generate_pipes_synthetic.py",
+    "generator_sha256": "e737770645db6a276acd7af4b30a28756879bf94c532e248b01e643541580904"
+  },
+  "implementation": {
+    "probe": "results/pipes/improvement/policy_conditioned_rollout/policy_conditioned_probe.py",
+    "probe_sha256": "fcb1ec562edf691a89872b259ba4a09eba42f46b4f5e9db185182e2ea5545db1",
+    "stream_generator": "results/pipes/improvement/policy_conditioned_rollout/generate_streams.py",
+    "stream_generator_sha256": "d018ce9af24cc7337a1dcaf46aa1372a58d8ea2bb6c9475daa4ffaad2af0cdb5",
+    "imported_baseline_simulator": "results/pipes/improvement/joint_gap_portfolio_probe/probe.py",
+    "imported_baseline_simulator_sha256": "35cbdc6a57a6ef8cd9efc3650d034c2a6b8aa22a33819e2cc27c820cc3d19082"
+  },
+  "builds": {
+    "frozen_noMC": {
+      "command": "clang++ -O2 -std=c++20 -DMC_ROLLOUT_DISABLED results/pipes/final/solution.cpp -o results/pipes/improvement/policy_conditioned_rollout/bin/frozen_nomc",
+      "binary": "results/pipes/improvement/policy_conditioned_rollout/bin/frozen_nomc",
+      "binary_sha256": "e5256420b8a1cf23ceb4c38bac83e649ebf792336f36df2f2c4040ca215768a6"
+    },
+    "P4": {
+      "command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/strategies/policy4_baseline.cpp -o results/pipes/improvement/policy_conditioned_rollout/bin/p4",
+      "binary": "results/pipes/improvement/policy_conditioned_rollout/bin/p4",
+      "binary_sha256": "e208fad981c32c6e90a0401d10df5f50a6d6b8379a879eb94c47f9e51e35edef"
+    }
+  },
+  "run": {
+    "generation_command": "python3 results/pipes/improvement/policy_conditioned_rollout/generate_streams.py",
+    "probe_command": "python3 results/pipes/improvement/policy_conditioned_rollout/policy_conditioned_probe.py --baseline results/pipes/improvement/policy_conditioned_rollout/bin/frozen_nomc --p4 results/pipes/improvement/policy_conditioned_rollout/bin/p4",
+    "python": "3.14.5",
+    "compiler": "Apple clang 17.0.0 (clang-1700.0.13.5); g++ resolves to Apple clang on this host",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "probe_wall_seconds": 17.852907291031443,
+    "transcript_checks": "27/27 streams matched for both frozen-noMC and P4"
+  },
+  "parameters": {
+    "snapshot_min_command_index": 180,
+    "snapshot_cadence_commands": 60,
+    "scenario_depth": 4,
+    "scenario_trials": 16,
+    "bootstrap_samples": 20000,
+    "bootstrap_seed": 20261021,
+    "validation_used_for_parameter_tuning": false
+  },
+  "results": {
+    "validation_informative_states": 82,
+    "validation_candidate_states": 138,
+    "validation_informative_streams": 14,
+    "conditioned_minus_baseline_pair_accuracy": 0.01574675324675325,
+    "pair_accuracy_paired_stream_bootstrap_95_ci": [0.0, 0.036850649350649356],
+    "conditioned_minus_baseline_top1_regret_m": -0.9870129870129871,
+    "regret_paired_stream_bootstrap_95_ci_m": [-2.545454545454546, 0.0],
+    "gate_passed": false
+  },
+  "outputs": {
+    "report": {
+      "path": "results/pipes/improvement/policy_conditioned_rollout/REPORT.md",
+      "sha256": "27fa20d5f348160e59381fa2661bad4938c1db5f8080aeae04a7550c981902d7"
+    },
+    "ranking_states": {
+      "path": "results/pipes/improvement/policy_conditioned_rollout/ranking_states.csv",
+      "sha256": "5602838c033e7c4ac91dc7778aa53b6bbba84feea807e7774bc13a697af37ecb"
+    },
+    "summary": {
+      "path": "results/pipes/improvement/policy_conditioned_rollout/summary.json",
+      "sha256": "f6d8773e63ed78417af325432bb506a99ea37eb716b0476ff323d0baf69f8bcf"
+    }
+  }
+}

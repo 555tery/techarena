@@ -1,0 +1,13 @@
+{
+  "origin": "Post-freeze diagnostic construction, not independent validation",
+  "tests": [
+    {
+      "id": "retained-root-capacity-240",
+      "file": "retained-root-capacity-240.in"
+    },
+    {
+      "id": "presync-resource-200k",
+      "file": "presync-resource-200k.in"
+    }
+  ]
+}

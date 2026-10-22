@@ -1,0 +1,577 @@
+{
+  "target_source_sha256": "7fe4d9430d708021f602ebb2333564ebb8c1e0b0ac5b1355855c4a18155c011f",
+  "scope": "New release-v5 geometry attacks only; generated without modifying the frozen source or prior suites.",
+  "search": "For each bounded Open15 prefix, require cumulative max T_replay/T_plain_BF <= 2; reject a valid PID deletion that diverges from all matching tables; enumerate subsets of active deletions; greedily place lengths that fit plain-BF gaps but grow the replayed fallback geometry. Subset beam retained the top 32 free-gap advantages per prefix.",
+  "selection": "Unique input hashes against all tests in the existing v5 manifest; prioritize Open3, then other cases, then fill by target KPI.",
+  "suite_size": 10,
+  "official_interactor_validation": "verified; records in official-results files",
+  "not_claimed": "Targeted counterexamples to this frozen release and its fallback state; not universal attacks against every Open15-trained algorithm or unseen-distribution estimates.",
+  "tests": [
+    {
+      "input_sha256": "4bb8597dd34f1aa188c46b1764a73e2bb6cb03f04422ecc0725095f74350050a",
+      "case": 3,
+      "cut": 4,
+      "prefix": [
+        4,
+        4,
+        3,
+        4
+      ],
+      "suffix": [
+        -1,
+        -2,
+        -3,
+        9,
+        5
+      ],
+      "first_divergent_command": -1,
+      "matching_tables_before_divergence": [
+        3
+      ],
+      "target_prefix_T_m": 20,
+      "bestfit_prefix_T_m": 20,
+      "max_prefix_ratio": 1.0,
+      "final_volume_m": 18,
+      "target_predicted_T_m": 40,
+      "bestfit_predicted_T_m": 20,
+      "target_predicted_KPI": 0.45,
+      "bestfit_predicted_KPI": 0.9,
+      "gap_advantage_after_deletions_m": 3,
+      "deletion_subset": [
+        1,
+        2,
+        3
+      ],
+      "refill_lengths": [
+        9,
+        5
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-01-open3-p4",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-01-open3-p4.in",
+      "operation_count": 9,
+      "public_input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.45,
+        "bestfit_KPI": 0.9,
+        "candidate-v3_KPI": 0.9,
+        "cumulative_prefix_max_ratio": 1.0
+      }
+    },
+    {
+      "input_sha256": "8f0520b3c1e9abd5a23b40c52a420561f12b0f25da7fd594436b9b922033b290",
+      "case": 6,
+      "cut": 6,
+      "prefix": [
+        3,
+        1,
+        2,
+        1,
+        1,
+        12
+      ],
+      "suffix": [
+        -2,
+        -1,
+        -3,
+        -5,
+        5
+      ],
+      "first_divergent_command": -2,
+      "matching_tables_before_divergence": [
+        6
+      ],
+      "target_prefix_T_m": 20,
+      "bestfit_prefix_T_m": 20,
+      "max_prefix_ratio": 1.0,
+      "final_volume_m": 18,
+      "target_predicted_T_m": 40,
+      "bestfit_predicted_T_m": 20,
+      "target_predicted_KPI": 0.45,
+      "bestfit_predicted_KPI": 0.9,
+      "gap_advantage_after_deletions_m": 2,
+      "deletion_subset": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "refill_lengths": [
+        5
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-02-open6-p6",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-02-open6-p6.in",
+      "operation_count": 11,
+      "public_input_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.45,
+        "bestfit_KPI": 0.9,
+        "candidate-v3_KPI": 0.9,
+        "cumulative_prefix_max_ratio": 1.0
+      }
+    },
+    {
+      "input_sha256": "2641115c3bbc8cc2065247180f61b4650d4e99dcffce0630ba276aeb13d657f4",
+      "case": 4,
+      "cut": 11,
+      "prefix": [
+        5,
+        6,
+        5,
+        6,
+        6,
+        5,
+        6,
+        5,
+        5,
+        5,
+        -3
+      ],
+      "suffix": [
+        -1,
+        -4,
+        -5,
+        -6,
+        -7,
+        27,
+        6
+      ],
+      "first_divergent_command": -1,
+      "matching_tables_before_divergence": [
+        4
+      ],
+      "target_prefix_T_m": 60,
+      "bestfit_prefix_T_m": 60,
+      "max_prefix_ratio": 2.0,
+      "final_volume_m": 54,
+      "target_predicted_T_m": 100,
+      "bestfit_predicted_T_m": 60,
+      "target_predicted_KPI": 0.54,
+      "bestfit_predicted_KPI": 0.9,
+      "gap_advantage_after_deletions_m": 6,
+      "deletion_subset": [
+        1,
+        4,
+        5,
+        6,
+        7
+      ],
+      "refill_lengths": [
+        27,
+        6
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-03-open4-p11",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-03-open4-p11.in",
+      "operation_count": 18,
+      "public_input_sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.54,
+        "bestfit_KPI": 0.9,
+        "candidate-v3_KPI": 0.9,
+        "cumulative_prefix_max_ratio": 2.0
+      }
+    },
+    {
+      "input_sha256": "f6f2c27497e5b3970e5e8e5e922007f480e289c3479dccf01772771d0043adab",
+      "case": 12,
+      "cut": 34,
+      "prefix": [
+        20,
+        20,
+        20,
+        7,
+        6,
+        15,
+        13,
+        -3,
+        20,
+        5,
+        -9,
+        5,
+        -7,
+        20,
+        -11,
+        20,
+        -12,
+        20,
+        -13,
+        20,
+        -14,
+        20,
+        -15,
+        20,
+        -16,
+        20,
+        -17,
+        20,
+        -18,
+        20,
+        -10,
+        5,
+        14,
+        14
+      ],
+      "suffix": [
+        -1,
+        -2,
+        -4,
+        -5,
+        -8,
+        -21,
+        40,
+        32,
+        18
+      ],
+      "first_divergent_command": -1,
+      "matching_tables_before_divergence": [
+        12
+      ],
+      "target_prefix_T_m": 180,
+      "bestfit_prefix_T_m": 160,
+      "max_prefix_ratio": 1.6666666666666667,
+      "final_volume_m": 144,
+      "target_predicted_T_m": 220,
+      "bestfit_predicted_T_m": 160,
+      "target_predicted_KPI": 0.6545454545454545,
+      "bestfit_predicted_KPI": 0.9,
+      "gap_advantage_after_deletions_m": 20,
+      "deletion_subset": [
+        1,
+        2,
+        4,
+        5,
+        8,
+        21
+      ],
+      "refill_lengths": [
+        40,
+        32,
+        18
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-04-open12-p34",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-04-open12-p34.in",
+      "operation_count": 43,
+      "public_input_sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.6545454545454545,
+        "bestfit_KPI": 0.9,
+        "candidate-v3_KPI": 0.6545454545454545,
+        "cumulative_prefix_max_ratio": 1.6666666666666667
+      }
+    },
+    {
+      "input_sha256": "4195c549112ba73de78c37807e8582dc4c5ba9b1ba3aaf2ca8324a0e868a8f7b",
+      "case": 1,
+      "cut": 3,
+      "prefix": [
+        1,
+        4,
+        15
+      ],
+      "suffix": [
+        -1,
+        -2,
+        5
+      ],
+      "first_divergent_command": -1,
+      "matching_tables_before_divergence": [
+        1
+      ],
+      "target_prefix_T_m": 20,
+      "bestfit_prefix_T_m": 20,
+      "max_prefix_ratio": 1.0,
+      "final_volume_m": 20,
+      "target_predicted_T_m": 40,
+      "bestfit_predicted_T_m": 20,
+      "target_predicted_KPI": 0.5,
+      "bestfit_predicted_KPI": 1.0,
+      "gap_advantage_after_deletions_m": 1,
+      "deletion_subset": [
+        1,
+        2
+      ],
+      "refill_lengths": [
+        5
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-05-open1-p3",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-05-open1-p3.in",
+      "operation_count": 6,
+      "public_input_sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.5,
+        "bestfit_KPI": 1.0,
+        "candidate-v3_KPI": 1.0,
+        "cumulative_prefix_max_ratio": 1.0
+      }
+    },
+    {
+      "input_sha256": "09a0d12aec659c9f63037e444991c4312d0bfaeee33c0171cd915001da15ca4a",
+      "case": 3,
+      "cut": 6,
+      "prefix": [
+        4,
+        4,
+        3,
+        4,
+        2,
+        3
+      ],
+      "suffix": [
+        -2,
+        -3,
+        5
+      ],
+      "first_divergent_command": -2,
+      "matching_tables_before_divergence": [
+        3
+      ],
+      "target_prefix_T_m": 20,
+      "bestfit_prefix_T_m": 20,
+      "max_prefix_ratio": 1.0,
+      "final_volume_m": 18,
+      "target_predicted_T_m": 40,
+      "bestfit_predicted_T_m": 20,
+      "target_predicted_KPI": 0.45,
+      "bestfit_predicted_KPI": 0.9,
+      "gap_advantage_after_deletions_m": 3,
+      "deletion_subset": [
+        2,
+        3
+      ],
+      "refill_lengths": [
+        5
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-06-open3-p6",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-06-open3-p6.in",
+      "operation_count": 9,
+      "public_input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.45,
+        "bestfit_KPI": 0.9,
+        "candidate-v3_KPI": 0.9,
+        "cumulative_prefix_max_ratio": 1.0
+      }
+    },
+    {
+      "input_sha256": "c367f6c6db4cd072692c814b83c7599f847be3581b321442dabbb4ce547e7477",
+      "case": 3,
+      "cut": 5,
+      "prefix": [
+        4,
+        4,
+        3,
+        4,
+        2
+      ],
+      "suffix": [
+        -1,
+        -2,
+        -3,
+        9,
+        3
+      ],
+      "first_divergent_command": -1,
+      "matching_tables_before_divergence": [
+        3
+      ],
+      "target_prefix_T_m": 20,
+      "bestfit_prefix_T_m": 20,
+      "max_prefix_ratio": 1.0,
+      "final_volume_m": 18,
+      "target_predicted_T_m": 40,
+      "bestfit_predicted_T_m": 20,
+      "target_predicted_KPI": 0.45,
+      "bestfit_predicted_KPI": 0.9,
+      "gap_advantage_after_deletions_m": 3,
+      "deletion_subset": [
+        1,
+        2,
+        3
+      ],
+      "refill_lengths": [
+        9,
+        3
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-07-open3-p5",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-07-open3-p5.in",
+      "operation_count": 10,
+      "public_input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.45,
+        "bestfit_KPI": 0.9,
+        "candidate-v3_KPI": 0.9,
+        "cumulative_prefix_max_ratio": 1.0
+      }
+    },
+    {
+      "input_sha256": "a8fd70738322710576ffa73dc7c509b4ab86a08759e7511a49fe73f042d7e089",
+      "case": 3,
+      "cut": 6,
+      "prefix": [
+        4,
+        4,
+        3,
+        4,
+        2,
+        3
+      ],
+      "suffix": [
+        -2,
+        -1,
+        -3,
+        9
+      ],
+      "first_divergent_command": -2,
+      "matching_tables_before_divergence": [
+        3
+      ],
+      "target_prefix_T_m": 20,
+      "bestfit_prefix_T_m": 20,
+      "max_prefix_ratio": 1.0,
+      "final_volume_m": 18,
+      "target_predicted_T_m": 40,
+      "bestfit_predicted_T_m": 20,
+      "target_predicted_KPI": 0.45,
+      "bestfit_predicted_KPI": 0.9,
+      "gap_advantage_after_deletions_m": 3,
+      "deletion_subset": [
+        1,
+        2,
+        3
+      ],
+      "refill_lengths": [
+        9
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-08-open3-p6",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-08-open3-p6.in",
+      "operation_count": 10,
+      "public_input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.45,
+        "bestfit_KPI": 0.9,
+        "candidate-v3_KPI": 0.9,
+        "cumulative_prefix_max_ratio": 1.0
+      }
+    },
+    {
+      "input_sha256": "be2450320341c80d6c71274179b11e05290cd6f9e927259bcd47a204b9118c07",
+      "case": 6,
+      "cut": 7,
+      "prefix": [
+        3,
+        1,
+        2,
+        1,
+        1,
+        12,
+        -1
+      ],
+      "suffix": [
+        -2,
+        -3,
+        -5,
+        5
+      ],
+      "first_divergent_command": -2,
+      "matching_tables_before_divergence": [
+        6
+      ],
+      "target_prefix_T_m": 20,
+      "bestfit_prefix_T_m": 20,
+      "max_prefix_ratio": 1.0,
+      "final_volume_m": 18,
+      "target_predicted_T_m": 40,
+      "bestfit_predicted_T_m": 20,
+      "target_predicted_KPI": 0.45,
+      "bestfit_predicted_KPI": 0.9,
+      "gap_advantage_after_deletions_m": 2,
+      "deletion_subset": [
+        2,
+        3,
+        5
+      ],
+      "refill_lengths": [
+        5
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-09-open6-p7",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-09-open6-p7.in",
+      "operation_count": 11,
+      "public_input_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.45,
+        "bestfit_KPI": 0.9,
+        "candidate-v3_KPI": 0.9,
+        "cumulative_prefix_max_ratio": 1.0
+      }
+    },
+    {
+      "input_sha256": "aaacdbe756703fb326b962a2db14e82ba9f9893d3091c2c3799312434ac89d2c",
+      "case": 6,
+      "cut": 8,
+      "prefix": [
+        3,
+        1,
+        2,
+        1,
+        1,
+        12,
+        -1,
+        -3
+      ],
+      "suffix": [
+        -2,
+        -5,
+        5
+      ],
+      "first_divergent_command": -2,
+      "matching_tables_before_divergence": [
+        6
+      ],
+      "target_prefix_T_m": 20,
+      "bestfit_prefix_T_m": 20,
+      "max_prefix_ratio": 1.0,
+      "final_volume_m": 18,
+      "target_predicted_T_m": 40,
+      "bestfit_predicted_T_m": 20,
+      "target_predicted_KPI": 0.45,
+      "bestfit_predicted_KPI": 0.9,
+      "gap_advantage_after_deletions_m": 2,
+      "deletion_subset": [
+        2,
+        5
+      ],
+      "refill_lengths": [
+        5
+      ],
+      "family": "delete-and-refill geometry search",
+      "name": "attack-10-open6-p8",
+      "file": "prototypes/pipes_v5_robust_20261019/new_attacks/attack-10-open6-p8.in",
+      "operation_count": 11,
+      "public_input_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "official_interactor_validation": {
+        "status": "ok",
+        "v5_KPI": 0.45,
+        "bestfit_KPI": 0.9,
+        "candidate-v3_KPI": 0.9,
+        "cumulative_prefix_max_ratio": 1.0
+      }
+    }
+  ]
+}

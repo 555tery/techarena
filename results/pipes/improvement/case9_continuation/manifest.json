@@ -1,0 +1,23 @@
+{
+  "protocol": "case9-geometric-run-alignment-open15-v1",
+  "candidate_source": "results/pipes/improvement/case9_continuation/source/geometric_run_alignment.cpp",
+  "candidate_source_sha256": "4d0eada1669b9a757b2d09bc82f46b3b7ef60f95f73f5f4e6d0c77ca00d95a8d",
+  "candidate_binary": "results/pipes/improvement/case9_continuation/build/geometric_run_alignment",
+  "candidate_binary_sha256": "65657bf43a20850e0074ad4083def127637a69cba5166b3176b038d1436622ec",
+  "baseline_source": "results/pipes/final/solution.cpp",
+  "baseline_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "canonical_source": "src/pipes.cpp",
+  "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+  "open15_baseline_cases_csv": "results/pipes/final/open-run-size-cohort-lanes/cases.csv",
+  "open15_candidate_summary": "results/pipes/improvement/case9_continuation/runs/geometric_run_alignment-open15/summary.json",
+  "open15_candidate_cases_csv": "results/pipes/improvement/case9_continuation/runs/geometric_run_alignment-open15/cases.csv",
+  "comparison_csv": "results/pipes/improvement/case9_continuation/per_case_comparison.csv",
+  "open15_score_baseline": 29.789717928594047,
+  "open15_score_candidate": 29.791364277400064,
+  "open15_status": "15/15",
+  "case9_input_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+  "holdout_v2_tested_on_this_candidate": false,
+  "debug_in_candidate": false,
+  "build_command": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic results/pipes/improvement/case9_continuation/source/geometric_run_alignment.cpp -o results/pipes/improvement/case9_continuation/build/geometric_run_alignment",
+  "run_command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_continuation/build/geometric_run_alignment --interactor results/pipes/final/bin/interactor --tests data/pipes/open --out results/pipes/improvement/case9_continuation/runs/geometric_run_alignment-open15 --name geometric-run-alignment-open15 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120"
+}

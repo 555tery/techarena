@@ -1,0 +1,156 @@
+{
+  "status": "completed",
+  "id": "external_d29c215c8b585648",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/pareto_pair_transfer/solution.cpp",
+  "sha256": "d29c215c8b58564885e9281d1f0e707e7e34580fb81780c0dac74096245cad72",
+  "idea": "Transfer exact homogeneous-capacity and two-request Pareto certificate from actual BF-improving donor84.",
+  "parent": "trial_0022",
+  "weighted_score": 30.089222448774226,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438140,
+      "kpi": 0.9557607157529556,
+      "weighted_score": 9.557607157529556
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.00043509306864174973,
+    "worst_delta": -0.004395170835634787,
+    "wins": 10,
+    "regressions": 5,
+    "ties": 15,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": -0.0032606941081517737,
+        "baseline_T": 17640,
+        "candidate_T": 17700
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "delta": -0.0017740451672255686,
+        "baseline_T": 21700,
+        "candidate_T": 21740
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.0006137592848791673,
+        "baseline_T": 64880,
+        "candidate_T": 64920
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.00022608306054439087,
+        "baseline_T": 87420,
+        "candidate_T": 87440
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8092335895402459,
+  "max_cpu_s": 1.231732,
+  "max_rss_mib": 14.5625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_d29c215c8b585648/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_d29c215c8b585648/fresh_dev/harness/summary.json",
+  "finished_at": 1792330701.182993,
+  "balanced_gate": true,
+  "hypothesis": "After the parent gap/MC choice, allow a wider existing gap only if the original donor certificate preserves homogeneous capacity for every request size1..40 and retains all feasible request pairs with at least one strict gain. Widths<80 use only current geometry and finite arithmetic. The donor has exactly120m gain on15 over its actual BF parent (17changes), not a new14 gain. This is not the rejected scalar Markov pair score. Certificate does not guarantee long mixed-sequence/deletion or finalT performance. No strong-base score improvement measured yet.",
+  "causality": "Only observed past request-size runs or current free-space capacities. No test id, stream N, fingerprint, future command or external state. Frozen parent unchanged, source diff audited, C++20 Wall/Wextra/Werror syntax passed. Structural guards/excavation remain; same full15+30development and CPU/RSS gates. Explicit activation counters distinguish an inactive check from active regression.",
+  "origin": "independent branch inbox"
+}

@@ -1,0 +1,18 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-fit-inline/solution.cj
++++ prototypes/pipes_cj_tle_fix_20261020/candidate-final/solution.cj
+@@ -3366,6 +3366,7 @@
+                 }
+                 value.write(g, fMin(fMax(estimate, 0.0), Float64(g)))
+             }
++            blackBox(this) // Retain all fixed-buffer owners through the last raw pointer access.
+             causalBaseExpiry = expiry
+             causalComputedLimit = 0
+             causalRiskReady = !parityCohortMode && activePipeCount > kMcMaxActivePipes && expiry > 0.0 &&
+@@ -4327,6 +4328,7 @@
+                     gapValues.write(offset + gap, fMin(fMax(estimate, 0.0), Float64(gap)))
+                 }
+             }
++            blackBox(this) // Retain all fixed-buffer owners through the last raw pointer access.
+             causalComputedLimit = maxGap
+         }
+     }

@@ -1,0 +1,30 @@
+{
+  "binary": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/bin/candidate-exact-fast-o0",
+  "binary_sha256": "760343105b8594fa85d5d13e01eff2b1fc9239ef1494881f36f35901f4763d34",
+  "source": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-exact-fast/solution.cj",
+  "source_sha256": "4e7efbcfd0b3d7f1d2cd2ca6f8764afa4bdee46566294116272d27e778cbf2b9",
+  "selected_ids": [
+    "01e2f6fbf401aa5f13f98ca8e2da46bdf52ade5a6e835a7b95a3ab8ac610c568",
+    "071a9071e4ef638b1e1f27cc91862331d0631b01f352bca691605eb7fa4fb9d1",
+    "07f2b7ada79016724568acac3ff9c1467ed5ad1998abe6a1517650be127a266b",
+    "0a0f041ce58ed532188d32fadb0bbe50ddca0cac1feb129f16d58c462e7cbcaf",
+    "0ac73aac477d10dfc7ed1b5d8db062121c9abc5020d13b155f37009cc5f901cb",
+    "0e774d144aa1313e3303c9d094b3494ceab191d52a1d03bdf45db043b3918492",
+    "0f69ae5e9376c847eb780ef5bb98037fdd4e43c86d9c42cc8a44f69459964e90",
+    "13ba7c11a55cdf1a3b9156cbccbbe00dac563fecf85b99f5fb68aed62eaf0df3",
+    "1cd3a5febffc518c2c064d2087f515acfe9649d5cddf8c6871e9a614edf1f894",
+    "216953fc246e22f2c50aba5211bb24bbda388fcab0ae51caf3340aa4a16f52ac",
+    "26b87847de6788ee0ace0bb770d13a14c47333a0147c22a037b57f57fbde1b2c",
+    "2b909d17e3408054154b5ede1dc488d83c392e6abfc1d80c84438219acfcf0d0",
+    "38b4d09eaa84c3220541fca138ef4e2f75a771f50d6808ba5bf18886eaa9b313",
+    "4be9bbd6c0caf1f5246e487eec4fcda5376bfe3b3c32a1463decef590766c2f4"
+  ],
+  "baseline_freeze_sha256": "36eaf4aa8dd92f3654bda3aad114b7e3f6d208da446db5100a4de55310c35488",
+  "baseline_records_sha256": "cbce687947c02d7ac650540ff53927335f4758a21733d2cbd69e63b666d44131",
+  "runner_sha256": "b481f8d2255ec891cb0621626cb544fe7ded1d33f3cf63029e7c471c853a7c70",
+  "workers": 1,
+  "cjProcessorNum": 1,
+  "cpu_limit_s": 5,
+  "memory_limit_mib": 256,
+  "measurement": "Whole solver process CPU user+system; macOS arm64; no hard CPU affinity"
+}

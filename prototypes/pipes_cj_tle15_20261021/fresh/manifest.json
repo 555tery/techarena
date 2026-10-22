@@ -1,0 +1,866 @@
+{
+  "status": "fixed_fresh_corpus_static_validation_complete_no_solver_runs",
+  "cases": [
+    {
+      "id": "fresh-01",
+      "seed": 20261021,
+      "family": "steady_churn",
+      "operations": 200000,
+      "deletion_policy": "fifo",
+      "profile": "dense_sparse",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-01.in",
+      "sha256": "971d5b8f27df159dfdfe2e490cbf82a4d88a43fcea6d3edc60b7a0aef0c95682",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "971d5b8f27df159dfdfe2e490cbf82a4d88a43fcea6d3edc60b7a0aef0c95682",
+        "operation_count": 200000,
+        "placement_count": 113568,
+        "peak_live_pipe_length_m": 926710,
+        "minimum_trench_lower_bound_m": 926720,
+        "final_occupied_length_m": 926710,
+        "kpi_upper_bound_from_live_volume": 0.9999892092541437
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 86431,
+        "final_live_pipe_count": 27136,
+        "survivor_deletions": [],
+        "final_append_only_operations": 25000,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-02",
+      "seed": 20261022,
+      "family": "steady_churn",
+      "operations": 200000,
+      "deletion_policy": "lifo",
+      "profile": "dense_sparse",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-02.in",
+      "sha256": "5fc3eedfa45fefe3c88e03905dda078a9226da76b54664bd5edbd2a3208a830a",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "5fc3eedfa45fefe3c88e03905dda078a9226da76b54664bd5edbd2a3208a830a",
+        "operation_count": 200000,
+        "placement_count": 113544,
+        "peak_live_pipe_length_m": 926458,
+        "minimum_trench_lower_bound_m": 926460,
+        "final_occupied_length_m": 926458,
+        "kpi_upper_bound_from_live_volume": 0.9999978412451698
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 32727,
+        "final_live_pipe_count": 27088,
+        "survivor_deletions": [],
+        "final_append_only_operations": 25000,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-03",
+      "seed": 20261023,
+      "family": "steady_churn",
+      "operations": 200000,
+      "deletion_policy": "random_middle",
+      "profile": "dense_sparse",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-03.in",
+      "sha256": "af62f3c5041e7a4f232bc075d057a6461416ba1abf15ce666b02d96e7308eedd",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "af62f3c5041e7a4f232bc075d057a6461416ba1abf15ce666b02d96e7308eedd",
+        "operation_count": 200000,
+        "placement_count": 113525,
+        "peak_live_pipe_length_m": 927208,
+        "minimum_trench_lower_bound_m": 927220,
+        "final_occupied_length_m": 927208,
+        "kpi_upper_bound_from_live_volume": 0.9999870580876168
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 47,
+        "final_live_pipe_count": 27050,
+        "survivor_deletions": [],
+        "final_append_only_operations": 25000,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-04",
+      "seed": 20261024,
+      "family": "steady_churn",
+      "operations": 200000,
+      "deletion_policy": "cyclic",
+      "profile": "dense_sparse",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-04.in",
+      "sha256": "6940ebcb48188d48d85da573764699b5d5e943846fd918c9303fc23478ef1b38",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "6940ebcb48188d48d85da573764699b5d5e943846fd918c9303fc23478ef1b38",
+        "operation_count": 200000,
+        "placement_count": 113575,
+        "peak_live_pipe_length_m": 930398,
+        "minimum_trench_lower_bound_m": 930400,
+        "final_occupied_length_m": 930398,
+        "kpi_upper_bound_from_live_volume": 0.9999978503869303
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 8691,
+        "final_live_pipe_count": 27150,
+        "survivor_deletions": [],
+        "final_append_only_operations": 25000,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-05",
+      "seed": 20261025,
+      "family": "coalescing_runs",
+      "operations": 200000,
+      "deletion_policy": "random_middle",
+      "profile": "sparse_dense",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-05.in",
+      "sha256": "3ae3279606a7bb7db160339d04575975b574c2ce9f0cff22db3d416e9d19c818",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "3ae3279606a7bb7db160339d04575975b574c2ce9f0cff22db3d416e9d19c818",
+        "operation_count": 200000,
+        "placement_count": 113576,
+        "peak_live_pipe_length_m": 935573,
+        "minimum_trench_lower_bound_m": 935580,
+        "final_occupied_length_m": 935573,
+        "kpi_upper_bound_from_live_volume": 0.9999925180102183
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 82274,
+        "final_live_pipe_count": 27152,
+        "survivor_deletions": [],
+        "final_append_only_operations": 25000,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-06",
+      "seed": 20261026,
+      "family": "recycling_permuted",
+      "operations": 200000,
+      "deletion_policy": "random_middle",
+      "profile": "dense_sparse",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-06.in",
+      "sha256": "775e99676749ea04938942bd3291c7a7a29a45f401d3b7922092521f9b86ac6d",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "775e99676749ea04938942bd3291c7a7a29a45f401d3b7922092521f9b86ac6d",
+        "operation_count": 200000,
+        "placement_count": 113576,
+        "peak_live_pipe_length_m": 926944,
+        "minimum_trench_lower_bound_m": 926960,
+        "final_occupied_length_m": 926944,
+        "kpi_upper_bound_from_live_volume": 0.9999827392767757
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 328,
+        "final_live_pipe_count": 27152,
+        "survivor_deletions": [],
+        "final_append_only_operations": 25000,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-07",
+      "seed": 20261027,
+      "family": "long_survivors",
+      "operations": 200000,
+      "deletion_policy": "random_middle",
+      "profile": "dense_sparse",
+      "survivor_target_ages": [
+        16,
+        64,
+        256,
+        1024,
+        4096,
+        16384,
+        65536,
+        70000
+      ],
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-07.in",
+      "sha256": "82d8cac66fe49ea4b84e6b8bdbc031845c876e877ec6f342d250b6defb0acc80",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "82d8cac66fe49ea4b84e6b8bdbc031845c876e877ec6f342d250b6defb0acc80",
+        "operation_count": 200000,
+        "placement_count": 113568,
+        "peak_live_pipe_length_m": 928764,
+        "minimum_trench_lower_bound_m": 928780,
+        "final_occupied_length_m": 928764,
+        "kpi_upper_bound_from_live_volume": 0.999982773100196
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 50,
+        "final_live_pipe_count": 27136,
+        "survivor_deletions": [
+          {
+            "pid": 1,
+            "born_event": 1,
+            "deleted_event": 17,
+            "age_events": 16
+          },
+          {
+            "pid": 2,
+            "born_event": 2,
+            "deleted_event": 66,
+            "age_events": 64
+          },
+          {
+            "pid": 3,
+            "born_event": 3,
+            "deleted_event": 259,
+            "age_events": 256
+          },
+          {
+            "pid": 4,
+            "born_event": 4,
+            "deleted_event": 1028,
+            "age_events": 1024
+          },
+          {
+            "pid": 5,
+            "born_event": 5,
+            "deleted_event": 4101,
+            "age_events": 4096
+          },
+          {
+            "pid": 6,
+            "born_event": 6,
+            "deleted_event": 16390,
+            "age_events": 16384
+          },
+          {
+            "pid": 7,
+            "born_event": 7,
+            "deleted_event": 65543,
+            "age_events": 65536
+          },
+          {
+            "pid": 8,
+            "born_event": 8,
+            "deleted_event": 70008,
+            "age_events": 70000
+          }
+        ],
+        "final_append_only_operations": 25000,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-08",
+      "seed": 20261028,
+      "family": "long_survivors",
+      "operations": 200000,
+      "deletion_policy": "cyclic",
+      "profile": "sparse_dense",
+      "survivor_target_ages": [
+        15,
+        63,
+        255,
+        1023,
+        4095,
+        16383,
+        65535,
+        65537
+      ],
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-08.in",
+      "sha256": "c37b2f4a1d8211c528297ab82734775a1f19a43ff70daedf57de786df93f51ce",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "c37b2f4a1d8211c528297ab82734775a1f19a43ff70daedf57de786df93f51ce",
+        "operation_count": 200000,
+        "placement_count": 113573,
+        "peak_live_pipe_length_m": 926351,
+        "minimum_trench_lower_bound_m": 926360,
+        "final_occupied_length_m": 926351,
+        "kpi_upper_bound_from_live_volume": 0.9999902845546008
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 8735,
+        "final_live_pipe_count": 27146,
+        "survivor_deletions": [
+          {
+            "pid": 1,
+            "born_event": 1,
+            "deleted_event": 16,
+            "age_events": 15
+          },
+          {
+            "pid": 2,
+            "born_event": 2,
+            "deleted_event": 65,
+            "age_events": 63
+          },
+          {
+            "pid": 3,
+            "born_event": 3,
+            "deleted_event": 258,
+            "age_events": 255
+          },
+          {
+            "pid": 4,
+            "born_event": 4,
+            "deleted_event": 1027,
+            "age_events": 1023
+          },
+          {
+            "pid": 5,
+            "born_event": 5,
+            "deleted_event": 4100,
+            "age_events": 4095
+          },
+          {
+            "pid": 6,
+            "born_event": 6,
+            "deleted_event": 16389,
+            "age_events": 16383
+          },
+          {
+            "pid": 7,
+            "born_event": 7,
+            "deleted_event": 65542,
+            "age_events": 65535
+          },
+          {
+            "pid": 8,
+            "born_event": 8,
+            "deleted_event": 65545,
+            "age_events": 65537
+          }
+        ],
+        "final_append_only_operations": 25000,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-09",
+      "seed": 20261029,
+      "family": "open15_prefix_sibling",
+      "operations": 5000,
+      "deletion_policy": "fifo",
+      "profile": "dense_sparse",
+      "open15_prefix": 16,
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-09.in",
+      "sha256": "88ff7d24c513e44421cccb02571a0bf2930d9c72c06ba175c3a93eaf8e41662f",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "88ff7d24c513e44421cccb02571a0bf2930d9c72c06ba175c3a93eaf8e41662f",
+        "operation_count": 5000,
+        "placement_count": 2965,
+        "peak_live_pipe_length_m": 28528,
+        "minimum_trench_lower_bound_m": 28540,
+        "final_occupied_length_m": 28528,
+        "kpi_upper_bound_from_live_volume": 0.9995795374912404
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 2033,
+        "final_live_pipe_count": 930,
+        "survivor_deletions": [],
+        "final_append_only_operations": 625,
+        "first_suffix_command": 40,
+        "original_next_open15_command": 4
+      }
+    },
+    {
+      "id": "fresh-10",
+      "seed": 20261030,
+      "family": "open15_prefix_sibling",
+      "operations": 12000,
+      "deletion_policy": "lifo",
+      "profile": "dense_sparse",
+      "open15_prefix": 17,
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-10.in",
+      "sha256": "9ee3fb3c3bcf5a786e946abb5ce8e3007dfa8b72f82751df5e9e26f189e0731c",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "9ee3fb3c3bcf5a786e946abb5ce8e3007dfa8b72f82751df5e9e26f189e0731c",
+        "operation_count": 12000,
+        "placement_count": 7053,
+        "peak_live_pipe_length_m": 64608,
+        "minimum_trench_lower_bound_m": 64620,
+        "final_occupied_length_m": 64608,
+        "kpi_upper_bound_from_live_volume": 0.9998142989786444
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 1919,
+        "final_live_pipe_count": 2106,
+        "survivor_deletions": [],
+        "final_append_only_operations": 1500,
+        "first_suffix_command": 40,
+        "original_next_open15_command": 2
+      }
+    },
+    {
+      "id": "fresh-11",
+      "seed": 20261031,
+      "family": "open15_prefix_sibling",
+      "operations": 25000,
+      "deletion_policy": "random_middle",
+      "profile": "dense_sparse",
+      "open15_prefix": 31,
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-11.in",
+      "sha256": "a8e564caeb20f37957d0e2656ecc4aa7ee7594e5d2d8a843b8c51171c92c27fd",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "a8e564caeb20f37957d0e2656ecc4aa7ee7594e5d2d8a843b8c51171c92c27fd",
+        "operation_count": 25000,
+        "placement_count": 14702,
+        "peak_live_pipe_length_m": 129624,
+        "minimum_trench_lower_bound_m": 129640,
+        "final_occupied_length_m": 129624,
+        "kpi_upper_bound_from_live_volume": 0.9998765813020672
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 9,
+        "final_live_pipe_count": 4404,
+        "survivor_deletions": [],
+        "final_append_only_operations": 3125,
+        "first_suffix_command": 40,
+        "original_next_open15_command": 4
+      }
+    },
+    {
+      "id": "fresh-12",
+      "seed": 20261032,
+      "family": "open15_prefix_sibling",
+      "operations": 50000,
+      "deletion_policy": "cyclic",
+      "profile": "dense_sparse",
+      "open15_prefix": 65,
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-12.in",
+      "sha256": "6def49b4558e7f9490cce2e00029a5e6d0c3f666432d9414babb2259d00fd2af",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "6def49b4558e7f9490cce2e00029a5e6d0c3f666432d9414babb2259d00fd2af",
+        "operation_count": 50000,
+        "placement_count": 29181,
+        "peak_live_pipe_length_m": 251190,
+        "minimum_trench_lower_bound_m": 251200,
+        "final_occupied_length_m": 251190,
+        "kpi_upper_bound_from_live_volume": 0.9999601910828025
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 3682,
+        "final_live_pipe_count": 8362,
+        "survivor_deletions": [],
+        "final_append_only_operations": 6250,
+        "first_suffix_command": 40,
+        "original_next_open15_command": 6
+      }
+    },
+    {
+      "id": "fresh-13",
+      "seed": 20261033,
+      "family": "run_window_boundaries",
+      "operations": 5000,
+      "deletion_policy": "fifo",
+      "profile": "run_boundary",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-13.in",
+      "sha256": "b8c95a80ed1568d8ea89846c3f202d86b41a33f1d7ebd202a698edc0d9288f28",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "b8c95a80ed1568d8ea89846c3f202d86b41a33f1d7ebd202a698edc0d9288f28",
+        "operation_count": 5000,
+        "placement_count": 2939,
+        "peak_live_pipe_length_m": 25510,
+        "minimum_trench_lower_bound_m": 25520,
+        "final_occupied_length_m": 25510,
+        "kpi_upper_bound_from_live_volume": 0.9996081504702194
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 2060,
+        "final_live_pipe_count": 878,
+        "survivor_deletions": [],
+        "final_append_only_operations": 625,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-14",
+      "seed": 20261034,
+      "family": "run_window_boundaries",
+      "operations": 12000,
+      "deletion_policy": "lifo",
+      "profile": "run_boundary",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-14.in",
+      "sha256": "6a511dbfb1bd0cc7090357eab2812e28c906554e15b35a6341000481a1eae2c9",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "6a511dbfb1bd0cc7090357eab2812e28c906554e15b35a6341000481a1eae2c9",
+        "operation_count": 12000,
+        "placement_count": 7056,
+        "peak_live_pipe_length_m": 58322,
+        "minimum_trench_lower_bound_m": 58340,
+        "final_occupied_length_m": 58322,
+        "kpi_upper_bound_from_live_volume": 0.9996914638327048
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 1852,
+        "final_live_pipe_count": 2112,
+        "survivor_deletions": [],
+        "final_append_only_operations": 1500,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-15",
+      "seed": 20261035,
+      "family": "run_window_boundaries",
+      "operations": 25000,
+      "deletion_policy": "random_middle",
+      "profile": "run_boundary",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-15.in",
+      "sha256": "bb50ea02149825d5f20bc7532d14a200e48ce1489809a862d909961da852fcac",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "bb50ea02149825d5f20bc7532d14a200e48ce1489809a862d909961da852fcac",
+        "operation_count": 25000,
+        "placement_count": 14719,
+        "peak_live_pipe_length_m": 143840,
+        "minimum_trench_lower_bound_m": 143840,
+        "final_occupied_length_m": 143840,
+        "kpi_upper_bound_from_live_volume": 1.0
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 9,
+        "final_live_pipe_count": 4438,
+        "survivor_deletions": [],
+        "final_append_only_operations": 3125,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-16",
+      "seed": 20261036,
+      "family": "run_window_boundaries",
+      "operations": 50000,
+      "deletion_policy": "cyclic",
+      "profile": "run_boundary",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-16.in",
+      "sha256": "78ac102569d0815606602517f8196b5e77eb0d73a0f2c427dbbb7233037d257c",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "78ac102569d0815606602517f8196b5e77eb0d73a0f2c427dbbb7233037d257c",
+        "operation_count": 50000,
+        "placement_count": 29150,
+        "peak_live_pipe_length_m": 257580,
+        "minimum_trench_lower_bound_m": 257580,
+        "final_occupied_length_m": 257580,
+        "kpi_upper_bound_from_live_volume": 1.0
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 3655,
+        "final_live_pipe_count": 8300,
+        "survivor_deletions": [],
+        "final_append_only_operations": 6250,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-17",
+      "seed": 20261037,
+      "family": "coalescing_runs",
+      "operations": 5000,
+      "deletion_policy": "random_middle",
+      "profile": "sparse",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-17.in",
+      "sha256": "6de507fcbb3570c7d83f6d85f8e2fefb6e5937e944a2a62fd787150d5b4db972",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "6de507fcbb3570c7d83f6d85f8e2fefb6e5937e944a2a62fd787150d5b4db972",
+        "operation_count": 5000,
+        "placement_count": 3000,
+        "peak_live_pipe_length_m": 23920,
+        "minimum_trench_lower_bound_m": 23920,
+        "final_occupied_length_m": 23920,
+        "kpi_upper_bound_from_live_volume": 1.0
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 1905,
+        "final_live_pipe_count": 1000,
+        "survivor_deletions": [],
+        "final_append_only_operations": 625,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-18",
+      "seed": 20261038,
+      "family": "recycling_permuted",
+      "operations": 12000,
+      "deletion_policy": "random_middle",
+      "profile": "sparse_dense",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-18.in",
+      "sha256": "68ce9c8e7c549f6f87e9586e10226824fb978599fbd47ed7ad2c2910f016eeef",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "68ce9c8e7c549f6f87e9586e10226824fb978599fbd47ed7ad2c2910f016eeef",
+        "operation_count": 12000,
+        "placement_count": 7000,
+        "peak_live_pipe_length_m": 60158,
+        "minimum_trench_lower_bound_m": 60160,
+        "final_occupied_length_m": 60158,
+        "kpi_upper_bound_from_live_volume": 0.9999667553191489
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 19,
+        "final_live_pipe_count": 2000,
+        "survivor_deletions": [],
+        "final_append_only_operations": 1500,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-19",
+      "seed": 20261039,
+      "family": "coalescing_runs",
+      "operations": 25000,
+      "deletion_policy": "random_middle",
+      "profile": "dense",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-19.in",
+      "sha256": "0e2076545910c490a1c9b5f18b0b180ff15428ef537751fda23803df3cccee85",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "0e2076545910c490a1c9b5f18b0b180ff15428ef537751fda23803df3cccee85",
+        "operation_count": 25000,
+        "placement_count": 14389,
+        "peak_live_pipe_length_m": 125894,
+        "minimum_trench_lower_bound_m": 125900,
+        "final_occupied_length_m": 125894,
+        "kpi_upper_bound_from_live_volume": 0.9999523431294678
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 10104,
+        "final_live_pipe_count": 3778,
+        "survivor_deletions": [],
+        "final_append_only_operations": 3125,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-20",
+      "seed": 20261040,
+      "family": "recycling_permuted",
+      "operations": 50000,
+      "deletion_policy": "random_middle",
+      "profile": "dense_sparse",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-20.in",
+      "sha256": "d7a5566cdf30d3d9efa53f3feca4b5cb101f8df8c2d1291fb9790a62cdc630f2",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "d7a5566cdf30d3d9efa53f3feca4b5cb101f8df8c2d1291fb9790a62cdc630f2",
+        "operation_count": 50000,
+        "placement_count": 28500,
+        "peak_live_pipe_length_m": 232649,
+        "minimum_trench_lower_bound_m": 232660,
+        "final_occupied_length_m": 232649,
+        "kpi_upper_bound_from_live_volume": 0.9999527207083297
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 83,
+        "final_live_pipe_count": 7000,
+        "survivor_deletions": [],
+        "final_append_only_operations": 6250,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-21",
+      "seed": 20261041,
+      "family": "independent_profile_switch",
+      "operations": 20000,
+      "deletion_policy": "cyclic",
+      "profile": "sparse",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-21.in",
+      "sha256": "ac3107bf6f79fafe83775cece40ece2927d89906f338c07348a75a57a0a484a5",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "ac3107bf6f79fafe83775cece40ece2927d89906f338c07348a75a57a0a484a5",
+        "operation_count": 20000,
+        "placement_count": 11750,
+        "peak_live_pipe_length_m": 93595,
+        "minimum_trench_lower_bound_m": 93600,
+        "final_occupied_length_m": 93595,
+        "kpi_upper_bound_from_live_volume": 0.9999465811965812
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 1594,
+        "final_live_pipe_count": 3500,
+        "survivor_deletions": [],
+        "final_append_only_operations": 2500,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-22",
+      "seed": 20261042,
+      "family": "independent_profile_switch",
+      "operations": 30000,
+      "deletion_policy": "random_middle",
+      "profile": "sparse_dense",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-22.in",
+      "sha256": "0afba593db7e75ab692262cbb04d96026c002e38082e8651d4c22dc16539f6c7",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "0afba593db7e75ab692262cbb04d96026c002e38082e8651d4c22dc16539f6c7",
+        "operation_count": 30000,
+        "placement_count": 17630,
+        "peak_live_pipe_length_m": 155236,
+        "minimum_trench_lower_bound_m": 155240,
+        "final_occupied_length_m": 155236,
+        "kpi_upper_bound_from_live_volume": 0.9999742334449884
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 7,
+        "final_live_pipe_count": 5260,
+        "survivor_deletions": [],
+        "final_append_only_operations": 3750,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-23",
+      "seed": 20261043,
+      "family": "independent_profile_switch",
+      "operations": 40000,
+      "deletion_policy": "fifo",
+      "profile": "dense_sparse",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-23.in",
+      "sha256": "a7310537985218f2682c6bb6f83aba8ee3975e54e8b8234e1b3c6f6831c3ffb2",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "a7310537985218f2682c6bb6f83aba8ee3975e54e8b8234e1b3c6f6831c3ffb2",
+        "operation_count": 40000,
+        "placement_count": 23526,
+        "peak_live_pipe_length_m": 206052,
+        "minimum_trench_lower_bound_m": 206060,
+        "final_occupied_length_m": 206052,
+        "kpi_upper_bound_from_live_volume": 0.999961176356401
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 16473,
+        "final_live_pipe_count": 7052,
+        "survivor_deletions": [],
+        "final_append_only_operations": 5000,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    },
+    {
+      "id": "fresh-24",
+      "seed": 20261044,
+      "family": "independent_profile_switch",
+      "operations": 45000,
+      "deletion_policy": "lifo",
+      "profile": "sparse_dense",
+      "path": "prototypes/pipes_cj_tle15_20261021/fresh/inputs/fresh-24.in",
+      "sha256": "61d8d66eb76f0507c5f7dc4ca03df8ee9dbe83acfb2702c7aba3973028dbf29d",
+      "static_validation": "tools.pipes_harness.parse_test: passed",
+      "metadata": {
+        "weight": 1.0,
+        "test_sha256": "61d8d66eb76f0507c5f7dc4ca03df8ee9dbe83acfb2702c7aba3973028dbf29d",
+        "operation_count": 45000,
+        "placement_count": 26355,
+        "peak_live_pipe_length_m": 228457,
+        "minimum_trench_lower_bound_m": 228460,
+        "final_occupied_length_m": 228457,
+        "kpi_upper_bound_from_live_volume": 0.9999868685984418
+      },
+      "volume_ceiling_below_085": false,
+      "mechanism_metadata": {
+        "adjacent_pid_delete_transitions": 7094,
+        "final_live_pipe_count": 7710,
+        "survivor_deletions": [],
+        "final_append_only_operations": 5625,
+        "first_suffix_command": null,
+        "original_next_open15_command": null
+      }
+    }
+  ],
+  "total_cases": 24,
+  "total_commands": 2011000,
+  "generator_sha256": "bf4d75091250b62d67d5bebd2ad6bb5cb0b1941fb6205dcf5a77bc3072c67292",
+  "plan_sha256": "04b0faa7cd05b1582cd4997dbb4295b2d274e126f969f84cdbdc777e4bc3d00a",
+  "provenance": {
+    "seed_range": [
+      20261021,
+      20261044
+    ],
+    "method": "New Python Random(seed) streams; no solver output, holdout answers, or result-dependent selection.",
+    "reference_generator_read": "tools/generate_pipes_synthetic.py; independent implementation here avoids O(n) list erasure.",
+    "open15_source": "data/pipes/open/15.in",
+    "open15_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+    "open15_use": "Only first16/17/31/65 commands reused for four labeled siblings; immediate next command deliberately differs.",
+    "random_middle_definition": "Median PID of three uniformly sampled live array slots; biased to middle age, not an exact rank query.",
+    "cyclic_definition": "Cyclic traversal of live slots with deterministic swap deletion.",
+    "coverage_limit": "Coalescing/recycling/two-child AVL deletion are input design targets, not proven internal coverage without solver instrumentation.",
+    "volume_limit": "Live-volume KPI ceiling is only an optimistic bound, not evidence KPI>=0.85 is attainable."
+  }
+}

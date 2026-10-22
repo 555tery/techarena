@@ -1,0 +1,65 @@
+{
+  "design_sha256": "eb8bbb2e81362a8756ece2b9013cec7a5d3ce672fefc0965a33de5a06e3d7aee",
+  "cases": [
+    {
+      "name": "dev_00_recent_uniform",
+      "sha256": "bc1906ace2b8be52263e0f8b89913e32d23ff82474b34beb8b354675a41ccf8c",
+      "operations": 10000
+    },
+    {
+      "name": "dev_01_recent_uniform",
+      "sha256": "c269019fd07ae561277a83a159dd47b8ee3abe7c110e94488d4799c20b4633a7",
+      "operations": 10000
+    },
+    {
+      "name": "dev_02_recent_uniform",
+      "sha256": "197b602976a7e170c8d25a8a124ab157276dec5793a44ec1bc863f10043a3201",
+      "operations": 10000
+    },
+    {
+      "name": "dev_03_recent_uniform",
+      "sha256": "c173ac30207c967304445698564cd7bb9067485c6af36390c49a0e2a3352794d",
+      "operations": 10000
+    },
+    {
+      "name": "dev_04_recent_geometric",
+      "sha256": "cefc0e0d8fa6018bf2e8178b4e30fdf67331201525cc8f3ceb4a4f6afd9b6226",
+      "operations": 10000
+    },
+    {
+      "name": "dev_05_recent_geometric",
+      "sha256": "b387a06e1324877512970e2773d53d55d6d5dc71f8825da436249b1a5d287410",
+      "operations": 10000
+    },
+    {
+      "name": "dev_06_recent_geometric",
+      "sha256": "d3a3a4f8dfcd793e8d444b1827be672bcdc18dd3c08f8553f8a94c4a8ca0c98e",
+      "operations": 10000
+    },
+    {
+      "name": "dev_07_recent_geometric",
+      "sha256": "23983db9c0ef717ce33fe1ddf43eb6b0209003e17a2cf339f2d5a7e4a054ff96",
+      "operations": 10000
+    },
+    {
+      "name": "dev_08_old_tail_mix",
+      "sha256": "2a269d08709ef793a3ece261daaf5491b26c820a2aefa0c7dc6ee537e7cd416e",
+      "operations": 10000
+    },
+    {
+      "name": "dev_09_old_tail_mix",
+      "sha256": "c314cbaecd922907b9d4c6549493c89ee40bd9da155052744af15ec4956d513b",
+      "operations": 10000
+    },
+    {
+      "name": "dev_10_old_tail_mix",
+      "sha256": "468a61896891f1c6362b8a873413c846594b40941dc3fcc0183b3101fc5cd223",
+      "operations": 10000
+    },
+    {
+      "name": "dev_11_old_tail_mix",
+      "sha256": "0510b63326db9df9214352466bbfa57979a94acc07baad7fe63f4c6f439d7754",
+      "operations": 10000
+    }
+  ]
+}

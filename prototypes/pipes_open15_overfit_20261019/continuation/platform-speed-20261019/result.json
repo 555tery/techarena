@@ -1,0 +1,47 @@
+{
+  "updated_at": "2026-10-19T19:33:05.303899+07:00",
+  "status": "accepted_maximum_score_row_two",
+  "submissions_by_agent_this_action": [
+    1666308,
+    1666311,
+    1666313,
+    1666317,
+    1666320,
+    1666321
+  ],
+  "current_submission": 1666321,
+  "current_source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v29/solution.cpp",
+  "current_source_sha256": "f54eded134153c794db288d3412bd1ef55e391897ea9c7ca9898942399140063",
+  "compiler": "Visual C++ 2022 x64 C++20 14.34.31933",
+  "accepted": 15,
+  "tests": 15,
+  "local_score": 30.75747404826914,
+  "ranking": {
+    "observed_at": "2026-10-19T19:33:05.303899+07:00",
+    "score": "30.75747405",
+    "displayed_rank": 1,
+    "row_position": 2,
+    "row_above": "SysCall",
+    "equal_rank_teams": 6,
+    "cpu_sorting_confirmed": false,
+    "screenshot": "ranking-v20.png"
+  },
+  "local_checks": 160,
+  "change": "v28 hot parser, v25 optimized NT IO, split byte streams in numeric word arrays, minimal documented Win32 declarations for SDK-less MSVC, ordinary CRT startup.",
+  "server_windows_build_confirmed": true,
+  "server_cpu_time_available": false,
+  "first_row_achieved": false,
+  "hidden_generalization_claim": false,
+  "owned_local_jobs_finished": true,
+  "unknown_input_support": false,
+  "constraints": "Read one command before each reply. Deliberate public memorization banner retained. Unknown test streams unsupported by user-authorized design.",
+  "speed_evidence": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v29/result.json",
+  "total_speed_improvement_established": false,
+  "proofs": [
+    "../speed-v29/server-accepted.jpg",
+    "../speed-v29/verification-summary.json",
+    "../speed-lab-20261019/final-v28-v20.json"
+  ],
+  "previous_verified_submission": 1666320,
+  "rank_control_report": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-rank-control-20261019/experiment.json"
+}

@@ -1,0 +1,87 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-exact-fast/solution.cj
++++ prototypes/pipes_cj_tle_fix_20261020/candidate-dp-while/solution.cj
+@@ -1899,10 +1899,16 @@
+             let expiry = 2.0 * Float64(primalRecentDeletes) / Float64(iMax(1, activePipeCount))
+             let value = primalGapValue.borrowData()
+             primalGapValue.fill(0.0)
+-            for (g in 1..=maxGap) {
++            var dpManualCursor4: Int64 = 1
++            while (dpManualCursor4 <= maxGap) {
++                let g = dpManualCursor4
++                dpManualCursor4++
+                 let top = iMin(g, lastRequest)
+                 if (expiry == 0.0) {
+-                    for (request in firstRequest..=top) {
++                    var dpManualCursor3: Int64 = firstRequest
++                    while (dpManualCursor3 <= top) {
++                        let request = dpManualCursor3
++                        dpManualCursor3++
+                         if (rate.read(request) > 0.0) { value.write(g, fMax(value.read(g), Float64(request) + value.read(g - request))) }
+                     }
+                     continue
+@@ -1912,7 +1918,10 @@
+                 var minActiveReward = Float64.Inf
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry
+-                for (request in firstRequest..=top) {
++                var dpManualCursor2: Int64 = firstRequest
++                while (dpManualCursor2 <= top) {
++                    let request = dpManualCursor2
++                    dpManualCursor2++
+                     let requestRate = rate.read(request)
+                     if (requestRate == 0.0) { continue }
+                     let requestReward = Float64(request) + value.read(g - request)
+@@ -1926,7 +1935,10 @@
+                 while (estimate > minActiveReward) {
+                     minActiveReward = Float64.Inf
+                     var removed = false
+-                    for (request in firstRequest..=top) {
++                    var dpManualCursor1: Int64 = firstRequest
++                    while (dpManualCursor1 <= top) {
++                        let request = dpManualCursor1
++                        dpManualCursor1++
+                         let bit: Int64 = 1 << request
+                         if ((active & bit) != 0) {
+                             let rr = reward.read(request)
+@@ -1976,17 +1988,26 @@
+             while (firstRequest <= lastRequest && requestRates.read(firstRequest) == 0.0) { firstRequest++ }
+             let gapValues = causalGapValue.borrowData()
+             causalGapValue.fill(0.0)
+-            for (model in 0..2) {
++            var dpManualCursor8: Int64 = 0
++            while (dpManualCursor8 < 2) {
++                let model = dpManualCursor8
++                dpManualCursor8++
+                 let offset: Int64 = model * 513
+                 let expiry = causalBaseExpiry * (if (model == 0) { 0.5 } else { 2.0 })
+-                for (gap in 1..=maxGap) {
++                var dpManualCursor7: Int64 = 1
++                while (dpManualCursor7 <= maxGap) {
++                    let gap = dpManualCursor7
++                    dpManualCursor7++
+                     let top = iMin(gap, lastRequest)
+                     let reward = dpRewardScratch.borrowData()
+                     var active: Int64 = 0
+                     var minActiveReward = Float64.Inf
+                     var numerator: Float64 = 0.0
+                     var denominator = expiry
+-                    for (request in firstRequest..=top) {
++                    var dpManualCursor6: Int64 = firstRequest
++                    while (dpManualCursor6 <= top) {
++                        let request = dpManualCursor6
++                        dpManualCursor6++
+                         let requestRate = requestRates.read(request)
+                         if (requestRate == 0.0) { continue }
+                         let requestReward = Float64(request) + gapValues.read(offset + gap - request)
+@@ -2000,7 +2021,10 @@
+                     while (estimate > minActiveReward) {
+                         minActiveReward = Float64.Inf
+                         var removed = false
+-                        for (request in firstRequest..=top) {
++                        var dpManualCursor5: Int64 = firstRequest
++                        while (dpManualCursor5 <= top) {
++                            let request = dpManualCursor5
++                            dpManualCursor5++
+                             let bit: Int64 = 1 << request
+                             if ((active & bit) != 0) {
+                                 let rr = reward.read(request)

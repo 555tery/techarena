@@ -1,0 +1,85 @@
+{
+  "seeds": [
+    67219,
+    67220,
+    67221,
+    67222,
+    67223,
+    67224
+  ],
+  "selection": "fixed prior to candidate validation; no best-of-seed selection",
+  "tests": [
+    {
+      "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/neutral/neutral-67219.in",
+      "sha256": "06789ea4039c2d2b0b7af6f330563411fa4d14869a0a1be8768e42b2b70f8ebd",
+      "weight": 1.0,
+      "test_sha256": "06789ea4039c2d2b0b7af6f330563411fa4d14869a0a1be8768e42b2b70f8ebd",
+      "operation_count": 6000,
+      "placement_count": 3064,
+      "peak_live_pipe_length_m": 3097,
+      "minimum_trench_lower_bound_m": 3100,
+      "final_occupied_length_m": 2960,
+      "kpi_upper_bound_from_live_volume": 0.9548387096774194
+    },
+    {
+      "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/neutral/neutral-67220.in",
+      "sha256": "b818ccf142cc817ebdfa8825eecdd07ff0ad7fe06e51eebd2c3384be0f466c91",
+      "weight": 1.0,
+      "test_sha256": "b818ccf142cc817ebdfa8825eecdd07ff0ad7fe06e51eebd2c3384be0f466c91",
+      "operation_count": 6000,
+      "placement_count": 3063,
+      "peak_live_pipe_length_m": 3008,
+      "minimum_trench_lower_bound_m": 3020,
+      "final_occupied_length_m": 2687,
+      "kpi_upper_bound_from_live_volume": 0.8897350993377483
+    },
+    {
+      "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/neutral/neutral-67221.in",
+      "sha256": "a8c542b8519e2db808bda6cc9e3dcab7db577ca7dbb45cd105e1578c2f6fab34",
+      "weight": 1.0,
+      "test_sha256": "a8c542b8519e2db808bda6cc9e3dcab7db577ca7dbb45cd105e1578c2f6fab34",
+      "operation_count": 6000,
+      "placement_count": 3051,
+      "peak_live_pipe_length_m": 2684,
+      "minimum_trench_lower_bound_m": 2700,
+      "final_occupied_length_m": 1750,
+      "kpi_upper_bound_from_live_volume": 0.6481481481481481
+    },
+    {
+      "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/neutral/neutral-67222.in",
+      "sha256": "24f449f315718f96825ce525c91dd5a4bb0dec0d779abec52a5c1f6f233ba4c2",
+      "weight": 1.0,
+      "test_sha256": "24f449f315718f96825ce525c91dd5a4bb0dec0d779abec52a5c1f6f233ba4c2",
+      "operation_count": 6000,
+      "placement_count": 3064,
+      "peak_live_pipe_length_m": 2808,
+      "minimum_trench_lower_bound_m": 2820,
+      "final_occupied_length_m": 2711,
+      "kpi_upper_bound_from_live_volume": 0.9613475177304964
+    },
+    {
+      "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/neutral/neutral-67223.in",
+      "sha256": "67908f1b7e760054cf7c035f2ce1a5df290319be72dc99210a88196c93c008fe",
+      "weight": 1.0,
+      "test_sha256": "67908f1b7e760054cf7c035f2ce1a5df290319be72dc99210a88196c93c008fe",
+      "operation_count": 6000,
+      "placement_count": 3049,
+      "peak_live_pipe_length_m": 2842,
+      "minimum_trench_lower_bound_m": 2860,
+      "final_occupied_length_m": 1822,
+      "kpi_upper_bound_from_live_volume": 0.637062937062937
+    },
+    {
+      "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/neutral/neutral-67224.in",
+      "sha256": "f063e7d9fea0aa24378d06f7507b4a0e0b475276e04335fc3b37daed07d89a9b",
+      "weight": 1.0,
+      "test_sha256": "f063e7d9fea0aa24378d06f7507b4a0e0b475276e04335fc3b37daed07d89a9b",
+      "operation_count": 200000,
+      "placement_count": 100065,
+      "peak_live_pipe_length_m": 3104,
+      "minimum_trench_lower_bound_m": 3120,
+      "final_occupied_length_m": 2236,
+      "kpi_upper_bound_from_live_volume": 0.7166666666666667
+    }
+  ]
+}

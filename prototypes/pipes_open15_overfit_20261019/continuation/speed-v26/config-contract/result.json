@@ -1,0 +1,31 @@
+{
+  "all_passed": true,
+  "cases": [
+    "sync success configures exactly once",
+    "async mode rejected before mutation",
+    "query failure rejected",
+    "configuration failure rejected"
+  ],
+  "results": [
+    {
+      "scenario": 0,
+      "actual_code": 0,
+      "stderr": ""
+    },
+    {
+      "scenario": 1,
+      "actual_code": 2,
+      "stderr": "error: stdout is not a verified synchronous pipe\n"
+    },
+    {
+      "scenario": 2,
+      "actual_code": 2,
+      "stderr": "error: stdout is not a verified synchronous pipe\n"
+    },
+    {
+      "scenario": 3,
+      "actual_code": 2,
+      "stderr": "error: stdout completion optimization unavailable\n"
+    }
+  ]
+}

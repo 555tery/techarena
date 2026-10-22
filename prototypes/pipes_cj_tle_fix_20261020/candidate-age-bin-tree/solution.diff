@@ -1,0 +1,22 @@
+--- /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-avl-inline/solution.cj
++++ /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-age-bin-tree/solution.cj
+@@ -1686,9 +1686,16 @@
+     public init() {}
+ 
+     private func ageBin(age: Int64): Int64 {
+-        var bin: Int64 = 0
+-        while (bin + 1 < 8 && age >= lower[bin + 1]) { bin++ }
+-        return bin
++        if (age < 1024) {
++            if (age < 64) {
++                return if (age < 16) { 0 } else { 1 }
++            }
++            return if (age < 256) { 2 } else { 3 }
++        }
++        if (age < 16384) {
++            return if (age < 4096) { 4 } else { 5 }
++        }
++        return if (age < 65536) { 6 } else { 7 }
+     }
+ 
+     private func enter(record: LifetimeRecord, bin: Int64): Unit {

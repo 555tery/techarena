@@ -1,0 +1,39 @@
+{
+  "status": "verified",
+  "candidate_source": "prototypes/pipes_open15_overfit_20261019/continuation/pool-order/best.txt",
+  "candidate_source_sha256": "640ad400bdf1578b7bb80235540ff51e3c2b39e984f7e90a9a622bbcacabeb8b",
+  "input11_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+  "input15_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+  "positions_count": 6493,
+  "positions_sha256": "640ad400bdf1578b7bb80235540ff51e3c2b39e984f7e90a9a622bbcacabeb8b",
+  "bound": 20760,
+  "extent": 20760,
+  "T": 20760,
+  "pid1": {
+    "position": 0,
+    "length": 3,
+    "birth_zero_based": 0,
+    "death_zero_based": 9999,
+    "immortal": true
+  },
+  "independent_cell_replay": {
+    "insertions": 6493,
+    "deletions": 3506,
+    "survivors": 2987,
+    "peak_volume": 20759
+  },
+  "common_prefix": {
+    "commands": 4999,
+    "identical_commands": true,
+    "births": 4006,
+    "min_position": 0,
+    "max_assignment_end": 20760,
+    "assignment_span": 20760,
+    "active_after_prefix": 3013,
+    "active_after_prefix_extent": 20760
+  },
+  "positions_file": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/positions.txt",
+  "positions_file_sha256": "640ad400bdf1578b7bb80235540ff51e3c2b39e984f7e90a9a622bbcacabeb8b",
+  "audit_pid": 49757,
+  "runtime_record": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/processes/49757.json"
+}

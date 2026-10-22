@@ -1,0 +1,21 @@
+{
+  "created_at": "2026-10-19T19:39:39.442421+00:00",
+  "selected": "hybrid",
+  "candidates_freeze_sha256": "78078dc6c7bf24234683f82764ce1141df35b786b53eec04d03126d405f57bfc",
+  "experiment_sha256": "4873c7d2ecb36dedd8da1c194c870704636415bceb96999ab8d7ff0a5012843f",
+  "calibration_records_sha256": "c2fb0bfb1f3dd9552be5c9ed14471264dd9592de7ad8362549393ec66612a7fa",
+  "open15_records_sha256": "21febb17327e312708609fe980f2fb903769896b065bd4d19531f33de26f954c",
+  "ineligibility_reasons": {
+    "online": [],
+    "full": [
+      "prefix_macro_below_online_minus_0.002"
+    ],
+    "hybrid": []
+  },
+  "maximum_regret": {
+    "online": 0.6834047630391353,
+    "full": 4.150045713305829,
+    "hybrid": 0.6547624594450383
+  },
+  "final_rule": "Confirm ordinary/prefix macro >= online-0.002, ordinary retention >=0.8, correctness/resources. If failed, choose online; no retuning."
+}

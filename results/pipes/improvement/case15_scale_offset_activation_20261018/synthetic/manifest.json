@@ -1,0 +1,50 @@
+[
+  {
+    "name": "gate_stress_01",
+    "seed": 202610184101,
+    "command_count": 105000,
+    "initial_active": 5000,
+    "minimum_active_count": 5000,
+    "maximum_active_count": 21002,
+    "placement_count": 63000,
+    "deletion_count": 42000,
+    "description": "phased short lengths; newest-5% deletion every time",
+    "input_sha256": "57b07116f4ec2cf40790571d32f4705a999af9f9d66be64942314d3d74734f5f"
+  },
+  {
+    "name": "gate_stress_02",
+    "seed": 202610184102,
+    "command_count": 105000,
+    "initial_active": 5000,
+    "minimum_active_count": 5000,
+    "maximum_active_count": 21002,
+    "placement_count": 63000,
+    "deletion_count": 42000,
+    "description": "low/mid short-size phase shift; 85% newest-5%, otherwise FIFO",
+    "input_sha256": "807b9f3a434844269f82ad65aeff6b096632847d2db13e9d91dda5796c9a9b1f"
+  },
+  {
+    "name": "gate_stress_03",
+    "seed": 202610184103,
+    "command_count": 105000,
+    "initial_active": 5000,
+    "minimum_active_count": 5000,
+    "maximum_active_count": 21002,
+    "placement_count": 63000,
+    "deletion_count": 42000,
+    "description": "short demand with a 6% wide pulse; 90% newest-5%, otherwise random",
+    "input_sha256": "b179af5a8dbcc0ade6c42d9432c38349e960405a94f2cd3b8f8e9e52a0552402"
+  },
+  {
+    "name": "gate_stress_04",
+    "seed": 202610184104,
+    "command_count": 105000,
+    "initial_active": 5000,
+    "minimum_active_count": 5000,
+    "maximum_active_count": 21002,
+    "placement_count": 63000,
+    "deletion_count": 42000,
+    "description": "short-size phases; random then mixed then 95% newest-5% deletion",
+    "input_sha256": "d24ec1fe3fba0ca305cf9d8957aa9f90f90202ea338ce75da5df95d21e71ecfe"
+  }
+]

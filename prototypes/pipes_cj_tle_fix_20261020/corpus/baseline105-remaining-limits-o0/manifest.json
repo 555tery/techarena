@@ -1,0 +1,18 @@
+{
+  "binary": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/bin/baseline105-o0",
+  "binary_sha256": "6ab1a547922c1b5299f609a7db0964c3f76cfff5f66c262bdd91601d2c5c8f50",
+  "source": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/baseline/solution.cj",
+  "source_sha256": "fd5fe184cb85bf47c18085a3ef12ceb36ae20168398dd00d8983f16165b8fc9a",
+  "selected_ids": [
+    "a60a69f623f4a603a3c897664a1f228b56458df052d1fc08397d842e163f6b5d",
+    "c51a00bd865e7242d2d1b923f87bb20f235941c391f5a7db0cf9f5a98a2905a8"
+  ],
+  "baseline_freeze_sha256": "36eaf4aa8dd92f3654bda3aad114b7e3f6d208da446db5100a4de55310c35488",
+  "baseline_records_sha256": "cbce687947c02d7ac650540ff53927335f4758a21733d2cbd69e63b666d44131",
+  "runner_sha256": "b481f8d2255ec891cb0621626cb544fe7ded1d33f3cf63029e7c471c853a7c70",
+  "workers": 1,
+  "cjProcessorNum": 1,
+  "cpu_limit_s": 5,
+  "memory_limit_mib": 256,
+  "measurement": "Whole solver process CPU user+system; macOS arm64; no hard CPU affinity"
+}

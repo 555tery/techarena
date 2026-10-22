@@ -1,0 +1,69 @@
+{
+  "baseline": "candidate-counts/solution.cj",
+  "baseline_sha256": "85fa2c3efef59dc00a4fe59b5c346374e39549bf6a0eea0817acd1c67a7eebdf",
+  "source_sha256": "6cbb4810a69dd70a1fd59f312dbd6f1502bf991bbf4d02a02f2b796d5dbf8f24",
+  "generator_sha256": "62361402088b03d79941e9741b2328fadb19f762365bab724452fc653e50428c",
+  "changes": [
+    {
+      "old": "// Source: allocator.cj\n",
+      "new": "// Fixed-capacity owner of stdlib malloc memory. No managed references\n// are stored in its payload; Cangjie GC never relocates this C-heap memory.\n// Local aliases borrow this class instance. Ownership is never copied.\npublic class FastFloatBuffer {\n    private let data: CPointer<Float64>\n    public let size: Int64\n\n    public init(capacity: Int64) {\n        if (capacity <= 0) { throw IllegalArgumentException(\"Invalid numeric buffer capacity\") }\n        this.size = capacity\n        this.data = LibC.malloc<Float64>(count: capacity)\n        if (data.isNull()) { throw IllegalMemoryException(\"Numeric buffer allocation failed\") }\n        unsafe {\n            for (i in 0..capacity) { data.write(i, 0.0) }\n        }\n    }\n\n    // Official1.0.5 finalizer syntax. No instance method calls, allocation,\n    // synchronization or potentially throwing arithmetic in this body.\n    ~init() {\n        unsafe { LibC.free(data) }\n    }\n\n    public operator func [](index: Int64): Float64 {\n        if (index < 0 || index >= size) { throw IndexOutOfBoundsException(\"Numeric buffer index\") }\n        return unsafe { data.read(index) }\n    }\n\n    public operator func [](index: Int64, value!: Float64): Unit {\n        if (index < 0 || index >= size) { throw IndexOutOfBoundsException(\"Numeric buffer index\") }\n        unsafe { data.write(index, value) }\n    }\n\n    public func fill(value: Float64): Unit {\n        unsafe {\n            for (i in 0..size) { data.write(i, value) }\n        }\n    }\n\n    public func copyFrom(other: FastFloatBuffer): Unit {\n        if (other.size != size) { throw IllegalArgumentException(\"Numeric buffer copy size\") }\n        unsafe {\n            for (i in 0..size) { data.write(i, other.data.read(i)) }\n        }\n    }\n}\n\n// Source: allocator.cj\n",
+      "occurrences": 1
+    },
+    {
+      "old": "    public var primalGapValue = VArray<Float64, $513>(repeat: 0.0)",
+      "new": "    private let primalGapValue = FastFloatBuffer(513)",
+      "occurrences": 1
+    },
+    {
+      "old": "    public var causalRequestRate = VArray<Float64, $41>(repeat: 0.0)",
+      "new": "    private let causalRequestRate = FastFloatBuffer(41)",
+      "occurrences": 1
+    },
+    {
+      "old": "    public var causalGapValue = VArray<Float64, $1026>(repeat: 0.0)",
+      "new": "    private let causalGapValue = FastFloatBuffer(1026)\n    private let dpRateScratch = FastFloatBuffer(41)\n    private let dpRewardScratch = FastFloatBuffer(41)\n    private let dpValueScratch = FastFloatBuffer(513)",
+      "occurrences": 1
+    }
+  ],
+  "allocations_per_allocator": {
+    "persistent": [
+      513,
+      41,
+      1026
+    ],
+    "scratch": [
+      41,
+      41,
+      513
+    ],
+    "count": 6,
+    "payload_bytes": 17400,
+    "rebuild_allocations": 0
+  },
+  "ownership": [
+    "Each of six private let fields owns a distinct FastFloatBuffer class instance and its one malloc allocation.",
+    "The CPointer is private and never returned; no buffer clone exists and no owning field is assigned another buffer.",
+    "Local bindings are non-owning class aliases keeping their owner reachable while operating.",
+    "Primal commit copies payload into persistent primalGapValue and causalRequestRate; scratch is never aliased as a persistent table.",
+    "Causal rows are written directly to the one persistent causalGapValue; no callback observes intermediate state.",
+    "Same scratch buffers are reused sequentially; these DP methods are neither concurrent nor reentrant in the existing solver.",
+    "Each FastFloatBuffer finalizer releases its allocation via stdlib LibC.free once. Finalizer timing is unspecified and is never used for synchronization.",
+    "If allocation fails constructor throws before any owned non-null allocation; zero initialization has no expected throwing path for these fixed positive capacities."
+  ],
+  "official_105_sources": {
+    "malloc_free": "https://github.com/cangjielanguage/cangjie_runtime/blob/c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9/std/libs/std/core/libc.cj#L37-L51",
+    "pointer_read_write": "https://github.com/cangjielanguage/cangjie_runtime/blob/c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9/std/libs/std/core/c_pointer_resource.cj#L48-L65",
+    "operator_syntax": "https://github.com/cangjielanguage/cangjie_runtime/blob/c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9/std/libs/std/core/array.cj#L108-L131",
+    "finalizer": "https://github.com/cangjielanguage/cangjie_docs/blob/f8f8cd75a336e23785a4c57bd6091b2adf1e0302/docs/dev-guide/source_zh_cn/class_and_interface/class.md#class-终结器"
+  },
+  "fp_policy": "All recurrence FP expressions, operation order, iteration order and thresholds preserved. Added fill/copy operations only write identical Float64 values; they perform no FP arithmetic.",
+  "caveats": [
+    "Not compiled or executed, as requested.",
+    "Bounds checks and Cangjie method/intrinsic overhead remain; performance is unmeasured.",
+    "Native payload memory is outside managed heap accounting;17400bytes per Allocator until its six owners finalize.",
+    "Finalizers may run on arbitrary threads at unspecified times, so only stdlib free occurs there.",
+    "Changing unreachable finalizer timing is a resource behavior change, not a placement-policy change."
+  ],
+  "compile_executed": false,
+  "solver_executed": false
+}

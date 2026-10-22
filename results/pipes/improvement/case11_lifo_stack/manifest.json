@@ -1,0 +1,59 @@
+{
+  "experiment": "case11_lifo_stack_lane",
+  "baseline_open15_score": 29.932085817214315,
+  "candidate_open15_score": 29.906777984955234,
+  "baseline_source": "results/pipes/improvement/case9_causal_profiles/source/champion_cohort_slabs.cpp",
+  "candidate_source": "results/pipes/improvement/case11_lifo_stack/src/lifo_high_side.cpp",
+  "artifacts": {
+    "results/pipes/improvement/case11_lifo_stack/src/baseline_champion.cpp": "43bfbdadbae18ac180d1e59b6631342cfe1bef99190a449838f0470d6f220200",
+    "results/pipes/improvement/case11_lifo_stack/src/lifo_stack_lane.cpp": "6c63fa0687de8c7289a1bdb5748c00c9dbe1076f7d06c205ba30b8c0e1c513ce",
+    "results/pipes/improvement/case11_lifo_stack/src/lifo_high_side.cpp": "0d91fd019211ae7f9fe02977c4b6f0b0f6a702fce085848d9bfb6b391713d672",
+    "results/pipes/improvement/case11_lifo_stack/bin/baseline_champion": "fbaee4a9a5e63662bc6878b02a21b6b37adada71a59d2722f33f2ddf5b174a28",
+    "results/pipes/improvement/case11_lifo_stack/bin/lifo_stack_lane": "0825ac154551fb954b2908f43c4527bae027694c06cd29f812a719e6ee4fd043",
+    "results/pipes/improvement/case11_lifo_stack/bin/lifo_high_side": "df6326c8626831037133be487f9cc9551b2b39c51fcc0487e2834b0b391082d0",
+    "data/pipes/open/11.in": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "tools/pipes_harness.py": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "tools/interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "results/pipes/improvement/case11_lifo_stack/runs/open15_high_side/summary.json": "5af98b229ca1a3e1bdacd29e0c6ac6ec9df4ebf29c9e513aaca353e7121aa496",
+    "results/pipes/improvement/case11_lifo_stack/runs/open15_high_side/cases.csv": "e7bca24ab7dd73e8e2cfed1cb675b344d8316e7f321b11f58c75492ddfba89ad",
+    "results/pipes/improvement/case11_lifo_stack/open15_comparison.csv": "f6458630d2b86b143066a86ab847686b4229ff179b0cba3fe3a6c9eb8bc092b7",
+    "results/pipes/improvement/case11_lifo_stack/synthetic/s01_small_lifo.in": "871cbdbda8df1679f9114f464d13342e8b9cedd2c6866f6202975ff5c4504e18",
+    "results/pipes/improvement/case11_lifo_stack/synthetic/s02_small_fifo.in": "200b1ce854cc8901cb55c9ab92dc451a5693ba2da18b8be30ccb07567a52899d",
+    "results/pipes/improvement/case11_lifo_stack/synthetic/s03_small_random.in": "6bc4504db5ab030675aa012f183a5db92b4bddb2886cc8ba7e7e5ba819e0e0b1",
+    "results/pipes/improvement/case11_lifo_stack/synthetic/s04_small_to_wide_lifo.in": "834ac5751622b5a84458e5906789a70e92a9a2400380e1df629162fc0772437c"
+  },
+  "synthetic_results": {
+    "baseline_s01_small_lifo": {
+      "trench_m": 21760,
+      "score": 0.999080882352941
+    },
+    "candidate_high_side_s01_small_lifo": {
+      "trench_m": 21760,
+      "score": 0.999080882352941
+    },
+    "baseline_s02_small_fifo": {
+      "trench_m": 21520,
+      "score": 0.999210037174721
+    },
+    "candidate_high_side_s02_small_fifo": {
+      "trench_m": 21520,
+      "score": 0.999210037174721
+    },
+    "baseline_s03_small_random": {
+      "trench_m": 21940,
+      "score": 0.998997265268915
+    },
+    "candidate_high_side_s03_small_random": {
+      "trench_m": 21940,
+      "score": 0.998997265268915
+    },
+    "baseline_s04_small_to_wide_lifo": {
+      "trench_m": 19200,
+      "score": 0.960625
+    },
+    "candidate_high_side_s04_small_to_wide_lifo": {
+      "trench_m": 19200,
+      "score": 0.960625
+    }
+  }
+}

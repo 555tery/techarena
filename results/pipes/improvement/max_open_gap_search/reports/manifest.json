@@ -1,0 +1,282 @@
+{
+  "source": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp",
+  "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+  "interactor": "/Users/555tery/techarena/tools/interactor",
+  "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+  "tests_dir": "/Users/555tery/techarena/data/pipes/open",
+  "candidates": [
+    {
+      "name": "best_fit",
+      "policy": 0,
+      "window": 128,
+      "scale": 50,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=0 -DPIPES_WINDOW=128 -DPIPES_SCALE=50 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/best_fit",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/best_fit",
+      "binary_sha256": "5789e8eb781316eea50e08cb61557e20603e457e25fee5be54d97313171f8c37",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.005032 s  wall=0.38088779198005795 s  RSS=1.296875 MiB\n2  ok  KPI=0.5  CPU=0.003284 s  wall=0.015392125002108514 s  RSS=1.296875 MiB\n3  ok  KPI=0.375  CPU=0.00183 s  wall=0.010015249950811267 s  RSS=1.296875 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.001863 s  wall=0.012654249905608594 s  RSS=1.3125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.041104 s  wall=0.29047645803075284 s  RSS=2.109375 MiB\n6  ok  KPI=0.9  CPU=0.0018729999999999999 s  wall=0.012480583041906357 s  RSS=1.296875 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.0031769999999999997 s  wall=0.022302292054519057 s  RSS=1.390625 MiB\n8  ok  KPI=0.9802966101694915  CPU=0.029543 s  wall=0.22512912505771965 s  RSS=1.53125 MiB\n9  ok  KPI=0.5  CPU=0.043989 s  wall=0.3131261250237003 s  RSS=2.1875 MiB\n10  ok  KPI=0.666522210184182  CPU=0.047169 s  wall=0.35696045809891075 s  RSS=2.09375 MiB\n11  ok  KPI=0.900929203539823  CPU=0.046028 s  wall=0.3521612919867039 s  RSS=1.734375 MiB\n12  ok  KPI=0.9892857142857143  CPU=0.00865 s  wall=0.057734666974283755 s  RSS=1.453125 MiB\n13  ok  KPI=0.9672727272727273  CPU=0.043609999999999996 s  wall=0.3242203330155462 s  RSS=1.640625 MiB\n14  ok  KPI=0.9969328397673188  CPU=0.100545 s  wall=0.815764750004746 s  RSS=2.296875 MiB\n15  ok  KPI=0.9484440115963036  CPU=0.9196279999999999 s  wall=6.652962333988398 s  RSS=5.28125 MiB\nweighted_score_sum=28.3758375994 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/best_fit/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/best_fit/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 10.024842042010278,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/best_fit",
+        "score": 28.375837599373007,
+        "ok": 15
+      },
+      "score": 28.375837599373007,
+      "valid": 15
+    },
+    {
+      "name": "first_fit_low",
+      "policy": 1,
+      "window": 128,
+      "scale": 50,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=1 -DPIPES_WINDOW=128 -DPIPES_SCALE=50 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/first_fit_low",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/first_fit_low",
+      "binary_sha256": "cb587c59b2184f0e5edfcab82ca57a6b7bf7cead2f2eb85a57cd3cb9ef3c0010",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.004366999999999999 s  wall=0.4249245839891955 s  RSS=1.3125 MiB\n2  ok  KPI=0.5  CPU=0.003248 s  wall=0.016861500102095306 s  RSS=1.3125 MiB\n3  ok  KPI=0.75  CPU=0.002185 s  wall=0.013153958017937839 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.002235 s  wall=0.014611041988246143 s  RSS=1.3125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.05990999999999999 s  wall=0.30672437499742955 s  RSS=2.109375 MiB\n6  ok  KPI=0.45  CPU=0.001951 s  wall=0.01055708306375891 s  RSS=1.3125 MiB\n7  ok  KPI=0.6708  CPU=0.0031859999999999996 s  wall=0.02228050003759563 s  RSS=1.421875 MiB\n8  ok  KPI=0.9802966101694915  CPU=0.029667 s  wall=0.22182033292483538 s  RSS=1.546875 MiB\n9  ok  KPI=0.5  CPU=0.067089 s  wall=0.3268849169835448 s  RSS=2.21875 MiB\n10  ok  KPI=0.8  CPU=0.046394 s  wall=0.3300522919744253 s  RSS=2.09375 MiB\n11  ok  KPI=0.8868031358885018  CPU=0.047702999999999995 s  wall=0.3406761250225827 s  RSS=1.796875 MiB\n12  ok  KPI=0.9873795761078998  CPU=0.008375 s  wall=0.061510708066634834 s  RSS=1.46875 MiB\n13  ok  KPI=0.9614457831325302  CPU=0.04339 s  wall=0.3238582919584587 s  RSS=1.640625 MiB\n14  ok  KPI=0.9958795562599049  CPU=0.101736 s  wall=0.8094122499460354 s  RSS=2.3125 MiB\n15  ok  KPI=0.9315647802100018  CPU=1.7062179999999998 s  wall=7.402693124953657 s  RSS=5.96875 MiB\nweighted_score_sum=27.8888372587 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/first_fit_low/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/first_fit_low/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 10.782499207998626,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/first_fit_low",
+        "score": 27.888837258658498,
+        "ok": 15
+      },
+      "score": 27.888837258658498,
+      "valid": 15
+    },
+    {
+      "name": "worst_fit",
+      "policy": 2,
+      "window": 128,
+      "scale": 50,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=2 -DPIPES_WINDOW=128 -DPIPES_SCALE=50 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/worst_fit",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/worst_fit",
+      "binary_sha256": "59e1eef28e64273e39a62962237cf31cf131552cb99d8bf72990198381a086e1",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.005362 s  wall=0.5270904999924824 s  RSS=1.296875 MiB\n2  ok  KPI=0.5  CPU=0.0031709999999999998 s  wall=0.016498957993462682 s  RSS=1.3125 MiB\n3  ok  KPI=0.75  CPU=0.0021999999999999997 s  wall=0.014648583950474858 s  RSS=1.296875 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.002345 s  wall=0.013470667065121233 s  RSS=1.296875 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.039549 s  wall=0.28944341698661447 s  RSS=2.109375 MiB\n6  ok  KPI=0.45  CPU=0.001979 s  wall=0.012593208928592503 s  RSS=1.296875 MiB\n7  ok  KPI=0.6654761904761904  CPU=0.003211 s  wall=0.021583792055025697 s  RSS=1.375 MiB\n8  ok  KPI=0.9366396761133603  CPU=0.029348 s  wall=0.21953912498429418 s  RSS=1.515625 MiB\n9  ok  KPI=0.5  CPU=0.041336 s  wall=0.299135374953039 s  RSS=2.203125 MiB\n10  ok  KPI=0.8  CPU=0.044406 s  wall=0.3380975420586765 s  RSS=2.078125 MiB\n11  ok  KPI=0.7795176110260337  CPU=0.049553 s  wall=0.35181300004478544 s  RSS=1.84375 MiB\n12  ok  KPI=0.9705492424242425  CPU=0.008813999999999999 s  wall=0.062255167053081095 s  RSS=1.4375 MiB\n13  ok  KPI=0.822680412371134  CPU=0.044828 s  wall=0.3288662499981001 s  RSS=1.640625 MiB\n14  ok  KPI=0.9932560590094837  CPU=0.10034599999999999 s  wall=0.8085482920287177 s  RSS=2.296875 MiB\n15  ok  KPI=0.7884117181910607  CPU=1.0736970000000001 s  wall=6.978926624986343 s  RSS=7.1875 MiB\nweighted_score_sum=25.6681635632 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/worst_fit/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/worst_fit/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 10.434071541996673,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/worst_fit",
+        "score": 25.66816356324478,
+        "ok": 15
+      },
+      "score": 25.66816356324478,
+      "valid": 15
+    },
+    {
+      "name": "first_fit_high",
+      "policy": 3,
+      "window": 128,
+      "scale": 50,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=3 -DPIPES_WINDOW=128 -DPIPES_SCALE=50 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/first_fit_high",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/first_fit_high",
+      "binary_sha256": "67d4f3a6ff3972a6a91c492089f7ec9d139d9ac77a7a2d0e2cef5d5640f2f31b",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.004824999999999999 s  wall=0.3511670829029754 s  RSS=1.3125 MiB\n2  ok  KPI=0.5  CPU=0.003282 s  wall=0.01567666605114937 s  RSS=1.3125 MiB\n3  ok  KPI=0.375  CPU=0.003471 s  wall=0.015134166926145554 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.003734 s  wall=0.01549079199321568 s  RSS=1.328125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.07171699999999999 s  wall=0.31531612493563443 s  RSS=2.109375 MiB\n6  ok  KPI=0.9  CPU=0.001844 s  wall=0.012395291938446462 s  RSS=1.3125 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.003071 s  wall=0.020896916976198554 s  RSS=1.390625 MiB\n8  ok  KPI=0.9761603375527426  CPU=0.029403 s  wall=0.21607991703785956 s  RSS=1.53125 MiB\n9  ok  KPI=0.5  CPU=0.06787599999999999 s  wall=0.32052166596986353 s  RSS=2.203125 MiB\n10  ok  KPI=0.7718946047678795  CPU=0.04725699999999999 s  wall=0.32536520902067423 s  RSS=2.09375 MiB\n11  ok  KPI=0.8310612244897959  CPU=0.048184 s  wall=0.3183011249639094 s  RSS=1.765625 MiB\n12  ok  KPI=0.9817049808429119  CPU=0.008609 s  wall=0.060354707995429635 s  RSS=1.453125 MiB\n13  ok  KPI=0.8916201117318435  CPU=0.042842 s  wall=0.31939204107038677 s  RSS=1.625 MiB\n14  ok  KPI=0.9953537486800422  CPU=0.098866 s  wall=0.7971991249360144 s  RSS=2.28125 MiB\n15  ok  KPI=0.8598000164257555  CPU=1.869748 s  wall=7.503929125028662 s  RSS=7.875 MiB\nweighted_score_sum=27.1815160303 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/first_fit_high/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/first_fit_high/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 10.763739875052124,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/first_fit_high",
+        "score": 27.1815160303006,
+        "ok": 15
+      },
+      "score": 27.1815160303006,
+      "valid": 15
+    },
+    {
+      "name": "age_oldest_near",
+      "policy": 4,
+      "window": 128,
+      "scale": 50,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=4 -DPIPES_WINDOW=128 -DPIPES_SCALE=50 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/age_oldest_near",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/age_oldest_near",
+      "binary_sha256": "1aba85f9c1068cc7416920cc912d5ff0ca7c31fada3ec50cb2fb7ac7400187a5",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.0018299999999999998 s  wall=0.32931549998465925 s  RSS=1.3125 MiB\n2  ok  KPI=0.5  CPU=0.0019289999999999997 s  wall=0.012851084000431001 s  RSS=1.3125 MiB\n3  ok  KPI=0.75  CPU=0.001746 s  wall=0.012054375023581088 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.001647 s  wall=0.011994124972261488 s  RSS=1.3125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.035297999999999996 s  wall=0.2516892079729587 s  RSS=2.125 MiB\n6  ok  KPI=0.45  CPU=0.001702 s  wall=0.012997916084714234 s  RSS=1.3125 MiB\n7  ok  KPI=0.6708  CPU=0.003156 s  wall=0.020688583026640117 s  RSS=1.40625 MiB\n8  ok  KPI=0.9802966101694915  CPU=0.030628999999999997 s  wall=0.23088225000537932 s  RSS=1.546875 MiB\n9  ok  KPI=0.5  CPU=0.043611 s  wall=0.3099299999885261 s  RSS=2.21875 MiB\n10  ok  KPI=0.8  CPU=0.045138 s  wall=0.32968854100909084 s  RSS=2.09375 MiB\n11  ok  KPI=0.8977513227513227  CPU=0.045478 s  wall=0.33160579192917794 s  RSS=1.796875 MiB\n12  ok  KPI=0.9854807692307692  CPU=0.008354 s  wall=0.0606264160014689 s  RSS=1.453125 MiB\n13  ok  KPI=0.95  CPU=0.04438 s  wall=0.32946987508330494 s  RSS=1.640625 MiB\n14  ok  KPI=0.9953537486800422  CPU=0.103652 s  wall=0.8217723340494558 s  RSS=2.3125 MiB\n15  ok  KPI=0.9454461302266775  CPU=0.93438 s  wall=6.711607625009492 s  RSS=5.5625 MiB\nweighted_score_sum=27.9831173553 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/age_oldest_near/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/age_oldest_near/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 9.9135860420065,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/age_oldest_near",
+        "score": 27.983117355329984,
+        "ok": 15
+      },
+      "score": 27.983117355329984,
+      "valid": 15
+    },
+    {
+      "name": "age_newest_near",
+      "policy": 5,
+      "window": 128,
+      "scale": 50,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=5 -DPIPES_WINDOW=128 -DPIPES_SCALE=50 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/age_newest_near",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/age_newest_near",
+      "binary_sha256": "2fb4e13b9569af66b0bc4df1e4a83f47ec5fec89eec764c65825db2b4754a646",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.0017829999999999999 s  wall=0.33353925007395446 s  RSS=1.3125 MiB\n2  ok  KPI=0.5  CPU=0.0017529999999999998 s  wall=0.012480041943490505 s  RSS=1.328125 MiB\n3  ok  KPI=0.375  CPU=0.001695 s  wall=0.011970624909736216 s  RSS=1.328125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.0017039999999999998 s  wall=0.012031333986669779 s  RSS=1.34375 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.034642 s  wall=0.25426262500695884 s  RSS=2.0625 MiB\n6  ok  KPI=0.9  CPU=0.0017889999999999998 s  wall=0.012221875018440187 s  RSS=1.3125 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.002947 s  wall=0.020629000035114586 s  RSS=1.375 MiB\n8  ok  KPI=0.9720588235294118  CPU=0.02865 s  wall=0.21742629096843302 s  RSS=1.5 MiB\n9  ok  KPI=0.5  CPU=0.042900999999999995 s  wall=0.3095585830742493 s  RSS=2.1875 MiB\n10  ok  KPI=0.7718946047678795  CPU=0.042511999999999994 s  wall=0.32013166695833206 s  RSS=2.078125 MiB\n11  ok  KPI=0.8124900239425379  CPU=0.047573 s  wall=0.33294404100161046 s  RSS=1.78125 MiB\n12  ok  KPI=0.9873795761078998  CPU=0.008206 s  wall=0.06059204100165516 s  RSS=1.421875 MiB\n13  ok  KPI=0.9443786982248521  CPU=0.043996999999999994 s  wall=0.33234141604043543 s  RSS=1.625 MiB\n14  ok  KPI=0.9953537486800422  CPU=0.09822 s  wall=0.7907719160430133 s  RSS=2.25 MiB\n15  ok  KPI=0.8312299019413236  CPU=1.0570529999999998 s  wall=6.8579331249929965 s  RSS=6.890625 MiB\nweighted_score_sum=27.1068748979 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/age_newest_near/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/age_newest_near/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 10.025356666999869,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/age_newest_near",
+        "score": 27.106874897917677,
+        "ok": 15
+      },
+      "score": 27.106874897917677,
+      "valid": 15
+    },
+    {
+      "name": "recent_w16_s8",
+      "policy": 7,
+      "window": 16,
+      "scale": 8,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=7 -DPIPES_WINDOW=16 -DPIPES_SCALE=8 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w16_s8",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w16_s8",
+      "binary_sha256": "5e452d5b957ddce10a36d13f5b782142834550346f610e01ba53db3fc9fbd8b0",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.001749 s  wall=0.3180692919995636 s  RSS=1.3125 MiB\n2  ok  KPI=0.5  CPU=0.001643 s  wall=0.012207666994072497 s  RSS=1.3125 MiB\n3  ok  KPI=0.375  CPU=0.001668 s  wall=0.012023666989989579 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.0018609999999999998 s  wall=0.012340166955254972 s  RSS=1.3125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.035656 s  wall=0.25088979105930775 s  RSS=2.078125 MiB\n6  ok  KPI=0.9  CPU=0.001774 s  wall=0.012054249993525445 s  RSS=1.3125 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.002911 s  wall=0.020638582995161414 s  RSS=1.375 MiB\n8  ok  KPI=0.9802966101694915  CPU=0.028797 s  wall=0.22030487505253404 s  RSS=1.53125 MiB\n9  ok  KPI=0.5  CPU=0.042706999999999995 s  wall=0.309777042013593 s  RSS=2.1875 MiB\n10  ok  KPI=0.666522210184182  CPU=0.044079 s  wall=0.3291387080680579 s  RSS=2.078125 MiB\n11  ok  KPI=0.9041296625222025  CPU=0.04597999999999999 s  wall=0.34222529199905694 s  RSS=1.765625 MiB\n12  ok  KPI=0.9892857142857143  CPU=0.008461999999999999 s  wall=0.06263579102233052 s  RSS=1.453125 MiB\n13  ok  KPI=0.9672727272727273  CPU=0.044245 s  wall=0.32818337506614625 s  RSS=1.625 MiB\n14  ok  KPI=0.9969328397673188  CPU=0.100668 s  wall=0.8055405840277672 s  RSS=2.28125 MiB\n15  ok  KPI=0.9483151410842883  CPU=0.9571799999999999 s  wall=6.851033707964234 s  RSS=5.734375 MiB\nweighted_score_sum=28.3777493532 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w16_s8/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w16_s8/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 10.029920167056844,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w16_s8",
+        "score": 28.377749353235235,
+        "ok": 15
+      },
+      "score": 28.377749353235235,
+      "valid": 15
+    },
+    {
+      "name": "recent_w32_s16",
+      "policy": 7,
+      "window": 32,
+      "scale": 16,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=7 -DPIPES_WINDOW=32 -DPIPES_SCALE=16 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w32_s16",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w32_s16",
+      "binary_sha256": "6266aca204d15ba0c0c03bd03cf2aa8b8ab3605dbc64b2949e9f89fbe2d4ae34",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.00182 s  wall=0.3179993750527501 s  RSS=1.3125 MiB\n2  ok  KPI=1.0  CPU=0.001931 s  wall=0.012888959026895463 s  RSS=1.3125 MiB\n3  ok  KPI=0.375  CPU=0.002038 s  wall=0.01292383298277855 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.0017199999999999997 s  wall=0.01213762501720339 s  RSS=1.328125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.036164 s  wall=0.25858237501233816 s  RSS=2.09375 MiB\n6  ok  KPI=0.9  CPU=0.001729 s  wall=0.010828041937202215 s  RSS=1.3125 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.002856 s  wall=0.020495999953709543 s  RSS=1.390625 MiB\n8  ok  KPI=0.9802966101694915  CPU=0.029059999999999996 s  wall=0.22165533399675041 s  RSS=1.515625 MiB\n9  ok  KPI=0.5  CPU=0.043011999999999995 s  wall=0.30583729199133813 s  RSS=2.1875 MiB\n10  ok  KPI=0.666522210184182  CPU=0.044229 s  wall=0.330283832969144 s  RSS=2.09375 MiB\n11  ok  KPI=0.9025265957446809  CPU=0.045937 s  wall=0.34034254192374647 s  RSS=1.6875 MiB\n12  ok  KPI=0.9911992263056093  CPU=0.0077 s  wall=0.057910208008252084 s  RSS=1.453125 MiB\n13  ok  KPI=0.9614457831325302  CPU=0.042231 s  wall=0.3239357080310583 s  RSS=1.625 MiB\n14  ok  KPI=0.9969328397673188  CPU=0.09901499999999999 s  wall=0.8027272500330582 s  RSS=2.28125 MiB\n15  ok  KPI=0.9474997737351797  CPU=0.9330879999999999 s  wall=6.74125266703777 s  RSS=6.015625 MiB\nweighted_score_sum=28.8523388845 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w32_s16/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w32_s16/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 9.918279042001814,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w32_s16",
+        "score": 28.85233888448542,
+        "ok": 15
+      },
+      "score": 28.85233888448542,
+      "valid": 15
+    },
+    {
+      "name": "recent_w64_s25",
+      "policy": 7,
+      "window": 64,
+      "scale": 25,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=7 -DPIPES_WINDOW=64 -DPIPES_SCALE=25 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s25",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s25",
+      "binary_sha256": "31a27caa424ff774f19b51a6d558b3d47ef939e3582c9baa046be2edfce33caa",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.0017529999999999998 s  wall=0.32234941702336073 s  RSS=1.3125 MiB\n2  ok  KPI=1.0  CPU=0.0017299999999999998 s  wall=0.012295500026084483 s  RSS=1.3125 MiB\n3  ok  KPI=0.375  CPU=0.00166 s  wall=0.01210345805156976 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.001927 s  wall=0.012820790987461805 s  RSS=1.3125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.035453 s  wall=0.252232416998595 s  RSS=2.109375 MiB\n6  ok  KPI=0.9  CPU=0.001772 s  wall=0.011930583976209164 s  RSS=1.3125 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.0028799999999999997 s  wall=0.020604957942850888 s  RSS=1.375 MiB\n8  ok  KPI=0.984468085106383  CPU=0.028605 s  wall=0.2163045419147238 s  RSS=1.515625 MiB\n9  ok  KPI=0.5  CPU=0.041611999999999996 s  wall=0.2988042499637231 s  RSS=2.203125 MiB\n10  ok  KPI=0.666522210184182  CPU=0.04327399999999999 s  wall=0.3236695840023458 s  RSS=2.09375 MiB\n11  ok  KPI=0.900132625994695  CPU=0.044572 s  wall=0.3257053750567138 s  RSS=1.734375 MiB\n12  ok  KPI=0.9911992263056093  CPU=0.008005 s  wall=0.058905874961055815 s  RSS=1.453125 MiB\n13  ok  KPI=0.9614457831325302  CPU=0.043863 s  wall=0.33490975003223866 s  RSS=1.625 MiB\n14  ok  KPI=0.9969328397673188  CPU=0.100987 s  wall=0.8076537089655176 s  RSS=2.296875 MiB\n15  ok  KPI=0.9484440115963036  CPU=0.9795229999999999 s  wall=6.944831083994359 s  RSS=5.59375 MiB\nweighted_score_sum=28.8635587683 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s25/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s25/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 10.097893874975853,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s25",
+        "score": 28.863558768283564,
+        "ok": 15
+      },
+      "score": 28.863558768283564,
+      "valid": 15
+    },
+    {
+      "name": "recent_w64_s32",
+      "policy": 7,
+      "window": 64,
+      "scale": 32,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=7 -DPIPES_WINDOW=64 -DPIPES_SCALE=32 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s32",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s32",
+      "binary_sha256": "53f6dc3f1be744ef4fdff6f756d1f907864c3fed43437c9506fc53d0a4158cdd",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.002103 s  wall=0.3757243340369314 s  RSS=1.3125 MiB\n2  ok  KPI=1.0  CPU=0.002143 s  wall=0.013714750064536929 s  RSS=1.3125 MiB\n3  ok  KPI=0.375  CPU=0.002842 s  wall=0.01385354099329561 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.0023409999999999998 s  wall=0.013383334036916494 s  RSS=1.3125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.037823999999999997 s  wall=0.26880054199136794 s  RSS=2.109375 MiB\n6  ok  KPI=0.9  CPU=0.0018059999999999999 s  wall=0.01218120800331235 s  RSS=1.3125 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.0027819999999999998 s  wall=0.020461666048504412 s  RSS=1.390625 MiB\n8  ok  KPI=0.984468085106383  CPU=0.029018999999999996 s  wall=0.21058970806188881 s  RSS=1.5 MiB\n9  ok  KPI=0.5  CPU=0.041790999999999995 s  wall=0.2988338749855757 s  RSS=2.1875 MiB\n10  ok  KPI=0.666522210184182  CPU=0.04362 s  wall=0.3398982919752598 s  RSS=2.09375 MiB\n11  ok  KPI=0.9041296625222025  CPU=0.045627999999999995 s  wall=0.3330488339997828 s  RSS=1.75 MiB\n12  ok  KPI=0.9911992263056093  CPU=0.008048 s  wall=0.059380457969382405 s  RSS=1.453125 MiB\n13  ok  KPI=0.9614457831325302  CPU=0.042558 s  wall=0.3255685409530997 s  RSS=1.609375 MiB\n14  ok  KPI=0.9969328397673188  CPU=0.099728 s  wall=0.8071847920073196 s  RSS=2.28125 MiB\n15  ok  KPI=0.9502087587928296  CPU=0.946091 s  wall=6.73754570807796 s  RSS=5.453125 MiB\nweighted_score_sum=28.8852032768 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s32/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s32/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 9.968406582949683,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s32",
+        "score": 28.88520327677633,
+        "ok": 15
+      },
+      "score": 28.88520327677633,
+      "valid": 15
+    },
+    {
+      "name": "recent_w64_s50",
+      "policy": 7,
+      "window": 64,
+      "scale": 50,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=7 -DPIPES_WINDOW=64 -DPIPES_SCALE=50 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s50",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s50",
+      "binary_sha256": "a042de1eb09cdc8fa678004d01f296d23c1d07caab1fd5acee56a2960020eeac",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.002266 s  wall=0.5834943749941885 s  RSS=1.3125 MiB\n2  ok  KPI=1.0  CPU=0.001702 s  wall=0.010430000023916364 s  RSS=1.3125 MiB\n3  ok  KPI=0.375  CPU=0.001723 s  wall=0.010211499989964068 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.0018349999999999998 s  wall=0.013121249969117343 s  RSS=1.3125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.039415 s  wall=0.2746847500093281 s  RSS=2.109375 MiB\n6  ok  KPI=0.9  CPU=0.0018839999999999998 s  wall=0.012186708976514637 s  RSS=1.3125 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.0030229999999999996 s  wall=0.02135312499012798 s  RSS=1.390625 MiB\n8  ok  KPI=0.9886752136752137  CPU=0.029427999999999996 s  wall=0.22173595800995827 s  RSS=1.546875 MiB\n9  ok  KPI=0.5  CPU=0.041326 s  wall=0.29163354192860425 s  RSS=2.21875 MiB\n10  ok  KPI=0.666522210184182  CPU=0.044598 s  wall=0.3282640000106767 s  RSS=2.09375 MiB\n11  ok  KPI=0.900929203539823  CPU=0.044854 s  wall=0.33556970802601427 s  RSS=1.796875 MiB\n12  ok  KPI=0.9911992263056093  CPU=0.008379000000000001 s  wall=0.06052916694898158 s  RSS=1.453125 MiB\n13  ok  KPI=0.9672727272727273  CPU=0.043657 s  wall=0.3307948330184445 s  RSS=1.640625 MiB\n14  ok  KPI=0.9964059196617336  CPU=0.101298 s  wall=0.7991630840115249 s  RSS=2.296875 MiB\n15  ok  KPI=0.9542361680794823  CPU=0.930477 s  wall=6.754188415943645 s  RSS=6.359375 MiB\nweighted_score_sum=28.9476841354 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s50/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s50/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 10.179959542001598,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s50",
+        "score": 28.94768413536776,
+        "ok": 15
+      },
+      "score": 28.94768413536776,
+      "valid": 15
+    },
+    {
+      "name": "recent_w64_s64",
+      "policy": 7,
+      "window": 64,
+      "scale": 64,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=7 -DPIPES_WINDOW=64 -DPIPES_SCALE=64 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s64",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s64",
+      "binary_sha256": "254122fe9fae6c4b30b65b393b9506b32bab974ce7309622039b2f549aab862e",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.001921 s  wall=0.5628680409863591 s  RSS=1.3125 MiB\n2  ok  KPI=1.0  CPU=0.002042 s  wall=0.01361416606232524 s  RSS=1.3125 MiB\n3  ok  KPI=0.375  CPU=0.00207 s  wall=0.013540417072363198 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.002353 s  wall=0.013735166983678937 s  RSS=1.34375 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.036612 s  wall=0.26464254199527204 s  RSS=2.109375 MiB\n6  ok  KPI=0.9  CPU=0.001887 s  wall=0.012790709035471082 s  RSS=1.3125 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.00438 s  wall=0.025309500051662326 s  RSS=1.390625 MiB\n8  ok  KPI=0.9886752136752137  CPU=0.030606 s  wall=0.2283073749858886 s  RSS=1.515625 MiB\n9  ok  KPI=0.5  CPU=0.04209 s  wall=0.3114675839897245 s  RSS=2.1875 MiB\n10  ok  KPI=0.666522210184182  CPU=0.04650599999999999 s  wall=0.34766070800833404 s  RSS=2.078125 MiB\n11  ok  KPI=0.9017271922054916  CPU=0.048226 s  wall=0.353521708981134 s  RSS=1.71875 MiB\n12  ok  KPI=0.9911992263056093  CPU=0.009278 s  wall=0.06963329098653048 s  RSS=1.4375 MiB\n13  ok  KPI=0.9556886227544911  CPU=0.045103 s  wall=0.34145820792764425 s  RSS=1.640625 MiB\n14  ok  KPI=0.9964059196617336  CPU=0.106607 s  wall=0.840840750024654 s  RSS=2.28125 MiB\n15  ok  KPI=0.954366652992388  CPU=0.9773080000000001 s  wall=7.054391916957684 s  RSS=5.75 MiB\nweighted_score_sum=28.9034505551 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s64/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s64/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 10.594631374930032,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s64",
+        "score": 28.903450555089538,
+        "ok": 15
+      },
+      "score": 28.903450555089538,
+      "valid": 15
+    },
+    {
+      "name": "recent_w64_s80",
+      "policy": 7,
+      "window": 64,
+      "scale": 80,
+      "compile_command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -DPIPES_POLICY=7 -DPIPES_WINDOW=64 -DPIPES_SCALE=80 /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/src/gap_search.cpp -o /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s80",
+      "source_sha256": "e890a759b401a6cc050ce6404be3f9a777165b5e3c675c7c32b5e4b9bb6c543e",
+      "binary": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/binaries/recent_w64_s80",
+      "binary_sha256": "4fe5e61f993874b3fcfe41da3c2136291974ddc03e71d300bbc148300d8491bd",
+      "run": {
+        "returncode": 0,
+        "stdout": "1  ok  KPI=0.9  CPU=0.001851 s  wall=0.3479189589852467 s  RSS=1.3125 MiB\n2  ok  KPI=1.0  CPU=0.001994 s  wall=0.014777291100472212 s  RSS=1.3125 MiB\n3  ok  KPI=0.375  CPU=0.001882 s  wall=0.013321249978616834 s  RSS=1.3125 MiB\n4  ok  KPI=0.6666666666666666  CPU=0.0023229999999999995 s  wall=0.016221750061959028 s  RSS=1.328125 MiB\n5  ok  KPI=0.4998033818324813  CPU=0.039414000000000005 s  wall=0.28113337501417845 s  RSS=2.09375 MiB\n6  ok  KPI=0.9  CPU=0.001779 s  wall=0.010006042080931365 s  RSS=1.3125 MiB\n7  ok  KPI=0.9982142857142857  CPU=0.0035389999999999996 s  wall=0.020621374947950244 s  RSS=1.390625 MiB\n8  ok  KPI=0.9886752136752137  CPU=0.028806 s  wall=0.20868679194245487 s  RSS=1.53125 MiB\n9  ok  KPI=0.5  CPU=0.040970999999999994 s  wall=0.29639783303719014 s  RSS=2.1875 MiB\n10  ok  KPI=0.666522210184182  CPU=0.043851 s  wall=0.3233087909175083 s  RSS=2.078125 MiB\n11  ok  KPI=0.8985436893203883  CPU=0.044847 s  wall=0.32974633399862796 s  RSS=1.734375 MiB\n12  ok  KPI=0.9931201550387597  CPU=0.009049999999999999 s  wall=0.06276733393315226 s  RSS=1.453125 MiB\n13  ok  KPI=0.9614457831325302  CPU=0.042772000000000004 s  wall=0.3044264579657465 s  RSS=1.640625 MiB\n14  ok  KPI=0.9964059196617336  CPU=0.098831 s  wall=0.7917885839706287 s  RSS=2.296875 MiB\n15  ok  KPI=0.9542796590857299  CPU=0.9251229999999999 s  wall=6.667952042073011 s  RSS=5.03125 MiB\nweighted_score_sum=28.9301094696 (sum over these tests only)\nJSON: /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s80/summary.json\nCSV:  /Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s80/cases.csv\n",
+        "stderr": "",
+        "elapsed_s": 9.835162207949907,
+        "output_dir": "/Users/555tery/techarena/results/pipes/improvement/max_open_gap_search/reports/recent_w64_s80",
+        "score": 28.93010946958261,
+        "ok": 15
+      },
+      "score": 28.93010946958261,
+      "valid": 15
+    }
+  ]
+}

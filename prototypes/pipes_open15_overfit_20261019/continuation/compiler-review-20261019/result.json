@@ -1,0 +1,133 @@
+{
+  "checked_at": "2026-10-19T04:27:18.753609+07:00",
+  "status": "analysis_complete_no_promotion",
+  "current_accepted": "speed-v13 / submission 1665894",
+  "source_sha256": "065707442c1d303ae148b30282f421536a9350505dd8aead5cbc6f3a77043cd3",
+  "io": {
+    "windows": "ReadFile/WriteFile",
+    "local": "POSIX read/write",
+    "iostream_used": false,
+    "sync_with_stdio_applicable": false
+  },
+  "published_platform": {
+    "url": "https://olympic.nsu.ru/nsuts-new/help#tabcompile",
+    "evidence": "platform-help.txt",
+    "gcc": "g++ -static-libgcc -static-libstdc++ -std=c++20 -m64 -w -Wl,--stack=536870912 -O2 -DONLINE_JUDGE task.cpp -o task.exe",
+    "msvc": "cl.exe /EHsc /Ox /DONLINE_JUDGE /std:c++20 task.cpp /link /STACK:536870912",
+    "cpu": "Intel Pentium Gold G5420 3.80GHz",
+    "os": "Windows 10 64bit 22H2"
+  },
+  "local_compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+  "local_gcc_or_windows_toolchain_available": false,
+  "experiments": {
+    "o3": {
+      "status": "verified",
+      "candidate": "compiler-review-20261019/o3",
+      "pairs": 5,
+      "workers": 2,
+      "source_sha256": "065707442c1d303ae148b30282f421536a9350505dd8aead5cbc6f3a77043cd3",
+      "score": 30.75747404826914,
+      "all_answers_identical": true,
+      "baseline_cpu_sums": [
+        0.657149,
+        0.667172,
+        0.654042,
+        0.668665,
+        0.66769
+      ],
+      "candidate_cpu_sums": [
+        0.665425,
+        0.651641,
+        0.650147,
+        0.66235,
+        0.664305
+      ],
+      "baseline_median": 0.667172,
+      "candidate_median": 0.66235,
+      "median_cpu_reduction_percent": 0.7227521538673676,
+      "faster_pairs": 4,
+      "paired_mean_saved_seconds": 0.004169999999999963,
+      "paired_bootstrap_95_ci_seconds": [
+        -0.0029236000000000483,
+        0.010876599999999969
+      ],
+      "candidate_user_cpu_median": 0.076996,
+      "baseline_user_cpu_median": 0.077374,
+      "candidate_system_cpu_median": 0.583801,
+      "baseline_system_cpu_median": 0.590127,
+      "scope": "Local macOS interactive solver CPU; does not establish Windows/server speed. Small paired sample; bootstrap is descriptive.",
+      "candidate_checks": 75,
+      "baseline_checks": 75,
+      "promotion": false,
+      "speed_conclusion": "No established speedup; descriptive paired confidence interval includes zero.",
+      "max_cpu_s": 0.416126,
+      "max_rss_mib": 3.0
+    },
+    "inline": {
+      "status": "verified",
+      "candidate": "compiler-review-20261019/inline",
+      "pairs": 5,
+      "workers": 2,
+      "source_sha256": "0fbe0aa89d3902067e3b09790ef0d3580d808dfa1ffb24c9ceb6c6518fd65d7a",
+      "score": 30.75747404826914,
+      "all_answers_identical": true,
+      "baseline_cpu_sums": [
+        1.7583229999999999,
+        1.4440330000000001,
+        1.459913,
+        1.434335,
+        1.429586
+      ],
+      "candidate_cpu_sums": [
+        1.8755479999999998,
+        1.7974919999999999,
+        1.3665690000000001,
+        1.324072,
+        1.393713
+      ],
+      "baseline_median": 1.4440330000000001,
+      "candidate_median": 1.393713,
+      "median_cpu_reduction_percent": 3.4846849067853847,
+      "faster_pairs": 3,
+      "paired_mean_saved_seconds": -0.04624079999999995,
+      "paired_bootstrap_95_ci_seconds": [
+        -0.21346779999999982,
+        0.08861739999999996
+      ],
+      "candidate_user_cpu_median": 0.092041,
+      "baseline_user_cpu_median": 0.101245,
+      "candidate_system_cpu_median": 1.301672,
+      "baseline_system_cpu_median": 1.342788,
+      "scope": "Local macOS interactive solver CPU; does not establish Windows/server speed. Small paired sample; bootstrap is descriptive.",
+      "candidate_checks": 75,
+      "baseline_checks": 75,
+      "promotion": false,
+      "speed_conclusion": "No established speedup; descriptive paired confidence interval includes zero.",
+      "confound": "Other concurrent local evaluator jobs observed; unchanged baseline CPU increased substantially. Timing unsuitable for promotion.",
+      "max_cpu_s": 1.2243069999999998,
+      "max_rss_mib": 3.0
+    }
+  },
+  "reasoning": [
+    "The hot inputChar/spaceChar and output loop are already inlined locally at O2; consumeNonzeroToken remained a call.",
+    "The inline variant removed the consumeNonzeroToken symbol and placed fail in cold code, but performance benefit is unproven.",
+    "About 88 percent of CPU in the O2/O3 local series is system CPU; this does not measure Windows I/O or server performance.",
+    "GCC optimize O3 pragma can override function options, but local Clang O3 is not a validation of GCC pragma behavior/performance.",
+    "Avoid AVX2: the published G5420 specification lists SSE4.1/SSE4.2, not AVX2. The replay loop has no demonstrated SIMD workload.",
+    "LTO/PGO require compiler/linker workflow support unavailable in the submitted source interface; no demonstrated production gain here."
+  ],
+  "source_size_discrepancy": {
+    "published_generic_limit": "256 KB",
+    "accepted_v13_source_bytes": 4185456,
+    "status": "unresolved generic-help versus accepted-submission discrepancy; acceptance alone does not clarify written limit"
+  },
+  "sources": [
+    "https://gcc.gnu.org/onlinedocs/libstdc++/manual/io_and_c.html",
+    "https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Function-Specific-Option-Pragmas.html",
+    "https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Common-Function-Attributes.html",
+    "https://gcc.gnu.org/onlinedocs/gcc-14.2.0/gcc/Optimize-Options.html",
+    "https://www.intel.com/content/www/us/en/products/sku/135456/intel-pentium-gold-g5420-processor-4m-cache-3-80-ghz/specifications.html"
+  ],
+  "platform_submissions_this_review": 0,
+  "decision": "Keep accepted v13 unchanged. Preserve isolated O3 and inline variants; no established speed advantage and no Windows/GCC timing evidence."
+}

@@ -1,0 +1,15 @@
+{
+  "updated_at": "2026-10-19T04:55:36.893574+07:00",
+  "status": "accepted",
+  "source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v17/solution.cpp",
+  "source_sha256": "477393256330e4b2c6dbefc51c85587ceadfcc0c98f469e29d583827f4f843d1",
+  "submission": 1665904,
+  "tests_accepted": 15,
+  "score": 30.75747404826914,
+  "checks": 95,
+  "change": "Windows only: remove successful stderr diagnostic and call ExitProcess(0) after final zero. No custom entry point. Keep GCC compiler, input and reply code unchanged.",
+  "cpu_evidence": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/cpu-optimization-20261019/result.json",
+  "server_cpu_speedup_established": false,
+  "unknown_input_support": false,
+  "hidden_generalization_claim": false
+}

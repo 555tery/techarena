@@ -1,0 +1,90 @@
+[
+  {
+    "name": "fresh_a",
+    "seed": 20261022,
+    "sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "counts": [
+      360,
+      380,
+      400,
+      420,
+      440,
+      460
+    ],
+    "deletion": "even",
+    "commands": 3690,
+    "path": "results/pipes/improvement/case9_neighbor_coalescence/synthetic/fresh_a.in"
+  },
+  {
+    "name": "fresh_b",
+    "seed": 20261023,
+    "sizes": [
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "counts": [
+      420,
+      400,
+      420,
+      400,
+      420
+    ],
+    "deletion": "odd",
+    "commands": 3090,
+    "path": "results/pipes/improvement/case9_neighbor_coalescence/synthetic/fresh_b.in"
+  },
+  {
+    "name": "fresh_c",
+    "seed": 20261024,
+    "sizes": [
+      1,
+      3,
+      6,
+      12,
+      24
+    ],
+    "counts": [
+      480,
+      520,
+      500,
+      480,
+      520
+    ],
+    "deletion": "even",
+    "commands": 3750,
+    "path": "results/pipes/improvement/case9_neighbor_coalescence/synthetic/fresh_c.in"
+  },
+  {
+    "name": "fresh_d",
+    "seed": 20261025,
+    "sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "counts": [
+      400,
+      420,
+      440,
+      460,
+      480,
+      500
+    ],
+    "deletion": "biased_even",
+    "commands": 4064,
+    "path": "results/pipes/improvement/case9_neighbor_coalescence/synthetic/fresh_d.in"
+  }
+]

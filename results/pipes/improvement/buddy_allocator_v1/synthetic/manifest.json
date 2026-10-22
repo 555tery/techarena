@@ -1,0 +1,61 @@
+{
+  "seed_base": 20261017,
+  "operations_per_case": 30000,
+  "generator": "generate_synthetic.py",
+  "cases": [
+    {
+      "name": "01_stationary_uniform_random.in",
+      "scenario": "stationary_uniform_random",
+      "seed": 20365746,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "3b753ec809b753d716c15307c79a7e269094366625fb65ef590a91512d7924af"
+    },
+    {
+      "name": "02_short_to_wide_random.in",
+      "scenario": "short_to_wide_random",
+      "seed": 20470475,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "28df17398bd33bc67a5872a4c1b683dec7cd7cfd4006c7400e258ff82ea35cf6"
+    },
+    {
+      "name": "03_wide_to_short_fifo.in",
+      "scenario": "wide_to_short_fifo",
+      "seed": 20575204,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "bced76eb0e47a5983d761f7e132960e5c8763c7fb67b3247a4414bb4f4182532"
+    },
+    {
+      "name": "04_bimodal_lifo.in",
+      "scenario": "bimodal_lifo",
+      "seed": 20679933,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "1775779f85ceefbfc36489f4ef3a7c819c29951f600888e26a713c4ecf1e2400"
+    },
+    {
+      "name": "05_periodic_cohort_delete.in",
+      "scenario": "periodic_cohort_delete",
+      "seed": 20784662,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "45abb728aa7e59efb22d57cd65a9ec12e1deb622c4b5280017430d6f3412750e"
+    },
+    {
+      "name": "06_three_phase_old_bias.in",
+      "scenario": "three_phase_old_bias",
+      "seed": 20889391,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "8ee7f980e6c2f0773e960b45e8cd124a1ddb93fa3d8f2b0f6906f07a8e15f58a"
+    }
+  ]
+}

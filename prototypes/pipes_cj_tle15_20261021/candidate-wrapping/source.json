@@ -1,0 +1,527 @@
+{
+  "base_sha256": "69dd5ba54fdcdd142738c093aa79a6edc12a9e5800017d22213f81fc676f2c3e",
+  "source_sha256": "7bae4094c3761640f0d9694e69836aef2986f2daa66ecd9785f02f7dd8f61778",
+  "changes": "Function-local integer overflow guards omitted only in bounded numeric allocator/container methods; same explicit validity checks remain. IEEE operations unchanged. Legal domain<=200000 commands, lengths<=40; generated annotation diff only.",
+  "annotated_methods": [
+    {
+      "class_name": "FastIntVector",
+      "method": "func borrowData(): CPointer<Int64>"
+    },
+    {
+      "class_name": "FastIntVector",
+      "method": "public operator func [](index: Int64): Int64"
+    },
+    {
+      "class_name": "FastIntVector",
+      "method": "public operator func [](index: Int64, value!: Int64): Unit"
+    },
+    {
+      "class_name": "FastIntVector",
+      "method": "func reserveForAdd(): Unit"
+    },
+    {
+      "class_name": "FastIntVector",
+      "method": "public func add(value: Int64): Unit"
+    },
+    {
+      "class_name": "FastIntVector",
+      "method": "public func remove(at!: Int64): Int64"
+    },
+    {
+      "class_name": "FastIntVector",
+      "method": "public func clone(): FastIntVector"
+    },
+    {
+      "class_name": "FastKeyVector",
+      "method": "func borrowData(): CPointer<Int64>"
+    },
+    {
+      "class_name": "FastKeyVector",
+      "method": "public operator func [](index: Int64): Key"
+    },
+    {
+      "class_name": "FastKeyVector",
+      "method": "public operator func [](index: Int64, value!: Key): Unit"
+    },
+    {
+      "class_name": "FastKeyVector",
+      "method": "public func compareAt(index: Int64, wanted: Key): Int64"
+    },
+    {
+      "class_name": "FastKeyVector",
+      "method": "private func reserveForAdd(): Unit"
+    },
+    {
+      "class_name": "FastKeyVector",
+      "method": "public func add(value: Key): Unit"
+    },
+    {
+      "class_name": "FastKeyVector",
+      "method": "public func remove(at!: Int64): Key"
+    },
+    {
+      "class_name": "FastKeyVector",
+      "method": "public func clone(): FastKeyVector"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func isEmpty(): Bool"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func key(node: Int64): Key"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func keyA(node: Int64): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func keyB(node: Int64): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func keyC(node: Int64): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func value(node: Int64): V"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func setValue(node: Int64, value: V): Unit"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func first(): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func last(): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func next(node: Int64): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func prev(node: Int64): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func find(wanted: Key): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func lower(wanted: Key): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func upper(wanted: Key): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "private func fixHeight(node: Int64): Unit"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "private func replaceAtParent(oldNode: Int64, newNode: Int64): Unit"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "private func rotateLeft(node: Int64): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "private func rotateRight(node: Int64): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "private func rebalance(start: Int64): Unit"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "private func newNode(k: Key, v: V, p: Int64): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func put(k: Key, v: V): Int64"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func eraseKey(k: Key): Unit"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func eraseNode(node: Int64): Unit"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func clone(): OrderedMap<V>"
+    },
+    {
+      "class_name": "OrderedMap",
+      "method": "public func clear(): Unit"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func isEmpty(): Bool"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func key(node: Int64): Key"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func keyA(node: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func keyB(node: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func keyC(node: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func value(node: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func setValue(node: Int64, value: Int64): Unit"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func first(): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func last(): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func next(node: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func prev(node: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func find(wanted: Key): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func lower(wanted: Key): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func upper(wanted: Key): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "private func fixHeight(node: Int64): Unit"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "private func replaceAtParent(oldNode: Int64, newNode: Int64): Unit"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "private func rotateLeft(node: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "private func rotateRight(node: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "private func rebalance(start: Int64): Unit"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "private func newNode(k: Key, v: Int64, p: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func put(k: Key, v: Int64): Int64"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func eraseKey(k: Key): Unit"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func eraseNode(node: Int64): Unit"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func clone(): IntOrderedMap"
+    },
+    {
+      "class_name": "IntOrderedMap",
+      "method": "public func clear(): Unit"
+    },
+    {
+      "class_name": "Ring",
+      "method": "public func get(index: Int64): T"
+    },
+    {
+      "class_name": "Ring",
+      "method": "public func back(): T"
+    },
+    {
+      "class_name": "Ring",
+      "method": "public func pushBack(value: T): Unit"
+    },
+    {
+      "class_name": "Ring",
+      "method": "public func popFront(): Unit"
+    },
+    {
+      "class_name": "Ring",
+      "method": "public func popBack(): Unit"
+    },
+    {
+      "class_name": "Ring",
+      "method": "public func clone(): Ring<T>"
+    },
+    {
+      "class_name": "IntRing",
+      "method": "public func get(index: Int64): Int64"
+    },
+    {
+      "class_name": "IntRing",
+      "method": "public func back(): Int64"
+    },
+    {
+      "class_name": "IntRing",
+      "method": "public func pushBack(value: Int64): Unit"
+    },
+    {
+      "class_name": "IntRing",
+      "method": "public func popFront(): Unit"
+    },
+    {
+      "class_name": "IntRing",
+      "method": "public func popBack(): Unit"
+    },
+    {
+      "class_name": "IntRing",
+      "method": "public func clone(): IntRing"
+    },
+    {
+      "class_name": "LengthHistory",
+      "method": "public func get(index: Int64): Int64"
+    },
+    {
+      "class_name": "LengthHistory",
+      "method": "public func back(): Int64"
+    },
+    {
+      "class_name": "LengthHistory",
+      "method": "public func runLength(index: Int64): Int64"
+    },
+    {
+      "class_name": "LengthHistory",
+      "method": "public func runCount(index: Int64): Int64"
+    },
+    {
+      "class_name": "LengthHistory",
+      "method": "public func pushBack(value: Int64): Unit"
+    },
+    {
+      "class_name": "LengthHistory",
+      "method": "public func popFront(): Unit"
+    },
+    {
+      "class_name": "LengthHistory",
+      "method": "public func popBack(): Unit"
+    },
+    {
+      "class_name": "LengthHistory",
+      "method": "public func clone(): LengthHistory"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func hasLongAdditiveSizeTrend(currentLength: Int64): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func alignForNextAdditiveSize(length: Int64, gapStart: Int64, fallbackHighSide: Bool): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func predictEarlyNextGeometricSize(currentLength: Int64): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func hasLifoDeletionConfidence(): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func hasYoungTailNeighbor(tailStart: Int64): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func unitDominantRecentProfile(): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func useLifoStackLane(currentLength: Int64): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func place(length: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func remove(pid: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func fenwickAdd(index: Int64, delta: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func fenwickPrefix(index: Int64): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func rankFromNewestPermille(pid: Int64): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func recordDeletionPattern(pid: Int64, length: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func beginCohortSlab(length: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func recordObservation(event: Observation): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func recordPrimalEvent(event: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func hasRecentPrimalDemand(): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func ensurePrimalGapValues(maxGap: Int64): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func causalValueAt(gap: Int64, expiryFactor: Float64): Float64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func causalPrimalLoss(gap: Int64, length: Int64, highSide: Bool, modelLimit: Int64, freshRisk: Float64): Float64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func chooseCausalLifetimeGap(candidates: ArrayList<Key>, length: Int64, highSide: Bool, baselineGap: Int64): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func primalGapLoss(gapLength: Int64, length: Int64): Float64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func scoreGap(gapLength: Int64, length: Int64): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func observationKeyEqual(lhs: Observation, rhs: Observation): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func nextRandom(): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func sampleScenario(): Array<Observation>"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func makeRolloutState(): RolloutState"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func topGapCandidates(length: Int64, highSide: Bool, sizeCohort: Int64): ArrayList<GapCandidate>"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func chooseGapWithRollout(length: Int64, highSide: Bool, sizeCohort: Int64, baselineGap: Int64): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func hasSteadySizeTrend(): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func tailGap(): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func bestFittingGapBefore(length: Int64, highSide: Bool, sizeCohort: Int64, endLimit: Int64): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func projectedNextClassCapacity(obstacles: ArrayList<Key>, candidateStart: Int64, length: Int64, nextLength: Int64): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func chooseCounterfactualCapacityGap(length: Int64, nextLength: Int64, fallbackHighSide: Bool, sizeCohort: Int64, baselineGap: Int64): Array<Int64>"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func bestFittingGap(length: Int64, highSide: Bool, sizeCohort: Int64): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func bestFittingGapFromSet(gaps: IntOrderedMap, length: Int64, highSide: Bool): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func hasSameLengthRecentRun(length: Int64): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func hasSmoothSizeTrendWith(currentLength: Int64): Bool"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func consumeAtSide(it: Int64, length: Int64, highSide: Bool): Int64"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func recordLength(length: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func eraseGap(it: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func addFreeGap(start: Int64, end: Int64, cohort: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func addFreeGap(start: Int64, end: Int64, cohort: Int64, freedAt: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func printPlacement(digs: Int64, start: Int64): Unit"
+    },
+    {
+      "class_name": "Allocator",
+      "method": "public func printInvalidPidFallback(): Unit"
+    }
+  ]
+}

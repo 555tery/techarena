@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0002",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0002/candidate_0.cpp",
+  "sha256": "f99588ef408c8541a35852e71f1d9a2bc2f61a02fc3332da185f1daa7b626f25",
+  "idea": "Censored hazard anchoring: обучать остаточную survival по длине и возрасту трубы и использовать её для выбора между щелями одинакового размера и двумя концами выбранной щели.",
+  "parent": "seed_baseline",
+  "weighted_score": 30.062824642610792,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22520,
+      "kpi": 0.9041296625222025,
+      "weighted_score": 0.904129662522203
+    },
+    {
+      "case": "12",
+      "T": 10340,
+      "kpi": 0.9911992263056093,
+      "weighted_score": 3.964796905222437
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37860,
+      "kpi": 0.9958795562599049,
+      "weighted_score": 3.983518225039619
+    },
+    {
+      "case": "15",
+      "T": 438680,
+      "kpi": 0.9545842071669554,
+      "weighted_score": 9.545842071669554
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0011400258965690387,
+    "worst_delta": -0.0007322801833541392,
+    "wins": 15,
+    "regressions": 3,
+    "ties": 12,
+    "worst_cases": [
+      {
+        "case": "dev_08_cohort_release",
+        "delta": -0.0007322801833541392,
+        "baseline_T": 25140,
+        "candidate_T": 25200
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": -0.00042926456456160444,
+        "baseline_T": 46460,
+        "candidate_T": 46480
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.00022608306054439087,
+        "baseline_T": 87420,
+        "candidate_T": 87440
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 94540,
+        "candidate_T": 94540
+      },
+      {
+        "case": "dev_14_large_recent",
+        "delta": 0.0,
+        "baseline_T": 34560,
+        "candidate_T": 34560
+      },
+      {
+        "case": "dev_15_large_recent",
+        "delta": 0.0,
+        "baseline_T": 28140,
+        "candidate_T": 28140
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8099385223681732,
+  "max_cpu_s": 0.9586189999999999,
+  "max_rss_mib": 12.234375,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0002/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0002/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792309120.412761,
+  "balanced_gate": true,
+  "hypothesis": "Если остаток щели оставлять со стороны соседа с большей вероятностью скорого удаления, он чаще сможет слиться с освобождённым пространством. Новую трубу следует прижимать к более устойчивому соседу. Это отличается от выбора по возрасту освобождения щели: направление определяется обученной hazard, которая может различаться для FIFO и LIFO. Кандидат не проверен; улучшение score и соблюдение 5s требуют измерения.",
+  "causality": "Для каждой пары (length, age-bin) учитываются наблюдённые удаления D и exposure E — суммарное время всех живых объектов в данном возрастном интервале. Живые объекты дают только exposure, без метки permanent. Кусочно-постоянная hazard D/E задаёт условную survival на горизонт, равный удвоенному среднему возрасту уже наблюдённых удалений. При недостатке удалений отдельной длины используется pooled-модель. Решение меняется только при разделении приближённых диапазонов survival. Рассматриваются максимум шесть внутренних щелей того же размера; fitScore сохраняется. Для щели с остатком выбирается более устойчивый сосед, для exact fit — сумма survival обоих соседей. Существующие cohort/run/trend/LIFO-механизмы имеют приоритет. Модель предполагает примерно стабильную hazard внутри возрастных интервалов; её диапазоны не являются гарантией улучшения."
+}

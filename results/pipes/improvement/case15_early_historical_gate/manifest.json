@@ -1,0 +1,50 @@
+{
+  "experiment": "early-prefix-historical-allocator-gate",
+  "status": "no-go-open15-regression",
+  "gate": {
+    "sample": "first 32 positive placement requests",
+    "eligibility": "all observed lengths are in the inclusive range 1 through 7 meters",
+    "activation": "historical regime starts on the placement after the 32nd qualifying request",
+    "threshold_sweep": false,
+    "test_id_or_future_used": false
+  },
+  "baseline": {
+    "name": "current champion cohort slabs",
+    "source": "results/pipes/improvement/case9_causal_profiles/source/champion_cohort_slabs.cpp",
+    "source_sha256": "43bfbdadbae18ac180d1e59b6631342cfe1bef99190a449838f0470d6f220200",
+    "open15_score": 29.932085817214315,
+    "summary_sha256": "35eff9d9d8dc7afe42016e782637b7eed4af2c9144cd70336b5c0021e4d4e6c3"
+  },
+  "candidate": {
+    "source": "results/pipes/improvement/case15_early_historical_gate/source/champion_early_prefix_gate.cpp",
+    "source_sha256": "20da6b34d9dbd08826c8018b88d81d968914794177b4edaae4712ae5d17029cb",
+    "binary": "results/pipes/improvement/case15_early_historical_gate/bin/champion_early_prefix_gate",
+    "binary_sha256": "8eb0e733ebf1749fb8a7329dae6c5c7ff570f50ae6039bd61776a9c00a8ec140",
+    "open15": {
+      "status": "15/15 ok",
+      "weighted_score": 29.3240394072776,
+      "delta_vs_baseline": -0.608046409936715,
+      "max_solver_cpu_s": 0.949339,
+      "max_solver_peak_rss_mib": 9.296875,
+      "summary_sha256": "9122498a0b3de075d2fa0e62f7f715c28c5d39a5642e9ac9f18687678d092b87",
+      "cases_csv_sha256": "89ecd5184a9df9f78c9b8aef760be55de940df1fb7a82c6864ab966dd17af37d"
+    },
+    "qualified_cases": [5, 9, 10, 11, 14, 15],
+    "qualified_case_trenches_m": {
+      "5": 63140,
+      "9": 62420,
+      "10": 15380,
+      "11": 24480,
+      "14": 37820,
+      "15": 457560
+    }
+  },
+  "followup": {
+    "holdout_v2_run": false,
+    "fresh_phase_shift_synthetics_run": 0,
+    "reason": "Open15 score regressed, so conditional follow-up was not justified",
+    "platform_used": false,
+    "docker_used": false,
+    "frozen_or_canonical_source_modified": false
+  }
+}

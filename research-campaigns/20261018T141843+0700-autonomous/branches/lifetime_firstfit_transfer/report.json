@@ -1,0 +1,460 @@
+{
+  "status": "public_inactive_development_neutral",
+  "created_at": 1792326747.697361,
+  "proposal": {
+    "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/lifetime_firstfit_transfer/solution.cpp",
+    "sha256": "e8e9efc5f52c34311fddae7ad7d7ddb0c4a956b854cec0ea3fbea2c635686a0a",
+    "idea": "Risk-gated address First-Fit on strong22, using its existing censored lifetime model.",
+    "hypothesis": "Use minimum-address fitting gap at its low side for newborns whose parent censored model supports risk below1. Keep physical exact fits and all protected structural routes. This tests a policy change with existing predictor; donor72 birth-run survival predictor is intentionally not copied. No virtual-layout score is treated as a guarantee for actual layout. No measured gain yet.",
+    "causality": "Only current physical free space and existing parent uncertainty-adjusted lifetime risk, learned from past births/deaths plus live censored exposure. The neutral model result1 cannot activate the branch. Additional width buckets min(width,40) mirror all parent add/erase/merge operations, allowing exact address First-Fit inO40 query time. No future input, test id, stream N, external state, permanent labels or new fitted thresholds. Source diff and bounds reviewed; strict C++20 Wall/Wextra/Werror syntax passed. Same full15+30development checker and5s/256MiB resource gates.",
+    "parent": "trial_0022"
+  },
+  "inspiration_donor": 72,
+  "donor_sha256": "a168536919f96a30ebcf30cc91b13fec250fa27484493e360343a634cfc458d7",
+  "parent_sha256": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+  "strict_syntax_compile": "passed",
+  "evaluation_result": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_e8e9efc5f52c3431/result.json",
+  "model_calls": 0,
+  "release_started": false,
+  "submitted": false,
+  "scope_audit": "No mutation to frozen sources or input generators. Placement-source provenance preserved in build.py. No extra excavation for the custom placement. All prior parent structural routes retain priority; added index operations mirror canonical gap edits.",
+  "checked_at": 1792328277.35719,
+  "source_sha256_verified": true,
+  "weighted_score": 30.090967891345112,
+  "score_delta_vs22": 0.0,
+  "balanced_gate": true,
+  "max_cpu_s": 1.1784,
+  "max_rss_mib": 14.765625,
+  "comparisons": {
+    "open15": {
+      "case_count": 15,
+      "correct": true,
+      "same_answer_transcripts": 15,
+      "mean_delta": 0.0,
+      "worst_delta": 0.0,
+      "wins": 0,
+      "regressions": 0,
+      "ties": 15,
+      "records": [
+        {
+          "case": "1",
+          "parent_T": 20,
+          "candidate_T": 20,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "0c17f2e9efc8a8f9a376c8bd7f26d940ee3fe78feacc07dac0608b508b63590d",
+          "parent_answer_sha256": "0c17f2e9efc8a8f9a376c8bd7f26d940ee3fe78feacc07dac0608b508b63590d",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "2",
+          "parent_T": 20,
+          "candidate_T": 20,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2",
+          "parent_answer_sha256": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "3",
+          "parent_T": 20,
+          "candidate_T": 20,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "14f51309b18138cfc8c504ebeb4bf9f136d509fe4af3a83d917b408f1f74264d",
+          "parent_answer_sha256": "14f51309b18138cfc8c504ebeb4bf9f136d509fe4af3a83d917b408f1f74264d",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "4",
+          "parent_T": 60,
+          "candidate_T": 60,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b",
+          "parent_answer_sha256": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "5",
+          "parent_T": 54440,
+          "candidate_T": 54440,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "8a37fb4d81a30a7fe9924d5e4798869342f4939971313b8346671ed7cb09893b",
+          "parent_answer_sha256": "8a37fb4d81a30a7fe9924d5e4798869342f4939971313b8346671ed7cb09893b",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "6",
+          "parent_T": 20,
+          "candidate_T": 20,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "c44b9007a27cf242dd34a06e4b0bafa2bfa5570e70cebc7ffa578f5505c96b05",
+          "parent_answer_sha256": "c44b9007a27cf242dd34a06e4b0bafa2bfa5570e70cebc7ffa578f5505c96b05",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "7",
+          "parent_T": 1700,
+          "candidate_T": 1700,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "e93d243bb723f5c4d3951824be0d63cc283607cf0422fe3a6ccd8db289ce8979",
+          "parent_answer_sha256": "e93d243bb723f5c4d3951824be0d63cc283607cf0422fe3a6ccd8db289ce8979",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "8",
+          "parent_T": 4700,
+          "candidate_T": 4700,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "a86800267292840409a96208bfeeb69c2eb787b30cdbed16e34b4199345c3cad",
+          "parent_answer_sha256": "a86800267292840409a96208bfeeb69c2eb787b30cdbed16e34b4199345c3cad",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "9",
+          "parent_T": 47700,
+          "candidate_T": 47700,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "7cb60a47ac3d0ea827e7c47b93211bd962e3c103cf4ea53613c0ee3e4e34fb22",
+          "parent_answer_sha256": "7cb60a47ac3d0ea827e7c47b93211bd962e3c103cf4ea53613c0ee3e4e34fb22",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "10",
+          "parent_T": 15380,
+          "candidate_T": 15380,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03",
+          "parent_answer_sha256": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "11",
+          "parent_T": 22400,
+          "candidate_T": 22400,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "862f7678b0659963028a133f0ea7743820c9472d8ddd7e2389c561bd7ef7f22d",
+          "parent_answer_sha256": "862f7678b0659963028a133f0ea7743820c9472d8ddd7e2389c561bd7ef7f22d",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "12",
+          "parent_T": 10320,
+          "candidate_T": 10320,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e",
+          "parent_answer_sha256": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "13",
+          "parent_T": 3280,
+          "candidate_T": 3280,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "e5da020ce8a522213ae26acc8d03d03b4dbf657a767f9eeba4503a2740f55ef6",
+          "parent_answer_sha256": "e5da020ce8a522213ae26acc8d03d03b4dbf657a767f9eeba4503a2740f55ef6",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "14",
+          "parent_T": 37840,
+          "candidate_T": 37840,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "3b35a1e92cb6f3946257193b32221c96bbafd3bce75dcb86d433df59b398b503",
+          "parent_answer_sha256": "3b35a1e92cb6f3946257193b32221c96bbafd3bce75dcb86d433df59b398b503",
+          "diagnostic": "lifetime_firstfit_queries=4797 supported=0 changed_placements=0"
+        },
+        {
+          "case": "15",
+          "parent_T": 438060,
+          "candidate_T": 438060,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "35dde59702ca397695a327c1ad0317d3ffebaae416498aa8714f7b4cc93b9bd9",
+          "parent_answer_sha256": "35dde59702ca397695a327c1ad0317d3ffebaae416498aa8714f7b4cc93b9bd9",
+          "diagnostic": "lifetime_firstfit_queries=55648 supported=0 changed_placements=0"
+        }
+      ]
+    },
+    "development": {
+      "case_count": 30,
+      "correct": true,
+      "same_answer_transcripts": 29,
+      "mean_delta": 0.0,
+      "worst_delta": 0.0,
+      "wins": 0,
+      "regressions": 0,
+      "ties": 30,
+      "records": [
+        {
+          "case": "dev_00_recent_growth_shift",
+          "parent_T": 30480,
+          "candidate_T": 30480,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "7836fcd936d82de37f24d4d4ab9357a903bf37bb132f1f21bd60da9d84e41989",
+          "parent_answer_sha256": "7836fcd936d82de37f24d4d4ab9357a903bf37bb132f1f21bd60da9d84e41989",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_01_recent_growth_shift",
+          "parent_T": 94020,
+          "candidate_T": 94020,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "837aadfbafe5e7db0438b91a7dd65f5364cf53dc9ef20abf545e9ae97744740d",
+          "parent_answer_sha256": "837aadfbafe5e7db0438b91a7dd65f5364cf53dc9ef20abf545e9ae97744740d",
+          "diagnostic": "lifetime_firstfit_queries=1542 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_02_recent_stationary",
+          "parent_T": 17640,
+          "candidate_T": 17640,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "501e8cbbdb9dcda30ea341966123e20e44e6a5f81121e8a6079afaad32eb4302",
+          "parent_answer_sha256": "501e8cbbdb9dcda30ea341966123e20e44e6a5f81121e8a6079afaad32eb4302",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_03_recent_stationary",
+          "parent_T": 21700,
+          "candidate_T": 21700,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "32495f5f451ef3676accd0616114876d78e4e39dc4bab81162969b485eb734bb",
+          "parent_answer_sha256": "32495f5f451ef3676accd0616114876d78e4e39dc4bab81162969b485eb734bb",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_04_fifo_size_drift",
+          "parent_T": 103520,
+          "candidate_T": 103520,
+          "same_answer_transcript": false,
+          "candidate_answer_sha256": "a41d61d5bed9090b9b4bde62a3c6c1ec041eaef62ec52338939b96ce2036a065",
+          "parent_answer_sha256": "9d0e5d5a2497e52a58cdb9bd18ef1d11e528e856450a931026ab6a42eb1961d9",
+          "diagnostic": "lifetime_firstfit_queries=2564 supported=2564 changed_placements=890"
+        },
+        {
+          "case": "dev_05_fifo_size_drift",
+          "parent_T": 54820,
+          "candidate_T": 54820,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "7c9f36e178f401bf34c53047ff093b544a6b73890a7402a0153024946e85916c",
+          "parent_answer_sha256": "7c9f36e178f401bf34c53047ff093b544a6b73890a7402a0153024946e85916c",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_06_random_mixture",
+          "parent_T": 42240,
+          "candidate_T": 42240,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "b07ca9a6ce0e246a45dcc0ccec59f20d8caaa3fc36c445e6029d008877f95160",
+          "parent_answer_sha256": "b07ca9a6ce0e246a45dcc0ccec59f20d8caaa3fc36c445e6029d008877f95160",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_07_random_mixture",
+          "parent_T": 42420,
+          "candidate_T": 42420,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "a178d253a13bdab8258e095f381fcb9384061fa91d13e44d2b636180be7caf63",
+          "parent_answer_sha256": "a178d253a13bdab8258e095f381fcb9384061fa91d13e44d2b636180be7caf63",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_08_cohort_release",
+          "parent_T": 25140,
+          "candidate_T": 25140,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "fd3783cd387c68ed8e278d00c9bcde06a9cb07f4f723b3c05dacb944466c34f3",
+          "parent_answer_sha256": "fd3783cd387c68ed8e278d00c9bcde06a9cb07f4f723b3c05dacb944466c34f3",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_09_cohort_release",
+          "parent_T": 11500,
+          "candidate_T": 11500,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "8ed4d74e4ddc10684f445176446afb9743d3501769da821c2a57b748f08b4b23",
+          "parent_answer_sha256": "8ed4d74e4ddc10684f445176446afb9743d3501769da821c2a57b748f08b4b23",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_10_repeated_sizes",
+          "parent_T": 158940,
+          "candidate_T": 158940,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "917dd12488a77285769e405e90096c37ca964357141bb1d505d7cf8eded33224",
+          "parent_answer_sha256": "917dd12488a77285769e405e90096c37ca964357141bb1d505d7cf8eded33224",
+          "diagnostic": "lifetime_firstfit_queries=2947 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_11_repeated_sizes",
+          "parent_T": 160620,
+          "candidate_T": 160620,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "98fe7b0abb74ce024787623df7e4a92d13ca9a478840810d5f89734f0f33ba2b",
+          "parent_answer_sha256": "98fe7b0abb74ce024787623df7e4a92d13ca9a478840810d5f89734f0f33ba2b",
+          "diagnostic": "lifetime_firstfit_queries=2540 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_12_large_recent",
+          "parent_T": 14460,
+          "candidate_T": 14460,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "6c35bbad67e0c161dd1a71c9c7a2f273286da358d02ca5d991e83b5cbc7877b0",
+          "parent_answer_sha256": "6c35bbad67e0c161dd1a71c9c7a2f273286da358d02ca5d991e83b5cbc7877b0",
+          "diagnostic": "lifetime_firstfit_queries=7519 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_13_large_recent",
+          "parent_T": 46460,
+          "candidate_T": 46460,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "2dcc6e76a2d51787bc93ecab5f13faf0def62209caa7cedfe9454b420b38578e",
+          "parent_answer_sha256": "2dcc6e76a2d51787bc93ecab5f13faf0def62209caa7cedfe9454b420b38578e",
+          "diagnostic": "lifetime_firstfit_queries=3841 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_14_large_recent",
+          "parent_T": 34500,
+          "candidate_T": 34500,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "db87f348c1df6d76471c0072f7fb4b0501d03089a1e3d2051d9da2cb58518ec2",
+          "parent_answer_sha256": "db87f348c1df6d76471c0072f7fb4b0501d03089a1e3d2051d9da2cb58518ec2",
+          "diagnostic": "lifetime_firstfit_queries=1823 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_15_large_recent",
+          "parent_T": 28060,
+          "candidate_T": 28060,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "34c5aff6d871bd0b28666fbb4630dea0b57e80a9b1e562c0e919027d427b2e9f",
+          "parent_answer_sha256": "34c5aff6d871bd0b28666fbb4630dea0b57e80a9b1e562c0e919027d427b2e9f",
+          "diagnostic": "lifetime_firstfit_queries=1566 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_16_large_recent",
+          "parent_T": 24820,
+          "candidate_T": 24820,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "e4e7ba99997563fcb9579e5154e54a73c4b57adaeffca333ba1d3a32867a3464",
+          "parent_answer_sha256": "e4e7ba99997563fcb9579e5154e54a73c4b57adaeffca333ba1d3a32867a3464",
+          "diagnostic": "lifetime_firstfit_queries=1005 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_17_large_recent",
+          "parent_T": 64920,
+          "candidate_T": 64920,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "3a4bc8e78eaedf159c3d02b5cf0413db1f0bedd77f919257bef76d81bbe00592",
+          "parent_answer_sha256": "3a4bc8e78eaedf159c3d02b5cf0413db1f0bedd77f919257bef76d81bbe00592",
+          "diagnostic": "lifetime_firstfit_queries=1100 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_18_frames",
+          "parent_T": 1660,
+          "candidate_T": 1660,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "7014b6082c4bf91446e78a5f2ed6f38a5458ab2be47b14a01c71387f323ed13c",
+          "parent_answer_sha256": "7014b6082c4bf91446e78a5f2ed6f38a5458ab2be47b14a01c71387f323ed13c",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_19_frames",
+          "parent_T": 9760,
+          "candidate_T": 9760,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "4336532057bd6cd6dc15e505cfd00eefaab2d66a2256a0acdd9d3bd6f286a17d",
+          "parent_answer_sha256": "4336532057bd6cd6dc15e505cfd00eefaab2d66a2256a0acdd9d3bd6f286a17d",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_20_frames",
+          "parent_T": 87420,
+          "candidate_T": 87420,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "42be22ef2996a52fd83cb2f73f24f9130a9f747dd4a52e167764fa477feca785",
+          "parent_answer_sha256": "42be22ef2996a52fd83cb2f73f24f9130a9f747dd4a52e167764fa477feca785",
+          "diagnostic": "lifetime_firstfit_queries=246 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_21_frames",
+          "parent_T": 8740,
+          "candidate_T": 8740,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "e452f35feb14f82a744ecf82838e7e29289b3c46d18471bcb86ef9ef0afaca11",
+          "parent_answer_sha256": "e452f35feb14f82a744ecf82838e7e29289b3c46d18471bcb86ef9ef0afaca11",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_22_frames",
+          "parent_T": 27140,
+          "candidate_T": 27140,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "bdfca2f354680e7ec4f60bdd16070e9347152a8e1d0aad5a55cc92da9d45d4b1",
+          "parent_answer_sha256": "bdfca2f354680e7ec4f60bdd16070e9347152a8e1d0aad5a55cc92da9d45d4b1",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_23_frames",
+          "parent_T": 90220,
+          "candidate_T": 90220,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "4c466722623e969d0ae474b9d1e545ff41d972abbd49af0b420784ead61902fa",
+          "parent_answer_sha256": "4c466722623e969d0ae474b9d1e545ff41d972abbd49af0b420784ead61902fa",
+          "diagnostic": "lifetime_firstfit_queries=210 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_24_micro",
+          "parent_T": 140,
+          "candidate_T": 140,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "3f15d3f64796be0473017660f1c0a00b64ee1e4818f5c7a06cbd5bb30ed25e57",
+          "parent_answer_sha256": "3f15d3f64796be0473017660f1c0a00b64ee1e4818f5c7a06cbd5bb30ed25e57",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_25_micro",
+          "parent_T": 200,
+          "candidate_T": 200,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "407f8f0871a0a0380125b00a5d5fdc5f69c6d52dfb0ea4c40d168f564a96cd76",
+          "parent_answer_sha256": "407f8f0871a0a0380125b00a5d5fdc5f69c6d52dfb0ea4c40d168f564a96cd76",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_26_micro",
+          "parent_T": 260,
+          "candidate_T": 260,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "89766bffd5ac8b2d65a09984368d767887c53ac609316bf80304b78b6b34fa3c",
+          "parent_answer_sha256": "89766bffd5ac8b2d65a09984368d767887c53ac609316bf80304b78b6b34fa3c",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_27_micro",
+          "parent_T": 320,
+          "candidate_T": 320,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "fbaa8fad5358be6d660460b5f71ffa54de45f55909e57c1d32f1826f92c5a092",
+          "parent_answer_sha256": "fbaa8fad5358be6d660460b5f71ffa54de45f55909e57c1d32f1826f92c5a092",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_28_micro",
+          "parent_T": 420,
+          "candidate_T": 420,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "2705b636db987cc33891c71bb5462b83169036e13bdd1240da016419cbee1939",
+          "parent_answer_sha256": "2705b636db987cc33891c71bb5462b83169036e13bdd1240da016419cbee1939",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        },
+        {
+          "case": "dev_29_micro",
+          "parent_T": 420,
+          "candidate_T": 420,
+          "same_answer_transcript": true,
+          "candidate_answer_sha256": "5fdb6042797bcd5006a0ebfdfc166aa120d9aca7831cf79f0e2fa82d66067896",
+          "parent_answer_sha256": "5fdb6042797bcd5006a0ebfdfc166aa120d9aca7831cf79f0e2fa82d66067896",
+          "diagnostic": "lifetime_firstfit_queries=0 supported=0 changed_placements=0"
+        }
+      ]
+    }
+  },
+  "conclusion": "FirstFit is inactive on allOpen15 (supported0), so tie does not test its allocation effect there. Development dev04 has2564 supported queries and890 actual changes, same finalT;29/30 dev transcripts same. No improvement or general rejection of all FirstFit policies. No release/submission."
+}

@@ -1,0 +1,550 @@
+{
+  "freeze_sha256": "87b47e093914d7ddb4d8ec9cadff27ab765877e9cb8fa344a18122807c28aa08",
+  "primary_records_sha256": "ec096162f3b4b3e6de4890a055efeb832f9e9e8e3fcd31e65ff753faaba5d825",
+  "runner_sha256": "c8c523e90a7ba4e2077db69fe0e9b73ec8aafa976908e678088edae8e08a8a40",
+  "workers": 1,
+  "rule": "All failed/CPU>=4s/RSS>=230MiB, top3 CPU and top1 RSS per method; paired C++/CJ counterparts. One fresh repeat, primary results preserved.",
+  "jobs": [
+    {
+      "id": "0e774d144aa1313e3303c9d094b3494ceab191d52a1d03bdf45db043b3918492",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "0e774d144aa1313e3303c9d094b3494ceab191d52a1d03bdf45db043b3918492",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "0e7a00c24bcb922f06976927873299dfa52a0fd039443f1626404b9084274a18",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "0e7a00c24bcb922f06976927873299dfa52a0fd039443f1626404b9084274a18",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "1a545baa1966a4f7e5d84f88928c58d2955fc1a910e92cb7b420a7b7db63bc5e",
+      "method": "online_cj",
+      "reasons": [
+        "largest primary RSS measurement"
+      ]
+    },
+    {
+      "id": "1a545baa1966a4f7e5d84f88928c58d2955fc1a910e92cb7b420a7b7db63bc5e",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "2590c93463620c823f37150d0167eecf8607798080ff86d1b039a6124c5d6e09",
+      "method": "trial22",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "26a7d1bb41cda0a5197aecd22f798d1f2a8de6a47b7ae62392991686c786af4c",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable",
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "26a7d1bb41cda0a5197aecd22f798d1f2a8de6a47b7ae62392991686c786af4c",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "26b87847de6788ee0ace0bb770d13a14c47333a0147c22a037b57f57fbde1b2c",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable",
+        "paired current online C++/Cangjie resource comparison",
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "26b87847de6788ee0ace0bb770d13a14c47333a0147c22a037b57f57fbde1b2c",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison",
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "26b87847de6788ee0ace0bb770d13a14c47333a0147c22a037b57f57fbde1b2c",
+      "method": "primal_recent",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "2b40f439f245f152178f99dec4b428e65200fd82ef187fa3a22cb8d6e28c56bc",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "2b40f439f245f152178f99dec4b428e65200fd82ef187fa3a22cb8d6e28c56bc",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "2f2be2cc4212fbe5713d46c1e44f52fb637907460cfe501c412dc06a44e42abb",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "2f2be2cc4212fbe5713d46c1e44f52fb637907460cfe501c412dc06a44e42abb",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "4eabea4a9a5ed3a504bc1f8cff6f0fde21796af081d2dcde6dd4b750b5ce53aa",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "4eabea4a9a5ed3a504bc1f8cff6f0fde21796af081d2dcde6dd4b750b5ce53aa",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "5272b44e4e7327214d3dbe422b686f009f6e47c2ffe80c1800583cfa760b32d8",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "5272b44e4e7327214d3dbe422b686f009f6e47c2ffe80c1800583cfa760b32d8",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "53071714a4a3b9e7bd657356542eb622819e3eb3327d2e13fb3038f163b550ba",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "53071714a4a3b9e7bd657356542eb622819e3eb3327d2e13fb3038f163b550ba",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "53908e4c33fc85b0041f744ee9d5a5b96d21258d0dfbf76bc76652e0d18ac2be",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "53908e4c33fc85b0041f744ee9d5a5b96d21258d0dfbf76bc76652e0d18ac2be",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "5696b45157b9ce1ed1f36e371f90bf9bf164f7bd7a1bd11e104ddb6d896fa499",
+      "method": "hybrid",
+      "reasons": [
+        "largest primary RSS measurement"
+      ]
+    },
+    {
+      "id": "6dfd9b85394cb600ec751fbc04d1816a66e36478dcc1d07e6040ffad4cf1a0b1",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "6dfd9b85394cb600ec751fbc04d1816a66e36478dcc1d07e6040ffad4cf1a0b1",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "76152ca6a2fd9aa95238787ad1cb05bb431e493b00b96433e2e624672a722084",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "76152ca6a2fd9aa95238787ad1cb05bb431e493b00b96433e2e624672a722084",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "7ee237f77ff2a08d9a25891c46b6dc407f5c2f1b2814dbc33fe8ec7297ae8a17",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "7ee237f77ff2a08d9a25891c46b6dc407f5c2f1b2814dbc33fe8ec7297ae8a17",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "81a5ef555d73c23ee24990bbca3750e0bb5f82c39f6bd42307c36f31e66252ed",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable",
+        "paired current online C++/Cangjie resource comparison",
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "81a5ef555d73c23ee24990bbca3750e0bb5f82c39f6bd42307c36f31e66252ed",
+      "method": "online_cpp",
+      "reasons": [
+        "largest primary RSS measurement",
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "81a5ef555d73c23ee24990bbca3750e0bb5f82c39f6bd42307c36f31e66252ed",
+      "method": "primal_recent",
+      "reasons": [
+        "largest primary RSS measurement"
+      ]
+    },
+    {
+      "id": "81a5ef555d73c23ee24990bbca3750e0bb5f82c39f6bd42307c36f31e66252ed",
+      "method": "trial22",
+      "reasons": [
+        "largest primary RSS measurement"
+      ]
+    },
+    {
+      "id": "873e4c11e659aa2ea6f028c33c5094c424786133c31dccce4368ae3bf2f20a4a",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "873e4c11e659aa2ea6f028c33c5094c424786133c31dccce4368ae3bf2f20a4a",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "91d29866126e12cf3e5ef7baa03587522d14c8b1d21dbc2ad19c55ee52c2280e",
+      "method": "replay_search",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "94a6eee97e7700178bb0ad44694ef1dea859f13b47165564894bac8adfa278b9",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "94a6eee97e7700178bb0ad44694ef1dea859f13b47165564894bac8adfa278b9",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "94a6eee97e7700178bb0ad44694ef1dea859f13b47165564894bac8adfa278b9",
+      "method": "primal_recent",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "95a2b3e8e0b440ea2cabd881d7c892a55f0f641b7c5e1e8e9d854f94918c1c59",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "95a2b3e8e0b440ea2cabd881d7c892a55f0f641b7c5e1e8e9d854f94918c1c59",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "961f2c74527b3feaafd2d97ef788ba90084011414e449e0d66b48d5c50444cfc",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "961f2c74527b3feaafd2d97ef788ba90084011414e449e0d66b48d5c50444cfc",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "9ef46c1f8911a9d0d1545be3d13e99b07ec3c01ac1a2bedcd371149c13384f50",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "9ef46c1f8911a9d0d1545be3d13e99b07ec3c01ac1a2bedcd371149c13384f50",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "9f770ebec7f3df8688448589815cc3a5b6ef26fe2ad462fe7790cf49767f4bdf",
+      "method": "hybrid",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "9f770ebec7f3df8688448589815cc3a5b6ef26fe2ad462fe7790cf49767f4bdf",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable",
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "9f770ebec7f3df8688448589815cc3a5b6ef26fe2ad462fe7790cf49767f4bdf",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison",
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "9f770ebec7f3df8688448589815cc3a5b6ef26fe2ad462fe7790cf49767f4bdf",
+      "method": "primal_recent",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "a454661d40b36134b15af6a906684b8ce55ad71aa588a4aad410cea5a3aec123",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "a454661d40b36134b15af6a906684b8ce55ad71aa588a4aad410cea5a3aec123",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "a60a69f623f4a603a3c897664a1f228b56458df052d1fc08397d842e163f6b5d",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "a60a69f623f4a603a3c897664a1f228b56458df052d1fc08397d842e163f6b5d",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "a6409f7336376f7ecc9cfced5cea7a591b177d897648d57911a02823862991e1",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "a6409f7336376f7ecc9cfced5cea7a591b177d897648d57911a02823862991e1",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "bdb40daccfe5165c3e2381878912e85fbd76f2f840e994d7b22dd56e7cc86f11",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "bdb40daccfe5165c3e2381878912e85fbd76f2f840e994d7b22dd56e7cc86f11",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "bdc68b31478da4202e47a00abb536cda35e8b55fe4af749764ef040d366779a1",
+      "method": "hybrid",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "bdc68b31478da4202e47a00abb536cda35e8b55fe4af749764ef040d366779a1",
+      "method": "trial22",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "c51a00bd865e7242d2d1b923f87bb20f235941c391f5a7db0cf9f5a98a2905a8",
+      "method": "online_cj",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "c51a00bd865e7242d2d1b923f87bb20f235941c391f5a7db0cf9f5a98a2905a8",
+      "method": "online_cpp",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "c552e45da506b710ec34b2d4f0556ed14aabbcf541b6b253ebd2101751900844",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "c552e45da506b710ec34b2d4f0556ed14aabbcf541b6b253ebd2101751900844",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "d5896336fb7274fd1441e14fb0127974934dd1ca91d6b5f1b69fd444ff3e2a78",
+      "method": "replay_search",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "deabe9b19342d940d3e4460ff9757ea5b2326cbecbbb3bc2411bce7989979280",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "deabe9b19342d940d3e4460ff9757ea5b2326cbecbbb3bc2411bce7989979280",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "f030eb572732a2b1f559f49c74705e56e243750551a532cb797e881e82566771",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "f030eb572732a2b1f559f49c74705e56e243750551a532cb797e881e82566771",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "f31bec0acbfc43dbacaf3feefcc47725e561c9b44061b090bc32575c9f4c9d46",
+      "method": "replay_search",
+      "reasons": [
+        "largest primary RSS measurement"
+      ]
+    },
+    {
+      "id": "fbbb1c206a1d33f631589c4d1b9be7fe744ba25f522bc04ddbe972456d3ec389",
+      "method": "replay_search",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "fdd2afcfa9da3b5051fd1643b049c49fad8b28d8db1bd0dede6f238b6a085bde",
+      "method": "hybrid",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    },
+    {
+      "id": "fdd2afcfa9da3b5051fd1643b049c49fad8b28d8db1bd0dede6f238b6a085bde",
+      "method": "online_cj",
+      "reasons": [
+        "CPU >= 4 s or unavailable"
+      ]
+    },
+    {
+      "id": "fdd2afcfa9da3b5051fd1643b049c49fad8b28d8db1bd0dede6f238b6a085bde",
+      "method": "online_cpp",
+      "reasons": [
+        "paired current online C++/Cangjie resource comparison"
+      ]
+    },
+    {
+      "id": "fdd2afcfa9da3b5051fd1643b049c49fad8b28d8db1bd0dede6f238b6a085bde",
+      "method": "trial22",
+      "reasons": [
+        "three largest primary CPU measurements"
+      ]
+    }
+  ]
+}

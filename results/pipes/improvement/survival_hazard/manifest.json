@@ -1,0 +1,93 @@
+{
+  "task": "Causal survival-hazard spatial grouping experiment for TECH ARENA Pipes",
+  "baseline_source_sha256": "57338ca2dd0d81e2c553edefb5c2c40fdb1b3aec88873709a21da6574c85560f",
+  "candidate_source": "candidate.cpp",
+  "candidate_source_sha256": "2fe202bb534bcb5808e310b508e48ca74dca0525ce74d41e3f381019560378d0",
+  "candidate_build": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -DSURVIVAL_HORIZON=32 -DSURVIVAL_MATCH_TOLERANCE=80 -DSURVIVAL_NEIGHBOR_SEPARATION=80 candidate.cpp",
+  "candidate_binary": "short-horizon.bin",
+  "candidate_binary_sha256": "a94b0375629982856683f7155a833df421b444ee0028e773fa3147104086d90e",
+  "baseline_binary": "baseline.bin",
+  "baseline_binary_sha256": "ef9e5b5b1cd63d001559ced40151a781d872a3efd85e57ed88f4cb24f1f54c7d",
+  "tests": {
+    "screen_h64": {
+      "baseline": {
+        "weighted_score_sum": 10.854660881950673,
+        "weight_sum": 12.0,
+        "ok_count": 3,
+        "case_count": 3,
+        "sum_solver_cpu_s": 1.062008,
+        "max_solver_cpu_s": 0.9670810000000001,
+        "max_solver_peak_rss_mb": 9.46875
+      },
+      "survival_hazard": {
+        "weighted_score_sum": 10.850315544713977,
+        "weight_sum": 12.0,
+        "ok_count": 3,
+        "case_count": 3,
+        "sum_solver_cpu_s": 1.2863440000000002,
+        "max_solver_cpu_s": 1.167234,
+        "max_solver_peak_rss_mb": 116.125
+      }
+    },
+    "screen_variants": {
+      "baseline": {
+        "weighted_score_sum": 10.854660881950673,
+        "weight_sum": 12.0,
+        "ok_count": 3,
+        "case_count": 3,
+        "sum_solver_cpu_s": 1.2626959999999998,
+        "max_solver_cpu_s": 1.1673209999999998,
+        "max_solver_peak_rss_mb": 9.53125
+      },
+      "h32": {
+        "weighted_score_sum": 10.857269985625301,
+        "weight_sum": 12.0,
+        "ok_count": 3,
+        "case_count": 3,
+        "sum_solver_cpu_s": 1.815094,
+        "max_solver_cpu_s": 1.657509,
+        "max_solver_peak_rss_mb": 114.265625
+      },
+      "h128": {
+        "weighted_score_sum": 10.850315544713977,
+        "weight_sum": 12.0,
+        "ok_count": 3,
+        "case_count": 3,
+        "sum_solver_cpu_s": 1.939664,
+        "max_solver_cpu_s": 1.758419,
+        "max_solver_peak_rss_mb": 103.078125
+      },
+      "wide-match": {
+        "weighted_score_sum": 10.848578517919869,
+        "weight_sum": 12.0,
+        "ok_count": 3,
+        "case_count": 3,
+        "sum_solver_cpu_s": 1.642643,
+        "max_solver_cpu_s": 1.479022,
+        "max_solver_peak_rss_mb": 116.1875
+      }
+    },
+    "open15": {
+      "baseline": {
+        "weighted_score_sum": 29.785293754007295,
+        "weight_sum": 32.1,
+        "ok_count": 15,
+        "case_count": 15,
+        "sum_solver_cpu_s": 1.7120409999999997,
+        "max_solver_cpu_s": 1.2927939999999998,
+        "max_solver_peak_rss_mb": 9.5
+      },
+      "h32": {
+        "weighted_score_sum": 29.77011253472319,
+        "weight_sum": 32.1,
+        "ok_count": 15,
+        "case_count": 15,
+        "sum_solver_cpu_s": 2.599558,
+        "max_solver_cpu_s": 1.820347,
+        "max_solver_peak_rss_mb": 107.75
+      }
+    }
+  },
+  "qualification": "H32 was positive by 120 m on case 15 in the initial 3-case screen, but lost 0.015181219284 weighted points on all 15 official open tests; no holdout or development suite was run.",
+  "guardrails": "The new logic reads only current/past streaming commands and stored placements/removals. It does not inspect test IDs, files, future commands, environment variables, or scores."
+}

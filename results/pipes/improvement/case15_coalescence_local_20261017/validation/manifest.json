@@ -1,0 +1,427 @@
+{
+  "schema_version": 1,
+  "purpose": "Independent synthetic validation for general causal hole-coalescence behavior.",
+  "design_fixed_before_solver_metrics": true,
+  "generator": "generate.py; Python standard library random.Random (MT19937)",
+  "python_version": "3.14.5",
+  "generation_parameters": {
+    "non_cohort_live_pipe_floor": 180,
+    "non_cohort_live_pipe_ceiling": 1800,
+    "baseline_deletion_probability": 0.5,
+    "random_deletion_control_probability": 0.56,
+    "near_lifo_selection_probability": 0.88,
+    "near_lifo_pid_window": 64,
+    "near_lifo_choice_among_most_recent_live_pids": 12,
+    "cohort_size_range": [
+      90,
+      180
+    ],
+    "cohort_survivor_fraction_range": [
+      0.12,
+      0.27
+    ],
+    "cohort_batch_noisy_operation_probability": 0.08,
+    "cohort_background_random_delete_probability": 0.035,
+    "size_regime_block_count": 5
+  },
+  "development": [
+    {
+      "id": "dev01",
+      "seed": 71527001,
+      "profile": "mixed_iid_uniform",
+      "operation_count": 20000,
+      "path": "inputs/development/dev01.in",
+      "sha256": "606ea8392be890464bfd3c13971125d99bdd457fea3df4fc98886d30dbe06dd4",
+      "generated": true,
+      "validation": {
+        "operation_count": 20000,
+        "placement_count": 10254,
+        "peak_live_pipe_length_m": 10986,
+        "final_occupied_length_m": 10684,
+        "minimum_trench_lower_bound_m": 11000
+      }
+    },
+    {
+      "id": "dev02",
+      "seed": 71527002,
+      "profile": "near_lifo_local",
+      "operation_count": 18000,
+      "path": "inputs/development/dev02.in",
+      "sha256": "69d775d7b290674e1a88c40137ad8e1872479a98cdde1cec4e364826a6007e50",
+      "generated": true,
+      "validation": {
+        "operation_count": 18000,
+        "placement_count": 9206,
+        "peak_live_pipe_length_m": 8651,
+        "final_occupied_length_m": 8193,
+        "minimum_trench_lower_bound_m": 8660
+      }
+    },
+    {
+      "id": "dev03",
+      "seed": 71527003,
+      "profile": "fifo_control",
+      "operation_count": 22000,
+      "path": "inputs/development/dev03.in",
+      "sha256": "bf3b781e5b9337902895117346631e61d5b529371673f01b77fc73aed5810ad2",
+      "generated": true,
+      "validation": {
+        "operation_count": 22000,
+        "placement_count": 11187,
+        "peak_live_pipe_length_m": 7850,
+        "final_occupied_length_m": 7743,
+        "minimum_trench_lower_bound_m": 7860
+      }
+    },
+    {
+      "id": "dev04",
+      "seed": 71527004,
+      "profile": "random_deletion_control",
+      "operation_count": 19000,
+      "path": "inputs/development/dev04.in",
+      "sha256": "b62e435f57530db2c24dd57fe86373e13aefcd77d69680b4d3c3fd475c7b4aa9",
+      "generated": true,
+      "validation": {
+        "operation_count": 19000,
+        "placement_count": 9594,
+        "peak_live_pipe_length_m": 4442,
+        "final_occupied_length_m": 3763,
+        "minimum_trench_lower_bound_m": 4460
+      }
+    },
+    {
+      "id": "dev05",
+      "seed": 71527005,
+      "profile": "increasing_size_regime_blocks",
+      "operation_count": 24000,
+      "path": "inputs/development/dev05.in",
+      "sha256": "2acbf14cdad3703c99e7c05b8ac50175f55939764e1e7958a5a8b75ade1c8a5b",
+      "generated": true,
+      "validation": {
+        "operation_count": 24000,
+        "placement_count": 12189,
+        "peak_live_pipe_length_m": 15143,
+        "final_occupied_length_m": 12923,
+        "minimum_trench_lower_bound_m": 15160
+      }
+    },
+    {
+      "id": "dev06",
+      "seed": 71527006,
+      "profile": "decreasing_size_regime_blocks",
+      "operation_count": 16000,
+      "path": "inputs/development/dev06.in",
+      "sha256": "840de5c612e583e06dc10e2033a1af6a83d14597b0991c783dbdc1c1597341eb",
+      "generated": true,
+      "validation": {
+        "operation_count": 16000,
+        "placement_count": 8106,
+        "peak_live_pipe_length_m": 8088,
+        "final_occupied_length_m": 1058,
+        "minimum_trench_lower_bound_m": 8100
+      }
+    },
+    {
+      "id": "dev07",
+      "seed": 71527007,
+      "profile": "random_size_regime_blocks",
+      "operation_count": 21000,
+      "path": "inputs/development/dev07.in",
+      "sha256": "1a621cf2e022b5f2815b6abebe8efdbf2ded6e9a64e11761f2f70fa80ba6e5a6",
+      "generated": true,
+      "validation": {
+        "operation_count": 21000,
+        "placement_count": 10642,
+        "peak_live_pipe_length_m": 11075,
+        "final_occupied_length_m": 7471,
+        "minimum_trench_lower_bound_m": 11080
+      }
+    },
+    {
+      "id": "dev08",
+      "seed": 71527008,
+      "profile": "batched_cohorts_noisy_survivors",
+      "operation_count": 25000,
+      "path": "inputs/development/dev08.in",
+      "sha256": "e51f77579fc55fee0e0f74263e5b69b30bf0c46f56031de99253a14b805218ce",
+      "generated": true,
+      "validation": {
+        "operation_count": 25000,
+        "placement_count": 13665,
+        "peak_live_pipe_length_m": 47493,
+        "final_occupied_length_m": 47478,
+        "minimum_trench_lower_bound_m": 47500
+      }
+    },
+    {
+      "id": "dev09",
+      "seed": 71527009,
+      "profile": "mixed_iid_uniform",
+      "operation_count": 17000,
+      "path": "inputs/development/dev09.in",
+      "sha256": "70cd873fa06e52167a3d05d5f71e3a9a2feba73768f89196bc715d75fbb2f340",
+      "generated": true,
+      "validation": {
+        "operation_count": 17000,
+        "placement_count": 8749,
+        "peak_live_pipe_length_m": 10613,
+        "final_occupied_length_m": 10123,
+        "minimum_trench_lower_bound_m": 10620
+      }
+    },
+    {
+      "id": "dev10",
+      "seed": 71527010,
+      "profile": "near_lifo_local",
+      "operation_count": 23000,
+      "path": "inputs/development/dev10.in",
+      "sha256": "47ed28e30a2781ca8adefb4208de8502a9f0701377e9d6ef2032b5faa0c16039",
+      "generated": true,
+      "validation": {
+        "operation_count": 23000,
+        "placement_count": 11662,
+        "peak_live_pipe_length_m": 7005,
+        "final_occupied_length_m": 6817,
+        "minimum_trench_lower_bound_m": 7020
+      }
+    },
+    {
+      "id": "dev11",
+      "seed": 71527011,
+      "profile": "fifo_control",
+      "operation_count": 15000,
+      "path": "inputs/development/dev11.in",
+      "sha256": "bdf107ba0aba1468f39d4f887d0798d2a2148f37daf1a0a5eca26d60f2846e13",
+      "generated": true,
+      "validation": {
+        "operation_count": 15000,
+        "placement_count": 7599,
+        "peak_live_pipe_length_m": 6091,
+        "final_occupied_length_m": 4157,
+        "minimum_trench_lower_bound_m": 6100
+      }
+    },
+    {
+      "id": "dev12",
+      "seed": 71527012,
+      "profile": "random_deletion_control",
+      "operation_count": 20000,
+      "path": "inputs/development/dev12.in",
+      "sha256": "79890f9be6cf76bc0e34219b2081585b77dc6ccaea32fcfb067152d2d60d688e",
+      "generated": true,
+      "validation": {
+        "operation_count": 20000,
+        "placement_count": 10090,
+        "peak_live_pipe_length_m": 4530,
+        "final_occupied_length_m": 3658,
+        "minimum_trench_lower_bound_m": 4540
+      }
+    }
+  ],
+  "sealed_validation": [
+    {
+      "id": "seal01",
+      "seed": 71527101,
+      "profile": "mixed_iid_uniform",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal01.in",
+      "sha256": "93a26b6b147e01ec68cba44cc8c1606cfb7939f2f5b8f946d35d770d7e06bb4a",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15196,
+        "peak_live_pipe_length_m": 9413,
+        "final_occupied_length_m": 8029,
+        "minimum_trench_lower_bound_m": 9420
+      }
+    },
+    {
+      "id": "seal02",
+      "seed": 71527102,
+      "profile": "near_lifo_local",
+      "operation_count": 200000,
+      "path": "inputs/sealed_validation/seal02.in",
+      "sha256": "6f1071c046e5536e67ad845337d4fd092b06a9fdec5344952caeb0411ec2662c",
+      "generated": true,
+      "validation": {
+        "operation_count": 200000,
+        "placement_count": 100127,
+        "peak_live_pipe_length_m": 12457,
+        "final_occupied_length_m": 5236,
+        "minimum_trench_lower_bound_m": 12460
+      }
+    },
+    {
+      "id": "seal03",
+      "seed": 71527103,
+      "profile": "fifo_control",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal03.in",
+      "sha256": "b0dc2aa4406e1291a1ff9e16e6ea5569ca7b42968d3b8a8bb6ee4fe8b3e75339",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15130,
+        "peak_live_pipe_length_m": 6355,
+        "final_occupied_length_m": 5433,
+        "minimum_trench_lower_bound_m": 6360
+      }
+    },
+    {
+      "id": "seal04",
+      "seed": 71527104,
+      "profile": "random_deletion_control",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal04.in",
+      "sha256": "3c31a1d8ed69fd6fed6a2d46336162a5d4a15b13c9c07e7a8c049ab50fe1a33e",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15091,
+        "peak_live_pipe_length_m": 4352,
+        "final_occupied_length_m": 3600,
+        "minimum_trench_lower_bound_m": 4360
+      }
+    },
+    {
+      "id": "seal05",
+      "seed": 71527105,
+      "profile": "increasing_size_regime_blocks",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal05.in",
+      "sha256": "587522f94317af19fdb2ebcf032535112bcc3a2927d00d6c40862f74bbd0625e",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15146,
+        "peak_live_pipe_length_m": 11882,
+        "final_occupied_length_m": 9939,
+        "minimum_trench_lower_bound_m": 11900
+      }
+    },
+    {
+      "id": "seal06",
+      "seed": 71527106,
+      "profile": "decreasing_size_regime_blocks",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal06.in",
+      "sha256": "449de442ae71445bcf1ba168722f79e8ac32773a65d63347b8a4d2c74490c9e5",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15096,
+        "peak_live_pipe_length_m": 8906,
+        "final_occupied_length_m": 965,
+        "minimum_trench_lower_bound_m": 8920
+      }
+    },
+    {
+      "id": "seal07",
+      "seed": 71527107,
+      "profile": "random_size_regime_blocks",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal07.in",
+      "sha256": "08600c66476c5763bf46b659d4f4881daabdc17a5b486d2ecb056519dfca68cb",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15176,
+        "peak_live_pipe_length_m": 10460,
+        "final_occupied_length_m": 9363,
+        "minimum_trench_lower_bound_m": 10460
+      }
+    },
+    {
+      "id": "seal08",
+      "seed": 71527108,
+      "profile": "batched_cohorts_noisy_survivors",
+      "operation_count": 200000,
+      "path": "inputs/sealed_validation/seal08.in",
+      "sha256": "8bf8ce91d0431aca7444c05cba7ecc97f91f8060d656a8bbc924cdb5f82d855e",
+      "generated": true,
+      "validation": {
+        "operation_count": 200000,
+        "placement_count": 108653,
+        "peak_live_pipe_length_m": 356189,
+        "final_occupied_length_m": 354802,
+        "minimum_trench_lower_bound_m": 356200
+      }
+    },
+    {
+      "id": "seal09",
+      "seed": 71527109,
+      "profile": "mixed_iid_uniform",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal09.in",
+      "sha256": "38db1da8517b290564f96f672b6c2335991a8c53240def9351c3d54cc713b217",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15136,
+        "peak_live_pipe_length_m": 9142,
+        "final_occupied_length_m": 5615,
+        "minimum_trench_lower_bound_m": 9160
+      }
+    },
+    {
+      "id": "seal10",
+      "seed": 71527110,
+      "profile": "near_lifo_local",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal10.in",
+      "sha256": "0f18e72d0eee93e9bb65baa46504a31493a3c01dec27d4e05e8cabc8b99edd1f",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15198,
+        "peak_live_pipe_length_m": 10127,
+        "final_occupied_length_m": 8042,
+        "minimum_trench_lower_bound_m": 10140
+      }
+    },
+    {
+      "id": "seal11",
+      "seed": 71527111,
+      "profile": "fifo_control",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal11.in",
+      "sha256": "d4f77d74b1ed3ca54546e5a02dd5d5f7d3f2195f72587adecb0aaa910dc0911f",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15163,
+        "peak_live_pipe_length_m": 7223,
+        "final_occupied_length_m": 6689,
+        "minimum_trench_lower_bound_m": 7240
+      }
+    },
+    {
+      "id": "seal12",
+      "seed": 71527112,
+      "profile": "random_deletion_control",
+      "operation_count": 30000,
+      "path": "inputs/sealed_validation/seal12.in",
+      "sha256": "9ba532e629113ca710f90dea29cccb5a392947f43c4be3fa8f82c49787b902ca",
+      "generated": true,
+      "validation": {
+        "operation_count": 30000,
+        "placement_count": 15091,
+        "peak_live_pipe_length_m": 4493,
+        "final_occupied_length_m": 3607,
+        "minimum_trench_lower_bound_m": 4500
+      }
+    }
+  ],
+  "sealed_generation_gate": {
+    "required_cli_argument": "--freeze-id",
+    "freeze_id": "endpoint-1c545d73692dd620",
+    "generated_after_freeze": true
+  },
+  "rationale": [
+    "Pipes commands expose insertions and deletions; deletion turns occupied intervals into reusable holes, and nearby later deletions can merge them.",
+    "The suite includes cohort bursts and near-LIFO locality to exercise that mechanism, while IID, FIFO, and random-delete controls test whether gains survive different lifetimes.",
+    "Length regimes vary over whole blocks and the seeds are newly fixed in the 71527001+ range; no official input, PID sequence, prefix, or case-specific value is used.",
+    "Each case is a fresh PRNG trace with no solver feedback. Development and sealed-validation seeds are disjoint; each suite contains all eight profile families, with one or two cases per family."
+  ],
+  "score_policy": "No scores are generated here. Select up to two candidates using development only, freeze, then evaluate once on sealed_validation."
+}

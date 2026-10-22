@@ -1,0 +1,81 @@
+{
+  "parent": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-avl-borrows-fenced/solution.cj",
+  "parent_sha256": "04b3ba856bb769b1eb4bb0a9169dc3eb3257c37db10519e2c8f48449e76affc0",
+  "source_sha256": "f2ab40d1c27e9dba983f0bdf52c0bdc4619e0d59301e227e8833c9db5a5f62be",
+  "generator_sha256": "86f1eb3ef43a1cd1a5ea696817b5938543d9b7e027ac300f4fc887727e5610f9",
+  "scope": "Borrow left/right/parent/heights only in non-resizing mutation helpers",
+  "methods": [
+    {
+      "method": "fixHeight",
+      "before_sha256": "7b13f455de207a1c20d90e3b2ef5e45559004a74c82645d3a854890767b106a8",
+      "after_sha256": "46cf72331377f4aa7efa3c84d2205d130820e3ad201d7b0fc16a26194c9d59ef"
+    },
+    {
+      "method": "fixHeight",
+      "before_sha256": "7b13f455de207a1c20d90e3b2ef5e45559004a74c82645d3a854890767b106a8",
+      "after_sha256": "46cf72331377f4aa7efa3c84d2205d130820e3ad201d7b0fc16a26194c9d59ef"
+    },
+    {
+      "method": "replaceAtParent",
+      "before_sha256": "2e8b075002936ae70f6edfe959a6311057cae3708ba7ffc504772a4be3c7d16e",
+      "after_sha256": "e6bd04bf70266249c7fc72db1c0274a80a04101e8963f5dc7a52f800693a113c"
+    },
+    {
+      "method": "replaceAtParent",
+      "before_sha256": "2e8b075002936ae70f6edfe959a6311057cae3708ba7ffc504772a4be3c7d16e",
+      "after_sha256": "e6bd04bf70266249c7fc72db1c0274a80a04101e8963f5dc7a52f800693a113c"
+    },
+    {
+      "method": "rotateLeft",
+      "before_sha256": "1b912b4f4e2610fbcfa13f1515d760d89c93dd788e77f4c3e072c8750a6d890b",
+      "after_sha256": "53e432befc3af994dc09280c25ea51b29fb4a95db5bf54b302c185811e3c627f"
+    },
+    {
+      "method": "rotateLeft",
+      "before_sha256": "1b912b4f4e2610fbcfa13f1515d760d89c93dd788e77f4c3e072c8750a6d890b",
+      "after_sha256": "53e432befc3af994dc09280c25ea51b29fb4a95db5bf54b302c185811e3c627f"
+    },
+    {
+      "method": "rotateRight",
+      "before_sha256": "6fc7cc745b1588a19f9982e67215c75b8d0e9fee289314a57a52d6a29f8e2f8b",
+      "after_sha256": "4b0c87db26c02454833c0fbd1b7babf839000e3f40d5c90c2c1c9c71f19f74f2"
+    },
+    {
+      "method": "rotateRight",
+      "before_sha256": "6fc7cc745b1588a19f9982e67215c75b8d0e9fee289314a57a52d6a29f8e2f8b",
+      "after_sha256": "4b0c87db26c02454833c0fbd1b7babf839000e3f40d5c90c2c1c9c71f19f74f2"
+    },
+    {
+      "method": "rebalance",
+      "before_sha256": "fe47417787b69c80fbc8030377f89aa2041db067ac20e819eaa97b8c5a06794b",
+      "after_sha256": "95271c26b153d307b10853a12002958cf3a34897fccaad489de5036c8416f4f3"
+    },
+    {
+      "method": "rebalance",
+      "before_sha256": "fe47417787b69c80fbc8030377f89aa2041db067ac20e819eaa97b8c5a06794b",
+      "after_sha256": "95271c26b153d307b10853a12002958cf3a34897fccaad489de5036c8416f4f3"
+    },
+    {
+      "method": "eraseNode",
+      "before_sha256": "6badf9a42f9d2d7923c939ac6315495a40bf56f678e23bd26750d2fd941252f0",
+      "after_sha256": "3abd43f8a21fc0f8d9bba0bd6ffb70eddbba7759c83d009485a03cf6df0b0c7d"
+    },
+    {
+      "method": "eraseNode",
+      "before_sha256": "6badf9a42f9d2d7923c939ac6315495a40bf56f678e23bd26750d2fd941252f0",
+      "after_sha256": "3abd43f8a21fc0f8d9bba0bd6ffb70eddbba7759c83d009485a03cf6df0b0c7d"
+    }
+  ],
+  "ownership": [
+    "All pointers belong to existing vectors, which these methods and nested helpers never append to.",
+    "eraseNode appends only to vacant, whose allocation is distinct and never borrowed.",
+    "No pointer is stored, returned, copied to another owner, or used across newNode.",
+    "Each selected method calls the documented std.runtime.blackBox(this) after its last pointer access, retaining this and all owning fields even under optimization."
+  ],
+  "invariants": [
+    "Every reachable child/parent ID is zero or below allocated vector size.",
+    "Zero sentinel is allocated in all arrays and maintains height zero.",
+    "All writes, rotation calls, branches, tie decisions and height arithmetic retain their original order.",
+    "The map is single-threaded; no helper performs callbacks or changes a vector owner."
+  ]
+}

@@ -1,0 +1,301 @@
+--- a/original.cpp
++++ b/original.cpp
+@@ -1,113 +1,268 @@
+ #include <algorithm>
+ #include <array>
+ #include <cstddef>
+ #include <cstdint>
+ #include <deque>
+ #include <iostream>
+ #include <iterator>
+ #include <limits>
+ #include <map>
+ #include <optional>
+ #include <set>
+ #include <utility>
+ #include <vector>
+ 
+ // EVOLVE-BLOCK-START
+ namespace {
+ using Coordinate = std::int64_t;
+ class Allocator {
+-    struct Pipe { Coordinate start; int length; };
++    struct Pipe {
++        Coordinate start = 0;
++        int length = 0;
++        std::uint64_t birthClock = 0;
++        std::size_t left = 0;
++        std::size_t right = 0;
++    };
++    struct Gap {
++        Coordinate finish;
++        std::size_t left;
++        std::size_t right;
++    };
++    struct ReleaseCell {
++        std::uint64_t live = 0;
++        std::uint64_t deaths = 0;
++        std::uint64_t lastClock = 0;
++        double exposure = 0.0;
++    };
++    static constexpr bool useAgeConditioning_ = true;
++    static constexpr std::array<std::uint64_t, 2> ageLimits_{{64, 512}};
+     std::vector<Pipe> pipes_{{0, 0}};
+-    std::map<Coordinate, Coordinate> gaps_;
++    std::map<Coordinate, Gap> gaps_;
+     std::set<std::pair<Coordinate, Coordinate>> sizes_;
+     std::array<std::set<Coordinate>, 41> starts_;
++    std::array<std::array<ReleaseCell, 3>, 41> release_{};
++    std::array<std::size_t, 2> ageCursor_{{1, 1}};
++    std::uint64_t clock_ = 0;
++    std::uint64_t liveCount_ = 0;
++    std::uint64_t deaths_ = 0;
++    double totalExposure_ = 0.0;
+     Coordinate trench_ = 0;
+-    static int bucket(Coordinate n) { return static_cast<int>(std::min<Coordinate>(40, n)); }
+-    void add(Coordinate a, Coordinate b) {
++    std::size_t rightmostPipe_ = 0;
++    static int bucket(Coordinate n) {
++        return static_cast<int>(std::min<Coordinate>(40, n));
++    }
++    static int ageBucket(std::uint64_t age) {
++        if (age < ageLimits_[0]) return 0;
++        if (age < ageLimits_[1]) return 1;
++        return 2;
++    }
++    void add(Coordinate a, Coordinate b,
++             std::size_t left, std::size_t right) {
+         if (a >= b) return;
+-        gaps_[a] = b;
+-        sizes_.insert({b-a, a});
+-        starts_[bucket(b-a)].insert(a);
++        gaps_.emplace(a, Gap{b, left, right});
++        sizes_.insert({b - a, a});
++        starts_[bucket(b - a)].insert(a);
+     }
+     void erase(Coordinate a) {
+-        const Coordinate b = gaps_.at(a);
+-        sizes_.erase({b-a, a});
+-        starts_[bucket(b-a)].erase(a);
++        const Coordinate b = gaps_.at(a).finish;
++        sizes_.erase({b - a, a});
++        starts_[bucket(b - a)].erase(a);
+         gaps_.erase(a);
++    }
++    static void settle(ReleaseCell& cell, std::uint64_t time) {
++        cell.exposure += static_cast<double>(time - cell.lastClock)
++                       * static_cast<double>(cell.live);
++        cell.lastClock = time;
++    }
++    void changeCount(int length, int age, bool increase,
++                     std::uint64_t time) {
++        ReleaseCell& cell = release_[length][age];
++        settle(cell, time);
++        if (increase) {
++            ++cell.live;
++        } else {
++            --cell.live;
++        }
++    }
++    double exposureNow(const ReleaseCell& cell) const {
++        return cell.exposure
++             + static_cast<double>(clock_ - cell.lastClock)
++             * static_cast<double>(cell.live);
++    }
++    void advanceClock() {
++        const std::uint64_t previousClock = clock_;
++        ++clock_;
++        totalExposure_ += static_cast<double>(liveCount_);
++        for (int stage = 0; stage < 2; ++stage) {
++            std::size_t& cursor = ageCursor_[stage];
++            while (cursor < pipes_.size()) {
++                const Pipe& pipe = pipes_[cursor];
++                if (clock_ - pipe.birthClock < ageLimits_[stage]) break;
++                ++cursor;
++                if (pipe.length == 0) continue;
++                // Move at the previous timestamp so the current command's
++                // exposure belongs to the new age bucket.
++                changeCount(pipe.length, stage, false, previousClock);
++                changeCount(pipe.length, stage + 1, true, previousClock);
++            }
++        }
++    }
++    double releaseRate(std::size_t pid) const {
++        const Pipe& pipe = pipes_[pid];
++        const auto& cells = release_[pipe.length];
++        double sizeExposure = 0.0;
++        std::uint64_t sizeDeaths = 0;
++        for (const ReleaseCell& cell : cells) {
++            sizeExposure += exposureNow(cell);
++            sizeDeaths += cell.deaths;
++        }
++        const double pooledRate =
++            static_cast<double>(deaths_) / totalExposure_;
++        // Two virtual deaths shrink sparse size estimates to the pooled rate.
++        const double sizeRate =
++            (static_cast<double>(sizeDeaths) + 2.0)
++            / (sizeExposure + 2.0 / pooledRate);
++        if constexpr (!useAgeConditioning_) {
++            return sizeRate;
++        }
++        const int age = ageBucket(clock_ - pipe.birthClock);
++        const ReleaseCell& cell = cells[age];
++        const double ageExposure = exposureNow(cell);
++        // Survival without deaths also supplies evidence of a lower rate.
++        if (cell.deaths < 4 && ageExposure * sizeRate < 8.0) {
++            return sizeRate;
++        }
++        // Four virtual deaths shrink the age estimate to its size estimate.
++        return (static_cast<double>(cell.deaths) + 4.0)
++             / (ageExposure + 4.0 / sizeRate);
++    }
++    bool preferRight(const Gap& gap) const {
++        // Preserve the parent's behavior at both trench boundaries.
++        if (gap.left == 0 || gap.right == 0 ||
++            deaths_ == 0 || totalExposure_ <= 0.0) {
++            return false;
++        }
++        const double leftRate = releaseRate(gap.left);
++        const double rightRate = releaseRate(gap.right);
++        // Placing on the right leaves the remainder beside the left neighbor.
++        return leftRate > 1.25 * rightRate;
+     }
+ public:
+     std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+     std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+     std::uint64_t unitProfileSuppressedExpansions = 0;
+     void place(int length) {
++        advanceClock();
+         Coordinate at = -1, digs = 0;
+-        if constexpr (true) {
+-            for (int k = length; k <= 40; ++k)
+-                if (!starts_[k].empty() && (at < 0 || *starts_[k].begin() < at))
+-                    at = *starts_[k].begin();
+-        } else {
+-            auto candidate = sizes_.lower_bound({length, 0});
+-            if (candidate != sizes_.end()) at = candidate->second;
+-        }
++        for (int k = length; k <= 40; ++k) {
++            if (!starts_[k].empty() &&
++                (at < 0 || *starts_[k].begin() < at)) {
++                at = *starts_[k].begin();
++            }
++        }
++        // Growth is permitted only after the global fitting-gap search fails.
+         if (at < 0) {
+             at = trench_;
+-            if (!gaps_.empty() && gaps_.rbegin()->second == trench_) {
++            std::size_t left = rightmostPipe_;
++            if (!gaps_.empty() &&
++                gaps_.rbegin()->second.finish == trench_) {
+                 at = gaps_.rbegin()->first;
++                left = gaps_.rbegin()->second.left;
+                 erase(at);
+             }
+             digs = (length - (trench_ - at) + 19) / 20;
+             trench_ += digs * 20;
+-            add(at, trench_);
+-        }
+-        const Coordinate finish = gaps_.at(at);
++            add(at, trench_, left, 0);
++        }
++        const Gap chosen = gaps_.at(at);
++        const Coordinate finish = chosen.finish;
++        Coordinate start = at;
++        if (finish - at > length && preferRight(chosen)) {
++            start = finish - length;
++        }
+         erase(at);
+-        add(at + length, finish);
+-        pipes_.push_back({at, length});
+-        std::cout << digs << ' ' << at << '\n' << std::flush;
++        const std::size_t pid = pipes_.size();
++        pipes_.push_back(
++            Pipe{start, length, clock_, chosen.left, chosen.right});
++        if (chosen.left != 0) {
++            pipes_[chosen.left].right = pid;
++        }
++        if (chosen.right != 0) {
++            pipes_[chosen.right].left = pid;
++        } else {
++            rightmostPipe_ = pid;
++        }
++        add(at, start, chosen.left, pid);
++        add(start + length, finish, pid, chosen.right);
++        changeCount(length, 0, true, clock_);
++        ++liveCount_;
++        std::cout << digs << ' ' << start << '\n' << std::flush;
+     }
+     void remove(Coordinate pid) {
+-        const Pipe p = pipes_.at(static_cast<std::size_t>(pid));
++        advanceClock();
++        const std::size_t id = static_cast<std::size_t>(pid);
++        const Pipe p = pipes_.at(id);
++        const int age = ageBucket(clock_ - p.birthClock);
++        ReleaseCell& cell = release_[p.length][age];
++        settle(cell, clock_);
++        --cell.live;
++        ++cell.deaths;
++        ++deaths_;
++        --liveCount_;
++        // A zero length marks a dead pipe for the two transition cursors.
++        pipes_[id].length = 0;
++        if (p.left != 0) {
++            pipes_[p.left].right = p.right;
++        }
++        if (p.right != 0) {
++            pipes_[p.right].left = p.left;
++        } else {
++            rightmostPipe_ = p.left;
++        }
+         Coordinate a = p.start, b = a + p.length;
+         auto right = gaps_.lower_bound(a);
+         if (right != gaps_.end() && right->first == b) {
+-            b = right->second;
++            b = right->second.finish;
+             erase(right->first);
+         }
+         auto left = gaps_.lower_bound(a);
+         if (left != gaps_.begin()) {
+             --left;
+-            if (left->second == a) { a = left->first; erase(a); }
+-        }
+-        add(a, b);
++            if (left->second.finish == a) {
++                a = left->first;
++                erase(a);
++            }
++        }
++        add(a, b, p.left, p.right);
+         std::cout << p.start << '\n' << std::flush;
+     }
+ };
+ }  // namespace
+ // EVOLVE-BLOCK-END
+ 
+ int main() {
+     std::ios::sync_with_stdio(false);
+     std::cin.tie(nullptr);
+ 
+     Allocator allocator;
+     std::int64_t command;
+     while (std::cin >> command) {
+         if (command == 0) {
+ #if defined(MC_ROLLOUT_DIAGNOSTICS)
+             std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                       << " mc_rollouts=" << allocator.mcRolloutsRun
+                       << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                       << " expansion_gate_passes=" << allocator.expansionGatePasses
+                       << " unit_profile_suppressed_expansions="
+                       << allocator.unitProfileSuppressedExpansions << '\n';
+ #endif
+             return 0;
+         }
+         if (command > 0) {
+             allocator.place(static_cast<int>(command));
+         } else {
+             allocator.remove(-command);
+         }
+     }
+     return 0;
+ }

@@ -1,0 +1,54 @@
+{
+  "objective": "Improve directed shared-prefix failures while retaining Open15 maximum and avoiding measured per-case losses",
+  "parent": "prototypes/pipes_g5420_cpu_20261020/cache32/solution.cpp",
+  "parent_source_sha256": "a843822451c2a7c5e07330daa33268fc77bccfbc08fd196bfaf98a673ae24cfe",
+  "hypothesis": "Causal reference BF handoff can recover canonical geometry after a repaired prefix; scope only streams with a physically different observed prefix",
+  "bounded_candidates": [
+    "minimal",
+    "broad11",
+    "repair15",
+    "temporary9"
+  ],
+  "disabled_control": "Original public tables, same handoff code; reference should never start",
+  "selection_gate": {
+    "public": "Exact all15 volume ceilings; valid shared actions; no increase of prefix excavation",
+    "known": "No per-case KPI loss on all155 previously observed regression inputs; timer-sensitive differences audited separately",
+    "selection_order": "Among passing candidates: strongest directed-trap gain, then simpler table edits; no selection by fresh outcomes",
+    "resource": "Official local CPU<5sec and RSS<256MiB, one solver worker; target native Windows/G5420 not available"
+  },
+  "fresh_gate": "One independent new48-input set after source/binary freeze, report all cases; no tuning or switching candidates after seeing fresh scores",
+  "budget": "One handoff policy, four prefix profiles, one fresh confirmation; no old Shinka/scientist campaign resumed",
+  "promotion": "Separate frozen local prototype only; preserve parent and canonical code",
+  "platform_actions": 0,
+  "not_guaranteed": "No extra immediate digs is not terminal-KPI dominance. Finite directed input validation is not hidden-distribution generalization.",
+  "scope_amendment_before_fresh": {
+    "reason": "known triage exposed interior-gap fragmentation in unrestricted canonical proposals",
+    "new_policy": "Canonical tie-breaking only: choose a left edge of an equal-size smallest fitting gap, so post-step gap-length multiset equals actual BF",
+    "additional_bounded_candidates": [
+      "minimal-ties",
+      "broad11-ties",
+      "repair15-ties",
+      "temporary9-ties"
+    ],
+    "fresh_status": "Manifest prepared by independent generator; candidate has not been chosen and fresh results are unseen",
+    "budget": "One corrected policy, four same prefix profiles; no further online policy tuning in this round"
+  },
+  "coupling_amendment_before_fresh": {
+    "reason": "Local shape preservation still lacks terminal dominance; active coordinate identity permits a strict coupling certificate",
+    "new_candidates": [
+      "coupled-minimal",
+      "coupled-buffer40"
+    ],
+    "control": "coupled-control",
+    "policy": "Execute complete virtual parent including original Planner, advanced episode and public replay. After live PID coordinates agree and actualT<=virtualT, follow virtual addresses forever.",
+    "selection_priority": [
+      "coupled-buffer40",
+      "coupled-minimal",
+      "minimal"
+    ],
+    "buffer40_rationale": "2m marker atx38 ends on40m boundary, giving higher initial trench thanx3 but avoiding the predeclared five40+29+9 exact-capacity obstruction after deleting PID1. Counter probes are known mechanism checks, not globally unseen mechanisms.",
+    "required_known_gate": "No per-case losses on155 observed streams; all15 exact public ceilings; resource and reference-certificate checks",
+    "fresh_status": "48 prepared; source not yet selected/frozen, metrics not opened",
+    "budget": "Two certificate candidates and one refactor control. End the round after one frozen confirmation; no tuning on confirmation results."
+  }
+}

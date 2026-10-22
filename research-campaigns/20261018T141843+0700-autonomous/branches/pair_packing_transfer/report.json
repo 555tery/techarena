@@ -1,0 +1,405 @@
+{
+  "status": "no-go",
+  "created_at": 1792323094.0356858,
+  "proposal": {
+    "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/pair_packing_transfer/solution.cpp",
+    "sha256": "d623373e6e435b34d2e22394a8012ddfe40c32823b676f183886a776e0a25e74",
+    "idea": "Two-gap Markov packing: compare residual-capacity pairs after the parent final gap choice, preserving protected structural routes.",
+    "hypothesis": "Transfer the donor joint two-gap accepted-volume DP with observed insertion-size transitions, reset transition context at deletion. It uses only existing gaps<=40 and preserves exact fits. Compare the chosen residual pair to using an alternative parent width representative, without changing endpoints or excavation. Parent MC still runs before this additional ordinary-mode comparison. Partial forecast: ignores deletions and the other gaps; global benefit unproved.",
+    "causality": "Current request and current free geometry plus already observed insertion/deletion history only. No test id, stream N, future input, fingerprints or external state. Parent source and donor hash verified. Source insertion scopes and bounds audited; C++20 Wall/Wextra/Werror syntax passed. No model calls for preparing this transfer. Strict full15 plus all30 development and CPU/RSS gates decide acceptance.",
+    "parent": "trial_0022"
+  },
+  "parent_sha256": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+  "donor": 54,
+  "donor_sha256": "26c02b9f101fa75679ed285d393be4c8fd8260447b021a2408e3c1439f2f7ab9",
+  "strict_syntax_compile": "passed",
+  "evaluation_result": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_d623373e6e435b34/result.json",
+  "model_calls": 0,
+  "release_started": false,
+  "submitted": false,
+  "scope_audit": "Existing parent structural routes, recent-free-age representatives, endpoints and expansion unchanged. Added score applies only in protected ordinary route; retained parent MC/causal lifetime computations. Additional compute subject to original5s/256MiB gate.",
+  "checked_at": 1792323248.186593,
+  "source_sha256_verified": true,
+  "weighted_score": 29.500841417347484,
+  "score_delta_vs22": -0.5901264739976284,
+  "balanced_gate": false,
+  "max_cpu_s": 1.291167,
+  "max_rss_mib": 15.140625,
+  "comparisons": {
+    "open15": {
+      "case_count": 15,
+      "correct": true,
+      "mean_delta": -0.035577567747304764,
+      "worst_delta": -0.5,
+      "wins": 0,
+      "regressions": 7,
+      "ties": 8,
+      "changed_T": [
+        {
+          "case": "2",
+          "parent_T": 20,
+          "candidate_T": 40,
+          "delta_T": 20
+        },
+        {
+          "case": "7",
+          "parent_T": 1700,
+          "candidate_T": 1720,
+          "delta_T": 20
+        },
+        {
+          "case": "8",
+          "parent_T": 4700,
+          "candidate_T": 4720,
+          "delta_T": 20
+        },
+        {
+          "case": "11",
+          "parent_T": 22400,
+          "candidate_T": 22620,
+          "delta_T": 220
+        },
+        {
+          "case": "12",
+          "parent_T": 10320,
+          "candidate_T": 10360,
+          "delta_T": 40
+        },
+        {
+          "case": "14",
+          "parent_T": 37840,
+          "candidate_T": 37860,
+          "delta_T": 20
+        },
+        {
+          "case": "15",
+          "parent_T": 438060,
+          "candidate_T": 440280,
+          "delta_T": 2220
+        }
+      ],
+      "counters": [
+        {
+          "case": "1",
+          "diagnostic": "pair_packing_opportunities=2 comparisons=0 changed_placements=0"
+        },
+        {
+          "case": "2",
+          "diagnostic": "pair_packing_opportunities=9 comparisons=3 changed_placements=1"
+        },
+        {
+          "case": "3",
+          "diagnostic": "pair_packing_opportunities=5 comparisons=0 changed_placements=0"
+        },
+        {
+          "case": "4",
+          "diagnostic": "pair_packing_opportunities=10 comparisons=0 changed_placements=0"
+        },
+        {
+          "case": "5",
+          "diagnostic": "pair_packing_opportunities=41 comparisons=0 changed_placements=0"
+        },
+        {
+          "case": "6",
+          "diagnostic": "pair_packing_opportunities=4 comparisons=0 changed_placements=0"
+        },
+        {
+          "case": "7",
+          "diagnostic": "pair_packing_opportunities=92 comparisons=99 changed_placements=28"
+        },
+        {
+          "case": "8",
+          "diagnostic": "pair_packing_opportunities=1495 comparisons=592 changed_placements=343"
+        },
+        {
+          "case": "9",
+          "diagnostic": "pair_packing_opportunities=41 comparisons=0 changed_placements=0"
+        },
+        {
+          "case": "10",
+          "diagnostic": "pair_packing_opportunities=4999 comparisons=2305 changed_placements=769"
+        },
+        {
+          "case": "11",
+          "diagnostic": "pair_packing_opportunities=2399 comparisons=3034 changed_placements=998"
+        },
+        {
+          "case": "12",
+          "diagnostic": "pair_packing_opportunities=457 comparisons=99 changed_placements=64"
+        },
+        {
+          "case": "13",
+          "diagnostic": "pair_packing_opportunities=1430 comparisons=751 changed_placements=380"
+        },
+        {
+          "case": "14",
+          "diagnostic": "pair_packing_opportunities=20941 comparisons=385 changed_placements=182"
+        },
+        {
+          "case": "15",
+          "diagnostic": "pair_packing_opportunities=59569 comparisons=77174 changed_placements=16201"
+        }
+      ]
+    },
+    "development": {
+      "case_count": 30,
+      "correct": true,
+      "mean_delta": 0.004408690826056212,
+      "worst_delta": -0.02911255411255409,
+      "wins": 12,
+      "regressions": 9,
+      "ties": 9,
+      "changed_T": [
+        {
+          "case": "dev_00_recent_growth_shift",
+          "parent_T": 30480,
+          "candidate_T": 30540,
+          "delta_T": 60
+        },
+        {
+          "case": "dev_01_recent_growth_shift",
+          "parent_T": 94020,
+          "candidate_T": 94360,
+          "delta_T": 340
+        },
+        {
+          "case": "dev_02_recent_stationary",
+          "parent_T": 17640,
+          "candidate_T": 17540,
+          "delta_T": -100
+        },
+        {
+          "case": "dev_03_recent_stationary",
+          "parent_T": 21700,
+          "candidate_T": 21580,
+          "delta_T": -120
+        },
+        {
+          "case": "dev_04_fifo_size_drift",
+          "parent_T": 103520,
+          "candidate_T": 103560,
+          "delta_T": 40
+        },
+        {
+          "case": "dev_05_fifo_size_drift",
+          "parent_T": 54820,
+          "candidate_T": 54840,
+          "delta_T": 20
+        },
+        {
+          "case": "dev_06_random_mixture",
+          "parent_T": 42240,
+          "candidate_T": 41420,
+          "delta_T": -820
+        },
+        {
+          "case": "dev_07_random_mixture",
+          "parent_T": 42420,
+          "candidate_T": 41640,
+          "delta_T": -780
+        },
+        {
+          "case": "dev_08_cohort_release",
+          "parent_T": 25140,
+          "candidate_T": 24660,
+          "delta_T": -480
+        },
+        {
+          "case": "dev_09_cohort_release",
+          "parent_T": 11500,
+          "candidate_T": 11180,
+          "delta_T": -320
+        },
+        {
+          "case": "dev_10_repeated_sizes",
+          "parent_T": 158940,
+          "candidate_T": 159020,
+          "delta_T": 80
+        },
+        {
+          "case": "dev_11_repeated_sizes",
+          "parent_T": 160620,
+          "candidate_T": 160700,
+          "delta_T": 80
+        },
+        {
+          "case": "dev_17_large_recent",
+          "parent_T": 64920,
+          "candidate_T": 64900,
+          "delta_T": -20
+        },
+        {
+          "case": "dev_20_frames",
+          "parent_T": 87420,
+          "candidate_T": 87580,
+          "delta_T": 160
+        },
+        {
+          "case": "dev_21_frames",
+          "parent_T": 8740,
+          "candidate_T": 8660,
+          "delta_T": -80
+        },
+        {
+          "case": "dev_22_frames",
+          "parent_T": 27140,
+          "candidate_T": 27120,
+          "delta_T": -20
+        },
+        {
+          "case": "dev_23_frames",
+          "parent_T": 90220,
+          "candidate_T": 90440,
+          "delta_T": 220
+        },
+        {
+          "case": "dev_26_micro",
+          "parent_T": 260,
+          "candidate_T": 240,
+          "delta_T": -20
+        },
+        {
+          "case": "dev_27_micro",
+          "parent_T": 320,
+          "candidate_T": 300,
+          "delta_T": -20
+        },
+        {
+          "case": "dev_28_micro",
+          "parent_T": 420,
+          "candidate_T": 360,
+          "delta_T": -60
+        },
+        {
+          "case": "dev_29_micro",
+          "parent_T": 420,
+          "candidate_T": 440,
+          "delta_T": 20
+        }
+      ],
+      "counters": [
+        {
+          "case": "dev_00_recent_growth_shift",
+          "diagnostic": "pair_packing_opportunities=3802 comparisons=3948 changed_placements=1212"
+        },
+        {
+          "case": "dev_01_recent_growth_shift",
+          "diagnostic": "pair_packing_opportunities=3852 comparisons=3010 changed_placements=717"
+        },
+        {
+          "case": "dev_02_recent_stationary",
+          "diagnostic": "pair_packing_opportunities=2927 comparisons=9021 changed_placements=2268"
+        },
+        {
+          "case": "dev_03_recent_stationary",
+          "diagnostic": "pair_packing_opportunities=2783 comparisons=10820 changed_placements=2246"
+        },
+        {
+          "case": "dev_04_fifo_size_drift",
+          "diagnostic": "pair_packing_opportunities=5189 comparisons=1979 changed_placements=1164"
+        },
+        {
+          "case": "dev_05_fifo_size_drift",
+          "diagnostic": "pair_packing_opportunities=3471 comparisons=2325 changed_placements=1232"
+        },
+        {
+          "case": "dev_06_random_mixture",
+          "diagnostic": "pair_packing_opportunities=2508 comparisons=10795 changed_placements=1367"
+        },
+        {
+          "case": "dev_07_random_mixture",
+          "diagnostic": "pair_packing_opportunities=2508 comparisons=10135 changed_placements=1198"
+        },
+        {
+          "case": "dev_08_cohort_release",
+          "diagnostic": "pair_packing_opportunities=1923 comparisons=7482 changed_placements=1467"
+        },
+        {
+          "case": "dev_09_cohort_release",
+          "diagnostic": "pair_packing_opportunities=2031 comparisons=12395 changed_placements=1740"
+        },
+        {
+          "case": "dev_10_repeated_sizes",
+          "diagnostic": "pair_packing_opportunities=3750 comparisons=10383 changed_placements=1723"
+        },
+        {
+          "case": "dev_11_repeated_sizes",
+          "diagnostic": "pair_packing_opportunities=3338 comparisons=7375 changed_placements=1245"
+        },
+        {
+          "case": "dev_12_large_recent",
+          "diagnostic": "pair_packing_opportunities=10421 comparisons=12737 changed_placements=4396"
+        },
+        {
+          "case": "dev_13_large_recent",
+          "diagnostic": "pair_packing_opportunities=10226 comparisons=16411 changed_placements=3700"
+        },
+        {
+          "case": "dev_14_large_recent",
+          "diagnostic": "pair_packing_opportunities=12751 comparisons=9903 changed_placements=2677"
+        },
+        {
+          "case": "dev_15_large_recent",
+          "diagnostic": "pair_packing_opportunities=5942 comparisons=6826 changed_placements=1726"
+        },
+        {
+          "case": "dev_16_large_recent",
+          "diagnostic": "pair_packing_opportunities=8945 comparisons=4493 changed_placements=1539"
+        },
+        {
+          "case": "dev_17_large_recent",
+          "diagnostic": "pair_packing_opportunities=10009 comparisons=5770 changed_placements=1725"
+        },
+        {
+          "case": "dev_18_frames",
+          "diagnostic": "pair_packing_opportunities=5343 comparisons=6119 changed_placements=1296"
+        },
+        {
+          "case": "dev_19_frames",
+          "diagnostic": "pair_packing_opportunities=2636 comparisons=5799 changed_placements=1410"
+        },
+        {
+          "case": "dev_20_frames",
+          "diagnostic": "pair_packing_opportunities=2804 comparisons=9379 changed_placements=1925"
+        },
+        {
+          "case": "dev_21_frames",
+          "diagnostic": "pair_packing_opportunities=4195 comparisons=5145 changed_placements=1490"
+        },
+        {
+          "case": "dev_22_frames",
+          "diagnostic": "pair_packing_opportunities=3000 comparisons=5792 changed_placements=1708"
+        },
+        {
+          "case": "dev_23_frames",
+          "diagnostic": "pair_packing_opportunities=2973 comparisons=10176 changed_placements=2024"
+        },
+        {
+          "case": "dev_24_micro",
+          "diagnostic": "pair_packing_opportunities=4 comparisons=0 changed_placements=0"
+        },
+        {
+          "case": "dev_25_micro",
+          "diagnostic": "pair_packing_opportunities=14 comparisons=4 changed_placements=2"
+        },
+        {
+          "case": "dev_26_micro",
+          "diagnostic": "pair_packing_opportunities=31 comparisons=18 changed_placements=10"
+        },
+        {
+          "case": "dev_27_micro",
+          "diagnostic": "pair_packing_opportunities=41 comparisons=36 changed_placements=14"
+        },
+        {
+          "case": "dev_28_micro",
+          "diagnostic": "pair_packing_opportunities=48 comparisons=66 changed_placements=32"
+        },
+        {
+          "case": "dev_29_micro",
+          "diagnostic": "pair_packing_opportunities=56 comparisons=102 changed_placements=34"
+        }
+      ]
+    }
+  },
+  "conclusion": "Active transfer, negative public result. No improved public case versus frozen22; reject without release/submission or threshold sweep. Development results reported separately and cannot justify the public regression."
+}

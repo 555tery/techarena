@@ -1,0 +1,5 @@
+{
+  "base_sha256": "7bae4094c3761640f0d9694e69836aef2986f2daa66ecd9785f02f7dd8f61778",
+  "source_sha256": "585c6e7ffa9cedc20f1dd0efeaed59fdef39c62dba0e3c57853faba3b6024ad8",
+  "last_change": "Explicit post-access strong owner fence in native decimal formatting; no arithmetic or policy change."
+}

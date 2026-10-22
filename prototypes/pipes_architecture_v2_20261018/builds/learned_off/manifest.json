@@ -1,0 +1,38 @@
+{
+  "label": "learned_off",
+  "spec": {
+    "directory": "learned/src",
+    "entry": "solver.cpp",
+    "defines": [
+      "LEARNED_ENABLED=0"
+    ],
+    "overrides": {
+      "model.hpp": "learned/checkpoints/gen4.hpp"
+    }
+  },
+  "source_files_sha256": {
+    "policy.hpp": "f9ca8f7a9698c076c02e1175e91594d967ad6dc5bb1e2c7b5dec38c5670b9e2e",
+    "allocator.hpp": "ec65465a12d5ac6081e032123b617b2c78b6e9de65eca016fb105abae7d9f4d6",
+    "model.hpp": "78840d2357058904ee338d292883049d9e1fa3d7ce0e678bcf6d63830d900065",
+    "train.cpp": "d548ccca7b69903dbdcc2e704cfe7a7d6afc68d6fa444dc8d0621ba359999c4c",
+    "check.cpp": "85dd80b06599a7ad03da0ecad38619d9ba2d0df5a7a0c5827ccc2450a59605ee",
+    "solver.cpp": "8f397a53a370660b6379489e05863fa031befe5a4c27eaa1c62cd769187f8c4a"
+  },
+  "compile_command": [
+    "/usr/bin/clang++",
+    "-std=c++20",
+    "-O2",
+    "-pipe",
+    "-Wall",
+    "-Wextra",
+    "-DLEARNED_ENABLED=0",
+    "-I",
+    "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/builds/learned_off/source",
+    "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/builds/learned_off/source/solver.cpp",
+    "-o",
+    "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/builds/learned_off/solver"
+  ],
+  "returncode": 0,
+  "created_at": 1792341178.915873,
+  "binary_sha256": "8b12d77aaf3956b2560188235f1f51b4c22864b803e4bfeec1aad6a1f973a1b6"
+}

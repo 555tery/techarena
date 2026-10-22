@@ -1,0 +1,12 @@
+{
+  "status": "server_compile_error",
+  "submission": 1666317,
+  "source_sha256": "82041abf5726fe21435a668f1e9148f474a881268ad041ec3d333522777436b0",
+  "compiler": "Visual C++ 2022 x64 C++20 14.34.31933",
+  "exact_error": "task.cpp(23): fatal error C1083: windows.h: No such file or directory",
+  "runtime_measured": false,
+  "tables_verified_identical": true,
+  "local_correctness_checks": 160,
+  "next_candidate": "speed-v29 with minimal documented Win32 ABI declarations and v28 parser",
+  "deploy": false
+}

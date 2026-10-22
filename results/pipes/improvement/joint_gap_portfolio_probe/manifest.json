@@ -1,0 +1,85 @@
+{
+  "artifact": "Joint-gap portfolio ranking probe",
+  "status": "no-go; no candidate chooser implemented",
+  "date": "2026-10-17",
+  "scope": {
+    "evaluated": "causal joint-gap mixed-length scenario ranking with explicit tail option value",
+    "gate": "only implement chooser and screen Open cases 5/9/15 if ranking evaluator shows positive signal",
+    "official_tests_run": false,
+    "site_accessed": false
+  },
+  "protected_sources": {
+    "frozen_final": {
+      "path": "results/pipes/final/solution.cpp",
+      "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+    },
+    "canonical": {
+      "path": "src/pipes.cpp",
+      "sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+    }
+  },
+  "build": {
+    "source": "results/pipes/final/solution.cpp",
+    "macro": "MC_ROLLOUT_DISABLED",
+    "command": "clang++ -O2 -std=c++20 -DMC_ROLLOUT_DISABLED results/pipes/final/solution.cpp -o results/pipes/improvement/joint_gap_portfolio_probe/bin/frozen_nomc",
+    "compiler": "Apple clang 17.0.0 (clang-1700.0.13.5)",
+    "target": "arm64-apple-darwin25.6.0",
+    "binary": "results/pipes/improvement/joint_gap_portfolio_probe/bin/frozen_nomc",
+    "binary_sha256": "e5256420b8a1cf23ceb4c38bac83e649ebf792336f36df2f2c4040ca215768a6"
+  },
+  "inputs": {
+    "count": 18,
+    "design": "3 length profiles x 3 deletion policies x 2 seeds; 1800 operations each; churn 0.48",
+    "manifest": "results/pipes/improvement/joint_gap_portfolio_probe/input_manifest.json",
+    "manifest_sha256": "c9109b006dda270e6df8d60024da86ec6d0f63844fca3dc485678ef667fdb7b5",
+    "all_input_hashes_verified": true,
+    "independent_from_open15_and_holdout_v2": true
+  },
+  "probe": {
+    "source": "results/pipes/improvement/joint_gap_portfolio_probe/probe.py",
+    "source_sha256": "35cbdc6a57a6ef8cd9efc3650d034c2a6b8aa22a33819e2cc27c820cc3d19082",
+    "generator": "results/pipes/improvement/joint_gap_portfolio_probe/generate_streams.py",
+    "generator_sha256": "295b246695d01410f7807969389204f06ff58d9767e43a89e1e084e6c3cfe26d",
+    "command": "python3 results/pipes/improvement/joint_gap_portfolio_probe/probe.py --solver results/pipes/improvement/joint_gap_portfolio_probe/bin/frozen_nomc",
+    "python": "3.14.5",
+    "platform": "Darwin 25.6.0 arm64",
+    "outputs": {
+      "states_csv": "results/pipes/improvement/joint_gap_portfolio_probe/ranking_states.csv",
+      "states_csv_sha256": "9a55a1d96a69e071cd80d78fbb2d06e0c9ce3a152221cebaff1da76b671b7108",
+      "summary_json": "results/pipes/improvement/joint_gap_portfolio_probe/ranking_summary.json",
+      "summary_json_sha256": "1a9f1e64ade66ea76fdcde57812a9b1a51284b17df5a40cb3e4a2100588762e4"
+    }
+  },
+  "ranking_gate": {
+    "states_total": 142,
+    "states_informative": 99,
+    "streams_total": 18,
+    "streams_with_informative_states": 12,
+    "state_weighted_pairwise_accuracy": {
+      "baseline": 0.5995791246,
+      "per_gap_potential": 0.5071548822,
+      "joint_portfolio": 0.4835016835
+    },
+    "state_weighted_mean_top1_regret_m": {
+      "baseline": 26.8686868687,
+      "per_gap_potential": 35.9595959596,
+      "joint_portfolio": 31.7171717172
+    },
+    "paired_equal_stream_bootstrap": {
+      "portfolio_minus_baseline_pairwise_accuracy_mean": -0.1193933882,
+      "pairwise_accuracy_95_percentile_ci": [-0.2582239508, 0.0239068024],
+      "pairwise_improved_worsened_tied_streams": [5, 7, 0],
+      "portfolio_minus_baseline_top1_regret_mean_m": 5.6838624339,
+      "top1_regret_95_percentile_ci_m": [-1.794973545, 13.7460978836],
+      "regret_improved_worsened_tied_streams": [2, 6, 4],
+      "bootstrap_samples": 20000,
+      "bootstrap_seed": 20261017
+    }
+  },
+  "report": {
+    "path": "results/pipes/improvement/joint_gap_portfolio_probe/REPORT.md",
+    "bytes": 7457,
+    "sha256": "f5ca8c397b787e49c7b6c8324a5fcdd4ae48a5242f10290cbfcdaba89d84a7bd",
+    "max_bytes": 8192
+  }
+}

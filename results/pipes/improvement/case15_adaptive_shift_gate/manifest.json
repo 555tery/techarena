@@ -1,0 +1,54 @@
+{
+  "experiment": "case15-historical-allocator-disjoint-support-gate",
+  "status": "no-go-case15-screen",
+  "gate": {
+    "rolling_placement_samples": 320,
+    "prior_window": 256,
+    "recent_window": 64,
+    "trigger": "nonempty prior and recent length supports are disjoint, and the two supports are ordered without overlap on the size axis",
+    "activation": "permanent after first causal trigger; historical allocator takes effect on the current placement after observing its length",
+    "case15_first_trigger_command": 100146,
+    "case15_first_trigger_placement": 80253,
+    "case15_prior_support": [1, 7],
+    "case15_recent_support": [8, 40]
+  },
+  "baseline": {
+    "name": "current champion cohort slabs",
+    "source": "results/pipes/improvement/case9_causal_profiles/source/champion_cohort_slabs.cpp",
+    "source_sha256": "43bfbdadbae18ac180d1e59b6631342cfe1bef99190a449838f0470d6f220200",
+    "case15_trench_m": 438920,
+    "case15_weighted_score": 9.54062243689055
+  },
+  "candidate": {
+    "source": "results/pipes/improvement/case15_adaptive_shift_gate/source/champion_historical_shift_gate.cpp",
+    "source_sha256": "b08550b7c678887d1f13c60092415049e2e02a7c6c2f09ab8d7a8b1653dccb5c",
+    "binary": "results/pipes/improvement/case15_adaptive_shift_gate/bin/champion_historical_shift_gate",
+    "binary_sha256": "821ef6dcb97032f1ecadb2222d0109bbc7b4237198841a1095748e352ddcf391",
+    "case15": {
+      "status": "ok",
+      "trench_m": 463740,
+      "occupied_m": 418757,
+      "kpi": 0.9029995255962393,
+      "weighted_score": 9.029995255962394,
+      "solver_cpu_s": 0.956064,
+      "solver_peak_rss_mib": 9.546875,
+      "summary_sha256": "13a1ba4af9a8ec6e0fa97e9334580f2a817e72b718760e5bf09af1fec608e429",
+      "cases_csv_sha256": "60bafa1aac2e0b19eb6db116009ce3e31aedd153668c80d2dad7163a906a8f9f",
+      "judge_output_sha256": "c09c41fd2d38b43fcc3361841f4f20886806a672128e6db56536d3c7b752c9b7"
+    }
+  },
+  "historical_reference": {
+    "binary": "results/pipes/improvement/segregated_allocator/adaptive_live_mean",
+    "binary_sha256": "ff1015a0cad8b5c64141ca8255c789630ffe95fabdff42a6defe7ae580213043",
+    "case15_trench_m": 438360,
+    "case15_weighted_score": 9.55281047540834
+  },
+  "followup": {
+    "synthetic_phase_shift_tests_run": 0,
+    "open15_run": false,
+    "reason": "candidate failed the required case15 improvement screen",
+    "site_used": false,
+    "docker_used": false,
+    "frozen_or_canonical_source_modified": false
+  }
+}

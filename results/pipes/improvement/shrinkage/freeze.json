@@ -1,0 +1,39 @@
+{
+  "selected_at": "2026-10-16",
+  "rule": {
+    "R_open": "weighted open score / 28.375837599373007",
+    "R_dev": "development score / 1.870543569789272",
+    "primary": "maximize min(R_open,R_dev); invalid candidates excluded",
+    "tie_break": "within 1e-9 in primary score, maximize sqrt(R_open*R_dev), then open score",
+    "frozen_sets": "excluded from candidate tuning and selection"
+  },
+  "winner_among_adaptive_candidates": "s50_shrink_tau128",
+  "frozen_source": "source/adaptive_allocator.cpp",
+  "source_sha256": "5b0067000157e1e3d464b66ae5e91c207e04a1663b0953d58aa2500e417efb20",
+  "binary_sha256": "5454221dbecdc53a7347583df991cc6c788752810b6f82a4f55b98b10f225608",
+  "compile_command": [
+    "clang++",
+    "-O2",
+    "-std=c++20",
+    "-pipe",
+    "-DPIPES_STRATEGY=4",
+    "-DPIPES_HISTORY_WINDOW=128",
+    "-DPIPES_PENALTY_SCALE=50",
+    "-DPIPES_SHRINK_TAU=128",
+    "/Users/555tery/techarena/results/pipes/improvement/shrinkage/source/adaptive_allocator.cpp",
+    "-o",
+    "/Users/555tery/techarena/results/pipes/improvement/shrinkage/binaries/s50_shrink_tau128"
+  ],
+  "open_score": 28.354366985731556,
+  "open_weight": 32.1,
+  "R_open_vs_P4": 0.9992433487270196,
+  "development_score": 1.866240842895806,
+  "development_weight": 4.0,
+  "R_development_vs_P4": 0.9976997451634068,
+  "R_robust_min": 0.9976997451634068,
+  "geometric_mean": 0.9984712486502436,
+  "P4_open_score": 28.375837599373007,
+  "P4_development_score": 1.870543569789272,
+  "adaptive_beats_P4_on_both_sets": false,
+  "frozen_set_used_for_selection": false
+}

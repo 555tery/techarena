@@ -1,0 +1,100 @@
+{
+  "target": "Windows10/G5420/one logical CPU",
+  "tests": [
+    {
+      "file": "tests/open/1.in",
+      "sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/2.in",
+      "sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/3.in",
+      "sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/4.in",
+      "sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/5.in",
+      "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/6.in",
+      "sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/7.in",
+      "sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/8.in",
+      "sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/9.in",
+      "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/10.in",
+      "sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/11.in",
+      "sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/12.in",
+      "sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/13.in",
+      "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/14.in",
+      "sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+      "group": "open15"
+    },
+    {
+      "file": "tests/open/15.in",
+      "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+      "group": "open15"
+    },
+    {
+      "file": "tests/stress/f05-stress-200k-high-live-set.in",
+      "sha256": "15f8f21c9729d1de0c024ce628f6c0020361c9ca0e6b7196483740f77c0617e0",
+      "group": "resource-stress"
+    },
+    {
+      "file": "tests/stress/grow-after-warm-search.in",
+      "sha256": "fc91e921b40bfaeb0fa701fcf71f51580944781fdce511aaeb6def6bfe290736",
+      "group": "resource-stress"
+    },
+    {
+      "file": "tests/stress/late-planner-allocation.in",
+      "sha256": "5b82e1ed09a8dbd7ea4ee1a278ad5a93b8a4e7569568c4501cc62ef9c294867d",
+      "group": "resource-stress"
+    },
+    {
+      "file": "tests/stress/b23-stress-200k-regime-many-gaps.in",
+      "sha256": "909fed2f248e4f7c099921ef1c19eec350411f1ef17bfab2800de84eef00330d",
+      "group": "resource-stress"
+    }
+  ]
+}

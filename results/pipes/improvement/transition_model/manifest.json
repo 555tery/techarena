@@ -1,0 +1,125 @@
+{
+  "candidate": "transition-model-v1",
+  "working_directory": "/Users/555tery/techarena",
+  "candidate_config": {
+    "prediction": "order-1 conditional mode of next positive pipe length given current positive pipe length",
+    "history_window_transitions": 128,
+    "minimum_support": 4,
+    "minimum_unique_mode_share": "4/5",
+    "placement": "P4 best-fit; preserve predicted next length only when an alternative span leaves room and has at most 40 m more slack than current best-fit",
+    "deletion_commands_in_history": "ignored; history pairs consecutive positive arrivals",
+    "test_identity_or_command_position_branching": false
+  },
+  "build_command": "clang++ -std=c++20 -O2 -Wall -Wextra -Wconversion -Wsign-conversion -Wshadow -pedantic -Werror results/pipes/improvement/transition_model/transition_allocator.cpp -o results/pipes/improvement/transition_model/transition_allocator",
+  "files": {
+    "results/pipes/improvement/transition_model/transition_allocator.cpp": {
+      "sha256": "88d8283ecb14e3f1b97a9ca479f6780a4eae602a8f56ce9864ff79553e70fe9b"
+    },
+    "results/pipes/improvement/transition_model/transition_allocator": {
+      "sha256": "1902d7dd47d1c0fe5392ecf27da66a75eb87bb5b7ad5cac435c53763decbd5a1"
+    },
+    "results/pipes/improvement/strategies/policy4_baseline.cpp": {
+      "sha256": "a524195683fc0fb2aa4815faed12a0fea37df66dc6c4bdb1ffbf53de8d0e8ae3"
+    },
+    "results/pipes/improvement/strategies/binaries/policy4_baseline": {
+      "sha256": "fee43fb4630cd2a09ce58eb112de6e213bf12d4c619bb4a98ca27bcecd79f3db"
+    },
+    "results/pipes/improvement/strategies/binaries/recent_unfit_s50": {
+      "sha256": "5c9efebc85b11d7b176ffe77a9ac002d58a78debfd045d535249a65ff2bd2e93"
+    },
+    "tools/interactor": {
+      "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+    },
+    "tools/pipes_harness.py": {
+      "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d"
+    }
+  },
+  "inputs_sha256": {
+    "data/pipes/open/1.in": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+    "data/pipes/open/10.in": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+    "data/pipes/open/11.in": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "data/pipes/open/12.in": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+    "data/pipes/open/13.in": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+    "data/pipes/open/14.in": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+    "data/pipes/open/15.in": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+    "data/pipes/open/2.in": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+    "data/pipes/open/3.in": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+    "data/pipes/open/4.in": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+    "data/pipes/open/5.in": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+    "data/pipes/open/6.in": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+    "data/pipes/open/7.in": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+    "data/pipes/open/8.in": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+    "data/pipes/open/9.in": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+    "data/pipes/synthetic/development/high-churn.in": "8ef0cbf49ef2797134070f5f69a3aa79ecbcd56d4eacbfb242cdad45624a113d",
+    "data/pipes/synthetic/development/long-heavy.in": "1da1dbfc55191b23cc83df486619f27d10090393de209adcf9b91ed3566355f3",
+    "data/pipes/synthetic/development/short-heavy.in": "9599429ab80c6368751bfc2ceaca8e46709eb1799cc2772102e994bb6eb80198",
+    "data/pipes/synthetic/development/uniform.in": "a8e9d056046bbb90d936b0c863eab67bb5c26fdbeaa7bbac4a5ce20a11a060c6"
+  },
+  "runs": {
+    "open": {
+      "p4": {
+        "summary_path": "results/pipes/improvement/transition_model/runs/open/p4/summary.json",
+        "case_count": 15,
+        "ok_count": 15,
+        "weighted_score_sum": 28.375837599373007,
+        "weight_sum": 32.1,
+        "total_judge_commands_including_terminators": 280171,
+        "max_solver_cpu_s": 0.870374,
+        "max_solver_rss_mib": 4.796875
+      },
+      "s50": {
+        "summary_path": "results/pipes/improvement/transition_model/runs/open/s50/summary.json",
+        "case_count": 15,
+        "ok_count": 15,
+        "weighted_score_sum": 28.93945894026516,
+        "weight_sum": 32.1,
+        "total_judge_commands_including_terminators": 280171,
+        "max_solver_cpu_s": 1.038546,
+        "max_solver_rss_mib": 5.0
+      },
+      "transition": {
+        "summary_path": "results/pipes/improvement/transition_model/runs/open/transition/summary.json",
+        "case_count": 15,
+        "ok_count": 15,
+        "weighted_score_sum": 28.340907851396324,
+        "weight_sum": 32.1,
+        "total_judge_commands_including_terminators": 280171,
+        "max_solver_cpu_s": 0.858641,
+        "max_solver_rss_mib": 5.921875
+      }
+    },
+    "development": {
+      "p4": {
+        "summary_path": "results/pipes/improvement/transition_model/runs/development/p4/summary.json",
+        "case_count": 4,
+        "ok_count": 4,
+        "weighted_score_sum": 1.870543569789272,
+        "weight_sum": 4.0,
+        "total_judge_commands_including_terminators": 100004,
+        "max_solver_cpu_s": 0.151879,
+        "max_solver_rss_mib": 1.859375
+      },
+      "s50": {
+        "summary_path": "results/pipes/improvement/transition_model/runs/development/s50/summary.json",
+        "case_count": 4,
+        "ok_count": 4,
+        "weighted_score_sum": 1.853025396524615,
+        "weight_sum": 4.0,
+        "total_judge_commands_including_terminators": 100004,
+        "max_solver_cpu_s": 0.154667,
+        "max_solver_rss_mib": 1.875
+      },
+      "transition": {
+        "summary_path": "results/pipes/improvement/transition_model/runs/development/transition/summary.json",
+        "case_count": 4,
+        "ok_count": 4,
+        "weighted_score_sum": 1.870543569789272,
+        "weight_sum": 4.0,
+        "total_judge_commands_including_terminators": 100004,
+        "max_solver_cpu_s": 0.133019,
+        "max_solver_rss_mib": 1.859375
+      }
+    }
+  },
+  "evaluation_caveat": "The four data/pipes/synthetic/development inputs are previously used development data, not independent validation. No holdout-v2 data was used."
+}

@@ -1,0 +1,155 @@
+{
+  "cases": [
+    {
+      "name": "sealed_00_0_recent_growth_shift",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_00_0_recent_growth_shift.in",
+      "sha256": "1e6f2c2f2da82292fb07f5828754cd2d9a3e4a7a9a5cbdc53787d606fb994284"
+    },
+    {
+      "name": "sealed_00_1_recent_growth_shift",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_00_1_recent_growth_shift.in",
+      "sha256": "961f116ba3a0c1d78bee88b58dbe82c595a8580a2f230c57399268b66257df17"
+    },
+    {
+      "name": "sealed_01_0_recent_stationary",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_01_0_recent_stationary.in",
+      "sha256": "432a92b2d1ed09afb7c984dc6614b107ab8c773e0cc325b7c3003d9ab0cbbfa1"
+    },
+    {
+      "name": "sealed_01_1_recent_stationary",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_01_1_recent_stationary.in",
+      "sha256": "683c3cb68270fb868bcd49e419e3102561ba0b3a760066194fb7b2b0c1015601"
+    },
+    {
+      "name": "sealed_02_0_fifo_size_drift",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_02_0_fifo_size_drift.in",
+      "sha256": "472175f301f214a31195d259c24ed081206304afa1cda0d9f3a8b128fa10631a"
+    },
+    {
+      "name": "sealed_02_1_fifo_size_drift",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_02_1_fifo_size_drift.in",
+      "sha256": "753ab1785e7f534af0921a959be6aaf1af8b1e19accdd86d09184cad9f1a51ac"
+    },
+    {
+      "name": "sealed_03_0_random_mixture",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_03_0_random_mixture.in",
+      "sha256": "7868e04200acec73151e061aec58cfe14b27640e22931c7a250cf9ce2a9fdb0b"
+    },
+    {
+      "name": "sealed_03_1_random_mixture",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_03_1_random_mixture.in",
+      "sha256": "e48305c1a6f128dfdb3e8d96f0fe32d246bc368188a4f56eb7ba458444a04ea0"
+    },
+    {
+      "name": "sealed_04_0_cohort_release",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_04_0_cohort_release.in",
+      "sha256": "091c3ac71b89b649413b89439d9f9255dfbc7e11dc39f4c07ae65043f86208e9"
+    },
+    {
+      "name": "sealed_04_1_cohort_release",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_04_1_cohort_release.in",
+      "sha256": "68974be96b05a84cd283e9e367605c6bb79d9bdd494267c661244cb0d0ef0d0d"
+    },
+    {
+      "name": "sealed_05_0_repeated_sizes",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_05_0_repeated_sizes.in",
+      "sha256": "bdb77f61a262dd4f334927cd0908ad72092462550170a0234abba3c1670380fc"
+    },
+    {
+      "name": "sealed_05_1_repeated_sizes",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/sealed/sealed_05_1_repeated_sizes.in",
+      "sha256": "792e784b131e071b3abe4c412110559f4b9cdd563532564e6ea42a7c6002de07"
+    },
+    {
+      "name": "sealed_00_recent_geometric",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_00_recent_geometric.in",
+      "sha256": "795f04608629038e3d945f3098f78505c19ef516090192089a83332b343f4b77"
+    },
+    {
+      "name": "sealed_01_recent_geometric",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_01_recent_geometric.in",
+      "sha256": "eded1db098f1286e7f949ce9bd9395019836ab9e09f30960eea6d09db94374f7"
+    },
+    {
+      "name": "sealed_02_recent_geometric",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_02_recent_geometric.in",
+      "sha256": "46b2f177e61b761bf6f8d7ffb2901d42d309a18df7b8d352c0c63b2f9f022c23"
+    },
+    {
+      "name": "sealed_03_recent_geometric",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_03_recent_geometric.in",
+      "sha256": "e475abd6aa9bce55cea42d95b0f39f33a58e89247d45a37801f4e8ada9df7d58"
+    },
+    {
+      "name": "sealed_04_old_tail_mix",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_04_old_tail_mix.in",
+      "sha256": "e6c33034875c0832a58e99b2046bf11699fa5ffee724eac23535bf0fba622683"
+    },
+    {
+      "name": "sealed_05_old_tail_mix",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_05_old_tail_mix.in",
+      "sha256": "23f3fe434684f4c129c31eb027b74f39806d1c4e12cddbb31dd06c1c6ab15ec7"
+    },
+    {
+      "name": "sealed_06_old_tail_mix",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_06_old_tail_mix.in",
+      "sha256": "ba689c445c43b863b05aea6ebeb7982d11264cdfca07561ee903ce504dc47d5b"
+    },
+    {
+      "name": "sealed_07_old_tail_mix",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_07_old_tail_mix.in",
+      "sha256": "d8d94fc0e46fc374549850f603046385bf21870543b967c65f891f3c3a2d7cd4"
+    },
+    {
+      "name": "sealed_08_recent_uniform",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_08_recent_uniform.in",
+      "sha256": "9d4a52668eb256d45b4500e1638917804e8f7a16d8e9e5791fc8c85587c7b81b"
+    },
+    {
+      "name": "sealed_09_recent_uniform",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_09_recent_uniform.in",
+      "sha256": "279471560b2aeddaff55ac33d655afe3785dae794cfb5ad57099b728146e98b3"
+    },
+    {
+      "name": "sealed_10_recent_uniform",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_10_recent_uniform.in",
+      "sha256": "d6ec3c6a35ae391dc8267e4df118b511037e67b6d10c842d71d8d09d491379f7"
+    },
+    {
+      "name": "sealed_11_recent_uniform",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_sealed/sealed_11_recent_uniform.in",
+      "sha256": "362d775e2ace139d86118668e6d3d68b8b3155ec80cb3c7f880217ec065264cc"
+    },
+    {
+      "name": "large_sealed_00",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_sealed/large_sealed_00.in",
+      "sha256": "ac7b5c72b224d46633de0e41339fb21af3b2f0508f5a46102cd0346a9162879c"
+    },
+    {
+      "name": "large_sealed_01",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_sealed/large_sealed_01.in",
+      "sha256": "69ca410ac1fac156754ff2b109ae782bfa0d39d266a5f97e08c897676025c1b2"
+    },
+    {
+      "name": "large_sealed_02",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_sealed/large_sealed_02.in",
+      "sha256": "1340522c85e3a553a7f2c1b2ce5d0b5cfa42bb4836fc5d5f93a5f08430f6752e"
+    },
+    {
+      "name": "large_sealed_03",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_sealed/large_sealed_03.in",
+      "sha256": "b4832a0606c5bf7c56b38a4d284e9aba94a6c89c967fd4208593af9695949b33"
+    },
+    {
+      "name": "large_sealed_04",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_sealed/large_sealed_04.in",
+      "sha256": "261f50e7f5abae706b7b2fa35e01b349b29a649ac31e70e11c2c523fe9942975"
+    },
+    {
+      "name": "large_sealed_05",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_sealed/large_sealed_05.in",
+      "sha256": "0faeb3f978372f69f746eb3f54fb802d491cc01a8bba222896ea470a113e5aa0"
+    }
+  ],
+  "kind": "fresh heldout generated after candidate freeze; evaluate once"
+}

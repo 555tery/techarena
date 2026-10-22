@@ -1,0 +1,38 @@
+{
+  "baseline": "candidate-borrows/solution.cj",
+  "baseline_sha256": "ee12e7ee8cf506eacbe3558e218af92c6f7a76a13f74604aa49706cbe2d5a8d0",
+  "source_sha256": "1d905fadb9a91a222b62ed4732b286626a257fc73cb11416f5f18342df08e710",
+  "generator_sha256": "3a855c92053294b60d298fd696126b87df07bce59ad55159ac9700c3a1e49eed",
+  "changed_class": "FastKeyVector only",
+  "source_outside_class_byte_identical": true,
+  "layout": "data[3*i]=a, data[3*i+1]=b, data[3*i+2]=c; capacity and size count keys",
+  "API": [
+    "size",
+    "checked key getter/setter",
+    "add",
+    "remove(at:) last only",
+    "independent clone"
+  ],
+  "ownership": [
+    "One private pointer owner per FastKeyVector; constructor allocates48 Int64 cells for16 keys.",
+    "Resize allocates3*newCapacity cells, copies exactly3*used initialized cells, commits new pointer/capacity, then frees old allocation once.",
+    "Null allocation or capacity overflow throws before pointer/size changes. No other operation between allocation and commit has an expected throwing path for validated indices.",
+    "Finalizer frees only current pointer; no pointer is exposed, shared with another owner, pinned, or manually closed.",
+    "Clone constructs a distinct owner and appends the same three numeric fields for every logical entry; keys at vacant node IDs and sentinel are included."
+  ],
+  "bounds": [
+    "Getter/setter each check0<=index<used once before accessing allthree cells.",
+    "Invariant0<=used<=capacity<=Int64.Max/3 makes3*index+2 and3*used safe. add reserves first, writes three cells, then increments used.",
+    "Resize checks capacity*2 and expandedCapacity*3 separately before multiplication; typed malloc additionally checks native byte-count overflow.",
+    "remove verifies nonempty and at==used-1 once, reads a/b/c, decrements used and zeros exactly the removed triple. Other removal positions are rejected as before."
+  ],
+  "semantic_proof": "The old three columns and new triple layout implement the same indexed Key sequence and deep-clone behavior. Both AVL classes and every other source byte remain unchanged, so node geometry, stable indices, comparison fields, iteration and decisions are preserved conditional on successful allocation.",
+  "windows_105": "Uses the same stdlib LibC.malloc/free, CPointer<Int64> read/write and finalizer constructs already present in the source. No OS-specific API or raw managed-array pointer; typed malloc guards32-bit as well as64-bit native-size overflow. Actual Windows compiler/runtime parity remains untested here.",
+  "caveats": [
+    "Native memory remains outside managed-heap telemetry and inside process RSS; same total Int64 payload capacity, fewer owners/allocations.",
+    "Private FastIntVector.reserveForAdd comment still mentions former columns, but FastIntVector itself is deliberately untouched.",
+    "Compiler1.0.5 compatibility, FP/response parity and CPU/RSS require parent measurement."
+  ],
+  "compile_executed": false,
+  "solver_executed": false
+}

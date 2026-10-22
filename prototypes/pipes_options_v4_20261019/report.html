@@ -1,0 +1,103 @@
+<!doctype html><meta charset="utf-8"><title>Own trajectories + options</title><style>body{font:16px system-ui;max-width:1200px;margin:40px auto;padding:0 18px;color:#192638;background:#f5f7fa}table{border-collapse:collapse;background:white;width:100%;margin:20px 0}td,th{padding:8px;border-bottom:1px solid #ddd;text-align:right}th:first-child{text-align:left}pre{white-space:pre-wrap;background:white;padding:16px}.card{background:#e4edf8;padding:20px;border-radius:12px}</style><h1>Обучение на собственных траекториях и согласованные действия</h1><p class="card">Кандидат отклонён: финальное среднее не выше BF.</p><p>Три фиксированных раунда: BF → M1 → M2 → M3. Финальная версия всегда M3. Стратегия удерживается четыре укладки; удаления не расходуют этот срок. Четвёртая стратегия: первая укладка BF слева, три следующих BF справа. На точном диагностическом примере она даёт 20 м вместо 40 м. Рабочий solver не видит будущих команд.</p><p>Контроль bf_rollin обучен на тех же 96 входах и с тем же рецептом, но только на состояниях BF. no_hold использует веса M3 и выбирает стратегию на каждой укладке; anchored-стратегия при этом вырождается в BF слева. Это диагностическая абляция, не отдельно обученный конкурент. За пределами 12 живых труб или 160 м все обученные политики возвращаются к BF.</p><h2>Среднее F/T</h2><p>Final: 64 новых потока, 8 механизмов × 2 начала × 4 продолжения. Четыре механизма отсутствовали в обучении. Ещё четыре потока по 200 000 команд проверяют ресурсы и не входят в среднее. Seeds получены после freeze; параметры по final не менялись.</p><table><tr><th>Срез</th><th>candidate</th><th>bf_rollin</th><th>no_hold</th><th>bf</th><th>ss</th><th>trial22</th></tr><tr><th>dev</th><td>0.621943</td><td>0.624439</td><td>0.621943</td><td>0.621943</td><td>0.621327</td><td>0.603420</td></tr><tr><th>final</th><td>0.666171</td><td>0.668737</td><td>0.665104</td><td>0.670511</td><td>0.666879</td><td>0.661455</td></tr></table><table><tr><th>Срез</th><th>candidate</th><th>bf_rollin</th><th>no_hold</th><th>bf</th><th>ss</th><th>trial22</th></tr><tr><th>alternating_support</th><td>0.777617</td><td>0.777617</td><td>0.777617</td><td>0.777617</td><td>0.777617</td><td>0.777617</td></tr><tr><th>anchors</th><td>0.558234</td><td>0.554414</td><td>0.549692</td><td>0.558234</td><td>0.544953</td><td>0.544045</td></tr><tr><th>bursts</th><td>0.835732</td><td>0.835732</td><td>0.835732</td><td>0.835732</td><td>0.831039</td><td>0.824513</td></tr><tr><th>bursty_lengths</th><td>0.754118</td><td>0.788832</td><td>0.754118</td><td>0.788832</td><td>0.782192</td><td>0.782192</td></tr><tr><th>complements</th><td>0.659872</td><td>0.659872</td><td>0.659872</td><td>0.659872</td><td>0.651905</td><td>0.652242</td></tr><tr><th>renewal</th><td>0.556834</td><td>0.556834</td><td>0.556834</td><td>0.556834</td><td>0.556834</td><td>0.545227</td></tr><tr><th>ring_queue</th><td>0.626867</td><td>0.626867</td><td>0.626867</td><td>0.626867</td><td>0.626867</td><td>0.619754</td></tr><tr><th>size_survival</th><td>0.560097</td><td>0.549727</td><td>0.560097</td><td>0.560097</td><td>0.563630</td><td>0.546056</td></tr></table><table><tr><th>Срез</th><th>candidate</th><th>bf_rollin</th><th>no_hold</th><th>bf</th><th>ss</th><th>trial22</th></tr><tr><th>drain</th><td>0.349676</td><td>0.353025</td><td>0.346343</td><td>0.353025</td><td>0.353025</td><td>0.351462</td></tr><tr><th>early_stop</th><td>0.621629</td><td>0.628996</td><td>0.620692</td><td>0.628996</td><td>0.628996</td><td>0.622746</td></tr><tr><th>growth</th><td>0.945422</td><td>0.945422</td><td>0.945422</td><td>0.945422</td><td>0.938782</td><td>0.923812</td></tr><tr><th>size_shift</th><td>0.747957</td><td>0.747505</td><td>0.747957</td><td>0.754600</td><td>0.746716</td><td>0.747802</td></tr></table><h2>Что удалось и где возник проигрыш</h2><p>Собственные траектории действительно менялись: 18 из 32 потоков второго раунда и 3 из 32 третьего отличались от BF. Однако M3 выучила лишь одно переключение на BF справа и не выбирает последовательность «слева, затем справа». В 533 из 590 размеченных состояний варианты имели одинаковую оценку; имеется только 300 групп наблюдаемых состояний.</p><p>Все четыре финальных проигрыша BF — на новом механизме bursty_lengths: +20, +20, +40 и +20 м. Это ветви двух общих префиксов. Два выигрыша удержания над hold1 — ветви одного anchors-префикса; обе лишь возвращают результат BF. На обучающих механизмах M3 совпала с BF по итоговому F/T на всех 32 новых потоках. На четырёх новых механизмах средняя разность к BF −0.008679.</p><p>Это отрицательный результат конкретного малого пилота, а не опровержение обучения на собственных траекториях или согласованных действий вообще. Всего два начала на механизм, а обученная политика работает лишь при ≤12 живых трубах и ≤160 м траншеи. Длинные ресурсные проверки преимущественно исполняют BF fallback.</p><h2>Парные результаты</h2><pre>{
+  &quot;bf_rollin&quot;: {
+    &quot;wins&quot;: 2,
+    &quot;losses&quot;: 4,
+    &quot;ties&quot;: 58,
+    &quot;mean_delta&quot;: -0.0025656244226351134,
+    &quot;worst_delta&quot;: -0.11785714285714285,
+    &quot;mean_extra_trench_m&quot;: 0.625
+  },
+  &quot;no_hold&quot;: {
+    &quot;wins&quot;: 2,
+    &quot;losses&quot;: 0,
+    &quot;ties&quot;: 62,
+    &quot;mean_delta&quot;: 0.0010677083333333333,
+    &quot;worst_delta&quot;: 0.0,
+    &quot;mean_extra_trench_m&quot;: -0.625
+  },
+  &quot;bf&quot;: {
+    &quot;wins&quot;: 0,
+    &quot;losses&quot;: 4,
+    &quot;ties&quot;: 60,
+    &quot;mean_delta&quot;: -0.004339264251373627,
+    &quot;worst_delta&quot;: -0.11785714285714285,
+    &quot;mean_extra_trench_m&quot;: 1.5625
+  },
+  &quot;ss&quot;: {
+    &quot;wins&quot;: 3,
+    &quot;losses&quot;: 4,
+    &quot;ties&quot;: 57,
+    &quot;mean_delta&quot;: -0.0007081283608317655,
+    &quot;worst_delta&quot;: -0.11785714285714285,
+    &quot;mean_extra_trench_m&quot;: 0.3125
+  },
+  &quot;trial22&quot;: {
+    &quot;wins&quot;: 11,
+    &quot;losses&quot;: 6,
+    &quot;ties&quot;: 47,
+    &quot;mean_delta&quot;: 0.004715810119928745,
+    &quot;worst_delta&quot;: -0.11785714285714285,
+    &quot;mean_extra_trench_m&quot;: -0.9375
+  }
+}</pre><h2>Активация и ресурсы</h2><pre>{
+  &quot;activity&quot;: {
+    &quot;candidate&quot;: {
+      &quot;placements&quot;: 414038,
+      &quot;decisions&quot;: 702,
+      &quot;non_bf_options&quot;: 17,
+      &quot;continuation_placements&quot;: 2003,
+      &quot;changes&quot;: 61,
+      &quot;cancellations&quot;: 29,
+      &quot;active_crossed_deletions&quot;: 1619
+    },
+    &quot;bf_rollin&quot;: {
+      &quot;placements&quot;: 414038,
+      &quot;decisions&quot;: 701,
+      &quot;non_bf_options&quot;: 12,
+      &quot;continuation_placements&quot;: 1997,
+      &quot;changes&quot;: 26,
+      &quot;cancellations&quot;: 31,
+      &quot;active_crossed_deletions&quot;: 1611
+    },
+    &quot;no_hold&quot;: {
+      &quot;placements&quot;: 414038,
+      &quot;decisions&quot;: 1939,
+      &quot;non_bf_options&quot;: 43,
+      &quot;continuation_placements&quot;: 0,
+      &quot;changes&quot;: 37,
+      &quot;cancellations&quot;: 0,
+      &quot;active_crossed_deletions&quot;: 0
+    }
+  },
+  &quot;resources&quot;: {
+    &quot;candidate&quot;: {
+      &quot;max_cpu_s&quot;: 0.750184,
+      &quot;max_rss_MiB&quot;: 8.09375
+    },
+    &quot;bf_rollin&quot;: {
+      &quot;max_cpu_s&quot;: 0.742777,
+      &quot;max_rss_MiB&quot;: 8.140625
+    },
+    &quot;no_hold&quot;: {
+      &quot;max_cpu_s&quot;: 0.7660629999999999,
+      &quot;max_rss_MiB&quot;: 8.15625
+    },
+    &quot;bf&quot;: {
+      &quot;max_cpu_s&quot;: 0.926241,
+      &quot;max_rss_MiB&quot;: 2.640625
+    },
+    &quot;ss&quot;: {
+      &quot;max_cpu_s&quot;: 1.0644740000000001,
+      &quot;max_rss_MiB&quot;: 2.796875
+    },
+    &quot;trial22&quot;: {
+      &quot;max_cpu_s&quot;: 1.271681,
+      &quot;max_rss_MiB&quot;: 10.25
+    }
+  },
+  &quot;audit&quot;: {
+    &quot;replayed&quot;: 408,
+    &quot;matched_prefix_comparisons&quot;: 288,
+    &quot;passed&quot;: true
+  }
+}</pre><p>Две обучающие контрольные серии первоначально получили по два пустых native report, затем по 94 пропуска. Повтор на тех же 96 входах и неизменных solver/checker binaries прошёл полностью. Исходные отчёты сохранены; причина раннего завершения checker не установлена. Всего 912 успешных проверок, отдельно 4 неуспешных старта checker и 188 пропущенных резервов; лимит 1120 не превышен. Независимо воспроизведены 408 финальных ответных траекторий, проверены 288 совпадений общих префиксов и 24 точных повтора.</p><h2>Следующая гипотеза, пока без запуска</h2><p>Оценивать option при продолжении текущей causal policy по нескольким возможным будущим, отдельно контролируя потери относительно BF. Это проверило бы оставшееся расхождение: нынешний teacher после первого блока снова оптимизирует будущее, а исполнять его должен ограниченный student. Собственные состояния исправляют только часть этого расхождения. Для следующей проверки нужны новые final seeds; текущий final уже использован.</p><p>Все результаты относятся к этой ограниченной синтетике. Open15, старый validation и платформа не использовались; trial22 сохранён. Никакой автоматической замены конкурсного решения.</p><p><a href="results.json">Полные результаты и аудит</a> · <a href="protocol.json">Протокол</a> · <a href="freeze.json">Hashes источников и моделей</a> · <a href="completion.json">Завершение и лимит</a></p>

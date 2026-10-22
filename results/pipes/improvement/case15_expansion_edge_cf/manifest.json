@@ -1,0 +1,249 @@
+{
+  "experiment": "Case15 causal expansion slack offset with active-count scale gate",
+  "date_local": "2026-10-17",
+  "scope": "Local replay/interactor only; no platform or Docker; canonical and frozen final unchanged.",
+  "baseline": {
+    "source": "results/pipes/improvement/case5_additive_next_alignment_20261017/src/staircase_plus_additive_next_alignment.cpp",
+    "source_sha256": "4c3a3590eb1ad4251640af32f10f7e5b506b8cfac8ee6b9d0edaa6d4e231caae",
+    "binary": "results/pipes/improvement/case5_additive_next_alignment_20261017/bin/staircase_plus_additive_next_alignment",
+    "binary_sha256": "ca885fb8869514ab494502e2ee517cfb4d716d9d55c9d291aa9c1b4126544838",
+    "open15_run": "results/pipes/improvement/case5_additive_next_alignment_20261017/runs/AB_open15",
+    "open15_cases_sha256": "973d51007fce7d0977ce40f696d2c8efffd8204360170469e06efb3065260957",
+    "open15_summary_sha256": "63305f0402b50a3df9f550aac70d7afd020ee25a098bd5874c9e98b2ec8897cb",
+    "open15_score": 30.04308919953782
+  },
+  "candidate": {
+    "source": "results/pipes/improvement/case15_expansion_edge_cf/source/lifo_young_offset_scale_gt4096.cpp",
+    "source_sha256": "a280146cdc55c0fe8fbb6d4b7fda158f4e2189fa3463ce9d046f02a070a3571a",
+    "binary": "results/pipes/improvement/case15_expansion_edge_cf/bin/lifo_young_offset_scale_gt4096",
+    "binary_sha256": "af9110515fb0d814956f00925f2e4126f9d7abdcd5d1d08806e3fe6ee50f292c",
+    "build": "clang++ -std=c++20 -O2 -DNDEBUG -Wall -Wextra -Werror -pedantic -DMC_ROLLOUT_DIAGNOSTICS",
+    "policy": "At an expansion with positive slack, offset to the right edge only if activePipeCount > 4096, >=48 recent deletion ranks have >=80% in the newest 5%, >=90% of recent placement lengths are <=8m, and the touching left neighbor is in the newest 5% by PID rank."
+  },
+  "rules": {
+    "dig_required": true,
+    "post_dig_slack_positive": true,
+    "active_pipe_count_strictly_greater_than": 4096,
+    "lifo_rank_observations_min": 48,
+    "lifo_rank_window_max": 64,
+    "lifo_rank_permille_max": 50,
+    "lifo_rank_fraction_min": 0.8,
+    "young_neighbor_rank_permille_max": 50,
+    "short_recent_length_fraction_min": 0.9,
+    "recent_length_max_m": 8,
+    "recent_length_window_max": 2048
+  },
+  "open15": {
+    "candidate_run": "results/pipes/improvement/case15_expansion_edge_cf/runs/scale_gt4096_open15",
+    "baseline_score": 30.04308919953782,
+    "candidate_score": 30.044966194731057,
+    "delta_score": 0.0018769951932355866,
+    "ok_cases": 15,
+    "max_solver_cpu_s": 2.248566,
+    "max_solver_rss_mib": 9.09375,
+    "changed_cases": [
+      {
+        "case": 14,
+        "baseline_trench_m": 37820,
+        "candidate_trench_m": 37860,
+        "delta_trench_m": 40,
+        "baseline_weighted_score": 3.987731359069275,
+        "candidate_weighted_score": 3.983518225039619
+      },
+      {
+        "case": 15,
+        "baseline_trench_m": 438920,
+        "candidate_trench_m": 438640,
+        "delta_trench_m": -280,
+        "baseline_weighted_score": 9.54062243689055,
+        "candidate_weighted_score": 9.546712566113442
+      }
+    ],
+    "gate_counts": {
+      "case14": "mc_decisions=32 mc_rollouts=768 expansion_gate_opportunities=1762 expansion_gate_passes=439",
+      "case15": "mc_decisions=32 mc_rollouts=1020 expansion_gate_opportunities=17639 expansion_gate_passes=11259"
+    },
+    "input_sha256": {
+      "1": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+      "2": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+      "3": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "4": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+      "5": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+      "6": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "7": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+      "8": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+      "9": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+      "10": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+      "11": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+      "12": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+      "13": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+      "14": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+      "15": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    },
+    "baseline_answer_sha256": {
+      "1": "0c17f2e9efc8a8f9a376c8bd7f26d940ee3fe78feacc07dac0608b508b63590d",
+      "2": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2",
+      "3": "14f51309b18138cfc8c504ebeb4bf9f136d509fe4af3a83d917b408f1f74264d",
+      "4": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b",
+      "5": "75dd1889ccbf61730c62edfc0f96a56dbf0eb4037f91404d4a3cbe3f15e8682a",
+      "6": "c44b9007a27cf242dd34a06e4b0bafa2bfa5570e70cebc7ffa578f5505c96b05",
+      "7": "e93d243bb723f5c4d3951824be0d63cc283607cf0422fe3a6ccd8db289ce8979",
+      "8": "a86800267292840409a96208bfeeb69c2eb787b30cdbed16e34b4199345c3cad",
+      "9": "f0a354503ed638dea12d973f68e8878a3dbeb16c267e70285f1cc85445b63950",
+      "10": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03",
+      "11": "36ad5e3a34ca42366b95adcc3f7f93c5917de0935fa511fee68322e6905f9bf9",
+      "12": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e",
+      "13": "e5da020ce8a522213ae26acc8d03d03b4dbf657a767f9eeba4503a2740f55ef6",
+      "14": "a8dfb6dc9d17d6ddbbb36d673ecd002170b3137a589f364150c5d73ef932ac2a",
+      "15": "a5951afda72f935b35b05e3c962a269afe662740a9adf2c15670f8db55b337c4"
+    },
+    "candidate_answer_sha256": {
+      "1": "0c17f2e9efc8a8f9a376c8bd7f26d940ee3fe78feacc07dac0608b508b63590d",
+      "2": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2",
+      "3": "14f51309b18138cfc8c504ebeb4bf9f136d509fe4af3a83d917b408f1f74264d",
+      "4": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b",
+      "5": "75dd1889ccbf61730c62edfc0f96a56dbf0eb4037f91404d4a3cbe3f15e8682a",
+      "6": "c44b9007a27cf242dd34a06e4b0bafa2bfa5570e70cebc7ffa578f5505c96b05",
+      "7": "e93d243bb723f5c4d3951824be0d63cc283607cf0422fe3a6ccd8db289ce8979",
+      "8": "a86800267292840409a96208bfeeb69c2eb787b30cdbed16e34b4199345c3cad",
+      "9": "f0a354503ed638dea12d973f68e8878a3dbeb16c267e70285f1cc85445b63950",
+      "10": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03",
+      "11": "36ad5e3a34ca42366b95adcc3f7f93c5917de0935fa511fee68322e6905f9bf9",
+      "12": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e",
+      "13": "e5da020ce8a522213ae26acc8d03d03b4dbf657a767f9eeba4503a2740f55ef6",
+      "14": "480a58f0a756aa1d873a9090fa45d36c9caad916c8df598a8d0b4ce6311d64fb",
+      "15": "910f1a9e96935977d7aa2fc5676b5d3896184510d0ae8c65d66a2887c14b0625"
+    }
+  },
+  "case15": {
+    "baseline_trench_m": 438920,
+    "candidate_trench_m": 438640,
+    "candidate_kpi": 0.9546712566113441,
+    "solver_cpu_s": 2.248566,
+    "solver_rss_mib": 9.09375,
+    "run": "results/pipes/improvement/case15_expansion_edge_cf/runs/scale_gt4096_case15",
+    "answer_sha256": "910f1a9e96935977d7aa2fc5676b5d3896184510d0ae8c65d66a2887c14b0625"
+  },
+  "fresh_synthetics": {
+    "baseline_run": "results/pipes/improvement/case15_expansion_edge_cf/runs/scale_gt4096_fresh4_baseline",
+    "candidate_run": "results/pipes/improvement/case15_expansion_edge_cf/runs/scale_gt4096_fresh4_candidate",
+    "baseline_score": 3.331724446235643,
+    "candidate_score": 3.331724446235643,
+    "records": [
+      {
+        "name": "fresh_long_fifo",
+        "input": "results/pipes/improvement/case15_expansion_edge_cf/synthetic/fresh_20261017/fresh_long_fifo.in",
+        "input_sha256": "16ba6cfe25078bdd213846dbb31f0ccabee5f2ea0a6e2db9f655e56603fd2a3d",
+        "baseline_trench_m": 421600,
+        "candidate_trench_m": 421600,
+        "delta_trench_m": 0,
+        "gate_diagnostics": "mc_decisions=32 mc_rollouts=1008 expansion_gate_opportunities=13406 expansion_gate_passes=0",
+        "baseline_answer_sha256": "ae494ad769c87e00d940a749b514ae272be2522c559ca6bd20c6f00c30cc0218",
+        "candidate_answer_sha256": "ae494ad769c87e00d940a749b514ae272be2522c559ca6bd20c6f00c30cc0218"
+      },
+      {
+        "name": "fresh_periodic_shortest",
+        "input": "results/pipes/improvement/case15_expansion_edge_cf/synthetic/fresh_20261017/fresh_periodic_shortest.in",
+        "input_sha256": "4ac1b9f33ab0018a0a23be3b5ef0803ecf462e9722dd28bcce4661943c256d43",
+        "baseline_trench_m": 339620,
+        "candidate_trench_m": 339620,
+        "delta_trench_m": 0,
+        "gate_diagnostics": "mc_decisions=32 mc_rollouts=1116 expansion_gate_opportunities=10091 expansion_gate_passes=0",
+        "baseline_answer_sha256": "a05d1f57b868c93b7c54523dc6ff0c142b9e97bef416f1755f6e653555a8e6b6",
+        "candidate_answer_sha256": "a05d1f57b868c93b7c54523dc6ff0c142b9e97bef416f1755f6e653555a8e6b6"
+      },
+      {
+        "name": "fresh_short_lifo",
+        "input": "results/pipes/improvement/case15_expansion_edge_cf/synthetic/fresh_20261017/fresh_short_lifo.in",
+        "input_sha256": "a91651ab575026deb48942d931cd3472c1a6d35992e45e50eb37e9fb18a64bcc",
+        "baseline_trench_m": 151200,
+        "candidate_trench_m": 151200,
+        "delta_trench_m": 0,
+        "gate_diagnostics": "mc_decisions=32 mc_rollouts=852 expansion_gate_opportunities=5862 expansion_gate_passes=0",
+        "baseline_answer_sha256": "059eb49e5e74de2f56df85abe317c2a90ba6891fef5d305905fb167811e40479",
+        "candidate_answer_sha256": "059eb49e5e74de2f56df85abe317c2a90ba6891fef5d305905fb167811e40479"
+      },
+      {
+        "name": "fresh_uniform_random",
+        "input": "results/pipes/improvement/case15_expansion_edge_cf/synthetic/fresh_20261017/fresh_uniform_random.in",
+        "input_sha256": "a575707a164fb23282faf506f55283441b8410680370816bd99755e099b383f0",
+        "baseline_trench_m": 199380,
+        "candidate_trench_m": 199380,
+        "delta_trench_m": 0,
+        "gate_diagnostics": "mc_decisions=32 mc_rollouts=1032 expansion_gate_opportunities=5582 expansion_gate_passes=0",
+        "baseline_answer_sha256": "4238602e5a10c9396b5c6bdc67b95e61a8b5128e5e5cd95e74f970edff249b02",
+        "candidate_answer_sha256": "4238602e5a10c9396b5c6bdc67b95e61a8b5128e5e5cd95e74f970edff249b02"
+      }
+    ],
+    "interpretation": "All four ties had zero expansion offset gate activations; they do not test the candidate action."
+  },
+  "rejected_screens": {
+    "single_op_counterfactual": {
+      "case15_trench_m": 439340,
+      "baseline_case15_trench_m": 438920,
+      "delta_m": 420,
+      "run": "results/pipes/improvement/case15_expansion_edge_cf/runs/cf_op100146"
+    },
+    "all_tail_offsets": {
+      "case15_trench_m": 439500,
+      "baseline_case15_trench_m": 438920,
+      "delta_m": 580,
+      "run": "results/pipes/improvement/case15_expansion_edge_cf/runs/all_tail_offsets_case15"
+    },
+    "lifo_young_no_scale": {
+      "case15_trench_m": 438640,
+      "case15_delta_m": -280,
+      "open15_score": 29.947231508930027,
+      "run": "results/pipes/improvement/case15_expansion_edge_cf/runs/lifo_young_offset_open15"
+    },
+    "mixed_size_1of8_with_existing_lifo_helper": {
+      "open15_score": 30.04308919953782,
+      "gate_activations": 0,
+      "reason": "Contradictory conditions: existing helper requires >=90% lengths <=8m while mix guard requires >=12.5% >8m."
+    },
+    "mixed_size_1of8_with_rank_only_lifo": {
+      "open15_score": 29.98735099455074,
+      "case14_delta_m": 460,
+      "case15_delta_m": 360,
+      "run": "results/pipes/improvement/case15_expansion_edge_cf/runs/lifo_rank_mix_open15"
+    }
+  },
+  "other_source_hashes": {
+    "case15_counterfactual_source": {
+      "path": "results/pipes/improvement/case15_expansion_edge_cf/source/cf_op100146.cpp",
+      "sha256": "9ac473196ff42233fe18f67a87b2285626f497cbb3b93679e536e63c3afb8db9"
+    },
+    "all_tail_offsets_source": {
+      "path": "results/pipes/improvement/case15_expansion_edge_cf/source/all_tail_offsets.cpp",
+      "sha256": "aae7d225a77e60c97da5b945c5f8d1818adeb1dc05d15fcb5625b51215d09423"
+    },
+    "lifo_young_no_scale_source": {
+      "path": "results/pipes/improvement/case15_expansion_edge_cf/source/lifo_young_offset.cpp",
+      "sha256": "e3f0e6c9717564d8054a631e297ae51b899a95e8c81c207a8695e270fffcb535"
+    },
+    "scale_gt4096_source": {
+      "path": "results/pipes/improvement/case15_expansion_edge_cf/source/lifo_young_offset_scale_gt4096.cpp",
+      "sha256": "a280146cdc55c0fe8fbb6d4b7fda158f4e2189fa3463ce9d046f02a070a3571a"
+    },
+    "scale_mixed_1of8_source": {
+      "path": "results/pipes/improvement/case15_expansion_edge_cf/source/lifo_young_offset_scale_mixed_1of8.cpp",
+      "sha256": "b9a0b553a791abbe7cbefcfebc2ce9af4d2d19fd5acaab31a9126f27d147ea60"
+    },
+    "rank_mix_source": {
+      "path": "results/pipes/improvement/case15_expansion_edge_cf/source/lifo_rank_mix_offset.cpp",
+      "sha256": "fd32829c331c8f0a0a20e49785cfc6915ebaa3f24fd78b5ed959f1445209c881"
+    }
+  },
+  "validation_tools": {
+    "harness": "tools/pipes_harness.py",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor": "results/pipes/final/bin/interactor",
+    "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+  },
+  "artifacts": {
+    "target_summary": "results/pipes/improvement/case15_expansion_edge_cf/runs/scale_gt4096_case15/summary.json",
+    "open15_summary": "results/pipes/improvement/case15_expansion_edge_cf/runs/scale_gt4096_open15/summary.json",
+    "fresh_baseline_summary": "results/pipes/improvement/case15_expansion_edge_cf/runs/scale_gt4096_fresh4_baseline/summary.json",
+    "fresh_candidate_summary": "results/pipes/improvement/case15_expansion_edge_cf/runs/scale_gt4096_fresh4_candidate/summary.json"
+  }
+}

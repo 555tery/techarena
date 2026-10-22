@@ -1,0 +1,230 @@
+{
+  "component_mode": 3,
+  "components": 2817,
+  "component_span": 20760,
+  "T11": 20760,
+  "plan11": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/11.txt",
+  "plan11_sha256": "207d0c02be05ce18877aa6a1a5f3cafc531d0e0fc70df4bc92f815fabff85957",
+  "attempts": [
+    {
+      "method": "conditioned_knapsack",
+      "mode": 2002,
+      "T15": 418820,
+      "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned_knapsack-2002.txt",
+      "sha256": "4f8f47d43cbd301cbf41d046ceb32592889495473aae5e5251ecf04afcfa0523",
+      "replay15": {
+        "commands": 200000,
+        "pipes": 130255,
+        "peak_volume": 418768,
+        "extent": 418812,
+        "T": 418820,
+        "pid1": {
+          "x": 0,
+          "length": 3,
+          "birth": 0,
+          "death": 200000,
+          "immortal": true
+        }
+      },
+      "log": "conditioned_knapsack-2002.log"
+    },
+    {
+      "method": "conditioned_knapsack",
+      "mode": 2000,
+      "T15": 419080,
+      "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned_knapsack-2000.txt",
+      "sha256": "67f7d25ab96d7c071fa7de2ff38ebd9c884ba1e53bed66e611344a4cc39ec0fc",
+      "replay15": {
+        "commands": 200000,
+        "pipes": 130255,
+        "peak_volume": 418768,
+        "extent": 419069,
+        "T": 419080,
+        "pid1": {
+          "x": 0,
+          "length": 3,
+          "birth": 0,
+          "death": 200000,
+          "immortal": true
+        }
+      },
+      "log": "conditioned_knapsack-2000.log"
+    },
+    {
+      "method": "conditioned_knapsack",
+      "mode": 2001,
+      "T15": 418860,
+      "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned_knapsack-2001.txt",
+      "sha256": "18dbb0355a954be8d659f20c0c372d3cf4225e6a64460ec5e9a59e1b35648e8b",
+      "replay15": {
+        "commands": 200000,
+        "pipes": 130255,
+        "peak_volume": 418768,
+        "extent": 418847,
+        "T": 418860,
+        "pid1": {
+          "x": 0,
+          "length": 3,
+          "birth": 0,
+          "death": 200000,
+          "immortal": true
+        }
+      },
+      "log": "conditioned_knapsack-2001.log"
+    },
+    {
+      "method": "conditioned_knapsack",
+      "mode": 2003,
+      "T15": 418860,
+      "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned_knapsack-2003.txt",
+      "sha256": "4f72d6e35caaf9a708717984fbbf97539b7ffe0c313ca8241d314ea861af12d2",
+      "replay15": {
+        "commands": 200000,
+        "pipes": 130255,
+        "peak_volume": 418768,
+        "extent": 418851,
+        "T": 418860,
+        "pid1": {
+          "x": 0,
+          "length": 3,
+          "birth": 0,
+          "death": 200000,
+          "immortal": true
+        }
+      },
+      "log": "conditioned_knapsack-2003.log"
+    },
+    {
+      "method": "conditioned_reverse",
+      "mode": 2,
+      "T15": 418980,
+      "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned_reverse-2.txt",
+      "sha256": "a00fcb73caa953ed5292614d4135e9a4d047eb9dda6de5d27c6b0a6c064b5fa7",
+      "replay15": {
+        "commands": 200000,
+        "pipes": 130255,
+        "peak_volume": 418768,
+        "extent": 418961,
+        "T": 418980,
+        "pid1": {
+          "x": 0,
+          "length": 3,
+          "birth": 0,
+          "death": 200000,
+          "immortal": true
+        }
+      },
+      "log": "conditioned_reverse-2.log"
+    },
+    {
+      "method": "conditioned_reverse",
+      "mode": 3,
+      "T15": 418900,
+      "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned_reverse-3.txt",
+      "sha256": "f7e9c5ca2846700d9f5a0261d77b1af30fc54e7381b74612e3d795ff6cbb5d36",
+      "replay15": {
+        "commands": 200000,
+        "pipes": 130255,
+        "peak_volume": 418768,
+        "extent": 418892,
+        "T": 418900,
+        "pid1": {
+          "x": 0,
+          "length": 3,
+          "birth": 0,
+          "death": 200000,
+          "immortal": true
+        }
+      },
+      "log": "conditioned_reverse-3.log"
+    },
+    {
+      "method": "conditioned_reverse",
+      "mode": 1,
+      "T15": 418860,
+      "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned_reverse-1.txt",
+      "sha256": "d54632ce1ceae081fc94223ec834cae5bf9c22f9998d5859990be6a3129f8bb4",
+      "replay15": {
+        "commands": 200000,
+        "pipes": 130255,
+        "peak_volume": 418768,
+        "extent": 418846,
+        "T": 418860,
+        "pid1": {
+          "x": 0,
+          "length": 3,
+          "birth": 0,
+          "death": 200000,
+          "immortal": true
+        }
+      },
+      "log": "conditioned_reverse-1.log"
+    },
+    {
+      "method": "conditioned_reverse",
+      "mode": 5,
+      "T15": 418840,
+      "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned_reverse-5.txt",
+      "sha256": "d34ba7b7db9d4397e8eb2d8c6fa010426dd0809822bab17d2ff419f816496cc4",
+      "replay15": {
+        "commands": 200000,
+        "pipes": 130255,
+        "peak_volume": 418768,
+        "extent": 418836,
+        "T": 418840,
+        "pid1": {
+          "x": 0,
+          "length": 3,
+          "birth": 0,
+          "death": 200000,
+          "immortal": true
+        }
+      },
+      "log": "conditioned_reverse-5.log"
+    },
+    {
+      "method": "conditioned",
+      "mode": 0,
+      "T15": 418960,
+      "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned-0.txt",
+      "sha256": "4b5b21c77aa25f79a16a90fca490108fe8b73fcc50fa628962da9dd4b1fbf152",
+      "replay15": {
+        "commands": 200000,
+        "pipes": 130255,
+        "peak_volume": 418768,
+        "extent": 418942,
+        "T": 418960,
+        "pid1": {
+          "x": 0,
+          "length": 3,
+          "birth": 0,
+          "death": 200000,
+          "immortal": true
+        }
+      },
+      "log": "conditioned-0.log"
+    }
+  ],
+  "best15": {
+    "method": "conditioned_knapsack",
+    "mode": 2002,
+    "T15": 418820,
+    "plan15": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/ceiling-final/joint-components/mode-3/15-conditioned_knapsack-2002.txt",
+    "sha256": "4f8f47d43cbd301cbf41d046ceb32592889495473aae5e5251ecf04afcfa0523",
+    "replay15": {
+      "commands": 200000,
+      "pipes": 130255,
+      "peak_volume": 418768,
+      "extent": 418812,
+      "T": 418820,
+      "pid1": {
+        "x": 0,
+        "length": 3,
+        "birth": 0,
+        "death": 200000,
+        "immortal": true
+      }
+    },
+    "log": "conditioned_knapsack-2002.log"
+  }
+}

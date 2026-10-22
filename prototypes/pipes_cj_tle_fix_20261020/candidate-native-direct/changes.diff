@@ -1,0 +1,136 @@
+--- candidate-native-dp/solution.cj
++++ candidate-native-direct/solution.cj
+@@ -1275,9 +1275,7 @@
+     public var lifetimeModel = CensoredLifetimeModel()
+     private let causalRequestRate = FastFloatBuffer(41)
+     private let causalGapValue = FastFloatBuffer(1026)
+-    private let dpRateScratch = FastFloatBuffer(41)
+     private let dpRewardScratch = FastFloatBuffer(41)
+-    private let dpValueScratch = FastFloatBuffer(513)
+     public var causalBaseExpiry: Float64 = 0.0
+     public var causalComputedLimit: Int64 = 0
+     public var causalRiskReady = false
+@@ -1663,7 +1661,7 @@
+     public func rebuildPrimalGapValues(maxGap: Int64): Unit {
+         let gapCounts = primalGapCounts
+         let recentRequests = primalRecentRequests
+-        let rate = dpRateScratch
++        let rate = causalRequestRate
+         rate.fill(0.0)
+         var fitting = gapCounts[kPrimalGapValueCap + 1]
+         var gap = kPrimalGapValueCap
+@@ -1673,7 +1671,7 @@
+             gap--
+         }
+         let expiry = 2.0 * Float64(primalRecentDeletes) / Float64(iMax(1, activePipeCount))
+-        let value = dpValueScratch
++        let value = primalGapValue
+         value.fill(0.0)
+         for (g in 1..=maxGap) {
+             let top = iMin(g, 40)
+@@ -1684,15 +1682,15 @@
+                 continue
+             }
+             let reward = dpRewardScratch
+-            reward.fill(0.0)
+             var active: Int64 = 0
+             var numerator: Float64 = 0.0
+             var denominator = expiry
+             for (request in 1..=top) {
+                 let requestRate = rate[request]
+                 if (requestRate == 0.0) { continue }
+-                reward[request] = Float64(request) + value[g - request]
+-                numerator += requestRate * reward[request]
++                let requestReward = Float64(request) + value[g - request]
++                reward[request] = requestReward
++                numerator += requestRate * requestReward
+                 denominator += requestRate
+                 active = active | (1 << request)
+             }
+@@ -1701,11 +1699,15 @@
+                 var removed = false
+                 for (request in 1..=top) {
+                     let bit: Int64 = 1 << request
+-                    if ((active & bit) != 0 && reward[request] < estimate) {
+-                        numerator -= rate[request] * reward[request]
+-                        denominator -= rate[request]
+-                        active = active & (!bit)
+-                        removed = true
++                    if ((active & bit) != 0) {
++                        let rr = reward[request]
++                        if (rr < estimate) {
++                            let requestRate = rate[request]
++                            numerator -= requestRate * rr
++                            denominator -= requestRate
++                            active = active & (!bit)
++                            removed = true
++                        }
+                     }
+                 }
+                 if (!removed) { break }
+@@ -1713,8 +1715,6 @@
+             }
+             value[g] = fMin(fMax(estimate, 0.0), Float64(g))
+         }
+-        primalGapValue.copyFrom(value)
+-        causalRequestRate.copyFrom(rate)
+         causalBaseExpiry = expiry
+         causalComputedLimit = 0
+         causalRiskReady = !parityCohortMode && activePipeCount > kMcMaxActivePipes && expiry > 0.0 &&
+@@ -1736,21 +1736,20 @@
+         let gapValues = causalGapValue
+         gapValues.fill(0.0)
+         for (model in 0..2) {
+-            let value = dpValueScratch
+-            value.fill(0.0)
++            let offset: Int64 = model * 513
+             let expiry = causalBaseExpiry * (if (model == 0) { 0.5 } else { 2.0 })
+             for (gap in 1..=maxGap) {
+                 let top = iMin(gap, 40)
+                 let reward = dpRewardScratch
+-                reward.fill(0.0)
+                 var active: Int64 = 0
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry
+                 for (request in 1..=top) {
+                     let requestRate = requestRates[request]
+                     if (requestRate == 0.0) { continue }
+-                    reward[request] = Float64(request) + value[gap - request]
+-                    numerator += requestRate * reward[request]
++                    let requestReward = Float64(request) + gapValues[offset + gap - request]
++                    reward[request] = requestReward
++                    numerator += requestRate * requestReward
+                     denominator += requestRate
+                     active = active | (1 << request)
+                 }
+@@ -1759,19 +1758,22 @@
+                     var removed = false
+                     for (request in 1..=top) {
+                         let bit: Int64 = 1 << request
+-                        if ((active & bit) != 0 && reward[request] < estimate) {
+-                            numerator -= requestRates[request] * reward[request]
+-                            denominator -= requestRates[request]
+-                            active = active & (!bit)
+-                            removed = true
++                        if ((active & bit) != 0) {
++                            let rr = reward[request]
++                            if (rr < estimate) {
++                                let requestRate = requestRates[request]
++                                numerator -= requestRate * rr
++                                denominator -= requestRate
++                                active = active & (!bit)
++                                removed = true
++                            }
+                         }
+                     }
+                     if (!removed) { break }
+                     estimate = numerator / denominator
+                 }
+-                value[gap] = fMin(fMax(estimate, 0.0), Float64(gap))
+-            }
+-            for (cell in 0..513) { gapValues[model * 513 + cell] = value[cell] }
++                gapValues[offset + gap] = fMin(fMax(estimate, 0.0), Float64(gap))
++            }
+         }
+         causalComputedLimit = maxGap
+     }

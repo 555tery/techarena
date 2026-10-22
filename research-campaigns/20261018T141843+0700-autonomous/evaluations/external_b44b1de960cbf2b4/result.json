@@ -1,0 +1,156 @@
+{
+  "status": "completed",
+  "id": "external_b44b1de960cbf2b4",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/learned_run_prefix/solution.cpp",
+  "sha256": "b44b1de960cbf2b4e9993fcb1d16bba77fd459124507dacb862920e78784e250",
+  "idea": "Learn long same-size runs from completed prefix, then route the next confirmed repeated size earlier.",
+  "parent": "trial_0022",
+  "weighted_score": 30.090967891345112,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438060,
+      "kpi": 0.9559352600100443,
+      "weighted_score": 9.559352600100443
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0005563886894591678,
+    "worst_delta": -0.004395170835634787,
+    "wins": 8,
+    "regressions": 2,
+    "ties": 20,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.0006137592848791673,
+        "baseline_T": 64880,
+        "candidate_T": 64920
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 17640,
+        "candidate_T": 17640
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 21700,
+        "candidate_T": 21700
+      },
+      {
+        "case": "dev_04_fifo_size_drift",
+        "delta": 0.0,
+        "baseline_T": 103520,
+        "candidate_T": 103520
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8093548851610634,
+  "max_cpu_s": 1.179017,
+  "max_rss_mib": 14.625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_b44b1de960cbf2b4/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_b44b1de960cbf2b4/fresh_dev/harness/summary.json",
+  "finished_at": 1792330691.641336,
+  "balanced_gate": true,
+  "hypothesis": "Preserve the existing46-repeat threshold as fallback. If the current request confirms an observed repeat and the two preceding completed insertion-size runs each reached that existing threshold, use the same-size structural route earlier. This is a learned prefix condition, not a threshold sweep. Real allocator and bounded simulator use the exact same causal predicate. Actual future run length/composition is unknown; early evidence can be wrong. No strong-base score improvement measured yet.",
+  "causality": "Only observed past request-size runs or current free-space capacities. No test id, stream N, fingerprint, future command or external state. Frozen parent unchanged, source diff audited, C++20 Wall/Wextra/Werror syntax passed. Structural guards/excavation remain; same full15+30development and CPU/RSS gates. Explicit activation counters distinguish an inactive check from active regression.",
+  "origin": "independent branch inbox"
+}

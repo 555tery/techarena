@@ -1,0 +1,45 @@
+{
+  "candidate": "symmetry-9",
+  "source_sha256": "e1431b877f8f0c27055d9d4d2d39ac056ba49d89bb9117bfc30277176b95e4fb",
+  "binary_sha256": "bad94004856391318a1b04b00121a0b559fd9d49085568054f1622d356b2679e",
+  "frozen_at": "2026-10-19T18:46:51.538741+00:00",
+  "selection": [
+    {
+      "candidate": "symmetry-9",
+      "wins": 9,
+      "ties": 213,
+      "losses": 5,
+      "worst_delta": -0.015176767676767677,
+      "maximum_cpu_s": 2.87,
+      "maximum_rss_mib": 124.09375
+    },
+    {
+      "candidate": "symmetry-9-search",
+      "wins": 9,
+      "ties": 212,
+      "losses": 6,
+      "worst_delta": -0.015176767676767677,
+      "maximum_cpu_s": 2.8800000000000003,
+      "maximum_rss_mib": 124.03125
+    },
+    {
+      "candidate": "mapped-4-10-v2",
+      "wins": 4,
+      "ties": 217,
+      "losses": 6,
+      "worst_delta": -0.07692307692307687,
+      "maximum_cpu_s": 2.8800000000000003,
+      "maximum_rss_mib": 124.28125
+    }
+  ],
+  "selection_gate_passed": false,
+  "reason": "Smallest observed known loss count5; all3 standalone candidates failed the no-regression gate. This freeze is a diagnostic validation, not promotion.",
+  "known_summary_sha256": "60b90a66aa4ede69033cbd69b0d4e793826dc839fe6d82e8807c2c8658370673",
+  "fresh_manifest_sha256": "e1e16b53b57eb95932615e1452a9f7986cde74d42dc09767a68d700efeb84c7b",
+  "fresh_generator_sha256": "8924dabfa1eccc06e810ddea2d1d177925078e707554fa0d4e962732fe1f5efb",
+  "fresh_inputs_opened_by_primary_before_freeze": false,
+  "no_tuning_after_fresh": true,
+  "maximum_open15_expected": 30.75747404826914,
+  "platform_actions": 0,
+  "target_hardware_run": false
+}

@@ -1,0 +1,6 @@
+{
+  "parent_sha256": "1136c5e5e39c6a127f097156ff913de44a9a95111c7c5c6300bad766f952e6f8",
+  "source_sha256": "86fece6427f0a240b37cc6520ce3662b4cebf0839a8b4d95f7cfd3ff76e345db",
+  "proof": "Lexicographic comparison of primitive Int64 triples is antisymmetric; compareAt(node,wanted)=compareKey(wanted,keys[node]). Reverse operand inequalities by reversing their direction; equality and traversal order remain identical.",
+  "changed": "Only the lower and upper comparison predicates in both AVL classes (4 expressions). No FP, tree mutation or ownership change."
+}

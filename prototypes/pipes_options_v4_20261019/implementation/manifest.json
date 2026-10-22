@@ -1,0 +1,21 @@
+{
+  "schema": "pipes-options-v4-implementation-manifest",
+  "source_hashes_sha256": {
+    "Makefile": "273b822f5880472314bd7bcc8887126ba6dddeff21eaa2f1183e44d79744b275",
+    "README.md": "07082045f9752dbf2b4c12501cf5b9c377634255477f1fb1ae5d37994d1fb94e",
+    "allocator.hpp": "ec65465a12d5ac6081e032123b617b2c78b6e9de65eca016fb105abae7d9f4d6",
+    "model.hpp": "2ad9d5c60033b530b1c4dda4de61f2467f640872a8876700f0ebb91836615fd1",
+    "parity.py": "da6429da86b51cdcced39b927714444f0f25f7ae75d3123ff4e3479abaa74246",
+    "policy.hpp": "b198599dd62e7be8cfa87736b701fa7f514b5cde6d4fa6a438a44c2a01be89e4",
+    "probe.cpp": "fa2ab4c53879434e7aa61b5be4e20e30f2ea94e5b49290faa20772b99960f4a0",
+    "smoke.cpp": "6ffd17551c22c67ee8e9ab41dc9a946fedd6993b4c1eab1f432df709c13fd038",
+    "smoke_test.py": "307f6545698c030e8a69a8547f0cc90fd8a876c02ddce24336cac23f1783cc47",
+    "solver.cpp": "164a188cebbb5435d1f007c5150c3099cd4567624ad43f4a2cbd1510d35452c9",
+    "teacher.cpp": "57c123a4295e2caa11c45e9c32c103bd32d8882d35831ab163321827ef9ac259",
+    "train.py": "d5f186a4c3a97564dfb782c0373d9563f58b9429c2711a4c32ea3d6279c74628"
+  },
+  "smoke_report_sha256": "c652200cf6a8e172cce9415d90b1f6ce0737052c34f3c6453053fd4ea792e545",
+  "copied_primitive_source": "prototypes/pipes_hindsight_v3_20261019/implementation/allocator.hpp",
+  "default_model": "untrained-BF",
+  "real_training_or_evaluation": false
+}

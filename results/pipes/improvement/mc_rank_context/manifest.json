@@ -1,0 +1,319 @@
+{
+  "manifest_version": 1,
+  "task": "Single-variable MC suffix-context screen with removal-rank quartiles",
+  "date": "2026-10-17",
+  "prior_experiment_audit": {
+    "finding": "Prior MC reports describe rank-permille in removal history and explicit kind-only matching; no rank-bin conditional context variant was found in the documented MC reports/manifest files reviewed.",
+    "evidence": [
+      {
+        "path": "results/pipes/improvement/max_open_lookahead/bounded_mc/REPORT.md",
+        "line": 64,
+        "sha256": "1012d3f4f586461d78cd63af042e4ef66e62fe0fd574fbcb45bb67e477a08e07"
+      },
+      {
+        "path": "results/pipes/improvement/cohort_owner_mc_corrected_audit/REPORT.md",
+        "line": 51,
+        "sha256": "b1a613351af56e1d65b313583daa41e1e01dceafdf7917cbaac6f814321d255c"
+      },
+      {
+        "path": "results/pipes/final/solution.cpp",
+        "lines": "552-555",
+        "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+      }
+    ]
+  },
+  "baseline_source": {
+    "path": "results/pipes/final/solution.cpp",
+    "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "expected_task_sha": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "unchanged": true
+  },
+  "candidate_source": {
+    "path": "results/pipes/improvement/mc_rank_context/candidate.cpp",
+    "sha256": "5741252812af234de8babaa2b315f89cd9694f2efd15cc4442eebf495c6242c5",
+    "only_change": "observationKeyEqual compares negative-event rank-permille by 4 equal-width bins; insertion length remains exact"
+  },
+  "mc_parameters_unchanged": true,
+  "build": {
+    "command": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic SOURCE.cpp -o BINARY",
+    "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)"
+  },
+  "binaries": {
+    "baseline": {
+      "path": "results/pipes/improvement/mc_rank_context/baseline",
+      "sha256": "ee9ae15f8f4879eaca8da9a0c5fdb1caeb05311893279a4eaf0734c167427290"
+    },
+    "candidate": {
+      "path": "results/pipes/improvement/mc_rank_context/candidate",
+      "sha256": "5a487764d2f8dc031a659a4362de03e7ce1da184f99efcb72c815ba9eab04e26"
+    }
+  },
+  "official_tools": {
+    "harness": {
+      "path": "tools/pipes_harness.py",
+      "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d"
+    },
+    "interactor": {
+      "path": "tools/interactor",
+      "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+    }
+  },
+  "inputs": {
+    "official": [
+      {
+        "case": 5,
+        "path": "data/pipes/open/5.in",
+        "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+      },
+      {
+        "case": 9,
+        "path": "data/pipes/open/9.in",
+        "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+      },
+      {
+        "case": 15,
+        "path": "data/pipes/open/15.in",
+        "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+      }
+    ],
+    "screen_copies": [
+      {
+        "case": 5,
+        "path": "results/pipes/improvement/mc_rank_context/screen_inputs/5.in",
+        "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+        "matches_official_input": true
+      },
+      {
+        "case": 9,
+        "path": "results/pipes/improvement/mc_rank_context/screen_inputs/9.in",
+        "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+        "matches_official_input": true
+      },
+      {
+        "case": 15,
+        "path": "results/pipes/improvement/mc_rank_context/screen_inputs/15.in",
+        "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+        "matches_official_input": true
+      }
+    ]
+  },
+  "screen": {
+    "cases": [
+      5,
+      9,
+      15
+    ],
+    "cpu_limit_s": 5,
+    "memory_limit_mib": 256,
+    "results": {
+      "screen_baseline": {
+        "5": {
+          "kpi": 0.8100701083492671,
+          "trench_m": 62760,
+          "occupied_m": 50840,
+          "cpu_s": 0.09109,
+          "rss_mib": 3.15625,
+          "status": "ok"
+        },
+        "9": {
+          "kpi": 0.5083925112976113,
+          "trench_m": 61960,
+          "occupied_m": 31500,
+          "cpu_s": 0.10996,
+          "rss_mib": 3.0625,
+          "status": "ok"
+        },
+        "15": {
+          "kpi": 0.9540622436890549,
+          "trench_m": 438920,
+          "occupied_m": 418757,
+          "cpu_s": 2.110689,
+          "rss_mib": 5.5625,
+          "status": "ok"
+        }
+      },
+      "screen_candidate": {
+        "5": {
+          "kpi": 0.8100701083492671,
+          "trench_m": 62760,
+          "occupied_m": 50840,
+          "cpu_s": 0.08993799999999999,
+          "rss_mib": 3.125,
+          "status": "ok"
+        },
+        "9": {
+          "kpi": 0.5083925112976113,
+          "trench_m": 61960,
+          "occupied_m": 31500,
+          "cpu_s": 0.119212,
+          "rss_mib": 3.09375,
+          "status": "ok"
+        },
+        "15": {
+          "kpi": 0.9540622436890549,
+          "trench_m": 438920,
+          "occupied_m": 418757,
+          "cpu_s": 2.090824,
+          "rss_mib": 5.546875,
+          "status": "ok"
+        }
+      }
+    },
+    "weighted_score_sum_baseline": 10.8590850565,
+    "weighted_score_sum_candidate": 10.8590850565,
+    "weighted_score_delta": 0.0,
+    "full_open15_run": false,
+    "holdout_v2_run": false,
+    "robustness_suite_run": false
+  },
+  "outputs_sha256": {
+    "screen_baseline": {
+      "results/pipes/improvement/mc_rank_context/screen_baseline/cases.csv": "c5b011a3f6ec3e17cb3e70f70ed3213b38384dc126b508b8c3d7f144a9081ebf",
+      "results/pipes/improvement/mc_rank_context/screen_baseline/summary.json": "02b0a869143db7b989a2918d15aa7798a34a5cc3dcd53a211356ced03de7de05",
+      "runs": {
+        "5": {
+          "score.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/5/score.txt",
+            "sha256": "fdfdf07cc7a3da7cf49c35f5750267a2ef24157d2576f161c13d405b36ade81a"
+          },
+          "judge_output.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/5/judge_output.txt",
+            "sha256": "e78bb7900ad184037e578f13012eaae1cb8d854700ee7ddc520ac6c8a113bb63"
+          },
+          "solver_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/5/solver_stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "interactor_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/5/interactor_stderr.txt",
+            "sha256": "dfdc884b03bed6f6e0b9676bb5b64c873e68982fd215e7a918ff440eecaa6677"
+          },
+          "unused_answer.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/5/unused_answer.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "9": {
+          "score.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/9/score.txt",
+            "sha256": "b0c310c79f6f2e773e5df985d81e9e8909f338eb0c4f5a4ab08ff9f3413f2d61"
+          },
+          "judge_output.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/9/judge_output.txt",
+            "sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f"
+          },
+          "solver_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/9/solver_stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "interactor_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/9/interactor_stderr.txt",
+            "sha256": "e21eb20fcb07cc85e099698d3bc9a4f47bd3adf1c541dee572cf5b7907f5d775"
+          },
+          "unused_answer.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/9/unused_answer.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "15": {
+          "score.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/15/score.txt",
+            "sha256": "76d1e745d1e70c8ffdfabcc50c45cc3c82c9edf4c065ad81093e1f9fbd20dc30"
+          },
+          "judge_output.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/15/judge_output.txt",
+            "sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e"
+          },
+          "solver_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/15/solver_stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "interactor_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/15/interactor_stderr.txt",
+            "sha256": "f41d1634ebee6002db068895bd7f6dd3fef179c512b959a2feda4845b19f0686"
+          },
+          "unused_answer.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_baseline/runs/15/unused_answer.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    },
+    "screen_candidate": {
+      "results/pipes/improvement/mc_rank_context/screen_candidate/cases.csv": "f2202088aff41077213a5b6fd5af8b55203414975d11a6c2e262e32bff774df8",
+      "results/pipes/improvement/mc_rank_context/screen_candidate/summary.json": "4d1e9c5ad86f95d24026b7568a71189177f4ccb0be58280b0640bd6dfe8b91a0",
+      "runs": {
+        "5": {
+          "score.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/5/score.txt",
+            "sha256": "fdfdf07cc7a3da7cf49c35f5750267a2ef24157d2576f161c13d405b36ade81a"
+          },
+          "judge_output.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/5/judge_output.txt",
+            "sha256": "e78bb7900ad184037e578f13012eaae1cb8d854700ee7ddc520ac6c8a113bb63"
+          },
+          "solver_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/5/solver_stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "interactor_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/5/interactor_stderr.txt",
+            "sha256": "dfdc884b03bed6f6e0b9676bb5b64c873e68982fd215e7a918ff440eecaa6677"
+          },
+          "unused_answer.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/5/unused_answer.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "9": {
+          "score.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/9/score.txt",
+            "sha256": "b0c310c79f6f2e773e5df985d81e9e8909f338eb0c4f5a4ab08ff9f3413f2d61"
+          },
+          "judge_output.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/9/judge_output.txt",
+            "sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f"
+          },
+          "solver_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/9/solver_stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "interactor_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/9/interactor_stderr.txt",
+            "sha256": "e21eb20fcb07cc85e099698d3bc9a4f47bd3adf1c541dee572cf5b7907f5d775"
+          },
+          "unused_answer.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/9/unused_answer.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        },
+        "15": {
+          "score.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/15/score.txt",
+            "sha256": "76d1e745d1e70c8ffdfabcc50c45cc3c82c9edf4c065ad81093e1f9fbd20dc30"
+          },
+          "judge_output.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/15/judge_output.txt",
+            "sha256": "4b41c616b7f7f541e6425aebc115b9bceb88887f54b058c1b1a36fff75402451"
+          },
+          "solver_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/15/solver_stderr.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "interactor_stderr.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/15/interactor_stderr.txt",
+            "sha256": "f41d1634ebee6002db068895bd7f6dd3fef179c512b959a2feda4845b19f0686"
+          },
+          "unused_answer.txt": {
+            "path": "results/pipes/improvement/mc_rank_context/screen_candidate/runs/15/unused_answer.txt",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        }
+      }
+    }
+  },
+  "report": {
+    "path": "results/pipes/improvement/mc_rank_context/REPORT.md",
+    "sha256": "f5b511bece7cdc39712c9cdbaea2d517600951e11d64da6dd5e30f48d028a986"
+  }
+}

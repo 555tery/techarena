@@ -1,0 +1,32 @@
+{
+  "base_source": "/Users/555tery/techarena/prototypes/pipes_online_core_20261020/release/solution.cpp",
+  "base_sha256": "57c047da7ae9939d9d86dfb050458f22e1a189ec43c5fb621c578bee324821d9",
+  "variants": {
+    "dp_stability_gate": {
+      "source_sha256": "7873ab77bfab3cf39e92be7ba272e738d9095e1ea2838f9222433b645ec37cd6",
+      "binary_sha256": "d8471fd9786dee8083980fdcfbed751870a245384fabf3c643eb063d8e5223da",
+      "compile_command": [
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-DNDEBUG",
+        "/Users/555tery/techarena/prototypes/pipes_online_patterns_20261020/core_candidates/dp_stability_gate/solution.cpp",
+        "-o",
+        "/Users/555tery/techarena/prototypes/pipes_online_patterns_20261020/core_candidates/dp_stability_gate/solver"
+      ]
+    },
+    "dp_recency_mix": {
+      "source_sha256": "86dac57f90e8b4353776636c3bc9574c408fbe93fdb531f5f3a93ccb0591431d",
+      "binary_sha256": "e48c0412a1641317e4f28fe0c8384591513563a480d436bb92d416ab1a156801",
+      "compile_command": [
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-DNDEBUG",
+        "/Users/555tery/techarena/prototypes/pipes_online_patterns_20261020/core_candidates/dp_recency_mix/solution.cpp",
+        "-o",
+        "/Users/555tery/techarena/prototypes/pipes_online_patterns_20261020/core_candidates/dp_recency_mix/solver"
+      ]
+    }
+  }
+}

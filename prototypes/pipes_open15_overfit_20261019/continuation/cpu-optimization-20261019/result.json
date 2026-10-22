@@ -1,0 +1,106 @@
+{
+  "status": "complete_v17_accepted_no_server_cpu_measurement",
+  "updated_at": "2026-10-19T04:55:36.893574+07:00",
+  "baseline": "speed-v13",
+  "baseline_sha256": "065707442c1d303ae148b30282f421536a9350505dd8aead5cbc6f3a77043cd3",
+  "objective": "minimum CPU on exact Open15, unchanged optimal score and protocol",
+  "observed_compiler_options": [
+    "Cangjie 1.0.5",
+    "GCC C++14.2 x64 C++20",
+    "Java11.0.2",
+    "Java21",
+    "Kotlin1.9.25",
+    "PyPy3.10",
+    "Python3.12.7",
+    "Visual C++2022 x64 C++20 14.34.31933"
+  ],
+  "language_conclusion": "Keep native C++ for now: no measured advantage from another supported language; direct WinAPI already bypasses standard I/O. Cangjie was not benchmarked and is not claimed to be an interpreter. Free Pascal and C# were in generic help but are absent from this task selector.",
+  "trials": [
+    {
+      "variant": "speed-v14",
+      "source_sha256": "bc2b0be2b112e943acaf2d2561bb6be0fea11404e4beb6eda751754edf6ccaf1",
+      "purpose": "contiguous token scanning",
+      "paired_runs": 5,
+      "full_open15_checks": 75,
+      "exact_answer_parity": true,
+      "baseline_median_cpu_s": 0.667926,
+      "candidate_median_cpu_s": 0.661853,
+      "median_cpu_reduction_percent": 0.9092324598832802,
+      "paired_mean_saved_seconds": 0.003660399999999964,
+      "paired_bootstrap_95_ci_seconds": [
+        -0.008556800000000031,
+        0.012830200000000014
+      ],
+      "established_total_speedup": false,
+      "promoted": false
+    },
+    {
+      "variant": "speed-v15",
+      "source_sha256": "7939157e37382408d08fc5f0f71bbb15a82a075e8206bea8eff35eaf01c4348e",
+      "purpose": "frozen token width packed into reply length byte",
+      "paired_runs": 5,
+      "full_open15_checks": 75,
+      "exact_answer_parity": true,
+      "baseline_median_cpu_s": 0.698006,
+      "candidate_median_cpu_s": 0.69187,
+      "median_cpu_reduction_percent": 0.8790755380326254,
+      "paired_mean_saved_seconds": -0.00301079999999998,
+      "paired_bootstrap_95_ci_seconds": [
+        -0.01641640000000002,
+        0.008293200000000023
+      ],
+      "established_total_speedup": false,
+      "promoted": false
+    }
+  ],
+  "windows_startup": {
+    "variant": "speed-v16",
+    "source_sha256": "d50ead2e29bc9e608996d5c12d2779381a3adf0f1c55cb76001ab514ee2dbdad",
+    "checks": 95,
+    "codegen": "Clang x64 MSVC-target with exceptions and strong stack protector; imported only five WinAPI functions and three security cookie symbols",
+    "independent_audit": "windows_startup_audit",
+    "security_cookie_preserved": true,
+    "standard_crt_entry_bypassed_in_source": true,
+    "server_submission": 1665898,
+    "server_compiler": "MSVC14.34.31933",
+    "server_status": "J, no test result archive available",
+    "actual_msvc_validation": false,
+    "server_cpu_available": false,
+    "causal_diagnosis": "Unknown; server diagnostics absent. Do not infer either an algorithm defect or a platform compiler outage.",
+    "promoted": false
+  },
+  "table_deduplication_screen": {
+    "current_packed_reply_bytes": 2239170,
+    "global_unique_reply_strings": 114824,
+    "global_dictionary_bytes": 1016308,
+    "decision": "No implementation: dictionary indices and offsets eat much of the saving and add lookups. This is a storage-size estimate, not a runtime benchmark."
+  },
+  "decision": "Use v17: remove unnecessary Windows success diagnostic and CRT teardown, preserve accepted GCC startup. Local parser alternatives lacked robust total CPU improvement and were not promoted. MSVC custom startup was not server-qualified. No claim of minimum or reduced server CPU without actual timings.",
+  "server_cpu_speedup_established": false,
+  "new_background_search_started": false,
+  "sources": [
+    "https://learn.microsoft.com/en-us/cpp/preprocessor/comment-c-cpp",
+    "https://learn.microsoft.com/en-us/cpp/build/reference/entry-entry-point-symbol?view=msvc-170",
+    "https://learn.microsoft.com/en-us/cpp/c-runtime-library/reference/security-init-cookie?view=msvc-160",
+    "https://olympic.nsu.ru/nsuts-new/help#tabcompile",
+    "https://olympic.nsu.ru/nsuts-new/help#tabresults"
+  ],
+  "selected_variant": "speed-v17",
+  "selected_source_sha256": "477393256330e4b2c6dbefc51c85587ceadfcc0c98f469e29d583827f4f843d1",
+  "server_submission": 1665904,
+  "accepted": 15,
+  "tests": 15,
+  "ranking_score": "30.75747405",
+  "displayed_rank": 1,
+  "row_position": 2,
+  "previous_restored_submission": 1665900,
+  "windows_exit": {
+    "variant": "speed-v17",
+    "source_sha256": "477393256330e4b2c6dbefc51c85587ceadfcc0c98f469e29d583827f4f843d1",
+    "checks": 95,
+    "native_binary_identical_to_v13": true,
+    "actual_windows_GCC_accepted": true,
+    "cpu_speedup_established": false,
+    "change": "ExitProcess(0), no successful stderr diagnostic; no custom entrypoint or CRT security changes."
+  }
+}

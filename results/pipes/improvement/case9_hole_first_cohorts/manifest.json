@@ -1,0 +1,82 @@
+{
+  "experiment": "case9_hole_first_cohorts",
+  "date": "2026-10-17",
+  "environment": "macOS 26.6.2 arm64; clang++ -O2 -std=c++20",
+  "limits": {
+    "cpu_seconds_per_test": 5,
+    "memory_mib_per_test": 256
+  },
+  "reference": {
+    "name": "champion_cohort_slabs",
+    "source": "results/pipes/improvement/case9_causal_profiles/source/champion_cohort_slabs.cpp",
+    "source_sha256": "43bfbdadbae18ac180d1e59b6631342cfe1bef99190a449838f0470d6f220200",
+    "binary": "results/pipes/improvement/case9_causal_profiles/bin/champion_cohort_slabs",
+    "binary_sha256": "e4b79d8eb55a1fdc03a8c62505142ee615304401e821895bf6ab7f3712e54049",
+    "open15_score": 29.932085817214315,
+    "open15_cases_csv_sha256": "9a9e0925a040bedaf72ee456e4e2a52bff526d88d1089ab10e06d40cdf132ab6",
+    "holdout_v2_score": 5.13526432428047,
+    "holdout_v2_cases_csv_sha256": "ed81cf25cbb29fba842dd188a303146752440db9e5434f1e646173f1cc968a74"
+  },
+  "candidate_hole_first": {
+    "source": "source/hole_first_survivor_cohorts.cpp",
+    "source_sha256": "9ba88fac2348cd09073e2aef0177b381e3b42eda0b3b18f252889e311c0ff57a",
+    "binary": "bin/hole_first_survivor_cohorts",
+    "binary_sha256": "7374adcb57311f3535a6fecf2559268f2f63cfe4f97c9edcc29c3cd262b1ec6e",
+    "case9_trench_m": 47740,
+    "open15_score": 29.942960543986803,
+    "open15_cases_csv_sha256": "890c2fcd3b311e7e60ec24a5667f4b931604c3306b0211c5c827565ec5e12f42",
+    "holdout_v2_score": 5.13526432428047,
+    "holdout_v2_cases_csv_sha256": "8b7bc95f23b1b306776b111e82bbf776b5d3e845214ae1529bc98f4d37f2b774"
+  },
+  "candidate_hole_first_plus_lifo_gate": {
+    "source": "source/hole_first_survivor_cohorts_plus_lifo_gate.cpp",
+    "source_sha256": "5cc564ca88d8ae3be941ca2c3dab252e0836fa8d93e937dec4c32b5168b2aa9a",
+    "binary": "bin/hole_first_survivor_cohorts_plus_lifo_gate",
+    "binary_sha256": "6780b3d8537bb778ace4df6451e4d203d0e53603ef0ba271a88b49e3eea0614d",
+    "gate_source": "results/pipes/improvement/case11_lifo_stack/src/lifo_confidence_gate.cpp",
+    "gate_source_sha256": "9a847dd40988f17c60d6b5cdaae3794c8228896708e9825a22df3a021f98b01c",
+    "open15_score": 29.947761251325442,
+    "open15_delta_vs_reference": 0.015675434111127,
+    "open15_cases_csv_sha256": "404bf646302b944c45af4ffdf8d6534006f5d7927cae1f7dd515ade0a596cf6d",
+    "open15_summary_sha256": "93284b4a97bd05922529561e303ea9c9fb31342f08694bce19e9587b4791eef5",
+    "holdout_v2_score": 5.13526432428047,
+    "holdout_v2_cases_csv_sha256": "1342564d8330a09b9698674b8b3dfbbb9a1d97ead905f8ea8e2a34ef61f2d315",
+    "holdout_v2_summary_sha256": "5ec1cd5223faab52b8f72daeb8132866063de1110157c3de77df255a8313ca86"
+  },
+  "synthetic_screen": {
+    "generator": "make_synthetic.py",
+    "generator_sha256": "e980c213cafa5b4e8cb72ed879d8e686678b99fdffa9687b01013501032c09c8",
+    "input_sha256": {
+      "fresh_01.in": "e42a3a890fa3bfbc37f98d91ce8e7e3cea4f7273207b259d618aa1a9f2d671ef",
+      "fresh_02.in": "7b0ab866fcef40aab9b2ebfb35ca8d7f1d3ddadbe2a4e61fd33a03a1f64388da",
+      "fresh_03.in": "814b296625354dd5246709c08ba59dde1e0bd71a441dc484fb6675617d5b0560",
+      "fresh_04.in": "45d58f776f94f60ef55c66c8f6437a45c41cbfbaa54c044664176853b1b58bd6"
+    },
+    "champion_cases_csv_sha256": "1af88ed5dbc2ea9cca3726fc32d72a448db3c97167f8e1fa64fb2545409b5708",
+    "candidate_cases_csv_sha256": "213dae619b32c0fce832eface1ae5a90a0c86f5a8fefbda33271df1142e25d54",
+    "trench_delta_m_by_case": {
+      "fresh_01": -600,
+      "fresh_02": -9780,
+      "fresh_03": -260,
+      "fresh_04": 0
+    }
+  },
+  "preserved_sources": {
+    "frozen_final_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical_src_pipes_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "commands": [
+    "python3 results/pipes/improvement/case9_hole_first_cohorts/make_synthetic.py",
+    "python3 results/pipes/improvement/case9_hole_first_cohorts/generate_candidate.py",
+    "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/case9_hole_first_cohorts/source/hole_first_survivor_cohorts.cpp -o results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts",
+    "python3 results/pipes/improvement/case9_hole_first_cohorts/compose_lifo_gate.py",
+    "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/case9_hole_first_cohorts/source/hole_first_survivor_cohorts_plus_lifo_gate.cpp -o results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts_plus_lifo_gate",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts --name hole_first_survivor_cohorts_case9 --interactor results/pipes/final/bin/interactor --tests data/pipes/open/9.in --out results/pipes/improvement/case9_hole_first_cohorts/runs/candidate_case9 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts --name hole_first_survivor_cohorts_four_new_synthetics --interactor results/pipes/final/bin/interactor --tests results/pipes/improvement/case9_hole_first_cohorts/synthetic --out results/pipes/improvement/case9_hole_first_cohorts/runs/candidate_synthetic --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts --name hole_first_survivor_cohorts_open15 --interactor results/pipes/final/bin/interactor --tests data/pipes/open --out results/pipes/improvement/case9_hole_first_cohorts/runs/candidate_open15 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts --name hole_first_survivor_cohorts_holdout_v2 --interactor results/pipes/final/bin/interactor --tests data/pipes/synthetic/final-holdout-v2 --out results/pipes/improvement/case9_hole_first_cohorts/runs/candidate_holdout_v2 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts_plus_lifo_gate --name hole_first_survivor_cohorts_plus_lifo_gate_open15 --interactor results/pipes/final/bin/interactor --tests data/pipes/open --out results/pipes/improvement/case9_hole_first_cohorts/runs/combined_open15 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts_plus_lifo_gate --name hole_first_survivor_cohorts_plus_lifo_gate_holdout_v2 --interactor results/pipes/final/bin/interactor --tests data/pipes/synthetic/final-holdout-v2 --out results/pipes/improvement/case9_hole_first_cohorts/runs/combined_holdout_v2 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120"
+  ],
+  "not_used": ["website", "Docker"]
+}

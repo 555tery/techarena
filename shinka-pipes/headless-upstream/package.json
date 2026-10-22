@@ -1,0 +1,54 @@
+{
+  "name": "@roberttlange/headless",
+  "version": "0.6.1",
+  "description": "One CLI entrypoint for running coding agents in headless mode.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "bin": {
+    "headless": "dist/cli.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobertTLange/headless-cli.git"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "files": [
+    "Dockerfile",
+    "config.toml.example",
+    "dist",
+    "skills"
+  ],
+  "scripts": {
+    "build": "tsc && chmod +x dist/cli.js",
+    "test": "node --import tsx --test $(find tests -name '*.test.ts' ! -name 'integration-local.test.ts' -print)",
+    "test:integration:local": "node --import tsx --test tests/integration-local.test.ts",
+    "test:agents": "tsx --test tests/agents-smoke.ts",
+    "check": "npm run build && npm test",
+    "hooks:install": "git config core.hooksPath .githooks",
+    "pack:check": "npm pack --dry-run",
+    "prepare": "npm run build",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@bufbuild/protobuf": "^2.12.0",
+    "@types/node": "^22.10.2",
+    "@types/proper-lockfile": "^4.1.4",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "overrides": {
+    "uuid": "^14.0.0"
+  },
+  "dependencies": {
+    "@agentclientprotocol/sdk": "^0.21.0",
+    "modal": "^0.7.4",
+    "proper-lockfile": "^4.1.2",
+    "zod": "^4.2.0"
+  }
+}

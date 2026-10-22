@@ -1,0 +1,111 @@
+{
+  "experiment": "case15_equal_gap_diversity",
+  "date": "2026-10-17",
+  "decision": "no-go; do not promote candidate",
+  "candidate_policy": {
+    "description": "Allow the existing Monte Carlo rollout to compare the greedy baseline with one rightmost representative only when it is an exact-equal-length, equal-cost, higher-address gap in the observed top candidate set. Candidate zero remains baseline and is the fallback. The choice uses the existing causal 12-trial x 4-step rollout with its 1m minimum mean-saving threshold.",
+    "causal_features_only": true,
+    "uses_test_id_or_future_commands": false,
+    "exact_length_guard_added_before_open15": true,
+    "prior_variant_1_status": "The generic candidate list already enumerated separate equal-sized gaps; the change opens an additional representative to rollout under explicit online checks rather than duplicating that pool behavior."
+  },
+  "source_and_binary": {
+    "frozen_baseline_source": "results/pipes/final/solution.cpp",
+    "frozen_baseline_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical_source": "src/pipes.cpp",
+    "canonical_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+    "candidate_source": "results/pipes/improvement/case15_equal_gap_diversity/source/highside_equal_gap_rollout.cpp",
+    "candidate_source_sha256": "f567a695bd1711ef6cd02ac0275cebc69bb5062a47df1ba514eb619c7c1e0f27",
+    "baseline_copy_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "candidate_binary": "results/pipes/improvement/case15_equal_gap_diversity/bin/highside_equal_gap_rollout_gcc_guarded",
+    "candidate_binary_sha256": "a76f2c04095403c10436fdfc717fa465ae31683968a27396b8677d5764e5da70",
+    "baseline_binary": "results/pipes/improvement/case15_equal_gap_diversity/bin/baseline_gcc_prior_gate",
+    "baseline_binary_sha256": "6691764afe6828a7a75f9be23bfbf8bf888de9287393e2ea4d76bf62d6b4d950",
+    "interactor_binary_sha256": "785574199a5123fe70a40575e69d849301987c7d4a118cfcd73bdc090333f119",
+    "frozen_and_canonical_unchanged": true
+  },
+  "toolchain": {
+    "docker_image": "agentic-scientist/pipes-cpp:2b8aa392",
+    "platform": "linux/arm64",
+    "runtime": "Linux aarch64, glibc 2.41",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "solver_compile_command": "g++ -O2 -std=c++20 -pipe results/pipes/improvement/case15_equal_gap_diversity/source/highside_equal_gap_rollout.cpp -o results/pipes/improvement/case15_equal_gap_diversity/bin/highside_equal_gap_rollout_gcc_guarded",
+    "interactor_source": "scientist-v3/tasks/pipes/vendor/interactor.cpp",
+    "interactor_source_sha256": "85672e4c3ad9fdcb97d8b601758de1f1d1b5e86d6dd20252e0f72acdb9cb122a",
+    "evaluator_sha256": "588951ebba831dc1424f0a6e3d2a7d9388c55269e65e834b3548706605523951",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "limits": {
+      "solver_cpu_s_per_case": 5,
+      "solver_rss_mib_per_case": 256,
+      "response_timeout_s": 5,
+      "wall_timeout_s": 180
+    }
+  },
+  "gates": {
+    "screen": {
+      "cases": [
+        5,
+        9,
+        15
+      ],
+      "all_correct": true,
+      "all_scores_equal_to_baseline": true,
+      "max_candidate_cpu_s": 2.6964639999999997,
+      "max_candidate_rss_mib": 32.81640625,
+      "per_case_csv": "results/pipes/improvement/case15_equal_gap_diversity/screen_per_case.csv",
+      "raw_status": "results/pipes/improvement/case15_equal_gap_diversity/runs/guarded-screen-status.txt",
+      "outputs_equal_cases": [
+        5,
+        9
+      ],
+      "outputs_differ_cases": [
+        15
+      ]
+    },
+    "open15": {
+      "candidate_summary": "results/pipes/improvement/case15_equal_gap_diversity/runs/guarded-open15-candidate/summary.json",
+      "candidate_cases_csv": "results/pipes/improvement/case15_equal_gap_diversity/runs/guarded-open15-candidate/cases.csv",
+      "candidate_summary_sha256": "52689294fa493aaf74bb5983c9dd819dbdaa50b7942b98aef58c0e55003317bc",
+      "candidate_cases_csv_sha256": "8b33613d54e70ded6cdd0b73a3daabaf051c19698553ab282d4ed212b95cbdfa",
+      "baseline_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+      "baseline_per_case_csv": "results/pipes/improvement/priority3_small_cases_gcc_audit/linux_gcc_open15_cases.csv",
+      "baseline_per_case_csv_sha256": "5a9832eb7f39122d44a90f0aed3448f3670a0084850158bc644192f260996cb2",
+      "baseline_summary_sha256": "288522e20df937300ce0e869a42188a8c413ae6192f411ae54e2301a8adbfb49",
+      "baseline_score": 29.789717928594047,
+      "candidate_score": 29.76704044380703,
+      "score_delta": -0.022677484787017477,
+      "correct_cases": 15,
+      "case_count": 15,
+      "max_candidate_solver_cpu_s": 2.954365,
+      "max_candidate_solver_rss_mib": 32.83984375,
+      "candidate_all_limits_passed": true,
+      "per_case_csv": "results/pipes/improvement/case15_equal_gap_diversity/open15_per_case.csv",
+      "score_regression_case": 7,
+      "case7_trench_delta_m": 40,
+      "case7_first_differing_output_line_one_based": 104,
+      "case7_baseline_response": "0 716",
+      "case7_candidate_response": "0 839"
+    },
+    "holdout_v2": {
+      "status": "not run",
+      "reason": "Open15 had a score regression; the predeclared promotion gate stopped before holdout."
+    },
+    "platform": "not accessed; no submissions made"
+  },
+  "notes": [
+    "The prior accepted Linux/GCC Open15 baseline report is an exact-source, exact-image GCC 14.2 run; the candidate was compared to its stored per-case CSV rather than spending a duplicate baseline Open15 run.",
+    "Case 11 and case 15 judge outputs differ while their final trench and score remain unchanged; case 7 is the only score regression.",
+    "Screen and Open15 candidate passed 5s CPU and 256 MiB RSS limits in the recorded runs. No runtime qualification is inferred from the earlier over-limit unguarded exploratory run."
+  ],
+  "artifacts": {
+    "report": "results/pipes/improvement/case15_equal_gap_diversity/REPORT.md",
+    "case7_diagnosis": "results/pipes/improvement/case15_equal_gap_diversity/case7-diagnosis.md",
+    "case7_diagnosis_sha256": "06d44253fb17669f205e87b933970b5ab067578075d0fa393f1bb65f462af1c7",
+    "screen_per_case": "results/pipes/improvement/case15_equal_gap_diversity/screen_per_case.csv",
+    "open15_per_case": "results/pipes/improvement/case15_equal_gap_diversity/open15_per_case.csv",
+    "report_sha256": "43361d715e02beaef665a45ea5a808cae63c70b837e379b094731a840148e16d",
+    "screen_per_case_sha256": "1572a07cd8d51e1232929b8e6fd7db6798a7e30ff2c6e4eff1800d33d7929591",
+    "open15_per_case_sha256": "adae8efa78e597093fc10c2dfceaae4188ba23febc5444d986b8cab148979afc",
+    "manifest_sha256_note": "Manifest does not hash itself."
+  }
+}

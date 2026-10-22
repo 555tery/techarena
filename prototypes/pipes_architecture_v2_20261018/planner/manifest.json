@@ -1,0 +1,109 @@
+{
+  "schema": "h1-scenario-planner-v1",
+  "status": "frozen_for_coordinator_evaluation",
+  "frozen_at": "2026-10-18T16:37:26.889801+00:00",
+  "directory": "prototypes/pipes_architecture_v2_20261018/planner",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "files": {
+    "solver.cpp": {
+      "sha256": "48cf27334a8b60be6d7916963dc50e69c069915f6cc0627969016082d4b519d9",
+      "bytes": 1259
+    },
+    "scenario_planner.hpp": {
+      "sha256": "4e0ebd61c0ba310175a3cbebcbd2d1fa91c3374d8d8a7da1a1996cd27e190d6d",
+      "bytes": 36788
+    },
+    "allocator.hpp": {
+      "sha256": "ec65465a12d5ac6081e032123b617b2c78b6e9de65eca016fb105abae7d9f4d6",
+      "bytes": 14930
+    },
+    "selftest.cpp": {
+      "sha256": "4f94128016e46c6bacddeb5e50d994e6ef44a862aee13590474b5d13173449ce",
+      "bytes": 5111
+    },
+    "test_protocol.py": {
+      "sha256": "362215377fc3b9e119da58729bfec4362ee7024ef8cf011d2d81c389eadf8902",
+      "bytes": 3847
+    },
+    "README.md": {
+      "sha256": "02dc696900da1d5be3590e81a1afd0b962a004ddddb0cf123635b611b948b40b",
+      "bytes": 7145
+    },
+    "h1-on": {
+      "sha256": "67ac1e44ae93d673361441d2e3cfd993a1363c3bc3f570efafe221f5d7dcc88e",
+      "bytes": 79160
+    },
+    "h1-off": {
+      "sha256": "e57afa7dae234c98e5df5137fdcf6866386619ab4b55f1372ed6cf8bc124ccb9",
+      "bytes": 57768
+    },
+    "selftest": {
+      "sha256": "8a8604f9c1ac5f4ce8adca11d8ad268486f3cf7666e76f5c18cd01aab97cdc19",
+      "bytes": 97528
+    },
+    "selftest-result.json": {
+      "sha256": "fcd9392fbff6d0b299dc26468d7bae982a223fd30c4660fae83ba948d46dd940",
+      "bytes": 909
+    },
+    "protocol-result.json": {
+      "sha256": "545ce8918ac87f39bbbc3e1933fb810628ad21c51e9fe1434350abb150b54ba7",
+      "bytes": 1808
+    }
+  },
+  "allocator_origin": "prototypes/pipes_learned_v1/src/allocator.hpp",
+  "allocator_origin_sha256": "ec65465a12d5ac6081e032123b617b2c78b6e9de65eca016fb105abae7d9f4d6",
+  "allocator_copy_identical": true,
+  "build_commands": {
+    "0": "clang++ -std=c++20 -O2 -DNDEBUG -Wall -Wextra -Wpedantic -DPLANNER_ENABLED=0 prototypes/pipes_architecture_v2_20261018/planner/solver.cpp -o prototypes/pipes_architecture_v2_20261018/planner/h1-off",
+    "1": "clang++ -std=c++20 -O2 -DNDEBUG -Wall -Wextra -Wpedantic -DPLANNER_ENABLED=1 prototypes/pipes_architecture_v2_20261018/planner/solver.cpp -o prototypes/pipes_architecture_v2_20261018/planner/h1-on"
+  },
+  "selftest_build": [
+    "clang++",
+    "-std=c++20",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-DPLANNER_ENABLED=1",
+    "prototypes/pipes_architecture_v2_20261018/planner/selftest.cpp",
+    "-o",
+    "prototypes/pipes_architecture_v2_20261018/planner/selftest"
+  ],
+  "protocol_check": [
+    "python3",
+    "prototypes/pipes_architecture_v2_20261018/planner/test_protocol.py",
+    "--on",
+    "prototypes/pipes_architecture_v2_20261018/planner/h1-on",
+    "--off",
+    "prototypes/pipes_architecture_v2_20261018/planner/h1-off"
+  ],
+  "dependencies": [
+    "C++20 standard library"
+  ],
+  "trained_parameters": null,
+  "data_accessed": [
+    "handwritten 184-command tiny fixture",
+    "targeted causal-scenario-matching unit fixture"
+  ],
+  "official_or_large_evaluations_run_by_implementer": 0,
+  "resource_limit_validation": "not performed; independent coordinator task",
+  "future_data_policy": "final/Open15 not accessed; policy frozen before coordinator metrics",
+  "caps": {
+    "horizon": 14,
+    "regimes": 3,
+    "beam": 3,
+    "root_candidates": 10,
+    "future_candidates": 6,
+    "region_spans": 96,
+    "initial_region_spans": 74,
+    "expanded_nodes": 420000,
+    "scored_roots": 128
+  },
+  "known_limitations": [
+    "scenario-wise recourse optimistic",
+    "exact-prefix execution can be rare",
+    "uncaptured free spans frozen in forecasts",
+    "finite sparse planning coverage",
+    "tiny tests establish legality only, not improvement or 200k resource limits"
+  ]
+}

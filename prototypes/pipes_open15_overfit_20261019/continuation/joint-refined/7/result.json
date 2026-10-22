@@ -1,0 +1,17 @@
+{
+  "pair": [
+    [
+      20960,
+      "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/joint-refined/7/11-conditioned_reverse-2.txt",
+      "conditioned_reverse",
+      2
+    ],
+    [
+      418820,
+      "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/joint-refined/7/15-conditioned_reverse-5.txt",
+      "conditioned_reverse",
+      5
+    ]
+  ],
+  "score": 10.969917529565981
+}

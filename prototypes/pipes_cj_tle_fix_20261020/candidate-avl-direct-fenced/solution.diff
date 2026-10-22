@@ -1,0 +1,444 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-avl-borrows-fenced/solution.cj
++++ solution.cj
+@@ -409,54 +409,114 @@
+         return answer
+     }
+     private func fixHeight(node: Int64): Unit {
+-        heights[node] = 1 + iMax(heights[left[node]], heights[right[node]])
++        let allocated = keys.size
++        if (node < 0 || node >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navHeights = heights.borrowData()
++        unsafe {
++            navHeights.write(node, 1 + iMax(navHeights.read(navLeft.read(node)), navHeights.read(navRight.read(node))))
++        
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++        }
+     }
+     private func replaceAtParent(oldNode: Int64, newNode: Int64): Unit {
+-        let p = parent[oldNode]
+-        if (p == 0) { root = newNode }
+-        else if (left[p] == oldNode) { left[p] = newNode }
+-        else { right[p] = newNode }
+-        if (newNode != 0) { parent[newNode] = p }
++        let allocated = keys.size
++        if (oldNode < 0 || oldNode >= allocated || newNode < 0 || newNode >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        unsafe {
++            let p = navParent.read(oldNode)
++            if (p == 0) { root = newNode }
++            else if (navLeft.read(p) == oldNode) { navLeft.write(p, newNode) }
++            else { navRight.write(p, newNode) }
++            if (newNode != 0) { navParent.write(newNode, p) }
++        
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++        }
+     }
+     private func rotateLeft(node: Int64): Int64 {
+-        let top = right[node]
+-        let middle = left[top]
+-        replaceAtParent(node, top)
+-        left[top] = node; parent[node] = top
+-        right[node] = middle
+-        if (middle != 0) { parent[middle] = node }
+-        fixHeight(node); fixHeight(top)
+-        return top
++        let allocated = keys.size
++        if (node < 0 || node >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        unsafe {
++            let top = navRight.read(node)
++            let middle = navLeft.read(top)
++            replaceAtParent(node, top)
++            navLeft.write(top, node); navParent.write(node, top)
++            navRight.write(node, middle)
++            if (middle != 0) { navParent.write(middle, node) }
++            fixHeight(node); fixHeight(top)
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++            return top
++        }
+     }
+     private func rotateRight(node: Int64): Int64 {
+-        let top = left[node]
+-        let middle = right[top]
+-        replaceAtParent(node, top)
+-        right[top] = node; parent[node] = top
+-        left[node] = middle
+-        if (middle != 0) { parent[middle] = node }
+-        fixHeight(node); fixHeight(top)
+-        return top
++        let allocated = keys.size
++        if (node < 0 || node >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        unsafe {
++            let top = navLeft.read(node)
++            let middle = navRight.read(top)
++            replaceAtParent(node, top)
++            navRight.write(top, node); navParent.write(node, top)
++            navLeft.write(node, middle)
++            if (middle != 0) { navParent.write(middle, node) }
++            fixHeight(node); fixHeight(top)
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++            return top
++        }
+     }
+     private func rebalance(start: Int64): Unit {
+-        var node = start
+-        while (node != 0) {
+-            let oldHeight = heights[node]
+-            fixHeight(node)
+-            let balance = heights[left[node]] - heights[right[node]]
+-            if (balance > 1) {
+-                let child = left[node]
+-                if (heights[left[child]] < heights[right[child]]) { rotateLeft(child) }
+-                node = rotateRight(node)
+-            } else if (balance < -1) {
+-                let child = right[node]
+-                if (heights[right[child]] < heights[left[child]]) { rotateRight(child) }
+-                node = rotateLeft(node)
+-            }
+-            // The repaired subtree has the same height as before the
+-            // mutation. Ancestors retain their heights and balances.
+-            if (heights[node] == oldHeight) { break }
+-            node = parent[node]
++        if (start == 0) { return }
++        let allocated = keys.size
++        if (start < 0 || start >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        let navHeights = heights.borrowData()
++        unsafe {
++            var node = start
++            while (node != 0) {
++                let oldHeight = navHeights.read(node)
++                fixHeight(node)
++                let balance = navHeights.read(navLeft.read(node)) - navHeights.read(navRight.read(node))
++                if (balance > 1) {
++                    let child = navLeft.read(node)
++                    if (navHeights.read(navLeft.read(child)) < navHeights.read(navRight.read(child))) { rotateLeft(child) }
++                    node = rotateRight(node)
++                } else if (balance < -1) {
++                    let child = navRight.read(node)
++                    if (navHeights.read(navRight.read(child)) < navHeights.read(navLeft.read(child))) { rotateRight(child) }
++                    node = rotateLeft(node)
++                }
++                // The repaired subtree has the same height as before the
++                // mutation. Ancestors retain their heights and balances.
++                if (navHeights.read(node) == oldHeight) { break }
++                node = navParent.read(node)
++            }
++        
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
+         }
+     }
+     private func newNode(k: Key, v: V, p: Int64): Int64 {
+@@ -518,29 +578,42 @@
+     }
+     public func eraseNode(node: Int64): Unit {
+         if (node == 0) { return }
+-        var repair: Int64
+-        if (left[node] == 0 || right[node] == 0) {
+-            repair = parent[node]
+-            let child = if (left[node] != 0) { left[node] } else { right[node] }
+-            replaceAtParent(node, child)
+-        } else {
+-            var successor = right[node]
+-            while (left[successor] != 0) { successor = left[successor] }
+-            if (parent[successor] != node) {
+-                repair = parent[successor]
+-                replaceAtParent(successor, right[successor])
+-                right[successor] = right[node]
+-                parent[right[successor]] = successor
+-            } else { repair = successor }
+-            replaceAtParent(node, successor)
+-            left[successor] = left[node]
+-            parent[left[successor]] = successor
+-            heights[successor] = heights[node]
+-        }
+-        left[node] = 0; right[node] = 0; parent[node] = 0; heights[node] = 0
+-        values[node] = zero
+-        vacant.add(node); count--
+-        rebalance(repair)
++        let allocated = keys.size
++        if (node < 0 || node >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        let navHeights = heights.borrowData()
++        unsafe {
++            var repair: Int64
++            if (navLeft.read(node) == 0 || navRight.read(node) == 0) {
++                repair = navParent.read(node)
++                let child = if (navLeft.read(node) != 0) { navLeft.read(node) } else { navRight.read(node) }
++                replaceAtParent(node, child)
++            } else {
++                var successor = navRight.read(node)
++                while (navLeft.read(successor) != 0) { successor = navLeft.read(successor) }
++                if (navParent.read(successor) != node) {
++                    repair = navParent.read(successor)
++                    replaceAtParent(successor, navRight.read(successor))
++                    navRight.write(successor, navRight.read(node))
++                    navParent.write(navRight.read(successor), successor)
++                } else { repair = successor }
++                replaceAtParent(node, successor)
++                navLeft.write(successor, navLeft.read(node))
++                navParent.write(navLeft.read(successor), successor)
++                navHeights.write(successor, navHeights.read(node))
++            }
++            navLeft.write(node, 0); navRight.write(node, 0); navParent.write(node, 0); navHeights.write(node, 0)
++            values[node] = zero
++            vacant.add(node); count--
++            rebalance(repair)
++        
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++        }
+     }
+     public func clone(): OrderedMap<V> {
+         let result = OrderedMap<V>(zero)
+@@ -772,54 +845,114 @@
+         return answer
+     }
+     private func fixHeight(node: Int64): Unit {
+-        heights[node] = 1 + iMax(heights[left[node]], heights[right[node]])
++        let allocated = keys.size
++        if (node < 0 || node >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navHeights = heights.borrowData()
++        unsafe {
++            navHeights.write(node, 1 + iMax(navHeights.read(navLeft.read(node)), navHeights.read(navRight.read(node))))
++        
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++        }
+     }
+     private func replaceAtParent(oldNode: Int64, newNode: Int64): Unit {
+-        let p = parent[oldNode]
+-        if (p == 0) { root = newNode }
+-        else if (left[p] == oldNode) { left[p] = newNode }
+-        else { right[p] = newNode }
+-        if (newNode != 0) { parent[newNode] = p }
++        let allocated = keys.size
++        if (oldNode < 0 || oldNode >= allocated || newNode < 0 || newNode >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        unsafe {
++            let p = navParent.read(oldNode)
++            if (p == 0) { root = newNode }
++            else if (navLeft.read(p) == oldNode) { navLeft.write(p, newNode) }
++            else { navRight.write(p, newNode) }
++            if (newNode != 0) { navParent.write(newNode, p) }
++        
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++        }
+     }
+     private func rotateLeft(node: Int64): Int64 {
+-        let top = right[node]
+-        let middle = left[top]
+-        replaceAtParent(node, top)
+-        left[top] = node; parent[node] = top
+-        right[node] = middle
+-        if (middle != 0) { parent[middle] = node }
+-        fixHeight(node); fixHeight(top)
+-        return top
++        let allocated = keys.size
++        if (node < 0 || node >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        unsafe {
++            let top = navRight.read(node)
++            let middle = navLeft.read(top)
++            replaceAtParent(node, top)
++            navLeft.write(top, node); navParent.write(node, top)
++            navRight.write(node, middle)
++            if (middle != 0) { navParent.write(middle, node) }
++            fixHeight(node); fixHeight(top)
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++            return top
++        }
+     }
+     private func rotateRight(node: Int64): Int64 {
+-        let top = left[node]
+-        let middle = right[top]
+-        replaceAtParent(node, top)
+-        right[top] = node; parent[node] = top
+-        left[node] = middle
+-        if (middle != 0) { parent[middle] = node }
+-        fixHeight(node); fixHeight(top)
+-        return top
++        let allocated = keys.size
++        if (node < 0 || node >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        unsafe {
++            let top = navLeft.read(node)
++            let middle = navRight.read(top)
++            replaceAtParent(node, top)
++            navRight.write(top, node); navParent.write(node, top)
++            navLeft.write(node, middle)
++            if (middle != 0) { navParent.write(middle, node) }
++            fixHeight(node); fixHeight(top)
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++            return top
++        }
+     }
+     private func rebalance(start: Int64): Unit {
+-        var node = start
+-        while (node != 0) {
+-            let oldHeight = heights[node]
+-            fixHeight(node)
+-            let balance = heights[left[node]] - heights[right[node]]
+-            if (balance > 1) {
+-                let child = left[node]
+-                if (heights[left[child]] < heights[right[child]]) { rotateLeft(child) }
+-                node = rotateRight(node)
+-            } else if (balance < -1) {
+-                let child = right[node]
+-                if (heights[right[child]] < heights[left[child]]) { rotateRight(child) }
+-                node = rotateLeft(node)
+-            }
+-            // The repaired subtree has the same height as before the
+-            // mutation. Ancestors retain their heights and balances.
+-            if (heights[node] == oldHeight) { break }
+-            node = parent[node]
++        if (start == 0) { return }
++        let allocated = keys.size
++        if (start < 0 || start >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        let navHeights = heights.borrowData()
++        unsafe {
++            var node = start
++            while (node != 0) {
++                let oldHeight = navHeights.read(node)
++                fixHeight(node)
++                let balance = navHeights.read(navLeft.read(node)) - navHeights.read(navRight.read(node))
++                if (balance > 1) {
++                    let child = navLeft.read(node)
++                    if (navHeights.read(navLeft.read(child)) < navHeights.read(navRight.read(child))) { rotateLeft(child) }
++                    node = rotateRight(node)
++                } else if (balance < -1) {
++                    let child = navRight.read(node)
++                    if (navHeights.read(navRight.read(child)) < navHeights.read(navLeft.read(child))) { rotateRight(child) }
++                    node = rotateLeft(node)
++                }
++                // The repaired subtree has the same height as before the
++                // mutation. Ancestors retain their heights and balances.
++                if (navHeights.read(node) == oldHeight) { break }
++                node = navParent.read(node)
++            }
++        
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
+         }
+     }
+     private func newNode(k: Key, v: Int64, p: Int64): Int64 {
+@@ -881,29 +1014,42 @@
+     }
+     public func eraseNode(node: Int64): Unit {
+         if (node == 0) { return }
+-        var repair: Int64
+-        if (left[node] == 0 || right[node] == 0) {
+-            repair = parent[node]
+-            let child = if (left[node] != 0) { left[node] } else { right[node] }
+-            replaceAtParent(node, child)
+-        } else {
+-            var successor = right[node]
+-            while (left[successor] != 0) { successor = left[successor] }
+-            if (parent[successor] != node) {
+-                repair = parent[successor]
+-                replaceAtParent(successor, right[successor])
+-                right[successor] = right[node]
+-                parent[right[successor]] = successor
+-            } else { repair = successor }
+-            replaceAtParent(node, successor)
+-            left[successor] = left[node]
+-            parent[left[successor]] = successor
+-            heights[successor] = heights[node]
+-        }
+-        left[node] = 0; right[node] = 0; parent[node] = 0; heights[node] = 0
+-        values[node] = zero
+-        vacant.add(node); count--
+-        rebalance(repair)
++        let allocated = keys.size
++        if (node < 0 || node >= allocated) { throw IndexOutOfBoundsException("AVL node") }
++        let navLeft = left.borrowData()
++        let navRight = right.borrowData()
++        let navParent = parent.borrowData()
++        let navHeights = heights.borrowData()
++        unsafe {
++            var repair: Int64
++            if (navLeft.read(node) == 0 || navRight.read(node) == 0) {
++                repair = navParent.read(node)
++                let child = if (navLeft.read(node) != 0) { navLeft.read(node) } else { navRight.read(node) }
++                replaceAtParent(node, child)
++            } else {
++                var successor = navRight.read(node)
++                while (navLeft.read(successor) != 0) { successor = navLeft.read(successor) }
++                if (navParent.read(successor) != node) {
++                    repair = navParent.read(successor)
++                    replaceAtParent(successor, navRight.read(successor))
++                    navRight.write(successor, navRight.read(node))
++                    navParent.write(navRight.read(successor), successor)
++                } else { repair = successor }
++                replaceAtParent(node, successor)
++                navLeft.write(successor, navLeft.read(node))
++                navParent.write(navLeft.read(successor), successor)
++                navHeights.write(successor, navHeights.read(node))
++            }
++            navLeft.write(node, 0); navRight.write(node, 0); navParent.write(node, 0); navHeights.write(node, 0)
++            values[node] = zero
++            vacant.add(node); count--
++            rebalance(repair)
++        
++            // No helper below resizes these vectors. The owner check
++            // after the final pointer use keeps all buffers reachable.
++            blackBox(this)
++            if (keys.size != allocated) { throw IllegalStateException("AVL storage changed") }
++        }
+     }
+     public func clone(): IntOrderedMap {
+         let result = IntOrderedMap(zero)

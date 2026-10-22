@@ -1,0 +1,251 @@
+{
+  "experiment": "case11 online policy screens and H32 Open15 gate",
+  "date_local": "2026-10-17",
+  "environment": {
+    "host_platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.5",
+    "compiler_family": "Apple Clang (strict C++20 build)",
+    "limits": {
+      "solver_cpu_s": 5,
+      "solver_memory_mib": 256
+    }
+  },
+  "scope": {
+    "platform_used": false,
+    "docker_used": false,
+    "holdout_v2_run": false,
+    "frozen_final_modified": false,
+    "canonical_modified": false,
+    "subagents_spawned": false
+  },
+  "policy_notes": {
+    "empirical_gap_potential": "Replace local gap preference with empirically weighted estimated fit-capacity loss; applied in live and Monte Carlo gap scoring.",
+    "lifo_neighbor_grouping": "If the last 16 observed removal ranks from newest have mean <=250 permille, choose edge adjacent to newer-PID neighbor.",
+    "survival_h32": "Causal lifetime-hazard grouping, SURVIVAL_HORIZON=32, SURVIVAL_MATCH_TOLERANCE=80, SURVIVAL_NEIGHBOR_SEPARATION=80; based only on observed events/current state."
+  },
+  "scores": {
+    "pid46_open15": {
+      "score": 29.791529008363593,
+      "weight_sum": 32.1,
+      "source": "results/pipes/improvement/pid_lane_run48_factorial/runs/open15/pid_run46/summary.json"
+    },
+    "current_local_champion": {
+      "score": 29.79317535716961,
+      "source_sha256": "89f7173f61fba3710e752607df4fec83195abe88a14a51b75ff7a710ed6d1982",
+      "source": "results/pipes/improvement/archive_mix_screen/gated_causal/pid46_rearm_geometric_gate1.cpp"
+    },
+    "h32_open15": {
+      "score": 29.77634778907949,
+      "delta_vs_pid46": -0.015181219284102099,
+      "delta_vs_current_local_champion": -0.01682756809012,
+      "status": "15/15, fails promotion gate"
+    }
+  },
+  "runs": {
+    "empirical_gap_potential": {
+      "summary": "results/pipes/improvement/case11_online_rules/screen_potential_case11/summary.json",
+      "summary_sha256": "7043d20351ce07074cedb49bfd1d8a8c5c65ed747c66c7fe90350eaedd46cb60",
+      "per_case_csv": "results/pipes/improvement/case11_online_rules/screen_potential_case11/cases.csv",
+      "per_case_csv_sha256": "f1c6bc8631097e95c0b036404def490e1828708fa2a96627dcd68576332c990b",
+      "ok_count": 1,
+      "case_count": 1,
+      "max_solver_cpu_s": 0.06323999999999999,
+      "max_solver_rss_mib": 3.109375,
+      "score": 0.900132625994695,
+      "trench_m": 22620,
+      "occupied_m": 20361,
+      "case11_score": 0.900132625994695
+    },
+    "lifo_neighbor_grouping": {
+      "summary": "results/pipes/improvement/case11_online_rules/screen_lifo_neighbor_case11/summary.json",
+      "summary_sha256": "b7a189c85e1c19ddd108b542c7de61950a5c75244a4c4e67729620ff25c0095a",
+      "per_case_csv": "results/pipes/improvement/case11_online_rules/screen_lifo_neighbor_case11/cases.csv",
+      "per_case_csv_sha256": "a94b6329fd3e46e193aaa5502d2e118dfe62f64d065953c9c5ec4568fae01901",
+      "ok_count": 1,
+      "case_count": 1,
+      "max_solver_cpu_s": 0.054807999999999996,
+      "max_solver_rss_mib": 3.234375,
+      "score": 0.897751322751323,
+      "trench_m": 22680,
+      "occupied_m": 20361,
+      "case11_score": 0.897751322751323
+    },
+    "survival_h32_case11_screen": {
+      "summary": "results/pipes/improvement/case11_online_rules/screen_h32_case11/summary.json",
+      "summary_sha256": "869ff4a7f1ba6a06375e3e8fbdee28a7fb81f5f47495cc01bebddef31c11ed9b",
+      "per_case_csv": "results/pipes/improvement/case11_online_rules/screen_h32_case11/cases.csv",
+      "per_case_csv_sha256": "96bcf32e52ec1fdfc8b6d57aadbd1d59ab4636a5a91a40a5a7a7de4ba1c7aef7",
+      "ok_count": 1,
+      "case_count": 1,
+      "max_solver_cpu_s": 0.07127,
+      "max_solver_rss_mib": 103.171875,
+      "score": 0.901727192205492,
+      "trench_m": 22580,
+      "occupied_m": 20361,
+      "case11_score": 0.901727192205492
+    },
+    "survival_h32_open15": {
+      "summary": "results/pipes/improvement/case11_online_rules/open15_h32_pid46/summary.json",
+      "summary_sha256": "e3acf565a1893eff549cea057d35ec80f2f4b48f2dc3eafb23e128bcf0e74150",
+      "per_case_csv": "results/pipes/improvement/case11_online_rules/open15_h32_pid46/cases.csv",
+      "per_case_csv_sha256": "ea17d5dc605cb240e38e071b825291e88b06bb0b31fad6a158b9b2c39d8ebfee",
+      "ok_count": 15,
+      "case_count": 15,
+      "weighted_score_sum": 29.77634778907949,
+      "weight_sum": 32.1,
+      "max_solver_cpu_s": 1.090929,
+      "max_solver_rss_mib": 115.046875,
+      "records": [
+        {
+          "case": "1",
+          "trench_m": 20,
+          "occupied_m": 18,
+          "weighted_score": 0.09,
+          "solver_cpu_s": 0.014197,
+          "peak_rss_mib": 101.90625
+        },
+        {
+          "case": "2",
+          "trench_m": 20,
+          "occupied_m": 20,
+          "weighted_score": 1.0,
+          "solver_cpu_s": 0.013489000000000001,
+          "peak_rss_mib": 101.90625
+        },
+        {
+          "case": "3",
+          "trench_m": 20,
+          "occupied_m": 15,
+          "weighted_score": 0.75,
+          "solver_cpu_s": 0.012258,
+          "peak_rss_mib": 101.90625
+        },
+        {
+          "case": "4",
+          "trench_m": 60,
+          "occupied_m": 40,
+          "weighted_score": 0.666666666666667,
+          "solver_cpu_s": 0.011593,
+          "peak_rss_mib": 101.90625
+        },
+        {
+          "case": "5",
+          "trench_m": 62620,
+          "occupied_m": 50840,
+          "weighted_score": 0.811881188118812,
+          "solver_cpu_s": 0.054418999999999995,
+          "peak_rss_mib": 103.28125
+        },
+        {
+          "case": "6",
+          "trench_m": 20,
+          "occupied_m": 18,
+          "weighted_score": 0.9,
+          "solver_cpu_s": 0.010734,
+          "peak_rss_mib": 101.90625
+        },
+        {
+          "case": "7",
+          "trench_m": 1700,
+          "occupied_m": 1677,
+          "weighted_score": 0.986470588235294,
+          "solver_cpu_s": 0.014209,
+          "peak_rss_mib": 102.4375
+        },
+        {
+          "case": "8",
+          "trench_m": 4680,
+          "occupied_m": 4627,
+          "weighted_score": 0.988675213675214,
+          "solver_cpu_s": 0.04110899999999999,
+          "peak_rss_mib": 102.5625
+        },
+        {
+          "case": "9",
+          "trench_m": 61960,
+          "occupied_m": 31500,
+          "weighted_score": 0.508392511297611,
+          "solver_cpu_s": 0.073662,
+          "peak_rss_mib": 103.1875
+        },
+        {
+          "case": "10",
+          "trench_m": 15380,
+          "occupied_m": 12304,
+          "weighted_score": 0.8,
+          "solver_cpu_s": 0.058219999999999994,
+          "peak_rss_mib": 102.953125
+        },
+        {
+          "case": "11",
+          "trench_m": 22580,
+          "occupied_m": 20361,
+          "weighted_score": 0.901727192205492,
+          "solver_cpu_s": 0.06122999999999999,
+          "peak_rss_mib": 103.15625
+        },
+        {
+          "case": "12",
+          "trench_m": 10320,
+          "occupied_m": 10249,
+          "weighted_score": 3.972480620155039,
+          "solver_cpu_s": 0.020132,
+          "peak_rss_mib": 102.578125
+        },
+        {
+          "case": "13",
+          "trench_m": 3300,
+          "occupied_m": 3192,
+          "weighted_score": 3.869090909090909,
+          "solver_cpu_s": 0.056718,
+          "peak_rss_mib": 102.8125
+        },
+        {
+          "case": "14",
+          "trench_m": 37820,
+          "occupied_m": 37704,
+          "weighted_score": 3.987731359069275,
+          "solver_cpu_s": 0.136444,
+          "peak_rss_mib": 105.859375
+        },
+        {
+          "case": "15",
+          "trench_m": 438800,
+          "occupied_m": 418757,
+          "weighted_score": 9.543231540565177,
+          "solver_cpu_s": 1.090929,
+          "peak_rss_mib": 115.046875
+        }
+      ]
+    }
+  },
+  "trace_evidence": {
+    "case11_input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "baseline_judge_transcript": "results/pipes/improvement/pid_lane_run48_factorial/runs/open15/pid_run46/runs/11/judge_output.txt",
+    "baseline_judge_transcript_sha256": "d0bab50f3326e0580365ee83233cba73e0537e8b14d614e2200dc93dbf31b4be",
+    "note": "Last-extension gap/tail values reconstructed from input and transcript; no complete saved free-gap trace. This supports immediate fit failure only, not causal attribution to earlier placements."
+  },
+  "sha256": {
+    "results/pipes/improvement/case11_online_rules/pid46_baseline.cpp": "1a643a2b8a560de5c7dfd7efe0b288dc93785e96400d2ae6fd4ec7eea5f55f59",
+    "results/pipes/improvement/case11_online_rules/potential_gap.cpp": "a1f8eab572f9c6482168bf7a0278f9dd18ff7ece3d5c4bdd60ce064fe29af8c6",
+    "results/pipes/improvement/case11_online_rules/potential_gap.bin": "4d8917b0ff909eb2f7a1e3e3e18c6e033a5987816b9b1c2b977d41d161bbb12b",
+    "results/pipes/improvement/case11_online_rules/lifo_neighbor.cpp": "fac604d83bef35b0f8380d1cc387a93ee9189a703f4c049f1e2d78da7da8f0f5",
+    "results/pipes/improvement/case11_online_rules/lifo_neighbor.bin": "642e347b6dc303b767238f9a70573413ff6df2b1976976f55fd40dda922a968e",
+    "results/pipes/improvement/case11_online_rules/survival_h32_pid46.cpp": "22bec82edae97f8cf1970c862a37b2511ec61d8d76e0a4c4fc81fc2ac6a8638c",
+    "results/pipes/improvement/case11_online_rules/survival_h32_pid46.bin": "99cdf5b0e9129e0db29ef493bb503857db6d03d492cbfd65cf7ae2013bbb28ef",
+    "results/pipes/improvement/case11_online_rules/REPORT.md": "e308c4f8eb1ec3230c7eb143f182e13327918a0b0e8f978956a994d637d533f2",
+    "results/pipes/improvement/case11_online_rules/per_case.csv": "cf0bbabe330801fd283553686bd7fdc0cf099bcb36a0d99384773d125ee10845",
+    "results/pipes/final/solution.cpp": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "src/pipes.cpp": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+    "results/pipes/final/bin/interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "results/pipes/improvement/pid_lane_run48_factorial/runs/open15/pid_run46/summary.json": "632d439b9eaf4266f2af44932fb3176ecef8fd550e1f5c48eca4068eb43dcba5",
+    "results/pipes/improvement/pid_lane_run48_factorial/runs/open15/pid_run46/cases.csv": "aadcff8b392d86966683d6db7707ecc8c78f36867192313fd4dc3e2394e637e3",
+    "results/pipes/improvement/archive_mix_screen/gated_causal/pid46-open15/summary.json": "c24d7fcc04b9d5ac09e80083d4549836922b7b70d21c41b1496647698733afaf",
+    "results/pipes/improvement/archive_mix_screen/gated_causal/pid46-open15/cases.csv": "85c3e8a39a1e570dd7c5db553bc1c272a780056e5101df2337393331ba19b77e",
+    "data/pipes/open/11.in": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "results/pipes/improvement/pid_lane_run48_factorial/runs/open15/pid_run46/runs/11/judge_output.txt": "d0bab50f3326e0580365ee83233cba73e0537e8b14d614e2200dc93dbf31b4be"
+  },
+  "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+  "frozen_final_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+}

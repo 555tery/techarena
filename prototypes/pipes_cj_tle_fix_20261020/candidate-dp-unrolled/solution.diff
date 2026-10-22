@@ -1,0 +1,2336 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-lifetime-fast/solution.cj
++++ prototypes/pipes_cj_tle_fix_20261020/candidate-dp-unrolled/solution.cj
+@@ -2555,8 +2555,131 @@
+             for (g in 1..=maxGap) {
+                 let top = iMin(g, lastRequest)
+                 if (expiry == 0.0) {
+-                    for (request in firstRequest..=top) {
+-                        if (rate.read(request) > 0.0) { value.write(g, fMax(value.read(g), Float64(request) + value.read(g - request))) }
++                    if (g >= 40) {
++                        if (true) {
++                            if (rate.read(1) > 0.0) { value.write(g, fMax(value.read(g), Float64(1) + value.read(g - 1))) }
++                        }
++                        if (true) {
++                            if (rate.read(2) > 0.0) { value.write(g, fMax(value.read(g), Float64(2) + value.read(g - 2))) }
++                        }
++                        if (true) {
++                            if (rate.read(3) > 0.0) { value.write(g, fMax(value.read(g), Float64(3) + value.read(g - 3))) }
++                        }
++                        if (true) {
++                            if (rate.read(4) > 0.0) { value.write(g, fMax(value.read(g), Float64(4) + value.read(g - 4))) }
++                        }
++                        if (true) {
++                            if (rate.read(5) > 0.0) { value.write(g, fMax(value.read(g), Float64(5) + value.read(g - 5))) }
++                        }
++                        if (true) {
++                            if (rate.read(6) > 0.0) { value.write(g, fMax(value.read(g), Float64(6) + value.read(g - 6))) }
++                        }
++                        if (true) {
++                            if (rate.read(7) > 0.0) { value.write(g, fMax(value.read(g), Float64(7) + value.read(g - 7))) }
++                        }
++                        if (true) {
++                            if (rate.read(8) > 0.0) { value.write(g, fMax(value.read(g), Float64(8) + value.read(g - 8))) }
++                        }
++                        if (true) {
++                            if (rate.read(9) > 0.0) { value.write(g, fMax(value.read(g), Float64(9) + value.read(g - 9))) }
++                        }
++                        if (true) {
++                            if (rate.read(10) > 0.0) { value.write(g, fMax(value.read(g), Float64(10) + value.read(g - 10))) }
++                        }
++                        if (true) {
++                            if (rate.read(11) > 0.0) { value.write(g, fMax(value.read(g), Float64(11) + value.read(g - 11))) }
++                        }
++                        if (true) {
++                            if (rate.read(12) > 0.0) { value.write(g, fMax(value.read(g), Float64(12) + value.read(g - 12))) }
++                        }
++                        if (true) {
++                            if (rate.read(13) > 0.0) { value.write(g, fMax(value.read(g), Float64(13) + value.read(g - 13))) }
++                        }
++                        if (true) {
++                            if (rate.read(14) > 0.0) { value.write(g, fMax(value.read(g), Float64(14) + value.read(g - 14))) }
++                        }
++                        if (true) {
++                            if (rate.read(15) > 0.0) { value.write(g, fMax(value.read(g), Float64(15) + value.read(g - 15))) }
++                        }
++                        if (true) {
++                            if (rate.read(16) > 0.0) { value.write(g, fMax(value.read(g), Float64(16) + value.read(g - 16))) }
++                        }
++                        if (true) {
++                            if (rate.read(17) > 0.0) { value.write(g, fMax(value.read(g), Float64(17) + value.read(g - 17))) }
++                        }
++                        if (true) {
++                            if (rate.read(18) > 0.0) { value.write(g, fMax(value.read(g), Float64(18) + value.read(g - 18))) }
++                        }
++                        if (true) {
++                            if (rate.read(19) > 0.0) { value.write(g, fMax(value.read(g), Float64(19) + value.read(g - 19))) }
++                        }
++                        if (true) {
++                            if (rate.read(20) > 0.0) { value.write(g, fMax(value.read(g), Float64(20) + value.read(g - 20))) }
++                        }
++                        if (true) {
++                            if (rate.read(21) > 0.0) { value.write(g, fMax(value.read(g), Float64(21) + value.read(g - 21))) }
++                        }
++                        if (true) {
++                            if (rate.read(22) > 0.0) { value.write(g, fMax(value.read(g), Float64(22) + value.read(g - 22))) }
++                        }
++                        if (true) {
++                            if (rate.read(23) > 0.0) { value.write(g, fMax(value.read(g), Float64(23) + value.read(g - 23))) }
++                        }
++                        if (true) {
++                            if (rate.read(24) > 0.0) { value.write(g, fMax(value.read(g), Float64(24) + value.read(g - 24))) }
++                        }
++                        if (true) {
++                            if (rate.read(25) > 0.0) { value.write(g, fMax(value.read(g), Float64(25) + value.read(g - 25))) }
++                        }
++                        if (true) {
++                            if (rate.read(26) > 0.0) { value.write(g, fMax(value.read(g), Float64(26) + value.read(g - 26))) }
++                        }
++                        if (true) {
++                            if (rate.read(27) > 0.0) { value.write(g, fMax(value.read(g), Float64(27) + value.read(g - 27))) }
++                        }
++                        if (true) {
++                            if (rate.read(28) > 0.0) { value.write(g, fMax(value.read(g), Float64(28) + value.read(g - 28))) }
++                        }
++                        if (true) {
++                            if (rate.read(29) > 0.0) { value.write(g, fMax(value.read(g), Float64(29) + value.read(g - 29))) }
++                        }
++                        if (true) {
++                            if (rate.read(30) > 0.0) { value.write(g, fMax(value.read(g), Float64(30) + value.read(g - 30))) }
++                        }
++                        if (true) {
++                            if (rate.read(31) > 0.0) { value.write(g, fMax(value.read(g), Float64(31) + value.read(g - 31))) }
++                        }
++                        if (true) {
++                            if (rate.read(32) > 0.0) { value.write(g, fMax(value.read(g), Float64(32) + value.read(g - 32))) }
++                        }
++                        if (true) {
++                            if (rate.read(33) > 0.0) { value.write(g, fMax(value.read(g), Float64(33) + value.read(g - 33))) }
++                        }
++                        if (true) {
++                            if (rate.read(34) > 0.0) { value.write(g, fMax(value.read(g), Float64(34) + value.read(g - 34))) }
++                        }
++                        if (true) {
++                            if (rate.read(35) > 0.0) { value.write(g, fMax(value.read(g), Float64(35) + value.read(g - 35))) }
++                        }
++                        if (true) {
++                            if (rate.read(36) > 0.0) { value.write(g, fMax(value.read(g), Float64(36) + value.read(g - 36))) }
++                        }
++                        if (true) {
++                            if (rate.read(37) > 0.0) { value.write(g, fMax(value.read(g), Float64(37) + value.read(g - 37))) }
++                        }
++                        if (true) {
++                            if (rate.read(38) > 0.0) { value.write(g, fMax(value.read(g), Float64(38) + value.read(g - 38))) }
++                        }
++                        if (true) {
++                            if (rate.read(39) > 0.0) { value.write(g, fMax(value.read(g), Float64(39) + value.read(g - 39))) }
++                        }
++                        if (true) {
++                            if (rate.read(40) > 0.0) { value.write(g, fMax(value.read(g), Float64(40) + value.read(g - 40))) }
++                        }
++                    } else {
++                        for (request in firstRequest..=top) {
++                            if (rate.read(request) > 0.0) { value.write(g, fMax(value.read(g), Float64(request) + value.read(g - request))) }
++                        }
+                     }
+                     continue
+                 }
+@@ -2565,32 +2688,1078 @@
+                 var minActiveReward = Float64.Inf
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry
+-                for (request in firstRequest..=top) {
+-                    let requestRate = rate.read(request)
+-                    if (requestRate == 0.0) { continue }
+-                    let requestReward = Float64(request) + value.read(g - request)
+-                    if (requestReward < minActiveReward) { minActiveReward = requestReward }
+-                    reward.write(request, requestReward)
+-                    numerator += requestRate * requestReward
+-                    denominator += requestRate
+-                    active = active | (1 << request)
++                if (g >= 40) {
++                    if (true) {
++                        let requestRate = rate.read(1)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(1) + value.read(g - 1)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(1, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 1)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(2)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(2) + value.read(g - 2)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(2, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 2)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(3)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(3) + value.read(g - 3)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(3, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 3)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(4)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(4) + value.read(g - 4)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(4, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 4)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(5)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(5) + value.read(g - 5)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(5, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 5)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(6)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(6) + value.read(g - 6)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(6, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 6)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(7)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(7) + value.read(g - 7)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(7, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 7)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(8)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(8) + value.read(g - 8)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(8, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 8)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(9)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(9) + value.read(g - 9)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(9, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 9)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(10)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(10) + value.read(g - 10)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(10, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 10)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(11)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(11) + value.read(g - 11)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(11, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 11)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(12)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(12) + value.read(g - 12)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(12, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 12)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(13)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(13) + value.read(g - 13)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(13, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 13)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(14)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(14) + value.read(g - 14)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(14, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 14)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(15)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(15) + value.read(g - 15)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(15, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 15)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(16)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(16) + value.read(g - 16)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(16, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 16)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(17)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(17) + value.read(g - 17)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(17, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 17)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(18)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(18) + value.read(g - 18)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(18, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 18)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(19)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(19) + value.read(g - 19)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(19, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 19)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(20)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(20) + value.read(g - 20)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(20, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 20)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(21)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(21) + value.read(g - 21)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(21, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 21)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(22)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(22) + value.read(g - 22)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(22, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 22)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(23)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(23) + value.read(g - 23)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(23, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 23)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(24)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(24) + value.read(g - 24)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(24, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 24)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(25)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(25) + value.read(g - 25)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(25, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 25)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(26)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(26) + value.read(g - 26)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(26, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 26)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(27)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(27) + value.read(g - 27)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(27, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 27)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(28)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(28) + value.read(g - 28)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(28, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 28)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(29)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(29) + value.read(g - 29)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(29, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 29)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(30)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(30) + value.read(g - 30)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(30, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 30)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(31)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(31) + value.read(g - 31)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(31, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 31)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(32)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(32) + value.read(g - 32)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(32, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 32)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(33)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(33) + value.read(g - 33)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(33, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 33)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(34)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(34) + value.read(g - 34)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(34, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 34)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(35)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(35) + value.read(g - 35)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(35, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 35)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(36)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(36) + value.read(g - 36)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(36, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 36)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(37)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(37) + value.read(g - 37)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(37, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 37)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(38)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(38) + value.read(g - 38)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(38, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 38)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(39)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(39) + value.read(g - 39)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(39, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 39)
++                        }
++                    }
++                    if (true) {
++                        let requestRate = rate.read(40)
++                        if (requestRate != 0.0) {
++                            let requestReward = Float64(40) + value.read(g - 40)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(40, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << 40)
++                        }
++                    }
++                } else {
++                    for (request in firstRequest..=top) {
++                        let requestRate = rate.read(request)
++                        if (requestRate == 0.0) { continue }
++                        let requestReward = Float64(request) + value.read(g - request)
++                        if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                        reward.write(request, requestReward)
++                        numerator += requestRate * requestReward
++                        denominator += requestRate
++                        active = active | (1 << request)
++                    }
+                 }
+                 var estimate = numerator / denominator
+                 while (estimate > minActiveReward) {
+                     minActiveReward = Float64.Inf
+                     var removed = false
+-                    for (request in firstRequest..=top) {
+-                        let bit: Int64 = 1 << request
+-                        if ((active & bit) != 0) {
+-                            let rr = reward.read(request)
+-                            if (rr < estimate) {
+-                                let requestRate = rate.read(request)
+-                                numerator -= requestRate * rr
+-                                denominator -= requestRate
+-                                active = active & (!bit)
+-                                removed = true
+-                            } else if (rr < minActiveReward) {
+-                                minActiveReward = rr
++                    if (g >= 40) {
++                        if (true) {
++                            let bit: Int64 = 1 << 1
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(1)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(1)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 2
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(2)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(2)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 3
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(3)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(3)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 4
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(4)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(4)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 5
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(5)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(5)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 6
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(6)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(6)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 7
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(7)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(7)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 8
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(8)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(8)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 9
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(9)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(9)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 10
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(10)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(10)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 11
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(11)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(11)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 12
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(12)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(12)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 13
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(13)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(13)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 14
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(14)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(14)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 15
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(15)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(15)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 16
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(16)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(16)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 17
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(17)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(17)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 18
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(18)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(18)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 19
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(19)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(19)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 20
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(20)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(20)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 21
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(21)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(21)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 22
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(22)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(22)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 23
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(23)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(23)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 24
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(24)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(24)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 25
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(25)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(25)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 26
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(26)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(26)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 27
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(27)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(27)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 28
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(28)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(28)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 29
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(29)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(29)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 30
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(30)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(30)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 31
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(31)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(31)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 32
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(32)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(32)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 33
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(33)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(33)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 34
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(34)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(34)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 35
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(35)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(35)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 36
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(36)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(36)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 37
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(37)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(37)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 38
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(38)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(38)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 39
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(39)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(39)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                        if (true) {
++                            let bit: Int64 = 1 << 40
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(40)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(40)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
++                            }
++                        }
++                    } else {
++                        for (request in firstRequest..=top) {
++                            let bit: Int64 = 1 << request
++                            if ((active & bit) != 0) {
++                                let rr = reward.read(request)
++                                if (rr < estimate) {
++                                    let requestRate = rate.read(request)
++                                    numerator -= requestRate * rr
++                                    denominator -= requestRate
++                                    active = active & (!bit)
++                                    removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
++                                }
+                             }
+                         }
+                     }
+@@ -2639,32 +3808,1078 @@
+                     var minActiveReward = Float64.Inf
+                     var numerator: Float64 = 0.0
+                     var denominator = expiry
+-                    for (request in firstRequest..=top) {
+-                        let requestRate = requestRates.read(request)
+-                        if (requestRate == 0.0) { continue }
+-                        let requestReward = Float64(request) + gapValues.read(offset + gap - request)
+-                        if (requestReward < minActiveReward) { minActiveReward = requestReward }
+-                        reward.write(request, requestReward)
+-                        numerator += requestRate * requestReward
+-                        denominator += requestRate
+-                        active = active | (1 << request)
++                    if (gap >= 40) {
++                        if (true) {
++                            let requestRate = requestRates.read(1)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(1) + gapValues.read(offset + gap - 1)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(1, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 1)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(2)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(2) + gapValues.read(offset + gap - 2)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(2, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 2)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(3)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(3) + gapValues.read(offset + gap - 3)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(3, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 3)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(4)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(4) + gapValues.read(offset + gap - 4)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(4, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 4)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(5)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(5) + gapValues.read(offset + gap - 5)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(5, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 5)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(6)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(6) + gapValues.read(offset + gap - 6)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(6, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 6)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(7)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(7) + gapValues.read(offset + gap - 7)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(7, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 7)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(8)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(8) + gapValues.read(offset + gap - 8)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(8, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 8)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(9)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(9) + gapValues.read(offset + gap - 9)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(9, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 9)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(10)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(10) + gapValues.read(offset + gap - 10)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(10, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 10)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(11)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(11) + gapValues.read(offset + gap - 11)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(11, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 11)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(12)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(12) + gapValues.read(offset + gap - 12)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(12, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 12)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(13)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(13) + gapValues.read(offset + gap - 13)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(13, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 13)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(14)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(14) + gapValues.read(offset + gap - 14)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(14, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 14)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(15)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(15) + gapValues.read(offset + gap - 15)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(15, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 15)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(16)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(16) + gapValues.read(offset + gap - 16)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(16, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 16)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(17)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(17) + gapValues.read(offset + gap - 17)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(17, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 17)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(18)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(18) + gapValues.read(offset + gap - 18)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(18, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 18)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(19)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(19) + gapValues.read(offset + gap - 19)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(19, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 19)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(20)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(20) + gapValues.read(offset + gap - 20)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(20, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 20)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(21)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(21) + gapValues.read(offset + gap - 21)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(21, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 21)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(22)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(22) + gapValues.read(offset + gap - 22)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(22, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 22)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(23)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(23) + gapValues.read(offset + gap - 23)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(23, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 23)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(24)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(24) + gapValues.read(offset + gap - 24)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(24, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 24)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(25)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(25) + gapValues.read(offset + gap - 25)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(25, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 25)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(26)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(26) + gapValues.read(offset + gap - 26)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(26, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 26)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(27)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(27) + gapValues.read(offset + gap - 27)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(27, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 27)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(28)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(28) + gapValues.read(offset + gap - 28)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(28, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 28)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(29)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(29) + gapValues.read(offset + gap - 29)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(29, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 29)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(30)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(30) + gapValues.read(offset + gap - 30)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(30, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 30)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(31)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(31) + gapValues.read(offset + gap - 31)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(31, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 31)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(32)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(32) + gapValues.read(offset + gap - 32)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(32, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 32)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(33)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(33) + gapValues.read(offset + gap - 33)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(33, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 33)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(34)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(34) + gapValues.read(offset + gap - 34)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(34, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 34)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(35)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(35) + gapValues.read(offset + gap - 35)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(35, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 35)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(36)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(36) + gapValues.read(offset + gap - 36)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(36, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 36)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(37)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(37) + gapValues.read(offset + gap - 37)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(37, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 37)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(38)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(38) + gapValues.read(offset + gap - 38)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(38, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 38)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(39)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(39) + gapValues.read(offset + gap - 39)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(39, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 39)
++                            }
++                        }
++                        if (true) {
++                            let requestRate = requestRates.read(40)
++                            if (requestRate != 0.0) {
++                                let requestReward = Float64(40) + gapValues.read(offset + gap - 40)
++                                if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                                reward.write(40, requestReward)
++                                numerator += requestRate * requestReward
++                                denominator += requestRate
++                                active = active | (1 << 40)
++                            }
++                        }
++                    } else {
++                        for (request in firstRequest..=top) {
++                            let requestRate = requestRates.read(request)
++                            if (requestRate == 0.0) { continue }
++                            let requestReward = Float64(request) + gapValues.read(offset + gap - request)
++                            if (requestReward < minActiveReward) { minActiveReward = requestReward }
++                            reward.write(request, requestReward)
++                            numerator += requestRate * requestReward
++                            denominator += requestRate
++                            active = active | (1 << request)
++                        }
+                     }
+                     var estimate = numerator / denominator
+                     while (estimate > minActiveReward) {
+                         minActiveReward = Float64.Inf
+                         var removed = false
+-                        for (request in firstRequest..=top) {
+-                            let bit: Int64 = 1 << request
+-                            if ((active & bit) != 0) {
+-                                let rr = reward.read(request)
+-                                if (rr < estimate) {
+-                                    let requestRate = requestRates.read(request)
+-                                    numerator -= requestRate * rr
+-                                    denominator -= requestRate
+-                                    active = active & (!bit)
+-                                    removed = true
+-                                } else if (rr < minActiveReward) {
+-                                    minActiveReward = rr
++                        if (gap >= 40) {
++                            if (true) {
++                                let bit: Int64 = 1 << 1
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(1)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(1)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 2
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(2)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(2)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 3
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(3)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(3)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 4
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(4)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(4)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 5
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(5)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(5)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 6
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(6)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(6)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 7
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(7)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(7)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 8
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(8)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(8)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 9
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(9)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(9)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 10
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(10)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(10)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 11
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(11)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(11)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 12
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(12)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(12)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 13
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(13)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(13)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 14
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(14)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(14)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 15
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(15)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(15)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 16
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(16)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(16)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 17
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(17)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(17)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 18
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(18)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(18)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 19
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(19)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(19)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 20
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(20)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(20)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 21
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(21)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(21)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 22
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(22)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(22)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 23
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(23)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(23)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 24
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(24)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(24)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 25
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(25)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(25)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 26
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(26)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(26)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 27
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(27)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(27)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 28
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(28)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(28)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 29
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(29)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(29)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 30
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(30)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(30)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 31
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(31)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(31)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 32
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(32)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(32)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 33
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(33)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(33)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 34
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(34)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(34)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 35
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(35)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(35)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 36
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(36)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(36)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 37
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(37)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(37)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 38
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(38)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(38)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 39
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(39)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(39)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                            if (true) {
++                                let bit: Int64 = 1 << 40
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(40)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(40)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
++                                }
++                            }
++                        } else {
++                            for (request in firstRequest..=top) {
++                                let bit: Int64 = 1 << request
++                                if ((active & bit) != 0) {
++                                    let rr = reward.read(request)
++                                    if (rr < estimate) {
++                                        let requestRate = requestRates.read(request)
++                                        numerator -= requestRate * rr
++                                        denominator -= requestRate
++                                        active = active & (!bit)
++                                        removed = true
++                                    } else if (rr < minActiveReward) {
++                                        minActiveReward = rr
++                                    }
+                                 }
+                             }
+                         }

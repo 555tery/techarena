@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0021",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0021/candidate_0.cpp",
+  "sha256": "2b613ef3b4bc0c098a862c9f474f3b4dd12daf838f5589111ea348504122b8dc",
+  "idea": "Run-front split: оставлять остаток выбранной щели со стороны более длинного блока потенциально освобождающихся труб, когда учёт нескольких соседей меняет решение относительно ближайшего соседа.",
+  "parent": "seed_baseline",
+  "weighted_score": 30.0629839174423,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22500,
+      "kpi": 0.9049333333333334,
+      "weighted_score": 0.904933333333333
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 439160,
+      "kpi": 0.9535408507150014,
+      "weighted_score": 9.535408507150013
+    }
+  ],
+  "fresh": {
+    "mean_delta": -3.3479006574432814e-05,
+    "worst_delta": -0.0005751056326713799,
+    "wins": 0,
+    "regressions": 2,
+    "ties": 28,
+    "worst_cases": [
+      {
+        "case": "dev_14_large_recent",
+        "delta": -0.0005751056326713799,
+        "baseline_T": 34560,
+        "candidate_T": 34580
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": -0.00042926456456160444,
+        "baseline_T": 46460,
+        "candidate_T": 46480
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 94540,
+        "candidate_T": 94540
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 17640,
+        "candidate_T": 17640
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 21700,
+        "candidate_T": 21700
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8087650174650297,
+  "max_cpu_s": 0.8973720000000001,
+  "max_rss_mib": 12.265625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0021/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0021/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792313949.2153049,
+  "balanced_gate": true,
+  "hypothesis": "Последовательное освобождение нескольких соседних труб может сделать один край щели существенно ценнее другого. Размещение новой трубы у противоположного края сохраняет возможность получить большой непрерывный свободный участок, если новая труба переживёт соседей. Механизм действует внутри существующих щелей и может менять ранний prefix. Это непроверенный кандидат: стационарность удаления по rank и независимость освобождений являются приближениями; улучшение score не измерено.",
+  "causality": "Для логарифмических bins числа более новых живых труб учитываются фактические удаления и population exposure за последние 64 удаления. Вес освобождения равен h/(1+h), где h — наблюдавшееся число удалений на трубу за окно. Для каждого края вычисляется R=sum(length_i*product(weight_1..weight_i)) по непрерывному занятому блоку глубиной до 16 труб. При остатке r разность квадратичного proxy размеров освобождённых участков составляет 2*r*(R_left-R_right). Правило применяется только когда глубокие члены разрешают ничью или переворачивают сравнение ближайших соседей. Счётчики eligible, block_decisions, changed, first_event, max_depth и potential_gain_m2 позволяют проверить активацию и изменение раннего prefix; конечный T нужен для проверки практической пользы. Дополнительная память фиксирована; работа ограничена 19 bins на удаление и 32 соседями на подходящее размещение. Компиляция и измерения не выполнялись."
+}

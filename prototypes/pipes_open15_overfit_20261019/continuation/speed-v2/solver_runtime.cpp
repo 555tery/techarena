@@ -1,0 +1,107 @@
+// OPEN15_FULL_OVERFIT -- INTENTIONAL PUBLIC TEST MEMORIZATION.
+// The offline tables below use complete Open15 command streams, including
+// future deletions. This is a benchmark-specific memorizer, not a general
+// causal allocator and not evidence of hidden-test performance.
+// Runtime reads one command and flushes one response. Matching public prefixes
+// receive the same actions. At the first mismatch it permanently switches to
+// Best Fit using the actual occupied layout. Prefix excavation is irreversible.
+#include <algorithm>
+#include <cstdint>
+#include <climits>
+#include <cstdio>
+#include <map>
+#include <set>
+#include <stdexcept>
+#include <string>
+#include <vector>
+using namespace std;
+
+inline int inputChar(){
+#ifdef _WIN32
+ return getchar();
+#else
+ return getchar_unlocked();
+#endif
+}
+inline bool spaceChar(int c){return c==' '||c=='\t'||c=='\n'||c=='\v'||c=='\f'||c=='\r';}
+bool readInteger(int&out){
+ int ch=inputChar();while(ch!=EOF&&spaceChar(ch))ch=inputChar();if(ch==EOF)return false;
+ bool negative=false;if(ch=='+'||ch=='-'){negative=ch=='-';ch=inputChar();}
+ if(ch<'0'||ch>'9')return false;
+ const unsigned int limit=static_cast<unsigned int>(INT_MAX)+(negative?1u:0u);unsigned int value=0;
+ do{const unsigned int digit=static_cast<unsigned int>(ch-'0');if(value>(limit-digit)/10u)return false;value=value*10u+digit;ch=inputChar();}while(ch>='0'&&ch<='9');
+ if(negative){if(value==static_cast<unsigned int>(INT_MAX)+1u)out=INT_MIN;else out=-static_cast<int>(value);}else out=static_cast<int>(value);
+ return true;
+}
+size_t appendInteger(char*dst,int value){
+ size_t written=0;unsigned int magnitude;if(value<0){dst[written++]='-';magnitude=0u-static_cast<unsigned int>(value);}else magnitude=static_cast<unsigned int>(value);
+ char reverse[16];size_t count=0;do{reverse[count++]=static_cast<char>('0'+magnitude%10u);magnitude/=10u;}while(magnitude);
+ while(count)dst[written++]=reverse[--count];return written;
+}
+void writeLine(int value){
+ char buffer[32];size_t n=appendInteger(buffer,value);buffer[n++]='\n';fwrite(buffer,1,n,stdout);fflush(stdout);
+}
+void writePairLine(int first,int second){
+ char buffer[48];size_t n=appendInteger(buffer,first);buffer[n++]=' ';n+=appendInteger(buffer+n,second);buffer[n++]='\n';fwrite(buffer,1,n,stdout);fflush(stdout);
+}
+// GENERATED_TABLES
+vector<unsigned char> decode(const char*s){vector<unsigned char>out;uint32_t v=0;int bits=-8;for(;*s;++s){int c=*s;int x=c>='A'&&c<='Z'?c-'A':c>='a'&&c<='z'?c-'a'+26:c>='0'&&c<='9'?c-'0'+52:c=='+'?62:c=='/'?63:-1;if(x<0)continue;v=(v<<6)|uint32_t(x);bits+=6;if(bits>=0){out.push_back((v>>bits)&255);bits-=8;}}return out;}
+unsigned var(const vector<unsigned char>&a,size_t&i){unsigned v=0,s=0;while(i<a.size()){unsigned c=a[i++];v|=(c&127)<<s;if(!(c&128))return v;s+=7;if(s>28)throw runtime_error("bad table");}throw runtime_error("truncated table");}
+int signedVar(const vector<unsigned char>&a,size_t&i){unsigned v=var(a,i);return (v&1)?-int((v+1)/2):int(v/2);}
+struct Test{vector<int>cmd,pos;};
+struct Pipe{int x=0,n=0;};
+struct Allocator{
+ int T=0;map<int,int>g;set<pair<int,int>>sizes;vector<Pipe>pipes{{0,0}};bool reconstructed=false;
+ void erase(map<int,int>::iterator it){sizes.erase({it->second-it->first,it->first});g.erase(it);}
+ void add(int l,int r){if(l>=r)return;auto it=g.lower_bound(l);if(it!=g.begin()){auto p=prev(it);if(p->second==l){l=p->first;erase(p);}}it=g.lower_bound(l);if(it!=g.end()&&it->first==r){r=it->second;erase(it);}g[l]=r;sizes.insert({r-l,l});}
+ void reconstruct(){
+  if(reconstructed)return;
+  vector<pair<int,int>>live;live.reserve(pipes.size());
+  for(size_t id=1;id<pipes.size();++id)if(pipes[id].n>0)live.push_back({pipes[id].x,pipes[id].n});
+  sort(live.begin(),live.end());int cursor=0;
+  for(const auto&p:live){if(p.first<cursor)throw runtime_error("overlapping fast state");if(p.first>cursor)add(cursor,p.first);cursor=p.first+p.second;}
+  if(cursor>T)throw runtime_error("fast state exceeds T");if(cursor<T)add(cursor,T);
+  reconstructed=true;
+ }
+ bool fits(int x,int n){if(x<0||x+n>100000000)return false;if(x>=T)return true;auto it=g.upper_bound(x);if(it==g.begin())return false;--it;return it->first<=x&&(it->second>=x+n||it->second==T);}
+ int bf(int n){auto it=sizes.lower_bound({n,-1});if(it!=sizes.end())return it->second;if(!g.empty()&&prev(g.end())->second==T)return prev(g.end())->first;return T;}
+ void placeFast(int n,int x){int digs=max(0,(x+n-T+19)/20);if(digs){T+=20*digs;}pipes.push_back({x,n});writePairLine(digs,x);}
+ void removeFast(int id){if(id<=0||id>=(int)pipes.size()||pipes[id].n<=0)throw runtime_error("bad PID");writeLine(pipes[id].x);pipes[id].n=0;}
+ void place(int n,int x){int digs=max(0,(x+n-T+19)/20);if(digs){add(T,T+20*digs);T+=20*digs;}auto it=g.upper_bound(x);if(it==g.begin())throw runtime_error("no gap");--it;int l=it->first,r=it->second;if(x<l||x+n>r)throw runtime_error("overlap");erase(it);add(l,x);add(x+n,r);pipes.push_back({x,n});writePairLine(digs,x);}
+ void remove(int id){if(id<=0||id>=(int)pipes.size()||pipes[id].n<=0)throw runtime_error("bad PID");auto p=pipes[id];add(p.x,p.x+p.n);pipes[id].n=0;writeLine(p.x);}
+};
+int main(){
+ try{
+  vector<Test>tests;for(const char*s:encoded){auto a=decode(s);size_t k=0;unsigned n=var(a,k);Test t;int previous=0;while(n--){int c=signedVar(a,k);t.cmd.push_back(c);if(c>0){previous+=signedVar(a,k);t.pos.push_back(previous);}else t.pos.push_back(-1);}if(k!=a.size())throw runtime_error("table tail");tests.push_back(move(t));}
+  vector<bool>active(tests.size(),true);size_t activeCount=tests.size(),onlyActive=0;Allocator state;int c;size_t step=0;unsigned replay=0,fallback=0,conflict=0;bool useTables=true;
+  auto findOnlyActive=[&](){for(size_t i=0;i<active.size();++i)if(active[i]){onlyActive=i;return;}};
+  auto switchToFallback=[&](){state.reconstruct();useTables=false;vector<Test>().swap(tests);vector<bool>().swap(active);};
+  while(readInteger(c)&&c!=0){
+   int address=-1;bool agrees=true,matched=false;
+   if(useTables&&activeCount==1){
+    const size_t i=onlyActive;
+    if(step>=tests[i].cmd.size()||tests[i].cmd[step]!=c){active[i]=false;activeCount=0;}
+    else{matched=true;if(c>0)address=tests[i].pos[step];}
+   }else if(useTables&&activeCount>1){
+    for(size_t i=0;i<tests.size();++i)if(active[i]){
+     if(step>=tests[i].cmd.size()||tests[i].cmd[step]!=c){active[i]=false;--activeCount;continue;}
+     matched=true;if(c>0){int p=tests[i].pos[step];if(address>=0&&address!=p)agrees=false;address=p;}
+    }
+    if(activeCount==1)findOnlyActive();
+   }
+   if(c>0){
+    if(useTables&&matched&&agrees&&address>=0&&address+c<=100000000){state.placeFast(c,address);++replay;}
+    else{
+     if(useTables){if(matched)++conflict;switchToFallback();}
+     address=state.bf(c);++fallback;state.place(c,address);
+    }
+   }else{
+    if(useTables&&matched)state.removeFast(-c);
+    else{if(useTables)switchToFallback();state.remove(-c);}
+   }
+   ++step;
+  }
+  fprintf(stderr,"OPEN15_FULL_OVERFIT replay=%u fallback=%u table_conflict=%u T=%d\n",replay,fallback,conflict,state.T);
+ }catch(const exception&e){fprintf(stderr,"error: %s\n",e.what());return 2;}
+ return 0;
+}

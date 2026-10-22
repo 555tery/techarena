@@ -1,0 +1,86 @@
+{
+  "generator": "case13_push_20261018/generate_screen.py",
+  "operation_target": 5400,
+  "streams": [
+    {
+      "name": "alternating_lifo_20261026",
+      "seed": 20261026,
+      "operations": 5400,
+      "placements": 3000,
+      "deletions": 2400,
+      "final_active": 600,
+      "sha256": "080d4b0670f8ecb9158a0eaaa973672c73e5ac3e7c09ad3e27ff73152871ce06",
+      "distribution": "alternating_lifo"
+    },
+    {
+      "name": "uniform_mixed_lifo_20261027",
+      "seed": 20261027,
+      "operations": 5400,
+      "placements": 3000,
+      "deletions": 2400,
+      "final_active": 600,
+      "sha256": "ae2ad2aa3382cc19072d450a53802f8f457d817c79fdb90e95dc19404d70ac9a",
+      "distribution": "uniform_mixed_lifo"
+    },
+    {
+      "name": "small_large_phase_shift_20261028",
+      "seed": 20261028,
+      "operations": 5400,
+      "placements": 3000,
+      "deletions": 2400,
+      "final_active": 600,
+      "sha256": "e26111e954b5dbed593ce4660f8a22445be0403473bf68db9d840f1242ee3fd4",
+      "distribution": "small_large_phase_shift"
+    },
+    {
+      "name": "uniform_random_delete_20261029",
+      "seed": 20261029,
+      "operations": 5400,
+      "placements": 3000,
+      "deletions": 2400,
+      "final_active": 600,
+      "sha256": "f40e537b5c6e33964021cdca565e3d6c2e9b16964643bd140653fc9289eb9c95",
+      "distribution": "uniform_random_delete"
+    },
+    {
+      "name": "bursty_5_10_lifo_20261030",
+      "seed": 20261030,
+      "operations": 5400,
+      "placements": 3000,
+      "deletions": 2400,
+      "final_active": 600,
+      "sha256": "5b555ef69edb18e45690e4189d70c810eaaf073aec8090e247363a7a3ab65b02",
+      "distribution": "bursty_5_10_lifo"
+    },
+    {
+      "name": "class_mixture_fifo_20261031",
+      "seed": 20261031,
+      "operations": 5400,
+      "placements": 3000,
+      "deletions": 2400,
+      "final_active": 600,
+      "sha256": "247fca23ab3b3a3155c74de9dfecc682e7d3bf4a34d165ebfd89fc493ffacc63",
+      "distribution": "class_mixture_fifo"
+    },
+    {
+      "name": "random_walk_top20_delete_20261032",
+      "seed": 20261032,
+      "operations": 5400,
+      "placements": 3000,
+      "deletions": 2400,
+      "final_active": 600,
+      "sha256": "cfde329503c2e82756123b8830a4f59bd6b46df84acdb8fd30a3040f942faf1e",
+      "distribution": "random_walk_top20_delete"
+    },
+    {
+      "name": "three_phase_mixed_delete_20261033",
+      "seed": 20261033,
+      "operations": 5400,
+      "placements": 3000,
+      "deletions": 2400,
+      "final_active": 600,
+      "sha256": "b67bfb53f8a59694850ee5c7ed221d1832bfb047b163fe8027770e9cea8c2167",
+      "distribution": "three_phase_mixed_delete"
+    }
+  ]
+}

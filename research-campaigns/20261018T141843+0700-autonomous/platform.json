@@ -1,0 +1,20 @@
+{
+  "submission_id": 1665224,
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/releases/988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4/solution.cpp",
+  "sha256": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+  "compiler": "GCC C++ 14.2 (64-bit, C++20, msys2)",
+  "status": "AAAAAAAAAAAAAAA",
+  "displayed_score": 30.09096,
+  "local_exact_score": 30.090967891345112,
+  "leaderboard_exact_displayed_score": 30.09096789,
+  "verified_at": 1792314788.598838,
+  "result_url": "https://olympic.nsu.ru/nsuts-new/solution?id=1665224",
+  "rank_after_submission": 29,
+  "leader_score_at_start": 30.75699652,
+  "leader_score_latest_observed": 30.75747405,
+  "leader_name_latest_observed": "SysCall",
+  "previous_verified_submission": 1665193,
+  "previous_exact_score": 30.085297532529577,
+  "increment": 0.005670358815535792,
+  "qualification": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/releases/988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4/qualification.json"
+}

@@ -1,0 +1,169 @@
+{
+  "manifest_version": 1,
+  "generated_date": "2026-10-17",
+  "purpose": "Flow predictability investigation; rolling-16 parity candidate screen.",
+  "source_of_truth": {
+    "path": "results/pipes/final/solution.cpp",
+    "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "modified_by_this_investigation": false
+  },
+  "candidate": {
+    "path": "results/pipes/improvement/flow_predictors/official_screen/candidate.cpp",
+    "sha256": "6b19dedc10697cf9022aee3335f0908823160f1ef3601eea5d9107ab25676c69",
+    "change": "add rolling-16 same-PID-parity trigger below existing exact trigger"
+  },
+  "build": {
+    "command": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic",
+    "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)"
+  },
+  "official_screen": {
+    "cases": [
+      5,
+      9,
+      15
+    ],
+    "input_hashes_match_open_inputs": true,
+    "baseline_and_candidate_kpi": {
+      "5": 0.8100701083492671,
+      "9": 0.5083925112976113,
+      "15": 0.9540622436890549
+    },
+    "weighted_score_sum_baseline": 10.8590850565,
+    "weighted_score_sum_candidate": 10.8590850565,
+    "weighted_score_delta": 0.0,
+    "cpu_limit_s": 5.0,
+    "memory_limit_mib": 256
+  },
+  "open_inputs": [
+    {
+      "case": 1,
+      "path": "data/pipes/open/1.in",
+      "sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d"
+    },
+    {
+      "case": 2,
+      "path": "data/pipes/open/2.in",
+      "sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923"
+    },
+    {
+      "case": 3,
+      "path": "data/pipes/open/3.in",
+      "sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494"
+    },
+    {
+      "case": 4,
+      "path": "data/pipes/open/4.in",
+      "sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f"
+    },
+    {
+      "case": 5,
+      "path": "data/pipes/open/5.in",
+      "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+    },
+    {
+      "case": 6,
+      "path": "data/pipes/open/6.in",
+      "sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd"
+    },
+    {
+      "case": 7,
+      "path": "data/pipes/open/7.in",
+      "sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd"
+    },
+    {
+      "case": 8,
+      "path": "data/pipes/open/8.in",
+      "sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7"
+    },
+    {
+      "case": 9,
+      "path": "data/pipes/open/9.in",
+      "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+    },
+    {
+      "case": 10,
+      "path": "data/pipes/open/10.in",
+      "sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b"
+    },
+    {
+      "case": 11,
+      "path": "data/pipes/open/11.in",
+      "sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c"
+    },
+    {
+      "case": 12,
+      "path": "data/pipes/open/12.in",
+      "sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984"
+    },
+    {
+      "case": 13,
+      "path": "data/pipes/open/13.in",
+      "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+    },
+    {
+      "case": 14,
+      "path": "data/pipes/open/14.in",
+      "sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d"
+    },
+    {
+      "case": 15,
+      "path": "data/pipes/open/15.in",
+      "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    }
+  ],
+  "synthetic_inputs": [
+    {
+      "scenario": "lifo",
+      "seed": 20261016,
+      "path": "results/pipes/improvement/flow_predictors/synthetic/lifo.in",
+      "sha256": "8b44389be894077fc22be517dd7f4d1757679eb4f4bdc9067ae4329c9cc9c54d"
+    },
+    {
+      "scenario": "fifo",
+      "seed": 20261017,
+      "path": "results/pipes/improvement/flow_predictors/synthetic/fifo.in",
+      "sha256": "aa2ce93d418c318f7cddc03ce63098358159a5f831ad4396f0b851cac54ff3ea"
+    },
+    {
+      "scenario": "periodic_size_mod2",
+      "seed": 20261018,
+      "path": "results/pipes/improvement/flow_predictors/synthetic/periodic_size_mod2.in",
+      "sha256": "0fe66e436d5f1ea6fc8c4777ad11b17a138d69cd90a7222fc94b6137135296e7"
+    },
+    {
+      "scenario": "regime_shift_mod2",
+      "seed": 20261019,
+      "path": "results/pipes/improvement/flow_predictors/synthetic/regime_shift_mod2.in",
+      "sha256": "ca65a2796a8cc80bc01b55a000a2f0725ef903c00a8c0245430d218a164220f5"
+    },
+    {
+      "scenario": "random_churn",
+      "seed": 20261020,
+      "path": "results/pipes/improvement/flow_predictors/synthetic/random_churn.in",
+      "sha256": "69da2b30a30cf707c750c0f74414431d10f65cec972fa17d596f9c0f74fe0fdb"
+    }
+  ],
+  "artifacts_sha256": {
+    "results/pipes/improvement/flow_predictors/analyze.py": "2e1800ef22adf09e9a1f5317718af58d553b5e5122ccc649ccd8cf43a90a5de7",
+    "results/pipes/improvement/flow_predictors/metrics.json": "dc53aab5527dce962649895575927ebfc2cbb0d1b01bb8dbc0ec2cc243b5da53",
+    "results/pipes/improvement/flow_predictors/synthetic_validation.py": "d45068f72b6db6e73b833a827c360390dc5b1148e32135a0f0fce226e47c2015",
+    "results/pipes/improvement/flow_predictors/synthetic/summary.json": "d0fb3ee559ed7686932d8c6628544399dff65cdbff1260c283e583f2807e2167",
+    "results/pipes/improvement/flow_predictors/phase_robustness.py": "b17494dc6727ce4c9dffdfa8456d0152ff9435b9905f7b094fb8ce16fd1dc844",
+    "results/pipes/improvement/flow_predictors/case8_k11_phase_robustness.json": "4e247580566ed7a106cf522c886bb7be8611bde8a027cef12fdd158a1c5d5f32",
+    "results/pipes/improvement/flow_predictors/trigger_audit.py": "c5f685c85db5360595796ede7074aa56c4cbe605d303b6aa972ff88301d6af67",
+    "results/pipes/improvement/flow_predictors/trigger_audit.json": "a9ff544c66d843767fb6a5431e8e046e80a0c597207d3562116d7ac0cdc564e8",
+    "results/pipes/improvement/flow_predictors/official_screen/candidate.cpp": "6b19dedc10697cf9022aee3335f0908823160f1ef3601eea5d9107ab25676c69",
+    "results/pipes/improvement/flow_predictors/official_screen/source-baseline-results/cases.csv": "572bcb6a3f672a956a110d2628d760cb34882e4ce0653868f7a699f78d605969",
+    "results/pipes/improvement/flow_predictors/official_screen/source-baseline-results/summary.json": "e53d7acb991572b7bd7113534de62d702f8ed6f72785214e9a5f3f0e4e33a590",
+    "results/pipes/improvement/flow_predictors/official_screen/candidate-results/cases.csv": "ea21f4ef3609043f3d98abe7140bcdf3e3cc869bf0a6e7b44c54c5cc22db3215",
+    "results/pipes/improvement/flow_predictors/official_screen/candidate-results/summary.json": "9244932733103629badb0d91b7aceaf7d5b89033c949e05fae9735be87624c52",
+    "results/pipes/improvement/flow_predictors/official_screen/source_baseline": "14677251625805b427eba188e1cb1745564127765216b3def0dfafa9e00924e5",
+    "results/pipes/improvement/flow_predictors/official_screen/candidate": "cf2ad13db1bf71b53c86c65367f265cce6acb6ad91a5e73f466ae0ed5f78efbc",
+    "tools/pipes_harness.py": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "tools/interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+  },
+  "report": {
+    "path": "results/pipes/improvement/flow_predictors/REPORT.md",
+    "sha256": "5b28ac8c0f3c26ab5146c52a453191f6b38d1b44f81135b1dbb9c66bc8354356"
+  }
+}

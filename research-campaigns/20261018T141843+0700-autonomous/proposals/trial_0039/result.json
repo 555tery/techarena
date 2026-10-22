@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0039",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0039/candidate_0.cpp",
+  "sha256": "1dae8ff477377b1d5f455fa45c137db9d5c04b143bbad816294ce64e01cb11bf",
+  "idea": "Совместить два измеренных механизма: high-address tie в малом confident-LIFO режиме и recent-free-age tie в крупном recent-rank режиме. Менять только представителя уже выбранного размера щели.",
+  "parent": "seed_baseline",
+  "weighted_score": 30.06715965998785,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37880,
+      "kpi": 0.9953537486800422,
+      "weighted_score": 3.981414994720169
+    },
+    {
+      "case": "15",
+      "T": 438960,
+      "kpi": 0.9539753052669947,
+      "weighted_score": 9.539753052669948
+    }
+  ],
+  "fresh": {
+    "mean_delta": -0.0003226962700801657,
+    "worst_delta": -0.004395170835634787,
+    "wins": 4,
+    "regressions": 9,
+    "ties": 17,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.002389908304422095,
+        "baseline_T": 24820,
+        "candidate_T": 24880
+      },
+      {
+        "case": "dev_12_large_recent",
+        "delta": -0.0013733092017527149,
+        "baseline_T": 14480,
+        "candidate_T": 14500
+      },
+      {
+        "case": "dev_14_large_recent",
+        "delta": -0.0011495464033397518,
+        "baseline_T": 34560,
+        "candidate_T": 34600
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": -0.0008581598692828374,
+        "baseline_T": 46460,
+        "candidate_T": 46500
+      },
+      {
+        "case": "dev_10_repeated_sizes",
+        "delta": -0.0007414062599734317,
+        "baseline_T": 159840,
+        "candidate_T": 159960
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.808475800201524,
+  "max_cpu_s": 0.920425,
+  "max_rss_mib": 12.9375,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0039/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0039/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792318157.291127,
+  "balanced_gate": true,
+  "hypothesis": "Высокий адрес может сохранять пространственную близость короткоживущих труб в малом состоянии; недавнее освобождение — временную близость в крупном. Возрастная ветка требует наблюдаемой концентрации удалений среди новейших PID. Эффекты не обязаны складываться. Это непроверенная композиция описанных механизмов: исходники donor trials отсутствуют, а прежние fresh-результаты age tie были смешанными.",
+  "causality": "Сигналы исключительно онлайн: число живых труб, существующая LIFO confidence, последние 64 ранга удалений и timestamps фактических освобождений. Разрезание наследует возраст; расширение не создаёт фиктивное освобождение. Исходный перебор размеров, scoreGap, cohort/trend routing и кандидаты rollout сохранены. Новый выбор разрешён вне структурных маршрутов и только когда текущий rollout не оценивал размещение. Среди всех щелей выбранного размера индекс точно выбирает максимальный адрес либо наиболее недавнее освобождение. Дополнительная память O(G), операции индекса O(log G). Диагностика разделяет возможности выбора и реальные изменения адреса. Сборка и score не проверялись."
+}

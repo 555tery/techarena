@@ -1,0 +1,134 @@
+--- candidate-fast/solution.cj
++++ candidate-counts/solution.cj
+@@ -642,6 +642,8 @@
+     public var nextPid: Int64 = 1
+     public var recentLengths = IntRing(0)
+     public var recentFrequency = VArray<Int64, $41>(repeat: 0)
++    public var recentDistinctCount: Int64 = 0
++    public var recentShortCount: Int64 = 0
+     public var lengthOccurrenceCount = VArray<Int64, $41>(repeat: 0)
+     public var removedLengthCohort = Array<Array<Int64>>(41, { _ => Array<Int64>(2, repeat: 0) })
+     public var parityCohortMode: Bool = false
+@@ -663,6 +665,8 @@
+         copy.nextPid = nextPid
+         copy.recentLengths = recentLengths.clone()
+         copy.recentFrequency = recentFrequency
++        copy.recentDistinctCount = recentDistinctCount
++        copy.recentShortCount = recentShortCount
+         copy.lengthOccurrenceCount = lengthOccurrenceCount
+         for (i in 0..41) {
+             copy.removedLengthCohort[i][0] = removedLengthCohort[i][0]
+@@ -680,8 +684,7 @@
+ 
+     public func hasSteadySizeTrend(): Bool {
+         if (recentLengths.size < 128) { return false }
+-        var availableSizes: Int64 = 0
+-        for (size in 1..=40) { if (recentFrequency[size] > 0) { availableSizes++ } }
++        var availableSizes: Int64 = recentDistinctCount
+         if (availableSizes < 3) { return false }
+         var distinctLengths = VArray<Int64, $3>(repeat: 0)
+         var distinctCount: Int64 = 0
+@@ -710,8 +713,7 @@
+ 
+     public func hasSmoothSizeTrendWith(currentLength: Int64): Bool {
+         if (recentLengths.size == 0) { return false }
+-        var availableSizes: Int64 = 0
+-        for (size in 1..=40) { if (recentFrequency[size] > 0) { availableSizes++ } }
++        var availableSizes: Int64 = recentDistinctCount
+         if (recentFrequency[currentLength] == 0) { availableSizes++ }
+         if (availableSizes < 3) { return false }
+         let currentRunAlreadyInHistory = recentLengths.back() == currentLength
+@@ -785,9 +787,14 @@
+ 
+     public func recordLength(length: Int64): Unit {
+         recentLengths.pushBack(length)
++        if (recentFrequency[length] == 0) { recentDistinctCount++ }
++        if (length <= 8) { recentShortCount++ }
+         recentFrequency[length]++
+         if (recentLengths.size > kHistoryWindow) {
+-            recentFrequency[recentLengths.get(0)]--
++            let oldest = recentLengths.get(0)
++            recentFrequency[oldest]--
++            if (recentFrequency[oldest] == 0) { recentDistinctCount-- }
++            if (oldest <= 8) { recentShortCount-- }
+             recentLengths.popFront()
+         }
+     }
+@@ -1180,6 +1187,8 @@
+     public var cohortSlabEnd: Int64 = 0
+     public var recentLengths = IntRing(0)
+     public var recentFrequency = VArray<Int64, $41>(repeat: 0)
++    public var recentDistinctCount: Int64 = 0
++    public var recentShortCount: Int64 = 0
+     public var lengthOccurrenceCount = VArray<Int64, $41>(repeat: 0)
+     public var removedLengthCohort = Array<Array<Int64>>(41, {_ => Array<Int64>(2, repeat: 0)})
+     public var parityCohortMode = false
+@@ -1269,9 +1278,7 @@
+     public func hasLifoDeletionConfidence(): Bool {
+         if (activePipeCount < 128 || recentDeleteRanksPermille.size < 48) { return false }
+         if (recentTopFivePercent * 100 < recentDeleteRanksPermille.size * 80) { return false }
+-        var shortPlacements: Int64 = 0
+-        for (size in 1..=8) { shortPlacements += recentFrequency[size] }
+-        return recentLengths.size >= 64 && shortPlacements * 100 >= recentLengths.size * 90
++        return recentLengths.size >= 64 && recentShortCount * 100 >= recentLengths.size * 90
+     }
+ 
+     public func hasYoungTailNeighbor(tailStart: Int64): Bool {
+@@ -1290,9 +1297,7 @@
+     public func useLifoStackLane(currentLength: Int64): Bool {
+         if (lifoLaneDisabledForScale || activePipeCount < 128 || currentLength > 8 || recentDeleteRanksPermille.size < 48) { return false }
+         if (recentTopFivePercent * 100 < recentDeleteRanksPermille.size * 80) { return false }
+-        var shortPlacements: Int64 = 0
+-        for (size in 1..=8) { shortPlacements += recentFrequency[size] }
+-        return recentLengths.size >= 64 && shortPlacements * 100 >= recentLengths.size * 90
++        return recentLengths.size >= 64 && recentShortCount * 100 >= recentLengths.size * 90
+     }
+ 
+     public func place(length: Int64): Unit {
+@@ -1831,6 +1836,8 @@
+         state.nextPid = pipes.size
+         state.recentLengths = recentLengths.clone()
+         state.recentFrequency = recentFrequency
++        state.recentDistinctCount = recentDistinctCount
++        state.recentShortCount = recentShortCount
+         state.lengthOccurrenceCount = lengthOccurrenceCount
+         state.removedLengthCohort = Array<Array<Int64>>(41, {i => removedLengthCohort[i].clone()})
+         state.parityCohortMode = parityCohortMode
+@@ -1911,8 +1918,7 @@
+ 
+     public func hasSteadySizeTrend(): Bool {
+         if (recentLengths.size < 128) { return false }
+-        var availableSizes: Int64 = 0
+-        for (size in 1..=40) { if (recentFrequency[size] > 0) { availableSizes++ } }
++        var availableSizes: Int64 = recentDistinctCount
+         if (availableSizes < 3) { return false }
+         var distinctLengths = VArray<Int64, $3>(repeat: 0)
+         var distinctCount: Int64 = 0
+@@ -2128,8 +2134,7 @@
+ 
+     public func hasSmoothSizeTrendWith(currentLength: Int64): Bool {
+         if (recentLengths.size == 0) { return false }
+-        var availableSizes: Int64 = 0
+-        for (size in 1..=40) { if (recentFrequency[size] > 0) { availableSizes++ } }
++        var availableSizes: Int64 = recentDistinctCount
+         if (recentFrequency[currentLength] == 0) { availableSizes++ }
+         if (availableSizes < 3) { return false }
+         let currentRunAlreadyInHistory = recentLengths.back() == currentLength
+@@ -2172,8 +2177,16 @@
+ 
+     public func recordLength(length: Int64): Unit {
+         recentLengths.pushBack(length)
++        if (recentFrequency[length] == 0) { recentDistinctCount++ }
++        if (length <= 8) { recentShortCount++ }
+         recentFrequency[length]++
+-        if (recentLengths.size > kHistoryWindow) { recentFrequency[recentLengths.get(0)]--; recentLengths.popFront() }
++        if (recentLengths.size > kHistoryWindow) {
++            let oldest = recentLengths.get(0)
++            recentFrequency[oldest]--
++            if (recentFrequency[oldest] == 0) { recentDistinctCount-- }
++            if (oldest <= 8) { recentShortCount-- }
++            recentLengths.popFront()
++        }
+     }
+ 
+     public func eraseGap(it: Int64): Unit {

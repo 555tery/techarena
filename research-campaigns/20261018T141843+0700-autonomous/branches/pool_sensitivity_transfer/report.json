@@ -1,0 +1,285 @@
+{
+  "status": "no-go",
+  "created_at": 1792323094.0353012,
+  "proposal": {
+    "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/pool_sensitivity_transfer/solution.cpp",
+    "sha256": "3a3f1ec58ac0ee60e93aa288ece04de5568abb6e2a43d6468094d12a944a525c",
+    "idea": "Pool sensitivity: account for the redistribution of request traffic over remaining gaps when one fitting gap is consumed.",
+    "hypothesis": "Differentiate the donor Bellman packing value with respect to log arrival rate at fixed expiry, aggregate sensitivity over current free inventory, and compare the parent two width finalists with the routing credit. Transfer only that correction onto22, retaining its lifetime score and representative. Derivative grid cap80 is inherited from donor as2*maximum request; larger gaps retain capped contribution. First-order approximation, not an exact global objective.",
+    "causality": "Current request and current free geometry plus already observed insertion/deletion history only. No test id, stream N, future input, fingerprints or external state. Parent source and donor hash verified. Source insertion scopes and bounds audited; C++20 Wall/Wextra/Werror syntax passed. No model calls for preparing this transfer. Strict full15 plus all30 development and CPU/RSS gates decide acceptance.",
+    "parent": "trial_0022"
+  },
+  "parent_sha256": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+  "donor": 44,
+  "donor_sha256": "ca11b3857ecfc753bbecd951900455494352706d21bf2e80f8cdccacfb300e12",
+  "strict_syntax_compile": "passed",
+  "evaluation_result": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_3a3f1ec58ac0ee60/result.json",
+  "model_calls": 0,
+  "release_started": false,
+  "submitted": false,
+  "scope_audit": "Existing parent structural routes, recent-free-age representatives, endpoints and expansion unchanged. Added score applies only in protected ordinary route; retained parent MC/causal lifetime computations. Additional compute subject to original5s/256MiB gate.",
+  "checked_at": 1792323248.183809,
+  "source_sha256_verified": true,
+  "weighted_score": 30.076657710511366,
+  "score_delta_vs22": -0.014310180833746244,
+  "balanced_gate": true,
+  "max_cpu_s": 1.3610039999999999,
+  "max_rss_mib": 14.703125,
+  "comparisons": {
+    "open15": {
+      "case_count": 15,
+      "correct": true,
+      "mean_delta": -0.00011645574163143824,
+      "worst_delta": -0.001220472722642807,
+      "wins": 0,
+      "regressions": 2,
+      "ties": 13,
+      "changed_T": [
+        {
+          "case": "14",
+          "parent_T": 37840,
+          "candidate_T": 37860,
+          "delta_T": 20
+        },
+        {
+          "case": "15",
+          "parent_T": 438060,
+          "candidate_T": 438620,
+          "delta_T": 560
+        }
+      ],
+      "counters": [
+        {
+          "case": "1",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "2",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "3",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "4",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "5",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "6",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "7",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "8",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "9",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "10",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "11",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "12",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "13",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "14",
+          "diagnostic": "pool_sensitivity_comparisons=490 nonzero_credits=616 overrides=46"
+        },
+        {
+          "case": "15",
+          "diagnostic": "pool_sensitivity_comparisons=24021 nonzero_credits=38198 overrides=5928"
+        }
+      ]
+    },
+    "development": {
+      "case_count": 30,
+      "correct": true,
+      "mean_delta": 4.220003457270731e-06,
+      "worst_delta": -0.0005771071590509047,
+      "wins": 2,
+      "regressions": 4,
+      "ties": 24,
+      "changed_T": [
+        {
+          "case": "dev_01_recent_growth_shift",
+          "parent_T": 94020,
+          "candidate_T": 93900,
+          "delta_T": -120
+        },
+        {
+          "case": "dev_04_fifo_size_drift",
+          "parent_T": 103520,
+          "candidate_T": 103540,
+          "delta_T": 20
+        },
+        {
+          "case": "dev_10_repeated_sizes",
+          "parent_T": 158940,
+          "candidate_T": 159020,
+          "delta_T": 80
+        },
+        {
+          "case": "dev_13_large_recent",
+          "parent_T": 46460,
+          "candidate_T": 46480,
+          "delta_T": 20
+        },
+        {
+          "case": "dev_14_large_recent",
+          "parent_T": 34500,
+          "candidate_T": 34520,
+          "delta_T": 20
+        },
+        {
+          "case": "dev_17_large_recent",
+          "parent_T": 64920,
+          "candidate_T": 64880,
+          "delta_T": -40
+        }
+      ],
+      "counters": [
+        {
+          "case": "dev_00_recent_growth_shift",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_01_recent_growth_shift",
+          "diagnostic": "pool_sensitivity_comparisons=830 nonzero_credits=1485 overrides=55"
+        },
+        {
+          "case": "dev_02_recent_stationary",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_03_recent_stationary",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_04_fifo_size_drift",
+          "diagnostic": "pool_sensitivity_comparisons=843 nonzero_credits=1318 overrides=303"
+        },
+        {
+          "case": "dev_05_fifo_size_drift",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_06_random_mixture",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_07_random_mixture",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_08_cohort_release",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_09_cohort_release",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_10_repeated_sizes",
+          "diagnostic": "pool_sensitivity_comparisons=2183 nonzero_credits=3696 overrides=611"
+        },
+        {
+          "case": "dev_11_repeated_sizes",
+          "diagnostic": "pool_sensitivity_comparisons=1506 nonzero_credits=2563 overrides=458"
+        },
+        {
+          "case": "dev_12_large_recent",
+          "diagnostic": "pool_sensitivity_comparisons=7505 nonzero_credits=4242 overrides=188"
+        },
+        {
+          "case": "dev_13_large_recent",
+          "diagnostic": "pool_sensitivity_comparisons=3912 nonzero_credits=2772 overrides=294"
+        },
+        {
+          "case": "dev_14_large_recent",
+          "diagnostic": "pool_sensitivity_comparisons=2053 nonzero_credits=2085 overrides=131"
+        },
+        {
+          "case": "dev_15_large_recent",
+          "diagnostic": "pool_sensitivity_comparisons=1436 nonzero_credits=1411 overrides=380"
+        },
+        {
+          "case": "dev_16_large_recent",
+          "diagnostic": "pool_sensitivity_comparisons=940 nonzero_credits=908 overrides=69"
+        },
+        {
+          "case": "dev_17_large_recent",
+          "diagnostic": "pool_sensitivity_comparisons=1065 nonzero_credits=972 overrides=177"
+        },
+        {
+          "case": "dev_18_frames",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_19_frames",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_20_frames",
+          "diagnostic": "pool_sensitivity_comparisons=173 nonzero_credits=277 overrides=22"
+        },
+        {
+          "case": "dev_21_frames",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_22_frames",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_23_frames",
+          "diagnostic": "pool_sensitivity_comparisons=132 nonzero_credits=207 overrides=13"
+        },
+        {
+          "case": "dev_24_micro",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_25_micro",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_26_micro",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_27_micro",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_28_micro",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        },
+        {
+          "case": "dev_29_micro",
+          "diagnostic": "pool_sensitivity_comparisons=0 nonzero_credits=0 overrides=0"
+        }
+      ]
+    }
+  },
+  "conclusion": "Active transfer, negative public result. No improved public case versus frozen22; reject without release/submission or threshold sweep. Development results reported separately and cannot justify the public regression."
+}

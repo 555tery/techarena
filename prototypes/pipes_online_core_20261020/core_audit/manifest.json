@@ -1,0 +1,14 @@
+{
+  "base": "/Users/555tery/techarena/prototypes/pipes_closed_ready_20261020/candidates-fast/online/solution.cpp",
+  "base_sha256": "12c976b59455f86d322413f55ffc4f16777c4cfa4393b933902d3fd89fa317c1",
+  "variants": {
+    "parity_decay64": {
+      "source_sha256": "63b57d58f2966a30a8e8055762aed1c4732b6d0b7dbe1950674a6778b7779dda",
+      "binary_sha256": "65b8d3428205d8db28fb5d6c91fed000bc7279e06cfb9417e0d5bd90bbe80867"
+    },
+    "primal_window256": {
+      "source_sha256": "0b9e006878b9405e448f00cdefc1526a58806868af16af0fb6a09b33f6d35d21",
+      "binary_sha256": "73d2d9cb73564bb59f77dbad89ff728ff0b100aba5853282a13e29d6fce19e92"
+    }
+  }
+}

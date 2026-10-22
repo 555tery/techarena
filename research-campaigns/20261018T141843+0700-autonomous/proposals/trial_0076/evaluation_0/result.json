@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "evaluation_0",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0076/candidate_0.cpp",
+  "sha256": "32d6faef356b41a90eb30b7e11fbbc5164d7b2947fa98458f8a2eed4b5fb0e29",
+  "idea": "Оценивать щели по реально выжившему объёму их заполнителей через одинаковый горизонт, используя родительский Bellman value как prior.",
+  "parent": "trial_0032",
+  "weighted_score": 28.050476165195864,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1740,
+      "kpi": 0.9637931034482758,
+      "weighted_score": 0.963793103448276
+    },
+    {
+      "case": "8",
+      "T": 4740,
+      "kpi": 0.9761603375527426,
+      "weighted_score": 0.976160337552743
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 15480,
+      "kpi": 0.7948320413436692,
+      "weighted_score": 0.794832041343669
+    },
+    {
+      "case": "11",
+      "T": 23340,
+      "kpi": 0.8723650385604114,
+      "weighted_score": 0.872365038560411
+    },
+    {
+      "case": "12",
+      "T": 10340,
+      "kpi": 0.9911992263056093,
+      "weighted_score": 3.964796905222437
+    },
+    {
+      "case": "13",
+      "T": 3300,
+      "kpi": 0.9672727272727273,
+      "weighted_score": 3.869090909090909
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 460560,
+      "kpi": 0.9092344102831336,
+      "weighted_score": 9.092344102831335
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0016680125548134206,
+    "worst_delta": -0.019287534453169664,
+    "wins": 11,
+    "regressions": 16,
+    "ties": 3,
+    "worst_cases": [
+      {
+        "case": "dev_15_large_recent",
+        "delta": -0.019287534453169664,
+        "baseline_T": 28140,
+        "candidate_T": 28700
+      },
+      {
+        "case": "dev_19_frames",
+        "delta": -0.018073399412870672,
+        "baseline_T": 9760,
+        "candidate_T": 9940
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.013573849032130991,
+        "baseline_T": 30480,
+        "candidate_T": 30920
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": -0.011848770863328584,
+        "baseline_T": 17640,
+        "candidate_T": 17860
+      },
+      {
+        "case": "dev_18_frames",
+        "delta": -0.011653757888697602,
+        "baseline_T": 1660,
+        "candidate_T": 1680
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.011233422376189073,
+        "baseline_T": 64880,
+        "candidate_T": 65620
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8104665090264176,
+  "max_cpu_s": 0.9315089999999999,
+  "max_rss_mib": 16.4375,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0076/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0076/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792327195.735919,
+  "balanced_gate": true
+}

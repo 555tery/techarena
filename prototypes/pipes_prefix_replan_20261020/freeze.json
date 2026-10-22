@@ -1,0 +1,16 @@
+{
+  "selected": "final",
+  "copied_exactly_from": "instant",
+  "source_sha256": "6e7be8503ec78147e407735c6010179dd83bf22692f3f4d6cdd315f5276cc500",
+  "binary_sha256": "7bbafed69b8efe136d583fcfdc22bdb854c54197c108b6f488abac3eaa94645a",
+  "frozen_at": "2026-10-19T17:30:52.968902+00:00",
+  "fresh_manifest_sha256": "61cdfe1c1134557ec26c06ae56ad4da5e550ce97283e0deef8dd60a328c32be0",
+  "selection": "No per-case loss on81known and24reusedconfirmation, exactOpen15, all-public-prefix excavation<=parent; known metrics can include timer-dependent differences",
+  "fresh_policy": "Open fresh24 once after this freeze; do not tune after results; report all losses",
+  "rejected": {
+    "joint": "3known regressions and2prior-confirmation regressions",
+    "local": "3known regressions"
+  },
+  "platform_actions": 0,
+  "target_G5420_benchmarked": false
+}

@@ -1,0 +1,126 @@
+{
+  "finished_at": "2026-10-19T19:19:13.353803+00:00",
+  "status": "completed_local_round_candidate_rejected",
+  "promoted": false,
+  "candidate": "tail-transport",
+  "source_sha256": "edfc4c8bc05a6d5dabd2c845d7710c6c5417efb1e73c841d1b4e6dde3a573dbe",
+  "binary_sha256": "f38540b05971193e32ee502b61759f0945f673089fadb681c686444858e46f7a",
+  "parent_source_sha256": "a843822451c2a7c5e07330daa33268fc77bccfbc08fd196bfaf98a673ae24cfe",
+  "Open15_score": 30.75747404826914,
+  "Open15_exact": "8753218892157372683/284588353335535200",
+  "known": {
+    "n": 293,
+    "wins": 4,
+    "ties": 286,
+    "losses": 3,
+    "mean_delta": 3.4043136751453165e-05,
+    "worst_delta": -0.02001040853499869,
+    "best_delta": 0.020031897926634734
+  },
+  "affected_known32_screen": {
+    "n": 32,
+    "wins": 2,
+    "ties": 30,
+    "losses": 0,
+    "mean_delta": 0.0006331190776663956,
+    "worst_delta": 0.0,
+    "best_delta": 0.020031897926634734
+  },
+  "official_recheck7": {
+    "n": 7,
+    "wins": 1,
+    "ties": 5,
+    "losses": 1,
+    "mean_delta": -0.0012272758367834718,
+    "worst_delta": -0.028622828784119037,
+    "best_delta": 0.020031897926634734
+  },
+  "fresh96": {
+    "n": 96,
+    "wins": 1,
+    "ties": 92,
+    "losses": 3,
+    "mean_delta": -0.00043623828607215997,
+    "worst_delta": -0.027081339712918706,
+    "best_delta": 0.002057926829268292
+  },
+  "fresh_base64": {
+    "n": 64,
+    "wins": 0,
+    "ties": 64,
+    "losses": 0,
+    "mean_delta": 0.0,
+    "worst_delta": 0.0,
+    "best_delta": 0.0
+  },
+  "fresh_late32": {
+    "n": 32,
+    "wins": 1,
+    "ties": 28,
+    "losses": 3,
+    "mean_delta": -0.00130871485821648,
+    "worst_delta": -0.027081339712918706,
+    "best_delta": 0.002057926829268292
+  },
+  "fresh_actually_uncoupled14": {
+    "n": 14,
+    "wins": 1,
+    "ties": 10,
+    "losses": 3,
+    "mean_delta": -0.002991348247351954,
+    "worst_delta": -0.027081339712918706,
+    "best_delta": 0.002057926829268292
+  },
+  "new_partition_certificates": [
+    {
+      "id": "partition-p17",
+      "baseline": 1.0,
+      "candidate": 0.9354838709677419,
+      "baselineT": 580,
+      "candidateT": 620,
+      "delta": -0.06451612903225812
+    },
+    {
+      "id": "partition-p67",
+      "baseline": 1.0,
+      "candidate": 0.9761904761904762,
+      "baselineT": 820,
+      "candidateT": 840,
+      "delta": -0.023809523809523836
+    },
+    {
+      "id": "partition-p109",
+      "baseline": 1.0,
+      "candidate": 0.9761904761904762,
+      "baselineT": 820,
+      "candidateT": 840,
+      "delta": -0.023809523809523836
+    },
+    {
+      "id": "partition-p303",
+      "baseline": 1.0,
+      "candidate": 0.9782608695652174,
+      "baselineT": 900,
+      "candidateT": 920,
+      "delta": -0.021739130434782594
+    }
+  ],
+  "official_runs": 126,
+  "official_distinct_inputs": 126,
+  "max_cpu_s": 3.5351019999999997,
+  "max_rss_mib": 120.359375,
+  "platform_actions": 0,
+  "target_hardware_run": false,
+  "canonical_and_original_parent_changed": false,
+  "scope": "Single solver worker on macOS arm64; no Windows 10 / Pentium Gold G5420 measurements.",
+  "next_round": "These96 independent inputs and5 targeted diagnostics are now observed regression data. A newly tuned candidate requires a new independent set.",
+  "limitations": [
+    "No-loss gate failed. Full existing screen contains CPU-sensitive differences; none are filtered out.",
+    "All3 fresh losses had zero Planner decisions, so they are physical pre-sync regressions, not timer noise.",
+    "Local transport certificate is only a current-state/current-allocation invariant. Subsequent requests may make continuation impossible within parentT.",
+    "The4 subset-sum certificates exclude any fallback for these4 already selected coordinates on their respective suffixes. They do not prove impossibility of every solver improvement.",
+    "Fresh streams are new seeds/inputs of known mechanisms. Base64 covers public11/15 and neutral streams; extra32 covers public8/13. Only14 actually execute uncoupled fallback."
+  ],
+  "report_sha256": "b5c565f335945860ebb08d6ee0177de5643868ebda1665a31b2c74ea9a31d1af",
+  "freeze_sha256": "8a5fab7dcf78c9142602bbdf70e2fe6672b24703543c56e5f97e5f4864a079d3"
+}

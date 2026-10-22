@@ -1,0 +1,88 @@
+{
+  "created_at": "2026-10-19T20:23:24.095602+00:00",
+  "selected": "strict_improvement",
+  "source_sha256": "f7b285eee9d59f443b015de581c4622668dd1a321e0cb9ef00d4baf10412f5db",
+  "binary_sha256": "7bde270abdffdf4f26146ea73e4d1e05f584be5857c9fff334e566477c6608f0",
+  "baseline_sha256": "57c047da7ae9939d9d86dfb050458f22e1a189ec43c5fb621c578bee324821d9",
+  "selection_freeze_sha256": "fe4e062aafb739462327604b486b3e95a74de08a14f5f6830a6c3918e879f3dc",
+  "quality_gates": {
+    "positive_equal_stratum_KPI": true,
+    "positive_equal_stratum_total": true,
+    "patterns_positive": true,
+    "stratum_floor": true,
+    "individual_retention": true,
+    "worst_total_endpoint": true
+  },
+  "quality_passed": true,
+  "official_confirmation_pending": false,
+  "public_scores": {
+    "baseline": 30.01926429194345,
+    "legacy": 30.090967891345112,
+    "strict_improvement": 30.044314328139688,
+    "stable_ties": 30.042572068504242
+  },
+  "delta_public": 0.025050036196237357,
+  "equal_stratum_KPI_delta": 0.00022913963646045915,
+  "total_score_equal_mix_delta": 0.044297765658915925,
+  "total_score_endpoints_delta": {
+    "stable_patterns": -0.001242282650574772,
+    "changing_patterns": 0.06701448612303149,
+    "neutral": 0.04833194872415661,
+    "public_prefix": 0.06308691043905038
+  },
+  "uncertainty": {
+    "method": "Post-freeze descriptive joint bootstrap of12 generating mechanisms across stable/changing/matched controls;6 IID profiles within neutral;8 suffix families within prefix.10000 draws, fixed seed. Point estimand equals frozen macro; not used for selection.",
+    "metadata_caveat": "Raw family strings in the frozen evaluator contain variant suffixes for non-prefix inputs. Their original intervals are variant-level; this report uses broader mechanism blocks. Do not call the original intervals mechanism-block intervals.",
+    "intervals95": {
+      "stable_patterns": [
+        -0.0008271276648424026,
+        0.00015225113021169004
+      ],
+      "changing_patterns": [
+        -0.0005097138501109141,
+        0.0017684319848364147
+      ],
+      "neutral": [
+        -0.000217578460931465,
+        0.000844691645069238
+      ],
+      "public_prefix": [
+        1.011839207674914e-06,
+        0.0010559601158794348
+      ],
+      "equal_four_strata": [
+        -0.00011440034655240891,
+        0.0005985003559561997
+      ]
+    },
+    "hidden_distribution_inferred": false,
+    "coverage_guarantee": false
+  },
+  "matched_controls": {
+    "n_pairs": 24,
+    "mean_pattern_delta": -0.0009906820919136684,
+    "mean_control_delta": 0.0006168645983823338,
+    "difference_of_policy_deltas": -0.0016075466902960023,
+    "interpretation": "Descriptive matched contrast; shuffled controls alter length order and PID lifetimes together while preserving event signs and size histograms. It does not isolate one causal feature."
+  },
+  "original_DEV_gain_retained": 0.9984883409002073,
+  "caveat": "Small positive point estimate with uncertainty crossing zero; independent synthetic transfer only, not a guarantee of hidden-contest gains.",
+  "no_source_edits_after_final": true,
+  "platform_actions": 0,
+  "canonical_changed": false,
+  "confirmation_passed": true,
+  "official_runs": 518,
+  "selected_official_runs": 307,
+  "maximum_cpu_s": 2.8395529999999995,
+  "maximum_rss_mib": 16.203125,
+  "native_windows_tested": false,
+  "target_G5420_tested": false,
+  "host": "macOS arm64, one solver worker, CPU user+system",
+  "source_review_sha256": "93852559b74d95b8cdae47947a981336c7e54153954ceb82758b5b5edc3db20a",
+  "recommendation": "Small incremental local candidate; passed the fixed point-estimate gates, but the incremental effect is not statistically resolved by the descriptive mechanism bootstrap.",
+  "generated_new_inputs": 292,
+  "selection_calibration_inputs": 96,
+  "independent_final_inputs": 192,
+  "packaged_tests": 307,
+  "final_now_observed": true
+}

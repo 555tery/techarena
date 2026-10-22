@@ -1,0 +1,295 @@
+<p align="center">
+  <img src="docs/logo.png" alt="Headless coding agent orchestration" width="200" style="border-radius: 24px;" />
+</p>
+
+<h1 align="center">Headless CLI</h1>
+
+<p align="center">
+  One CLI entrypoint for running Antigravity, Claude, Codex, Cursor, Gemini, Pi, OpenCode, and ACP-compatible agents in headless mode.
+</p>
+
+<p align="center">
+  <img alt="Node.js 22+" src="https://img.shields.io/badge/Node.js-22%2B-339933?logo=node.js&logoColor=white" />
+  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-ESM-3178C6?logo=typescript&logoColor=white" />
+  <img alt="npm package" src="https://img.shields.io/badge/npm-%40roberttlange%2Fheadless-CB3837?logo=npm&logoColor=white" />
+  <a href="https://roberttlange.com/blog/05-headless"><img alt="Blog post" src="https://img.shields.io/badge/blog-headless-111111" /></a>
+</p>
+
+Headless normalizes the small differences between coding-agent CLIs: prompts, models, reasoning effort, working directories, output modes, sessions, and environment checks use one interface while each backend keeps its native execution flags.
+
+## Install
+
+Run once with `npx`:
+
+```bash
+npx -y @roberttlange/headless codex --prompt "Hello world"
+```
+
+Or install globally:
+
+```bash
+npm install -g @roberttlange/headless
+headless codex --prompt "Hello world"
+```
+
+Requires Node.js 22+.
+
+To install the bundled Codex skill for visual Headless swarms, use `npx` to copy it into Codex's skill directory:
+
+```bash
+mkdir -p ~/.codex/skills
+HEADLESS_REF=main
+npx -y degit@2.8.4 "RobertTLange/headless-cli/skills/headless-swarm#$HEADLESS_REF" ~/.codex/skills/headless-swarm
+```
+
+### Python SDK
+
+Install the typed Python wrapper after installing the Headless CLI:
+
+```bash
+pip install headless-cli
+```
+
+```python
+from headless_cli import Headless
+
+headless = Headless()
+result = headless.run("codex", prompt="Review this repository")
+print(result.final_message)
+```
+
+Sync and async clients cover runs, native and tmux sessions, coordinated runs,
+cron jobs, Docker helpers, structured streaming, and a raw CLI escape hatch.
+See the [Python SDK guide](python/README.md) for the complete interface.
+
+## Core Usage
+
+```bash
+# Use the first installed supported agent.
+headless --prompt "Inspect this repository"
+
+# Choose an agent, model, and normalized reasoning effort.
+headless codex --prompt "Run the tests and fix failures" --model gpt-5 --reasoning-effort high
+
+# Select a Codex configuration profile for this invocation.
+headless codex --prompt "Review the architecture" --profile research
+
+# Opt into provider Fast mode for a Codex or Claude run. Without --fast,
+# Headless preserves the backend's ambient/profile setting.
+headless codex --fast --prompt "Run the focused test suite"
+headless claude --fast --prompt "Review this pull request"
+headless codex --no-fast --prompt "Run at the standard service tier"
+
+# Read a prompt from a file and run from another repository.
+headless claude --prompt-file prompt.md --work-dir /path/to/project
+
+# Pipe a prompt over stdin.
+printf "Review this diff" | headless pi --model claude-opus
+
+# Preview the native backend command.
+headless gemini --prompt "Summarize the codebase" --print-command
+headless antigravity --prompt "Inspect the current worktree" --print-command
+headless --prompt "identity" --print-command --json
+
+# Run an ACP-compatible agent from the registry or a custom ACP server command.
+headless acp --acp-agent auggie --prompt "Inspect this repository"
+headless acp --acp-command "atlas alta agent run" --prompt "Fix the failing tests"
+
+# Stream native JSON, debug traces, or append normalized usage.
+headless pi --prompt "Summarize this repo" --json
+headless codex --prompt "Fix the failing tests" --debug
+headless codex --prompt "Summarize this repo" --usage
+headless codex --prompt "Summarize this repo" --json --usage
+headless antigravity --prompt "Summarize this repo" --usage
+
+# Use read-only mode for review/planning work.
+headless codex --allow read-only --prompt "Review this repo"
+
+# Start or resume native sessions.
+headless codex --prompt "Continue the fix" --session bughunt
+headless codex --docker --session bughunt --prompt "Continue the fix in a durable Docker home"
+
+# Launch an interactive tmux session.
+headless codex --prompt "Fix the failing tests" --tmux
+headless codex --prompt "Fix the failing tests" --tmux --wait --delete
+headless attach --all
+
+# Validate local setup.
+headless --check
+```
+
+When no agent is specified, Headless selects the first installed agent in this order: `codex`, `claude`, `pi`, `opencode`, `gemini`, `antigravity`, `cursor`. ACP-compatible agents are explicit-only: use `headless acp --acp-agent ...` or `headless acp --acp-command ...`.
+
+## Billing and subscription fallback
+
+Noninteractive Claude and Codex invocations default to `--billing auto`: use an
+available subscription, then switch once to paid authentication after a native
+subscription limit or a subscription-specific Codex model rejection. GPT-5.4
+and `gpt-5.4-2026-03-05` use OpenAI API billing directly. Other harnesses keep
+their native authentication.
+
+```bash
+headless codex --prompt "Run the experiment"                     # subscription first
+headless codex --model gpt-5.4 --prompt "Run the experiment"      # OpenAI API
+headless claude --billing subscription --prompt "Review results" # never switch to paid
+headless claude --billing api --prompt "Continue the experiment" # Amazon Bedrock
+```
+
+Codex API billing needs `CODEX_API_KEY` or `OPENAI_API_KEY`. Claude's paid route
+uses Amazon Bedrock, with an AWS region and credentials available to the native
+CLI; it retains the requested model and native Bedrock model mapping. An
+Anthropic API key alone does not configure this backup. For Docker/Modal, supply
+credentials accessible inside the container (for example AWS access key, secret,
+session token, and region); a host AWS profile or credential-file path alone is
+not portable.
+
+Policy precedence: `--billing` > `HEADLESS_BILLING` > `billing` in
+`[agents.claude]`/`[agents.codex]` > `auto`. Choose `subscription` to disallow paid
+fallback. Explicit custom Codex profiles/providers keep native auth under `auto`
+and cannot be combined with explicit subscription/API routing. With no detected
+subscription or configured backup, `auto` preserves native authentication.
+
+Fallback preserves the workspace, native session, permissions, reasoning effort,
+and original deadline. Completed work resumes with a continuation prompt; the
+original task is not replayed after partial execution. If safe resumption or
+backup credentials are unavailable, Headless exits with status 78. Generic
+errors, tool output, interruptions, and timeouts do not trigger fallback. Paid
+provider limits still apply; Headless does not impose a local dollar cap.
+
+The policy applies locally, in Docker, and in Modal. Docker keeps an anonymous
+private home across attempts, removes it after native success, and reports
+its retained path on failure for recovery. `--session` homes remain durable.
+On Windows, anonymous Docker runs share a Docker-managed volume across attempts;
+success removes it and failure reports its name for recovery. Named durable
+Docker sessions remain unsupported on Windows.
+Interactive/tmux invocations use native authentication; explicit `--billing`
+with `--tmux` is rejected.
+
+`--usage` includes `billing.attempts` with route, transition reason, and each
+attempt's usage/cost provenance. The top-level token counts aggregate attempts;
+mixed or missing cost bases leave aggregate cost unavailable instead of mixing
+estimates with reported charges. Subscription cost estimates are API list-price
+comparisons, not subscription charges. Auth changes affect child environments
+only; Headless never replaces shared login files.
+
+### Temporary Codex capacity failures
+
+Noninteractive Codex runs automatically retry the native terminal error
+`Selected model is at capacity. Please try a different model.` up to three times.
+Delays are 30, 60, and 120 seconds, each with ±20% jitter. Waiting counts against
+the original command timeout, and cancellation stops the wait immediately.
+
+Set `HEADLESS_CAPACITY_RETRIES=0` to disable these retries, or choose `1`, `2`, or
+`3` to set their limit. Other values are rejected before launching the agent.
+Capacity retries keep the same model, profile, permissions, and billing route.
+They resume the native session with a continuation prompt; without a session,
+Headless retries the original prompt only if no work has been observed.
+
+Retries apply to local, Docker, and Modal runs. Unnamed Docker runs keep a private
+native home across attempts, including subscription-only and API billing; success
+removes it and failure reports its location for recovery. Interactive/tmux launches
+remain under the native CLI's control. Assistant text, tool output, generic errors,
+and recoverable error notices do not trigger capacity retries.
+
+Each wait emits a stderr diagnostic and a `capacity_retry` event in streamed
+JSON/log output, with `retry`, `delayMs`, and `reason: "model-capacity"`.
+`--usage` includes every execution once in `billing.attempts`, with
+`retryReason: "model-capacity"` on executions caused by capacity retries. The
+three capacity retries and the existing single billing fallback have independent
+budgets, allowing at most five executions per invocation. Exhausted capacity
+retries preserve the last failure status and transcript.
+
+### Empty Pi completions
+
+Pi can finish artifact-producing work with an empty final assistant message.
+Headless accepts that as success when Pi's native terminal event confirms a normal
+completion and the process exits successfully. Plain output contains no invented
+answer; `--usage` still reports usage, and SDK results contain `finalMessage: ""`.
+An incomplete lifecycle or native error remains a failure, including when earlier
+assistant progress text exists. Legacy message-only output remains supported.
+Artifact validation remains the caller's responsibility.
+
+## Native TUI Completion
+
+Use `--tmux --wait --delete` when you want Headless to launch the agent in its native TUI, wait for the final native transcript message, print that message, and then terminate the tmux session after the prompt completes.
+
+```bash
+headless codex --prompt "Fix the failing tests" --tmux --wait --delete
+headless codex --prompt "\goal ship the review fixes" --tmux --wait --delete
+```
+
+This setup circumvents the built-in headless execution mode of each agent harness. Because the agent runs inside its own interactive TUI, native TUI features remain available, including prompts that use commands such as `\goal`.
+
+## Scheduled Jobs
+
+Headless can run detached one-shot agent invocations on a schedule with a per-user daemon and local state under `~/.headless/cron`.
+
+```bash
+headless cron add codex --name inbox-triage --every 1h --prompt "Triage inbox"
+headless cron add codex --schedule "0 */6 * * *" --prompt-file ./triage.md --work-dir /path/to/project
+headless cron list
+headless cron view inbox-triage
+headless cron pause inbox-triage
+headless cron resume inbox-triage
+headless cron kill inbox-triage
+headless cron rm inbox-triage --force
+```
+
+Cron jobs accept detached-safe one-shot options such as `--model`, Codex-only `--profile`, `--fast` (Codex and Claude only), `--reasoning-effort`, `--allow`, `--work-dir`, `--docker`, `--modal`, `--timeout`, `--json`, `--debug`, and `--usage`. Interactive tmux/session/run-management flags are intentionally rejected for scheduled jobs.
+
+## Multi-Agent Orchestration
+
+Headless can track a local multi-agent run with named roles, team declarations, per-node logs, status updates, and routed follow-up messages. Use an `orchestrator` node to plan work, declare teammates with repeatable `--team` specs, then inspect and message the run with `headless run`.
+
+```bash
+headless codex --role orchestrator --run auth --node orchestrator --team explorer --team worker=2 --prompt "Build auth"
+headless run view auth
+headless run message auth worker-1 --prompt "Implement token refresh" --async
+headless run wait auth
+```
+
+Roles include `orchestrator`, `explorer`, `worker`, and `reviewer`. Team specs accept forms like `explorer`, `worker=2`, `claude/reviewer`, and `codex/worker=3`. See [docs/orchestration.md](docs/orchestration.md) for coordination modes, run state, and message routing.
+
+## Supported Agents
+
+| Agent | Install | Binary used by Headless |
+| --- | --- | --- |
+| [Antigravity CLI](https://antigravity.google/docs/cli-overview) | Follow Google's [CLI install docs](https://antigravity.google/docs/cli-getting-started); the upstream installer runs a shell script from `antigravity.google` | `agy`, or set `ANTIGRAVITY_CLI_BIN` / `AGY_CLI_BIN` |
+| [Codex](https://developers.openai.com/codex/cli/reference) | `npm install -g @openai/codex` | `codex` |
+| [Claude Code](https://code.claude.com/docs/en/cli-reference) | `npm install -g @anthropic-ai/claude-code` | `claude` |
+| [Cursor](https://cursor.com/docs/cli/headless) | `curl https://cursor.com/install -fsS \| bash` | `agent`, or set `CURSOR_CLI_BIN=cursor-agent` |
+| [Gemini CLI](https://geminicli.com/docs/cli/cli-reference/) | `npm install -g @google/gemini-cli` | `gemini` |
+| [OpenCode](https://opencode.ai/docs/cli/) | `curl -fsSL https://opencode.ai/install \| bash` or `npm install -g opencode-ai` | `opencode` |
+| [Pi](https://github.com/badlogic/pi-mono/blob/main/packages/coding-agent/docs/rpc.md) | `npm install -g @mariozechner/pi-coding-agent` | `pi`, or set `PI_CODING_AGENT_BIN` |
+| [ACP](https://agentclientprotocol.com/) | Use `--acp-agent <id>` to resolve from the ACP registry, or `--acp-command <cmd>` for a custom ACP server | `headless acp-client ...` adapter |
+
+Install the agent CLIs you want Headless to drive.
+
+## More Docs
+
+- [Usage guide](docs/usage.md): agents, output modes, sessions, cron jobs, Docker, Modal, config defaults, CLI flags, and environment variables.
+- [Python SDK](python/README.md): typed sync/async clients, structured streaming, namespaces, and raw invocation.
+- [Multi-agent workflows](docs/orchestration.md): roles, coordinated runs, teams, run state, messaging, and `headless run` commands.
+- [Development](docs/development.md): local setup, test commands, pre-push integration coverage, project layout, and agent install references.
+
+## Development
+
+```bash
+npm install
+npm run build
+npm test
+npm run check
+```
+
+See [docs/development.md](docs/development.md) for integration tests, hooks, and repository layout.
+
+## Related Inspirations
+
+Projects that shaped parts of Headless' CLI and session-management ergonomics:
+
+- [mngr](https://github.com/imbue-ai/mngr): a tmux-based manager for running and monitoring multiple coding-agent sessions.
+- [llm](https://github.com/simonw/llm): Simon Willison's CLI and Python library for running prompts, models, plugins, and local/remote LLM workflows.
+
+## License
+
+Apache-2.0. See [LICENSE](LICENSE).

@@ -1,0 +1,14 @@
+{
+  "binary": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/bin/final-o0",
+  "binary_sha256": "bf4d4c098ce7239bf31064f52e286b9bee1b1c5fbe71ea643d76d5046ec13971",
+  "source": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/candidate-final/solution.cj",
+  "source_sha256": "585c6e7ffa9cedc20f1dd0efeaed59fdef39c62dba0e3c57853faba3b6024ad8",
+  "baseline_freeze_sha256": "36eaf4aa8dd92f3654bda3aad114b7e3f6d208da446db5100a4de55310c35488",
+  "baseline_records_sha256": "cbce687947c02d7ac650540ff53927335f4758a21733d2cbd69e63b666d44131",
+  "runner_sha256": "20b2714fa2a8e0fee1fae27595db5d4917140202a4d6ef379f1b7637a84cc151",
+  "workers": 1,
+  "cjProcessorNum": 1,
+  "cpu_limit_s": 5,
+  "memory_limit_mib": 256,
+  "measurement": "Whole solver process CPU user+system; macOS arm64; no hard CPU affinity"
+}

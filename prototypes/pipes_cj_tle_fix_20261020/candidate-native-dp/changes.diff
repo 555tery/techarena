@@ -1,0 +1,148 @@
+--- candidate-counts/solution.cj
++++ candidate-native-dp/solution.cj
+@@ -1151,6 +1151,53 @@
+ 
+     public func newRisk(length: Int64): Float64 {
+         return adjustedRatio(length, 0)
++    }
++}
++
++// Fixed-capacity owner of stdlib malloc memory. No managed references
++// are stored in its payload; Cangjie GC never relocates this C-heap memory.
++// Local aliases borrow this class instance. Ownership is never copied.
++public class FastFloatBuffer {
++    private let data: CPointer<Float64>
++    public let size: Int64
++
++    public init(capacity: Int64) {
++        if (capacity <= 0) { throw IllegalArgumentException("Invalid numeric buffer capacity") }
++        this.size = capacity
++        this.data = LibC.malloc<Float64>(count: capacity)
++        if (data.isNull()) { throw IllegalMemoryException("Numeric buffer allocation failed") }
++        unsafe {
++            for (i in 0..capacity) { data.write(i, 0.0) }
++        }
++    }
++
++    // Official1.0.5 finalizer syntax. No instance method calls, allocation,
++    // synchronization or potentially throwing arithmetic in this body.
++    ~init() {
++        unsafe { LibC.free(data) }
++    }
++
++    public operator func [](index: Int64): Float64 {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Numeric buffer index") }
++        return unsafe { data.read(index) }
++    }
++
++    public operator func [](index: Int64, value!: Float64): Unit {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Numeric buffer index") }
++        unsafe { data.write(index, value) }
++    }
++
++    public func fill(value: Float64): Unit {
++        unsafe {
++            for (i in 0..size) { data.write(i, value) }
++        }
++    }
++
++    public func copyFrom(other: FastFloatBuffer): Unit {
++        if (other.size != size) { throw IllegalArgumentException("Numeric buffer copy size") }
++        unsafe {
++            for (i in 0..size) { data.write(i, other.data.read(i)) }
++        }
+     }
+ }
+ 
+@@ -1209,7 +1256,7 @@
+     public var primalGapCounts = VArray<Int64, $514>(repeat: 0)
+     public var primalEventHistory = VArray<Int64, $256>(repeat: 0)
+     public var primalRecentRequests = VArray<Int64, $41>(repeat: 0)
+-    public var primalGapValue = VArray<Float64, $513>(repeat: 0.0)
++    private let primalGapValue = FastFloatBuffer(513)
+     public var primalEventPosition: Int64 = 0
+     public var primalRecentDeletes: Int64 = 0
+     public var primalStep: Int64 = 0
+@@ -1226,8 +1273,11 @@
+     public var lastCompletedDeleteRelativeParity: Int64 = -1
+     public var previousCompletedDeleteRelativeParity: Int64 = -1
+     public var lifetimeModel = CensoredLifetimeModel()
+-    public var causalRequestRate = VArray<Float64, $41>(repeat: 0.0)
+-    public var causalGapValue = VArray<Float64, $1026>(repeat: 0.0)
++    private let causalRequestRate = FastFloatBuffer(41)
++    private let causalGapValue = FastFloatBuffer(1026)
++    private let dpRateScratch = FastFloatBuffer(41)
++    private let dpRewardScratch = FastFloatBuffer(41)
++    private let dpValueScratch = FastFloatBuffer(513)
+     public var causalBaseExpiry: Float64 = 0.0
+     public var causalComputedLimit: Int64 = 0
+     public var causalRiskReady = false
+@@ -1613,7 +1663,8 @@
+     public func rebuildPrimalGapValues(maxGap: Int64): Unit {
+         let gapCounts = primalGapCounts
+         let recentRequests = primalRecentRequests
+-        var rate = VArray<Float64, $41>(repeat: 0.0)
++        let rate = dpRateScratch
++        rate.fill(0.0)
+         var fitting = gapCounts[kPrimalGapValueCap + 1]
+         var gap = kPrimalGapValueCap
+         while (gap >= 1) {
+@@ -1622,7 +1673,8 @@
+             gap--
+         }
+         let expiry = 2.0 * Float64(primalRecentDeletes) / Float64(iMax(1, activePipeCount))
+-        var value = VArray<Float64, $513>(repeat: 0.0)
++        let value = dpValueScratch
++        value.fill(0.0)
+         for (g in 1..=maxGap) {
+             let top = iMin(g, 40)
+             if (expiry == 0.0) {
+@@ -1631,7 +1683,8 @@
+                 }
+                 continue
+             }
+-            var reward = VArray<Float64, $41>(repeat: 0.0)
++            let reward = dpRewardScratch
++            reward.fill(0.0)
+             var active: Int64 = 0
+             var numerator: Float64 = 0.0
+             var denominator = expiry
+@@ -1660,8 +1713,8 @@
+             }
+             value[g] = fMin(fMax(estimate, 0.0), Float64(g))
+         }
+-        primalGapValue = value
+-        causalRequestRate = rate
++        primalGapValue.copyFrom(value)
++        causalRequestRate.copyFrom(rate)
+         causalBaseExpiry = expiry
+         causalComputedLimit = 0
+         causalRiskReady = !parityCohortMode && activePipeCount > kMcMaxActivePipes && expiry > 0.0 &&
+@@ -1680,13 +1733,16 @@
+ 
+     public func rebuildCausalGapValues(maxGap: Int64): Unit {
+         let requestRates = causalRequestRate
+-        var gapValues = causalGapValue
++        let gapValues = causalGapValue
++        gapValues.fill(0.0)
+         for (model in 0..2) {
+-            var value = VArray<Float64, $513>(repeat: 0.0)
++            let value = dpValueScratch
++            value.fill(0.0)
+             let expiry = causalBaseExpiry * (if (model == 0) { 0.5 } else { 2.0 })
+             for (gap in 1..=maxGap) {
+                 let top = iMin(gap, 40)
+-                var reward = VArray<Float64, $41>(repeat: 0.0)
++                let reward = dpRewardScratch
++                reward.fill(0.0)
+                 var active: Int64 = 0
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry
+@@ -1717,7 +1773,6 @@
+             }
+             for (cell in 0..513) { gapValues[model * 513 + cell] = value[cell] }
+         }
+-        causalGapValue = gapValues
+         causalComputedLimit = maxGap
+     }
+ 

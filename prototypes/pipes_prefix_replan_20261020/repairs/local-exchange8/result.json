@@ -1,0 +1,178 @@
+{
+  "success": true,
+  "changes": {
+    "5499": 1219,
+    "7242": 3219,
+    "8517": 1247,
+    "8518": 3235
+  },
+  "trials": [
+    {
+      "x": 346,
+      "blocks": 5,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 351,
+      "blocks": 5,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 359,
+      "blocks": 5,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 367,
+      "blocks": 5,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 375,
+      "blocks": 5,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 383,
+      "blocks": 5,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 480,
+      "blocks": 5,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 488,
+      "blocks": 5,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 496,
+      "blocks": 5,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 578,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 594,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 633,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 646,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 662,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 678,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 694,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 710,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 726,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 749,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1010,
+      "blocks": 4,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1022,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1034,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1057,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1087,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1107,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1127,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1147,
+      "blocks": 4,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1159,
+      "blocks": 4,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1171,
+      "blocks": 4,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1183,
+      "blocks": 4,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1195,
+      "blocks": 4,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1207,
+      "blocks": 4,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1219,
+      "blocks": 4,
+      "status": "OPTIMAL"
+    }
+  ],
+  "elapsed": 1.2437282090540975,
+  "scope": "public case8 branch-only local survivor exchange; all other placements fixed; endpoints<=old public trench at birth"
+}

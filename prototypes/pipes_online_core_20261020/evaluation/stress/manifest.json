@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "split": "stress",
+  "weight": 1,
+  "cases": [
+    {
+      "id": "stress-000",
+      "file": "case-000.in",
+      "family": "max_alive",
+      "stratum": "stress",
+      "seed": 867539990000,
+      "n": 200000,
+      "sha256": "1b84a93583c818da03650ed3fd71175e7d5507e010c17951644aa30bc74dcd34",
+      "commands_sha256": "b0c6875b5cce6797260071dbaafd97698ac1ca0732735c18a86e18ebaca422ac",
+      "final_live_volume": 4103185,
+      "peak_live_volume": 4103185,
+      "final_live_count": 200000,
+      "peak_live_count": 200000,
+      "final_to_peak_volume": 1.0,
+      "predeclared_terminal_fill": false,
+      "public_prefix": null
+    },
+    {
+      "id": "stress-001",
+      "file": "case-001.in",
+      "family": "heavy_churn",
+      "stratum": "stress",
+      "seed": 867539990001,
+      "n": 200000,
+      "sha256": "ca14c288ae12d129ffbed4586314e8ee1d20c54b142961a66ae94b27ef6cb0af",
+      "commands_sha256": "c817d7be6c9fb60ab083d101d5c5a0468cd84361e28b6f4d63aff6366c18f27b",
+      "final_live_volume": 1799,
+      "peak_live_volume": 3015,
+      "final_live_count": 80,
+      "peak_live_count": 147,
+      "final_to_peak_volume": 0.5966832504145937,
+      "predeclared_terminal_fill": false,
+      "public_prefix": null
+    },
+    {
+      "id": "stress-002",
+      "file": "case-002.in",
+      "family": "regime_switches",
+      "stratum": "stress",
+      "seed": 867539990002,
+      "n": 200000,
+      "sha256": "36054ed773b9c134b1802b68c471ec50f6da60625ffe1a185fe754686d74e5e9",
+      "commands_sha256": "79b1c72f39aa2943b8877c931278060d0241188393bdf288831cca5252f2a0ba",
+      "final_live_volume": 838975,
+      "peak_live_volume": 838975,
+      "final_live_count": 51924,
+      "peak_live_count": 51924,
+      "final_to_peak_volume": 1.0,
+      "predeclared_terminal_fill": false,
+      "public_prefix": null
+    }
+  ]
+}

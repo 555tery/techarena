@@ -1,0 +1,74 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-native-direct/solution.cj
++++ prototypes/pipes_cj_tle_fix_20261020/candidate-support/solution.cj
+@@ -1670,13 +1670,17 @@
+             if (gap <= 40) { rate[gap] = Float64(recentRequests[gap]) / Float64(iMax(1, fitting)) }
+             gap--
+         }
++        var lastRequest: Int64 = 40
++        while (lastRequest > 0 && rate[lastRequest] == 0.0) { lastRequest-- }
++        var firstRequest: Int64 = 1
++        while (firstRequest <= lastRequest && rate[firstRequest] == 0.0) { firstRequest++ }
+         let expiry = 2.0 * Float64(primalRecentDeletes) / Float64(iMax(1, activePipeCount))
+         let value = primalGapValue
+         value.fill(0.0)
+         for (g in 1..=maxGap) {
+-            let top = iMin(g, 40)
++            let top = iMin(g, lastRequest)
+             if (expiry == 0.0) {
+-                for (request in 1..=top) {
++                for (request in firstRequest..=top) {
+                     if (rate[request] > 0.0) { value[g] = fMax(value[g], Float64(request) + value[g - request]) }
+                 }
+                 continue
+@@ -1685,7 +1689,7 @@
+             var active: Int64 = 0
+             var numerator: Float64 = 0.0
+             var denominator = expiry
+-            for (request in 1..=top) {
++            for (request in firstRequest..=top) {
+                 let requestRate = rate[request]
+                 if (requestRate == 0.0) { continue }
+                 let requestReward = Float64(request) + value[g - request]
+@@ -1697,7 +1701,7 @@
+             var estimate = numerator / denominator
+             while (true) {
+                 var removed = false
+-                for (request in 1..=top) {
++                for (request in firstRequest..=top) {
+                     let bit: Int64 = 1 << request
+                     if ((active & bit) != 0) {
+                         let rr = reward[request]
+@@ -1733,18 +1737,22 @@
+ 
+     public func rebuildCausalGapValues(maxGap: Int64): Unit {
+         let requestRates = causalRequestRate
++        var lastRequest: Int64 = 40
++        while (lastRequest > 0 && requestRates[lastRequest] == 0.0) { lastRequest-- }
++        var firstRequest: Int64 = 1
++        while (firstRequest <= lastRequest && requestRates[firstRequest] == 0.0) { firstRequest++ }
+         let gapValues = causalGapValue
+         gapValues.fill(0.0)
+         for (model in 0..2) {
+             let offset: Int64 = model * 513
+             let expiry = causalBaseExpiry * (if (model == 0) { 0.5 } else { 2.0 })
+             for (gap in 1..=maxGap) {
+-                let top = iMin(gap, 40)
++                let top = iMin(gap, lastRequest)
+                 let reward = dpRewardScratch
+                 var active: Int64 = 0
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry
+-                for (request in 1..=top) {
++                for (request in firstRequest..=top) {
+                     let requestRate = requestRates[request]
+                     if (requestRate == 0.0) { continue }
+                     let requestReward = Float64(request) + gapValues[offset + gap - request]
+@@ -1756,7 +1764,7 @@
+                 var estimate = numerator / denominator
+                 while (true) {
+                     var removed = false
+-                    for (request in 1..=top) {
++                    for (request in firstRequest..=top) {
+                         let bit: Int64 = 1 << request
+                         if ((active & bit) != 0) {
+                             let rr = reward[request]

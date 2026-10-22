@@ -1,0 +1,341 @@
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+// EVOLVE-BLOCK-START
+namespace {
+/*
+NAME: validated_transition_profile
+DESCRIPTION:
+Preserve the adjacent_release_edge placement policy.
+Use a first-order insertion-length profile only when its
+prequential Brier advantage over the parent's marginal profile
+is positive within the recent transition window.
+Conditional rows have 16 marginal-profile pseudo-observations
+and require at least eight observed transitions.
+Score each transition before incorporating its outcome.
+All physical lengths and placements remain exact.
+Ablation: set enableValidatedTransitionProfile_ to false.
+*/
+class Allocator {
+    static constexpr bool enableValidatedTransitionProfile_ = true;
+    static constexpr int transitionPrior_ = 16;
+    static constexpr int minimumTransitionSupport_ = 8;
+    struct Pipe {
+        int start;
+        int length;
+    };
+    using AddressIndex = std::map<int, int>;
+    using SizeIndex = std::set<std::pair<int, int>>;
+    AddressIndex freeByAddress_;
+    SizeIndex freeBySize_;
+    AddressIndex liveByAddress_;
+    std::vector<Pipe> pipes_;
+    int trenchLength_ = 0;
+    int frontier_ = 0;
+    std::array<int, 41> frequency_{};
+    std::array<int, 41> massAbove_{};
+    std::array<int, 512> recent_{};
+    std::size_t recentCount_ = 0;
+    std::size_t recentCursor_ = 0;
+    std::array<std::array<int, 41>, 41> transitionCount_{};
+    std::array<int, 41> transitionMass_{};
+    std::array<double, 41> transitionGain_{};
+    std::array<int, 512> recentFrom_{};
+    std::array<double, 512> recentGain_{};
+    int lastLength_ = 0;
+    double prequentialGain(int length) const {
+        if (lastLength_ == 0 ||
+            transitionMass_[lastLength_] == 0) {
+            return 0.0;
+        }
+        const double inverseGlobalMass =
+            1.0 / static_cast<double>(recentCount_ + 40);
+        const double inverseConditionalMass =
+            1.0 / static_cast<double>(
+                transitionPrior_ + transitionMass_[lastLength_]);
+        double gain = 0.0;
+        for (int size = 1; size <= 40; ++size) {
+            const double marginal =
+                frequency_[size] * inverseGlobalMass;
+            const double conditional =
+                (transitionCount_[lastLength_][size] +
+                 transitionPrior_ * marginal) *
+                inverseConditionalMass;
+            const double outcome = size == length ? 1.0 : 0.0;
+            const double marginalError = marginal - outcome;
+            const double conditionalError = conditional - outcome;
+            gain += marginalError * marginalError -
+                    conditionalError * conditionalError;
+        }
+        return gain;
+    }
+    void rememberLength(int length) {
+        // Evaluate both forecasts using only the preceding history.
+        const double gain = prequentialGain(length);
+        if (recentCount_ == recent_.size()) {
+            const int oldLength = recent_[recentCursor_];
+            const int oldFrom = recentFrom_[recentCursor_];
+            --frequency_[oldLength];
+            if (oldFrom != 0) {
+                --transitionCount_[oldFrom][oldLength];
+                --transitionMass_[oldFrom];
+                transitionGain_[oldFrom] -=
+                    recentGain_[recentCursor_];
+                if (transitionMass_[oldFrom] == 0) {
+                    transitionGain_[oldFrom] = 0.0;
+                }
+            }
+        } else {
+            ++recentCount_;
+        }
+        recent_[recentCursor_] = length;
+        recentFrom_[recentCursor_] = lastLength_;
+        recentGain_[recentCursor_] = gain;
+        if (lastLength_ != 0) {
+            ++transitionCount_[lastLength_][length];
+            ++transitionMass_[lastLength_];
+            transitionGain_[lastLength_] += gain;
+        }
+        recentCursor_ = (recentCursor_ + 1) % recent_.size();
+        ++frequency_[length];
+        lastLength_ = length;
+        bool useTransitions = false;
+        if constexpr (enableValidatedTransitionProfile_) {
+            useTransitions =
+                transitionMass_[length] >= minimumTransitionSupport_ &&
+                transitionGain_[length] > 0.0;
+        }
+        const int globalMass = static_cast<int>(recentCount_) + 40;
+        massAbove_[40] = 0;
+        for (int bound = 39; bound >= 0; --bound) {
+            const int size = bound + 1;
+            int mass = frequency_[size];
+            if (useTransitions) {
+                // A common denominator cancels in all placement
+                // comparisons, so integer masses suffice.
+                mass = transitionPrior_ * mass +
+                       globalMass * transitionCount_[length][size];
+            }
+            massAbove_[bound] = massAbove_[bound + 1] + mass;
+        }
+    }
+    int predictedGrowth(int largestHole, int suffixLength) const {
+        // ceil((length - suffixLength) / 20) is at most two.
+        // Growth is needed only when length > largestHole.
+        const int firstThreshold =
+            std::min(40, std::max(largestHole, suffixLength));
+        const int secondThreshold =
+            std::min(40, std::max(largestHole, suffixLength + 20));
+        return massAbove_[firstThreshold] + massAbove_[secondThreshold];
+    }
+    int largestHoleExcept(int firstStart, int secondStart) const {
+        for (auto it = freeBySize_.rbegin(); it != freeBySize_.rend();
+             ++it) {
+            if (it->second != firstStart && it->second != secondStart) {
+                return it->first;
+            }
+        }
+        return 0;
+    }
+    bool preferRightEdge(int holeStart, int holeLength, int length) const {
+        const int remainder = holeLength - length;
+        const int suffixLength = trenchLength_ - frontier_;
+        if (remainder == 0 || remainder >= 40 || suffixLength >= 40 ||
+            largestHoleExcept(holeStart, -1) >= 40) {
+            return false;
+        }
+        const auto right =
+            liveByAddress_.lower_bound(holeStart + holeLength);
+        const auto benefit = [&](AddressIndex::const_iterator neighbor,
+                                 bool leftSide) {
+            const int end = neighbor->first + neighbor->second;
+            if (!leftSide && end == frontier_) {
+                const int largest = largestHoleExcept(holeStart, -1);
+                const int newSuffix = suffixLength + neighbor->second;
+                return predictedGrowth(std::max(largest, remainder),
+                                       newSuffix) -
+                       predictedGrowth(largest, newSuffix + remainder);
+            }
+            int joinedLength = neighbor->second;
+            int outerStart = -1;
+            if (leftSide) {
+                const auto next =
+                    freeByAddress_.lower_bound(neighbor->first);
+                if (next != freeByAddress_.begin()) {
+                    const auto outer = std::prev(next);
+                    if (outer->first + outer->second == neighbor->first) {
+                        outerStart = outer->first;
+                        joinedLength += outer->second;
+                    }
+                }
+            } else {
+                const auto outer = freeByAddress_.find(end);
+                if (outer != freeByAddress_.end()) {
+                    outerStart = outer->first;
+                    joinedLength += outer->second;
+                }
+            }
+            const int largest = largestHoleExcept(holeStart, outerStart);
+            const int separateCost = predictedGrowth(
+                std::max({largest, remainder, joinedLength}),
+                suffixLength);
+            const int joinedCost = predictedGrowth(
+                std::max(largest, joinedLength + remainder),
+                suffixLength);
+            return separateCost - joinedCost;
+        };
+        int leftBenefit = 0;
+        if (right != liveByAddress_.begin()) {
+            const auto left = std::prev(right);
+            if (left->first + left->second == holeStart) {
+                leftBenefit = benefit(left, true);
+            }
+        }
+        int rightBenefit = 0;
+        if (right != liveByAddress_.end() &&
+            right->first == holeStart + holeLength) {
+            rightBenefit = benefit(right, false);
+        }
+        return leftBenefit > rightBenefit;
+    }
+    void addHole(int start, int length) {
+        if (length == 0) {
+            return;
+        }
+        freeByAddress_.emplace(start, length);
+        freeBySize_.emplace(length, start);
+    }
+    void eraseHole(AddressIndex::iterator it) {
+        freeBySize_.erase(std::make_pair(it->second, it->first));
+        freeByAddress_.erase(it);
+    }
+public:
+    // Required compatibility counters; they may stay zero.
+    std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+    std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+    std::uint64_t unitProfileSuppressedExpansions = 0;
+    Allocator() {
+        frequency_.fill(1);
+        frequency_[0] = 0;
+        pipes_.reserve(200001);
+        pipes_.push_back(Pipe{0, 0});
+    }
+    void place(int length) {
+        rememberLength(length);
+        const int suffixLength = trenchLength_ - frontier_;
+        const auto fit = freeBySize_.lower_bound(
+            std::make_pair(length, 0));
+        bool useHole = fit != freeBySize_.end();
+        if (useHole && suffixLength >= length) {
+            const auto largest = std::prev(freeBySize_.end());
+            const int largestBefore = largest->first;
+            int largestAfter = largestBefore;
+            if (fit == largest) {
+                largestAfter = 0;
+                if (largest != freeBySize_.begin()) {
+                    largestAfter = std::prev(largest)->first;
+                }
+            }
+            largestAfter = std::max(
+                largestAfter, fit->first - length);
+            const int holeCost =
+                predictedGrowth(largestAfter, suffixLength);
+            const int suffixCost =
+                predictedGrowth(largestBefore, suffixLength - length);
+            if (holeCost != suffixCost) {
+                useHole = holeCost < suffixCost;
+            } else {
+                useHole = fit->first <= suffixLength;
+            }
+        }
+        int start = 0;
+        int sections = 0;
+        if (useHole) {
+            const int holeLength = fit->first;
+            const int holeStart = fit->second;
+            const bool atRight =
+                preferRightEdge(holeStart, holeLength, length);
+            start = atRight ? holeStart + holeLength - length : holeStart;
+            eraseHole(freeByAddress_.find(holeStart));
+            addHole(atRight ? holeStart : holeStart + length,
+                    holeLength - length);
+        } else {
+            start = frontier_;
+            const int shortage = start + length - trenchLength_;
+            if (shortage > 0) {
+                sections = (shortage + 19) / 20;
+                trenchLength_ += sections * 20;
+            }
+            frontier_ = start + length;
+        }
+        liveByAddress_.emplace(start, length);
+        pipes_.push_back(Pipe{start, length});
+        std::cout << sections << ' ' << start << '\n' << std::flush;
+    }
+    void remove(std::int64_t pid) {
+        const Pipe old = pipes_[static_cast<std::size_t>(pid)];
+        liveByAddress_.erase(old.start);
+        int start = old.start;
+        int length = old.length;
+        const auto right = freeByAddress_.lower_bound(start);
+        if (right != freeByAddress_.begin()) {
+            const auto left = std::prev(right);
+            if (left->first + left->second == start) {
+                start = left->first;
+                length += left->second;
+                eraseHole(left);
+            }
+        }
+        if (right != freeByAddress_.end() &&
+            start + length == right->first) {
+            length += right->second;
+            eraseHole(right);
+        }
+        if (start + length == frontier_) {
+            frontier_ = start;
+        } else {
+            addHole(start, length);
+        }
+        std::cout << old.start << '\n' << std::flush;
+    }
+};
+}
+// EVOLVE-BLOCK-END
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                      << " expansion_gate_passes=" << allocator.expansionGatePasses
+                      << " unit_profile_suppressed_expansions="
+                      << allocator.unitProfileSuppressedExpansions << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}

@@ -1,0 +1,11 @@
+{
+  "baseline_sha256": "fd5fe184cb85bf47c18085a3ef12ceb36ae20168398dd00d8983f16165b8fc9a",
+  "source_sha256": "83e2e6852e51955e6ec05eee5cf87800c6e7e528f662336d550518cd556e10ab",
+  "changes": [
+    "Exact concrete Int64 specialization of OrderedMap and Ring",
+    "Histogram early rejection of impossible three-size arithmetic trends",
+    "Equivalent histogram query for short placements and unit dominance",
+    "Incremental exact count of top-five-percent deletions in the same 64-entry window"
+  ],
+  "policy": "No thresholds, replay tables, action selection or rollout budget changed"
+}

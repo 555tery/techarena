@@ -1,0 +1,9 @@
+{
+  "base_sha256": "dcc4d5483b12370a89335f6048abe6a20171fb874b5d73018ea67ccef556aeaf",
+  "source_sha256": "7727ec11c278382b7485cbdea679d8fff9244650fb9e32e21327f1f7e1378578",
+  "changes": [
+    "For lastRequest<=8 use the existing ascending bounded DP loops instead of40-way unroll.",
+    "All skipped rate terms above lastRequest are exactly0, all active reward bits are<=lastRequest; same FP operations/order.",
+    "Dense support path is byte-identical; no heuristic change."
+  ]
+}

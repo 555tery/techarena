@@ -1,0 +1,11 @@
+{
+  "base_sha256": "308d230d99b4bfd52838b9f0ff1086c8838c2ff3e05ea296903c78f1947b14cc",
+  "source_sha256": "30f49f39d864cd2dd08902c2fb0bed064dc3beb83a84430ce94d2a8e03d034bf",
+  "changes": [
+    "Two auxiliary attribute AVL maps replaced by stable freeByStart node ID side vectors; reused ID metadata overwritten on every put.",
+    "Eliminate first() and duplicate lower() in predecessor gap merge; stable successor ID retained.",
+    "Reuse identical group upper lookup.",
+    "Use exact cached last run and reuse sameSizeRun without history changes.",
+    "Maintain exact positive primal event count."
+  ]
+}

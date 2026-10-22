@@ -1,0 +1,106 @@
+{
+  "experiment": "SS-inspired gap-histogram potential tie-breaks",
+  "source_baseline": {
+    "path": "results/pipes/final/solution.cpp",
+    "sha256": "e95ed98e038aad6f46ccf62f4f167a45b2f1cc695772484d53001936c178df41",
+    "expected_sha256": "e95ed98e038aad6f46ccf62f4f167a45b2f1cc695772484d53001936c178df41",
+    "unchanged_from_requested_source": true,
+    "candidate_source_path": "results/pipes/improvement/potential/ss_inspired/ss_potential.cpp",
+    "candidate_source_sha256": "1ef513388ff4713b2b52b0e313ef66fceb4856597ca9d16259da2db38603c6ca"
+  },
+  "official_baseline": {
+    "manifest_path": "results/pipes/final/manifest.json",
+    "summary_path": "results/pipes/final/open-run-scoped-overlay/summary.json",
+    "source_sha256": "e95ed98e038aad6f46ccf62f4f167a45b2f1cc695772484d53001936c178df41",
+    "binary_path": "results/pipes/final/bin/solution",
+    "binary_sha256": "030cf4b104f1bf918b66aaaf91faeb704caae2d8743f753cf19c84483556a0f9",
+    "weighted_score_sum": 29.781127111082185,
+    "ok_count": 15
+  },
+  "selection_gate": {
+    "required_score_strictly_greater_than": 29.781127,
+    "open_gate_passed": false,
+    "independent_repeat_run": false,
+    "holdout_v2_run": false,
+    "stress_run": false,
+    "reason": "Neither screened candidate exceeded 29.781127; stopped at open-set gate."
+  },
+  "toolchain_and_harness": {
+    "compile_flags": [
+      "-O2",
+      "-std=c++20",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-pedantic",
+      "-Werror"
+    ],
+    "strict_warnings_passed": true,
+    "harness_path": "tools/pipes_harness.py",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "official_interactor_source_path": "vendor/pipes_official/interactor.cpp",
+    "official_interactor_source_sha256": "85672e4c3ad9fdcb97d8b601758de1f1d1b5e86d6dd20252e0f72acdb9cb122a",
+    "official_interactor_binary_path": "results/pipes/final/bin/interactor",
+    "official_interactor_binary_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+  },
+  "dataset": {
+    "path": "data/pipes/open",
+    "is_official_open_test_set": true,
+    "case_count": 15,
+    "input_sha256": {
+      "1": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+      "2": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+      "3": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "4": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+      "5": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+      "6": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "7": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+      "8": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+      "9": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+      "10": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+      "11": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+      "12": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+      "13": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+      "14": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+      "15": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    }
+  },
+  "variants": {
+    "expected_dig": {
+      "description": "SS expected next-demand dig cost",
+      "formula": "P_A = -sum_l f_l * 1[N_l=0] * ceil(max(0,l-T)/20). Maximize P_A among equal scoreGap candidates.",
+      "binary_path": "results/pipes/improvement/potential/ss_inspired/bin/ss_expected_dig",
+      "binary_sha256": "3dbe119442051ece1c5a7645e4e14ad51baf108fc3031f1a6583a123e371385e",
+      "build_command": "clang++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror -DSS_FORMULA=1 results/pipes/improvement/potential/ss_inspired/ss_potential.cpp -o results/pipes/improvement/potential/ss_inspired/bin/ss_expected_dig",
+      "harness_command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/potential/ss_inspired/bin/ss_expected_dig --name ss-expected-next-demand-dig-cost --interactor results/pipes/final/bin/interactor --tests data/pipes/open --out results/pipes/improvement/potential/ss_inspired/runs/ss_expected_dig --wall-timeout 30",
+      "summary_path": "results/pipes/improvement/potential/ss_inspired/runs/ss_expected_dig/summary.json",
+      "weighted_score_sum": 29.732383646994258,
+      "delta_vs_official_baseline": -0.04874346408792718,
+      "delta_vs_gate": -0.04874335300574373,
+      "case_count": 15,
+      "ok_count": 15,
+      "max_solver_cpu_s": 0.9801409999999999,
+      "max_solver_rss_mib": 9.0625,
+      "max_wall_orchestration_s": 6.825460041989572
+    },
+    "log_availability": {
+      "description": "SS log fit availability minus tail dig cost",
+      "formula": "P_B = sum_l f_l * log(1+N_l) - sum_l f_l * 1[N_l=0] * ceil(max(0,l-T)/20). Maximize P_B among equal scoreGap candidates.",
+      "binary_path": "results/pipes/improvement/potential/ss_inspired/bin/ss_log_availability",
+      "binary_sha256": "bbe842943fed729fe03171bf5f55b73df0c9114006ba8dbf993c1ca001811d9e",
+      "build_command": "clang++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror -DSS_FORMULA=2 results/pipes/improvement/potential/ss_inspired/ss_potential.cpp -o results/pipes/improvement/potential/ss_inspired/bin/ss_log_availability",
+      "harness_command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/potential/ss_inspired/bin/ss_log_availability --name ss-log-fit-availability-minus-tail-dig-cost --interactor results/pipes/final/bin/interactor --tests data/pipes/open --out results/pipes/improvement/potential/ss_inspired/runs/ss_log_availability --wall-timeout 30",
+      "summary_path": "results/pipes/improvement/potential/ss_inspired/runs/ss_log_availability/summary.json",
+      "weighted_score_sum": 29.72630294500092,
+      "delta_vs_official_baseline": -0.05482416608126428,
+      "delta_vs_gate": -0.05482405499908083,
+      "case_count": 15,
+      "ok_count": 15,
+      "max_solver_cpu_s": 0.9791909999999999,
+      "max_solver_rss_mib": 9.53125,
+      "max_wall_orchestration_s": 6.733812209102325
+    }
+  },
+  "comparison_csv": "results/pipes/improvement/potential/ss_inspired/per_case_comparison.csv"
+}

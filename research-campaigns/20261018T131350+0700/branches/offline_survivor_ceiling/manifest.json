@@ -1,0 +1,81 @@
+{
+  "branch": "offline_survivor_ceiling",
+  "campaign": "/Users/555tery/techarena/research-campaigns/20261018T131350+0700",
+  "explicit_future": true,
+  "online_solver_or_candidate": false,
+  "input": {
+    "path": "/Users/555tery/techarena/data/pipes/open/15.in",
+    "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+    "operations": 200000
+  },
+  "baseline_source_sha256": "c19945111834e5969e2f58f0b6503851b35e7642a9bd77f9f70c118ee3bb736c",
+  "algorithm": "Use exact EOF-survivor identities and temporary deletion ops. Place survivors in a birth-ordered contiguous prefix; place each temporary by first-fit in free space starting at or above prefixFinalVolume[known_death_op], extending the suffix only when no eligible gap fits. Dig quantum is 20 m.",
+  "result": {
+    "placements": 130255,
+    "temporary_placements": 69745,
+    "eof_survivors": 60510,
+    "final_survivor_volume_m": 418757,
+    "peak_live_volume_m": 418768,
+    "volume_bound_rounded_to_dig_unit_m": 418780,
+    "trench_length_m": 418840,
+    "excess_over_volume_bound_m": 60,
+    "dig_count": 20942,
+    "extensions_beyond_bound": [
+      {
+        "op": 199938,
+        "pid": 130223,
+        "kind": "temporary",
+        "length_m": 16,
+        "known_death_op": 199971,
+        "minimum_start_m": 418419,
+        "largest_eligible_free_extent_m": 14,
+        "dig_quanta_added": 1
+      },
+      {
+        "op": 199959,
+        "pid": 130233,
+        "kind": "temporary",
+        "length_m": 40,
+        "known_death_op": 199985,
+        "minimum_start_m": 418523,
+        "largest_eligible_free_extent_m": 8,
+        "dig_quanta_added": 2
+      }
+    ],
+    "conclusion": "This single first-fit clairvoyant schedule misses the target by 60 m; this is not an impossibility proof for a different full-information schedule."
+  },
+  "physical_replay": {
+    "answer_lines": 200000,
+    "all_allocations_within_dug_trench": true,
+    "no_overlapping_live_intervals": true,
+    "deletions_match_active_pid_and_start": true,
+    "eof_survivors_are_exact_prefix": true,
+    "temporary_volume_at_eof": 0,
+    "independent_range_minmax_tree": true
+  },
+  "artifacts": {
+    "script": {
+      "path": "clairvoyant_survivor_prefix.py",
+      "sha256": "c58e85cd004e8ee718f28aa109ecabddd16e81eb2f6bbb1c0610b4dff517c56e"
+    },
+    "answer": {
+      "path": "clairvoyant-answer.txt",
+      "sha256": "9df15ec1e67c33058f1ac8634d6944461cda25e3bfbb8b34ef662c01d84c9602"
+    },
+    "result": {
+      "path": "clairvoyant-result.json",
+      "sha256": "da3dcf86b46a03033920828bf56c3ce22d770f6aa3ea8369f7ff22acaba648c5"
+    },
+    "report": {
+      "path": "REPORT.md",
+      "sha256": "ac58d5018bf7378a5c20d4470b5bca9580d4898cdb9a4f254e82b4a69427c804"
+    }
+  },
+  "restrictions": {
+    "validation_or_holdouts_accessed": false,
+    "platform_accessed": false,
+    "official_evaluator_called": false,
+    "model_called": false,
+    "additional_heuristics_or_parameter_tuning": false
+  }
+}

@@ -1,0 +1,289 @@
+{
+  "source_hashes": {
+    "data/pipes/statement.pdf": "a937bdc9c3f77a4c6ed21f6658dfc90e29728c141d68c57695adf328e912f677",
+    "prototypes/pipes_all2537_comparison_20261020/analysis.json": "4901e26998d15a04de8e2da0d5ff13d6616a768a0db0f2e8b4f3a154df1e84ec",
+    "prototypes/pipes_all2537_comparison_20261020/coverage.json": "cbdd4d38280897fd3403b960c5af1d3f2e57ce4667b3029c2a0145d7ebd13c11",
+    "prototypes/pipes_current_hybrid_cj_20261020/analysis.json": "2a02628eba5b9f779dfdb8b820d0d21766f13e8b365efb44c6a6721c696e4db4",
+    "prototypes/pipes_cj_tle15_20261021/release/solution.cj": "585c6e7ffa9cedc20f1dd0efeaed59fdef39c62dba0e3c57853faba3b6024ad8"
+  },
+  "open_weights": {
+    "1": 0.1,
+    "2..11": 1,
+    "12..14": 4,
+    "15": 10
+  },
+  "closed_weights": {
+    "16..26": 4,
+    "27..30": 10
+  },
+  "capacities": {
+    "open": 32.1,
+    "closed": 84,
+    "cangjie_bonus": 20,
+    "total_with_bonus": 136.1
+  },
+  "bonus_source": "User-supplied organizer clarification, 16 October 2026; official website confirms a bonus but does not publish this formula.",
+  "bonus_formula": "10 * (two largest KPI among closed27..30)",
+  "open15": {
+    "full_replay": 30.75747404826914,
+    "online": 30.044314328139688,
+    "current_hybrid": 30.05605802561868
+  },
+  "sacrifice": 0.7014160226504629,
+  "uniform_hidden_KPI_gain_needed_without_bonus": 0.008350190745838844,
+  "uniform_hidden_KPI_gain_needed_with_bonus": 0.006744384833177528,
+  "one_expensive_test_KPI_gain_needed_without_bonus": 0.07014160226504629,
+  "source_trap_groups": [
+    "prototypes/pipes_guarded_traps_20261019",
+    "prototypes/pipes_open15_adversary_20261019",
+    "prototypes/pipes_prefix_replan_20261020",
+    "prototypes/pipes_prefix_shock_20261019",
+    "prototypes/pipes_presync_20261020",
+    "prototypes/pipes_presync_transport_20261020",
+    "prototypes/pipes_v5_graves_20261019"
+  ],
+  "scenarios": [
+    {
+      "name": "archive_uniform",
+      "cheap_pool": 2526,
+      "expensive_pool": 2526,
+      "methods": {
+        "full_replay": {
+          "open15": 30.75747404826914,
+          "closed_4": 40.72844157892246,
+          "closed_10": 37.0258559808386,
+          "bonus": 19.57916988624027,
+          "without_bonus": 108.5117716080302,
+          "with_bonus_if_cangjie": 128.09094149427048
+        },
+        "online": {
+          "open15": 30.044314328139688,
+          "closed_4": 40.95116937448899,
+          "closed_10": 37.22833579498999,
+          "bonus": 19.551089719687884,
+          "without_bonus": 108.22381949761866,
+          "with_bonus_if_cangjie": 127.77490921730654
+        },
+        "current_hybrid": {
+          "open15": 30.05605802561868,
+          "closed_4": 41.018949659683685,
+          "closed_10": 37.28995423607608,
+          "bonus": 19.55585648899179,
+          "without_bonus": 108.36496192137844,
+          "with_bonus_if_cangjie": 127.92081841037023
+        }
+      },
+      "hybrid_minus_full_if_both_cangjie": -0.17012308390025055,
+      "hybrid_cangjie_minus_full_cpp": 19.40904680234003
+    },
+    {
+      "name": "additional_archive",
+      "cheap_pool": 2256,
+      "expensive_pool": 2256,
+      "methods": {
+        "full_replay": {
+          "open15": 30.75747404826914,
+          "closed_4": 40.53656743357564,
+          "closed_10": 36.85142493961422,
+          "bonus": 19.53831197929985,
+          "without_bonus": 108.145466421459,
+          "with_bonus_if_cangjie": 127.68377840075885
+        },
+        "online": {
+          "open15": 30.044314328139688,
+          "closed_4": 40.75753025089303,
+          "closed_10": 37.052300228084576,
+          "bonus": 19.503125665007424,
+          "without_bonus": 107.8541448071173,
+          "with_bonus_if_cangjie": 127.35727047212472
+        },
+        "current_hybrid": {
+          "open15": 30.05605802561868,
+          "closed_4": 40.83358810269549,
+          "closed_10": 37.12144372972317,
+          "bonus": 19.508959606629592,
+          "without_bonus": 108.01108985803734,
+          "with_bonus_if_cangjie": 127.52004946466693
+        }
+      },
+      "hybrid_minus_full_if_both_cangjie": -0.1637289360919283,
+      "hybrid_cangjie_minus_full_cpp": 19.37458304320792
+    },
+    {
+      "name": "without_short",
+      "cheap_pool": 2231,
+      "expensive_pool": 2231,
+      "methods": {
+        "full_replay": {
+          "open15": 30.75747404826914,
+          "closed_4": 41.10393447442425,
+          "closed_10": 37.367213158567495,
+          "bonus": 19.63206581439308,
+          "without_bonus": 109.22862168126089,
+          "with_bonus_if_cangjie": 128.86068749565396
+        },
+        "online": {
+          "open15": 30.044314328139688,
+          "closed_4": 41.334574292135244,
+          "closed_10": 37.57688572012295,
+          "bonus": 19.614204604460337,
+          "without_bonus": 108.95577434039788,
+          "with_bonus_if_cangjie": 128.5699789448582
+        },
+        "current_hybrid": {
+          "open15": 30.05605802561868,
+          "closed_4": 41.33138070642269,
+          "closed_10": 37.573982460384265,
+          "bonus": 19.614241963867507,
+          "without_bonus": 108.96142119242563,
+          "with_bonus_if_cangjie": 128.57566315629313
+        }
+      },
+      "hybrid_minus_full_if_both_cangjie": -0.28502433936083094,
+      "hybrid_cangjie_minus_full_cpp": 19.347041475032242
+    },
+    {
+      "name": "long_only",
+      "cheap_pool": 259,
+      "expensive_pool": 259,
+      "methods": {
+        "full_replay": {
+          "open15": 30.75747404826914,
+          "closed_4": 42.29704876333038,
+          "closed_10": 38.451862512118524,
+          "bonus": 19.82337119141523,
+          "without_bonus": 111.50638532371805,
+          "with_bonus_if_cangjie": 131.32975651513328
+        },
+        "online": {
+          "open15": 30.044314328139688,
+          "closed_4": 42.18453878320862,
+          "closed_10": 38.34958071200784,
+          "bonus": 19.823678016658146,
+          "without_bonus": 110.57843382335616,
+          "with_bonus_if_cangjie": 130.4021118400143
+        },
+        "current_hybrid": {
+          "open15": 30.05605802561868,
+          "closed_4": 42.18453284817606,
+          "closed_10": 38.3495753165237,
+          "bonus": 19.823687011352135,
+          "without_bonus": 110.59016619031844,
+          "with_bonus_if_cangjie": 130.41385320167058
+        }
+      },
+      "hybrid_minus_full_if_both_cangjie": -0.9159033134627066,
+      "hybrid_cangjie_minus_full_cpp": 18.907467877952527
+    },
+    {
+      "name": "expensive_are_long",
+      "cheap_pool": 2267,
+      "expensive_pool": 259,
+      "methods": {
+        "full_replay": {
+          "open15": 30.75747404826914,
+          "closed_4": 40.54923149477528,
+          "closed_10": 38.451862512118524,
+          "bonus": 19.82337119141523,
+          "without_bonus": 109.75856805516294,
+          "with_bonus_if_cangjie": 129.58193924657817
+        },
+        "online": {
+          "open15": 30.044314328139688,
+          "closed_4": 40.81025950379716,
+          "closed_10": 38.34958071200784,
+          "bonus": 19.823678016658146,
+          "without_bonus": 109.2041545439447,
+          "with_bonus_if_cangjie": 129.02783256060283
+        },
+        "current_hybrid": {
+          "open15": 30.05605802561868,
+          "closed_4": 40.885784222621695,
+          "closed_10": 38.3495753165237,
+          "bonus": 19.823687011352135,
+          "without_bonus": 109.29141756476407,
+          "with_bonus_if_cangjie": 129.1151045761162
+        }
+      },
+      "hybrid_minus_full_if_both_cangjie": -0.4668346704619637,
+      "hybrid_cangjie_minus_full_cpp": 19.35653652095327
+    },
+    {
+      "name": "short_only",
+      "cheap_pool": 295,
+      "expensive_pool": 295,
+      "methods": {
+        "full_replay": {
+          "open15": 30.75747404826914,
+          "closed_4": 37.88869700311061,
+          "closed_10": 34.44427000282782,
+          "bonus": 18.971894621805287,
+          "without_bonus": 103.09044105420757,
+          "with_bonus_if_cangjie": 122.06233567601286
+        },
+        "online": {
+          "open15": 30.044314328139688,
+          "closed_4": 38.05158845493372,
+          "closed_10": 34.59235314084884,
+          "bonus": 18.79086870665329,
+          "without_bonus": 102.68825592392226,
+          "with_bonus_if_cangjie": 121.47912463057554
+        },
+        "current_hybrid": {
+          "open15": 30.05605802561868,
+          "closed_4": 38.65612367570156,
+          "closed_10": 35.141930614274145,
+          "bonus": 18.87989649256977,
+          "without_bonus": 103.85411231559438,
+          "with_bonus_if_cangjie": 122.73400880816415
+        }
+      },
+      "hybrid_minus_full_if_both_cangjie": 0.6716731321512839,
+      "hybrid_cangjie_minus_full_cpp": 19.643567753956575
+    },
+    {
+      "name": "previous_directed_traps_only",
+      "cheap_pool": 150,
+      "expensive_pool": 150,
+      "methods": {
+        "full_replay": {
+          "open15": 30.75747404826914,
+          "closed_4": 36.84042409783471,
+          "closed_10": 33.491294634395196,
+          "bonus": 19.09425818098463,
+          "without_bonus": 101.08919278049905,
+          "with_bonus_if_cangjie": 120.18345096148369
+        },
+        "online": {
+          "open15": 30.044314328139688,
+          "closed_4": 39.60534239764069,
+          "closed_10": 36.0048567251279,
+          "bonus": 19.227130503708704,
+          "without_bonus": 105.65451345090827,
+          "with_bonus_if_cangjie": 124.88164395461698
+        },
+        "current_hybrid": {
+          "open15": 30.05605802561868,
+          "closed_4": 39.937793189854375,
+          "closed_10": 36.30708471804943,
+          "bonus": 19.286440316701825,
+          "without_bonus": 106.30093593352248,
+          "with_bonus_if_cangjie": 125.58737625022431
+        }
+      },
+      "hybrid_minus_full_if_both_cangjie": 5.4039252887406235,
+      "hybrid_cangjie_minus_full_cpp": 24.498183469725262
+    }
+  ],
+  "assumptions": [
+    "Closed test distribution and mechanism frequencies are unknown; these are sampling scenarios, not competition forecasts.",
+    "Full replay was measured as C++ cache32, with causal fallback. Its Cangjie bonus is hypothetical: no such validated port is provided here.",
+    "Current hybrid source585c6e7f preserves the frozen hybrid response/KPI policy. Its Windows1.0.5 verdict is pending.",
+    "Archive examples are selected, correlated and partly adversarial. They are not an independent representative holdout.",
+    "Fresh96 and newest24 were not evaluated with this full-replay policy; no three-way fresh comparison is claimed.",
+    "All expected scores assume successful official execution; TLE/incorrect cases contribute zero."
+  ],
+  "extra_scenario_compatibility": {
+    "archive_delta_hybrid_online": 0.14590919306368733
+  }
+}

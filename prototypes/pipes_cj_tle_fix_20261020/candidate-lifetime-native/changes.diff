@@ -1,0 +1,187 @@
+--- candidate-avl-inline/solution.cj
++++ candidate-lifetime-native/solution.cj
+@@ -1672,12 +1672,180 @@
+     }
+ }
+ 
++// Concrete lifetime storage. Primitive native payloads have one owner;
++// accessors copy structs and never export pointers or managed references.
++private class NativeLifetimeRecords {
++    private var data: CPointer<Int64>
++    private var capacity: Int64 = 16
++    private var used: Int64 = 1
++
++    public init() {
++        data = LibC.malloc<Int64>(count: 48)
++        if (data.isNull()) { throw IllegalMemoryException("Lifetime record allocation failed") }
++        // Slot zero is the same default sentinel record as the ArrayList base.
++        unsafe { for (i in 0..48) { data.write(i, 0) } }
++        let ownerFence = blackBox(this)
++    }
++
++    ~init() { unsafe { LibC.free(data) } }
++
++    public prop size: Int64 { get() { used } }
++
++    public operator func [](index: Int64): LifetimeRecord {
++        if (index < 0 || index >= used) { throw IndexOutOfBoundsException("Lifetime record index") }
++        let offset = index * 3
++        let result = unsafe { LifetimeRecord(data.read(offset), data.read(offset + 1), data.read(offset + 2) != 0) }
++        blackBox(this)
++        return result
++    }
++
++    public operator func [](index: Int64, value!: LifetimeRecord): Unit {
++        if (index < 0 || index >= used) { throw IndexOutOfBoundsException("Lifetime record index") }
++        let offset = index * 3
++        unsafe {
++            data.write(offset, value.born)
++            data.write(offset + 1, value.length)
++            data.write(offset + 2, if (value.active) { 1 } else { 0 })
++        }
++        let ownerFence = blackBox(this)
++    }
++
++    private func reserveForAdd(): Unit {
++        if (used < capacity) { return }
++        if (capacity > Int64.Max / 6) { throw IllegalMemoryException("Lifetime record capacity overflow") }
++        let expandedCapacity = capacity * 2
++        let expanded = LibC.malloc<Int64>(count: expandedCapacity * 3)
++        if (expanded.isNull()) { throw IllegalMemoryException("Lifetime record expansion failed") }
++        unsafe { for (i in 0..(used * 3)) { expanded.write(i, data.read(i)) } }
++        let previous = data
++        data = expanded
++        capacity = expandedCapacity
++        unsafe { LibC.free(previous) }
++        let ownerFence = blackBox(this)
++    }
++
++    public func add(value: LifetimeRecord): Unit {
++        reserveForAdd()
++        let offset = used * 3
++        unsafe {
++            data.write(offset, value.born)
++            data.write(offset + 1, value.length)
++            data.write(offset + 2, if (value.active) { 1 } else { 0 })
++        }
++        used++
++        let ownerFence = blackBox(this)
++    }
++}
++
++private class NativeLifetimeCells {
++    private let data: CPointer<Int64>
++    public let size: Int64 = 328
++
++    public init() {
++        data = LibC.malloc<Int64>(count: 1312)
++        if (data.isNull()) { throw IllegalMemoryException("Lifetime buffer allocation failed") }
++        unsafe { for (i in 0..1312) { data.write(i, 0) } }
++        let ownerFence = blackBox(this)
++    }
++
++    ~init() { unsafe { LibC.free(data) } }
++
++    public operator func [](index: Int64): LifetimeCell {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Lifetime buffer index") }
++        let offset = index * 4
++        var result = LifetimeCell()
++        unsafe {
++            result.completedExposure = data.read(offset + 0)
++            result.birthSum = data.read(offset + 1)
++            result.active = data.read(offset + 2)
++            result.deaths = data.read(offset + 3)
++        }
++        blackBox(this)
++        return result
++    }
++
++    public operator func [](index: Int64, value!: LifetimeCell): Unit {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Lifetime buffer index") }
++        let offset = index * 4
++        unsafe {
++            data.write(offset + 0, value.completedExposure)
++            data.write(offset + 1, value.birthSum)
++            data.write(offset + 2, value.active)
++            data.write(offset + 3, value.deaths)
++        }
++        let ownerFence = blackBox(this)
++    }
++}
++
++private class NativeLifetimeRates {
++    private let data: CPointer<Float64>
++    public let size: Int64 = 328
++
++    public init() {
++        data = LibC.malloc<Float64>(count: 656)
++        if (data.isNull()) { throw IllegalMemoryException("Lifetime buffer allocation failed") }
++        unsafe { for (i in 0..656) { data.write(i, 0.0) } }
++        let ownerFence = blackBox(this)
++    }
++
++    ~init() { unsafe { LibC.free(data) } }
++
++    public operator func [](index: Int64): LifetimeEstimate {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Lifetime buffer index") }
++        let offset = index * 2
++        var result = LifetimeEstimate()
++        unsafe {
++            result.mean = data.read(offset + 0)
++            result.error = data.read(offset + 1)
++        }
++        blackBox(this)
++        return result
++    }
++
++    public operator func [](index: Int64, value!: LifetimeEstimate): Unit {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Lifetime buffer index") }
++        let offset = index * 2
++        unsafe {
++            data.write(offset + 0, value.mean)
++            data.write(offset + 1, value.error)
++        }
++        let ownerFence = blackBox(this)
++    }
++}
++
++private class NativeLifetimeCrossings {
++    private let data: CPointer<Int64>
++    public let size: Int64 = 8
++
++    public init() {
++        data = LibC.malloc<Int64>(count: 8)
++        if (data.isNull()) { throw IllegalMemoryException("Lifetime buffer allocation failed") }
++        unsafe { for (i in 0..8) { data.write(i, 1) } }
++        let ownerFence = blackBox(this)
++    }
++
++    ~init() { unsafe { LibC.free(data) } }
++
++    public operator func [](index: Int64): Int64 {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Lifetime buffer index") }
++        let result = unsafe { data.read(index) }
++        blackBox(this)
++        return result
++    }
++
++    public operator func [](index: Int64, value!: Int64): Unit {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Lifetime buffer index") }
++        unsafe { data.write(index, value) }
++        let ownerFence = blackBox(this)
++    }
++}
++
+ public class CensoredLifetimeModel {
+     private let lower: VArray<Int64, $8> = [0, 16, 64, 256, 1024, 4096, 16384, 65536]
+-    private var records = ArrayList<LifetimeRecord>([LifetimeRecord()])
+-    private var cells = Array<LifetimeCell>(328, repeat: LifetimeCell())
+-    private var rates = Array<LifetimeEstimate>(328, repeat: LifetimeEstimate())
+-    private var nextCrossing = VArray<Int64, $8>(repeat: 1)
++    private var records = NativeLifetimeRecords()
++    private var cells = NativeLifetimeCells()
++    private var rates = NativeLifetimeRates()
++    private var nextCrossing = NativeLifetimeCrossings()
+     private var clock: Int64 = 0
+     private var referenceRate: Float64 = 0.0
+     private var referenceError: Float64 = 0.0

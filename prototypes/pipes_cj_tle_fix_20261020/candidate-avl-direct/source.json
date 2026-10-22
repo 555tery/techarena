@@ -1,0 +1,81 @@
+{
+  "parent": "/Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-avl-borrows/solution.cj",
+  "parent_sha256": "2ee9ffb76f01445286cf2d1de622194252201cbb475964c070a3493708c381a7",
+  "source_sha256": "31c3ed1b4d95bd7526205a6d3ae0eee70e3683055b5e29046b623e4a41e4358c",
+  "generator_sha256": "ac4d7018f3ada0a356c5249a9ea78877ef1bf3c1c045dd9a3384fd6f6e7460bb",
+  "scope": "Borrow left/right/parent/heights only in non-resizing mutation helpers",
+  "methods": [
+    {
+      "method": "fixHeight",
+      "before_sha256": "7b13f455de207a1c20d90e3b2ef5e45559004a74c82645d3a854890767b106a8",
+      "after_sha256": "e4ab0c70493e2a09e6d0c493d450d2bae724ce2015072e247e714edd296eae1a"
+    },
+    {
+      "method": "fixHeight",
+      "before_sha256": "7b13f455de207a1c20d90e3b2ef5e45559004a74c82645d3a854890767b106a8",
+      "after_sha256": "e4ab0c70493e2a09e6d0c493d450d2bae724ce2015072e247e714edd296eae1a"
+    },
+    {
+      "method": "replaceAtParent",
+      "before_sha256": "2e8b075002936ae70f6edfe959a6311057cae3708ba7ffc504772a4be3c7d16e",
+      "after_sha256": "f205445929476131916c752f5b36713da47cfa5dcc68d3ffee098121fe555b32"
+    },
+    {
+      "method": "replaceAtParent",
+      "before_sha256": "2e8b075002936ae70f6edfe959a6311057cae3708ba7ffc504772a4be3c7d16e",
+      "after_sha256": "f205445929476131916c752f5b36713da47cfa5dcc68d3ffee098121fe555b32"
+    },
+    {
+      "method": "rotateLeft",
+      "before_sha256": "1b912b4f4e2610fbcfa13f1515d760d89c93dd788e77f4c3e072c8750a6d890b",
+      "after_sha256": "ee93423756e48d4df25ccc0162b898ca7da6b0ee6240a1ec3e101ea43e9cd7fb"
+    },
+    {
+      "method": "rotateLeft",
+      "before_sha256": "1b912b4f4e2610fbcfa13f1515d760d89c93dd788e77f4c3e072c8750a6d890b",
+      "after_sha256": "ee93423756e48d4df25ccc0162b898ca7da6b0ee6240a1ec3e101ea43e9cd7fb"
+    },
+    {
+      "method": "rotateRight",
+      "before_sha256": "6fc7cc745b1588a19f9982e67215c75b8d0e9fee289314a57a52d6a29f8e2f8b",
+      "after_sha256": "18f548c55093a921d5492dee16ebf7194f0bd0c7952da954ef01de5f2fb85cfa"
+    },
+    {
+      "method": "rotateRight",
+      "before_sha256": "6fc7cc745b1588a19f9982e67215c75b8d0e9fee289314a57a52d6a29f8e2f8b",
+      "after_sha256": "18f548c55093a921d5492dee16ebf7194f0bd0c7952da954ef01de5f2fb85cfa"
+    },
+    {
+      "method": "rebalance",
+      "before_sha256": "fe47417787b69c80fbc8030377f89aa2041db067ac20e819eaa97b8c5a06794b",
+      "after_sha256": "bd601ce263726d20f8d023c21b349f53a2659f49ecd82be8d3f4fd31d77443c9"
+    },
+    {
+      "method": "rebalance",
+      "before_sha256": "fe47417787b69c80fbc8030377f89aa2041db067ac20e819eaa97b8c5a06794b",
+      "after_sha256": "bd601ce263726d20f8d023c21b349f53a2659f49ecd82be8d3f4fd31d77443c9"
+    },
+    {
+      "method": "eraseNode",
+      "before_sha256": "6badf9a42f9d2d7923c939ac6315495a40bf56f678e23bd26750d2fd941252f0",
+      "after_sha256": "e91db778a15cc824c26ebd5aeae6792fe119074ca8b88505ed4a3f66136fccd4"
+    },
+    {
+      "method": "eraseNode",
+      "before_sha256": "6badf9a42f9d2d7923c939ac6315495a40bf56f678e23bd26750d2fd941252f0",
+      "after_sha256": "e91db778a15cc824c26ebd5aeae6792fe119074ca8b88505ed4a3f66136fccd4"
+    }
+  ],
+  "ownership": [
+    "All pointers belong to existing vectors, which these methods and nested helpers never append to.",
+    "eraseNode appends only to vacant, whose allocation is distinct and never borrowed.",
+    "No pointer is stored, returned, copied to another owner, or used across newNode.",
+    "Each selected method reads keys.size after its last pointer access, keeping this and all its owning fields live."
+  ],
+  "invariants": [
+    "Every reachable child/parent ID is zero or below allocated vector size.",
+    "Zero sentinel is allocated in all arrays and maintains height zero.",
+    "All writes, rotation calls, branches, tie decisions and height arithmetic retain their original order.",
+    "The map is single-threaded; no helper performs callbacks or changes a vector owner."
+  ]
+}

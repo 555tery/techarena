@@ -1,0 +1,486 @@
+import { chmodSync, closeSync, existsSync, mkdirSync, openSync, readFileSync } from "node:fs";
+import { spawn } from "node:child_process";
+import { dirname } from "node:path";
+
+import {
+  cronLogPath,
+  cronPidPath,
+  daemonRunning,
+  deleteCronJob,
+  killCronExecution,
+  listCronJobs,
+  nextCronRun,
+  parseCronSchedule,
+  readCronJob,
+  recentCronExecutions,
+  recordCronJob,
+  resolveHeadlessCronBinary,
+  type CronExecutionRecord,
+  type CronJobRecord,
+} from "./cron.js";
+import { quoteCommand } from "./shell.js";
+import { renderSdkResult, type SdkFormat } from "./sdk.js";
+import type { AgentName, AllowMode, Env, ReasoningEffort } from "./types.js";
+
+export type CronCommand = "add" | "list" | "view" | "pause" | "resume" | "kill" | "rm" | "start" | "stop";
+
+export interface CronCommandInput {
+  command: CronCommand;
+  jobId?: string;
+  agent?: AgentName;
+  every?: string;
+  schedule?: string;
+  prompt?: string;
+  promptFile?: string;
+  model?: string;
+  profile?: string;
+  fast?: boolean;
+  reasoningEffort?: ReasoningEffort;
+  allow?: AllowMode;
+  workDir?: string;
+  docker: boolean;
+  dockerImage?: string;
+  dockerArgs: string[];
+  dockerEnv: string[];
+  modal: boolean;
+  modalApp?: string;
+  modalCpu?: number;
+  modalEnv: string[];
+  modalImage?: string;
+  modalImageSecret?: string;
+  modalIncludeGit: boolean;
+  modalMemoryMiB?: number;
+  modalSecrets: string[];
+  modalTimeoutSeconds?: number;
+  timeoutSeconds?: number;
+  json: boolean;
+  debug: boolean;
+  usage: boolean;
+  force: boolean;
+  sdkFormat?: SdkFormat;
+}
+
+export interface CronCommandHandlers {
+  env: Env;
+  stdout: (text: string) => void;
+  stderr: (text: string) => void;
+}
+
+export async function handleCronCommand(input: CronCommandInput, handlers: CronCommandHandlers): Promise<number> {
+  if (input.command === "add") return await cronAdd(input, handlers);
+  if (input.command === "list") return cronList(input, handlers);
+  if (input.command === "view") return cronView(requireJobId(input), input, handlers);
+  if (input.command === "pause") return cronPause(requireJobId(input), handlers);
+  if (input.command === "resume") return cronResume(requireJobId(input), handlers);
+  if (input.command === "kill") return await cronKill(requireJobId(input), handlers);
+  if (input.command === "rm") return await cronRemove(requireJobId(input), input.force, handlers);
+  if (input.command === "start") return await cronStart(handlers);
+  if (input.command === "stop") return cronStop(handlers);
+  throw new Error("unsupported cron command");
+}
+
+async function cronAdd(input: CronCommandInput, handlers: CronCommandHandlers): Promise<number> {
+  if (!input.agent) {
+    throw new Error("cron add requires an agent");
+  }
+  if (input.fast !== undefined && input.agent !== "claude" && input.agent !== "codex") {
+    throw new Error("--fast is supported only by claude and codex");
+  }
+  if (input.profile !== undefined && input.agent !== "codex") {
+    throw new Error("--profile is supported only by codex");
+  }
+  if (input.prompt !== undefined && input.promptFile !== undefined) {
+    throw new Error("use either --prompt or --prompt-file, not both");
+  }
+  if (input.prompt === undefined && input.promptFile === undefined) {
+    throw new Error("cron add requires --prompt or --prompt-file");
+  }
+  const schedule = parseCronSchedule({ every: input.every, schedule: input.schedule });
+  const args = buildScheduledArgs(input);
+  const previousJob = input.jobId ? readCronJob(handlers.env, input.jobId) : undefined;
+  const job = recordCronJob(handlers.env, {
+    id: input.jobId,
+    agent: input.agent,
+    schedule,
+    command: {
+      args,
+      workDir: input.workDir ?? process.cwd(),
+    },
+  });
+  if (!daemonRunning(handlers.env)) {
+    try {
+      await startDaemonProcess(handlers);
+    } catch (error) {
+      if (previousJob) {
+        recordCronJob(handlers.env, previousJob);
+      } else {
+        deleteCronJob(handlers.env, job.id);
+      }
+      throw error;
+    }
+  }
+  handlers.stdout(`added: ${job.id}\nnext run: ${formatDisplayTime(job.nextRunAt)}\n`);
+  return 0;
+}
+
+function cronList(input: CronCommandInput, handlers: CronCommandHandlers): number {
+  const jobs = listCronJobs(handlers.env);
+  if (input.sdkFormat) {
+    handlers.stdout(
+      renderSdkResult("cron.list", {
+        jobs: jobs.map(sdkCronJobSummary),
+        daemonRunning: daemonRunning(handlers.env),
+      }),
+    );
+    return 0;
+  }
+  if (jobs.length === 0) {
+    handlers.stdout("No cron jobs\n");
+    return 0;
+  }
+  handlers.stdout(
+    renderTable(
+      ["id", "agent", "schedule", "status", "next run", "last run", "last exit"],
+      jobs.map((job) => [
+        job.id,
+        job.agent,
+        scheduleLabel(job),
+        job.status,
+        formatDisplayTime(job.nextRunAt),
+        job.lastRunAt ? formatDisplayTime(job.lastRunAt) : "-",
+        job.lastExitCode === undefined || job.lastExitCode === null ? "-" : String(job.lastExitCode),
+      ]),
+    ),
+  );
+  if (!daemonRunning(handlers.env)) {
+    handlers.stdout("daemon: stopped\n");
+  }
+  return 0;
+}
+
+function cronView(jobId: string, input: CronCommandInput, handlers: CronCommandHandlers): number {
+  const job = requireJob(handlers.env, jobId);
+  const executions = recentCronExecutions(handlers.env, jobId, 10);
+  const promptFile = promptFileFromArgs(job.command.args);
+  const warnings = promptFile && !existsSync(promptFile) ? [`prompt file not found: ${promptFile}`] : [];
+  if (input.sdkFormat) {
+    handlers.stdout(
+      renderSdkResult("cron.view", {
+        job: sdkCronJobView(job),
+        daemonRunning: daemonRunning(handlers.env),
+        executions: executions.map(sdkCronExecution),
+        warnings: warnings.map(() => "prompt file not found"),
+      }),
+    );
+    return 0;
+  }
+  const lines = [
+    `id: ${job.id}`,
+    `agent: ${job.agent}`,
+    `schedule: ${scheduleLabel(job)}`,
+    `status: ${job.status}`,
+    `daemon: ${daemonRunning(handlers.env) ? "running" : "stopped"}`,
+    `timezone: ${job.timezone}`,
+    `work dir: ${job.command.workDir}`,
+    `command: ${quoteCommand({ command: "headless", args: job.command.args })}`,
+    `active execution: ${job.activeExecutionId ?? "-"}`,
+    `pending: ${job.pending ? "yes" : "no"}`,
+    `next run: ${formatDisplayTime(job.nextRunAt)}`,
+    `last run: ${job.lastRunAt ? formatDisplayTime(job.lastRunAt) : "-"}`,
+    `last exit: ${job.lastExitCode === undefined || job.lastExitCode === null ? "-" : String(job.lastExitCode)}`,
+  ];
+  if (promptFile) {
+    lines.push(`prompt file: ${promptFile}`);
+    if (!existsSync(promptFile)) {
+      lines.push(`warning: prompt file not found: ${promptFile}`);
+    }
+  }
+  lines.push("", "recent executions:");
+  if (executions.length === 0) {
+    lines.push("  none");
+  } else {
+    for (const execution of executions) {
+      const duration = execution.completedAt
+        ? `${Math.max(0, new Date(execution.completedAt).getTime() - new Date(execution.startedAt).getTime())}ms`
+        : "-";
+      lines.push(
+        `  ${execution.executionId} ${execution.status} exit=${execution.exitCode ?? "-"} duration=${duration}`,
+        `    stdout: ${execution.stdoutLog}`,
+        `    stderr: ${execution.stderrLog}`,
+      );
+      if (execution.finalMessage) {
+        lines.push(`    final: ${execution.finalMessage}`);
+      }
+    }
+  }
+  handlers.stdout(`${lines.join("\n")}\n`);
+  return 0;
+}
+
+function sdkCronJobSummary(job: CronJobRecord): Record<string, unknown> {
+  return {
+    version: job.version,
+    id: job.id,
+    agent: job.agent,
+    schedule: job.schedule,
+    status: job.status,
+    timezone: job.timezone,
+    nextRunAt: job.nextRunAt,
+    lastRunAt: job.lastRunAt,
+    lastExitCode: job.lastExitCode,
+    lastExecutionId: job.lastExecutionId,
+    activeExecutionId: job.activeExecutionId,
+    pending: job.pending,
+    createdAt: job.createdAt,
+    updatedAt: job.updatedAt,
+  };
+}
+
+function sdkCronJobView(job: CronJobRecord): Record<string, unknown> {
+  return {
+    ...sdkCronJobSummary(job),
+    command: {
+      args: redactScheduledArgs(job.command.args),
+    },
+  };
+}
+
+function sdkCronExecution(execution: CronExecutionRecord): Record<string, unknown> {
+  const finalMessage = execution.finalMessage?.replace(/\s+/g, " ").trim();
+  return {
+    version: execution.version,
+    jobId: execution.jobId,
+    executionId: execution.executionId,
+    status: execution.status,
+    startedAt: execution.startedAt,
+    completedAt: execution.completedAt,
+    exitCode: execution.exitCode,
+    signal: execution.signal,
+    finalMessage:
+      finalMessage && finalMessage.length > 200
+        ? `${finalMessage.slice(0, 197)}...`
+        : finalMessage,
+  };
+}
+
+function redactScheduledArgs(args: string[]): string[] {
+  const redactedValueFlags = new Set([
+    "--prompt",
+    "--prompt-file",
+    "--work-dir",
+    "-C",
+    "--docker-arg",
+    "--docker-env",
+    "--modal-env",
+  ]);
+  const redacted: string[] = [];
+  for (let index = 0; index < args.length; index += 1) {
+    const value = args[index] ?? "";
+    redacted.push(value);
+    if (redactedValueFlags.has(value) && index + 1 < args.length) {
+      redacted.push("<redacted>");
+      index += 1;
+    }
+  }
+  return redacted;
+}
+
+function cronPause(jobId: string, handlers: CronCommandHandlers): number {
+  const job = requireJob(handlers.env, jobId);
+  recordCronJob(handlers.env, { ...job, status: "paused", pending: false, updatedAt: new Date().toISOString() });
+  handlers.stdout(`paused: ${jobId}\n`);
+  return 0;
+}
+
+function cronResume(jobId: string, handlers: CronCommandHandlers): number {
+  const job = requireJob(handlers.env, jobId);
+  const now = new Date();
+  const schedule = parseCronSchedule(job.schedule.kind === "every" ? { every: job.schedule.value } : { schedule: job.schedule.value });
+  const resumed = recordCronJob(handlers.env, {
+    ...job,
+    schedule,
+    status: "active",
+    pending: false,
+    nextRunAt: nextCronRun(schedule, now).toISOString(),
+    updatedAt: now.toISOString(),
+  });
+  handlers.stdout(`resumed: ${jobId}\nnext run: ${formatDisplayTime(resumed.nextRunAt)}\n`);
+  return 0;
+}
+
+async function cronKill(jobId: string, handlers: CronCommandHandlers): Promise<number> {
+  const job = requireJob(handlers.env, jobId);
+  await killCronExecution(handlers.env, job);
+  handlers.stdout(`killed: ${jobId}\n`);
+  return 0;
+}
+
+async function cronRemove(jobId: string, force: boolean, handlers: CronCommandHandlers): Promise<number> {
+  const job = requireJob(handlers.env, jobId);
+  if (job.activeExecutionId && !force) {
+    throw new Error(`job has an active execution; use --force to remove: ${jobId}`);
+  }
+  if (job.activeExecutionId) {
+    await killCronExecution(handlers.env, job);
+  }
+  deleteCronJob(handlers.env, jobId);
+  handlers.stdout(`removed: ${jobId}\n`);
+  return 0;
+}
+
+async function cronStart(handlers: CronCommandHandlers): Promise<number> {
+  if (daemonRunning(handlers.env)) {
+    handlers.stdout("daemon already running\n");
+    return 0;
+  }
+  await startDaemonProcess(handlers);
+  handlers.stdout("daemon started\n");
+  return 0;
+}
+
+function cronStop(handlers: CronCommandHandlers): number {
+  const pid = readDaemonPid(handlers.env);
+  if (!pid) {
+    handlers.stdout("daemon already stopped\n");
+    return 0;
+  }
+  try {
+    process.kill(pid, "SIGTERM");
+  } catch {
+    handlers.stdout("daemon already stopped\n");
+    return 0;
+  }
+  handlers.stdout("daemon stopped\n");
+  return 0;
+}
+
+function buildScheduledArgs(input: CronCommandInput): string[] {
+  const args = [input.agent as string];
+  if (input.prompt !== undefined) args.push("--prompt", input.prompt);
+  if (input.promptFile !== undefined) args.push("--prompt-file", input.promptFile);
+  if (input.model !== undefined) args.push("--model", input.model);
+  if (input.profile !== undefined) args.push("--profile", input.profile);
+  if (input.fast !== undefined) args.push(input.fast ? "--fast" : "--no-fast");
+  if (input.reasoningEffort !== undefined) args.push("--reasoning-effort", input.reasoningEffort);
+  if (input.allow !== undefined) args.push("--allow", input.allow);
+  if (input.workDir !== undefined) args.push("--work-dir", input.workDir);
+  if (input.docker) args.push("--docker");
+  if (input.dockerImage !== undefined) args.push("--docker-image", input.dockerImage);
+  for (const value of input.dockerArgs) args.push("--docker-arg", value);
+  for (const value of input.dockerEnv) args.push("--docker-env", value);
+  if (input.modal) args.push("--modal");
+  if (input.modalApp !== undefined) args.push("--modal-app", input.modalApp);
+  if (input.modalCpu !== undefined) args.push("--modal-cpu", String(input.modalCpu));
+  for (const value of input.modalEnv) args.push("--modal-env", value);
+  if (input.modalImage !== undefined) args.push("--modal-image", input.modalImage);
+  if (input.modalImageSecret !== undefined) args.push("--modal-image-secret", input.modalImageSecret);
+  if (input.modalIncludeGit) args.push("--modal-include-git");
+  if (input.modalMemoryMiB !== undefined) args.push("--modal-memory", String(input.modalMemoryMiB));
+  for (const value of input.modalSecrets) args.push("--modal-secret", value);
+  if (input.modalTimeoutSeconds !== undefined) args.push("--modal-timeout", String(input.modalTimeoutSeconds));
+  if (input.timeoutSeconds !== undefined) args.push("--timeout", String(input.timeoutSeconds));
+  if (input.json) args.push("--json");
+  if (input.debug) args.push("--debug");
+  if (input.usage) args.push("--usage");
+  return args;
+}
+
+async function startDaemonProcess(handlers: CronCommandHandlers): Promise<void> {
+  const logPath = cronLogPath(handlers.env);
+  mkdirSync(dirname(logPath), { recursive: true, mode: 0o700 });
+  const stdoutFd = openSync(logPath, "a", 0o600);
+  const stderrFd = openSync(logPath, "a", 0o600);
+  chmodSync(logPath, 0o600);
+  let spawnError: Error | undefined;
+  let exitStatus: { code: number | null; signal: NodeJS.Signals | null } | undefined;
+  const child = spawn(resolveHeadlessCronBinary(handlers.env), ["cron-daemon"], {
+    detached: true,
+    env: handlers.env as NodeJS.ProcessEnv,
+    stdio: ["ignore", stdoutFd, stderrFd],
+  });
+  child.once("error", (error) => {
+    spawnError = error;
+  });
+  child.once("exit", (code, signal) => {
+    exitStatus = { code, signal };
+  });
+  closeSync(stdoutFd);
+  closeSync(stderrFd);
+  child.unref();
+  const deadline = Date.now() + 1000;
+  while (Date.now() < deadline) {
+    if (daemonRunning(handlers.env)) {
+      return;
+    }
+    throwIfDaemonStartFailed(spawnError, exitStatus);
+    await new Promise((resolve) => setTimeout(resolve, 25));
+  }
+  throwIfDaemonStartFailed(spawnError, exitStatus);
+  throw new Error("cron daemon did not start within 1000ms");
+}
+
+function throwIfDaemonStartFailed(
+  spawnError: Error | undefined,
+  exitStatus: { code: number | null; signal: NodeJS.Signals | null } | undefined,
+): void {
+  if (spawnError) {
+    throw new Error(`cron daemon failed to start: ${spawnError.message}`);
+  }
+  if (exitStatus) {
+    const reason = exitStatus.signal ? `signal ${exitStatus.signal}` : `exit code ${exitStatus.code ?? "unknown"}`;
+    throw new Error(`cron daemon failed to start: ${reason}`);
+  }
+}
+
+function requireJobId(input: CronCommandInput): string {
+  if (!input.jobId) {
+    throw new Error(`cron ${input.command} requires a job id`);
+  }
+  return input.jobId;
+}
+
+function requireJob(env: Env, jobId: string): CronJobRecord {
+  const job = readCronJob(env, jobId);
+  if (!job) {
+    throw new Error(`unknown cron job: ${jobId}`);
+  }
+  return job;
+}
+
+function scheduleLabel(job: CronJobRecord): string {
+  return job.schedule.kind === "every" ? `every ${job.schedule.value}` : job.schedule.value;
+}
+
+function promptFileFromArgs(args: string[]): string | undefined {
+  const index = args.indexOf("--prompt-file");
+  return index >= 0 ? args[index + 1] : undefined;
+}
+
+function formatDisplayTime(iso: string): string {
+  const date = new Date(iso);
+  if (Number.isNaN(date.getTime())) {
+    return iso;
+  }
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  const hour = String(date.getHours()).padStart(2, "0");
+  const minute = String(date.getMinutes()).padStart(2, "0");
+  return `${year}-${month}-${day} ${hour}:${minute}`;
+}
+
+function renderTable(headers: string[], rows: string[][]): string {
+  const widths = headers.map((header, index) =>
+    Math.max(header.length, ...rows.map((row) => row[index]?.length ?? 0)),
+  );
+  const renderRow = (row: string[]) => row.map((cell, index) => cell.padEnd(widths[index] ?? 0)).join("  ").trimEnd();
+  return [renderRow(headers), ...rows.map(renderRow)].join("\n").concat("\n");
+}
+
+function readDaemonPid(env: Env): number | undefined {
+  if (!existsSync(cronPidPath(env))) {
+    return undefined;
+  }
+  const parsed = Number.parseInt(readFileSync(cronPidPath(env), "utf8").trim(), 10);
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : undefined;
+}

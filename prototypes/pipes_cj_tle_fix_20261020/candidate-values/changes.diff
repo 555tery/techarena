@@ -1,0 +1,180 @@
+--- candidate-v1/solution.cj
++++ candidate-values/solution.cj
+@@ -987,11 +987,11 @@
+ }
+ 
+ public class CensoredLifetimeModel {
+-    private let lower: Array<Int64> = [0, 16, 64, 256, 1024, 4096, 16384, 65536]
++    private let lower: VArray<Int64, $8> = [0, 16, 64, 256, 1024, 4096, 16384, 65536]
+     private var records = ArrayList<LifetimeRecord>([LifetimeRecord()])
+-    private var cells = Array<Array<LifetimeCell>>(41, { _ => Array<LifetimeCell>(8, repeat: LifetimeCell()) })
+-    private var rates = Array<Array<LifetimeEstimate>>(41, { _ => Array<LifetimeEstimate>(8, repeat: LifetimeEstimate()) })
+-    private var nextCrossing = Array<Int64>(8, repeat: 1)
++    private var cells = VArray<LifetimeCell, $328>(repeat: LifetimeCell())
++    private var rates = VArray<LifetimeEstimate, $328>(repeat: LifetimeEstimate())
++    private var nextCrossing = VArray<Int64, $8>(repeat: 1)
+     private var clock: Int64 = 0
+     private var referenceRate: Float64 = 0.0
+     private var referenceError: Float64 = 0.0
+@@ -1006,18 +1006,18 @@
+     }
+ 
+     private func enter(record: LifetimeRecord, bin: Int64): Unit {
+-        var cell = cells[record.length][bin]
++        var cell = cells[(record.length) * 8 + (bin)]
+         cell.active++
+         cell.birthSum += record.born
+-        cells[record.length][bin] = cell
++        cells[(record.length) * 8 + (bin)] = cell
+     }
+ 
+     private func leave(record: LifetimeRecord, bin: Int64, age: Int64): Unit {
+-        var cell = cells[record.length][bin]
++        var cell = cells[(record.length) * 8 + (bin)]
+         cell.completedExposure += age - lower[bin]
+         cell.active--
+         cell.birthSum -= record.born
+-        cells[record.length][bin] = cell
++        cells[(record.length) * 8 + (bin)] = cell
+     }
+ 
+     private func exposure(cell: LifetimeCell, bin: Int64): Int64 {
+@@ -1033,7 +1033,7 @@
+         while (age < end) {
+             let next = if (bin + 1 < 8) { iMin(end, lower[bin + 1]) } else { end }
+             let weight = Float64(next - age) / Float64(kHistoryWindow)
+-            let rate = rates[length][bin]
++            let rate = rates[(length) * 8 + (bin)]
+             result.mean += weight * rate.mean
+             result.error += weight * rate.error
+             age = next
+@@ -1078,9 +1078,9 @@
+         let age = clock - record.born
+         leave(record, ageBin(age), age)
+         let eventBin = ageBin(if (age == 0) { 0 } else { age - 1 })
+-        var cell = cells[record.length][eventBin]
++        var cell = cells[(record.length) * 8 + (eventBin)]
+         cell.deaths++
+-        cells[record.length][eventBin] = cell
++        cells[(record.length) * 8 + (eventBin)] = cell
+         record.active = false
+         records[pid] = record
+     }
+@@ -1093,18 +1093,18 @@
+             var pooledExposure: Float64 = 0.0
+             var pooledDeaths: Float64 = 0.0
+             for (length in 1..41) {
+-                pooledExposure += Float64(exposure(cells[length][bin], bin))
+-                pooledDeaths += Float64(cells[length][bin].deaths)
++                pooledExposure += Float64(exposure(cells[(length) * 8 + (bin)], bin))
++                pooledDeaths += Float64(cells[(length) * 8 + (bin)].deaths)
+             }
+             let pooledDenominator = pooledExposure + priorEvents / priorHazard
+             let pooledRate = (pooledDeaths + priorEvents) / pooledDenominator
+             let pooledError = sqrt(pooledDeaths + priorEvents) / pooledDenominator
+             for (length in 1..41) {
+-                let cell = cells[length][bin]
++                let cell = cells[(length) * 8 + (bin)]
+                 let borrowedExposure = priorEvents / pooledRate
+                 let denominator = Float64(exposure(cell, bin)) + borrowedExposure
+                 let shape = Float64(cell.deaths) + priorEvents
+-                rates[length][bin] = LifetimeEstimate(shape / denominator,
++                rates[(length) * 8 + (bin)] = LifetimeEstimate(shape / denominator,
+                     sqrt(shape) / denominator + borrowedExposure / denominator * pooledError)
+             }
+         }
+@@ -1113,7 +1113,7 @@
+         var population: Int64 = 0
+         for (length in 1..41) {
+             for (bin in 0..8) {
+-                let cell = cells[length][bin]
++                let cell = cells[(length) * 8 + (bin)]
+                 if (cell.active == 0) { continue }
+                 let meanAge = clock - cell.birthSum / cell.active
+                 let prediction = predict(length, meanAge)
+@@ -1189,10 +1189,10 @@
+     public var recentDeleteRanksPermille = IntRing(0)
+     public var recentTopFivePercent: Int64 = 0
+     public var lifoLaneDisabledForScale = false
+-    public var primalGapCounts = Array<Int64>(kPrimalGapValueCap + 2, repeat: 0)
+-    public var primalEventHistory = Array<Int64>(256, repeat: 0)
+-    public var primalRecentRequests = Array<Int64>(41, repeat: 0)
+-    public var primalGapValue = Array<Float64>(kPrimalGapValueCap + 1, repeat: 0.0)
++    public var primalGapCounts = VArray<Int64, $514>(repeat: 0)
++    public var primalEventHistory = VArray<Int64, $256>(repeat: 0)
++    public var primalRecentRequests = VArray<Int64, $41>(repeat: 0)
++    public var primalGapValue = VArray<Float64, $513>(repeat: 0.0)
+     public var primalEventPosition: Int64 = 0
+     public var primalRecentDeletes: Int64 = 0
+     public var primalStep: Int64 = 0
+@@ -1209,8 +1209,8 @@
+     public var lastCompletedDeleteRelativeParity: Int64 = -1
+     public var previousCompletedDeleteRelativeParity: Int64 = -1
+     public var lifetimeModel = CensoredLifetimeModel()
+-    public var causalRequestRate = Array<Float64>(41, repeat: 0.0)
+-    public var causalGapValue = Array<Array<Float64>>(2, {_ => Array<Float64>(kPrimalGapValueCap + 1, repeat: 0.0)})
++    public var causalRequestRate = VArray<Float64, $41>(repeat: 0.0)
++    public var causalGapValue = VArray<Float64, $1026>(repeat: 0.0)
+     public var causalBaseExpiry: Float64 = 0.0
+     public var causalComputedLimit: Int64 = 0
+     public var causalRiskReady = false
+@@ -1598,7 +1598,7 @@
+     }
+ 
+     public func rebuildPrimalGapValues(maxGap: Int64): Unit {
+-        let rate = Array<Float64>(41, repeat: 0.0)
++        var rate = VArray<Float64, $41>(repeat: 0.0)
+         var fitting = primalGapCounts[kPrimalGapValueCap + 1]
+         var gap = kPrimalGapValueCap
+         while (gap >= 1) {
+@@ -1607,7 +1607,7 @@
+             gap--
+         }
+         let expiry = 2.0 * Float64(primalRecentDeletes) / Float64(iMax(1, activePipeCount))
+-        primalGapValue = Array<Float64>(kPrimalGapValueCap + 1, repeat: 0.0)
++        primalGapValue = VArray<Float64, $513>(repeat: 0.0)
+         for (g in 1..=maxGap) {
+             let top = iMin(g, 40)
+             if (expiry == 0.0) {
+@@ -1616,7 +1616,7 @@
+                 }
+                 continue
+             }
+-            let reward = Array<Float64>(41, repeat: 0.0)
++            var reward = VArray<Float64, $41>(repeat: 0.0)
+             var active: Int64 = 0
+             var numerator: Float64 = 0.0
+             var denominator = expiry
+@@ -1664,11 +1664,11 @@
+ 
+     public func rebuildCausalGapValues(maxGap: Int64): Unit {
+         for (model in 0..2) {
+-            let value = Array<Float64>(kPrimalGapValueCap + 1, repeat: 0.0)
++            var value = VArray<Float64, $513>(repeat: 0.0)
+             let expiry = causalBaseExpiry * (if (model == 0) { 0.5 } else { 2.0 })
+             for (gap in 1..=maxGap) {
+                 let top = iMin(gap, 40)
+-                let reward = Array<Float64>(41, repeat: 0.0)
++                var reward = VArray<Float64, $41>(repeat: 0.0)
+                 var active: Int64 = 0
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry
+@@ -1697,15 +1697,15 @@
+                 }
+                 value[gap] = fMin(fMax(estimate, 0.0), Float64(gap))
+             }
+-            causalGapValue[model] = value
++            for (cell in 0..513) { causalGapValue[model * 513 + cell] = value[cell] }
+         }
+         causalComputedLimit = maxGap
+     }
+ 
+     public func causalValueAt(gap: Int64, expiryFactor: Float64): Float64 {
+         let base = primalGapValue[gap]
+-        if (expiryFactor <= 1.0) { return base + 2.0 * (1.0 - expiryFactor) * (causalGapValue[0][gap] - base) }
+-        return base + (expiryFactor - 1.0) * (causalGapValue[1][gap] - base)
++        if (expiryFactor <= 1.0) { return base + 2.0 * (1.0 - expiryFactor) * (causalGapValue[gap] - base) }
++        return base + (expiryFactor - 1.0) * (causalGapValue[513 + gap] - base)
+     }
+ 
+     public func causalPrimalLoss(gap: Int64, length: Int64, highSide: Bool, modelLimit: Int64, freshRisk: Float64): Float64 {

@@ -1,0 +1,69 @@
+--- /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-counts/solution.cj
++++ /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-array-dp/solution.cj
+@@ -1206,10 +1206,10 @@
+     public var recentDeleteRanksPermille = IntRing(0)
+     public var recentTopFivePercent: Int64 = 0
+     public var lifoLaneDisabledForScale = false
+-    public var primalGapCounts = VArray<Int64, $514>(repeat: 0)
+-    public var primalEventHistory = VArray<Int64, $256>(repeat: 0)
++    public var primalGapCounts = Array<Int64>(514, repeat: 0)
++    public var primalEventHistory = Array<Int64>(256, repeat: 0)
+     public var primalRecentRequests = VArray<Int64, $41>(repeat: 0)
+-    public var primalGapValue = VArray<Float64, $513>(repeat: 0.0)
++    public var primalGapValue = Array<Float64>(513, repeat: 0.0)
+     public var primalEventPosition: Int64 = 0
+     public var primalRecentDeletes: Int64 = 0
+     public var primalStep: Int64 = 0
+@@ -1226,8 +1226,8 @@
+     public var lastCompletedDeleteRelativeParity: Int64 = -1
+     public var previousCompletedDeleteRelativeParity: Int64 = -1
+     public var lifetimeModel = CensoredLifetimeModel()
+-    public var causalRequestRate = VArray<Float64, $41>(repeat: 0.0)
+-    public var causalGapValue = VArray<Float64, $1026>(repeat: 0.0)
++    public var causalRequestRate = Array<Float64>(41, repeat: 0.0)
++    public var causalGapValue = Array<Float64>(1026, repeat: 0.0)
+     public var causalBaseExpiry: Float64 = 0.0
+     public var causalComputedLimit: Int64 = 0
+     public var causalRiskReady = false
+@@ -1613,7 +1613,7 @@
+     public func rebuildPrimalGapValues(maxGap: Int64): Unit {
+         let gapCounts = primalGapCounts
+         let recentRequests = primalRecentRequests
+-        var rate = VArray<Float64, $41>(repeat: 0.0)
++        var rate = Array<Float64>(41, repeat: 0.0)
+         var fitting = gapCounts[kPrimalGapValueCap + 1]
+         var gap = kPrimalGapValueCap
+         while (gap >= 1) {
+@@ -1622,7 +1622,8 @@
+             gap--
+         }
+         let expiry = 2.0 * Float64(primalRecentDeletes) / Float64(iMax(1, activePipeCount))
+-        var value = VArray<Float64, $513>(repeat: 0.0)
++        var value = Array<Float64>(513, repeat: 0.0)
++        let reward = Array<Float64>(41, repeat: 0.0)
+         for (g in 1..=maxGap) {
+             let top = iMin(g, 40)
+             if (expiry == 0.0) {
+@@ -1631,7 +1632,6 @@
+                 }
+                 continue
+             }
+-            var reward = VArray<Float64, $41>(repeat: 0.0)
+             var active: Int64 = 0
+             var numerator: Float64 = 0.0
+             var denominator = expiry
+@@ -1681,12 +1681,12 @@
+     public func rebuildCausalGapValues(maxGap: Int64): Unit {
+         let requestRates = causalRequestRate
+         var gapValues = causalGapValue
++        let reward = Array<Float64>(41, repeat: 0.0)
+         for (model in 0..2) {
+-            var value = VArray<Float64, $513>(repeat: 0.0)
++            var value = Array<Float64>(513, repeat: 0.0)
+             let expiry = causalBaseExpiry * (if (model == 0) { 0.5 } else { 2.0 })
+             for (gap in 1..=maxGap) {
+                 let top = iMin(gap, 40)
+-                var reward = VArray<Float64, $41>(repeat: 0.0)
+                 var active: Int64 = 0
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry

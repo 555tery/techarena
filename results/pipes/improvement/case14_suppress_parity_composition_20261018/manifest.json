@@ -1,0 +1,393 @@
+{
+  "experiment": "case14 unit-profile suppression composed with case5 parity plus scale-gate leader",
+  "date": "2026-10-18",
+  "scope": "Local only. No platform, Docker, canonical source, frozen source, or wiki changes.",
+  "mechanism": "Online gate: only when the existing scale-offset gate would pass, suppress it if at least 85% of the latest up-to-2048 placement lengths are 1; require at least 128 recorded placements. Existing parity logic and scale-gate conditions otherwise remain unchanged.",
+  "parent_leader": {
+    "source": "results/pipes/improvement/case5_push_20261018/src/relative_cohort_plus_scale_gate.cpp",
+    "sha256": "b1712f18ff3ecfb1e63e86eed038dea32e1b597c94b0d54a7d07f5836c120bf5"
+  },
+  "suppression_reference": {
+    "source": "results/pipes/improvement/case_small_push_20261018/source/unit_profile_suppress_scale_offset.cpp",
+    "sha256": "f10ced1644f3e18771f2fec3c1b28a85ff6e9ebe8855006c346f7cc5b58f9440"
+  },
+  "artifacts": {
+    "parent_baseline_copy": {
+      "path": "results/pipes/improvement/case14_suppress_parity_composition_20261018/src/parent_baseline.cpp",
+      "sha256": "b1712f18ff3ecfb1e63e86eed038dea32e1b597c94b0d54a7d07f5836c120bf5"
+    },
+    "candidate_source": {
+      "path": "results/pipes/improvement/case14_suppress_parity_composition_20261018/src/relative_cohort_plus_scale_gate_unit_suppression.cpp",
+      "sha256": "4ac5d5c36220fc10610d82ce092e77907f80a1a1c425332d25f59316fa21d450"
+    },
+    "parent_baseline_binary": {
+      "path": "results/pipes/improvement/case14_suppress_parity_composition_20261018/bin/parent_baseline",
+      "sha256": "be0b956915e25be8c570318ccb18e80fbd2d704dd22c0a42c5a5dc77293cc3d5"
+    },
+    "candidate_binary": {
+      "path": "results/pipes/improvement/case14_suppress_parity_composition_20261018/bin/composed",
+      "sha256": "a7dca77cda957c707457ea54c810f572d8f64ae96d1d02f826ec7c80f0804942"
+    }
+  },
+  "build": {
+    "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+    "flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic -DMC_ROLLOUT_DIAGNOSTICS",
+    "baseline_command": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic -DMC_ROLLOUT_DIAGNOSTICS <parent_baseline.cpp> -o <parent_baseline>",
+    "candidate_command": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic -DMC_ROLLOUT_DIAGNOSTICS <candidate_source.cpp> -o <composed>"
+  },
+  "tools": {
+    "harness": "tools/pipes_harness.py",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor": "tools/interactor",
+    "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+  },
+  "limits": {
+    "cpu_seconds": 5,
+    "memory_mib": 256
+  },
+  "official_open15": {
+    "baseline_score_sum": 30.071629211228668,
+    "candidate_score_sum": 30.073734664835985,
+    "delta": 0.002105453607317287,
+    "weight_sum": 32.1,
+    "ok_count": 15,
+    "candidate_max_cpu_seconds": 2.7315579999999997,
+    "candidate_max_rss_mib": 8.40625,
+    "case_deltas": [
+      {
+        "case": "1",
+        "weight": 0.1,
+        "test_sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+        "baseline_trench_m": 20,
+        "candidate_trench_m": 20,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.09,
+        "candidate_weighted_score": 0.09,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.002954,
+        "candidate_peak_rss_mib": 2.15625
+      },
+      {
+        "case": "2",
+        "weight": 1.0,
+        "test_sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+        "baseline_trench_m": 20,
+        "candidate_trench_m": 20,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 1.0,
+        "candidate_weighted_score": 1.0,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.0033039999999999996,
+        "candidate_peak_rss_mib": 2.171875
+      },
+      {
+        "case": "3",
+        "weight": 1.0,
+        "test_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+        "baseline_trench_m": 20,
+        "candidate_trench_m": 20,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.75,
+        "candidate_weighted_score": 0.75,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.005559,
+        "candidate_peak_rss_mib": 2.171875
+      },
+      {
+        "case": "4",
+        "weight": 1.0,
+        "test_sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+        "baseline_trench_m": 60,
+        "candidate_trench_m": 60,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.666666666666667,
+        "candidate_weighted_score": 0.666666666666667,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.003554,
+        "candidate_peak_rss_mib": 2.1875
+      },
+      {
+        "case": "5",
+        "weight": 1.0,
+        "test_sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+        "baseline_trench_m": 54440,
+        "candidate_trench_m": 54440,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.933872152828802,
+        "candidate_weighted_score": 0.933872152828802,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.111793,
+        "candidate_peak_rss_mib": 2.796875
+      },
+      {
+        "case": "6",
+        "weight": 1.0,
+        "test_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+        "baseline_trench_m": 20,
+        "candidate_trench_m": 20,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.9,
+        "candidate_weighted_score": 0.9,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.004095,
+        "candidate_peak_rss_mib": 2.15625
+      },
+      {
+        "case": "7",
+        "weight": 1.0,
+        "test_sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+        "baseline_trench_m": 1700,
+        "candidate_trench_m": 1700,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.986470588235294,
+        "candidate_weighted_score": 0.986470588235294,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.009966,
+        "candidate_peak_rss_mib": 2.625
+      },
+      {
+        "case": "8",
+        "weight": 1.0,
+        "test_sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+        "baseline_trench_m": 4700,
+        "candidate_trench_m": 4700,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.984468085106383,
+        "candidate_weighted_score": 0.984468085106383,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.09779499999999999,
+        "candidate_peak_rss_mib": 2.671875
+      },
+      {
+        "case": "9",
+        "weight": 1.0,
+        "test_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+        "baseline_trench_m": 47740,
+        "candidate_trench_m": 47740,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.659824046920821,
+        "candidate_weighted_score": 0.659824046920821,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.159022,
+        "candidate_peak_rss_mib": 2.78125
+      },
+      {
+        "case": "10",
+        "weight": 1.0,
+        "test_sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+        "baseline_trench_m": 15380,
+        "candidate_trench_m": 15380,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.8,
+        "candidate_weighted_score": 0.8,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.12232399999999999,
+        "candidate_peak_rss_mib": 2.59375
+      },
+      {
+        "case": "11",
+        "weight": 1.0,
+        "test_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+        "baseline_trench_m": 22500,
+        "candidate_trench_m": 22500,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 0.904933333333333,
+        "candidate_weighted_score": 0.904933333333333,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.130206,
+        "candidate_peak_rss_mib": 3.203125
+      },
+      {
+        "case": "12",
+        "weight": 4.0,
+        "test_sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+        "baseline_trench_m": 10320,
+        "candidate_trench_m": 10320,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 3.972480620155039,
+        "candidate_weighted_score": 3.972480620155039,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.023249,
+        "candidate_peak_rss_mib": 2.8125
+      },
+      {
+        "case": "13",
+        "weight": 4.0,
+        "test_sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+        "baseline_trench_m": 3280,
+        "candidate_trench_m": 3280,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 3.892682926829268,
+        "candidate_weighted_score": 3.892682926829268,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 0.13002,
+        "candidate_peak_rss_mib": 2.84375
+      },
+      {
+        "case": "14",
+        "weight": 4.0,
+        "test_sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+        "baseline_trench_m": 37860,
+        "candidate_trench_m": 37840,
+        "trench_delta_m": -20,
+        "baseline_weighted_score": 3.983518225039619,
+        "candidate_weighted_score": 3.985623678646935,
+        "weighted_score_delta": 0.0021054536073159547,
+        "candidate_cpu_s": 0.327669,
+        "candidate_peak_rss_mib": 4.28125
+      },
+      {
+        "case": "15",
+        "weight": 10.0,
+        "test_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+        "baseline_trench_m": 438640,
+        "candidate_trench_m": 438640,
+        "trench_delta_m": 0,
+        "baseline_weighted_score": 9.546712566113442,
+        "candidate_weighted_score": 9.546712566113442,
+        "weighted_score_delta": 0.0,
+        "candidate_cpu_s": 2.7315579999999997,
+        "candidate_peak_rss_mib": 8.40625
+      }
+    ],
+    "inputs_sha256": {
+      "1": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+      "2": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+      "3": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "4": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+      "5": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+      "6": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "7": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+      "8": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+      "9": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+      "10": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+      "11": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+      "12": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+      "13": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+      "14": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+      "15": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    },
+    "baseline_run": "results/pipes/improvement/case14_suppress_parity_composition_20261018/runs/open15_baseline",
+    "candidate_run": "results/pipes/improvement/case14_suppress_parity_composition_20261018/runs/open15_candidate"
+  },
+  "target_case14": {
+    "input_sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+    "baseline_trench_m": 37860,
+    "candidate_trench_m": 37840,
+    "trench_delta_m": -20,
+    "baseline_score": 3.983518225039619,
+    "candidate_score": 3.985623678646935,
+    "score_delta": 0.0021054536073159547,
+    "candidate_cpu_seconds": 0.40008699999999997,
+    "candidate_peak_rss_mib": 3.21875,
+    "diagnostics": "mc_decisions=32 mc_rollouts=768 expansion_gate_opportunities=1811 expansion_gate_passes=120 unit_profile_suppressed_expansions=362\n",
+    "baseline_run": "results/pipes/improvement/case14_suppress_parity_composition_20261018/runs/case14_baseline",
+    "candidate_run": "results/pipes/improvement/case14_suppress_parity_composition_20261018/runs/case14_candidate"
+  },
+  "unit_lifo_synthetic": {
+    "suite_manifest": "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/manifest.json",
+    "suite_manifest_sha256": "09ca54511919112431dffda74d6ea11d4fcc041791db546bde29fd9bbf9fefc3",
+    "status": "Previously used suite; paired rerun, not independent holdout.",
+    "baseline_score_sum": 31.972237605615067,
+    "candidate_score_sum": 31.97665602834034,
+    "delta": 0.004418422725272819,
+    "ok_count": 8,
+    "wins": 1,
+    "ties": 7,
+    "regressions": 0,
+    "per_stream": [
+      {
+        "case": "unit_scale_2026101821",
+        "test_sha256": "8e5b4f5f9babd365158b5833061e758527b065851f41f75fae9486ba83f7f84f",
+        "baseline_trench_m": 12880,
+        "candidate_trench_m": 12880,
+        "trench_delta_m": 0,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "unit_scale_2026101822",
+        "test_sha256": "e2247e75ef60578cda60c6102d117c74512d52c66ea5309f097231ef37405b3d",
+        "baseline_trench_m": 17400,
+        "candidate_trench_m": 17400,
+        "trench_delta_m": 0,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "unit_scale_2026101823",
+        "test_sha256": "51f60792c47f15d3d4836cd64a97d462e567370b606952e8679a658f947ab05e",
+        "baseline_trench_m": 24920,
+        "candidate_trench_m": 24920,
+        "trench_delta_m": 0,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "unit_scale_2026101824",
+        "test_sha256": "904291a612757e12472322fb59e68f06d317b8534e027097fc08718179d0be1b",
+        "baseline_trench_m": 30100,
+        "candidate_trench_m": 30100,
+        "trench_delta_m": 0,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "unit_scale_2026101825",
+        "test_sha256": "26301bbf972dc0155b0d51a4b4073ffd558ecad6074b209e2cb201cec450ac2b",
+        "baseline_trench_m": 42480,
+        "candidate_trench_m": 42480,
+        "trench_delta_m": 0,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "unit_scale_2026101826",
+        "test_sha256": "97373c2f15e1759cfea8acc81d0ce21b95061573b2637c59b2eb188ade5d3909",
+        "baseline_trench_m": 52460,
+        "candidate_trench_m": 52460,
+        "trench_delta_m": 0,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "unit_scale_2026101827",
+        "test_sha256": "b1589dd5ced62fcc5e55c3c66d86447ce69549de913d20ba6a6b552cf1805c42",
+        "baseline_trench_m": 18100,
+        "candidate_trench_m": 18080,
+        "trench_delta_m": -20,
+        "weighted_score_delta": 0.004418422725272819
+      },
+      {
+        "case": "unit_scale_2026101828",
+        "test_sha256": "591630758499cee0420d42a390905a5b298df3a368eb42e4d07bed2637bd7be8",
+        "baseline_trench_m": 37020,
+        "candidate_trench_m": 37020,
+        "trench_delta_m": 0,
+        "weighted_score_delta": 0.0
+      }
+    ],
+    "input_sha256": {
+      "unit_scale_2026101821": "8e5b4f5f9babd365158b5833061e758527b065851f41f75fae9486ba83f7f84f",
+      "unit_scale_2026101822": "e2247e75ef60578cda60c6102d117c74512d52c66ea5309f097231ef37405b3d",
+      "unit_scale_2026101823": "51f60792c47f15d3d4836cd64a97d462e567370b606952e8679a658f947ab05e",
+      "unit_scale_2026101824": "904291a612757e12472322fb59e68f06d317b8534e027097fc08718179d0be1b",
+      "unit_scale_2026101825": "26301bbf972dc0155b0d51a4b4073ffd558ecad6074b209e2cb201cec450ac2b",
+      "unit_scale_2026101826": "97373c2f15e1759cfea8acc81d0ce21b95061573b2637c59b2eb188ade5d3909",
+      "unit_scale_2026101827": "b1589dd5ced62fcc5e55c3c66d86447ce69549de913d20ba6a6b552cf1805c42",
+      "unit_scale_2026101828": "591630758499cee0420d42a390905a5b298df3a368eb42e4d07bed2637bd7be8"
+    },
+    "baseline_run": "results/pipes/improvement/case14_suppress_parity_composition_20261018/runs/unit_lifo_baseline",
+    "candidate_run": "results/pipes/improvement/case14_suppress_parity_composition_20261018/runs/unit_lifo_candidate"
+  },
+  "preservation_checks": {
+    "frozen_source": "results/pipes/final/solution.cpp",
+    "frozen_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "expected_frozen_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical_source": "src/pipes.cpp",
+    "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+    "expected_canonical_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "commands": [
+    "python3 tools/pipes_harness.py --solver <baseline> --tests data/pipes/open/14.in --out <runs/case14_baseline> --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver <candidate> --tests data/pipes/open/14.in --out <runs/case14_candidate> --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver <baseline> --tests data/pipes/open --out <runs/open15_baseline> --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver <candidate> --tests data/pipes/open --out <runs/open15_candidate> --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver <baseline> --tests results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2 --out <runs/unit_lifo_baseline> --cpu-limit 5 --memory-limit-mb 256",
+    "python3 tools/pipes_harness.py --solver <candidate> --tests results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2 --out <runs/unit_lifo_candidate> --cpu-limit 5 --memory-limit-mb 256"
+  ]
+}

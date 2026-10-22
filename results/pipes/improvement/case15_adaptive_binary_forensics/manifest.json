@@ -1,0 +1,70 @@
+{
+  "experiment": "case15-adaptive-binary-forensics",
+  "status": "no-go",
+  "question": "Can the historical 438360 m case-15 behavior be reproduced causally on the current champion?",
+  "historical_binary": {
+    "path": "results/pipes/improvement/segregated_allocator/adaptive_live_mean",
+    "sha256": "ff1015a0cad8b5c64141ca8255c789630ffe95fabdff42a6defe7ae580213043",
+    "saved_open15_score": 28.951719995095576,
+    "source_at_rebuild_time": {
+      "wrapper_sha256": "32ee2907511918b0b5cf174fd67786557855a04f70814d2365b673c05e86da6a",
+      "base_sha256": "277eda6f269127c62ff27edd0f5fe5377438030c747b2ea8180ee126cfcddcc0"
+    },
+    "reconstruction": {
+      "source": "results/pipes/improvement/case15_adaptive_binary_forensics/source/adaptive_base_historical.cpp",
+      "source_sha256": "7208e668ff0cb4f18f936e34a8f61fb70718e820de208de3d698258f26c2527c",
+      "wrapper": "results/pipes/improvement/case15_adaptive_binary_forensics/source/adaptive_live_mean_historical.cpp",
+      "wrapper_sha256": "d6b49fe726ca103f3307389522e7872d9597784bab0b7a3768b7cdb68ae47d60",
+      "case15_trench_m": 438360,
+      "case15_transcript_sha256": "3b60d6aa12c9e007f40de2bd29fd32380a9f3d5708d24144bd0ac2be91777e87",
+      "matches_saved_binary_transcript": true
+    },
+    "open15_summary": {
+      "path": "results/pipes/improvement/segregated_allocator/open_adaptive_live_mean/summary.json",
+      "sha256": "83dfc1728640a332ecf53032c87363206a2cf7ccfa10677ab76d49ce61dd5149"
+    }
+  },
+  "champion": {
+    "source": "results/pipes/improvement/case9_causal_profiles/source/champion_cohort_slabs.cpp",
+    "source_sha256": "43bfbdadbae18ac180d1e59b6631342cfe1bef99190a449838f0470d6f220200",
+    "open15_score": 29.932085817214315,
+    "case15_trench_m": 438920,
+    "open15_summary": {
+      "path": "results/pipes/improvement/case9_causal_profiles/runs/champion-cohort-slabs-open15/summary.json",
+      "sha256": "35eff9d9d8dc7afe42016e782637b7eed4af2c9144cd70336b5c0021e4d4e6c3"
+    }
+  },
+  "variants": [
+    {
+      "name": "live-mean-parity-overlay",
+      "source": "results/pipes/improvement/case15_adaptive_binary_forensics/source/champion_live_mean_parity_overlay.cpp",
+      "source_sha256": "5e0e4bc9a0fa62a31936b1a01f0ec541f47925dd7edff5295779f3a79eb14b54",
+      "binary_sha256": "38be05f6f40364b463a519928f19d71f00456548f312b2abe397f60dc1b6fc93",
+      "case15_trench_m": 438880,
+      "case15_kpi": 0.9541491979584397,
+      "solver_cpu_s": 0.94958,
+      "solver_peak_rss_mib": 9.53125,
+      "judge_output_sha256": "3154727ecf5c44408b0ddf270cfa2c7e1c5a86d7fb6d6b95d2da6aedb5e12cbc",
+      "summary_sha256": "7e201ae863ab76eee085354f5e3692e7b6ac0c32051010a49459fc1a08b66594"
+    },
+    {
+      "name": "live-mean-parity-sticky-overlay",
+      "source": "results/pipes/improvement/case15_adaptive_binary_forensics/source/champion_live_mean_parity_sticky_overlay.cpp",
+      "source_sha256": "0c9aaee26a555b46d1aa10afb8e9a639b6e152b1dafcbed441b765864c9fe381",
+      "binary_sha256": "44166d71274e519f813c430637fe6d67fe6a033df8ba31d19119fd2cab9b37a6",
+      "case15_trench_m": 439100,
+      "case15_kpi": 0.9536711455249374,
+      "solver_cpu_s": 0.963215,
+      "solver_peak_rss_mib": 9.59375,
+      "judge_output_sha256": "1d44dd12878880e6221f6535fadc0ea843abae4ebc7c33cd46e4557c50b15221",
+      "summary_sha256": "ce9b999b4eb201838548a1ed5b0616bbff47e4e4d88f018a6087d3cf9d5506b6"
+    }
+  ],
+  "constraints": {
+    "case15_only_screening": true,
+    "open15_rerun": false,
+    "platform_used": false,
+    "docker_used": false,
+    "canonical_or_frozen_source_modified": false
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "frozen_at_utc": "2026-10-18T06:43:56.806242+00:00",
+  "source_sha256": "c70ade5c1ecd48c8f74ed99582f974467bd2b1791a214d79ddf6e5df8729af29",
+  "source_origin": "research-campaigns/20261018T131350+0700/branches/composite/candidate.cpp",
+  "local_open15_score": 30.078763164118683,
+  "basis": "Highest complete local Open15 score so far, no per-case Open15 regressions, full correctness/resources. This is an open-score optimized candidate; transfer not established. Archive screen remains independent and cannot edit this frozen candidate.",
+  "known_dev_evidence": "24 cases: mixed small regressions; 6 general cases identical transcripts, targeted LIFO cases mixed. Do not present as a general improvement.",
+  "sealed_design_sha256": {
+    "sealed": "a1d97ae9090c6497a197afb30bda503181723523fbc1c4aa819436e975f8a4e3",
+    "lifo_sealed": "1c2445ce8705ed649c72951f5c8e9b8ecab93927879e53c1a1d49a3ea0df8e72",
+    "lifo_large_sealed": "bf309785ff99721d39b6a8c8cf75b522490cd4779f76d476ade816ef41ac0e61"
+  },
+  "sealed_policy": "Evaluate once, report all outcomes. No source/threshold changes from heldout feedback. Keep strong baseline as separate fallback.",
+  "platform_submitted": false
+}

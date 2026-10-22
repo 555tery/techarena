@@ -1,0 +1,69 @@
+<!doctype html><meta charset="utf-8"><title>Проверка совместного планирования и причинной политики</title><style>body{font:16px system-ui;max-width:1100px;margin:40px auto;padding:0 20px;color:#182334;background:#f7f8fa}table{border-collapse:collapse;background:white;width:100%;margin:22px 0}td,th{padding:9px;border-bottom:1px solid #ddd;text-align:right}th:first-child{text-align:left}pre{white-space:pre-wrap;background:white;padding:18px}.card{padding:20px;background:#e6edf5;border-radius:12px}</style>
+    <h1>Проверка совместного планирования и причинной политики</h1><p class="card">Кандидат отклонён: на свежей полной проверке не превзошёл BF. Источники и модель заморожены до генерации final; platform, Open15 и старый validation не использовались.</p>
+    <p>Teacher оптимизирует все последующие размещения до конца короткого потока, beam width 12. Student — причинная линейная модель на взаимодействиях истории и геометрии, до 12 живых труб и 160 м, затем обычный BF. Учитель видит будущее только офлайн; рабочая программа читает по одной команде.</p>
+    <h2>Конкретная причина попробовать совместное планирование</h2><p>На [7,7,6,−2,5,−1,−3,15], при первой трубе в позиции 0, BF и все 81 одиночных вмешательства с дальнейшим BF требуют 40 м. Точный совместный план требует 20 м. Это диагностический пример, а не результат онлайн-алгоритма.</p>
+    <h2>Среднее F/T</h2><p>Dev: 32 потока. Final: 96 потоков, 8 механизмов × 3 независимых начала × 4 продолжения одного префикса; ещё 4 потока по 200 000 команд проверяют ресурсы и корректность и не входят в среднее. Семейства и ветки равновесны. Нулевое F сохранено.</p><table><tr><th>Срез</th><th>candidate</th><th>kernel_bf</th><th>bf</th><th>ss</th><th>trial22</th></tr><tr><th>dev</th><td>0.510597</td><td>0.542911</td><td>0.542911</td><td>0.542911</td><td>0.526659</td></tr><tr><th>final</th><td>0.585311</td><td>0.617117</td><td>0.617117</td><td>0.617446</td><td>0.603783</td></tr></table><table><tr><th>Срез</th><th>candidate</th><th>kernel_bf</th><th>bf</th><th>ss</th><th>trial22</th></tr><tr><th>alternating_support</th><td>0.629273</td><td>0.647825</td><td>0.647825</td><td>0.647825</td><td>0.656053</td></tr><tr><th>anchors</th><td>0.543657</td><td>0.543657</td><td>0.543657</td><td>0.543657</td><td>0.546828</td></tr><tr><th>bursts</th><td>0.634240</td><td>0.692735</td><td>0.692735</td><td>0.692735</td><td>0.664401</td></tr><tr><th>cohorts</th><td>0.518084</td><td>0.525100</td><td>0.525100</td><td>0.525100</td><td>0.527236</td></tr><tr><th>complements</th><td>0.626030</td><td>0.673771</td><td>0.673771</td><td>0.680716</td><td>0.646540</td></tr><tr><th>renewal</th><td>0.597311</td><td>0.654087</td><td>0.654087</td><td>0.654087</td><td>0.611895</td></tr><tr><th>sawtooth</th><td>0.554600</td><td>0.579640</td><td>0.579640</td><td>0.579640</td><td>0.579640</td></tr><tr><th>size_survival</th><td>0.579292</td><td>0.620121</td><td>0.620121</td><td>0.615810</td><td>0.597675</td></tr></table><table><tr><th>Срез</th><th>candidate</th><th>kernel_bf</th><th>bf</th><th>ss</th><th>trial22</th></tr><tr><th>growth</th><td>0.926428</td><td>0.932331</td><td>0.932331</td><td>0.935803</td><td>0.926428</td></tr><tr><th>drain</th><td>0.330825</td><td>0.401939</td><td>0.401939</td><td>0.401939</td><td>0.366366</td></tr><tr><th>size_shift</th><td>0.683220</td><td>0.685762</td><td>0.685762</td><td>0.683606</td><td>0.682004</td></tr><tr><th>early_stop</th><td>0.400771</td><td>0.448436</td><td>0.448436</td><td>0.448436</td><td>0.440336</td></tr></table>
+    <h2>Парные результаты и проверка</h2><pre>{
+  &quot;comparisons&quot;: {
+    &quot;candidate_vs_bf&quot;: {
+      &quot;wins&quot;: 3,
+      &quot;losses&quot;: 32,
+      &quot;ties&quot;: 61,
+      &quot;mean_delta&quot;: -0.031806260263061034,
+      &quot;worst_delta&quot;: -0.2833333333333333,
+      &quot;best_delta&quot;: 0.1117948717948718,
+      &quot;mean_extra_trench_m&quot;: 7.5
+    },
+    &quot;candidate_vs_ss&quot;: {
+      &quot;wins&quot;: 4,
+      &quot;losses&quot;: 33,
+      &quot;ties&quot;: 59,
+      &quot;mean_delta&quot;: -0.032135397994542514,
+      &quot;worst_delta&quot;: -0.2833333333333333,
+      &quot;best_delta&quot;: 0.1117948717948718,
+      &quot;mean_extra_trench_m&quot;: 7.291666666666667
+    },
+    &quot;candidate_vs_trial22&quot;: {
+      &quot;wins&quot;: 5,
+      &quot;losses&quot;: 27,
+      &quot;ties&quot;: 64,
+      &quot;mean_delta&quot;: -0.018472568002162754,
+      &quot;worst_delta&quot;: -0.2833333333333333,
+      &quot;best_delta&quot;: 0.12380382775119617,
+      &quot;mean_extra_trench_m&quot;: 5.208333333333333
+    }
+  },
+  &quot;resources&quot;: {
+    &quot;candidate&quot;: {
+      &quot;max_cpu_s&quot;: 0.803716,
+      &quot;max_rss_mib&quot;: 8.140625
+    },
+    &quot;kernel_bf&quot;: {
+      &quot;max_cpu_s&quot;: 0.853842,
+      &quot;max_rss_mib&quot;: 8.109375
+    },
+    &quot;bf&quot;: {
+      &quot;max_cpu_s&quot;: 0.952961,
+      &quot;max_rss_mib&quot;: 2.671875
+    },
+    &quot;ss&quot;: {
+      &quot;max_cpu_s&quot;: 1.214656,
+      &quot;max_rss_mib&quot;: 2.734375
+    },
+    &quot;trial22&quot;: {
+      &quot;max_cpu_s&quot;: 1.32449,
+      &quot;max_rss_mib&quot;: 10.875
+    }
+  },
+  &quot;audit&quot;: {
+    &quot;full_transcripts_replayed&quot;: 500,
+    &quot;paired_prefix_comparisons&quot;: 360,
+    &quot;kernel_bf_equals_independent_bf_all_cases&quot;: true,
+    &quot;passed&quot;: true
+  },
+  &quot;activity&quot;: {
+    &quot;decisions&quot;: 2160,
+    &quot;changed_vs_BF_in_own_state&quot;: 946
+  }
+}</pre>
+    <h2>Границы вывода</h2><p>Контроль trial22 сохранён без изменений. Малые обучающие состояния, ограниченный beam и одна линейная модель не исчерпывают подход. Улучшение учителя не доказывает, что студент может его повторить. Синтетика не даёт оценки неизвестного распределения закрытых тестов; настройки по final не менялись. Никакой отправки на платформу не было.</p><p><a href="results.json">Полные числа и hashes</a> · <a href="teacher-independent-audit.json">Независимый аудит учителя</a> · <a href="protocol.json">Зафиксированный протокол</a></p><h2>Почему student не перенёс выигрыш</h2><p>Из 228 состояний только 23 дали различающие пары для обучения; у 205 стоимость всех root-действий одинакова. Обучение использовало состояния BF, а рабочая политика создаёт собственные состояния и не сохраняет план учителя. Студент хуже BF даже на полном прохождении обучающих потоков, поэтому объяснять провал только новыми seed нельзя. Вклад отдельных причин не изолирован.</p><p><a href="postmortem.json">Разбор label-regret и траекторий</a>. Следующий необходимый барьер: улучшить полные обучающие траектории, затем проверить отдельные свежие механизмы. На текущем final параметры не менять.</p>

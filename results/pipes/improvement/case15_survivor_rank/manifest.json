@@ -1,0 +1,191 @@
+{
+  "diagnostic": "case15-survivor-rank-exact",
+  "scope": "case 15 only; diagnostic replay; no placement policy or frozen final changes",
+  "frozen_final_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "case15_input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+  "run": {
+    "status": "ok",
+    "operation_count": 200000,
+    "placement_count": 130255,
+    "trench_length_m": 438920,
+    "occupied_length_m": 418757,
+    "judge_output_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e",
+    "prior_geometry_judge_output_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e",
+    "judge_outputs_identical": true,
+    "diagnostic_solver_cpu_s": 2.405252,
+    "diagnostic_solver_peak_rss_mib": 6.65625,
+    "host_platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "cpu_limit_s_in_harness": 30.0,
+    "memory_limit_mib_in_harness": 256.0
+  },
+  "exact_audit": {
+    "survivor_gap_episodes": 97,
+    "gap_operation_rows": 32221,
+    "unique_operations": 3113,
+    "operation_range": [
+      185558,
+      199999
+    ],
+    "same_current_interval_confirmations": 32221,
+    "cohort_eligible_rows": 32221,
+    "scorer_status_rows": {
+      "same_size_shadowed": 31719,
+      "evaluated": 502
+    },
+    "evaluated_target_rank_min_max": [
+      2,
+      22
+    ],
+    "evaluated_target_rank_rows": {
+      "4-10": 220,
+      "11-25": 239,
+      "2-3": 43
+    },
+    "target_score_minus_selected_score": {
+      "min": 0,
+      "median": 129024,
+      "p90": 135844,
+      "p99": 137216,
+      "max": 137216,
+      "equal_rows": 2615
+    },
+    "cost_reconciliation_ops": 3113,
+    "cost_reconciliation_fields": {
+      "request": 3113,
+      "high_side": 3113,
+      "cohort": 3113,
+      "mode": 3113,
+      "baseline_start": 3113,
+      "baseline_score": 3113,
+      "selected_start": 3113
+    },
+    "monte_carlo_rollout_rows": 0
+  },
+  "artifacts": [
+    {
+      "path": "results/pipes/final/solution.cpp",
+      "size_bytes": 38729,
+      "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+    },
+    {
+      "path": "data/pipes/open/15.in",
+      "size_bytes": 1016108,
+      "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    },
+    {
+      "path": "results/pipes/improvement/case15_interval_lineage/REPORT.md",
+      "size_bytes": 18922,
+      "sha256": "54e6c79cb590258a0d212cb80921c33c07d0f68a41489c6c903b802a8202bd91"
+    },
+    {
+      "path": "results/pipes/improvement/case15_interval_lineage/analysis.json",
+      "size_bytes": 15675,
+      "sha256": "d7b65960cc37c7be584ee0487ee771a5c1a71a75576082a4c010d3528b679788"
+    },
+    {
+      "path": "results/pipes/improvement/case15_interval_lineage/replay/current_gaps.csv",
+      "size_bytes": 403072,
+      "sha256": "d3d293c92cb11816f522e7af2070d93f6624fa7d33b213638767174e1e233517"
+    },
+    {
+      "path": "results/pipes/improvement/case15_interval_lineage/replay/gap_episodes.csv",
+      "size_bytes": 16285323,
+      "sha256": "a54e55e760a2e2793339da4fe0414788e717cac77e7e30c7439f8db86c005f11"
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/cost_runs/runs/15/solver_stderr.txt",
+      "size_bytes": 5925786,
+      "sha256": "8655cc8185a3060c4b316ca585b657e72471daf48b2fdcb603d87598b58dd6fd"
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/cost_runs/runs/15/judge_output.txt",
+      "size_bytes": 1613182,
+      "sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e"
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/15/judge_output.txt",
+      "size_bytes": 1613182,
+      "sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/targets.tsv",
+      "size_bytes": 1314963,
+      "sha256": "fe5862a120409195fd9b153c4e8e9a394b3612ae19cb6170d8deae80f405894f"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/instrument.py",
+      "size_bytes": 10183,
+      "sha256": "1004d8b769439403898a90e7751b9c33a4b0efd0216f6d0dd2292f95b9fdc2aa"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/survivor_rank_replay.cpp",
+      "size_bytes": 46520,
+      "sha256": "8d2d0999f559d3e5501b5fc5bfee42fad94e52423e6a9f05ad68119c5a80f302"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/survivor_rank_replay",
+      "size_bytes": 79384,
+      "sha256": "78ef6414ce394c9fbd0310b0f3c4bc3b1fe7b7dc27f9894b86f9dcd0ee08f4fb"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/run_exact/cases.csv",
+      "size_bytes": 5598,
+      "sha256": "e311e37fe2c70ed6f7a7e6df887625ccaf3cfd94462e75b493f969303335c0ae"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/run_exact/summary.json",
+      "size_bytes": 7339,
+      "sha256": "fb1796c1cee569b15ad5e7695791de1d392f7e3b7b66a380389021d99b874f35"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/run_exact/runs/15/solver_stderr.txt",
+      "size_bytes": 4637286,
+      "sha256": "15ea5d5ab3596e8d4165657fe42683aeb59759bae19771ec70ccdcab41ef3ed2"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/run_exact/runs/15/judge_output.txt",
+      "size_bytes": 1613182,
+      "sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/run_exact/runs/15/interactor_stderr.txt",
+      "size_bytes": 79,
+      "sha256": "f41d1634ebee6002db068895bd7f6dd3fef179c512b959a2feda4845b19f0686"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/run_exact/runs/15/score.txt",
+      "size_bytes": 11,
+      "sha256": "76d1e745d1e70c8ffdfabcc50c45cc3c82c9edf4c065ad81093e1f9fbd20dc30"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/run_exact/runs/15/unused_answer.txt",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/analyze.py",
+      "size_bytes": 11712,
+      "sha256": "782a8acb54a715f36e69fcf99331f2d597cfe400893852028a89811a0459296c"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/analysis.json",
+      "size_bytes": 1729,
+      "sha256": "44f6a8c4e617ac12e13f665b8c2d78d20eb0e69a5f2701895db2d257c6d3ef7b"
+    },
+    {
+      "path": "results/pipes/improvement/case15_survivor_rank/REPORT.md",
+      "size_bytes": 6028,
+      "sha256": "d10932650acdb4920d2433c8fc0cc46e27791fa9b593458aa1734cfcee181359"
+    },
+    {
+      "path": "tools/pipes_harness.py",
+      "size_bytes": 25883,
+      "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d"
+    },
+    {
+      "path": "tools/interactor",
+      "size_bytes": 234952,
+      "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+    }
+  ]
+}

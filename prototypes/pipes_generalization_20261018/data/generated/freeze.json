@@ -1,0 +1,44 @@
+{
+  "schema_version": 1,
+  "design_approved": true,
+  "created_at": 1792342876.854733,
+  "generator_sha256": "e54ed5dda6bd346c92a79d66d07f296e758b8cd7bd6c6f832a2343bf5cf4ff13",
+  "design_sha256": "8d77ff13135712e4568bb3615c2754985eac7fd82340eae8773cb46aee6cf63d",
+  "solver_sha256": {
+    "trial22": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+    "bf": "5957ac938c5c2addc3dd7a1eaa06dbb8914a00ada576b666e319eee1be328836",
+    "ss": "5957ac938c5c2addc3dd7a1eaa06dbb8914a00ada576b666e319eee1be328836"
+  },
+  "binary_sha256": {
+    "trial22": "a3918d0d89f9901694a21baa0137d26405685d090e2f5b645882aae2eda72bd6",
+    "bf": "1651689abc6c9b356a6e97aa15121f71f67d4f7b3550e1a66cd45b804099e8d3",
+    "ss": "a5b8c197a8194996cb125b815eca6c03a909c1228c87d42d40ee3aac8c7c73bb"
+  },
+  "artifact_sha256": {
+    "PROTOCOL.md": "e04ed79bc5666fb2b935f33f5a3bcd7580db10b8b49d98a38cf574a1385dfdd2",
+    "variants.json": "ef9934c8087a877e1f3fb02d47c6456f145733347032352cfddcb0321401bd10",
+    "evaluate.py": "4558392efa7e485d408c955d1fa5ceec89e8c7397f93281f014f68c4eab0da93",
+    "analyze.py": "3d7410d4971758f34804455da7203c4e651f5dc33cdfcc4041d4b653b5210d0e",
+    "audit_baselines.py": "2b88060c22b34a1dfc419836b44613dcb90e4468a30a4c7a3911d91dd58e0c34",
+    "admit_dataset.py": "1c50f17253f993f11c736dfb6089afb42ea0e561459b44aee630d23083628101",
+    "independent-baseline-audit.json": "d4438570f830883a82ede26403f0f285aaab0a3ce71737bbe728da87cee62225",
+    "dataset/generate.py": "e54ed5dda6bd346c92a79d66d07f296e758b8cd7bd6c6f832a2343bf5cf4ff13",
+    "dataset/design.json": "8d77ff13135712e4568bb3615c2754985eac7fd82340eae8773cb46aee6cf63d",
+    "dataset/selftest.py": "6c95396a36027eef11f002a0ca6c8bb194fab46114408a73886684f551e4c1e1",
+    "solvers/pipes_exact.cpp": "5957ac938c5c2addc3dd7a1eaa06dbb8914a00ada576b666e319eee1be328836",
+    "solvers/manifest.json": "8421fb25c0bc7a7a1c1e9c9515389eb9c7d8cf651f5a41c0ed80b2c92cb67469",
+    "solvers/correctness_report.json": "ff3a23ef1bd9aeb9fd3b7b26d2582716d1e66ef769e40acfc312154ecc53932b",
+    "incumbent/solution.cpp": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+    "checker/native_runner": "0b62cb0a755aaab7529c1dfafb82deb1d12174ce01aca460c09864054d8e5ab7",
+    "checker/build.json": "dec38ab472027d1d7a7e0310e0437d8aa9f0c01061df3b2881fd0324f99968c8",
+    "builds/trial22/manifest.json": "1cda2747cba79ff29083e07fb845d8bc0784f4631709e5de1718ce867d6517c8",
+    "builds/bf/manifest.json": "3d4b07d4cd04fe7341e13636a0a16b7a427b053de4f50785f98dacbfe918f51f",
+    "builds/ss/manifest.json": "6f860a97af7270db095774db9d80bc30d0063e77c07abbc451a61dcd25ec8364"
+  },
+  "limits": {
+    "quota_remaining_floor": 65,
+    "native_workers": 2,
+    "max_official_evaluations": 800
+  },
+  "generators_and_solvers_locked_before_entropy": true
+}

@@ -1,0 +1,148 @@
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+// EVOLVE-BLOCK-START
+namespace {
+using Coordinate = std::int64_t;
+class Allocator {
+    struct Pipe { Coordinate start; int length; };
+    std::vector<Pipe> pipes_{{0, 0}};
+    std::map<Coordinate, Coordinate> gaps_;
+    std::set<std::pair<Coordinate, Coordinate>> sizes_;
+    std::array<std::set<Coordinate>, 41> starts_;
+    Coordinate trench_ = 0;
+    std::array<std::uint32_t, 41> demand_{};
+    std::uint32_t demandMass_ = 0;
+    void observeLength(int length) {
+        if (demandMass_ >= 128) {
+            demandMass_ = 0;
+            for (int k = 1; k <= 40; ++k) {
+                demand_[k] /= 2;
+                demandMass_ += demand_[k];
+            }
+        }
+        ++demand_[length];
+        ++demandMass_;
+    }
+    std::uint64_t splitPenalty(Coordinate space, int length) const {
+        std::uint64_t result = 0;
+        for (int k = 1; k <= 40; ++k) {
+            if (demand_[k] != 0 && space % k < length % k)
+                result += static_cast<std::uint64_t>(demand_[k]) * k;
+        }
+        return result;
+    }
+    static int bucket(Coordinate n) { return static_cast<int>(std::min<Coordinate>(40, n)); }
+    void add(Coordinate a, Coordinate b) {
+        if (a >= b) return;
+        gaps_[a] = b;
+        sizes_.insert({b-a, a});
+        starts_[bucket(b-a)].insert(a);
+    }
+    void erase(Coordinate a) {
+        const Coordinate b = gaps_.at(a);
+        sizes_.erase({b-a, a});
+        starts_[bucket(b-a)].erase(a);
+        gaps_.erase(a);
+    }
+public:
+    std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+    std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+    std::uint64_t unitProfileSuppressedExpansions = 0;
+    void place(int length) {
+        observeLength(length);
+        Coordinate at = -1, digs = 0;
+        if constexpr (false) {
+            for (int k = length; k <= 40; ++k)
+                if (!starts_[k].empty() && (at < 0 || *starts_[k].begin() < at))
+                    at = *starts_[k].begin();
+        } else {
+            auto candidate = sizes_.lower_bound({length, 0});
+            if (candidate != sizes_.end()) {
+                if (candidate->first > length) {
+                    const auto penalty = splitPenalty(candidate->first, length);
+                    if (penalty != 0) {
+                        auto larger = sizes_.upper_bound(
+                            {candidate->first, std::numeric_limits<Coordinate>::max()});
+                        if (larger != sizes_.end() &&
+                            splitPenalty(larger->first, length) < penalty) {
+                            candidate = larger;
+                        }
+                    }
+                }
+                at = candidate->second;
+            }
+        }
+        if (at < 0) {
+            at = trench_;
+            if (!gaps_.empty() && gaps_.rbegin()->second == trench_) {
+                at = gaps_.rbegin()->first;
+                erase(at);
+            }
+            digs = (length - (trench_ - at) + 19) / 20;
+            trench_ += digs * 20;
+            add(at, trench_);
+        }
+        const Coordinate finish = gaps_.at(at);
+        erase(at);
+        add(at + length, finish);
+        pipes_.push_back({at, length});
+        std::cout << digs << ' ' << at << '\n' << std::flush;
+    }
+    void remove(Coordinate pid) {
+        const Pipe p = pipes_.at(static_cast<std::size_t>(pid));
+        Coordinate a = p.start, b = a + p.length;
+        auto right = gaps_.lower_bound(a);
+        if (right != gaps_.end() && right->first == b) {
+            b = right->second;
+            erase(right->first);
+        }
+        auto left = gaps_.lower_bound(a);
+        if (left != gaps_.begin()) {
+            --left;
+            if (left->second == a) { a = left->first; erase(a); }
+        }
+        add(a, b);
+        std::cout << p.start << '\n' << std::flush;
+    }
+};
+}  // namespace
+// EVOLVE-BLOCK-END
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                      << " expansion_gate_passes=" << allocator.expansionGatePasses
+                      << " unit_profile_suppressed_expansions="
+                      << allocator.unitProfileSuppressedExpansions << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}

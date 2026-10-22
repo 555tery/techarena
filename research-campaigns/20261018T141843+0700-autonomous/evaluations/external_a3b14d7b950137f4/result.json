@@ -1,0 +1,156 @@
+{
+  "status": "completed",
+  "id": "external_a3b14d7b950137f4",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/footprint_reuse_transfer/solution.cpp",
+  "sha256": "a3b14d7b950137f4e7462299321a5b292fcb1c418cd48f3b4e0e5cab56026491",
+  "idea": "Passive freed-footprint reuse on strong22, without reserving any free space or requesting expansion.",
+  "parent": "trial_0022",
+  "weighted_score": 30.08006932262008,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438560,
+      "kpi": 0.9548454031375411,
+      "weighted_score": 9.54845403137541
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0004668487750148757,
+    "worst_delta": -0.004395170835634787,
+    "wins": 7,
+    "regressions": 4,
+    "ties": 19,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": -0.00042926456456160444,
+        "baseline_T": 46460,
+        "candidate_T": 46480
+      },
+      {
+        "case": "dev_04_fifo_size_drift",
+        "delta": -0.0003851413631443812,
+        "baseline_T": 103520,
+        "candidate_T": 103560
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.00030697421243719436,
+        "baseline_T": 64880,
+        "candidate_T": 64900
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 17640,
+        "candidate_T": 17640
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.809265345246619,
+  "max_cpu_s": 1.170576,
+  "max_rss_mib": 14.890625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_a3b14d7b950137f4/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_a3b14d7b950137f4/fresh_dev/harness/summary.json",
+  "finished_at": 1792327205.18589,
+  "balanced_gate": true,
+  "hypothesis": "Revisit cached addresses of actually freed same-size pipes inside currently verified free physical spans. Parent physical exact fits take priority. A valid cached footprint may choose another containing span or an interior address; stale entries are removed lazily. This differs from earlier rejected exact-slot-growth: never append or reserve capacity while any physical fit exists. It is inspired by donor66 but does not transplant its dual physical/available indices. No measured gain yet.",
+  "causality": "Only past frees and current gap containment are used. Every chosen footprint is proved wholly free by current freeByStart. The full parent free pool remains exposed; no slot protection or extra section requests. Metadata erased/split through original parent index helpers. Ordinary large mode only; protected structural routes and all small-population behavior unchanged. Explicit query/hit/stale/changed/interior counters. Source diff and bounds reviewed; strict C++20 Wall/Wextra/Werror syntax passed. Same full15+30development checker and5s/256MiB resource gates.",
+  "origin": "independent branch inbox"
+}

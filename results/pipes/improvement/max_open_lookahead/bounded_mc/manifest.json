@@ -1,0 +1,312 @@
+{
+  "candidate": {
+    "binary": "results/pipes/improvement/max_open_lookahead/bounded_mc/solver_mc_corrected",
+    "binary_sha256": "d48784bc2a26e72755fd52fa1222607f17c88cda5e1fd222adc2cdfc51211a2f",
+    "compilation": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror",
+    "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+    "diagnostic_binary": "results/pipes/improvement/max_open_lookahead/bounded_mc/solver_mc_corrected_diag",
+    "diagnostic_binary_sha256": "738dc2fd693aceda5810ddce8c896628f828a1648e3d68f350446df25b3cfe22",
+    "disabled_control_binary": "results/pipes/improvement/max_open_lookahead/bounded_mc/solver_mc_corrected_disabled",
+    "disabled_control_binary_sha256": "6e727d0628e208de1889fed21e2c409ca81acd1dc2ba247cbcc5821354d10aed",
+    "name": "bounded_mc_rollout_corrected_simulator",
+    "solver_protocol": "Interactive stdin/stdout; no future commands are read by candidate",
+    "source": "results/pipes/improvement/max_open_lookahead/bounded_mc/cohort_owner_mc_rollout.cpp",
+    "source_sha256": "fadbe93b0ae2d1dd1ff2ebce3dbdf384f3969272865f108729092b9d8cb98be3"
+  },
+  "canonical_integration": false,
+  "corrected_model": {
+    "actual_allocator_changed": false,
+    "change": "RolloutState::bestGap evaluates only the lowest-address eligible gap for each distinct length, matching the actual allocator index semantics.",
+    "source_frozen_after_sha256": "fadbe93b0ae2d1dd1ff2ebce3dbdf384f3969272865f108729092b9d8cb98be3"
+  },
+  "diagnostic_cases": {
+    "12": {
+      "mc_decisions": 32,
+      "mc_rollouts": 888,
+      "result_dir": "results/pipes/improvement/max_open_lookahead/bounded_mc/diag-corrected-case12",
+      "solver_stderr": "results/pipes/improvement/max_open_lookahead/bounded_mc/diag-corrected-case12/runs/12/solver_stderr.txt",
+      "solver_stderr_sha256": "045b7135ecbdc71d7e56d4a49efe686f9cf064ed15e5849abb766cfa22000385"
+    },
+    "7": {
+      "mc_decisions": 32,
+      "mc_rollouts": 1128,
+      "result_dir": "results/pipes/improvement/max_open_lookahead/bounded_mc/diag-corrected-case7",
+      "solver_stderr": "results/pipes/improvement/max_open_lookahead/bounded_mc/diag-corrected-case7/runs/7/solver_stderr.txt",
+      "solver_stderr_sha256": "499bc9bde69275a54995b631f1894f969f5ba9e863e69dc62967e3bc421f592b"
+    }
+  },
+  "holdout_v2_reused_paired_comparison": {
+    "case_inputs": [
+      {
+        "case": "case-01",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-01.in",
+        "sha256": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683"
+      },
+      {
+        "case": "case-02",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-02.in",
+        "sha256": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899"
+      },
+      {
+        "case": "case-03",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-03.in",
+        "sha256": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b"
+      },
+      {
+        "case": "case-04",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-04.in",
+        "sha256": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83"
+      },
+      {
+        "case": "case-05",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-05.in",
+        "sha256": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2"
+      },
+      {
+        "case": "case-06",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-06.in",
+        "sha256": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661"
+      },
+      {
+        "case": "case-07",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-07.in",
+        "sha256": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a"
+      },
+      {
+        "case": "case-08",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-08.in",
+        "sha256": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1"
+      },
+      {
+        "case": "case-09",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-09.in",
+        "sha256": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f"
+      },
+      {
+        "case": "case-10",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-10.in",
+        "sha256": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c"
+      },
+      {
+        "case": "case-11",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-11.in",
+        "sha256": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46"
+      },
+      {
+        "case": "case-12",
+        "path": "data/pipes/synthetic/final-holdout-v2/case-12.in",
+        "sha256": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce"
+      }
+    ],
+    "corrected_candidate": {
+      "case_count": 12,
+      "max_solver_cpu_s": 0.18594499999999997,
+      "max_solver_rss_mib": 4.203125,
+      "ok_count": 12,
+      "path": "results/pipes/improvement/max_open_lookahead/bounded_mc/holdout-v2-mc-model-corrected/summary.json",
+      "sha256": "b4727fc1eb98abdb7c368e7372c3bd9ffb55a37585eaf568681e312bb2245d7b",
+      "weighted_score_sum": 5.13526432428047
+    },
+    "frozen_original_owner": {
+      "case_count": 12,
+      "max_solver_cpu_s": 0.210036,
+      "max_solver_rss_mib": 2.84375,
+      "ok_count": 12,
+      "path": "results/pipes/improvement/max_open_lookahead/bounded_mc/holdout-v2-owner/summary.json",
+      "sha256": "9ad13cd4e6b712cfe214cac13c424aded96e466ee2f7c51f40d9ebce4d56362f",
+      "weighted_score_sum": 5.135100030340453
+    },
+    "no_retuning_between_runs": true,
+    "per_case_comparison": "results/pipes/improvement/max_open_lookahead/bounded_mc/holdout-v2-comparison.csv",
+    "per_case_comparison_sha256": "b03ca926aa55eaa04b393fd13a4c60485004588df8fe570590aa1d84f4d0f217",
+    "weighted_delta_candidate_minus_owner": 0.00016429394001704622
+  },
+  "official_open": {
+    "case_inputs": [
+      {
+        "case": "1",
+        "path": "data/pipes/open/1.in",
+        "sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d"
+      },
+      {
+        "case": "2",
+        "path": "data/pipes/open/2.in",
+        "sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923"
+      },
+      {
+        "case": "3",
+        "path": "data/pipes/open/3.in",
+        "sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494"
+      },
+      {
+        "case": "4",
+        "path": "data/pipes/open/4.in",
+        "sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f"
+      },
+      {
+        "case": "5",
+        "path": "data/pipes/open/5.in",
+        "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+      },
+      {
+        "case": "6",
+        "path": "data/pipes/open/6.in",
+        "sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd"
+      },
+      {
+        "case": "7",
+        "path": "data/pipes/open/7.in",
+        "sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd"
+      },
+      {
+        "case": "8",
+        "path": "data/pipes/open/8.in",
+        "sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7"
+      },
+      {
+        "case": "9",
+        "path": "data/pipes/open/9.in",
+        "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+      },
+      {
+        "case": "10",
+        "path": "data/pipes/open/10.in",
+        "sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b"
+      },
+      {
+        "case": "11",
+        "path": "data/pipes/open/11.in",
+        "sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c"
+      },
+      {
+        "case": "12",
+        "path": "data/pipes/open/12.in",
+        "sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984"
+      },
+      {
+        "case": "13",
+        "path": "data/pipes/open/13.in",
+        "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+      },
+      {
+        "case": "14",
+        "path": "data/pipes/open/14.in",
+        "sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d"
+      },
+      {
+        "case": "15",
+        "path": "data/pipes/open/15.in",
+        "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+      }
+    ],
+    "corrected_first_run": {
+      "case_count": 15,
+      "max_solver_cpu_s": 0.945238,
+      "max_solver_rss_mib": 9.46875,
+      "ok_count": 15,
+      "path": "results/pipes/improvement/max_open_lookahead/bounded_mc/official-open-mc-model-corrected/summary.json",
+      "sha256": "cebf0c4a1f1f337cffd9c2647b146c143957f74475b525a7341c31c345246704",
+      "weighted_score_sum": 29.77315080574852
+    },
+    "corrected_frozen_repeat": {
+      "case_count": 15,
+      "max_solver_cpu_s": 0.9481930000000001,
+      "max_solver_rss_mib": 9.546875,
+      "ok_count": 15,
+      "path": "results/pipes/improvement/max_open_lookahead/bounded_mc/official-open-mc-model-corrected-repro/summary.json",
+      "sha256": "a04e17d5100396d35f8ccffc7fffa58a7b63e63b5534d78cd9675cbd3c40b1a5",
+      "weighted_score_sum": 29.77315080574852
+    },
+    "per_case_comparison": "results/pipes/improvement/max_open_lookahead/bounded_mc/open-comparison.csv",
+    "per_case_comparison_sha256": "c62a5588c63c4fe2e0132d7aa2de3ef33e4554a94df83daa6cf683c7b3810964",
+    "repeat_outputs_byte_identical_for": [
+      "judge_output.txt",
+      "solver_stderr.txt",
+      "interactor_stderr.txt"
+    ],
+    "weighted_delta_vs_cohort_owner": 0.041313394076986754,
+    "weighted_delta_vs_t46": 0.325986262265495
+  },
+  "official_references": {
+    "cohort_owner_binary": {
+      "path": "results/pipes/improvement/cohort_owner_audit/bin/t46_cohort_owner_strict",
+      "sha256": "26e2b1285825406ed0c4390cfdef2e1c9717d1aed30769430f78f9a613a0bf1d"
+    },
+    "cohort_owner_open_score": 29.731837411671535,
+    "cohort_owner_source": {
+      "path": "results/pipes/improvement/lifetime/src/t46_cohort_owner.cpp",
+      "sha256": "2cce753dfaa9aa6f625cefee9550edff6d8c4ce8c915e9cb77cbfbb0c3dc3583"
+    },
+    "official_harness": {
+      "path": "tools/pipes_harness.py",
+      "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d"
+    },
+    "official_interactor": {
+      "path": "tools/interactor",
+      "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+    },
+    "t46_binary": {
+      "path": "results/pipes/improvement/cohort_owner_audit/bin/t46_baseline_strict",
+      "sha256": "bce18761000c395c9aacc6f7b1883fe48a279df3cb86d20a3c8fd95882c1b4a0"
+    },
+    "t46_open_score": 29.447164543483026
+  },
+  "paths": {
+    "corrected_holdout_results": "results/pipes/improvement/max_open_lookahead/bounded_mc/holdout-v2-mc-model-corrected",
+    "corrected_open_results": "results/pipes/improvement/max_open_lookahead/bounded_mc/official-open-mc-model-corrected",
+    "corrected_repeat_results": "results/pipes/improvement/max_open_lookahead/bounded_mc/official-open-mc-model-corrected-repro",
+    "holdout_comparison": "results/pipes/improvement/max_open_lookahead/bounded_mc/holdout-v2-comparison.csv",
+    "manifest": "manifest.json",
+    "open_comparison": "results/pipes/improvement/max_open_lookahead/bounded_mc/open-comparison.csv",
+    "report": "results/pipes/improvement/max_open_lookahead/bounded_mc/REPORT.md",
+    "report_sha256": "1012d3f4f586461d78cd63af042e4ef66e62fe0fd574fbcb45bb67e477a08e07",
+    "stress_results": "results/pipes/improvement/max_open_lookahead/bounded_mc/stress-cap-v2-model-corrected"
+  },
+  "previous_model_mismatch": {
+    "binary": "results/pipes/improvement/max_open_lookahead/bounded_mc/v1-model-mismatch/solver_mc",
+    "binary_sha256": "aed0943e4af0d7e7bb6c938f686e7d7bec9bf6cdc8c4d01ac3548702cbdfc34b",
+    "holdout_v2_score": 5.13526432428047,
+    "note": "Historical result only; its rollout gap selection model was mismatched.",
+    "open_score": 29.750473320961504,
+    "source": "results/pipes/improvement/max_open_lookahead/bounded_mc/v1-model-mismatch/cohort_owner_mc_rollout.cpp",
+    "source_sha256": "b84be191d67515e7a0e2bcc663d9a5268a8545d18f151fa6ea2eed14c9323a37"
+  },
+  "rollout_budget": {
+    "candidate_eligibility": "At least 32 observed events; <=64 free gaps; <=4096 active pipes; at least 2 candidates; baseline gap must equal first-ranked candidate; decision budget unused.",
+    "continuation_trials_per_candidate": 12,
+    "decision_rule": "Choose a different gap only if mean predicted trench saving is >=1 m across 12 continuations.",
+    "forecast_depth_events": 4,
+    "future_inputs_used": false,
+    "history_buffer_events": 256,
+    "maximum_candidates_per_decision": 3,
+    "maximum_decisions_per_solver_run": 32,
+    "maximum_forecast_events": 4608,
+    "maximum_rollouts": 1152,
+    "per_trial_candidate_placement_included": true,
+    "sampled_features": "Historical positive pipe lengths and observed removal rank from newest quantized to permille; current active state and policy statistics.",
+    "sampling_window_events": 128,
+    "suffix_context_events_max": 3
+  },
+  "stress_200k": {
+    "cpu_limit_s": 5.0,
+    "input": "results/pipes/improvement/max_open_lookahead/bounded_mc/stress_200k_mc_cap_v2.in",
+    "input_sha256": "41028468e6ae0ea94779c45cd770bcd9dab468035266d13420938b8e57e097ab",
+    "memory_limit_mib": 256.0,
+    "observed_mc_decisions": 32,
+    "observed_mc_rollouts": 1152,
+    "operation_count": 200000,
+    "placement_count": 100003,
+    "removal_count": 99997,
+    "solver_cpu_s": 0.8506719999999999,
+    "solver_peak_rss_mib": 7.703125,
+    "summary": {
+      "case_count": 1,
+      "max_solver_cpu_s": 0.8506719999999999,
+      "max_solver_rss_mib": 7.703125,
+      "ok_count": 1,
+      "path": "results/pipes/improvement/max_open_lookahead/bounded_mc/stress-cap-v2-model-corrected/summary.json",
+      "sha256": "b16bfdaaff37141f82af2bec0ce23b177f6daf43e8df7cb9173802f9a45786b9",
+      "weighted_score_sum": 0.746875
+    }
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "snapshot_files": 582606,
+  "payload_unique_bytes": 12326882278,
+  "compressed_bytes": 4065190590,
+  "parts": [
+    {
+      "name": "project.tar.zst.part-000",
+      "bytes": 536870912,
+      "sha256": "ffead734f956a98b61aa0d391994cd228eef73e1d75464b14424a688f27a941c"
+    },
+    {
+      "name": "project.tar.zst.part-001",
+      "bytes": 536870912,
+      "sha256": "7e691001d9ff7cb6fce222a93065809c1fafa2fd00d6dcea89e1f610fb6acdd1"
+    },
+    {
+      "name": "project.tar.zst.part-002",
+      "bytes": 536870912,
+      "sha256": "bffaa8303ec07984d2744d5cb40d86a04b6a25343333fcd3252b65caa62ebb1e"
+    },
+    {
+      "name": "project.tar.zst.part-003",
+      "bytes": 536870912,
+      "sha256": "1b75343deea067e7689769b185ffe5ba17c5fe0cfaaff0517ba5acf3a833cc22"
+    },
+    {
+      "name": "project.tar.zst.part-004",
+      "bytes": 536870912,
+      "sha256": "803d2888e1f8e02dd990d8cb55d0dabba3b34553b563c1b05f696cf3d50e1d76"
+    },
+    {
+      "name": "project.tar.zst.part-005",
+      "bytes": 536870912,
+      "sha256": "27324c0c6edd62e6771ec841236fedbfbf71c58736744efa28cf0655481b2bf5"
+    },
+    {
+      "name": "project.tar.zst.part-006",
+      "bytes": 536870912,
+      "sha256": "e81c20f755caacb9b707dbff3fac97e6b5e43c5528647b45bcb2a7b8a969d5d8"
+    },
+    {
+      "name": "project.tar.zst.part-007",
+      "bytes": 307094206,
+      "sha256": "6fc99393a697cace2ecf846068fe47399e6b7978f01fb1820d5012146d0cdfb5"
+    }
+  ],
+  "archive_sha256": "a420628f84fcb9a20b6b052ed4626c7da80e18bc12121a108335460585add2ac",
+  "archive_format": "PAX tar with content+mode deduplication hard links; zstd; 512MiB chunks",
+  "elapsed_s": 137.67183589935303,
+  "exclusions": "See repository reproducibility/excluded-local-paths.jsonl",
+  "source_audit": "/tmp/techarena-public-safe-audit-20261023"
+}

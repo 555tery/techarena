@@ -1,0 +1,151 @@
+{
+  "frozen_candidate": "coupled-buffer40",
+  "selected": null,
+  "status": "not promoted; independent no-loss gate failed",
+  "source_sha256": "b569fb6ce7cb9318a6ec85d6220df4c20d64126fde9c241a1e90431061eadedc",
+  "binary_sha256": "774939ea6fea870fdc9368f9410917730de88f418699ee945b90a87dbdc56947",
+  "Open15_score": 30.75747404826914,
+  "Open15_exact": "8753218892157372683/284588353335535200",
+  "known155": {
+    "count": 155,
+    "wins": 3,
+    "ties": 152,
+    "losses": 0,
+    "mean_delta": 0.008065471290015447,
+    "worst_delta": 0.0,
+    "best_delta": 0.8333333333333334
+  },
+  "known_excluding_timing_sensitive_B23": {
+    "count": 154,
+    "wins": 2,
+    "ties": 152,
+    "losses": 0,
+    "mean_delta": 0.008116883116883116,
+    "worst_delta": 0.0,
+    "best_delta": 0.8333333333333334
+  },
+  "fresh46": {
+    "count": 46,
+    "wins": 1,
+    "ties": 44,
+    "losses": 1,
+    "mean_delta": -1.2941109958559778e-05,
+    "worst_delta": -0.0006623060269280723,
+    "best_delta": 6.701496883432245e-05
+  },
+  "deterministic_controls2": {
+    "count": 2,
+    "wins": 0,
+    "ties": 2,
+    "losses": 0,
+    "mean_delta": 0.0,
+    "worst_delta": 0.0,
+    "best_delta": 0.0
+  },
+  "all_confirmation48": {
+    "count": 48,
+    "wins": 1,
+    "ties": 46,
+    "losses": 1,
+    "mean_delta": -1.2401897043619789e-05,
+    "worst_delta": -0.0006623060269280723,
+    "best_delta": 6.701496883432245e-05
+  },
+  "postfreeze_early24": {
+    "count": 24,
+    "wins": 6,
+    "ties": 8,
+    "losses": 10,
+    "mean_delta": -0.008819950368275873,
+    "worst_delta": -0.07692307692307687,
+    "best_delta": 0.034174208144796325
+  },
+  "early_diagnostic_losses": [
+    {
+      "id": "E03",
+      "baseline": 1.0,
+      "candidate": 0.9230769230769231,
+      "delta": -0.07692307692307687
+    },
+    {
+      "id": "E04",
+      "baseline": 1.0,
+      "candidate": 0.9230769230769231,
+      "delta": -0.07692307692307687
+    },
+    {
+      "id": "E05",
+      "baseline": 1.0,
+      "candidate": 0.9230769230769231,
+      "delta": -0.07692307692307687
+    },
+    {
+      "id": "E09",
+      "baseline": 0.8048701298701298,
+      "candidate": 0.7996774193548387,
+      "delta": -0.005192710515291132
+    },
+    {
+      "id": "E10",
+      "baseline": 0.6829545454545455,
+      "candidate": 0.6677777777777778,
+      "delta": -0.015176767676767677
+    },
+    {
+      "id": "E13",
+      "baseline": 0.36168831168831167,
+      "candidate": 0.35253164556962024,
+      "delta": -0.009156666118691426
+    },
+    {
+      "id": "E15",
+      "baseline": 0.7752100840336135,
+      "candidate": 0.7561475409836066,
+      "delta": -0.019062543050006875
+    },
+    {
+      "id": "E17",
+      "baseline": 0.5855555555555556,
+      "candidate": 0.5791208791208792,
+      "delta": -0.006434676434676434
+    },
+    {
+      "id": "E18",
+      "baseline": 0.658273381294964,
+      "candidate": 0.6310344827586207,
+      "delta": -0.027238898536343314
+    },
+    {
+      "id": "E22",
+      "baseline": 0.6904929577464789,
+      "candidate": 0.6856643356643357,
+      "delta": -0.004828622082143186
+    }
+  ],
+  "fresh_losses": [
+    {
+      "id": "n05-l7000",
+      "baseline": 0.6611905641458652,
+      "candidate": 0.6605282581189371,
+      "delta": -0.0006623060269280723
+    }
+  ],
+  "official_candidate_checks": 79,
+  "maximum_local_CPU_s": 3.8527959999999997,
+  "maximum_local_RSS_MiB": 125.5,
+  "host": "macOS arm64",
+  "target_hardware_run": false,
+  "certificate": "After live PID geometry equals internal parent and actualT<=parentT, following all parent addresses preserves this inequality for every suffix.",
+  "limits": [
+    "No terminal dominance before coupling.",
+    "The guarantee compares to the internally executed parent. Extra processing can change CPU-budgeted planner choices relative to a standalone run.",
+    "Fresh46 are new seeded inputs from known mechanisms; two deterministic controls were specified before selection.",
+    "B23 varied with CPU termination, repeated parent and candidate both reached0.0787033547; do not count it as a layout gain.",
+    "The independent46 mostly diverge after modified PID2 was removed;24 postfreeze retained-marker probes were added to audit this coverage gap without tuning the source.",
+    "Early probes exposed10 losses, including exact-capacity cases1.0\u21920.9230769. Coupling does not hold there; these are real geometry regressions.",
+    "Open11-p8 and Open8-prefix traps remain unresolved.",
+    "All timing/RSS measurements are from this macOS host, not Windows/G5420."
+  ],
+  "platform_actions": 0,
+  "canonical_and_parent_unchanged": true
+}

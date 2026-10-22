@@ -1,0 +1,533 @@
+--- a/original.cpp
++++ b/original.cpp
+@@ -1,485 +1,522 @@
+ #include <algorithm>
+ #include <array>
+ #include <cstddef>
+ #include <cstdint>
+ #include <deque>
+ #include <iostream>
+ #include <iterator>
+ #include <limits>
+ #include <map>
+ #include <optional>
+ #include <set>
+ #include <utility>
+ #include <vector>
+ 
+ // EVOLVE-BLOCK-START
+ #include <bit>
+ namespace {
+ using Coordinate = std::int64_t;
+ class Allocator {
+     static constexpr bool packingEnabled_ = true;
+     static constexpr int packingCap_ = 120;
+     static constexpr int scenarioCount_ = 8;
+     struct Pipe {
+         Coordinate start;
+         int length;
+     };
+     struct Placement {
+         Coordinate at = -1;
+         bool rightAligned = false;
+     };
+     // A simulated horizon consumes at most 120 units. Larger gaps can
+     // therefore share one bucket after the current placement is applied.
+     struct PackingProfile {
+         std::array<std::uint32_t, packingCap_ + 1> count{};
+         std::array<std::uint64_t, 2> nonempty{};
+         static int bucket(Coordinate length) {
+             return static_cast<int>(
+                 std::min<Coordinate>(packingCap_, length));
+         }
+         void add(Coordinate length) {
+             if (length <= 0) return;
+             const int k = bucket(length);
+             ++count[k];
+             nonempty[(k - 1) / 64] |=
+                 std::uint64_t{1} << ((k - 1) % 64);
+         }
+         void take(Coordinate length) {
+             if (length <= 0) return;
+             const int k = bucket(length);
+             if (--count[k] == 0) {
+                 nonempty[(k - 1) / 64] &=
+                     ~(std::uint64_t{1} << ((k - 1) % 64));
+             }
+         }
+         int firstFit(int length) const {
+             if (length <= 0 || length > packingCap_) return 0;
+             int word = (length - 1) / 64;
+             std::uint64_t bits = nonempty[word] &
+                 (~std::uint64_t{0} << ((length - 1) % 64));
+             if (bits == 0 && word == 0) {
+                 word = 1;
+                 bits = nonempty[1];
+             }
+             if (bits == 0) return 0;
+             return word * 64 +
+                 static_cast<int>(std::countr_zero(bits)) + 1;
+         }
+     };
+     struct Scenario {
+         std::array<int, 3> lengths{};
+         int volume = 0;
+     };
+     using Scenarios = std::array<Scenario, scenarioCount_>;
+     std::vector<Pipe> pipes_{{0, 0}};
+     std::map<Coordinate, Coordinate> gaps_;
+     std::set<std::pair<Coordinate, Coordinate>> sizes_;
+     std::array<std::set<Coordinate>, 41> starts_;
+     PackingProfile packingProfile_;
+     Coordinate trench_ = 0;
+     std::array<std::uint32_t, 41> demand_{};
+     std::uint32_t demandMass_ = 0;
++    std::array<std::uint32_t, 41> forecastDemand_{};
++    std::uint32_t forecastMass_ = 0;
++    double forecastMix_ = 0.5;
+     std::map<Coordinate, std::size_t> live_;
+     std::array<std::size_t, 41> population_{};
+     std::array<double, 41> deaths_{}, exposure_{};
+     std::array<std::uint64_t, 41> exposureAt_{};
+     std::uint64_t commandTick_ = 0;
+     double totalExposure_ = 0, totalDeaths_ = 0;
+     void settleExposure(int length) {
+         exposure_[length] +=
+             static_cast<double>(commandTick_ - exposureAt_[length]) *
+             static_cast<double>(population_[length]);
+         exposureAt_[length] = commandTick_;
+     }
+     void advanceReleaseClock() {
+         if (commandTick_ != 0 && commandTick_ % 128 == 0) {
+             for (int k = 1; k <= 40; ++k) {
+                 settleExposure(k);
+                 exposure_[k] *= 0.5;
+                 deaths_[k] *= 0.5;
+             }
+             totalExposure_ *= 0.5;
+             totalDeaths_ *= 0.5;
+         }
+         ++commandTick_;
+         totalExposure_ += static_cast<double>(live_.size());
+     }
+     double releaseRate(int length) const {
+         const double exposure = exposure_[length] +
+             static_cast<double>(commandTick_ - exposureAt_[length]) *
+             static_cast<double>(population_[length]);
+         const double pooledRate =
+             totalDeaths_ / (totalExposure_ + 1.0);
+         return (deaths_[length] + 8.0 * pooledRate) /
+                (exposure + 8.0);
+     }
+     void observeLength(int length) {
++        // Score both forecasts before either observes this insertion.
++        const double slowProbability =
++            (static_cast<double>(demand_[length]) + 1.0) /
++            (static_cast<double>(demandMass_) + 40.0);
++        const double fastProbability =
++            (2.0 * forecastDemand_[length] + 1.0) /
++            (2.0 * forecastMass_ + 40.0);
++        const double fastEvidence =
++            forecastMix_ * fastProbability;
++        const double slowEvidence =
++            (1.0 - forecastMix_) * slowProbability;
++        // Fixed sharing keeps either expert able to recover after a shift.
++        constexpr double share = 1.0 / 64.0;
++        forecastMix_ =
++            (1.0 - share) * fastEvidence /
++                (fastEvidence + slowEvidence) +
++            0.5 * share;
+         if (demandMass_ >= 128) {
+             demandMass_ = 0;
+             for (int k = 1; k <= 40; ++k) {
+                 demand_[k] /= 2;
+                 demandMass_ += demand_[k];
+             }
+         }
+         ++demand_[length];
+         ++demandMass_;
++        if (forecastMass_ >= 64) {
++            forecastMass_ = 0;
++            for (int k = 1; k <= 40; ++k) {
++                forecastDemand_[k] /= 2;
++                forecastMass_ += forecastDemand_[k];
++            }
++        }
++        ++forecastDemand_[length];
++        ++forecastMass_;
+     }
+     std::uint64_t splitPenalty(Coordinate space, int length) const {
+         std::uint64_t result = 0;
+         for (int k = 1; k <= 40; ++k) {
+             if (demand_[k] != 0 && space % k < length % k) {
+                 result +=
+                     static_cast<std::uint64_t>(demand_[k]) * k;
+             }
+         }
+         return result;
+     }
+     bool scarcityAllowsExchange(
+         Coordinate smaller, Coordinate larger, int length) const {
+         std::size_t fittingGaps = 0;
+         long double extraLoss = 0;
+         for (int k = 40; k >= 1; --k) {
+             fittingGaps += starts_[k].size();
+             if (demand_[k] == 0 || fittingGaps == 0) continue;
+             const int smallerLoses =
+                 smaller >= k && smaller - length < k;
+             const int largerLoses =
+                 larger >= k && larger - length < k;
+             if (smallerLoses != largerLoses) {
+                 extraLoss +=
+                     static_cast<long double>(demand_[k]) /
+                     static_cast<long double>(fittingGaps) *
+                     (largerLoses - smallerLoses);
+             }
+         }
+         return extraLoss <= 0;
+     }
+     double releaseGain(
+         Coordinate a, Coordinate remainder, bool rightAligned,
+         const std::array<std::uint32_t, 41>& prefix) const {
+         auto neighbor = live_.lower_bound(a);
+         if (rightAligned) {
+             if (neighbor == live_.begin()) return 0;
+             --neighbor;
+         } else if (neighbor == live_.end()) {
+             return 0;
+         }
+         const Pipe& p = pipes_[neighbor->second];
+         Coordinate releasedSpace = p.length;
+         if (releasedSpace >= 40) return 0;
+         if (rightAligned) {
+             auto outside = gaps_.lower_bound(p.start);
+             if (outside != gaps_.begin()) {
+                 --outside;
+                 if (outside->second == p.start) {
+                     releasedSpace +=
+                         outside->second - outside->first;
+                 }
+             }
+         } else {
+             const auto outside = gaps_.find(p.start + p.length);
+             if (outside != gaps_.end()) {
+                 releasedSpace += outside->second - outside->first;
+             }
+         }
+         const int before = static_cast<int>(
+             std::min<Coordinate>(
+                 40, std::max(remainder, releasedSpace)));
+         const int after = static_cast<int>(
+             std::min<Coordinate>(40, remainder + releasedSpace));
+         if (before == after) return 0;
+         return releaseRate(p.length) *
+             static_cast<double>(prefix[after] - prefix[before]);
+     }
+     void selectReleasePlacement(
+         int length, Coordinate& at, bool& rightAligned) const {
+         if (at < 0 || totalDeaths_ == 0) return;
+         const Coordinate space = gaps_.at(at) - at;
+         const Coordinate remainder = space - length;
+         if (remainder <= 0 || remainder >= 40) return;
+         std::array<std::uint32_t, 41> prefix{};
+         for (int k = 1; k <= 40; ++k) {
+             prefix[k] = prefix[k - 1] + demand_[k] * k;
+         }
+         const auto end = sizes_.upper_bound(
+             {space, std::numeric_limits<Coordinate>::max()});
+         const std::array<Coordinate, 2> candidates{
+             at, std::prev(end)->second};
+         double best = 0;
+         for (std::size_t i = 0; i < candidates.size(); ++i) {
+             if (i != 0 && candidates[i] == candidates[0]) continue;
+             const Coordinate a = candidates[i];
+             for (int side = 0; side < 2; ++side) {
+                 if (side != 0 && a + space == trench_) continue;
+                 const double score =
+                     releaseGain(a, remainder, side != 0, prefix);
+                 if (score > best) {
+                     best = score;
+                     at = a;
+                     rightAligned = side != 0;
+                 }
+             }
+         }
+     }
+     Scenarios buildScenarios() const {
+-        // One uniform pseudo-observation per possible request length.
+-        const std::uint32_t mass = demandMass_ + 40;
++        // Scale the probability mixture by both normalizing masses.
++        const double slowMass =
++            static_cast<double>(demandMass_) + 40.0;
++        const double fastMass = 2.0 * forecastMass_ + 40.0;
++        const double mass = slowMass * fastMass;
++        const double slowScale = (1.0 - forecastMix_) * fastMass;
++        const double fastScale = forecastMix_ * slowMass;
++        const auto weight = [&](int k) {
++            return slowScale * (demand_[k] + 1.0) +
++                   fastScale * (2.0 * forecastDemand_[k] + 1.0);
++        };
+         std::array<int, scenarioCount_> quantiles{};
+         int length = 1;
+-        std::uint32_t cumulative = demand_[1] + 1;
++        double cumulative = weight(1);
+         for (int i = 0; i < scenarioCount_; ++i) {
+-            const std::uint32_t target =
+-                static_cast<std::uint32_t>(
+-                    (static_cast<std::uint64_t>(2 * i + 1) * mass) /
+-                    (2 * scenarioCount_));
++            const double target =
++                (static_cast<double>(2 * i + 1) * mass) /
++                (2 * scenarioCount_);
+             while (length < 40 && cumulative <= target) {
+                 ++length;
+-                cumulative += demand_[length] + 1;
++                cumulative += weight(length);
+             }
+             quantiles[i] = length;
+         }
+         // Each horizon position uses every marginal stratum once.
+         Scenarios scenarios{};
+         for (int i = 0; i < scenarioCount_; ++i) {
+             scenarios[i].lengths = {
+                 quantiles[i],
+                 quantiles[(3 * i + 1) % scenarioCount_],
+                 quantiles[(5 * i + 2) % scenarioCount_]
+             };
+             for (int request : scenarios[i].lengths) {
+                 scenarios[i].volume += request;
+             }
+         }
+         return scenarios;
+     }
+     int projectedGrowth(
+         const Placement& placement, int length,
+         const PackingProfile& interior,
+         Coordinate tailStart, Coordinate tailSpace,
+         const Scenarios& scenarios, int cutoff) const {
+         PackingProfile after = interior;
+         Coordinate remainingTail = tailSpace;
+         if (placement.at == tailStart) {
+             remainingTail -= length;
+         } else {
+             const Coordinate space =
+                 gaps_.at(placement.at) - placement.at;
+             after.take(space);
+             after.add(space - length);
+         }
+         const int initialTail = static_cast<int>(
+             std::min<Coordinate>(packingCap_, remainingTail));
+         int totalGrowth = 0;
+         for (const Scenario& scenario : scenarios) {
+             // One gap holding the entire remaining volume guarantees
+             // zero growth under insertion-only Best-Fit.
+             if (initialTail >= scenario.volume ||
+                 after.firstFit(scenario.volume) != 0) {
+                 continue;
+             }
+             PackingProfile simulated = after;
+             int tail = initialTail;
+             for (int request : scenario.lengths) {
+                 const int fit = simulated.firstFit(request);
+                 // The physical tail has the largest address, so an
+                 // equal-sized interior fit wins the Best-Fit tie.
+                 if (fit != 0 &&
+                     (tail < request || fit <= tail)) {
+                     simulated.take(fit);
+                     simulated.add(fit - request);
+                 } else if (tail >= request) {
+                     tail -= request;
+                 } else {
+                     const int sections =
+                         (request - tail + 19) / 20;
+                     totalGrowth += sections;
+                     tail += sections * 20 - request;
+                 }
+             }
+             // All remaining contributions are nonnegative.
+             if (totalGrowth >= cutoff) return totalGrowth;
+         }
+         return totalGrowth;
+     }
+     Placement choosePlacement(int length) const {
+         const auto first = sizes_.lower_bound({length, 0});
+         if (first == sizes_.end()) return {};
+         const auto nextSize = sizes_.upper_bound(
+             {first->first, std::numeric_limits<Coordinate>::max()});
+         auto candidate = first;
+         // Preserve the parent's complete decision as the fallback.
+         if (candidate->first > length) {
+             const auto penalty =
+                 splitPenalty(candidate->first, length);
+             if (penalty != 0 && nextSize != sizes_.end() &&
+                 splitPenalty(nextSize->first, length) < penalty &&
+                 scarcityAllowsExchange(
+                     candidate->first, nextSize->first, length)) {
+                 candidate = nextSize;
+             }
+         }
+         Placement fallback{candidate->second, false};
+         selectReleasePlacement(
+             length, fallback.at, fallback.rightAligned);
+         if constexpr (!packingEnabled_) {
+             return fallback;
+         }
+         if (first->first == length) return fallback;
+         // In either condition every candidate leaves enough guaranteed
+         // capacity for three requests of maximum length.
+         if (starts_[40].size() >= 4 ||
+             sizes_.rbegin()->first >= length + packingCap_) {
+             return fallback;
+         }
+         Coordinate tailStart = -1;
+         Coordinate tailSpace = 0;
+         if (!gaps_.empty() &&
+             gaps_.rbegin()->second == trench_) {
+             tailStart = gaps_.rbegin()->first;
+             tailSpace = trench_ - tailStart;
+         }
+         // The fallback belongs to one of the first two size classes.
+         // Four slots simplify collection; at most three are distinct.
+         std::array<Placement, 4> choices{};
+         int choiceCount = 1;
+         choices[0] = fallback;
+         auto append = [&](Coordinate start) {
+             Placement proposed{start, false};
+             selectReleasePlacement(
+                 length, proposed.at, proposed.rightAligned);
+             for (int i = 0; i < choiceCount; ++i) {
+                 if (choices[i].at == proposed.at) return;
+             }
+             choices[choiceCount++] = proposed;
+         };
+         append(first->second);
+         if (nextSize != sizes_.end()) append(nextSize->second);
+         if (tailSpace >= length) append(tailStart);
+         if (choiceCount == 1) return fallback;
+         PackingProfile interior = packingProfile_;
+         interior.take(tailSpace);
+         const Scenarios scenarios = buildScenarios();
+         int bestIndex = 0;
+         int bestScore = projectedGrowth(
+             choices[0], length, interior, tailStart, tailSpace,
+             scenarios, std::numeric_limits<int>::max());
+         for (int i = 1; i < choiceCount && bestScore != 0; ++i) {
+             const int score = projectedGrowth(
+                 choices[i], length, interior, tailStart, tailSpace,
+                 scenarios, bestScore);
+             if (score < bestScore) {
+                 bestScore = score;
+                 bestIndex = i;
+             }
+         }
+         return choices[bestIndex];
+     }
+     static int bucket(Coordinate n) {
+         return static_cast<int>(std::min<Coordinate>(40, n));
+     }
+     void add(Coordinate a, Coordinate b) {
+         if (a >= b) return;
+         gaps_[a] = b;
+         sizes_.insert({b - a, a});
+         starts_[bucket(b - a)].insert(a);
+         packingProfile_.add(b - a);
+     }
+     void erase(Coordinate a) {
+         const Coordinate b = gaps_.at(a);
+         sizes_.erase({b - a, a});
+         starts_[bucket(b - a)].erase(a);
+         packingProfile_.take(b - a);
+         gaps_.erase(a);
+     }
+ public:
+     std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+     std::uint64_t expansionGateOpportunities = 0;
+     std::uint64_t expansionGatePasses = 0;
+     std::uint64_t unitProfileSuppressedExpansions = 0;
+     void place(int length) {
+         advanceReleaseClock();
+         observeLength(length);
+         const Placement placement = choosePlacement(length);
+         Coordinate at = placement.at;
+         Coordinate digs = 0;
+         // Growth is allowed only after the global fitting-gap search
+         // has established that no existing interval can hold the pipe.
+         if (at < 0) {
+             at = trench_;
+             if (!gaps_.empty() &&
+                 gaps_.rbegin()->second == trench_) {
+                 at = gaps_.rbegin()->first;
+                 erase(at);
+             }
+             digs = (length - (trench_ - at) + 19) / 20;
+             trench_ += digs * 20;
+             add(at, trench_);
+         }
+         const Coordinate finish = gaps_.at(at);
+         const Coordinate begin = at;
+         erase(begin);
+         if (placement.rightAligned) at = finish - length;
+         add(begin, at);
+         add(at + length, finish);
+         settleExposure(length);
+         ++population_[length];
+         live_.emplace(at, pipes_.size());
+         pipes_.push_back({at, length});
+         std::cout << digs << ' ' << at << '\n' << std::flush;
+     }
+     void remove(Coordinate pid) {
+         const Pipe p = pipes_.at(static_cast<std::size_t>(pid));
+         advanceReleaseClock();
+         settleExposure(p.length);
+         --population_[p.length];
+         deaths_[p.length] += 1.0;
+         totalDeaths_ += 1.0;
+         live_.erase(p.start);
+         Coordinate a = p.start;
+         Coordinate b = a + p.length;
+         auto right = gaps_.lower_bound(a);
+         if (right != gaps_.end() && right->first == b) {
+             b = right->second;
+             erase(right->first);
+         }
+         auto left = gaps_.lower_bound(a);
+         if (left != gaps_.begin()) {
+             --left;
+             if (left->second == a) {
+                 a = left->first;
+                 erase(a);
+             }
+         }
+         add(a, b);
+         std::cout << p.start << '\n' << std::flush;
+     }
+ };
+ }  // namespace
+ // EVOLVE-BLOCK-END
+ 
+ int main() {
+     std::ios::sync_with_stdio(false);
+     std::cin.tie(nullptr);
+ 
+     Allocator allocator;
+     std::int64_t command;
+     while (std::cin >> command) {
+         if (command == 0) {
+ #if defined(MC_ROLLOUT_DIAGNOSTICS)
+             std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                       << " mc_rollouts=" << allocator.mcRolloutsRun
+                       << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                       << " expansion_gate_passes=" << allocator.expansionGatePasses
+                       << " unit_profile_suppressed_expansions="
+                       << allocator.unitProfileSuppressedExpansions << '\n';
+ #endif
+             return 0;
+         }
+         if (command > 0) {
+             allocator.place(static_cast<int>(command));
+         } else {
+             allocator.remove(-command);
+         }
+     }
+     return 0;
+ }

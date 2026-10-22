@@ -1,0 +1,31 @@
+{
+  "model_sha256": "80129e13902a62c115002fcc64bbb1e155550a3f20c9fcf16f83dd36bb629648",
+  "commands": [
+    [
+      "clang++",
+      "-std=c++20",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-DMODEL_HEADER=\"/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/models/M1/model.hpp\"",
+      "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/implementation/teacher.cpp",
+      "-o",
+      "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/training-builds/rollin1/teacher"
+    ],
+    [
+      "clang++",
+      "-std=c++20",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-DMODEL_HEADER=\"/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/models/M1/model.hpp\"",
+      "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/implementation/solver.cpp",
+      "-o",
+      "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/training-builds/rollin1/solver"
+    ]
+  ],
+  "binary_sha256": {
+    "teacher": "0d17f92ac49f2945b18e08a8347eb5620d21f95325e5050da5b80acbebee5fd8",
+    "solver": "1681a198c0a0d64495a00635696c202db989166f8a54e75d2407b849f7d9cea4"
+  }
+}

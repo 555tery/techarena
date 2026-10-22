@@ -1,0 +1,542 @@
+--- a/original.cpp
++++ b/original.cpp
+@@ -1,165 +1,465 @@
+ #include <algorithm>
+ #include <array>
+ #include <cstddef>
+ #include <cstdint>
+ #include <deque>
+ #include <iostream>
+ #include <iterator>
+ #include <limits>
+ #include <map>
+ #include <optional>
+ #include <set>
+ #include <utility>
+ #include <vector>
+ 
+ // EVOLVE-BLOCK-START
+ namespace {
+ using Coordinate = std::int64_t;
+ class Allocator {
+-    struct Pipe { Coordinate start; int length; };
++    // false: same-parent ablation with identical placement decisions.
++    static constexpr bool kSameStateDuel = true;
++    static constexpr std::size_t kDuelDecisionLimit = 4096;
++    struct DemandProfile {
++        std::array<std::uint32_t, 41> demand{};
++        std::uint32_t mass = 0;
++        void observeLength(int length) {
++            if (mass >= 128) {
++                mass = 0;
++                for (int k = 1; k <= 40; ++k) {
++                    demand[k] /= 2;
++                    mass += demand[k];
++                }
++            }
++            ++demand[length];
++            ++mass;
++        }
++        std::uint64_t splitPenalty(
++            Coordinate space, int length
++        ) const {
++            std::uint64_t result = 0;
++            for (int k = 1; k <= 40; ++k) {
++                if (demand[k] != 0 &&
++                    space % k < length % k) {
++                    result +=
++                        static_cast<std::uint64_t>(demand[k]) * k;
++                }
++            }
++            return result;
++        }
++    };
++    static int bucket(Coordinate length) {
++        return static_cast<int>(
++            std::min<Coordinate>(40, length)
++        );
++    }
++    static bool scarcityAllowsExchange(
++        Coordinate smaller,
++        Coordinate larger,
++        int length,
++        const DemandProfile& profile,
++        const std::array<std::size_t, 41>& counts
++    ) {
++        std::size_t fittingGaps = 0;
++        long double extraLoss = 0;
++        for (int k = 40; k >= 1; --k) {
++            fittingGaps += counts[k];
++            if (profile.demand[k] == 0 ||
++                fittingGaps == 0) {
++                continue;
++            }
++            const int smallerLoses =
++                smaller >= k && smaller - length < k;
++            const int largerLoses =
++                larger >= k && larger - length < k;
++            if (smallerLoses != largerLoses) {
++                extraLoss +=
++                    static_cast<long double>(profile.demand[k]) /
++                    static_cast<long double>(fittingGaps) *
++                    (largerLoses - smallerLoses);
++            }
++        }
++        return extraLoss <= 0;
++    }
++    struct Forecast {
++        // Exact bucket counts include all gaps, including the tail.
++        std::array<std::size_t, 41> counts{};
++        // Interior gaps >= 40: up to four copies of each of the
++        // first five distinct sizes. The tail is stored separately.
++        std::array<Coordinate, 20> large{};
++        std::size_t largeUsed = 0;
++        Coordinate tail = 0;
++        bool consume(Coordinate space, int length) {
++            if (space < length ||
++                counts[bucket(space)] == 0) {
++                return false;
++            }
++            const Coordinate remaining = space - length;
++            bool useTail = false;
++            std::size_t index = largeUsed;
++            if (space < 40) {
++                useTail =
++                    tail == space &&
++                    counts[static_cast<std::size_t>(space)] == 1;
++            } else {
++                for (std::size_t i = 0; i < largeUsed; ++i) {
++                    if (large[i] == space) {
++                        index = i;
++                        break;
++                    }
++                }
++                if (index == largeUsed) {
++                    if (tail != space) {
++                        return false;
++                    }
++                    useTail = true;
++                }
++            }
++            if (!useTail && space >= 40) {
++                if (remaining >= 40) {
++                    large[index] = remaining;
++                } else {
++                    large[index] = large[--largeUsed];
++                }
++            }
++            --counts[bucket(space)];
++            if (remaining > 0) {
++                ++counts[bucket(remaining)];
++            }
++            if (useTail) {
++                tail = remaining;
++            }
++            return true;
++        }
++        Coordinate place(
++            int length,
++            bool useParentPolicy,
++            const DemandProfile& profile
++        ) {
++            Coordinate first = -1;
++            Coordinate second = -1;
++            const auto offer = [&](Coordinate space) {
++                if (space < length) {
++                    return;
++                }
++                if (first < 0 || space < first) {
++                    second = first;
++                    first = space;
++                } else if (space > first &&
++                           (second < 0 || space < second)) {
++                    second = space;
++                }
++            };
++            for (int k = length; k < 40; ++k) {
++                if (counts[k] != 0) {
++                    offer(k);
++                }
++            }
++            for (std::size_t i = 0; i < largeUsed; ++i) {
++                offer(large[i]);
++            }
++            offer(tail);
++            if (first < 0) {
++                // Hypothetical growth also requires failure of the
++                // global fitting-gap search.
++                if (tail > 0) {
++                    --counts[bucket(tail)];
++                }
++                const Coordinate digs =
++                    (length - tail + 19) / 20;
++                tail += digs * 20 - length;
++                if (tail > 0) {
++                    ++counts[bucket(tail)];
++                }
++                return digs;
++            }
++            Coordinate chosen = first;
++            if (useParentPolicy &&
++                first > length &&
++                second >= 0) {
++                const auto penalty =
++                    profile.splitPenalty(first, length);
++                if (penalty != 0 &&
++                    profile.splitPenalty(second, length) < penalty &&
++                    Allocator::scarcityAllowsExchange(
++                        first, second, length, profile, counts
++                    )) {
++                    chosen = second;
++                }
++            }
++            return consume(chosen, length) ? 0 : -1;
++        }
++    };
++    struct Pipe {
++        Coordinate start;
++        int length;
++    };
+     std::vector<Pipe> pipes_{{0, 0}};
+     std::map<Coordinate, Coordinate> gaps_;
+     std::set<std::pair<Coordinate, Coordinate>> sizes_;
+-    std::array<std::set<Coordinate>, 41> starts_;
++    std::array<std::size_t, 41> gapCounts_{};
+     Coordinate trench_ = 0;
+-    std::array<std::uint32_t, 41> demand_{};
+-    std::uint32_t demandMass_ = 0;
+-    void observeLength(int length) {
+-        if (demandMass_ >= 128) {
+-            demandMass_ = 0;
+-            for (int k = 1; k <= 40; ++k) {
+-                demand_[k] /= 2;
+-                demandMass_ += demand_[k];
+-            }
+-        }
+-        ++demand_[length];
+-        ++demandMass_;
+-    }
+-    std::uint64_t splitPenalty(Coordinate space, int length) const {
+-        std::uint64_t result = 0;
+-        for (int k = 1; k <= 40; ++k) {
+-            if (demand_[k] != 0 && space % k < length % k)
+-                result += static_cast<std::uint64_t>(demand_[k]) * k;
++    Coordinate liveVolume_ = 0;
++    DemandProfile profile_;
++    void add(Coordinate a, Coordinate b) {
++        if (a >= b) {
++            return;
++        }
++        gaps_[a] = b;
++        sizes_.insert({b - a, a});
++        ++gapCounts_[bucket(b - a)];
++    }
++    void erase(Coordinate a) {
++        const auto it = gaps_.find(a);
++        const Coordinate b = it->second;
++        sizes_.erase({b - a, a});
++        --gapCounts_[bucket(b - a)];
++        gaps_.erase(it);
++    }
++    Forecast makeForecast() const {
++        Forecast result;
++        result.counts = gapCounts_;
++        Coordinate tailStart = -1;
++        if (!gaps_.empty() &&
++            gaps_.rbegin()->second == trench_) {
++            tailStart = gaps_.rbegin()->first;
++            result.tail = trench_ - tailStart;
++        }
++        // There are only four simulated allocations, including the
++        // current one. Each policy selects one of the two smallest
++        // distinct fitting sizes. Thus five original large-size
++        // classes and four copies per class suffice for this horizon.
++        // Full bucket counts retain omitted gaps for scarcity tests.
++        auto it = sizes_.lower_bound({40, 0});
++        for (int distinct = 0;
++             distinct < 5 && it != sizes_.end();
++             ++distinct) {
++            const Coordinate space = it->first;
++            auto scan = it;
++            int copied = 0;
++            while (scan != sizes_.end() &&
++                   scan->first == space &&
++                   copied < 4) {
++                if (scan->second != tailStart) {
++                    result.large[result.largeUsed++] = space;
++                    ++copied;
++                }
++                ++scan;
++            }
++            it = sizes_.upper_bound({
++                space, std::numeric_limits<Coordinate>::max()
++            });
+         }
+         return result;
+     }
+-    bool scarcityAllowsExchange(Coordinate smaller, Coordinate larger, int length) const {
+-        std::size_t fittingGaps = 0;
+-        long double extraLoss = 0;
+-        for (int k = 40; k >= 1; --k) {
+-            fittingGaps += starts_[k].size();
+-            if (demand_[k] == 0 || fittingGaps == 0) continue;
+-            const int smallerLoses = smaller >= k && smaller - length < k;
+-            const int largerLoses = larger >= k && larger - length < k;
+-            if (smallerLoses != largerLoses) {
+-                extraLoss += static_cast<long double>(demand_[k]) /
+-                             static_cast<long double>(fittingGaps) *
+-                             (largerLoses - smallerLoses);
+-            }
+-        }
+-        return extraLoss <= 0;
+-    }
+-    static int bucket(Coordinate n) { return static_cast<int>(std::min<Coordinate>(40, n)); }
+-    void add(Coordinate a, Coordinate b) {
+-        if (a >= b) return;
+-        gaps_[a] = b;
+-        sizes_.insert({b-a, a});
+-        starts_[bucket(b-a)].insert(a);
+-    }
+-    void erase(Coordinate a) {
+-        const Coordinate b = gaps_.at(a);
+-        sizes_.erase({b-a, a});
+-        starts_[bucket(b-a)].erase(a);
+-        gaps_.erase(a);
++    std::array<std::array<int, 3>, 8> makeScenarios() const {
++        std::array<int, 8> quantiles{};
++        int k = 1;
++        std::uint32_t prefix = profile_.demand[k];
++        for (int i = 0; i < 8; ++i) {
++            const std::uint32_t target =
++                ((2 * i + 1) * profile_.mass) / 16;
++            while (k < 40 && prefix <= target) {
++                prefix += profile_.demand[++k];
++            }
++            quantiles[i] = k;
++        }
++        std::array<std::array<int, 3>, 8> scenarios{};
++        for (int i = 0; i < 4; ++i) {
++            const int repeated = quantiles[2 * i + 1];
++            scenarios[i] = {repeated, repeated, repeated};
++            scenarios[4 + i] = {
++                quantiles[2 * i],
++                quantiles[2 * ((i + 1) % 4)],
++                quantiles[2 * ((i + 3) % 4)]
++            };
++        }
++        return scenarios;
++    }
++    bool bestFitWins(
++        int length,
++        Coordinate bestFitSpace,
++        Coordinate parentSpace
++    ) {
++        if (mcDecisionsUsed >= kDuelDecisionLimit) {
++            return false;
++        }
++        ++mcDecisionsUsed;
++        const Forecast base = makeForecast();
++        const auto scenarios = makeScenarios();
++        long double advantage = 0;
++        for (std::size_t s = 0; s < scenarios.size(); ++s) {
++            bool alreadyEvaluated = false;
++            for (std::size_t j = 0; j < s; ++j) {
++                if (scenarios[j] == scenarios[s]) {
++                    alreadyEvaluated = true;
++                    break;
++                }
++            }
++            if (alreadyEvaluated) {
++                continue;
++            }
++            int weight = 0;
++            for (std::size_t j = s; j < scenarios.size(); ++j) {
++                if (scenarios[j] == scenarios[s]) {
++                    ++weight;
++                }
++            }
++            Forecast parent = base;
++            Forecast bestFit = base;
++            if (!parent.consume(parentSpace, length) ||
++                !bestFit.consume(bestFitSpace, length)) {
++                return false;
++            }
++            DemandProfile hypothetical = profile_;
++            Coordinate parentDigs = 0;
++            Coordinate bestFitDigs = 0;
++            long double futureVolume =
++                static_cast<long double>(liveVolume_);
++            mcRolloutsRun += 2;
++            for (int nextLength : scenarios[s]) {
++                hypothetical.observeLength(nextLength);
++                futureVolume += nextLength;
++                const Coordinate p =
++                    parent.place(nextLength, true, hypothetical);
++                const Coordinate b =
++                    bestFit.place(nextLength, false, hypothetical);
++                if (p < 0 || b < 0) {
++                    return false;
++                }
++                parentDigs += p;
++                bestFitDigs += b;
++            }
++            if (parentDigs == bestFitDigs) {
++                continue;
++            }
++            const long double parentTrench =
++                static_cast<long double>(trench_) +
++                20.0L * parentDigs;
++            const long double bestFitTrench =
++                static_cast<long double>(trench_) +
++                20.0L * bestFitDigs;
++            // Weighted predicted F/T(best-fit) - F/T(parent).
++            advantage +=
++                static_cast<long double>(weight) * futureVolume *
++                (20.0L * (parentDigs - bestFitDigs)) /
++                (parentTrench * bestFitTrench);
++        }
++        // Preserve the parent on ties.
++        return advantage > 0;
+     }
+ public:
+     std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+-    std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
++    std::uint64_t expansionGateOpportunities = 0;
++    std::uint64_t expansionGatePasses = 0;
+     std::uint64_t unitProfileSuppressedExpansions = 0;
+     void place(int length) {
+-        observeLength(length);
+-        Coordinate at = -1, digs = 0;
+-        if constexpr (false) {
+-            for (int k = length; k <= 40; ++k)
+-                if (!starts_[k].empty() && (at < 0 || *starts_[k].begin() < at))
+-                    at = *starts_[k].begin();
+-        } else {
+-            auto candidate = sizes_.lower_bound({length, 0});
+-            if (candidate != sizes_.end()) {
+-                if (candidate->first > length) {
+-                    const auto penalty = splitPenalty(candidate->first, length);
+-                    if (penalty != 0) {
+-                        auto larger = sizes_.upper_bound(
+-                            {candidate->first, std::numeric_limits<Coordinate>::max()});
+-                        if (larger != sizes_.end() &&
+-                            splitPenalty(larger->first, length) < penalty &&
+-                            scarcityAllowsExchange(candidate->first, larger->first, length)) {
+-                            candidate = larger;
+-                        }
++        profile_.observeLength(length);
++        liveVolume_ += length;
++        Coordinate at = -1;
++        Coordinate digs = 0;
++        const auto bestFit = sizes_.lower_bound({length, 0});
++        auto candidate = bestFit;
++        if (candidate != sizes_.end()) {
++            if (candidate->first > length) {
++                const auto penalty =
++                    profile_.splitPenalty(candidate->first, length);
++                if (penalty != 0) {
++                    const auto larger = sizes_.upper_bound({
++                        candidate->first,
++                        std::numeric_limits<Coordinate>::max()
++                    });
++                    if (larger != sizes_.end() &&
++                        profile_.splitPenalty(
++                            larger->first, length
++                        ) < penalty &&
++                        scarcityAllowsExchange(
++                            candidate->first,
++                            larger->first,
++                            length,
++                            profile_,
++                            gapCounts_
++                        )) {
++                        candidate = larger;
+                     }
+                 }
+-                at = candidate->second;
+-            }
+-        }
++            }
++            if constexpr (kSameStateDuel) {
++                if (candidate != bestFit &&
++                    bestFitWins(
++                        length, bestFit->first, candidate->first
++                    )) {
++                    candidate = bestFit;
++                }
++            }
++            at = candidate->second;
++        }
++        // Actual growth is permitted only after the global
++        // fitting-gap search has failed.
+         if (at < 0) {
+             at = trench_;
+-            if (!gaps_.empty() && gaps_.rbegin()->second == trench_) {
++            if (!gaps_.empty() &&
++                gaps_.rbegin()->second == trench_) {
+                 at = gaps_.rbegin()->first;
+                 erase(at);
+             }
+             digs = (length - (trench_ - at) + 19) / 20;
+             trench_ += digs * 20;
+             add(at, trench_);
+         }
+         const Coordinate finish = gaps_.at(at);
+         erase(at);
+         add(at + length, finish);
+         pipes_.push_back({at, length});
+         std::cout << digs << ' ' << at << '\n' << std::flush;
+     }
+     void remove(Coordinate pid) {
+         const Pipe p = pipes_.at(static_cast<std::size_t>(pid));
+-        Coordinate a = p.start, b = a + p.length;
++        liveVolume_ -= p.length;
++        Coordinate a = p.start;
++        Coordinate b = a + p.length;
+         auto right = gaps_.lower_bound(a);
+         if (right != gaps_.end() && right->first == b) {
+             b = right->second;
+             erase(right->first);
+         }
+         auto left = gaps_.lower_bound(a);
+         if (left != gaps_.begin()) {
+             --left;
+-            if (left->second == a) { a = left->first; erase(a); }
++            if (left->second == a) {
++                a = left->first;
++                erase(a);
++            }
+         }
+         add(a, b);
+         std::cout << p.start << '\n' << std::flush;
+     }
+ };
+ }  // namespace
+ // EVOLVE-BLOCK-END
+ 
+ int main() {
+     std::ios::sync_with_stdio(false);
+     std::cin.tie(nullptr);
+ 
+     Allocator allocator;
+     std::int64_t command;
+     while (std::cin >> command) {
+         if (command == 0) {
+ #if defined(MC_ROLLOUT_DIAGNOSTICS)
+             std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                       << " mc_rollouts=" << allocator.mcRolloutsRun
+                       << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                       << " expansion_gate_passes=" << allocator.expansionGatePasses
+                       << " unit_profile_suppressed_expansions="
+                       << allocator.unitProfileSuppressedExpansions << '\n';
+ #endif
+             return 0;
+         }
+         if (command > 0) {
+             allocator.place(static_cast<int>(command));
+         } else {
+             allocator.remove(-command);
+         }
+     }
+     return 0;
+ }

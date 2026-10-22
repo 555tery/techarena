@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "split": "stress",
+  "weight": 1,
+  "cases": [
+    {
+      "id": "stress-000",
+      "file": "case-000.in",
+      "family": "stable_pattern_longrun",
+      "stratum": "stress",
+      "seed": 515020261020000,
+      "n": 200000,
+      "sha256": "6ff716a801992786ff2ad9ab9dfc96f6a3ed27aa64a451653193a64acaba27df",
+      "commands_sha256": "3847a607a85d09202a22ea202499cb1bccb85a6d0937a186070717af52336bb0",
+      "final_live_volume": 3220,
+      "peak_live_volume": 4446,
+      "final_live_count": 426,
+      "peak_live_count": 589,
+      "final_to_peak_volume": 0.7242465137201979,
+      "public_prefix": null,
+      "mechanism_details": {
+        "primary_mechanism": "size_conditional_lifetime",
+        "secondary_mechanism": "alternating_lifetime_classes",
+        "parameters": {
+          "motif": [
+            9,
+            24,
+            34,
+            33,
+            4,
+            5,
+            9,
+            4
+          ],
+          "period": 277,
+          "affine_a": 9,
+          "affine_b": 37,
+          "short_life": 69,
+          "long_life": 1313,
+          "noise": 0.04,
+          "transition_p": 0.01960653866966311,
+          "index": 17,
+          "final": true
+        },
+        "terminal_fill": false,
+        "schedule": "stable_patterns/final/variant1"
+      },
+      "matched_control_for": null
+    },
+    {
+      "id": "stress-001",
+      "file": "case-001.in",
+      "family": "changing_pattern_longrun",
+      "stratum": "stress",
+      "seed": 515020261020001,
+      "n": 200000,
+      "sha256": "771f6511f9910f8af30b97edc17192225f6751a74bf66963c61da783b96c760b",
+      "commands_sha256": "a6adc6d04a6f036d36d8314bdce7c732bae5057961b92910a109b70832484eb2",
+      "final_live_volume": 924232,
+      "peak_live_volume": 924232,
+      "final_live_count": 42536,
+      "peak_live_count": 42537,
+      "final_to_peak_volume": 1.0,
+      "public_prefix": null,
+      "mechanism_details": {
+        "primary_mechanism": "markov_profiles",
+        "secondary_mechanism": "affine_motif",
+        "parameters": {
+          "motif": [
+            6,
+            33,
+            37,
+            29,
+            5,
+            40,
+            38,
+            31,
+            30,
+            19
+          ],
+          "period": 153,
+          "affine_a": 11,
+          "affine_b": 35,
+          "short_life": 77,
+          "long_life": 1123,
+          "noise": 0.075,
+          "transition_p": 0.017230672437635586,
+          "index": 26,
+          "final": true
+        },
+        "terminal_fill": false,
+        "schedule": "changing_patterns/final/variant2"
+      },
+      "matched_control_for": null
+    },
+    {
+      "id": "stress-002",
+      "file": "case-002.in",
+      "family": "neutral_heavy_churn",
+      "stratum": "stress",
+      "seed": 515020261020002,
+      "n": 200000,
+      "sha256": "80b0907554c8bf657bc3653b95fbc3e8cda11a8dc4ceb334df6202a701202532",
+      "commands_sha256": "82bfddb0e127c6f980d610e2f4b6db791a91b5996d5c47a39a81bae7cc49a1b5",
+      "final_live_volume": 509,
+      "peak_live_volume": 1175,
+      "final_live_count": 22,
+      "peak_live_count": 52,
+      "final_to_peak_volume": 0.43319148936170215,
+      "public_prefix": null,
+      "mechanism_details": {
+        "profile": 0,
+        "target_active": 19,
+        "terminal_fill": false,
+        "kind": "IID/independent_lifetimes"
+      },
+      "matched_control_for": null
+    },
+    {
+      "id": "stress-003",
+      "file": "case-003.in",
+      "family": "max_alive",
+      "stratum": "stress",
+      "seed": 515020261020003,
+      "n": 200000,
+      "sha256": "428f5075383d7556fdc65d4641c09972d28c865906cc59495561985dfb783ab2",
+      "commands_sha256": "3c2c507c20db3411773716f5dd6809a5a5322322b71f153dd7be82f8a37d4201",
+      "final_live_volume": 4103496,
+      "peak_live_volume": 4103496,
+      "final_live_count": 200000,
+      "peak_live_count": 200000,
+      "final_to_peak_volume": 1.0,
+      "public_prefix": null,
+      "mechanism_details": {
+        "terminal_fill": false,
+        "kind": "maximum_alive_count"
+      },
+      "matched_control_for": null
+    }
+  ]
+}

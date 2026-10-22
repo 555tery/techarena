@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0070",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0070/candidate_0.cpp",
+  "sha256": "9e97aeb68b0bc8b4d584359ca7ec7c74d1738d39c28b1a3fae18a41ef473fa24",
+  "idea": "Учитывать уже известную текущую вставку при выборе исторических продолжений для bounded rollout.",
+  "parent": "trial_0022",
+  "weighted_score": 30.037014673887132,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1740,
+      "kpi": 0.9637931034482758,
+      "weighted_score": 0.963793103448276
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10340,
+      "kpi": 0.9911992263056093,
+      "weighted_score": 3.964796905222437
+    },
+    {
+      "case": "13",
+      "T": 3300,
+      "kpi": 0.9672727272727273,
+      "weighted_score": 3.869090909090909
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438060,
+      "kpi": 0.9559352600100443,
+      "weighted_score": 9.559352600100443
+    }
+  ],
+  "fresh": {
+    "mean_delta": -0.0021620129728572523,
+    "worst_delta": -0.10247619047619039,
+    "wins": 13,
+    "regressions": 6,
+    "ties": 11,
+    "worst_cases": [
+      {
+        "case": "dev_29_micro",
+        "delta": -0.10247619047619039,
+        "baseline_T": 420,
+        "candidate_T": 500
+      },
+      {
+        "case": "dev_28_micro",
+        "delta": -0.010064935064935054,
+        "baseline_T": 420,
+        "candidate_T": 440
+      },
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_06_random_mixture",
+        "delta": -0.0009099464966600967,
+        "baseline_T": 42240,
+        "candidate_T": 42280
+      },
+      {
+        "case": "dev_17_large_recent",
+        "delta": -0.0006137592848791673,
+        "baseline_T": 64880,
+        "candidate_T": 64920
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.00022608306054439087,
+        "baseline_T": 87420,
+        "candidate_T": 87440
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.806636483498747,
+  "max_cpu_s": 1.155686,
+  "max_rss_mib": 14.53125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0070/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0070/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792325417.5837219,
+  "balanced_gate": false,
+  "hypothesis": "Parent сначала размещает текущую трубу в simulation, но sampler прогнозирует продолжение по истории до неё. При чередовании A,B это может дать последовательность B,B вместо B,A. Условие на текущую длину должно уменьшить такие ошибки фазы. Кандидат не запускался; улучшение generalization и сохранение weighted score пока не подтверждены.",
+  "causality": "Используются текущая длина, до трёх предыдущих событий и только полностью наблюдённые исторические продолжения. При отсутствии совпадения вызывается прежний sampler с неизменённым PRNG state. Глубина, число сценариев и бюджет решений сохраняются. MC_ROLLOUT_DIAGNOSTICS отдельно считает найденные условия и изменения выбранной щели относительно прежнего sampler на той же раскладке и с тем же seed; дополнительные shadow rollouts выполняются только в диагностической сборке."
+}

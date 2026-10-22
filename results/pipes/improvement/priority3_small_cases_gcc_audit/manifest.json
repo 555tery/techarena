@@ -1,0 +1,1895 @@
+{
+  "artifact": "TECH ARENA Pipes Priority 3 and Linux GCC audit",
+  "date": "2026-10-17",
+  "status": "complete; no candidate promoted; no platform upload",
+  "frozen_baseline": {
+    "path": "results/pipes/final/solution.cpp",
+    "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "preserved_byte_identically": true
+  },
+  "canonical_source": {
+    "path": "src/pipes.cpp",
+    "sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "six_case_screen": {
+    "cases": [
+      7,
+      8,
+      11,
+      12,
+      13,
+      14
+    ],
+    "weights_sum": 15.0,
+    "official_open15": false,
+    "records": [
+      {
+        "variant": "baseline",
+        "description": "Baseline, frozen final",
+        "source_path": null,
+        "source_sha256": null,
+        "summary_path": "results/pipes/improvement/priority3_recent_growth/runs/baseline/summary.json",
+        "summary_sha256": "d1ff75e5c8b0e222e610047348d69ecc29d6ad1f1eea61c0949b24918a9412b1",
+        "cases_csv_sha256": "81029685986ab325d3cda6374567668687c9f4f35b2e9ed0b3f754580cac4268",
+        "score_sum": 14.723966205389955,
+        "score_delta_vs_baseline": 0.0,
+        "max_solver_cpu_s": 0.130569,
+        "max_solver_rss_mib": 4.015625
+      },
+      {
+        "variant": "mc_budget64",
+        "description": "MC decision budget 64",
+        "source_path": "results/pipes/improvement/priority3_recent_growth/source/mc_budget64.cpp",
+        "source_sha256": "72500d7ec5390b8ed46693c8f5372f3f9bf711ec6782dae90c6c7f98b8c14317",
+        "summary_path": "results/pipes/improvement/priority3_recent_growth/runs/mc_budget64/summary.json",
+        "summary_sha256": "5ef077bab578c8ae4d8589dec08391beac1df07ad0d930e441319d4f746b4436",
+        "cases_csv_sha256": "b2e7bdc6da10be38bb638a068d9b306dc7713f3341439cd94eb62163667f939e",
+        "score_sum": 14.712111015520462,
+        "score_delta_vs_baseline": -0.011855189869493188,
+        "max_solver_cpu_s": 0.22717899999999996,
+        "max_solver_rss_mib": 3.15625
+      },
+      {
+        "variant": "history_potential_tiebreak",
+        "description": "History residual potential on exact ties",
+        "source_path": "results/pipes/improvement/priority3_recent_growth/source/history_potential_tiebreak.cpp",
+        "source_sha256": "6d70ead31ca5892d08be32b16871ac33af6f2800424168b2d222f38a2dda2ec1",
+        "summary_path": "results/pipes/improvement/priority3_recent_growth/runs/history_potential_tiebreak/summary.json",
+        "summary_sha256": "ea1ec4e8291ee6a82f142d9565ec2c055e6afd8f049a423c7fb9ba25aca9514a",
+        "cases_csv_sha256": "f4a545367764f2e2ed24af4a376eef2f6af755e3d4543a892750915b6ba8b36c",
+        "score_sum": 14.723966205389955,
+        "score_delta_vs_baseline": 0.0,
+        "max_solver_cpu_s": 0.19472699999999998,
+        "max_solver_rss_mib": 2.96875
+      },
+      {
+        "variant": "stratified_history_beam",
+        "description": "Deterministic stratified history beam",
+        "source_path": "results/pipes/improvement/priority3_recent_growth/source/stratified_history_beam.cpp",
+        "source_sha256": "184b2949f8c79bab871f56e19f83bd4088a4452636e8a7f757864dbf7e01071f",
+        "summary_path": "results/pipes/improvement/priority3_recent_growth/runs/stratified_history_beam/summary.json",
+        "summary_sha256": "62c86f004639259b3fb4adaa2b15290d3103a46170ca60507a34bc4eeb8796ea",
+        "cases_csv_sha256": "be9de7c2672b0167c2c1edf110c304a23c5c83774431c629197e7ad28ee3bc22",
+        "score_sum": 14.693605005670335,
+        "score_delta_vs_baseline": -0.03036119971961959,
+        "max_solver_cpu_s": 0.26152699999999995,
+        "max_solver_rss_mib": 3.140625
+      }
+    ],
+    "comparison_csv": "results/pipes/improvement/priority3_small_cases_gcc_audit/six_case_screen.csv",
+    "mc_budget": {
+      "decisions": 64,
+      "max_candidates_per_decision": 3,
+      "trials_per_candidate": 12,
+      "forecast_depth": 4,
+      "max_rollouts": 2304,
+      "max_forecast_events": 9216
+    },
+    "trace_diagnosis": {
+      "diagnosis_path": "results/pipes/improvement/priority3_recent_growth/runs/baseline/trace/trace_diagnosis.json",
+      "diagnosis_sha256": "6a2e39e649e40b61a0c061b0541c1d62ef287a0e8189a471450d67a63086a946",
+      "growth_events_path": "results/pipes/improvement/priority3_recent_growth/runs/baseline/trace/growth_events.json",
+      "growth_events_sha256": "78efda22fbce5e664a202c339554c6383fd35f9dab3f11ac24e6533d0b1dd96e",
+      "selected_cases": [
+        {
+          "case": 7,
+          "final_trench_m": 1700,
+          "volume_lower_bound_m": 1680,
+          "excess_m": 20,
+          "total_growth_events": 63,
+          "growth_events_contributing_to_final_excess": 1,
+          "final_excess_sections": 1,
+          "last_contributing_growths": [
+            {
+              "operation": 155,
+              "pid_being_placed": 155,
+              "pipe_length": 39,
+              "digs": 2,
+              "before_trench_m": 1660,
+              "after_trench_m": 1700,
+              "tail_gap_before_m": 0,
+              "free_volume_before_m": 23,
+              "largest_gap_before_m": 9,
+              "gap_count_before": 3,
+              "fragmentation_or_capacity": "free_volume_shortfall",
+              "live_volume_after_placement_m": 1676,
+              "volume_lb_after_placement_m": 1680,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 704,
+                  "end": 713,
+                  "length": 9,
+                  "left_blocker": {
+                    "pid": 95,
+                    "length": 24
+                  },
+                  "right_blocker": {
+                    "pid": 120,
+                    "length": 1
+                  }
+                },
+                {
+                  "start": 501,
+                  "end": 509,
+                  "length": 8,
+                  "left_blocker": {
+                    "pid": 79,
+                    "length": 20
+                  },
+                  "right_blocker": {
+                    "pid": 118,
+                    "length": 1
+                  }
+                },
+                {
+                  "start": 328,
+                  "end": 334,
+                  "length": 6,
+                  "left_blocker": {
+                    "pid": 63,
+                    "length": 16
+                  },
+                  "right_blocker": {
+                    "pid": 86,
+                    "length": 1
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "case": 8,
+          "final_trench_m": 4700,
+          "volume_lower_bound_m": 4640,
+          "excess_m": 60,
+          "total_growth_events": 214,
+          "growth_events_contributing_to_final_excess": 2,
+          "final_excess_sections": 3,
+          "last_contributing_growths": [
+            {
+              "operation": 6552,
+              "pid_being_placed": 3450,
+              "pipe_length": 10,
+              "digs": 1,
+              "before_trench_m": 4640,
+              "after_trench_m": 4660,
+              "tail_gap_before_m": 4,
+              "free_volume_before_m": 65,
+              "largest_gap_before_m": 4,
+              "gap_count_before": 29,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 4585,
+              "volume_lb_after_placement_m": 4600,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 916,
+                  "end": 920,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 996,
+                    "length": 16
+                  },
+                  "right_blocker": {
+                    "pid": 771,
+                    "length": 16
+                  }
+                },
+                {
+                  "start": 4004,
+                  "end": 4008,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 3256,
+                    "length": 12
+                  },
+                  "right_blocker": {
+                    "pid": 3257,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 4044,
+                  "end": 4048,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 3259,
+                    "length": 12
+                  },
+                  "right_blocker": {
+                    "pid": 3260,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 4084,
+                  "end": 4088,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 3262,
+                    "length": 12
+                  },
+                  "right_blocker": {
+                    "pid": 3263,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 4124,
+                  "end": 4128,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 3265,
+                    "length": 12
+                  },
+                  "right_blocker": {
+                    "pid": 3266,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 4636,
+                  "end": 4640,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 3449,
+                    "length": 8
+                  },
+                  "right_blocker": null
+                }
+              ]
+            },
+            {
+              "operation": 6561,
+              "pid_being_placed": 3456,
+              "pipe_length": 29,
+              "digs": 2,
+              "before_trench_m": 4660,
+              "after_trench_m": 4700,
+              "tail_gap_before_m": 0,
+              "free_volume_before_m": 66,
+              "largest_gap_before_m": 5,
+              "gap_count_before": 29,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 4623,
+              "volume_lb_after_placement_m": 4640,
+              "final_excess_sections_attributed": 2,
+              "largest_free_fragments": [
+                {
+                  "start": 4648,
+                  "end": 4653,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 3455,
+                    "length": 8
+                  },
+                  "right_blocker": {
+                    "pid": 3452,
+                    "length": 7
+                  }
+                },
+                {
+                  "start": 916,
+                  "end": 920,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 996,
+                    "length": 16
+                  },
+                  "right_blocker": {
+                    "pid": 771,
+                    "length": 16
+                  }
+                },
+                {
+                  "start": 4004,
+                  "end": 4008,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 3256,
+                    "length": 12
+                  },
+                  "right_blocker": {
+                    "pid": 3257,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 4044,
+                  "end": 4048,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 3259,
+                    "length": 12
+                  },
+                  "right_blocker": {
+                    "pid": 3260,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 4084,
+                  "end": 4088,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 3262,
+                    "length": 12
+                  },
+                  "right_blocker": {
+                    "pid": 3263,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 4124,
+                  "end": 4128,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 3265,
+                    "length": 12
+                  },
+                  "right_blocker": {
+                    "pid": 3266,
+                    "length": 12
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "case": 11,
+          "final_trench_m": 22620,
+          "volume_lower_bound_m": 20760,
+          "excess_m": 1860,
+          "total_growth_events": 980,
+          "growth_events_contributing_to_final_excess": 65,
+          "final_excess_sections": 93,
+          "last_contributing_growths": [
+            {
+              "operation": 9817,
+              "pid_being_placed": 6418,
+              "pipe_length": 32,
+              "digs": 1,
+              "before_trench_m": 22540,
+              "after_trench_m": 22560,
+              "tail_gap_before_m": 19,
+              "free_volume_before_m": 1829,
+              "largest_gap_before_m": 28,
+              "gap_count_before": 361,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 20743,
+              "volume_lb_after_placement_m": 20760,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 12621,
+                  "end": 12649,
+                  "length": 28,
+                  "left_blocker": {
+                    "pid": 5285,
+                    "length": 17
+                  },
+                  "right_blocker": {
+                    "pid": 4490,
+                    "length": 17
+                  }
+                },
+                {
+                  "start": 22127,
+                  "end": 22155,
+                  "length": 28,
+                  "left_blocker": {
+                    "pid": 6378,
+                    "length": 28
+                  },
+                  "right_blocker": {
+                    "pid": 6381,
+                    "length": 30
+                  }
+                },
+                {
+                  "start": 22022,
+                  "end": 22047,
+                  "length": 25,
+                  "left_blocker": {
+                    "pid": 6368,
+                    "length": 28
+                  },
+                  "right_blocker": {
+                    "pid": 6370,
+                    "length": 26
+                  }
+                },
+                {
+                  "start": 19764,
+                  "end": 19787,
+                  "length": 23,
+                  "left_blocker": {
+                    "pid": 5894,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 6218,
+                    "length": 26
+                  }
+                },
+                {
+                  "start": 20305,
+                  "end": 20325,
+                  "length": 20,
+                  "left_blocker": {
+                    "pid": 6073,
+                    "length": 23
+                  },
+                  "right_blocker": {
+                    "pid": 5879,
+                    "length": 20
+                  }
+                },
+                {
+                  "start": 20817,
+                  "end": 20837,
+                  "length": 20,
+                  "left_blocker": {
+                    "pid": 6131,
+                    "length": 29
+                  },
+                  "right_blocker": {
+                    "pid": 6240,
+                    "length": 21
+                  }
+                }
+              ]
+            },
+            {
+              "operation": 9819,
+              "pid_being_placed": 6419,
+              "pipe_length": 32,
+              "digs": 2,
+              "before_trench_m": 22560,
+              "after_trench_m": 22600,
+              "tail_gap_before_m": 7,
+              "free_volume_before_m": 1833,
+              "largest_gap_before_m": 28,
+              "gap_count_before": 362,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 20759,
+              "volume_lb_after_placement_m": 20760,
+              "final_excess_sections_attributed": 2,
+              "largest_free_fragments": [
+                {
+                  "start": 12621,
+                  "end": 12649,
+                  "length": 28,
+                  "left_blocker": {
+                    "pid": 5285,
+                    "length": 17
+                  },
+                  "right_blocker": {
+                    "pid": 4490,
+                    "length": 17
+                  }
+                },
+                {
+                  "start": 22127,
+                  "end": 22155,
+                  "length": 28,
+                  "left_blocker": {
+                    "pid": 6378,
+                    "length": 28
+                  },
+                  "right_blocker": {
+                    "pid": 6381,
+                    "length": 30
+                  }
+                },
+                {
+                  "start": 22022,
+                  "end": 22047,
+                  "length": 25,
+                  "left_blocker": {
+                    "pid": 6368,
+                    "length": 28
+                  },
+                  "right_blocker": {
+                    "pid": 6370,
+                    "length": 26
+                  }
+                },
+                {
+                  "start": 19764,
+                  "end": 19787,
+                  "length": 23,
+                  "left_blocker": {
+                    "pid": 5894,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 6218,
+                    "length": 26
+                  }
+                },
+                {
+                  "start": 20305,
+                  "end": 20325,
+                  "length": 20,
+                  "left_blocker": {
+                    "pid": 6073,
+                    "length": 23
+                  },
+                  "right_blocker": {
+                    "pid": 5879,
+                    "length": 20
+                  }
+                },
+                {
+                  "start": 20817,
+                  "end": 20837,
+                  "length": 20,
+                  "left_blocker": {
+                    "pid": 6131,
+                    "length": 29
+                  },
+                  "right_blocker": {
+                    "pid": 6240,
+                    "length": 21
+                  }
+                }
+              ]
+            },
+            {
+              "operation": 9832,
+              "pid_being_placed": 6425,
+              "pipe_length": 30,
+              "digs": 1,
+              "before_trench_m": 22600,
+              "after_trench_m": 22620,
+              "tail_gap_before_m": 15,
+              "free_volume_before_m": 1878,
+              "largest_gap_before_m": 29,
+              "gap_count_before": 364,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 20752,
+              "volume_lb_after_placement_m": 20760,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 21939,
+                  "end": 21968,
+                  "length": 29,
+                  "left_blocker": {
+                    "pid": 6345,
+                    "length": 22
+                  },
+                  "right_blocker": {
+                    "pid": 6366,
+                    "length": 26
+                  }
+                },
+                {
+                  "start": 12621,
+                  "end": 12649,
+                  "length": 28,
+                  "left_blocker": {
+                    "pid": 5285,
+                    "length": 17
+                  },
+                  "right_blocker": {
+                    "pid": 4490,
+                    "length": 17
+                  }
+                },
+                {
+                  "start": 22127,
+                  "end": 22155,
+                  "length": 28,
+                  "left_blocker": {
+                    "pid": 6378,
+                    "length": 28
+                  },
+                  "right_blocker": {
+                    "pid": 6381,
+                    "length": 30
+                  }
+                },
+                {
+                  "start": 22432,
+                  "end": 22458,
+                  "length": 26,
+                  "left_blocker": {
+                    "pid": 6404,
+                    "length": 21
+                  },
+                  "right_blocker": {
+                    "pid": 6412,
+                    "length": 32
+                  }
+                },
+                {
+                  "start": 22022,
+                  "end": 22047,
+                  "length": 25,
+                  "left_blocker": {
+                    "pid": 6368,
+                    "length": 28
+                  },
+                  "right_blocker": {
+                    "pid": 6370,
+                    "length": 26
+                  }
+                },
+                {
+                  "start": 22326,
+                  "end": 22348,
+                  "length": 22,
+                  "left_blocker": {
+                    "pid": 6394,
+                    "length": 28
+                  },
+                  "right_blocker": {
+                    "pid": 6398,
+                    "length": 31
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "case": 12,
+          "final_trench_m": 10320,
+          "volume_lower_bound_m": 10260,
+          "excess_m": 60,
+          "total_growth_events": 451,
+          "growth_events_contributing_to_final_excess": 3,
+          "final_excess_sections": 3,
+          "last_contributing_growths": [
+            {
+              "operation": 1486,
+              "pid_being_placed": 1126,
+              "pipe_length": 27,
+              "digs": 2,
+              "before_trench_m": 10240,
+              "after_trench_m": 10280,
+              "tail_gap_before_m": 4,
+              "free_volume_before_m": 73,
+              "largest_gap_before_m": 6,
+              "gap_count_before": 34,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 10194,
+              "volume_lb_after_placement_m": 10200,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 10066,
+                  "end": 10072,
+                  "length": 6,
+                  "left_blocker": {
+                    "pid": 1107,
+                    "length": 14
+                  },
+                  "right_blocker": {
+                    "pid": 1109,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 102,
+                  "end": 106,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 21,
+                    "length": 14
+                  },
+                  "right_blocker": {
+                    "pid": 19,
+                    "length": 20
+                  }
+                },
+                {
+                  "start": 1872,
+                  "end": 1876,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 183,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 182,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3471,
+                  "end": 3475,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 354,
+                    "length": 6
+                  },
+                  "right_blocker": {
+                    "pid": 314,
+                    "length": 7
+                  }
+                },
+                {
+                  "start": 4283,
+                  "end": 4287,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 447,
+                    "length": 16
+                  },
+                  "right_blocker": {
+                    "pid": 385,
+                    "length": 20
+                  }
+                },
+                {
+                  "start": 10236,
+                  "end": 10240,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 1125,
+                    "length": 16
+                  },
+                  "right_blocker": null
+                }
+              ]
+            },
+            {
+              "operation": 1487,
+              "pid_being_placed": 1127,
+              "pipe_length": 30,
+              "digs": 1,
+              "before_trench_m": 10280,
+              "after_trench_m": 10300,
+              "tail_gap_before_m": 17,
+              "free_volume_before_m": 86,
+              "largest_gap_before_m": 17,
+              "gap_count_before": 34,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 10224,
+              "volume_lb_after_placement_m": 10240,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 10263,
+                  "end": 10280,
+                  "length": 17,
+                  "left_blocker": {
+                    "pid": 1126,
+                    "length": 27
+                  },
+                  "right_blocker": null
+                },
+                {
+                  "start": 10066,
+                  "end": 10072,
+                  "length": 6,
+                  "left_blocker": {
+                    "pid": 1107,
+                    "length": 14
+                  },
+                  "right_blocker": {
+                    "pid": 1109,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 102,
+                  "end": 106,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 21,
+                    "length": 14
+                  },
+                  "right_blocker": {
+                    "pid": 19,
+                    "length": 20
+                  }
+                },
+                {
+                  "start": 1872,
+                  "end": 1876,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 183,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 182,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3471,
+                  "end": 3475,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 354,
+                    "length": 6
+                  },
+                  "right_blocker": {
+                    "pid": 314,
+                    "length": 7
+                  }
+                },
+                {
+                  "start": 4283,
+                  "end": 4287,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 447,
+                    "length": 16
+                  },
+                  "right_blocker": {
+                    "pid": 385,
+                    "length": 20
+                  }
+                }
+              ]
+            },
+            {
+              "operation": 1498,
+              "pid_being_placed": 1133,
+              "pipe_length": 11,
+              "digs": 1,
+              "before_trench_m": 10300,
+              "after_trench_m": 10320,
+              "tail_gap_before_m": 7,
+              "free_volume_before_m": 76,
+              "largest_gap_before_m": 7,
+              "gap_count_before": 34,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 10235,
+              "volume_lb_after_placement_m": 10240,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 10293,
+                  "end": 10300,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 1127,
+                    "length": 30
+                  },
+                  "right_blocker": null
+                },
+                {
+                  "start": 10066,
+                  "end": 10072,
+                  "length": 6,
+                  "left_blocker": {
+                    "pid": 1107,
+                    "length": 14
+                  },
+                  "right_blocker": {
+                    "pid": 1109,
+                    "length": 12
+                  }
+                },
+                {
+                  "start": 102,
+                  "end": 106,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 21,
+                    "length": 14
+                  },
+                  "right_blocker": {
+                    "pid": 19,
+                    "length": 20
+                  }
+                },
+                {
+                  "start": 1872,
+                  "end": 1876,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 183,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 182,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3471,
+                  "end": 3475,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 354,
+                    "length": 6
+                  },
+                  "right_blocker": {
+                    "pid": 314,
+                    "length": 7
+                  }
+                },
+                {
+                  "start": 4283,
+                  "end": 4287,
+                  "length": 4,
+                  "left_blocker": {
+                    "pid": 447,
+                    "length": 16
+                  },
+                  "right_blocker": {
+                    "pid": 385,
+                    "length": 20
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "case": 13,
+          "final_trench_m": 3280,
+          "volume_lower_bound_m": 3220,
+          "excess_m": 60,
+          "total_growth_events": 158,
+          "growth_events_contributing_to_final_excess": 3,
+          "final_excess_sections": 3,
+          "last_contributing_growths": [
+            {
+              "operation": 9371,
+              "pid_being_placed": 4842,
+              "pipe_length": 10,
+              "digs": 1,
+              "before_trench_m": 3220,
+              "after_trench_m": 3240,
+              "tail_gap_before_m": 6,
+              "free_volume_before_m": 74,
+              "largest_gap_before_m": 9,
+              "gap_count_before": 21,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 3156,
+              "volume_lb_after_placement_m": 3160,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 2728,
+                  "end": 2737,
+                  "length": 9,
+                  "left_blocker": {
+                    "pid": 4769,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4133,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3029,
+                  "end": 3037,
+                  "length": 8,
+                  "left_blocker": {
+                    "pid": 4488,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4483,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 2037,
+                  "end": 2044,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 3112,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 3045,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 2890,
+                  "end": 2897,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 4438,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4374,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3090,
+                  "end": 3097,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 4727,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4667,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3214,
+                  "end": 3220,
+                  "length": 6,
+                  "left_blocker": {
+                    "pid": 4840,
+                    "length": 10
+                  },
+                  "right_blocker": null
+                }
+              ]
+            },
+            {
+              "operation": 9374,
+              "pid_being_placed": 4844,
+              "pipe_length": 17,
+              "digs": 1,
+              "before_trench_m": 3240,
+              "after_trench_m": 3260,
+              "tail_gap_before_m": 16,
+              "free_volume_before_m": 84,
+              "largest_gap_before_m": 16,
+              "gap_count_before": 21,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 3173,
+              "volume_lb_after_placement_m": 3180,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 3224,
+                  "end": 3240,
+                  "length": 16,
+                  "left_blocker": {
+                    "pid": 4842,
+                    "length": 10
+                  },
+                  "right_blocker": null
+                },
+                {
+                  "start": 2728,
+                  "end": 2737,
+                  "length": 9,
+                  "left_blocker": {
+                    "pid": 4769,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4133,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3029,
+                  "end": 3037,
+                  "length": 8,
+                  "left_blocker": {
+                    "pid": 4488,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4483,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 2037,
+                  "end": 2044,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 3112,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 3045,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 2890,
+                  "end": 2897,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 4438,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4374,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3090,
+                  "end": 3097,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 4727,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4667,
+                    "length": 10
+                  }
+                }
+              ]
+            },
+            {
+              "operation": 9550,
+              "pid_being_placed": 4933,
+              "pipe_length": 20,
+              "digs": 1,
+              "before_trench_m": 3260,
+              "after_trench_m": 3280,
+              "tail_gap_before_m": 0,
+              "free_volume_before_m": 77,
+              "largest_gap_before_m": 10,
+              "gap_count_before": 23,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 3203,
+              "volume_lb_after_placement_m": 3220,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 2870,
+                  "end": 2880,
+                  "length": 10,
+                  "left_blocker": {
+                    "pid": 4436,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4438,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3029,
+                  "end": 3037,
+                  "length": 8,
+                  "left_blocker": {
+                    "pid": 4488,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4483,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 2037,
+                  "end": 2044,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 3112,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 3045,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 2890,
+                  "end": 2897,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 4438,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4374,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 3090,
+                  "end": 3097,
+                  "length": 7,
+                  "left_blocker": {
+                    "pid": 4727,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4667,
+                    "length": 10
+                  }
+                },
+                {
+                  "start": 2974,
+                  "end": 2979,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 4773,
+                    "length": 10
+                  },
+                  "right_blocker": {
+                    "pid": 4455,
+                    "length": 10
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "case": 14,
+          "final_trench_m": 37820,
+          "volume_lower_bound_m": 37720,
+          "excess_m": 100,
+          "total_growth_events": 1824,
+          "growth_events_contributing_to_final_excess": 5,
+          "final_excess_sections": 5,
+          "last_contributing_growths": [
+            {
+              "operation": 25193,
+              "pid_being_placed": 24527,
+              "pipe_length": 16,
+              "digs": 1,
+              "before_trench_m": 37760,
+              "after_trench_m": 37780,
+              "tail_gap_before_m": 5,
+              "free_volume_before_m": 121,
+              "largest_gap_before_m": 8,
+              "gap_count_before": 39,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 37655,
+              "volume_lb_after_placement_m": 37660,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 27558,
+                  "end": 27566,
+                  "length": 8,
+                  "left_blocker": {
+                    "pid": 24330,
+                    "length": 19
+                  },
+                  "right_blocker": {
+                    "pid": 24095,
+                    "length": 24
+                  }
+                },
+                {
+                  "start": 31801,
+                  "end": 31807,
+                  "length": 6,
+                  "left_blocker": {
+                    "pid": 24218,
+                    "length": 14
+                  },
+                  "right_blocker": {
+                    "pid": 23935,
+                    "length": 20
+                  }
+                },
+                {
+                  "start": 28199,
+                  "end": 28204,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24215,
+                    "length": 15
+                  },
+                  "right_blocker": {
+                    "pid": 23759,
+                    "length": 21
+                  }
+                },
+                {
+                  "start": 28597,
+                  "end": 28602,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24214,
+                    "length": 15
+                  },
+                  "right_blocker": {
+                    "pid": 24047,
+                    "length": 25
+                  }
+                },
+                {
+                  "start": 28802,
+                  "end": 28807,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24477,
+                    "length": 15
+                  },
+                  "right_blocker": {
+                    "pid": 24020,
+                    "length": 22
+                  }
+                },
+                {
+                  "start": 31294,
+                  "end": 31299,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24237,
+                    "length": 19
+                  },
+                  "right_blocker": {
+                    "pid": 24076,
+                    "length": 15
+                  }
+                }
+              ]
+            },
+            {
+              "operation": 25194,
+              "pid_being_placed": 24528,
+              "pipe_length": 19,
+              "digs": 1,
+              "before_trench_m": 37780,
+              "after_trench_m": 37800,
+              "tail_gap_before_m": 9,
+              "free_volume_before_m": 125,
+              "largest_gap_before_m": 9,
+              "gap_count_before": 39,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 37674,
+              "volume_lb_after_placement_m": 37680,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 37771,
+                  "end": 37780,
+                  "length": 9,
+                  "left_blocker": {
+                    "pid": 24527,
+                    "length": 16
+                  },
+                  "right_blocker": null
+                },
+                {
+                  "start": 27558,
+                  "end": 27566,
+                  "length": 8,
+                  "left_blocker": {
+                    "pid": 24330,
+                    "length": 19
+                  },
+                  "right_blocker": {
+                    "pid": 24095,
+                    "length": 24
+                  }
+                },
+                {
+                  "start": 31801,
+                  "end": 31807,
+                  "length": 6,
+                  "left_blocker": {
+                    "pid": 24218,
+                    "length": 14
+                  },
+                  "right_blocker": {
+                    "pid": 23935,
+                    "length": 20
+                  }
+                },
+                {
+                  "start": 28199,
+                  "end": 28204,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24215,
+                    "length": 15
+                  },
+                  "right_blocker": {
+                    "pid": 23759,
+                    "length": 21
+                  }
+                },
+                {
+                  "start": 28597,
+                  "end": 28602,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24214,
+                    "length": 15
+                  },
+                  "right_blocker": {
+                    "pid": 24047,
+                    "length": 25
+                  }
+                },
+                {
+                  "start": 28802,
+                  "end": 28807,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24477,
+                    "length": 15
+                  },
+                  "right_blocker": {
+                    "pid": 24020,
+                    "length": 22
+                  }
+                }
+              ]
+            },
+            {
+              "operation": 25195,
+              "pid_being_placed": 24529,
+              "pipe_length": 15,
+              "digs": 1,
+              "before_trench_m": 37800,
+              "after_trench_m": 37820,
+              "tail_gap_before_m": 10,
+              "free_volume_before_m": 126,
+              "largest_gap_before_m": 10,
+              "gap_count_before": 39,
+              "fragmentation_or_capacity": "fragmentation_with_enough_total_free",
+              "live_volume_after_placement_m": 37689,
+              "volume_lb_after_placement_m": 37700,
+              "final_excess_sections_attributed": 1,
+              "largest_free_fragments": [
+                {
+                  "start": 37790,
+                  "end": 37800,
+                  "length": 10,
+                  "left_blocker": {
+                    "pid": 24528,
+                    "length": 19
+                  },
+                  "right_blocker": null
+                },
+                {
+                  "start": 27558,
+                  "end": 27566,
+                  "length": 8,
+                  "left_blocker": {
+                    "pid": 24330,
+                    "length": 19
+                  },
+                  "right_blocker": {
+                    "pid": 24095,
+                    "length": 24
+                  }
+                },
+                {
+                  "start": 31801,
+                  "end": 31807,
+                  "length": 6,
+                  "left_blocker": {
+                    "pid": 24218,
+                    "length": 14
+                  },
+                  "right_blocker": {
+                    "pid": 23935,
+                    "length": 20
+                  }
+                },
+                {
+                  "start": 28199,
+                  "end": 28204,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24215,
+                    "length": 15
+                  },
+                  "right_blocker": {
+                    "pid": 23759,
+                    "length": 21
+                  }
+                },
+                {
+                  "start": 28597,
+                  "end": 28602,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24214,
+                    "length": 15
+                  },
+                  "right_blocker": {
+                    "pid": 24047,
+                    "length": 25
+                  }
+                },
+                {
+                  "start": 28802,
+                  "end": 28807,
+                  "length": 5,
+                  "left_blocker": {
+                    "pid": 24477,
+                    "length": 15
+                  },
+                  "right_blocker": {
+                    "pid": 24020,
+                    "length": 22
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "linux_gcc_open15_recheck": {
+    "result": "passed",
+    "correct": true,
+    "case_count": 15,
+    "ok_count": 15,
+    "score": 29.789717928594047,
+    "weight_sum": 32.1,
+    "platform": "Linux aarch64, Debian 13.7",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "compile_flags": [
+      "-O2",
+      "-std=c++20",
+      "-pipe"
+    ],
+    "solver_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "persisted_solver_binary": "results/pipes/improvement/priority3_small_cases_gcc_audit/linux_gcc_recheck/linux_gcc_frozen_final",
+    "persisted_solver_binary_sha256": "6691764afe6828a7a75f9be23bfbf8bf888de9287393e2ea4d76bf62d6b4d950",
+    "evaluator_path": "scientist-v3/tasks/pipes/evaluate.py",
+    "evaluator_sha256": "588951ebba831dc1424f0a6e3d2a7d9388c55269e65e834b3548706605523951",
+    "harness_path": "scientist-v3/tasks/pipes/tools/pipes_harness.py",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor_source_path": "scientist-v3/tasks/pipes/vendor/interactor.cpp",
+    "interactor_source_sha256": "85672e4c3ad9fdcb97d8b601758de1f1d1b5e86d6dd20252e0f72acdb9cb122a",
+    "docker_image": "agentic-scientist/pipes-cpp:2b8aa392",
+    "docker_platform": "linux/arm64",
+    "container_network": "disabled",
+    "metrics_path": "results/pipes/improvement/priority3_small_cases_gcc_audit/linux_gcc_recheck/metrics.json",
+    "metrics_sha256": "7723c3474b60755b1add934df696c77d1b759e57b1e32850dc9557f78272bcdc",
+    "correct_path": "results/pipes/improvement/priority3_small_cases_gcc_audit/linux_gcc_recheck/correct.json",
+    "correct_sha256": "cd38a9b529697be77f551f2e5c6a2f0a853aff8980379a4a0322289470673ce1",
+    "summary_path": "results/pipes/improvement/priority3_small_cases_gcc_audit/linux_gcc_recheck/harness/summary.json",
+    "summary_sha256": "288522e20df937300ce0e869a42188a8c413ae6192f411ae54e2301a8adbfb49",
+    "cases_csv": "results/pipes/improvement/priority3_small_cases_gcc_audit/linux_gcc_recheck/harness/cases.csv",
+    "cases_csv_sha256": "9e69e6c1af65048a86a769228303db548053249b2ec20e6f2f1fd8a0b015e767",
+    "max_solver_cpu_s": 2.443891,
+    "cpu_limit_per_case_s": 5.0,
+    "max_solver_rss_mib": 33.234375,
+    "memory_limit_per_case_mib": 256.0,
+    "per_case_csv": "results/pipes/improvement/priority3_small_cases_gcc_audit/linux_gcc_open15_cases.csv",
+    "per_case_records": [
+      {
+        "case": 1,
+        "input_sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+        "operation_count": 6,
+        "status": "ok",
+        "trench_m": 20,
+        "lower_bound_m": 20,
+        "weighted_score": 0.09,
+        "solver_cpu_s": 0.002454,
+        "solver_peak_rss_mib": 18.1953125,
+        "judge_output_sha256": "0c17f2e9efc8a8f9a376c8bd7f26d940ee3fe78feacc07dac0608b508b63590d"
+      },
+      {
+        "case": 2,
+        "input_sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+        "operation_count": 18,
+        "status": "ok",
+        "trench_m": 20,
+        "lower_bound_m": 20,
+        "weighted_score": 1.0,
+        "solver_cpu_s": 0.001408,
+        "solver_peak_rss_mib": 18.484375,
+        "judge_output_sha256": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2"
+      },
+      {
+        "case": 3,
+        "input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+        "operation_count": 12,
+        "status": "ok",
+        "trench_m": 20,
+        "lower_bound_m": 20,
+        "weighted_score": 0.75,
+        "solver_cpu_s": 0.0012309999999999999,
+        "solver_peak_rss_mib": 18.484375,
+        "judge_output_sha256": "14f51309b18138cfc8c504ebeb4bf9f136d509fe4af3a83d917b408f1f74264d"
+      },
+      {
+        "case": 4,
+        "input_sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+        "operation_count": 20,
+        "status": "ok",
+        "trench_m": 60,
+        "lower_bound_m": 60,
+        "weighted_score": 0.666666666666667,
+        "solver_cpu_s": 0.001398,
+        "solver_peak_rss_mib": 18.609375,
+        "judge_output_sha256": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b"
+      },
+      {
+        "case": 5,
+        "input_sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+        "operation_count": 7520,
+        "status": "ok",
+        "trench_m": 62760,
+        "lower_bound_m": 53360,
+        "weighted_score": 0.810070108349267,
+        "solver_cpu_s": 0.09648799999999999,
+        "solver_peak_rss_mib": 19.234375,
+        "judge_output_sha256": "e78bb7900ad184037e578f13012eaae1cb8d854700ee7ddc520ac6c8a113bb63"
+      },
+      {
+        "case": 6,
+        "input_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+        "operation_count": 11,
+        "status": "ok",
+        "trench_m": 20,
+        "lower_bound_m": 20,
+        "weighted_score": 0.9,
+        "solver_cpu_s": 0.001253,
+        "solver_peak_rss_mib": 19.234375,
+        "judge_output_sha256": "c44b9007a27cf242dd34a06e4b0bafa2bfa5570e70cebc7ffa578f5505c96b05"
+      },
+      {
+        "case": 7,
+        "input_sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+        "operation_count": 312,
+        "status": "ok",
+        "trench_m": 1700,
+        "lower_bound_m": 1680,
+        "weighted_score": 0.986470588235294,
+        "solver_cpu_s": 0.007085999999999999,
+        "solver_peak_rss_mib": 19.234375,
+        "judge_output_sha256": "e93d243bb723f5c4d3951824be0d63cc283607cf0422fe3a6ccd8db289ce8979"
+      },
+      {
+        "case": 8,
+        "input_sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+        "operation_count": 6565,
+        "status": "ok",
+        "trench_m": 4700,
+        "lower_bound_m": 4640,
+        "weighted_score": 0.984468085106383,
+        "solver_cpu_s": 0.078933,
+        "solver_peak_rss_mib": 19.234375,
+        "judge_output_sha256": "a86800267292840409a96208bfeeb69c2eb787b30cdbed16e34b4199345c3cad"
+      },
+      {
+        "case": 9,
+        "input_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+        "operation_count": 9000,
+        "status": "ok",
+        "trench_m": 61960,
+        "lower_bound_m": 47500,
+        "weighted_score": 0.508392511297611,
+        "solver_cpu_s": 0.122386,
+        "solver_peak_rss_mib": 19.359375,
+        "judge_output_sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f"
+      },
+      {
+        "case": 10,
+        "input_sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+        "operation_count": 9997,
+        "status": "ok",
+        "trench_m": 15380,
+        "lower_bound_m": 15380,
+        "weighted_score": 0.8,
+        "solver_cpu_s": 0.150834,
+        "solver_peak_rss_mib": 19.359375,
+        "judge_output_sha256": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03"
+      },
+      {
+        "case": 11,
+        "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+        "operation_count": 9999,
+        "status": "ok",
+        "trench_m": 22620,
+        "lower_bound_m": 20760,
+        "weighted_score": 0.900132625994695,
+        "solver_cpu_s": 0.14274599999999998,
+        "solver_peak_rss_mib": 19.359375,
+        "judge_output_sha256": "d0bab50f3326e0580365ee83233cba73e0537e8b14d614e2200dc93dbf31b4be"
+      },
+      {
+        "case": 12,
+        "input_sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+        "operation_count": 1501,
+        "status": "ok",
+        "trench_m": 10320,
+        "lower_bound_m": 10260,
+        "weighted_score": 3.972480620155039,
+        "solver_cpu_s": 0.022219,
+        "solver_peak_rss_mib": 19.359375,
+        "judge_output_sha256": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e"
+      },
+      {
+        "case": 13,
+        "input_sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+        "operation_count": 9999,
+        "status": "ok",
+        "trench_m": 3280,
+        "lower_bound_m": 3220,
+        "weighted_score": 3.892682926829268,
+        "solver_cpu_s": 0.118894,
+        "solver_peak_rss_mib": 19.46875,
+        "judge_output_sha256": "e5da020ce8a522213ae26acc8d03d03b4dbf657a767f9eeba4503a2740f55ef6"
+      },
+      {
+        "case": 14,
+        "input_sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+        "operation_count": 25196,
+        "status": "ok",
+        "trench_m": 37820,
+        "lower_bound_m": 37720,
+        "weighted_score": 3.987731359069275,
+        "solver_cpu_s": 0.329036,
+        "solver_peak_rss_mib": 20.16015625,
+        "judge_output_sha256": "a8dfb6dc9d17d6ddbbb36d673ecd002170b3137a589f364150c5d73ef932ac2a"
+      },
+      {
+        "case": 15,
+        "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+        "operation_count": 200000,
+        "status": "ok",
+        "trench_m": 438920,
+        "lower_bound_m": 418780,
+        "weighted_score": 9.54062243689055,
+        "solver_cpu_s": 2.443891,
+        "solver_peak_rss_mib": 33.234375,
+        "judge_output_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e"
+      }
+    ],
+    "prior_linux_gcc15_run": {
+      "summary_path": "results/pipes/improvement/priority3_recent_growth/runs/linux_gcc_final_open/summary.json",
+      "summary_sha256": "e5eb85bbe2daa1bbadb421f73354ee5d1d2868eec8c6ce3dcf9d02b770f7ff5c",
+      "cases_csv_sha256": "d5b479987eb01541aff3633bc1bee0c290392dc27d47f1847622650b69e3a72e",
+      "byte_identical_judge_outputs_all_15": true,
+      "checks": [
+        {
+          "case": 1,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "0c17f2e9efc8a8f9a376c8bd7f26d940ee3fe78feacc07dac0608b508b63590d",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 2,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 3,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "14f51309b18138cfc8c504ebeb4bf9f136d509fe4af3a83d917b408f1f74264d",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 4,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 5,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "e78bb7900ad184037e578f13012eaae1cb8d854700ee7ddc520ac6c8a113bb63",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 6,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "c44b9007a27cf242dd34a06e4b0bafa2bfa5570e70cebc7ffa578f5505c96b05",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 7,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "e93d243bb723f5c4d3951824be0d63cc283607cf0422fe3a6ccd8db289ce8979",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 8,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "a86800267292840409a96208bfeeb69c2eb787b30cdbed16e34b4199345c3cad",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 9,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 10,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 11,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "d0bab50f3326e0580365ee83233cba73e0537e8b14d614e2200dc93dbf31b4be",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 12,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 13,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "e5da020ce8a522213ae26acc8d03d03b4dbf657a767f9eeba4503a2740f55ef6",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 14,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "a8dfb6dc9d17d6ddbbb36d673ecd002170b3137a589f364150c5d73ef932ac2a",
+          "judge_output_byte_identical_to_GCC15_run": true
+        },
+        {
+          "case": 15,
+          "input_hash_matches_persisted": true,
+          "same_trench_as_GCC15_run": true,
+          "same_weighted_score_as_GCC15_run": true,
+          "judge_output_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e",
+          "judge_output_byte_identical_to_GCC15_run": true
+        }
+      ]
+    }
+  },
+  "delivered_files": {
+    "REPORT.md": "5e96878b59b75adab913ff65ce72a67a7722e5c18d574dcb00df3fc81a49da6b",
+    "six_case_screen.csv": "a98bd6297925ea221f26ce7c3e1150d636038c143e7c776c4c1499647485213e",
+    "linux_gcc_open15_cases.csv": "5a9832eb7f39122d44a90f0aed3448f3670a0084850158bc644192f260996cb2"
+  }
+}

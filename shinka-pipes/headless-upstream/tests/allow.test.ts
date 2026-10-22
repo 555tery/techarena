@@ -1,0 +1,478 @@
+import assert from "node:assert/strict";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import test from "node:test";
+
+import { buildAgentCommand, buildInteractiveAgentCommand } from "../src/agents.ts";
+import { runCli } from "../src/cli.ts";
+import { quoteCommand } from "../src/shell.ts";
+
+async function writeExecutable(path: string, source: string): Promise<void> {
+  await import("node:fs/promises").then(async ({ chmod, writeFile }) => {
+    await writeFile(path, source);
+    await chmod(path, 0o755);
+  });
+}
+
+test("builds read-only commands for supported agents", () => {
+  assert.deepEqual(buildAgentCommand("codex", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "codex",
+    args: [
+      "--sandbox",
+      "read-only",
+      "--ask-for-approval",
+      "never",
+      "--search",
+      "exec",
+      "--model",
+      "gpt-5.5",
+      "--json",
+      "--skip-git-repo-check",
+      "-",
+    ],
+    stdinText: "hello",
+  });
+
+  assert.deepEqual(buildAgentCommand("claude", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "claude",
+    args: [
+      "--model",
+      "claude-opus-4-6",
+      "-p",
+      "hello",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--allowedTools",
+      "Read,Grep,Glob,LS,WebFetch,WebSearch",
+    ],
+  });
+
+  assert.deepEqual(buildAgentCommand("cursor", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "agent",
+    args: ["-p", "--trust", "--output-format", "stream-json", "--model", "gpt-5.5-medium", "--mode", "plan", "hello"],
+  });
+
+  assert.deepEqual(buildAgentCommand("gemini", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "gemini",
+    args: [
+      "--model",
+      "gemini-3.1-pro-preview",
+      "--skip-trust",
+      "-p",
+      "hello",
+      "--output-format",
+      "stream-json",
+      "--approval-mode",
+      "plan",
+    ],
+  });
+
+  assert.deepEqual(buildAgentCommand("antigravity", { prompt: "hello", allow: "read-only", workDir: "/work" }, {}), {
+    command: "agy",
+    args: ["-p", "hello", "--sandbox"],
+  });
+
+  assert.deepEqual(buildAgentCommand("opencode", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "opencode",
+    args: ["run", "--format", "json", "--model", "openai/gpt-5.4", "hello"],
+    env: {
+      OPENCODE_CONFIG_CONTENT:
+        '{"permission":{"read":"allow","edit":"deny","bash":"deny","webfetch":"allow","websearch":"allow","codesearch":"allow","task":"deny"}}',
+    },
+  });
+
+  assert.deepEqual(buildAgentCommand("pi", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "pi",
+    args: [
+      "--no-session",
+      "--mode",
+      "json",
+      "--provider",
+      "openai-codex",
+      "--model",
+      "gpt-5.5",
+      "--tools",
+      "read,grep,find,ls",
+      "hello",
+    ],
+  });
+});
+
+test("builds explicit yolo commands for supported agents", () => {
+  assert.deepEqual(buildAgentCommand("codex", { prompt: "hello", allow: "yolo" }, {}).args, [
+    "--dangerously-bypass-approvals-and-sandbox",
+    "exec",
+    "--model",
+    "gpt-5.5",
+    "--json",
+    "--skip-git-repo-check",
+    "-",
+  ]);
+  assert.deepEqual(buildAgentCommand("claude", { prompt: "hello", allow: "yolo" }, {}).args, [
+    "--model",
+    "claude-opus-4-6",
+    "-p",
+    "hello",
+    "--output-format",
+    "stream-json",
+    "--verbose",
+    "--dangerously-skip-permissions",
+  ]);
+  assert.deepEqual(buildAgentCommand("cursor", { prompt: "hello", allow: "yolo" }, {}).args, [
+    "-p",
+    "--trust",
+    "--force",
+    "--output-format",
+    "stream-json",
+    "--model",
+    "gpt-5.5-medium",
+    "hello",
+  ]);
+  assert.deepEqual(buildAgentCommand("gemini", { prompt: "hello", allow: "yolo" }, {}).args, [
+    "--model",
+    "gemini-3.1-pro-preview",
+    "--skip-trust",
+    "-p",
+    "hello",
+    "--output-format",
+    "stream-json",
+    "--approval-mode",
+    "yolo",
+  ]);
+  assert.deepEqual(buildAgentCommand("antigravity", { prompt: "hello", allow: "yolo", workDir: "/work" }, {}).args, [
+    "-p",
+    "hello",
+    "--dangerously-skip-permissions",
+  ]);
+  assert.deepEqual(buildAgentCommand("opencode", { prompt: "hello", allow: "yolo" }, {}).args, [
+    "run",
+    "--format",
+    "json",
+    "--model",
+    "openai/gpt-5.4",
+    "--dangerously-skip-permissions",
+    "hello",
+  ]);
+  assert.deepEqual(buildAgentCommand("pi", { prompt: "hello", allow: "yolo" }, {}).args, [
+    "--no-session",
+    "--mode",
+    "json",
+    "--provider",
+    "openai-codex",
+    "--model",
+    "gpt-5.5",
+    "--tools",
+    "read,bash,edit,write",
+    "hello",
+  ]);
+});
+
+test("defaults to yolo commands for supported agents", () => {
+  const agents = ["antigravity", "claude", "codex", "cursor", "gemini", "opencode", "pi"] as const;
+
+  for (const agent of agents) {
+    assert.deepEqual(
+      buildAgentCommand(agent, { prompt: "hello", workDir: "/work" }, {}),
+      buildAgentCommand(agent, { prompt: "hello", allow: "yolo", workDir: "/work" }, {}),
+    );
+    assert.deepEqual(
+      buildInteractiveAgentCommand(agent, { prompt: "hello" }, {}),
+      buildInteractiveAgentCommand(agent, { prompt: "hello", allow: "yolo" }, {}),
+    );
+  }
+});
+
+test("builds read-only interactive commands for tmux mode", () => {
+  assert.deepEqual(buildInteractiveAgentCommand("codex", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "codex",
+    args: ["--sandbox", "read-only", "--ask-for-approval", "never", "--search", "--model", "gpt-5.5", "hello"],
+  });
+  assert.deepEqual(buildInteractiveAgentCommand("claude", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "claude",
+    args: [
+      "--model",
+      "claude-opus-4-6",
+      "--allowedTools",
+      "Read,Grep,Glob,LS,WebFetch,WebSearch",
+      "hello",
+    ],
+  });
+  assert.deepEqual(buildInteractiveAgentCommand("gemini", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "gemini",
+    args: ["--model", "gemini-3.1-pro-preview", "--skip-trust", "--approval-mode", "plan", "hello"],
+  });
+  assert.deepEqual(buildInteractiveAgentCommand("antigravity", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "agy",
+    args: ["--sandbox"],
+  });
+  assert.deepEqual(buildInteractiveAgentCommand("opencode", { prompt: "hello", allow: "read-only" }, {}), {
+    command: "opencode",
+    args: ["--model", "openai/gpt-5.4"],
+    env: {
+      OPENCODE_CONFIG_CONTENT:
+        '{"permission":{"read":"allow","edit":"deny","bash":"deny","webfetch":"allow","websearch":"allow","codesearch":"allow","task":"deny"}}',
+    },
+  });
+});
+
+test("quotes command environment overrides for print-command output", () => {
+  assert.equal(
+    quoteCommand({
+      command: "opencode",
+      args: ["run", "--format", "json", "hello"],
+      env: { OPENCODE_CONFIG_CONTENT: '{"permission":{"edit":"deny"}}' },
+    }),
+    "OPENCODE_CONFIG_CONTENT='{\"permission\":{\"edit\":\"deny\"}}' opencode run --format json hello",
+  );
+});
+
+test("CLI rejects invalid allow mode", async () => {
+  const stderr: string[] = [];
+  const code = await runCli(["codex", "--allow", "maybe", "--prompt", "hello"], {
+    stderr: (text) => stderr.push(text),
+  });
+
+  assert.equal(code, 2);
+  assert.match(stderr.join(""), /unsupported allow mode: maybe/);
+});
+
+test("CLI rejects invalid reasoning effort", async () => {
+  const stderr: string[] = [];
+  const code = await runCli(["codex", "--reasoning-effort", "max", "--prompt", "hello"], {
+    stderr: (text) => stderr.push(text),
+  });
+
+  assert.equal(code, 2);
+  assert.match(stderr.join(""), /unsupported reasoning effort: max/);
+});
+
+test("preserves ambient fast settings unless a mode is explicit", () => {
+  for (const build of [buildAgentCommand, buildInteractiveAgentCommand]) {
+    const ambientCodex = build("codex", { prompt: "hello" }, {}).args;
+    const ambientClaude = build("claude", { prompt: "hello" }, {}).args;
+    assert.equal(ambientCodex.some((arg) => arg.includes("service_tier")), false);
+    assert.equal(ambientClaude.includes('{"fastMode":false}'), false);
+    assert.ok(build("codex", { prompt: "hello", fast: false }, {}).args.includes('service_tier="default"'));
+    assert.ok(build("claude", { prompt: "hello", fast: false }, {}).args.includes('{"fastMode":false}'));
+  }
+});
+
+test("CLI leaves ambient fast settings untouched when --fast is absent", async () => {
+  for (const agent of ["codex", "claude"] as const) {
+    const stdout: string[] = [];
+    const code = await runCli([agent, "--prompt", "hello", "--print-command"], {
+      stdout: (text) => stdout.push(text),
+    });
+    assert.equal(code, 0);
+    assert.doesNotMatch(stdout.join(""), /service_tier|fastMode/);
+  }
+});
+
+test("CLI can explicitly disable ambient fast settings", async () => {
+  for (const [agent, expected] of [
+    ["codex", /service_tier="default"/],
+    ["claude", /fastMode":false/],
+  ] as const) {
+    const stdout: string[] = [];
+    const code = await runCli([agent, "--no-fast", "--prompt", "hello", "--print-command"], {
+      stdout: (text) => stdout.push(text),
+    });
+    assert.equal(code, 0);
+    assert.match(stdout.join(""), expected);
+  }
+
+  const stderr: string[] = [];
+  assert.equal(
+    await runCli(["codex", "--fast", "--no-fast", "--prompt", "hello"], {
+      stderr: (text) => stderr.push(text),
+    }),
+    2,
+  );
+  assert.match(stderr.join(""), /--fast and --no-fast are mutually exclusive/);
+});
+
+test("CLI enables fast mode only for Codex and Claude", async () => {
+  const codexOutput: string[] = [];
+  const codexCode = await runCli(["codex", "--fast", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => codexOutput.push(text),
+  });
+  assert.equal(codexCode, 0);
+  assert.match(codexOutput.join(""), /service_tier="fast"/);
+
+  const claudeOutput: string[] = [];
+  const claudeCode = await runCli(["claude", "--fast", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => claudeOutput.push(text),
+  });
+  assert.equal(claudeCode, 0);
+  assert.match(claudeOutput.join(""), /--settings '\{"fastMode":true\}'/);
+
+  const stderr: string[] = [];
+  const unsupportedCode = await runCli(["gemini", "--fast", "--prompt", "hello"], {
+    stderr: (text) => stderr.push(text),
+  });
+  assert.equal(unsupportedCode, 2);
+  assert.match(stderr.join(""), /--fast is supported only by claude and codex/);
+
+  const dir = mkdtempSync(join(tmpdir(), "headless-fast-test-"));
+  try {
+    const binDir = join(dir, "bin");
+    mkdirSync(binDir);
+    await writeExecutable(join(binDir, "tmux"), "#!/usr/bin/env node\nprocess.exit(process.argv[2] === 'has-session' ? 0 : 1);\n");
+    const tmuxStderr: string[] = [];
+    const existingTmuxCode = await runCli(["codex", "--tmux", "--session", "existing", "--fast", "--run", "fast", "--role", "orchestrator", "--team", "worker", "--prompt", "hello"], {
+      env: { ...process.env, HOME: join(dir, "home"), PATH: `${binDir}:${process.env.PATH ?? ""}` },
+      stderr: (text) => tmuxStderr.push(text),
+    });
+    assert.equal(existingTmuxCode, 2);
+    assert.match(tmuxStderr.join(""), /--fast cannot be applied to an existing tmux session/);
+    assert.equal(existsSync(join(dir, "home", ".headless", "runs", "fast", "run.json")), false);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("CLI forwards fast mode to tmux commands", async () => {
+  const stdout: string[] = [];
+  const code = await runCli(["claude", "--tmux", "--fast", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.match(stdout.join(""), /--settings '\\''\{"fastMode":true\}'\\''/);
+});
+
+test("CLI print-command includes allow mode flags", async () => {
+  const stdout: string[] = [];
+  const code = await runCli(["gemini", "--allow", "read-only", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.equal(
+    stdout.join(""),
+    "gemini --model gemini-3.1-pro-preview --skip-trust -p hello --output-format stream-json --approval-mode plan\n",
+  );
+});
+
+test("CLI print-command includes reasoning effort flags", async () => {
+  const stdout: string[] = [];
+  const code = await runCli(["codex", "--reasoning-effort", "high", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.match(stdout.join(""), /-c 'model_reasoning_effort="high"'/);
+});
+
+test("CLI accepts --effort as an alias for --reasoning-effort", async () => {
+  const stdout: string[] = [];
+  const code = await runCli(["codex", "--effort", "high", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.match(stdout.join(""), /-c 'model_reasoning_effort="high"'/);
+});
+
+test("CLI maps Cursor reasoning effort to model variants", async () => {
+  const stdout: string[] = [];
+  const stderr: string[] = [];
+  const code = await runCli(["cursor", "--reasoning-effort", "high", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+    stderr: (text) => stderr.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.equal(stdout.join(""), "agent -p --trust --force --output-format stream-json --model gpt-5.5-high hello\n");
+  assert.equal(stderr.join(""), "");
+});
+
+test("CLI warns when Gemini reasoning effort is unsupported", async () => {
+  const stdout: string[] = [];
+  const stderr: string[] = [];
+  const code = await runCli(["gemini", "--reasoning-effort", "high", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+    stderr: (text) => stderr.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.equal(
+    stdout.join(""),
+    "gemini --model gemini-3.1-pro-preview --skip-trust -p hello --output-format stream-json --approval-mode yolo\n",
+  );
+  assert.match(stderr.join(""), /reasoning effort is not supported by gemini and was ignored/);
+});
+
+test("CLI tmux print-command includes reasoning effort flags", async () => {
+  const stdout: string[] = [];
+  const code = await runCli(["codex", "--tmux", "--reasoning-effort", "high", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.match(stdout.join(""), /codex .* -c '\\''model_reasoning_effort="high"'\\'' hello/);
+});
+
+test("CLI tmux warns when reasoning effort is unsupported", async () => {
+  const stdout: string[] = [];
+  const stderr: string[] = [];
+  const code = await runCli(["opencode", "--tmux", "--reasoning-effort", "high", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+    stderr: (text) => stderr.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.match(stdout.join(""), /opencode --model openai\/gpt-5\.4 --dangerously-skip-permissions/);
+  assert.match(stderr.join(""), /reasoning effort is not supported by opencode in tmux mode and was ignored/);
+});
+
+test("CLI tmux print-command includes allow mode flags", async () => {
+  const stdout: string[] = [];
+  const code = await runCli(["codex", "--tmux", "--allow", "read-only", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.match(stdout.join(""), /codex --sandbox read-only --ask-for-approval never --search --model gpt-5\.5 hello/);
+});
+
+test("CLI Antigravity tmux print-command includes allow mode flags", async () => {
+  const stdout: string[] = [];
+  const code = await runCli(["antigravity", "--tmux", "--allow", "read-only", "--prompt", "hello", "--print-command"], {
+    stdout: (text) => stdout.push(text),
+  });
+
+  assert.equal(code, 0);
+  assert.match(stdout.join(""), /agy --sandbox/);
+});
+
+test("CLI execution passes command environment overrides", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-allow-test-"));
+  try {
+    const binDir = join(dir, "bin");
+    const captureFile = join(dir, "env.txt");
+    mkdirSync(binDir);
+    await writeExecutable(
+      join(binDir, "opencode"),
+      [
+        "#!/bin/sh",
+        "printf '%s' \"$OPENCODE_CONFIG_CONTENT\" > \"$HEADLESS_CAPTURE\"",
+        "printf '%s\\n' '{\"type\":\"message\",\"message\":{\"role\":\"assistant\",\"content\":[{\"type\":\"text\",\"text\":\"ok\"}]}}'",
+        "",
+      ].join("\n"),
+    );
+
+    const code = await runCli(["opencode", "--allow", "read-only", "--prompt", "hello"], {
+      env: { ...process.env, HEADLESS_CAPTURE: captureFile, PATH: binDir },
+      stdout: () => undefined,
+    });
+
+    assert.equal(code, 0);
+    assert.match(readFileSync(captureFile, "utf8"), /"edit":"deny"/);
+    assert.match(readFileSync(captureFile, "utf8"), /"bash":"deny"/);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});

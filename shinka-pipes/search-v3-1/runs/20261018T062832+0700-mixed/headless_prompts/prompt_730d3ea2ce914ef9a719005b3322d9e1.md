@@ -1,0 +1,971 @@
+# System Instructions
+
+Improve a causal online dynamic storage allocator in self-contained C++20.
+Propose code in your response; do not edit files or run tools/experiments.
+Change only EVOLVE-BLOCK regions. Preserve immediate flushing and the protocol.
+Inserts have exact length 1..40; deletes name a live PID; 0 exits.
+Live pipes never move; trench grows in sections of 20 and never shrinks.
+Use only past observations: no future commands, test IDs, fingerprints,
+raw inputs, filesystem, network, subprocesses or other project results.
+Every case must be correct with solver CPU <5 seconds and RSS <256 MiB.
+
+Fitness is the arithmetic mean of F/T on the fixed SEARCH-v3.1 MAIN corpus:
+152 cases, 38 equally weighted families with 4 equally weighted cases each.
+F is final live pipe length; T is the actual final trench length.
+B=20*ceil(peak_live_volume/20) is a volume lower bound, not the optimum.
+B/T and T/B-1 are diagnostic only and must not replace the F/T objective.
+CPU is recorded separately and has no penalty term in this fitness.
+Main retains 64 broad prior and 64 expanded cases, plus 24 micro cases.
+Micro cases cover early fragmentation, small remainders, neighbor releases,
+size shifts and repeated reuse in workloads constructively fitting 1..3 sections.
+Their short histories make cold-start decisions important; no future is available.
+Most traces end near the peak; others have moderate drain or short-horizon rounding.
+Parameters and mixtures do not match Open15 frequencies; hidden workloads are unknown.
+Re-evaluate the eventual selected seed on this entire corpus before evolution.
+Scores from earlier corpora cannot be carried over.
+
+STRESS is a separate diagnostic corpus. It is excluded from fitness,
+selection, archive decisions and model feedback, and is not run automatically.
+Validation and Open15 are also excluded. Do not inspect their files/results.
+This is a search corpus, not evidence of hidden-test generalization.
+
+Propose one algorithmic mechanism per candidate. Explain its overlap with
+the supplied parent, complexity, failure mode and a same-parent ablation.
+Parameter tuning alone does not satisfy this research objective. Prepared
+literature and malloc/jemalloc/mimalloc hypotheses may motivate mechanisms;
+they do not establish improvements. Keep global fitting-gap fallback before
+growth and exact pipe lengths; avoid speculative reserved trench.
+
+RESEARCH MEMORY. Each proposal includes a compact ledger of completed ideas,
+same-parent deltas and important regressions. Descriptions are author claims,
+not established causal explanations. Review the history before choosing a patch.
+Give the mechanism a stable NAME and state the actual behavioral difference
+from earlier attempts in DESCRIPTION; renaming code is not a new mechanism.
+Retrying a mechanism is allowed when fixing a bug, changing an interaction or
+testing a materially different assumption. Explain that reason explicitly.
+Historical SEARCH-v2 B/T evidence is not a ranking on this SEARCH-v3.1 F/T corpus.
+Paired feedback compares against the actual parent and the leader frozen at
+proposal time. These diagnostics never replace the fitness or correctness gates.
+Parent selection additionally retains one champion per family, independently
+of the scalar archive. A five-proposal cycle uses three ordinary score draws,
+one regression-aware draw and one family-specialist draw, within the same island.
+Regression loss is max(0, fixed gen0 F/T minus candidate F/T) per case; report
+the mean of its worst ceil(10% of cases), including zero losses. A robust draw
+considers candidates within 0.005 mean F/T of the island leader. A specialist
+may have a lower overall mean. Preserve its useful mechanism and address its
+regressions; overall best and primary fitness remain mean F/T. These selection
+defaults are engineering choices, not experimentally established optimal weights.
+Exact source duplicates of correct programs in THIS run are returned as repair
+feedback before evaluation. Supply a meaningful new change for the same parent;
+duplicate corrections share the existing three attempts with patch repairs.
+Similar names, equal scores and equal finite result vectors are advisory only.
+
+If a patch fails to apply, use exact error feedback and return the complete
+corrected proposal for the SAME parent and hypothesis, including all blocks.
+The exact-duplicate rejection above permits a different mechanism for that parent.
+Preserve exact SEARCH whitespace. At most three total apply attempts stay
+within one generation. Failed apply attempts must not enter the archive or
+consume an evaluated-generation slot. Exhausted proposals are retained in a
+separate bounded failure ledger; the next proposal may choose another parent.
+Runtime, request and repeated infrastructure-error limits remain enforced.
+
+You are given multiple code scripts implementing the same algorithm.
+You are tasked with generating a new code snippet that combines these code scripts in a way that is more efficient. 
+I.e. perform crossover between the code scripts.
+Provide the complete new program code.
+You MUST respond using a short summary name, description, and the full code:
+
+<NAME>
+A shortened name summarizing the code you are proposing. Lowercase, no spaces, underscores allowed.
+</NAME>
+
+<DESCRIPTION>
+A description and argumentation process of the code you are proposing.
+</DESCRIPTION>
+
+<CODE>
+```{language}
+# The new rewritten program here.
+```
+</CODE>
+
+* Keep the markers "EVOLVE-BLOCK-START" and "EVOLVE-BLOCK-END" in the code. Do not change the code outside of these markers.
+* Make sure your rewritten program maintains the same inputs and outputs as the original program, but with improved internal implementation.
+* Make sure the file still runs after your changes.
+* Use the <NAME>, <DESCRIPTION>, and <CODE> delimiters to structure your response. It will be parsed afterwards.
+
+# Research evidence and potential recommendations
+MIXED-START ISOLATION: use only this lineage's completed candidates and feedback. Do not infer from other lineages or historical memory.
+RESEARCH MEMORY — measured evidence, descriptions are unverified author claims.
+Past failures are not universal bans. Explain changed behavior/assumptions when retrying.
+Do not rename an already tested policy and present it as a new mechanism.
+No equivalence is inferred from a shared score or a shared finite case vector.
+CURRENT SEARCH-v3.1 (F/T):
+First-Fit: attempts=1; score_range=0.847432251..0.847432251
+exact_fit_priority: attempts=1; score_range=0.854163963..0.854163963
+wilderness_last_fit: attempts=1; score_range=0.855647274..0.855647274
+gen19 wilderness_last_fit; correct=True; parent=10; delta_F/T=+0.001483311; claim=Механизм wilderness_last_fit: использовать свободный хвост, примыкающий к trench_, только когда ни один внутренний gap не вмещает запрос. Это перенос принципа wilderness preservation: хвост можно объединить с новыми секц
+  improved/regressed/tied=35/24/93
+  regression s31_020_section_boundaries: delta_F/T=-0.019430894
+  regression s31_004_uniform_churn: delta_F/T=-0.010889774
+gen10 exact_fit_priority; correct=True; parent=2; delta_F/T=+0.006731712; claim=Механизм exact_fit_priority: сначала выбирать самый левый промежуток, длина которого точно равна запросу. Если такого нет, выполнять прежний First-Fit. Это позволяет избежать разрезания более крупного промежутка при нали
+  improved/regressed/tied=73/15/64
+  regression s31_103_serial_churn: delta_F/T=-0.043999453
+  regression s31_041_drifting_sizes: delta_F/T=-0.039941139
+gen2 First-Fit; correct=True; parent=None; delta_F/T=n/a; claim=Pinned strong/simple seed
+  improved/regressed/tied=19/76/57
+  regression s31_057_large_live_set: delta_F/T=-0.075770120
+  regression s31_031_size_lifetimes: delta_F/T=-0.075378788
+HISTORICAL SEARCH-v2 (different inputs AND B/T objective; not a v3.1 ranking):
+LINEAGE PARENT: mode=lineage-local-score; lineage=2; local mean leader=0.855647274; fixed-baseline tail loss=0.032748923; maximum case loss=0.075378788.
+
+# Previous Messages
+
+[]
+
+# User Request
+
+Here are the performance metrics of a set of previously implemented programs:
+
+# Prior programs
+
+```cpp
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+// EVOLVE-BLOCK-START
+namespace {
+using Coordinate = std::int64_t;
+class Allocator {
+    struct Pipe { Coordinate start; int length; };
+    std::vector<Pipe> pipes_{{0, 0}};
+    std::map<Coordinate, Coordinate> gaps_;
+    std::set<std::pair<Coordinate, Coordinate>> sizes_;
+    std::array<std::set<Coordinate>, 41> starts_;
+    Coordinate trench_ = 0;
+    static int bucket(Coordinate n) { return static_cast<int>(std::min<Coordinate>(40, n)); }
+    void add(Coordinate a, Coordinate b) {
+        if (a >= b) return;
+        gaps_[a] = b;
+        sizes_.insert({b-a, a});
+        starts_[bucket(b-a)].insert(a);
+    }
+    void erase(Coordinate a) {
+        const Coordinate b = gaps_.at(a);
+        sizes_.erase({b-a, a});
+        starts_[bucket(b-a)].erase(a);
+        gaps_.erase(a);
+    }
+public:
+    std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+    std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+    std::uint64_t unitProfileSuppressedExpansions = 0;
+    void place(int length) {
+        Coordinate at = -1, digs = 0;
+        if constexpr (true) {
+            for (int k = length; k <= 40; ++k)
+                if (!starts_[k].empty() && (at < 0 || *starts_[k].begin() < at))
+                    at = *starts_[k].begin();
+        } else {
+            auto candidate = sizes_.lower_bound({length, 0});
+            if (candidate != sizes_.end()) at = candidate->second;
+        }
+        if (at < 0) {
+            at = trench_;
+            if (!gaps_.empty() && gaps_.rbegin()->second == trench_) {
+                at = gaps_.rbegin()->first;
+                erase(at);
+            }
+            digs = (length - (trench_ - at) + 19) / 20;
+            trench_ += digs * 20;
+            add(at, trench_);
+        }
+        const Coordinate finish = gaps_.at(at);
+        erase(at);
+        add(at + length, finish);
+        pipes_.push_back({at, length});
+        std::cout << digs << ' ' << at << '\n' << std::flush;
+    }
+    void remove(Coordinate pid) {
+        const Pipe p = pipes_.at(static_cast<std::size_t>(pid));
+        Coordinate a = p.start, b = a + p.length;
+        auto right = gaps_.lower_bound(a);
+        if (right != gaps_.end() && right->first == b) {
+            b = right->second;
+            erase(right->first);
+        }
+        auto left = gaps_.lower_bound(a);
+        if (left != gaps_.begin()) {
+            --left;
+            if (left->second == a) { a = left->first; erase(a); }
+        }
+        add(a, b);
+        std::cout << p.start << '\n' << std::flush;
+    }
+};
+}  // namespace
+// EVOLVE-BLOCK-END
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                      << " expansion_gate_passes=" << allocator.expansionGatePasses
+                      << " unit_profile_suppressed_expansions="
+                      << allocator.unitProfileSuppressedExpansions << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}
+```
+
+Performance metrics:
+Combined score to maximize: 0.85
+valid_cases: 152; family_count: 38; mean_raw_kpi: 0.85; worst_family_score: 0.53; mean_overrun: 0.06; mean_bound_to_trench: 0.94; max_solver_cpu_seconds: 2.14; max_solver_rss_mib: 5.95
+
+Text feedback:
+Fitness F/T=0.847432250997; stress excluded. B/T is diagnostic only.
+family=micro_partial_drain mean_F/T=0.533333333
+family=micro_short_churn mean_F/T=0.733333333
+family=partial_drain mean_F/T=0.736377659
+family=short_phase_churn mean_F/T=0.751204939
+family=drifting_sizes mean_F/T=0.785248125
+family=uniform_churn mean_F/T=0.796746336
+family=short_heavy mean_F/T=0.800076523
+family=geometric_cohorts mean_F/T=0.801265596
+family=micro_size_shift mean_F/T=0.802083333
+family=long_heavy mean_F/T=0.803893194
+family=distribution_switch mean_F/T=0.806621971
+family=short_rounding mean_F/T=0.818394737
+family=large_live_set mean_F/T=0.819717525
+family=size_biased_deletion mean_F/T=0.822080518
+family=additive_cohorts mean_F/T=0.825195096
+family=long_prefill_random mean_F/T=0.827749018
+family=size_lifetimes mean_F/T=0.829723294
+family=tiny_churn mean_F/T=0.833601270
+family=micro_tail_reuse mean_F/T=0.845833333
+family=section_boundaries mean_F/T=0.851435359
+family=bimodal mean_F/T=0.860032574
+family=serial_churn mean_F/T=0.869400978
+family=hotset_switching mean_F/T=0.878869531
+family=fifo mean_F/T=0.878878168
+family=recent_window_growth mean_F/T=0.880109897
+family=micro_gap_refill mean_F/T=0.881250000
+family=soft_recency_growth mean_F/T=0.885700632
+family=burst_drain mean_F/T=0.894171240
+family=serial_growth mean_F/T=0.909138493
+family=drain_recovery mean_F/T=0.915626325
+family=long_prefill_recent mean_F/T=0.916445644
+family=isolated_recent_churn mean_F/T=0.917413989
+family=micro_neighbor_coalescence mean_F/T=0.918750000
+family=hotset_growth mean_F/T=0.945617876
+family=background_ephemeral mean_F/T=0.951133168
+family=lifo mean_F/T=0.953245266
+family=striped_recycling mean_F/T=0.960464194
+family=tiny_growth mean_F/T=0.962263069
+Worst F/T; F/B is an input-only ceiling, not an allocator loss.
+case=s31_121_short_rounding family=short_rounding F/T=0.433333333 F/B=0.433333333 B/T=1.000000000 overrun=0.000000 cpu_s=0.002568 rss_mib=1.344
+case=s31_150_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001625 rss_mib=1.297
+case=s31_151_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001599 rss_mib=1.297
+case=s31_152_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001787 rss_mib=1.328
+case=s31_139_micro_short_churn family=micro_short_churn F/T=0.550000000 F/B=0.550000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001762 rss_mib=1.297
+case=s31_130_micro_gap_refill family=micro_gap_refill F/T=0.575000000 F/B=0.575000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001698 rss_mib=1.297
+case=s31_060_large_live_set family=large_live_set F/T=0.583069807 F/B=0.641932619 B/T=0.908303754 overrun=0.100953 cpu_s=0.813443 rss_mib=3.953
+case=s31_068_recent_window_growth family=recent_window_growth F/T=0.609523075 F/B=0.675406191 B/T=0.902454082 overrun=0.108090 cpu_s=0.573265 rss_mib=3.172
+case=s31_118_partial_drain family=partial_drain F/T=0.610622509 F/B=0.646045362 B/T=0.945169713 overrun=0.058011 cpu_s=0.153914 rss_mib=2.047
+case=s31_040_distribution_switch family=distribution_switch F/T=0.631798246 F/B=0.692548077 B/T=0.912280702 overrun=0.096154 cpu_s=0.031076 rss_mib=1.422
+case=s31_149_micro_partial_drain family=micro_partial_drain F/T=0.633333333 F/B=0.633333333 B/T=1.000000000 overrun=0.000000 cpu_s=0.002028 rss_mib=1.297
+case=s31_052_geometric_cohorts family=geometric_cohorts F/T=0.637440758 F/B=0.781976744 B/T=0.815165877 overrun=0.226744 cpu_s=0.617833 rss_mib=2.609
+case=s31_141_micro_size_shift family=micro_size_shift F/T=0.650000000 F/B=0.650000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.002080 rss_mib=1.297
+case=s31_072_soft_recency_growth family=soft_recency_growth F/T=0.650950570 F/B=0.650950570 B/T=1.000000000 overrun=0.000000 cpu_s=0.005407 rss_mib=1.375
+case=s31_117_partial_drain family=partial_drain F/T=0.657471264 F/B=0.657471264 B/T=1.000000000 overrun=0.000000 cpu_s=0.026565 rss_mib=1.438
+case=s31_004_uniform_churn family=uniform_churn F/T=0.667624521 F/B=0.771017699 B/T=0.865900383 overrun=0.154867 cpu_s=0.589371 rss_mib=2.969
+Largest T/B-1 (diagnostic only); F/B is an input-only ceiling, not an allocator loss.
+case=s31_041_drifting_sizes family=drifting_sizes F/T=0.708955224 F/B=0.950000000 B/T=0.746268657 overrun=0.340000 cpu_s=0.708076 rss_mib=2.141
+case=s31_009_long_heavy family=long_heavy F/T=0.737903226 F/B=0.953125000 B/T=0.774193548 overrun=0.291667 cpu_s=0.657367 rss_mib=2.984
+case=s31_126_short_phase_churn family=short_phase_churn F/T=0.675757576 F/B=0.857692308 B/T=0.787878788 overrun=0.269231 cpu_s=0.003688 rss_mib=1.359
+case=s31_088_tiny_churn family=tiny_churn F/T=0.670000000 F/B=0.837500000 B/T=0.800000000 overrun=0.250000 cpu_s=0.004394 rss_mib=1.344
+case=s31_044_drifting_sizes family=drifting_sizes F/T=0.700161812 F/B=0.865400000 B/T=0.809061489 overrun=0.236000 cpu_s=0.177505 rss_mib=1.641
+case=s31_052_geometric_cohorts family=geometric_cohorts F/T=0.637440758 F/B=0.781976744 B/T=0.815165877 overrun=0.226744 cpu_s=0.617833 rss_mib=2.609
+case=s31_017_section_boundaries family=section_boundaries F/T=0.785000000 F/B=0.957317073 B/T=0.820000000 overrun=0.219512 cpu_s=0.057033 rss_mib=1.500
+case=s31_001_uniform_churn family=uniform_churn F/T=0.795000000 F/B=0.963636364 B/T=0.825000000 overrun=0.212121 cpu_s=0.061230 rss_mib=1.516
+case=s31_050_geometric_cohorts family=geometric_cohorts F/T=0.790252294 F/B=0.950045956 B/T=0.831804281 overrun=0.202206 cpu_s=0.260807 rss_mib=2.016
+case=s31_031_size_lifetimes family=size_lifetimes F/T=0.829166667 F/B=0.995000000 B/T=0.833333333 overrun=0.200000 cpu_s=0.200308 rss_mib=1.844
+case=s31_125_short_phase_churn family=short_phase_churn F/T=0.766666667 F/B=0.920000000 B/T=0.833333333 overrun=0.200000 cpu_s=0.002522 rss_mib=1.359
+case=s31_128_short_phase_churn family=short_phase_churn F/T=0.774617737 F/B=0.917753623 B/T=0.844036697 overrun=0.184783 cpu_s=0.062220 rss_mib=1.500
+case=s31_105_long_prefill_random family=long_prefill_random F/T=0.832565489 F/B=0.982097589 B/T=0.847742117 overrun=0.179604 cpu_s=0.296043 rss_mib=2.672
+case=s31_030_size_lifetimes family=size_lifetimes F/T=0.842553191 F/B=0.990000000 B/T=0.851063830 overrun=0.175000 cpu_s=0.065307 rss_mib=1.484
+case=s31_086_tiny_churn family=tiny_churn F/T=0.818014706 F/B=0.959051724 B/T=0.852941176 overrun=0.172414 cpu_s=0.228217 rss_mib=1.828
+case=s31_062_size_biased_deletion family=size_biased_deletion F/T=0.814432990 F/B=0.954682779 B/T=0.853092784 overrun=0.172205 cpu_s=0.069787 rss_mib=1.484
+
+PAIRED SEARCH EVIDENCE
+Against parent gen0: delta mean F/T=-0.007548957; improved/regressed/tied=19/76/57.
+family=large_live_set delta_F/T=-0.059277423
+family=tiny_churn delta_F/T=+0.048597604
+family=fifo delta_F/T=+0.047868787
+family=section_boundaries delta_F/T=-0.042671847
+family=long_heavy delta_F/T=-0.041563871
+family=uniform_churn delta_F/T=-0.040028505
+Regressions:
+s31_057_large_live_set: delta_F/T=-0.075770120, delta_T=+57040
+s31_031_size_lifetimes: delta_F/T=-0.075378788, delta_T=+20
+s31_059_large_live_set: delta_F/T=-0.068622962, delta_T=+13420
+s31_017_section_boundaries: delta_F/T=-0.068260870, delta_T=+80
+Gains:
+s31_024_fifo: delta_F/T=+0.120579436, delta_T=-280
+s31_006_short_heavy: delta_F/T=+0.101521298, delta_T=-140
+s31_086_tiny_churn: delta_F/T=+0.100272770, delta_T=-380
+s31_087_tiny_churn: delta_F/T=+0.094117647, delta_T=-40
+
+REGRESSIONS AGAINST FIXED BASELINE
+Fixed gen0 baseline: mean F/T=0.847432251; mean positive loss on worst 16 cases=0.055947609; max case loss=0.075770120; regressed cases=76; worst family delta F/T=-0.059277423. These are selection diagnostics; primary fitness remains mean F/T.
+
+```cpp
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+// EVOLVE-BLOCK-START
+namespace {
+using Coordinate = std::int64_t;
+class Allocator {
+    struct Pipe { Coordinate start; int length; };
+    std::vector<Pipe> pipes_{{0, 0}};
+    std::map<Coordinate, Coordinate> gaps_;
+    std::set<std::pair<Coordinate, Coordinate>> sizes_;
+    std::array<std::set<Coordinate>, 41> starts_;
+    Coordinate trench_ = 0;
+    static int bucket(Coordinate n) { return static_cast<int>(std::min<Coordinate>(40, n)); }
+    void add(Coordinate a, Coordinate b) {
+        if (a >= b) return;
+        gaps_[a] = b;
+        sizes_.insert({b-a, a});
+        starts_[bucket(b-a)].insert(a);
+    }
+    void erase(Coordinate a) {
+        const Coordinate b = gaps_.at(a);
+        sizes_.erase({b-a, a});
+        starts_[bucket(b-a)].erase(a);
+        gaps_.erase(a);
+    }
+public:
+    std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+    std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+    std::uint64_t unitProfileSuppressedExpansions = 0;
+    void place(int length) {
+        Coordinate at = -1, digs = 0;
+        if (length < 40 && !starts_[length].empty()) {
+            at = *starts_[length].begin();
+        } else if (length == 40) {
+            auto exact = sizes_.lower_bound({40, 0});
+            if (exact != sizes_.end() && exact->first == 40)
+                at = exact->second;
+        }
+        if (at < 0) {
+            for (int k = length; k <= 40; ++k)
+                if (!starts_[k].empty() && (at < 0 || *starts_[k].begin() < at))
+                    at = *starts_[k].begin();
+        }
+        if (at < 0) {
+            at = trench_;
+            if (!gaps_.empty() && gaps_.rbegin()->second == trench_) {
+                at = gaps_.rbegin()->first;
+                erase(at);
+            }
+            digs = (length - (trench_ - at) + 19) / 20;
+            trench_ += digs * 20;
+            add(at, trench_);
+        }
+        const Coordinate finish = gaps_.at(at);
+        erase(at);
+        add(at + length, finish);
+        pipes_.push_back({at, length});
+        std::cout << digs << ' ' << at << '\n' << std::flush;
+    }
+    void remove(Coordinate pid) {
+        const Pipe p = pipes_.at(static_cast<std::size_t>(pid));
+        Coordinate a = p.start, b = a + p.length;
+        auto right = gaps_.lower_bound(a);
+        if (right != gaps_.end() && right->first == b) {
+            b = right->second;
+            erase(right->first);
+        }
+        auto left = gaps_.lower_bound(a);
+        if (left != gaps_.begin()) {
+            --left;
+            if (left->second == a) { a = left->first; erase(a); }
+        }
+        add(a, b);
+        std::cout << p.start << '\n' << std::flush;
+    }
+};
+}  // namespace
+// EVOLVE-BLOCK-END
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                      << " expansion_gate_passes=" << allocator.expansionGatePasses
+                      << " unit_profile_suppressed_expansions="
+                      << allocator.unitProfileSuppressedExpansions << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}
+```
+
+Performance metrics:
+Combined score to maximize: 0.85
+valid_cases: 152; family_count: 38; mean_raw_kpi: 0.85; worst_family_score: 0.53; mean_overrun: 0.06; mean_bound_to_trench: 0.95; max_solver_cpu_seconds: 0.94; max_solver_rss_mib: 5.56
+
+Text feedback:
+Fitness F/T=0.854163963042; stress excluded. B/T is diagnostic only.
+family=micro_partial_drain mean_F/T=0.533333333
+family=micro_short_churn mean_F/T=0.733333333
+family=partial_drain mean_F/T=0.737742917
+family=short_phase_churn mean_F/T=0.756685725
+family=drifting_sizes mean_F/T=0.779756471
+family=micro_size_shift mean_F/T=0.802083333
+family=uniform_churn mean_F/T=0.816189289
+family=geometric_cohorts mean_F/T=0.816251301
+family=distribution_switch mean_F/T=0.817080788
+family=short_rounding mean_F/T=0.819366333
+family=short_heavy mean_F/T=0.824989630
+family=size_biased_deletion mean_F/T=0.826828823
+family=additive_cohorts mean_F/T=0.827571192
+family=tiny_churn mean_F/T=0.829187522
+family=long_heavy mean_F/T=0.829303440
+family=long_prefill_random mean_F/T=0.838002389
+family=size_lifetimes mean_F/T=0.843707974
+family=micro_tail_reuse mean_F/T=0.845833333
+family=serial_churn mean_F/T=0.855306383
+family=bimodal mean_F/T=0.865812164
+family=large_live_set mean_F/T=0.875625323
+family=micro_gap_refill mean_F/T=0.881250000
+family=recent_window_growth mean_F/T=0.881515808
+family=section_boundaries mean_F/T=0.883236463
+family=fifo mean_F/T=0.885775043
+family=hotset_switching mean_F/T=0.887306555
+family=burst_drain mean_F/T=0.892838828
+family=soft_recency_growth mean_F/T=0.897427842
+family=serial_growth mean_F/T=0.912148664
+family=long_prefill_recent mean_F/T=0.917767399
+family=micro_neighbor_coalescence mean_F/T=0.918750000
+family=isolated_recent_churn mean_F/T=0.920959145
+family=drain_recovery mean_F/T=0.924028557
+family=hotset_growth mean_F/T=0.949900376
+family=lifo mean_F/T=0.953245266
+family=background_ephemeral mean_F/T=0.955339631
+family=striped_recycling mean_F/T=0.960486952
+family=tiny_growth mean_F/T=0.962263069
+Worst F/T; F/B is an input-only ceiling, not an allocator loss.
+case=s31_121_short_rounding family=short_rounding F/T=0.433333333 F/B=0.433333333 B/T=1.000000000 overrun=0.000000 cpu_s=0.001489 rss_mib=1.312
+case=s31_150_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001469 rss_mib=1.312
+case=s31_151_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001423 rss_mib=1.328
+case=s31_152_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001505 rss_mib=1.312
+case=s31_139_micro_short_churn family=micro_short_churn F/T=0.550000000 F/B=0.550000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001430 rss_mib=1.312
+case=s31_130_micro_gap_refill family=micro_gap_refill F/T=0.575000000 F/B=0.575000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001694 rss_mib=1.312
+case=s31_118_partial_drain family=partial_drain F/T=0.612305360 F/B=0.646045362 B/T=0.947774562 overrun=0.055103 cpu_s=0.086237 rss_mib=2.000
+case=s31_068_recent_window_growth family=recent_window_growth F/T=0.615508105 F/B=0.675406191 B/T=0.911315461 overrun=0.097315 cpu_s=0.310674 rss_mib=3.094
+case=s31_060_large_live_set family=large_live_set F/T=0.628571429 F/B=0.641932619 B/T=0.979185993 overrun=0.021256 cpu_s=0.408500 rss_mib=3.688
+case=s31_149_micro_partial_drain family=micro_partial_drain F/T=0.633333333 F/B=0.633333333 B/T=1.000000000 overrun=0.000000 cpu_s=0.001427 rss_mib=1.312
+case=s31_040_distribution_switch family=distribution_switch F/T=0.645964126 F/B=0.692548077 B/T=0.932735426 overrun=0.072115 cpu_s=0.016995 rss_mib=1.422
+case=s31_141_micro_size_shift family=micro_size_shift F/T=0.650000000 F/B=0.650000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001396 rss_mib=1.312
+case=s31_072_soft_recency_growth family=soft_recency_growth F/T=0.650950570 F/B=0.650950570 B/T=1.000000000 overrun=0.000000 cpu_s=0.002931 rss_mib=1.359
+case=s31_052_geometric_cohorts family=geometric_cohorts F/T=0.656097561 F/B=0.781976744 B/T=0.839024390 overrun=0.191860 cpu_s=0.326354 rss_mib=2.906
+case=s31_117_partial_drain family=partial_drain F/T=0.657471264 F/B=0.657471264 B/T=1.000000000 overrun=0.000000 cpu_s=0.013264 rss_mib=1.438
+case=s31_041_drifting_sizes family=drifting_sizes F/T=0.669014085 F/B=0.950000000 B/T=0.704225352 overrun=0.420000 cpu_s=0.340354 rss_mib=2.953
+Largest T/B-1 (diagnostic only); F/B is an input-only ceiling, not an allocator loss.
+case=s31_041_drifting_sizes family=drifting_sizes F/T=0.669014085 F/B=0.950000000 B/T=0.704225352 overrun=0.420000 cpu_s=0.340354 rss_mib=2.953
+case=s31_009_long_heavy family=long_heavy F/T=0.737903226 F/B=0.953125000 B/T=0.774193548 overrun=0.291667 cpu_s=0.366541 rss_mib=2.984
+case=s31_001_uniform_churn family=uniform_churn F/T=0.757142857 F/B=0.963636364 B/T=0.785714286 overrun=0.272727 cpu_s=0.050228 rss_mib=1.484
+case=s31_126_short_phase_churn family=short_phase_churn F/T=0.675757576 F/B=0.857692308 B/T=0.787878788 overrun=0.269231 cpu_s=0.002372 rss_mib=1.359
+case=s31_044_drifting_sizes family=drifting_sizes F/T=0.682492114 F/B=0.865400000 B/T=0.788643533 overrun=0.268000 cpu_s=0.076639 rss_mib=1.625
+case=s31_088_tiny_churn family=tiny_churn F/T=0.670000000 F/B=0.837500000 B/T=0.800000000 overrun=0.250000 cpu_s=0.005381 rss_mib=1.359
+case=s31_050_geometric_cohorts family=geometric_cohorts F/T=0.786943281 F/B=0.950045956 B/T=0.828321279 overrun=0.207261 cpu_s=0.133426 rss_mib=2.062
+case=s31_031_size_lifetimes family=size_lifetimes F/T=0.829166667 F/B=0.995000000 B/T=0.833333333 overrun=0.200000 cpu_s=0.119555 rss_mib=1.828
+case=s31_125_short_phase_churn family=short_phase_churn F/T=0.766666667 F/B=0.920000000 B/T=0.833333333 overrun=0.200000 cpu_s=0.001694 rss_mib=1.344
+case=s31_086_tiny_churn family=tiny_churn F/T=0.800359712 F/B=0.959051724 B/T=0.834532374 overrun=0.198276 cpu_s=0.132751 rss_mib=1.844
+case=s31_052_geometric_cohorts family=geometric_cohorts F/T=0.656097561 F/B=0.781976744 B/T=0.839024390 overrun=0.191860 cpu_s=0.326354 rss_mib=2.906
+case=s31_062_size_biased_deletion family=size_biased_deletion F/T=0.810256410 F/B=0.954682779 B/T=0.848717949 overrun=0.178248 cpu_s=0.035795 rss_mib=1.500
+case=s31_105_long_prefill_random family=long_prefill_random F/T=0.833795189 F/B=0.982097589 B/T=0.848994233 overrun=0.177864 cpu_s=0.166215 rss_mib=2.797
+case=s31_017_section_boundaries family=section_boundaries F/T=0.817708333 F/B=0.957317073 B/T=0.854166667 overrun=0.170732 cpu_s=0.032317 rss_mib=1.500
+case=s31_102_serial_churn family=serial_churn F/T=0.816486486 F/B=0.950000000 B/T=0.859459459 overrun=0.163522 cpu_s=0.152349 rss_mib=1.875
+case=s31_039_distribution_switch family=distribution_switch F/T=0.820138889 F/B=0.952419355 B/T=0.861111111 overrun=0.161290 cpu_s=0.636623 rss_mib=4.453
+
+PAIRED SEARCH EVIDENCE
+Against parent gen2: delta mean F/T=+0.006731712; improved/regressed/tied=73/15/64.
+family=large_live_set delta_F/T=+0.055907797
+family=section_boundaries delta_F/T=+0.031801103
+family=long_heavy delta_F/T=+0.025410247
+family=short_heavy delta_F/T=+0.024913108
+family=uniform_churn delta_F/T=+0.019442953
+family=geometric_cohorts delta_F/T=+0.014985705
+Regressions:
+s31_103_serial_churn: delta_F/T=-0.043999453, delta_T=+60
+s31_041_drifting_sizes: delta_F/T=-0.039941139, delta_T=+80
+s31_001_uniform_churn: delta_F/T=-0.037857143, delta_T=+40
+s31_015_bimodal: delta_F/T=-0.035294118, delta_T=+40
+Gains:
+s31_057_large_live_set: delta_F/T=+0.073071859, delta_T=-55160
+s31_059_large_live_set: delta_F/T=+0.067962725, delta_T=-13300
+s31_010_long_heavy: delta_F/T=+0.049662875, delta_T=-12700
+s31_005_short_heavy: delta_F/T=+0.048525556, delta_T=-840
+
+Against leader gen2: delta mean F/T=+0.006731712; improved/regressed/tied=73/15/64.
+family=large_live_set delta_F/T=+0.055907797
+family=section_boundaries delta_F/T=+0.031801103
+family=long_heavy delta_F/T=+0.025410247
+family=short_heavy delta_F/T=+0.024913108
+family=uniform_churn delta_F/T=+0.019442953
+family=geometric_cohorts delta_F/T=+0.014985705
+Regressions:
+s31_103_serial_churn: delta_F/T=-0.043999453, delta_T=+60
+s31_041_drifting_sizes: delta_F/T=-0.039941139, delta_T=+80
+s31_001_uniform_churn: delta_F/T=-0.037857143, delta_T=+40
+s31_015_bimodal: delta_F/T=-0.035294118, delta_T=+40
+Gains:
+s31_057_large_live_set: delta_F/T=+0.073071859, delta_T=-55160
+s31_059_large_live_set: delta_F/T=+0.067962725, delta_T=-13300
+s31_010_long_heavy: delta_F/T=+0.049662875, delta_T=-12700
+s31_005_short_heavy: delta_F/T=+0.048525556, delta_T=-840
+
+REGRESSIONS AGAINST FIXED BASELINE
+Fixed gen0 baseline: mean F/T=0.854163963; mean positive loss on worst 16 cases=0.039271157; max case loss=0.075378788; regressed cases=54; worst family delta F/T=-0.028322581. These are selection diagnostics; primary fitness remains mean F/T.
+
+
+# Current program
+
+Here is the current program we are trying to improve (you will need to propose a new program with the same inputs and outputs as the original program, but with improved internal implementation):
+
+```cpp
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+// EVOLVE-BLOCK-START
+namespace {
+using Coordinate = std::int64_t;
+class Allocator {
+    struct Pipe { Coordinate start; int length; };
+    std::vector<Pipe> pipes_{{0, 0}};
+    std::map<Coordinate, Coordinate> gaps_;
+    std::set<std::pair<Coordinate, Coordinate>> sizes_;
+    std::array<std::set<Coordinate>, 41> starts_;
+    Coordinate trench_ = 0;
+    static int bucket(Coordinate n) { return static_cast<int>(std::min<Coordinate>(40, n)); }
+    void add(Coordinate a, Coordinate b) {
+        if (a >= b) return;
+        gaps_[a] = b;
+        sizes_.insert({b-a, a});
+        starts_[bucket(b-a)].insert(a);
+    }
+    void erase(Coordinate a) {
+        const Coordinate b = gaps_.at(a);
+        sizes_.erase({b-a, a});
+        starts_[bucket(b-a)].erase(a);
+        gaps_.erase(a);
+    }
+public:
+    std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+    std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+    std::uint64_t unitProfileSuppressedExpansions = 0;
+    void place(int length) {
+        Coordinate at = -1, digs = 0;
+        Coordinate tail = -1;
+        if (!gaps_.empty() && gaps_.rbegin()->second == trench_)
+            tail = gaps_.rbegin()->first;
+        if (length < 40 && !starts_[length].empty()) {
+            at = *starts_[length].begin();
+        } else if (length == 40) {
+            auto exact = sizes_.lower_bound({40, 0});
+            if (exact != sizes_.end() && exact->first == 40)
+                at = exact->second;
+        }
+        if (at >= 0 && at == tail) at = -1;
+        if (at < 0) {
+            for (int k = length; k <= 40; ++k) {
+                if (starts_[k].empty()) continue;
+                const Coordinate candidate = *starts_[k].begin();
+                if (candidate != tail && (at < 0 || candidate < at))
+                    at = candidate;
+            }
+        }
+        if (at < 0 && tail >= 0 && trench_ - tail >= length)
+            at = tail;
+        if (at < 0) {
+            at = trench_;
+            if (!gaps_.empty() && gaps_.rbegin()->second == trench_) {
+                at = gaps_.rbegin()->first;
+                erase(at);
+            }
+            digs = (length - (trench_ - at) + 19) / 20;
+            trench_ += digs * 20;
+            add(at, trench_);
+        }
+        const Coordinate finish = gaps_.at(at);
+        erase(at);
+        add(at + length, finish);
+        pipes_.push_back({at, length});
+        std::cout << digs << ' ' << at << '\n' << std::flush;
+    }
+    void remove(Coordinate pid) {
+        const Pipe p = pipes_.at(static_cast<std::size_t>(pid));
+        Coordinate a = p.start, b = a + p.length;
+        auto right = gaps_.lower_bound(a);
+        if (right != gaps_.end() && right->first == b) {
+            b = right->second;
+            erase(right->first);
+        }
+        auto left = gaps_.lower_bound(a);
+        if (left != gaps_.begin()) {
+            --left;
+            if (left->second == a) { a = left->first; erase(a); }
+        }
+        add(a, b);
+        std::cout << p.start << '\n' << std::flush;
+    }
+};
+}  // namespace
+// EVOLVE-BLOCK-END
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                      << " expansion_gate_passes=" << allocator.expansionGatePasses
+                      << " unit_profile_suppressed_expansions="
+                      << allocator.unitProfileSuppressedExpansions << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}
+```
+
+Here are the performance metrics of the program:
+
+Combined score to maximize: 0.86
+valid_cases: 152; family_count: 38; mean_raw_kpi: 0.86; worst_family_score: 0.53; mean_overrun: 0.05; mean_bound_to_trench: 0.95; max_solver_cpu_seconds: 0.97; max_solver_rss_mib: 5.58
+
+Here is additional text feedback about the current program:
+
+Fitness F/T=0.855647273918; stress excluded. B/T is diagnostic only.
+family=micro_partial_drain mean_F/T=0.533333333
+family=micro_short_churn mean_F/T=0.733333333
+family=partial_drain mean_F/T=0.738008982
+family=short_phase_churn mean_F/T=0.769027006
+family=drifting_sizes mean_F/T=0.794273673
+family=micro_size_shift mean_F/T=0.802083333
+family=distribution_switch mean_F/T=0.816720456
+family=geometric_cohorts mean_F/T=0.817305377
+family=short_rounding mean_F/T=0.819122721
+family=uniform_churn mean_F/T=0.820191128
+family=short_heavy mean_F/T=0.825295868
+family=additive_cohorts mean_F/T=0.827016922
+family=size_biased_deletion mean_F/T=0.831831993
+family=long_heavy mean_F/T=0.834759157
+family=tiny_churn mean_F/T=0.836653564
+family=long_prefill_random mean_F/T=0.837980697
+family=micro_tail_reuse mean_F/T=0.845833333
+family=size_lifetimes mean_F/T=0.849337556
+family=serial_churn mean_F/T=0.859817359
+family=bimodal mean_F/T=0.865128226
+family=large_live_set mean_F/T=0.874854453
+family=section_boundaries mean_F/T=0.879591613
+family=micro_gap_refill mean_F/T=0.881250000
+family=recent_window_growth mean_F/T=0.881780077
+family=fifo mean_F/T=0.884953138
+family=hotset_switching mean_F/T=0.885312853
+family=soft_recency_growth mean_F/T=0.897642195
+family=burst_drain mean_F/T=0.898058136
+family=serial_growth mean_F/T=0.911769346
+family=long_prefill_recent mean_F/T=0.917760464
+family=micro_neighbor_coalescence mean_F/T=0.918750000
+family=isolated_recent_churn mean_F/T=0.920891321
+family=drain_recovery mean_F/T=0.923938362
+family=hotset_growth mean_F/T=0.949971348
+family=lifo mean_F/T=0.953245266
+family=background_ephemeral mean_F/T=0.955023797
+family=striped_recycling mean_F/T=0.960486952
+family=tiny_growth mean_F/T=0.962263069
+Worst F/T; F/B is an input-only ceiling, not an allocator loss.
+case=s31_121_short_rounding family=short_rounding F/T=0.433333333 F/B=0.433333333 B/T=1.000000000 overrun=0.000000 cpu_s=0.001512 rss_mib=1.312
+case=s31_150_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001332 rss_mib=1.312
+case=s31_151_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001509 rss_mib=1.312
+case=s31_152_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001420 rss_mib=1.312
+case=s31_139_micro_short_churn family=micro_short_churn F/T=0.550000000 F/B=0.550000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001400 rss_mib=1.312
+case=s31_130_micro_gap_refill family=micro_gap_refill F/T=0.575000000 F/B=0.575000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001617 rss_mib=1.312
+case=s31_118_partial_drain family=partial_drain F/T=0.612305360 F/B=0.646045362 B/T=0.947774562 overrun=0.055103 cpu_s=0.086585 rss_mib=2.000
+case=s31_068_recent_window_growth family=recent_window_growth F/T=0.616565183 F/B=0.675406191 B/T=0.912880562 overrun=0.095434 cpu_s=0.371972 rss_mib=3.109
+case=s31_060_large_live_set family=large_live_set F/T=0.628498551 F/B=0.641932619 B/T=0.979072464 overrun=0.021375 cpu_s=0.407071 rss_mib=3.703
+case=s31_149_micro_partial_drain family=micro_partial_drain F/T=0.633333333 F/B=0.633333333 B/T=1.000000000 overrun=0.000000 cpu_s=0.001438 rss_mib=1.312
+case=s31_040_distribution_switch family=distribution_switch F/T=0.643080357 F/B=0.692548077 B/T=0.928571429 overrun=0.076923 cpu_s=0.017819 rss_mib=1.422
+case=s31_141_micro_size_shift family=micro_size_shift F/T=0.650000000 F/B=0.650000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001311 rss_mib=1.312
+case=s31_072_soft_recency_growth family=soft_recency_growth F/T=0.650950570 F/B=0.650950570 B/T=1.000000000 overrun=0.000000 cpu_s=0.003773 rss_mib=1.375
+case=s31_052_geometric_cohorts family=geometric_cohorts F/T=0.656097561 F/B=0.781976744 B/T=0.839024390 overrun=0.191860 cpu_s=0.330134 rss_mib=2.922
+case=s31_117_partial_drain family=partial_drain F/T=0.657471264 F/B=0.657471264 B/T=1.000000000 overrun=0.000000 cpu_s=0.012862 rss_mib=1.422
+case=s31_088_tiny_churn family=tiny_churn F/T=0.670000000 F/B=0.837500000 B/T=0.800000000 overrun=0.250000 cpu_s=0.003187 rss_mib=1.375
+Largest T/B-1 (diagnostic only); F/B is an input-only ceiling, not an allocator loss.
+case=s31_041_drifting_sizes family=drifting_sizes F/T=0.730769231 F/B=0.950000000 B/T=0.769230769 overrun=0.300000 cpu_s=0.342988 rss_mib=2.953
+case=s31_009_long_heavy family=long_heavy F/T=0.750000000 F/B=0.953125000 B/T=0.786885246 overrun=0.270833 cpu_s=0.368393 rss_mib=3.000
+case=s31_126_short_phase_churn family=short_phase_churn F/T=0.675757576 F/B=0.857692308 B/T=0.787878788 overrun=0.269231 cpu_s=0.002315 rss_mib=1.359
+case=s31_044_drifting_sizes family=drifting_sizes F/T=0.682492114 F/B=0.865400000 B/T=0.788643533 overrun=0.268000 cpu_s=0.077239 rss_mib=1.641
+case=s31_088_tiny_churn family=tiny_churn F/T=0.670000000 F/B=0.837500000 B/T=0.800000000 overrun=0.250000 cpu_s=0.003187 rss_mib=1.375
+case=s31_001_uniform_churn family=uniform_churn F/T=0.775609756 F/B=0.963636364 B/T=0.804878049 overrun=0.242424 cpu_s=0.062382 rss_mib=1.531
+case=s31_050_geometric_cohorts family=geometric_cohorts F/T=0.791159587 F/B=0.950045956 B/T=0.832759281 overrun=0.200827 cpu_s=0.133246 rss_mib=2.062
+case=s31_031_size_lifetimes family=size_lifetimes F/T=0.829166667 F/B=0.995000000 B/T=0.833333333 overrun=0.200000 cpu_s=0.120917 rss_mib=1.844
+case=s31_125_short_phase_churn family=short_phase_churn F/T=0.766666667 F/B=0.920000000 B/T=0.833333333 overrun=0.200000 cpu_s=0.001765 rss_mib=1.359
+case=s31_052_geometric_cohorts family=geometric_cohorts F/T=0.656097561 F/B=0.781976744 B/T=0.839024390 overrun=0.191860 cpu_s=0.330134 rss_mib=2.922
+case=s31_105_long_prefill_random family=long_prefill_random F/T=0.833795189 F/B=0.982097589 B/T=0.848994233 overrun=0.177864 cpu_s=0.163283 rss_mib=2.797
+case=s31_017_section_boundaries family=section_boundaries F/T=0.817708333 F/B=0.957317073 B/T=0.854166667 overrun=0.170732 cpu_s=0.032273 rss_mib=1.500
+case=s31_039_distribution_switch family=distribution_switch F/T=0.820138889 F/B=0.952419355 B/T=0.861111111 overrun=0.161290 cpu_s=0.653538 rss_mib=4.469
+case=s31_086_tiny_churn family=tiny_churn F/T=0.830223881 F/B=0.959051724 B/T=0.865671642 overrun=0.155172 cpu_s=0.132565 rss_mib=1.844
+case=s31_062_size_biased_deletion family=size_biased_deletion F/T=0.827225131 F/B=0.954682779 B/T=0.866492147 overrun=0.154079 cpu_s=0.043356 rss_mib=1.500
+case=s31_053_additive_cohorts family=additive_cohorts F/T=0.829129512 F/B=0.950170316 B/T=0.872611465 overrun=0.145985 cpu_s=0.132398 rss_mib=2.000
+
+PAIRED SEARCH EVIDENCE
+Against parent gen10: delta mean F/T=+0.001483311; improved/regressed/tied=35/24/93.
+family=drifting_sizes delta_F/T=+0.014517202
+family=short_phase_churn delta_F/T=+0.012341281
+family=tiny_churn delta_F/T=+0.007466042
+family=size_lifetimes delta_F/T=+0.005629582
+family=long_heavy delta_F/T=+0.005455717
+family=burst_drain delta_F/T=+0.005219307
+Regressions:
+s31_020_section_boundaries: delta_F/T=-0.019430894, delta_T=+120
+s31_004_uniform_churn: delta_F/T=-0.010889774, delta_T=+80
+s31_096_hotset_switching: delta_F/T=-0.008703004, delta_T=+100
+s31_054_additive_cohorts: delta_F/T=-0.004674281, delta_T=+40
+Gains:
+s31_041_drifting_sizes: delta_F/T=+0.061755146, delta_T=-120
+s31_127_short_phase_churn: delta_F/T=+0.036640827, delta_T=-40
+s31_086_tiny_churn: delta_F/T=+0.029864168, delta_T=-100
+s31_033_burst_drain: delta_F/T=+0.020441347, delta_T=-20
+
+Against leader gen10: delta mean F/T=+0.001483311; improved/regressed/tied=35/24/93.
+family=drifting_sizes delta_F/T=+0.014517202
+family=short_phase_churn delta_F/T=+0.012341281
+family=tiny_churn delta_F/T=+0.007466042
+family=size_lifetimes delta_F/T=+0.005629582
+family=long_heavy delta_F/T=+0.005455717
+family=burst_drain delta_F/T=+0.005219307
+Regressions:
+s31_020_section_boundaries: delta_F/T=-0.019430894, delta_T=+120
+s31_004_uniform_churn: delta_F/T=-0.010889774, delta_T=+80
+s31_096_hotset_switching: delta_F/T=-0.008703004, delta_T=+100
+s31_054_additive_cohorts: delta_F/T=-0.004674281, delta_T=+40
+Gains:
+s31_041_drifting_sizes: delta_F/T=+0.061755146, delta_T=-120
+s31_127_short_phase_churn: delta_F/T=+0.036640827, delta_T=-40
+s31_086_tiny_churn: delta_F/T=+0.029864168, delta_T=-100
+s31_033_burst_drain: delta_F/T=+0.020441347, delta_T=-20
+
+REGRESSIONS AGAINST FIXED BASELINE
+Fixed gen0 baseline: mean F/T=0.855647274; mean positive loss on worst 16 cases=0.032748923; max case loss=0.075378788; regressed cases=52; worst family delta F/T=-0.028682913. These are selection diagnostics; primary fitness remains mean F/T.
+
+
+# Task
+
+Perform a cross-over between the code script above and the one below. Aim to combine the best parts of both code implementations that improves the score.
+Provide the complete new program code.
+
+IMPORTANT: Make sure your rewritten program maintains the same inputs and outputs as the original program, but with improved internal implementation.
+
+# Crossover Inspiration Programs
+```cpp
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+// EVOLVE-BLOCK-START
+namespace {
+using Coordinate = std::int64_t;
+class Allocator {
+    struct Pipe { Coordinate start; int length; };
+    std::vector<Pipe> pipes_{{0, 0}};
+    std::map<Coordinate, Coordinate> gaps_;
+    std::set<std::pair<Coordinate, Coordinate>> sizes_;
+    std::array<std::set<Coordinate>, 41> starts_;
+    Coordinate trench_ = 0;
+    static int bucket(Coordinate n) { return static_cast<int>(std::min<Coordinate>(40, n)); }
+    void add(Coordinate a, Coordinate b) {
+        if (a >= b) return;
+        gaps_[a] = b;
+        sizes_.insert({b-a, a});
+        starts_[bucket(b-a)].insert(a);
+    }
+    void erase(Coordinate a) {
+        const Coordinate b = gaps_.at(a);
+        sizes_.erase({b-a, a});
+        starts_[bucket(b-a)].erase(a);
+        gaps_.erase(a);
+    }
+public:
+    std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+    std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+    std::uint64_t unitProfileSuppressedExpansions = 0;
+    void place(int length) {
+        Coordinate at = -1, digs = 0;
+        if constexpr (true) {
+            for (int k = length; k <= 40; ++k)
+                if (!starts_[k].empty() && (at < 0 || *starts_[k].begin() < at))
+                    at = *starts_[k].begin();
+        } else {
+            auto candidate = sizes_.lower_bound({length, 0});
+            if (candidate != sizes_.end()) at = candidate->second;
+        }
+        if (at < 0) {
+            at = trench_;
+            if (!gaps_.empty() && gaps_.rbegin()->second == trench_) {
+                at = gaps_.rbegin()->first;
+                erase(at);
+            }
+            digs = (length - (trench_ - at) + 19) / 20;
+            trench_ += digs * 20;
+            add(at, trench_);
+        }
+        const Coordinate finish = gaps_.at(at);
+        erase(at);
+        add(at + length, finish);
+        pipes_.push_back({at, length});
+        std::cout << digs << ' ' << at << '\n' << std::flush;
+    }
+    void remove(Coordinate pid) {
+        const Pipe p = pipes_.at(static_cast<std::size_t>(pid));
+        Coordinate a = p.start, b = a + p.length;
+        auto right = gaps_.lower_bound(a);
+        if (right != gaps_.end() && right->first == b) {
+            b = right->second;
+            erase(right->first);
+        }
+        auto left = gaps_.lower_bound(a);
+        if (left != gaps_.begin()) {
+            --left;
+            if (left->second == a) { a = left->first; erase(a); }
+        }
+        add(a, b);
+        std::cout << p.start << '\n' << std::flush;
+    }
+};
+}  // namespace
+// EVOLVE-BLOCK-END
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                      << " expansion_gate_passes=" << allocator.expansionGatePasses
+                      << " unit_profile_suppressed_expansions="
+                      << allocator.unitProfileSuppressedExpansions << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}
+```
+
+Performance metrics: Combined score to maximize: 0.85
+valid_cases: 152; family_count: 38; mean_raw_kpi: 0.85; worst_family_score: 0.53; mean_overrun: 0.06; mean_bound_to_trench: 0.94; max_solver_cpu_seconds: 2.14; max_solver_rss_mib: 5.95
+
+

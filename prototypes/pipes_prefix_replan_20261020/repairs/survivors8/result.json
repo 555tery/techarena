@@ -1,0 +1,10 @@
+{
+  "success": false,
+  "status": "UNKNOWN",
+  "changes": null,
+  "elapsed": 46.006226666038856,
+  "target_end": 1000,
+  "source": "/Users/555tery/techarena/prototypes/pipes_g5420_cpu_20261020/solution.cpp",
+  "stats": "CpSolverResponse summary:\nstatus: UNKNOWN\nobjective: 0\nbest_bound: 0\nintegers: 324\nbooleans: 2272\nconflicts: 31609\nbranches: 147794\npropagations: 1196838\ninteger_propagations: 6231829\nrestarts: 88\nlp_iterations: 0\nwalltime: 45.0075\nusertime: 45.0075\ndeterministic_time: 3.85611\ngap_integral: 0\n",
+  "scope": "case8 branch unique final survivors; all other public blocks fixed; public-prefix T bounded by old plan"
+}

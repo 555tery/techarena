@@ -1,0 +1,203 @@
+{
+  "title": "Causal parity detector synthetic trigger and reset check",
+  "purpose": "Narrow correctness check only; no parameter tuning. Monte Carlo rollout is disabled to isolate the live detector and its direct trench effect.",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+  "compile_flags": "-O2 -std=c++17 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -DMC_ROLLOUT_DISABLED",
+  "commands": {
+    "baseline": "clang++ -O2 -std=c++17 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -DMC_ROLLOUT_DISABLED results/pipes/improvement/beam_diagnosis/source/cohort_owner_mc_corrected_scoped_run.cpp -o results/pipes/improvement/case9_policy/audit/synthetic/e95_no_mc",
+    "candidate": "clang++ -O2 -std=c++17 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -DMC_ROLLOUT_DISABLED results/pipes/improvement/case9_policy/alternating_delete_parity_edges.cpp -o results/pipes/improvement/case9_policy/audit/synthetic/candidate_no_mc",
+    "diagnostic": "clang++ -O2 -std=c++17 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -DMC_ROLLOUT_DISABLED -DPARITY_DIAGNOSTICS results/pipes/improvement/case9_policy/audit/synthetic/parity_diagnostics.cpp -o results/pipes/improvement/case9_policy/audit/synthetic/candidate_diag",
+    "harness": "python3 tools/pipes_harness.py --solver <binary> --name <label> --interactor tools/interactor --tests <single-input-file> --out <run-directory> --wall-timeout 30"
+  },
+  "source_hashes_sha256": {
+    "baseline_source": "e95ed98e038aad6f46ccf62f4f167a45b2f1cc695772484d53001936c178df41",
+    "candidate_source": "57338ca2dd0d81e2c553edefb5c2c40fdb1b3aec88873709a21da6574c85560f",
+    "diagnostic_source": "1074b03c6a343f72d81ceb5597cb7448aafe7670ed29a80385527f9ccf33c49a"
+  },
+  "binary_hashes_sha256": {
+    "baseline_no_mc": "cf411c173eb0cbacbdb3f6ca0f4851000b8365c5e52607aa6e45ee8f8963c476",
+    "candidate_no_mc": "cc15d191889211bb72354a614aeec3fa0c6b002a3fd529ec20144655b0987191",
+    "candidate_diagnostic_no_mc": "cd69b07a243d978e631b2d4ed597963a5e7373101925c83fc9371609b03ba647"
+  },
+  "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+  "threshold": "Mode activates after 7 same-length PID stride-2 transitions, i.e. 8 qualifying removals; a mismatch resets the counter and mode.",
+  "results": {
+    "same_len_stride2_odd": {
+      "input": {
+        "path": "audit/synthetic/same_len_stride2_odd.in",
+        "sha256": "ca9ee229530af70c7051703a152285d6b0fd122882354d318536115557d1cae0",
+        "operation_count": 180
+      },
+      "detector_expectation": "odd parity activation at PID 15; mode resets when deleted length changes at PID 65",
+      "diagnostic": {
+        "mode_activation_lines": [
+          "pid=15 len=1 stride2=7 mode=1 target_parity=1",
+          "pid=79 len=2 stride2=7 mode=1 target_parity=1"
+        ],
+        "reset_evidence_line": "pid=65 len=2 stride2=0 mode=0 target_parity=1",
+        "diagnostic_source_sha256": "1074b03c6a343f72d81ceb5597cb7448aafe7670ed29a80385527f9ccf33c49a",
+        "diagnostic_binary_sha256": "cd69b07a243d978e631b2d4ed597963a5e7373101925c83fc9371609b03ba647"
+      },
+      "baseline": {
+        "status": "ok",
+        "score": 0.941176470588235,
+        "trench_m": 340,
+        "occupied_m": 320,
+        "cpu_s": 0.004188,
+        "rss_mib": 2.171875,
+        "summary_sha256": "5587f149e97b916efac8413d5d3bb129249eb1c04aff0e6094dd9a628e1ad256",
+        "cases_csv_sha256": "ceb96162c9b2c85337ff2494fdecedbf0dfa82c046e46b8cfce98df8ca3ff205",
+        "outputs_sha256": {
+          "judge_output.txt": "9750360545b9f05b4c67f0b61fd05b88c5dd68fc5d1c644312a392756f89000b",
+          "interactor_stderr.txt": "bb18af45bdc4c4e6f66018343c2067e39392df6b2108c573cdba1890d79bb598",
+          "solver_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "candidate": {
+        "status": "ok",
+        "score": 0.941176470588235,
+        "trench_m": 340,
+        "occupied_m": 320,
+        "cpu_s": 0.004168,
+        "rss_mib": 2.140625,
+        "summary_sha256": "9a9d9bb35bd6c3663943aa4bd4f7d6dcac3213a4e2ca83ee3e606033f5abc8bd",
+        "cases_csv_sha256": "2f9cc9a2c48202708757d6ed7f584069e150e864d2502dcbdd2203115a3d1c85",
+        "outputs_sha256": {
+          "judge_output.txt": "c7c20c298f3f12a2f9ef0c97fed1932b5b432bdd68fa52ed937b4bcbdb7cd7d0",
+          "interactor_stderr.txt": "bb18af45bdc4c4e6f66018343c2067e39392df6b2108c573cdba1890d79bb598",
+          "solver_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "diagnostic_run": {
+        "status": "ok",
+        "score": 0.941176470588235,
+        "trench_m": 340,
+        "summary_sha256": "04194206dcfb965c5e5ff8924acb260d5451805e48514765a150a240d75edffa",
+        "cases_csv_sha256": "abf77edfd1eaed153542696ca948cd0f5cb5890f94227861db15ebc1a0a5b0c5",
+        "outputs_sha256": {
+          "judge_output.txt": "c7c20c298f3f12a2f9ef0c97fed1932b5b432bdd68fa52ed937b4bcbdb7cd7d0",
+          "interactor_stderr.txt": "bb18af45bdc4c4e6f66018343c2067e39392df6b2108c573cdba1890d79bb598",
+          "solver_stderr.txt": "b4965ad3855e409ebc1bcf8271ec8cb12d8798ad6b9e570939d5ca57fd7eba21"
+        }
+      }
+    },
+    "same_len_stride2_even": {
+      "input": {
+        "path": "audit/synthetic/same_len_stride2_even.in",
+        "sha256": "de369648516f1cb60528946745fb80bf1bf1bb61bed9a9fc0f90192d09f3a5be",
+        "operation_count": 180
+      },
+      "detector_expectation": "even parity activation at PID 16; mode resets when deleted length changes at PID 66",
+      "diagnostic": {
+        "mode_activation_lines": [
+          "pid=16 len=1 stride2=7 mode=1 target_parity=0",
+          "pid=80 len=2 stride2=7 mode=1 target_parity=0"
+        ],
+        "reset_evidence_line": "pid=66 len=2 stride2=0 mode=0 target_parity=0",
+        "diagnostic_source_sha256": "1074b03c6a343f72d81ceb5597cb7448aafe7670ed29a80385527f9ccf33c49a",
+        "diagnostic_binary_sha256": "cd69b07a243d978e631b2d4ed597963a5e7373101925c83fc9371609b03ba647"
+      },
+      "baseline": {
+        "status": "ok",
+        "score": 0.888888888888889,
+        "trench_m": 360,
+        "occupied_m": 320,
+        "cpu_s": 0.004035,
+        "rss_mib": 2.140625,
+        "summary_sha256": "0aeb3c54dfd4cadd638703e5450504c022722c1224e4644d92beb69b0bb13349",
+        "cases_csv_sha256": "3772a38b5eb04594b608cd596e2491936004154262354caf7699bfccb07837b0",
+        "outputs_sha256": {
+          "judge_output.txt": "45f3d8657fc8be4e076a7caf4c71c5ff479a7ab1ed030b222847c2438e868180",
+          "interactor_stderr.txt": "edbbaadaf03ed09b13093c995d69b1a415a66bac5467184579d14f7bb60ca7b2",
+          "solver_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "candidate": {
+        "status": "ok",
+        "score": 0.941176470588235,
+        "trench_m": 340,
+        "occupied_m": 320,
+        "cpu_s": 0.003783,
+        "rss_mib": 2.140625,
+        "summary_sha256": "b632df65ba2e5d1a729ae7d13f5e6407c61f479d596dec47e20eac9074fff8d8",
+        "cases_csv_sha256": "bd3a13acf20ad1268d06fa200501611523fa3a50559f3671a5d9ce95959e4477",
+        "outputs_sha256": {
+          "judge_output.txt": "0e130b427829128cc19bb80406f9ed7624ed4c069d0d8532cf7aac6efecc71cd",
+          "interactor_stderr.txt": "bb18af45bdc4c4e6f66018343c2067e39392df6b2108c573cdba1890d79bb598",
+          "solver_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "diagnostic_run": {
+        "status": "ok",
+        "score": 0.941176470588235,
+        "trench_m": 340,
+        "summary_sha256": "07e7229863e27b219368a271acf8f77ae63d6d6eb54c2c8f551266602f374fb9",
+        "cases_csv_sha256": "57eac80435d746d92b473dc06c1abba3065edfe675a2e73ca7431b500c1b2bd1",
+        "outputs_sha256": {
+          "judge_output.txt": "0e130b427829128cc19bb80406f9ed7624ed4c069d0d8532cf7aac6efecc71cd",
+          "interactor_stderr.txt": "bb18af45bdc4c4e6f66018343c2067e39392df6b2108c573cdba1890d79bb598",
+          "solver_stderr.txt": "761b8747c0130eaf5933fad19b36c59eb39d61a87385ba0c8f4e46a7cf040a34"
+        }
+      }
+    },
+    "interrupted_stride2_control": {
+      "input": {
+        "path": "audit/synthetic/interrupted_stride2_control.in",
+        "sha256": "fafe2e198cbf20e08e71d1ae2f0f7d7c068264d8f3949e6fce6685849f33d0ef",
+        "operation_count": 135
+      },
+      "detector_expectation": "PID 8 breaks the initial stride; the subsequent run ends at 6 transitions and does not reactivate mode",
+      "diagnostic": {
+        "mode_activation_lines": [],
+        "reset_evidence_line": "pid=8 len=1 stride2=0 mode=0 target_parity=1",
+        "diagnostic_source_sha256": "1074b03c6a343f72d81ceb5597cb7448aafe7670ed29a80385527f9ccf33c49a",
+        "diagnostic_binary_sha256": "cd69b07a243d978e631b2d4ed597963a5e7373101925c83fc9371609b03ba647"
+      },
+      "baseline": {
+        "status": "ok",
+        "score": 0.961111111111111,
+        "trench_m": 180,
+        "occupied_m": 173,
+        "cpu_s": 0.0035569999999999994,
+        "rss_mib": 2.140625,
+        "summary_sha256": "b57e9d5401f6c6f5cdc9203703a4170ce9c2c8b835d136e729d59cede5cd975d",
+        "cases_csv_sha256": "f7ed9586a3347c52890a51dd9fc611d8616928d8b7a438030ad1735afdbdffb3",
+        "outputs_sha256": {
+          "judge_output.txt": "99be509badb6eb53127dc7933f0ba43b3e8d3ac7233cbb72d4185d20e548f795",
+          "interactor_stderr.txt": "31ac7bbf59198e3577d3e6d4ebbaefd5b6ca804e3578befb535788d7274a2177",
+          "solver_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "candidate": {
+        "status": "ok",
+        "score": 0.961111111111111,
+        "trench_m": 180,
+        "occupied_m": 173,
+        "cpu_s": 0.004014,
+        "rss_mib": 2.140625,
+        "summary_sha256": "ef29284ef0fe423456642f44861a812d5bfda431d60d9a5ce76542022eaeab03",
+        "cases_csv_sha256": "5b6d0b20c75c755a9154ed12f3415db650ab2f67376f274680e43c166a9ae0a0",
+        "outputs_sha256": {
+          "judge_output.txt": "99be509badb6eb53127dc7933f0ba43b3e8d3ac7233cbb72d4185d20e548f795",
+          "interactor_stderr.txt": "31ac7bbf59198e3577d3e6d4ebbaefd5b6ca804e3578befb535788d7274a2177",
+          "solver_stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "diagnostic_run": {
+        "status": "ok",
+        "score": 0.961111111111111,
+        "trench_m": 180,
+        "summary_sha256": "cbd256579ce86a0440fb3b6cc0371be53ce73cd521cca0d38898fb39e8724a26",
+        "cases_csv_sha256": "1add58d7dc4b3f3b3a83ab3662dfc6003962a4cada2eb421c42bdf143b252b7b",
+        "outputs_sha256": {
+          "judge_output.txt": "99be509badb6eb53127dc7933f0ba43b3e8d3ac7233cbb72d4185d20e548f795",
+          "interactor_stderr.txt": "31ac7bbf59198e3577d3e6d4ebbaefd5b6ca804e3578befb535788d7274a2177",
+          "solver_stderr.txt": "25827c106cb330c4b73506003106fafea5603a91a5d2535a596012196a703c29"
+        }
+      }
+    }
+  },
+  "comparison_csv": "audit/synthetic/per_case_comparison.csv",
+  "comparison_csv_sha256": "8ac3442f37a8fa0b057f011c16e875d7155caf609ae3eb665fc9a463e99bc083",
+  "superseded_trials": "Earlier synthetic control and pre-rebuild runs are archived under runs/pre-reset-correction and runs/pre-final-rebuild; they are excluded from the reported check."
+}

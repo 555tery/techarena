@@ -1,0 +1,8 @@
+{
+  "purpose": "resource/protocol stress only; excluded from final score comparison",
+  "warmup_source": "/Users/555tery/techarena/prototypes/pipes_memory_robust_20261019/evaluation/calibration/c01-iid-uniform-random.in",
+  "warmup_commands": 4096,
+  "operations": 200000,
+  "F": 1760266,
+  "sha256": "fc91e921b40bfaeb0fa701fcf71f51580944781fdce511aaeb6def6bfe290736"
+}

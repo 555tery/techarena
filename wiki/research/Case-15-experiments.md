@@ -1,0 +1,12 @@
+# Case 15: каталог экспериментов
+
+Краткие результаты и ссылки; точные версии и метрики проверяй в manifest соответствующего отчёта.
+
+- [Case 15: deletion-seam с отложенными lifetime labels — no-go](../../results/pipes/improvement/case15_coalescence_local_20261017/REPORT.md) — два заранее заданных варианта; выбранный по development E ухудшил case15 438 640 → 438 820 м и Open15 30.074288 → 29.975192. На 12 sealed streams mean ΔKPI −0.001873, CI включает ноль; source после freeze не менялся.
+- Case 15: [точный offline oracle на трёх ранних суффиксах](../../results/pipes/improvement/case15_bounded_oracle/REPORT.md) — 0/20/40 м hindsight; причинный перенос не проверялся.
+- Case 15: [адресный buddy allocator v1 — no-go](../../results/pipes/improvement/buddy_allocator_v1/REPORT.md) — case 15 +158 780 м к champion, синтетика хуже во всех 6 потоках.
+- Case 15: [фазы и сохранение крупных gap — overlay no-go на Open15](../../results/pipes/improvement/case15_fast_candidates/phase_micro/REPORT.md), [быстрые эвристики и pair-class прогнозы — no-go](../../results/pipes/improvement/case15_fast_candidates/archive_transfer/REPORT.md), [новая политика](../../results/pipes/improvement/case15_new_policy/REPORT.md), [фазы потока](../../results/pipes/improvement/case15_phase/REPORT.md), [survivor-rank](../../results/pipes/improvement/case15_survivor_rank/REPORT.md), [линия происхождения интервалов](../../results/pipes/improvement/case15_interval_lineage/REPORT.md), [точная candidate/lineage телеметрия](../../results/pipes/improvement/case15_exact_candidate_telemetry/README.md), [аудит равнодлинных кандидатов](../../results/pipes/improvement/case15_exact_candidate_telemetry/candidate-diversity-review.md), [equal-gap rollout — no-go](../../results/pipes/improvement/case15_equal_gap_diversity/REPORT.md) и [диагностика связанной регрессии case 7](../../results/pipes/improvement/case15_equal_gap_diversity/case7-diagnosis.md); также [cyclic next-fit — no-go](../../results/pipes/improvement/cyclic_next_fit/REPORT.md).
+- Case 15: [size-class arenas и гейт на бимодальность/удаления — no-go](../../results/pipes/improvement/case15_arena_bimodal_gate/REPORT.md) — +120 м на целевом тесте и неоднозначный перенос на шесть независимых synthetic-потоков.
+- Case 15: [Harmonic-fit v1 — no-go](../../results/pipes/improvement/harmonic_fit_v1/REPORT.md) — exact-length class-specific 40 м bins дали +80 600 м на case 15 и регресс на всех 6 свежих synthetic-потоках.
+
+[Диагностика case 15](Case-15.md) · [Общий индекс](Index.md)

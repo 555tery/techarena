@@ -1,0 +1,109 @@
+{
+  "experiment": "case12_lifo_final_expansions",
+  "status": "no-go-after-single-case-screen",
+  "scope": {
+    "case": 12,
+    "official_weight": 4.0,
+    "operations": 1501,
+    "input": "data/pipes/open/12.in",
+    "input_sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+    "selection_rationale": "Among eligible weight-4 cases 12 and 14, case 12 has larger volume-headroom (0.023230881 vs 0.010571928 weighted score).",
+    "baseline_source": "results/pipes/improvement/pid_lane_run48_factorial/sources/pid_run46.cpp",
+    "baseline_source_sha256": "1a643a2b8a560de5c7dfd7efe0b288dc93785e96400d2ae6fd4ec7eea5f55f59",
+    "baseline_open15_score": 29.791529008364,
+    "baseline_case12_judge_output_sha256": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e"
+  },
+  "diagnosis": {
+    "peak_live_volume_m": 10249,
+    "final_occupied_length_m": 10249,
+    "volume_lower_bound_trench_m": 10260,
+    "baseline_trench_m": 10320,
+    "baseline_final_free_gap_count": 35,
+    "baseline_final_largest_gap_m": 6,
+    "growth_events": 451,
+    "fragmentation_growth_events": 370,
+    "last_growth_events": [
+      {"operation": 1486, "request_m": 27, "trench_before_m": 10240, "trench_after_m": 10280, "free_volume_before_m": 73, "largest_gap_before_m": 6},
+      {"operation": 1487, "request_m": 30, "trench_before_m": 10280, "trench_after_m": 10300, "free_volume_before_m": 86, "largest_gap_before_m": 17},
+      {"operation": 1498, "request_m": 11, "trench_before_m": 10300, "trench_after_m": 10320, "free_volume_before_m": 76, "largest_gap_before_m": 7}
+    ]
+  },
+  "common_causal_trigger": {
+    "history": "last up to 64 observed removal ranks, stored as rank-permille from newest",
+    "minimum_observations": 24,
+    "condition": "at least 70 percent have rank <= 200 permille",
+    "future_commands_or_test_id_used": false,
+    "mirrored_in_monte_carlo_rollout": true
+  },
+  "variants": [
+    {
+      "name": "pid_run46",
+      "source_sha256": "1a643a2b8a560de5c7dfd7efe0b288dc93785e96400d2ae6fd4ec7eea5f55f59",
+      "binary_sha256": "e89981f32fb016f518bd2148f1e6d3bf58a60bb587b8f63be8234a93cdf9ddd1",
+      "judge_output_sha256": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e",
+      "status": "ok",
+      "trench_m": 10320,
+      "weighted_score": 3.972480620155039,
+      "delta_score_vs_baseline": 0.0,
+      "solver_cpu_s": 0.018711,
+      "solver_peak_rss_mib": 2.765625
+    },
+    {
+      "name": "lifo_high_side",
+      "source": "source/lifo_high_side.cpp",
+      "source_sha256": "1f5b0b6d7b16990449e2368c2e61490dcc65971dcadb2ea04d18420908e340a9",
+      "binary_sha256": "7dc45f8317d02e4377fba38201657f20722dfb74a9c701a94f473c46d11b8264",
+      "judge_output_sha256": "dd833e951a7fd994b3ea16e8d5d8d09b90601ed8355ab62afc48377552cdb0cd",
+      "status": "ok",
+      "trench_m": 10460,
+      "weighted_score": 3.919311663479923,
+      "delta_score_vs_baseline": -0.053168956675116,
+      "solver_cpu_s": 0.014905,
+      "solver_peak_rss_mib": 2.625
+    },
+    {
+      "name": "lifo_largest_gap",
+      "source": "source/lifo_largest_gap.cpp",
+      "source_sha256": "e10f83d998684e7e6e86182340cfcd8f3d8cdf4371add03812f5c683a3e93105",
+      "binary_sha256": "785f8844ea334638dc2577cb106920bd41cb95493199e6152af386c76383d7ed",
+      "judge_output_sha256": "9c853a7c567a5dece8dd7c2fc439f553cbc83100379113c0f81ca4b5a2aed710",
+      "status": "ok",
+      "trench_m": 10520,
+      "weighted_score": 3.896958174904943,
+      "delta_score_vs_baseline": -0.075522445250096,
+      "solver_cpu_s": 0.013981,
+      "solver_peak_rss_mib": 2.703125
+    },
+    {
+      "name": "lifo_smallest_fit",
+      "source": "source/lifo_smallest_fit.cpp",
+      "source_sha256": "43c9d9e97a318a0df18491f4cad9fdaa6dd9f0d168006e879e486b5d54f171c3",
+      "binary_sha256": "ae41dcd8cd53d821bea523645cedea2fb7114d80195be7206e042ea673bcdba4",
+      "judge_output_sha256": "96bd7e69378912d3af6e102ad2788c16cecb9fbf14abf4e974a62fdfd8d6c06d",
+      "status": "ok",
+      "trench_m": 10360,
+      "weighted_score": 3.957142857142857,
+      "delta_score_vs_baseline": -0.015337763012182,
+      "solver_cpu_s": 0.011701,
+      "solver_peak_rss_mib": 2.6875
+    }
+  ],
+  "build": {
+    "compiler": "Apple clang++ 17",
+    "flags": ["-O2", "-std=c++20", "-pipe", "-Wall", "-Wextra", "-Wconversion", "-Wshadow", "-Werror", "-pedantic"],
+    "official_interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "harness": "tools/pipes_harness.py",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "generator": "generate_candidates.py",
+    "generator_sha256": "cb525ca27b6a28fcc1a1b1c8cf489ddbe6e5fcc343b614eb82d0a028aab371fd"
+  },
+  "gates": {
+    "case12_screen_passed": false,
+    "open15_run": false,
+    "holdout_v2_run": false,
+    "platform_used": false,
+    "docker_used": false,
+    "frozen_final_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  }
+}

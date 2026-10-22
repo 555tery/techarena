@@ -1,0 +1,27 @@
+{
+  "schema": "cangjie-lifetime-native-storage-v1",
+  "base": "candidate-avl-inline/solution.cj",
+  "base_sha256": "b582fcb4c111f2e469bb2fee4cd928b26cf0c7c5aef2078ac4b343236df1110f",
+  "output_sha256": "ac365c6e417ab29e921abce628ab22ab0c877e858bb73c8304302a18cf3a335e",
+  "generator_sha256": "37486ae3f8bf711613d2f8e2f59c4d32667b206136f3acbc1da81a075bbb6099",
+  "scope": "Only four lifetime field declarations and four new private concrete owners; every pre-existing method and struct body unchanged.",
+  "storage": {
+    "records": "one growable Int64 allocation, triple born,length,active0/1; sentinel zero; capacity16 then doubling",
+    "cells": "one fixed1312Int64 allocation, stride4 completedExposure,birthSum,active,deaths; zero initialized",
+    "rates": "one fixed656Float64 allocation, stride2 mean,error; +0.0 initialized",
+    "nextCrossing": "one fixed8Int64 allocation initialized to1; dedicated owner avoids modifying the shared FastIntBuffer"
+  },
+  "copy_semantics": "Getters construct independent existing structs; setters copy all primitive fields. No pointer export, aliases or clones added.",
+  "ownership": "Each successfully constructed owner frees its current sole allocation once in ~init. Records reallocation copies before swapping/freeing old data. No managed references in payload.",
+  "fence": "blackBox(this) after each last native access outside finalizers, with return values copied first; native pointers never escape their owner.",
+  "official105": {
+    "commit": "c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9",
+    "malloc_free": "https://github.com/cangjielanguage/cangjie_runtime/blob/c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9/std/libs/std/core/libc.cj",
+    "pointer": "https://github.com/cangjielanguage/cangjie_runtime/blob/c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9/std/libs/std/core/c_pointer_resource.cj",
+    "blackBox": "https://github.com/cangjielanguage/cangjie_runtime/blob/c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9/std/doc/libs/std/runtime/runtime_package_api/runtime_package_funcs.md#func-blackboxtt",
+    "finalizer": "https://github.com/cangjielanguage/cangjie_docs/blob/f8f8cd75a336e23785a4c57bd6091b2adf1e0302/docs/dev-guide/source_zh_cn/class_and_interface/class.md#class-\u7ec8\u7ed3\u5668"
+  },
+  "reverse_exact": true,
+  "cangjie_compiled": false,
+  "solver_executed": false
+}

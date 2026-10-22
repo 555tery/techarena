@@ -1,0 +1,680 @@
+{
+  "artifact_sha256": {
+    "analysis_01_csv": "6ef640527383a4902777c9183caf093ae6d5f3b5e5652a57cac967e51b56d648",
+    "analysis_01_json": "17f1195dbf57a842b09a1598008d747e9713e8fb64a56670acb9d34e7376b298",
+    "analysis_02_csv": "45718f6529a83747d095b1a6316349e311cc43706e6097e9f4095183450c1bc0",
+    "analysis_02_json": "7f0ce5d9370a6625b1ee2f06459ae12fcca9e381d4ba2adb2e0f1cdd8f1f5ab0",
+    "analysis_03_csv": "b54389a282e9b3e37b86c2be6790bbe5527f1185e154c44c423e508a8190da48",
+    "analysis_03_json": "d7ba323f7a12e8ad95515d246c192ac08158449856360cdaa5c951b035cf5114",
+    "analysis_04_csv": "dcd2fd1b4ab67123c01c6d8def1ed671947e1a12a8a23828b2dbeabc2a9d2edf",
+    "analysis_04_json": "320b2a2ba11ae53c3c21f489d87811d6ad8acb91993f8284d79e624eccb6e921",
+    "analysis_05_csv": "032f0e526a63b25060d6eb2e5208a08fa45d1fa0255b33fc0f4574e4e5db0351",
+    "analysis_05_json": "5df4f2c448d7419c2784d0cf4a6dde7705ac9bce1a0e08281e195f88719ed0ab",
+    "analysis_06_csv": "cd94e0fa4a197717f5c5e04434b35e6fca36ce32d8544a595d2eb0254d2fa5f3",
+    "analysis_06_json": "c670cac20bb2401126e4d6ac56c660c6c46228900be96854b34e29649d091dee",
+    "analysis_case15_csv": "b46e0eb73396543df9211d72e079342ca378fd27b14117ac68dad79fa6d38d7b",
+    "analysis_case15_json": "9f29d8a8bced290ebf232f721d6de6b186a580a3b9b44172eb3de9e3146170a9",
+    "block_bootstrap_script": "2e9b5d1902ca5e6018660cec4a004b36febd54203141352baa6f4ffd4151cdaa",
+    "case15_bootstrap": "09827bcd64b3ab067220a0a6296bcd8a18d6a701b4892726b6fa57a25bd42931",
+    "case15_input": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+    "comparator_binary": "880d07d261e3e2c23de4a0f527aa18ad25a1601bc5d9c2334f08bc27f67913a9",
+    "comparator_source": "4ac5d5c36220fc10610d82ce092e77907f80a1a1c425332d25f59316fa21d450",
+    "harness": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "predictability_analyzer": "02517b1479c2f62a5d98894b4299e67f25cc96014a58b32d93641803dea3be5a",
+    "run_cases_csv": "4742fcb483a8a851cbefa6b4de10e43634b1eda55030a0b1cff1af7cb94c57b3",
+    "synthetic_01": "7f3383bbba29752cf4b5d247a43fb807d5bd68160f59d40847aed78311bd1565",
+    "synthetic_02": "1be40257a71fb3e3616676e5fa311d80679c6bb2e474762eca41609f55c71a00",
+    "synthetic_03": "2396eea9ce00a1143b6951cb56bfc016867fa303615e781b4264724b46d43f17",
+    "synthetic_04": "dc451a44dc281a802ccfb6015c378f103225279a1a0a02b4bb54e699faa9d4d3",
+    "synthetic_05": "5c300d9862343c3f37cc1af658f6e874734e8fdfae3ec873769285919e9702af",
+    "synthetic_06": "c44de3b7cfa3e28a0815e8df2776bf488a13a5e777327772029510cad9a5124f",
+    "synthetic_generator": "ebfcda1cc7a57cb331dd1678814a6bcd7ac5c3052dbfcd777185aa4c18a293a7",
+    "synthetic_manifest": "1e54d30b16dacea8490a0addd4936c1f754b78300951391cfb54342a9c8b528c"
+  },
+  "baseline_output_sha256": {
+    "15/judge_output": "910f1a9e96935977d7aa2fc5676b5d3896184510d0ae8c65d66a2887c14b0625",
+    "15/solver_stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "markov_case_01/judge_output": "05879bdd17c9239c59d9030dc029d2c7e08c56460b7cfe1c21027d27635de42a",
+    "markov_case_01/solver_stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "markov_case_02/judge_output": "48d16ab6482f613c51845c068c7537fdb511ba405235e987c1117d631dacd8b0",
+    "markov_case_02/solver_stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "markov_case_03/judge_output": "9f65809e437eb345311f26d12a30b10e93dc38f3036ce19696d7c4874ca56ee2",
+    "markov_case_03/solver_stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "markov_case_04/judge_output": "8c4ce8d2c30623285735168727e3c9c82134e636553c3abe7c45f4760cffe7ad",
+    "markov_case_04/solver_stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "markov_case_05/judge_output": "c69d5fde40f0b6ac643fa2b24d2d55e193ed3d6ded17dc8c582ee52bc3328fed",
+    "markov_case_05/solver_stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "markov_case_06/judge_output": "e4f3d409c657f59f9223530febf5d8dba0b50615ae67481919c09e040911dd46",
+    "markov_case_06/solver_stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "case15_block_bootstrap": {
+    "all": {
+      "block_bootstrap_95_ci": [
+        [
+          -0.0008498993548628968,
+          0.00294819828816981
+        ],
+        [
+          -0.12901712713120492,
+          -0.07861105951312523
+        ],
+        [
+          -0.006538814908419034,
+          -0.004485913051999226
+        ]
+      ],
+      "block_size_placements": 1024,
+      "blocks": 128,
+      "mean_differences": [
+        0.0010671457306493466,
+        -0.10329836090078082,
+        -0.005551230882941995
+      ],
+      "metrics": [
+        "top1_markov_minus_marginal",
+        "logloss_marginal_minus_markov",
+        "brier_marginal_minus_markov"
+      ],
+      "n_events": 130254,
+      "replicates": 2000,
+      "seed": 20261018
+    },
+    "expansions": {
+      "block_bootstrap_95_ci": [
+        [
+          0.0005667117986038223,
+          0.012678198340507978
+        ],
+        [
+          -0.11456497345064813,
+          -0.06403130689478065
+        ],
+        [
+          -0.006015219514228005,
+          -0.0036553154491017438
+        ]
+      ],
+      "block_size_placements": 1024,
+      "blocks": 128,
+      "mean_differences": [
+        0.006633029083281365,
+        -0.08871265253847437,
+        -0.004835424871705026
+      ],
+      "metrics": [
+        "top1_markov_minus_marginal",
+        "logloss_marginal_minus_markov",
+        "brier_marginal_minus_markov"
+      ],
+      "n_events": 17639,
+      "replicates": 2000,
+      "seed": 20261018
+    }
+  },
+  "case15_predictive_metrics": {
+    "all_next_arrivals": {
+      "brier_gain_marginal_minus_markov": -0.005551230882941995,
+      "brier_gain_normal95_ci": [
+        -0.005761258623527523,
+        -0.005341203142356466
+      ],
+      "logloss_gain_marginal_minus_markov": -0.10329836090078079,
+      "logloss_gain_normal95_ci": [
+        -0.10651867437060947,
+        -0.10007804743095211
+      ],
+      "marginal_brier": 0.9017930242105741,
+      "marginal_logloss": 2.572836713449856,
+      "marginal_top1_accuracy": 0.09836933990510847,
+      "marginal_top1_ece": 0.01060439315393039,
+      "markov_brier": 0.907344255093516,
+      "markov_logloss": 2.676135074350637,
+      "markov_top1_accuracy": 0.09943648563575783,
+      "markov_top1_ece": 0.037562566919737035,
+      "n": 130254,
+      "row_support": {
+        "ge_4_fraction": 0.9987716308136411,
+        "ge_8_fraction": 0.9975432616272821,
+        "median": 277
+      },
+      "top1_delta_markov_minus_marginal": 0.0010671457306493466,
+      "top1_delta_normal95_ci": [
+        -0.0009760503660111921,
+        0.0031103418273098855
+      ]
+    },
+    "answer": "results/pipes/improvement/case15_markov_prediction_20261018/runs/baseline_skill/runs/15/judge_output.txt",
+    "at_expansion_decisions": {
+      "brier_gain_marginal_minus_markov": -0.004835424871705026,
+      "brier_gain_normal95_ci": [
+        -0.005409947440991837,
+        -0.004260902302418216
+      ],
+      "logloss_gain_marginal_minus_markov": -0.08871265253847435,
+      "logloss_gain_normal95_ci": [
+        -0.09681991556463232,
+        -0.08060538951231638
+      ],
+      "marginal_brier": 0.8941852892952126,
+      "marginal_logloss": 2.4668994596453886,
+      "marginal_top1_accuracy": 0.1028969896252622,
+      "marginal_top1_ece": 0.013817976820776928,
+      "markov_brier": 0.8990207141669176,
+      "markov_logloss": 2.5556121121838626,
+      "markov_top1_accuracy": 0.10953001870854356,
+      "markov_top1_ece": 0.03359990485387326,
+      "n": 17639,
+      "row_support": {
+        "ge_4_fraction": 0.9985826860933159,
+        "ge_8_fraction": 0.997959067974375,
+        "median": 281
+      },
+      "top1_delta_markov_minus_marginal": 0.006633029083281365,
+      "top1_delta_normal95_ci": [
+        0.0009580160906626995,
+        0.012308042075900031
+      ]
+    },
+    "baseline_expansions": 17639,
+    "commands": 200000,
+    "evaluated_next_arrivals": 130254,
+    "input": "results/pipes/improvement/case15_markov_prediction_20261018/tests/case15/15.in",
+    "model": {
+      "baseline": "rolling marginal over previous 2048 positive pipe lengths with Laplace-1 smoothing",
+      "conditioning": "P(next positive pipe length | current positive pipe length)",
+      "dirichlet_global_prior_strength": 8.0,
+      "labels": 40,
+      "window_placements": 2048
+    },
+    "placements": 130255
+  },
+  "comparator_source_sha256": "4ac5d5c36220fc10610d82ce092e77907f80a1a1c425332d25f59316fa21d450",
+  "decision": "no-go before policy: expansion-only top1 gain is small, but proper distribution scores are worse on case15",
+  "environment": {
+    "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+    "machine": "arm64",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+  },
+  "experiment": "case15_markov_prediction_20261018",
+  "local_harness": {
+    "all_status_ok": true,
+    "limits_cpu_s": 5,
+    "limits_memory_mib": 256,
+    "max_cpu_s": 1.9108459999999998,
+    "max_rss_mib": 8.40625
+  },
+  "predictor": {
+    "dirichlet_prior_strength": 8,
+    "expansion_subset": "comparator placements with digs > 0",
+    "marginal_laplace": 1,
+    "order": 1,
+    "target": "next positive pipe length after current positive length",
+    "window_positive_installations": 2048
+  },
+  "report_sha256": "130e1a339e932e119d986bed983e288c327f6c882181312c951edfca74328ebb",
+  "synthetic_predictive_metrics": {
+    "markov_case_01": {
+      "all_next_arrivals": {
+        "brier_gain_marginal_minus_markov": -0.014581638516030167,
+        "brier_gain_normal95_ci": [
+          -0.015107751692286306,
+          -0.01405552533977403
+        ],
+        "logloss_gain_marginal_minus_markov": -0.4094332493753008,
+        "logloss_gain_normal95_ci": [
+          -0.423405542626932,
+          -0.3954609561236696
+        ],
+        "marginal_brier": 0.9755424713022701,
+        "marginal_logloss": 3.7000496628295654,
+        "marginal_top1_accuracy": 0.02521860959466641,
+        "marginal_top1_ece": 0.00796197534867027,
+        "markov_brier": 0.9901241098183003,
+        "markov_logloss": 4.109482912204865,
+        "markov_top1_accuracy": 0.025991593796801778,
+        "markov_top1_ece": 0.0515611221907171,
+        "n": 20699,
+        "row_support": {
+          "ge_4_fraction": 0.9922701579786463,
+          "ge_8_fraction": 0.9845403159572926,
+          "median": 50
+        },
+        "top1_delta_markov_minus_marginal": 0.0007729842021353689,
+        "top1_delta_normal95_ci": [
+          -0.0021609476142286956,
+          0.003706916018499433
+        ]
+      },
+      "answer": "results/pipes/improvement/case15_markov_prediction_20261018/runs/baseline_skill/runs/markov_case_01/judge_output.txt",
+      "at_expansion_decisions": {
+        "brier_gain_marginal_minus_markov": -0.022271078815985126,
+        "brier_gain_normal95_ci": [
+          -0.02660250365277555,
+          -0.017939653979194704
+        ],
+        "logloss_gain_marginal_minus_markov": -0.29850141845038625,
+        "logloss_gain_normal95_ci": [
+          -0.36040722772116424,
+          -0.23659560917960828
+        ],
+        "marginal_brier": 0.9772302855352603,
+        "marginal_logloss": 3.73588459481949,
+        "marginal_top1_accuracy": 0.015280135823429542,
+        "marginal_top1_ece": 0.02738511645108104,
+        "markov_brier": 0.9995013643512454,
+        "markov_logloss": 4.034386013269876,
+        "markov_top1_accuracy": 0.03225806451612903,
+        "markov_top1_ece": 0.0824935512506779,
+        "n": 589,
+        "row_support": {
+          "ge_4_fraction": 0.7911714770797963,
+          "ge_8_fraction": 0.5789473684210527,
+          "median": 9
+        },
+        "top1_delta_markov_minus_marginal": 0.01697792869269949,
+        "top1_delta_normal95_ci": [
+          0.0007196788435124245,
+          0.033236178541886555
+        ]
+      },
+      "baseline_expansions": 589,
+      "commands": 40700,
+      "evaluated_next_arrivals": 20699,
+      "input": "results/pipes/improvement/case15_markov_prediction_20261018/synthetic/markov_case_01.in",
+      "model": {
+        "baseline": "rolling marginal over previous 2048 positive pipe lengths with Laplace-1 smoothing",
+        "conditioning": "P(next positive pipe length | current positive pipe length)",
+        "dirichlet_global_prior_strength": 8.0,
+        "labels": 40,
+        "window_placements": 2048
+      },
+      "placements": 20700
+    },
+    "markov_case_02": {
+      "all_next_arrivals": {
+        "brier_gain_marginal_minus_markov": 0.5243487593008702,
+        "brier_gain_normal95_ci": [
+          0.516848621400259,
+          0.5318488972014814
+        ],
+        "logloss_gain_marginal_minus_markov": 2.0857482457906356,
+        "logloss_gain_normal95_ci": [
+          2.057668315514265,
+          2.113828176067006
+        ],
+        "marginal_brier": 0.9753269825200167,
+        "marginal_logloss": 3.6959968104177032,
+        "marginal_top1_accuracy": 0.035025846659258904,
+        "marginal_top1_ece": 0.015178373954569497,
+        "markov_brier": 0.4509782232191464,
+        "markov_logloss": 1.610248564627068,
+        "markov_top1_accuracy": 0.7555437460746895,
+        "markov_top1_ece": 0.11089453476671014,
+        "n": 20699,
+        "row_support": {
+          "ge_4_fraction": 0.9922701579786463,
+          "ge_8_fraction": 0.9842504468814919,
+          "median": 51
+        },
+        "top1_delta_markov_minus_marginal": 0.7205178994154307,
+        "top1_delta_normal95_ci": [
+          0.7142336918788199,
+          0.7268021069520414
+        ]
+      },
+      "answer": "results/pipes/improvement/case15_markov_prediction_20261018/runs/baseline_skill/runs/markov_case_02/judge_output.txt",
+      "at_expansion_decisions": {
+        "brier_gain_marginal_minus_markov": 0.3575472968017446,
+        "brier_gain_normal95_ci": [
+          0.3227869036638412,
+          0.39230768993964793
+        ],
+        "logloss_gain_marginal_minus_markov": 1.55525300501823,
+        "logloss_gain_normal95_ci": [
+          1.4209850149769485,
+          1.6895209950595116
+        ],
+        "marginal_brier": 0.9713579623349596,
+        "marginal_logloss": 3.6510940803600738,
+        "marginal_top1_accuracy": 0.06313645621181263,
+        "marginal_top1_ece": 0.05575087991999897,
+        "markov_brier": 0.6138106655332152,
+        "markov_logloss": 2.095841075341844,
+        "markov_top1_accuracy": 0.6680244399185336,
+        "markov_top1_ece": 0.2495333636264117,
+        "n": 491,
+        "row_support": {
+          "ge_4_fraction": 0.7657841140529531,
+          "ge_8_fraction": 0.5458248472505092,
+          "median": 8
+        },
+        "top1_delta_markov_minus_marginal": 0.604887983706721,
+        "top1_delta_normal95_ci": [
+          0.5601499950082187,
+          0.6496259724052234
+        ]
+      },
+      "baseline_expansions": 491,
+      "commands": 40700,
+      "evaluated_next_arrivals": 20699,
+      "input": "results/pipes/improvement/case15_markov_prediction_20261018/synthetic/markov_case_02.in",
+      "model": {
+        "baseline": "rolling marginal over previous 2048 positive pipe lengths with Laplace-1 smoothing",
+        "conditioning": "P(next positive pipe length | current positive pipe length)",
+        "dirichlet_global_prior_strength": 8.0,
+        "labels": 40,
+        "window_placements": 2048
+      },
+      "placements": 20700
+    },
+    "markov_case_03": {
+      "all_next_arrivals": {
+        "brier_gain_marginal_minus_markov": 0.4688919172641784,
+        "brier_gain_normal95_ci": [
+          0.4634184015482313,
+          0.4743654329801255
+        ],
+        "logloss_gain_marginal_minus_markov": 0.7751707595985888,
+        "logloss_gain_normal95_ci": [
+          0.7622134572026746,
+          0.788128061994503
+        ],
+        "marginal_brier": 0.7331095941865343,
+        "marginal_logloss": 1.684349766132682,
+        "marginal_top1_accuracy": 0.269481617469443,
+        "marginal_top1_ece": 0.022172881557592262,
+        "markov_brier": 0.264217676922356,
+        "markov_logloss": 0.9091790065340933,
+        "markov_top1_accuracy": 0.8302333446060196,
+        "markov_top1_ece": 0.023952701771651985,
+        "n": 20699,
+        "row_support": {
+          "ge_4_fraction": 0.9711097154451905,
+          "ge_8_fraction": 0.9187883472631528,
+          "median": 618
+        },
+        "top1_delta_markov_minus_marginal": 0.5607517271365766,
+        "top1_delta_normal95_ci": [
+          0.5534792453771988,
+          0.5680242088959544
+        ]
+      },
+      "answer": "results/pipes/improvement/case15_markov_prediction_20261018/runs/baseline_skill/runs/markov_case_03/judge_output.txt",
+      "at_expansion_decisions": {
+        "brier_gain_marginal_minus_markov": 0.49465440915050235,
+        "brier_gain_normal95_ci": [
+          0.45334428896272994,
+          0.5359645293382748
+        ],
+        "logloss_gain_marginal_minus_markov": 1.0876438065754446,
+        "logloss_gain_normal95_ci": [
+          0.9838121357381321,
+          1.191475477412757
+        ],
+        "marginal_brier": 0.8635279030567231,
+        "marginal_logloss": 2.327266405951335,
+        "marginal_top1_accuracy": 0.07677165354330709,
+        "marginal_top1_ece": 0.09010419316874599,
+        "markov_brier": 0.3688734939062208,
+        "markov_logloss": 1.2396225993758905,
+        "markov_top1_accuracy": 0.7677165354330708,
+        "markov_top1_ece": 0.0898689051100885,
+        "n": 508,
+        "row_support": {
+          "ge_4_fraction": 0.8700787401574803,
+          "ge_8_fraction": 0.8169291338582677,
+          "median": 49
+        },
+        "top1_delta_markov_minus_marginal": 0.6909448818897638,
+        "top1_delta_normal95_ci": [
+          0.6475110320959698,
+          0.7343787316835577
+        ]
+      },
+      "baseline_expansions": 508,
+      "commands": 40700,
+      "evaluated_next_arrivals": 20699,
+      "input": "results/pipes/improvement/case15_markov_prediction_20261018/synthetic/markov_case_03.in",
+      "model": {
+        "baseline": "rolling marginal over previous 2048 positive pipe lengths with Laplace-1 smoothing",
+        "conditioning": "P(next positive pipe length | current positive pipe length)",
+        "dirichlet_global_prior_strength": 8.0,
+        "labels": 40,
+        "window_placements": 2048
+      },
+      "placements": 20700
+    },
+    "markov_case_04": {
+      "all_next_arrivals": {
+        "brier_gain_marginal_minus_markov": 0.44554318197575804,
+        "brier_gain_normal95_ci": [
+          0.44385263587549617,
+          0.4472337280760199
+        ],
+        "logloss_gain_marginal_minus_markov": 2.797491991612252,
+        "logloss_gain_normal95_ci": [
+          2.7901793144098406,
+          2.804804668814663
+        ],
+        "marginal_brier": 0.9761638217841677,
+        "marginal_logloss": 3.7206742499330865,
+        "marginal_top1_accuracy": 0.03517078119715928,
+        "marginal_top1_ece": 0.020043164200321557,
+        "markov_brier": 0.5306206398084097,
+        "markov_logloss": 0.9231822583208346,
+        "markov_top1_accuracy": 0.5003623363447509,
+        "markov_top1_ece": 0.05403340119226674,
+        "n": 20699,
+        "row_support": {
+          "ge_4_fraction": 0.9873423836900334,
+          "ge_8_fraction": 0.9717860766220591,
+          "median": 52
+        },
+        "top1_delta_markov_minus_marginal": 0.4651915551475917,
+        "top1_delta_normal95_ci": [
+          0.45834632255480345,
+          0.47203678774037994
+        ]
+      },
+      "answer": "results/pipes/improvement/case15_markov_prediction_20261018/runs/baseline_skill/runs/markov_case_04/judge_output.txt",
+      "at_expansion_decisions": {
+        "brier_gain_marginal_minus_markov": 0.3305151012298064,
+        "brier_gain_normal95_ci": [
+          0.3168592863141868,
+          0.34417091614542594
+        ],
+        "logloss_gain_marginal_minus_markov": 1.8842827849844217,
+        "logloss_gain_normal95_ci": [
+          1.8265570090606356,
+          1.9420085609082078
+        ],
+        "marginal_brier": 0.9624638395718238,
+        "marginal_logloss": 3.3849851670120827,
+        "marginal_top1_accuracy": 0.0547945205479452,
+        "marginal_top1_ece": 0.04333105765464146,
+        "markov_brier": 0.6319487383420175,
+        "markov_logloss": 1.5007023820276613,
+        "markov_top1_accuracy": 0.4958904109589041,
+        "markov_top1_ece": 0.12668824818086852,
+        "n": 730,
+        "row_support": {
+          "ge_4_fraction": 0.8410958904109589,
+          "ge_8_fraction": 0.6876712328767123,
+          "median": 13
+        },
+        "top1_delta_markov_minus_marginal": 0.4410958904109589,
+        "top1_delta_normal95_ci": [
+          0.40505234825049874,
+          0.4771394325714191
+        ]
+      },
+      "baseline_expansions": 730,
+      "commands": 40700,
+      "evaluated_next_arrivals": 20699,
+      "input": "results/pipes/improvement/case15_markov_prediction_20261018/synthetic/markov_case_04.in",
+      "model": {
+        "baseline": "rolling marginal over previous 2048 positive pipe lengths with Laplace-1 smoothing",
+        "conditioning": "P(next positive pipe length | current positive pipe length)",
+        "dirichlet_global_prior_strength": 8.0,
+        "labels": 40,
+        "window_placements": 2048
+      },
+      "placements": 20700
+    },
+    "markov_case_05": {
+      "all_next_arrivals": {
+        "brier_gain_marginal_minus_markov": 0.009855259749472454,
+        "brier_gain_normal95_ci": [
+          0.009073044084977748,
+          0.010637475413967161
+        ],
+        "logloss_gain_marginal_minus_markov": 0.18205602248271627,
+        "logloss_gain_normal95_ci": [
+          0.17435516951944288,
+          0.18975687544598965
+        ],
+        "marginal_brier": 0.9213503928971367,
+        "marginal_logloss": 2.631119876539225,
+        "marginal_top1_accuracy": 0.08662254215179477,
+        "marginal_top1_ece": 0.014098549989964942,
+        "markov_brier": 0.9114951331476642,
+        "markov_logloss": 2.4490638540565093,
+        "markov_top1_accuracy": 0.09850717425962607,
+        "markov_top1_ece": 0.03767152916274471,
+        "n": 20699,
+        "row_support": {
+          "ge_4_fraction": 0.9922701579786463,
+          "ge_8_fraction": 0.9845403159572926,
+          "median": 187
+        },
+        "top1_delta_markov_minus_marginal": 0.011884632107831297,
+        "top1_delta_normal95_ci": [
+          0.006657555463854515,
+          0.017111708751808077
+        ]
+      },
+      "answer": "results/pipes/improvement/case15_markov_prediction_20261018/runs/baseline_skill/runs/markov_case_05/judge_output.txt",
+      "at_expansion_decisions": {
+        "brier_gain_marginal_minus_markov": 0.06327066430175313,
+        "brier_gain_normal95_ci": [
+          0.055340779321201315,
+          0.07120054928230493
+        ],
+        "logloss_gain_marginal_minus_markov": 0.8356089441442924,
+        "logloss_gain_normal95_ci": [
+          0.7314953032786768,
+          0.939722585009908
+        ],
+        "marginal_brier": 1.0117040756957294,
+        "marginal_logloss": 4.201724442180946,
+        "marginal_top1_accuracy": 0.035398230088495575,
+        "marginal_top1_ece": 0.06617919045735082,
+        "markov_brier": 0.9484334113939761,
+        "markov_logloss": 3.3661154980366526,
+        "markov_top1_accuracy": 0.09144542772861357,
+        "markov_top1_ece": 0.05897303900042336,
+        "n": 678,
+        "row_support": {
+          "ge_4_fraction": 0.8938053097345132,
+          "ge_8_fraction": 0.7743362831858407,
+          "median": 19
+        },
+        "top1_delta_markov_minus_marginal": 0.05604719764011799,
+        "top1_delta_normal95_ci": [
+          0.030518271123436493,
+          0.08157612415679949
+        ]
+      },
+      "baseline_expansions": 678,
+      "commands": 40700,
+      "evaluated_next_arrivals": 20699,
+      "input": "results/pipes/improvement/case15_markov_prediction_20261018/synthetic/markov_case_05.in",
+      "model": {
+        "baseline": "rolling marginal over previous 2048 positive pipe lengths with Laplace-1 smoothing",
+        "conditioning": "P(next positive pipe length | current positive pipe length)",
+        "dirichlet_global_prior_strength": 8.0,
+        "labels": 40,
+        "window_placements": 2048
+      },
+      "placements": 20700
+    },
+    "markov_case_06": {
+      "all_next_arrivals": {
+        "brier_gain_marginal_minus_markov": 0.009533563788920075,
+        "brier_gain_normal95_ci": [
+          0.0086273331954545,
+          0.01043979438238565
+        ],
+        "logloss_gain_marginal_minus_markov": 0.106340110799587,
+        "logloss_gain_normal95_ci": [
+          0.09571544716097811,
+          0.11696477443819588
+        ],
+        "marginal_brier": 0.9536944869478332,
+        "marginal_logloss": 3.1360412539895677,
+        "marginal_top1_accuracy": 0.06386781970143485,
+        "marginal_top1_ece": 0.006653687495686112,
+        "markov_brier": 0.9441609231589132,
+        "markov_logloss": 3.029701143189981,
+        "markov_top1_accuracy": 0.07956906130730954,
+        "markov_top1_ece": 0.04160645091395814,
+        "n": 20699,
+        "row_support": {
+          "ge_4_fraction": 0.9953620947871877,
+          "ge_8_fraction": 0.9907241895743756,
+          "median": 76
+        },
+        "top1_delta_markov_minus_marginal": 0.01570124160587468,
+        "top1_delta_normal95_ci": [
+          0.011089498369340273,
+          0.02031298484240909
+        ]
+      },
+      "answer": "results/pipes/improvement/case15_markov_prediction_20261018/runs/baseline_skill/runs/markov_case_06/judge_output.txt",
+      "at_expansion_decisions": {
+        "brier_gain_marginal_minus_markov": -0.005103559420286394,
+        "brier_gain_normal95_ci": [
+          -0.014306351977087062,
+          0.0040992331365142754
+        ],
+        "logloss_gain_marginal_minus_markov": -0.025069486280605135,
+        "logloss_gain_normal95_ci": [
+          -0.09997824502689517,
+          0.0498392724656849
+        ],
+        "marginal_brier": 0.9459026991264102,
+        "marginal_logloss": 3.099251987350004,
+        "marginal_top1_accuracy": 0.08196721311475409,
+        "marginal_top1_ece": 0.010042637874038628,
+        "markov_brier": 0.9510062585466967,
+        "markov_logloss": 3.1243214736306095,
+        "markov_top1_accuracy": 0.10070257611241218,
+        "markov_top1_ece": 0.06645390661821683,
+        "n": 427,
+        "row_support": {
+          "ge_4_fraction": 0.8313817330210773,
+          "ge_8_fraction": 0.6651053864168618,
+          "median": 12
+        },
+        "top1_delta_markov_minus_marginal": 0.01873536299765808,
+        "top1_delta_normal95_ci": [
+          -0.015608518605656783,
+          0.05307924460097294
+        ]
+      },
+      "baseline_expansions": 427,
+      "commands": 40700,
+      "evaluated_next_arrivals": 20699,
+      "input": "results/pipes/improvement/case15_markov_prediction_20261018/synthetic/markov_case_06.in",
+      "model": {
+        "baseline": "rolling marginal over previous 2048 positive pipe lengths with Laplace-1 smoothing",
+        "conditioning": "P(next positive pipe length | current positive pipe length)",
+        "dirichlet_global_prior_strength": 8.0,
+        "labels": 40,
+        "window_placements": 2048
+      },
+      "placements": 20700
+    }
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "status": "stopped_at_authorized_deadline",
+  "generated_at": 1792332105.370704,
+  "deadline_local": "2026-10-18T21:00:00+07:00",
+  "supervisor_finished_at": 1792332000.5537112,
+  "stop_reason": "evening_deadline",
+  "loop_manifest_reason": "unknown",
+  "reason_discrepancy_note": "Supervisor evening_deadline is authoritative; loop wrote unknown while handling termination of an active model child. Raw artifacts preserved.",
+  "unique_completed_evaluations": 112,
+  "unique_source_hashes": 112,
+  "target_upper_bound": 800,
+  "evaluation_attempt_counter": 113,
+  "model_calls": 98,
+  "failed_proposals_counter": 1,
+  "shutdown_note": "Only logged infrastructure_failure at final shutdown is trial97 model_exit_-15 caused by supervisor termination at deadline; this is not evidence of a preceding repeated infrastructure fault. Trials97/98 were unfinished and not evaluated; partial artifacts retained, no automatic retry.",
+  "pending_trials": [
+    "trial_0097",
+    "trial_0098"
+  ],
+  "best": {
+    "submission_id": 1665224,
+    "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/releases/988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4/solution.cpp",
+    "sha256": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+    "local_exact_score": 30.090967891345112,
+    "leaderboard_exact_displayed_score": 30.09096789,
+    "status": "AAAAAAAAAAAAAAA",
+    "result_url": "https://olympic.nsu.ru/nsuts-new/solution?id=1665224",
+    "qualification": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/releases/988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4/qualification.json"
+  },
+  "platform_entry_reference": {
+    "submission_id": 1665176,
+    "score": 30.078763164118683,
+    "increment": 0.012204727226428957
+  },
+  "local_baseline_reference": {
+    "sha256": "c19945111834e5969e2f58f0b6503851b35e7642a9bd77f9f70c118ee3bb736c",
+    "score": 30.074287976405,
+    "increment": 0.016679914940112894
+  },
+  "last_leaderboard_observation": {
+    "observed_at_utc": "2026-10-18T13:39:00Z",
+    "source": "live browser reload https://olympic.nsu.ru/nsuts-new/ranking",
+    "team": "бюро 67",
+    "rank": 30,
+    "score": 30.09096789,
+    "leader": "SysCall",
+    "leader_score": 30.75747405,
+    "submission_unchanged": "1665224",
+    "note": "Page reloaded; server last-update label unavailable. Submission metadata not changed."
+  },
+  "leader_gap_at_last_observation": 0.6665061586548866,
+  "generalization": "Latest submitted increment vs its previous submitted parent on30new post-freeze streams:9wins/6regressions/15ties,mean delta F/T+0.00002446947. Small mixed transfer; does not establish hidden-test improvement. Consumed release seeds were not repeated.",
+  "final_quota_remaining_percent": 73.0,
+  "fresh_quota_tool_checked_at_utc": "2026-10-18T14:00:42Z",
+  "cleanup_audit": "cleanup-audit.json",
+  "worker_exit_code": 0,
+  "automation": {
+    "id": "pipes-65",
+    "status": "PAUSED"
+  },
+  "automatic_recoveries": 0,
+  "planned_initial_reloads": 2,
+  "new_release_or_submission_this_heartbeat": false,
+  "goal_won": false,
+  "retained_artifacts": [
+    "analysis/recent-trials-89-96.json",
+    "stagnation-checkpoints/20261018T2032.json",
+    "branches/learned_run_prefix/report.json",
+    "branches/pareto_pair_transfer/report.json"
+  ],
+  "conclusion": "No result stronger than trial22. The requested victory was not achieved. Further autonomous work/submissions require new explicit authorization; no automatic resume."
+}

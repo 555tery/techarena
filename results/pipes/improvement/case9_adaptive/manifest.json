@@ -1,0 +1,175 @@
+{
+  "experiment": "case9_adaptive_geometry_signals",
+  "baseline_source": "results/pipes/final/solution.cpp",
+  "baseline_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "canonical_source": "src/pipes.cpp",
+  "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+  "build_flags": [
+    "-O2",
+    "-std=c++20",
+    "-pipe",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-pedantic"
+  ],
+  "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+  "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+  "screen_cases": [
+    "5",
+    "9",
+    "15"
+  ],
+  "full_open15_run": false,
+  "holdout_v2_run": false,
+  "promotion_gate": "candidate weighted screen must be >= final; no candidate passed",
+  "variants": {
+    "geometry_mass": {
+      "source_path": "results/pipes/improvement/case9_adaptive/source/geometry_mass.cpp",
+      "source_sha256": "89e9f7745d6acd144cd15112e9afbdbc30aca9977cf4ebd462d7418904be06c5",
+      "binary_path": "results/pipes/improvement/case9_adaptive/build/geometry_mass",
+      "binary_sha256": "f6ab98193df000df83e0b965780eb4e26359111fa44eb870fe576886129baf64",
+      "runs": [
+        {
+          "case": "5",
+          "summary_path": "results/pipes/improvement/case9_adaptive/screen/geometry_mass-case5/summary.json",
+          "summary_sha256": "7cec81db69e5c49a94a65a332929a6411d484845db737c1af19e6f52e792235a",
+          "cases_csv_path": "results/pipes/improvement/case9_adaptive/screen/geometry_mass-case5/cases.csv",
+          "cases_csv_sha256": "2d4a98d1bda6fcc455037a954426a8bdb3425388513f08a08acb39c7673fc02f",
+          "status": "ok",
+          "trench_m": 63180,
+          "weighted_score": 0.804685026907249,
+          "solver_cpu_s": 0.084394,
+          "solver_rss_mib": 2.59375,
+          "judge_output_sha256": "584942fde5432bda37d859369ecd6a4de428fd829c30a2e5a16cd954cf29a38c"
+        },
+        {
+          "case": "9",
+          "summary_path": "results/pipes/improvement/case9_adaptive/screen/geometry_mass-case9/summary.json",
+          "summary_sha256": "67f43b8ea1b812adbd67b43e45648925925f8d29dfe27f2bb6b7c111338749ad",
+          "cases_csv_path": "results/pipes/improvement/case9_adaptive/screen/geometry_mass-case9/cases.csv",
+          "cases_csv_sha256": "5970936d0c78e94ebdaaaf656e48d6e60834390fe24edadb9098c216bc9d48eb",
+          "status": "ok",
+          "trench_m": 63940,
+          "weighted_score": 0.49264935877385,
+          "solver_cpu_s": 0.133372,
+          "solver_rss_mib": 2.59375,
+          "judge_output_sha256": "ff0b0b62b8b9413b51fbcc60f93e325919d23f49906129ec852464b8e16d63a0"
+        },
+        {
+          "case": "15",
+          "summary_path": "results/pipes/improvement/case9_adaptive/screen/geometry_mass-case15/summary.json",
+          "summary_sha256": "6a01eff49a06b4de68eb8afe55fc42fc37042b6dce953fdb6cb89881f3ca7149",
+          "cases_csv_path": "results/pipes/improvement/case9_adaptive/screen/geometry_mass-case15/cases.csv",
+          "cases_csv_sha256": "d94fbd5725089bc9fb208370cfac18af256a343d56e7282eebbde2995df45d81",
+          "status": "ok",
+          "trench_m": 438920,
+          "weighted_score": 9.54062243689055,
+          "solver_cpu_s": 1.8537590000000002,
+          "solver_rss_mib": 7.21875,
+          "judge_output_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e"
+        }
+      ]
+    },
+    "geometry_slots": {
+      "source_path": "results/pipes/improvement/case9_adaptive/source/geometry_slots.cpp",
+      "source_sha256": "5a58f8ab86251208184350a6673b87d003b0b7355624863d14cb8833a866c15e",
+      "binary_path": "results/pipes/improvement/case9_adaptive/build/geometry_slots",
+      "binary_sha256": "462bb6bcd4cf7d9278dfc372c6bc4e6acd0ec73158720346a4a3e938e14e9afc",
+      "runs": [
+        {
+          "case": "5",
+          "summary_path": "results/pipes/improvement/case9_adaptive/screen/geometry_slots-case5/summary.json",
+          "summary_sha256": "5411c0cce29eb9f0a62e58fa1834b5a5f72a21eeac94ad80d54127e6121b892e",
+          "cases_csv_path": "results/pipes/improvement/case9_adaptive/screen/geometry_slots-case5/cases.csv",
+          "cases_csv_sha256": "ebed5805c0d82c6f4cf202da431383e048e797bdb06323b3d2c1e0dbbc1eb5df",
+          "status": "ok",
+          "trench_m": 63160,
+          "weighted_score": 0.804939835338822,
+          "solver_cpu_s": 0.082492,
+          "solver_rss_mib": 2.84375,
+          "judge_output_sha256": "28f3ea1f1856402a227005da68182127814c1486b6f7b4c189a5fb32f90bc289"
+        },
+        {
+          "case": "9",
+          "summary_path": "results/pipes/improvement/case9_adaptive/screen/geometry_slots-case9/summary.json",
+          "summary_sha256": "56fd2d83f903dc814dc3624ca0aa54e2d37beb67f7021f17c462f4a530fe0573",
+          "cases_csv_path": "results/pipes/improvement/case9_adaptive/screen/geometry_slots-case9/cases.csv",
+          "cases_csv_sha256": "d9cf00fef3949117905dd60846a47339e732f6a1e30918365b15620637b65566",
+          "status": "ok",
+          "trench_m": 62980,
+          "weighted_score": 0.500158780565259,
+          "solver_cpu_s": 0.13413799999999998,
+          "solver_rss_mib": 3.125,
+          "judge_output_sha256": "171778027cac0ba7a055a99a936aa5166c0186e3e9d41776e29621b1bad74b57"
+        },
+        {
+          "case": "15",
+          "summary_path": "results/pipes/improvement/case9_adaptive/screen/geometry_slots-case15/summary.json",
+          "summary_sha256": "eda043da6d8f0390f91f9e9b6b8cfd62d9b6c8d11044cb27b35e7ac59fe60f6a",
+          "cases_csv_path": "results/pipes/improvement/case9_adaptive/screen/geometry_slots-case15/cases.csv",
+          "cases_csv_sha256": "08a59922b11e8eedbe103046b8578340c7199957dfc5f984c935cba464a9a821",
+          "status": "ok",
+          "trench_m": 438920,
+          "weighted_score": 9.54062243689055,
+          "solver_cpu_s": 1.844465,
+          "solver_rss_mib": 7.328125,
+          "judge_output_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e"
+        }
+      ]
+    },
+    "geometry_count": {
+      "source_path": "results/pipes/improvement/case9_adaptive/source/geometry_count.cpp",
+      "source_sha256": "f3bc721daf9b06925f31d4537403c0e4b9ddbb97bead30b4b8c6c95f28032d4f",
+      "binary_path": "results/pipes/improvement/case9_adaptive/build/geometry_count",
+      "binary_sha256": "1685311901750a8c7d4008f33771174b1e2c65a3283ed0f5a716722cd4ab21c5",
+      "runs": [
+        {
+          "case": "5",
+          "summary_path": "results/pipes/improvement/case9_adaptive/screen/geometry_count-case5/summary.json",
+          "summary_sha256": "fef1163286e387b71e3cbfb2a0d80126aba681c03bef58dbbc905243464fa966",
+          "cases_csv_path": "results/pipes/improvement/case9_adaptive/screen/geometry_count-case5/cases.csv",
+          "cases_csv_sha256": "9cc3099560415af9ac11aa894ff09f098877621c584556689e9fae60311d4ee2",
+          "status": "ok",
+          "trench_m": 63160,
+          "weighted_score": 0.804939835338822,
+          "solver_cpu_s": 0.08595,
+          "solver_rss_mib": 2.40625,
+          "judge_output_sha256": "28f3ea1f1856402a227005da68182127814c1486b6f7b4c189a5fb32f90bc289"
+        },
+        {
+          "case": "9",
+          "summary_path": "results/pipes/improvement/case9_adaptive/screen/geometry_count-case9/summary.json",
+          "summary_sha256": "b8e354482cdd2807a4f6f66d6ffbf6974b9855709aea12938dce653e7e02bc44",
+          "cases_csv_path": "results/pipes/improvement/case9_adaptive/screen/geometry_count-case9/cases.csv",
+          "cases_csv_sha256": "82c644ec722359f178a528b31dbb912ce562d168819be1a8cf5c5b71c0d54915",
+          "status": "ok",
+          "trench_m": 62980,
+          "weighted_score": 0.500158780565259,
+          "solver_cpu_s": 0.148733,
+          "solver_rss_mib": 2.25,
+          "judge_output_sha256": "171778027cac0ba7a055a99a936aa5166c0186e3e9d41776e29621b1bad74b57"
+        },
+        {
+          "case": "15",
+          "summary_path": "results/pipes/improvement/case9_adaptive/screen/geometry_count-case15/summary.json",
+          "summary_sha256": "3e5a17df88fe863085e84467f30ae17449acec4e8e959ba18011db09e51269e7",
+          "cases_csv_path": "results/pipes/improvement/case9_adaptive/screen/geometry_count-case15/cases.csv",
+          "cases_csv_sha256": "628e5c6b2508fced3fa69c2099849b42876e82f9f1d995c3f7240f8456e1e910",
+          "status": "ok",
+          "trench_m": 438920,
+          "weighted_score": 9.54062243689055,
+          "solver_cpu_s": 1.838591,
+          "solver_rss_mib": 7.15625,
+          "judge_output_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e"
+        }
+      ]
+    }
+  },
+  "input_sha256": {
+    "data/pipes/open/5.in": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+    "data/pipes/open/9.in": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+    "data/pipes/open/15.in": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+  }
+}

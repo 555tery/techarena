@@ -1,0 +1,228 @@
+{
+  "experiment": "scale_gt4096 active-count and gate-activation qualification",
+  "date_local": "2026-10-18",
+  "scope": "Four fresh 105k-command synthetic streams; local harness only; no website or Docker.",
+  "prior_open15_scores_not_rerun": {
+    "AB": 30.04308919953782,
+    "scale_gt4096": 30.044966195,
+    "source_report": "results/pipes/improvement/case15_expansion_edge_cf/manifest.json"
+  },
+  "policy": {
+    "scale_gt4096_source_sha256": "a280146cdc55c0fe8fbb6d4b7fda158f4e2189fa3463ce9d046f02a070a3571a",
+    "gate": "dig required; positive post-dig slack; activePipeCount > 4096; >=48 recent delete ranks with >=80% in newest 5%; >=90% recent lengths <=8m; old tail neighbor in newest 5% by active PID rank.",
+    "activation_metric": "expansion_gate_passes from the candidate's MC_ROLLOUT_DIAGNOSTICS stderr; this counter increments only when the complete offset condition is true."
+  },
+  "comparators": {
+    "AB": {
+      "source": "results/pipes/improvement/case15_scale_offset_activation_20261018/source/ab_candidate.cpp",
+      "source_sha256": "4c3a3590eb1ad4251640af32f10f7e5b506b8cfac8ee6b9d0edaa6d4e231caae",
+      "source_matches_original": true,
+      "original_source_sha256": "4c3a3590eb1ad4251640af32f10f7e5b506b8cfac8ee6b9d0edaa6d4e231caae",
+      "binary": "results/pipes/improvement/case15_scale_offset_activation_20261018/bin/ab_candidate",
+      "binary_sha256": "11e0439e12051ea08816f61a68b0f33d482abafb8e08357d55c1883251ff9f66"
+    },
+    "scale_gt4096": {
+      "source": "results/pipes/improvement/case15_scale_offset_activation_20261018/source/scale_gt4096.cpp",
+      "source_sha256": "a280146cdc55c0fe8fbb6d4b7fda158f4e2189fa3463ce9d046f02a070a3571a",
+      "source_matches_original": true,
+      "original_source_sha256": "a280146cdc55c0fe8fbb6d4b7fda158f4e2189fa3463ce9d046f02a070a3571a",
+      "binary": "results/pipes/improvement/case15_scale_offset_activation_20261018/bin/scale_gt4096",
+      "binary_sha256": "5ae55337b76e6616df1a02be187910362877d9d984746c20e2039768b04e1c1c"
+    }
+  },
+  "synthetics": [
+    {
+      "name": "gate_stress_01",
+      "seed": 202610184101,
+      "command_count": 105000,
+      "initial_active": 5000,
+      "minimum_active_count": 5000,
+      "maximum_active_count": 21002,
+      "placement_count": 63000,
+      "deletion_count": 42000,
+      "description": "phased short lengths; newest-5% deletion every time",
+      "input_sha256": "57b07116f4ec2cf40790571d32f4705a999af9f9d66be64942314d3d74734f5f",
+      "path": "results/pipes/improvement/case15_scale_offset_activation_20261018/synthetic/gate_stress_01.in"
+    },
+    {
+      "name": "gate_stress_02",
+      "seed": 202610184102,
+      "command_count": 105000,
+      "initial_active": 5000,
+      "minimum_active_count": 5000,
+      "maximum_active_count": 21002,
+      "placement_count": 63000,
+      "deletion_count": 42000,
+      "description": "low/mid short-size phase shift; 85% newest-5%, otherwise FIFO",
+      "input_sha256": "807b9f3a434844269f82ad65aeff6b096632847d2db13e9d91dda5796c9a9b1f",
+      "path": "results/pipes/improvement/case15_scale_offset_activation_20261018/synthetic/gate_stress_02.in"
+    },
+    {
+      "name": "gate_stress_03",
+      "seed": 202610184103,
+      "command_count": 105000,
+      "initial_active": 5000,
+      "minimum_active_count": 5000,
+      "maximum_active_count": 21002,
+      "placement_count": 63000,
+      "deletion_count": 42000,
+      "description": "short demand with a 6% wide pulse; 90% newest-5%, otherwise random",
+      "input_sha256": "b179af5a8dbcc0ade6c42d9432c38349e960405a94f2cd3b8f8e9e52a0552402",
+      "path": "results/pipes/improvement/case15_scale_offset_activation_20261018/synthetic/gate_stress_03.in"
+    },
+    {
+      "name": "gate_stress_04",
+      "seed": 202610184104,
+      "command_count": 105000,
+      "initial_active": 5000,
+      "minimum_active_count": 5000,
+      "maximum_active_count": 21002,
+      "placement_count": 63000,
+      "deletion_count": 42000,
+      "description": "short-size phases; random then mixed then 95% newest-5% deletion",
+      "input_sha256": "d24ec1fe3fba0ca305cf9d8957aa9f90f90202ea338ce75da5df95d21e71ecfe",
+      "path": "results/pipes/improvement/case15_scale_offset_activation_20261018/synthetic/gate_stress_04.in"
+    }
+  ],
+  "runs": {
+    "AB": {
+      "summary_path": "results/pipes/improvement/case15_scale_offset_activation_20261018/runs/AB/summary.json",
+      "summary_sha256": "de0167efd4185f2c0adbaee539ebca8383ae1a89bd050eb6a6938b6c95d423ba",
+      "cases_path": "results/pipes/improvement/case15_scale_offset_activation_20261018/runs/AB/cases.csv",
+      "cases_sha256": "64509852fd952f14bc1c0e78434c72fcd8ff0655fcafef76051b04765ceafe6a",
+      "all_ok": true,
+      "score_sum": 3.992313260500535,
+      "max_solver_cpu_s": 1.530088,
+      "max_solver_rss_mib": 3.6875,
+      "records": [
+        {
+          "case": "gate_stress_01",
+          "test_sha256": "57b07116f4ec2cf40790571d32f4705a999af9f9d66be64942314d3d74734f5f",
+          "status": "ok",
+          "trench_m": 66480,
+          "kpi": 0.9993080625752105,
+          "solver_cpu_s": 1.367039,
+          "solver_rss_mib": 3.6875,
+          "answer_sha256": "802e5d591e98ba6062c6e49d620e442c830f4bb9348e9fcc6fdb5bcdfd90c681",
+          "solver_diagnostics": "mc_decisions=32 mc_rollouts=768"
+        },
+        {
+          "case": "gate_stress_02",
+          "test_sha256": "807b9f3a434844269f82ad65aeff6b096632847d2db13e9d91dda5796c9a9b1f",
+          "status": "ok",
+          "trench_m": 73960,
+          "kpi": 0.9943077339102218,
+          "solver_cpu_s": 1.530088,
+          "solver_rss_mib": 3.359375,
+          "answer_sha256": "f82ed695a61630bf1d1e59e168c8aa88200b3bd691a770a2184b01c2ebfa6cfb",
+          "solver_diagnostics": "mc_decisions=32 mc_rollouts=780"
+        },
+        {
+          "case": "gate_stress_03",
+          "test_sha256": "b179af5a8dbcc0ade6c42d9432c38349e960405a94f2cd3b8f8e9e52a0552402",
+          "status": "ok",
+          "trench_m": 96060,
+          "kpi": 0.9992712887778472,
+          "solver_cpu_s": 1.5070419999999998,
+          "solver_rss_mib": 3.015625,
+          "answer_sha256": "75a3be028e38cc946f61627a6e08ee1316cb9b7b582e74c96bc28a6d124be3f6",
+          "solver_diagnostics": "mc_decisions=32 mc_rollouts=852"
+        },
+        {
+          "case": "gate_stress_04",
+          "test_sha256": "d24ec1fe3fba0ca305cf9d8957aa9f90f90202ea338ce75da5df95d21e71ecfe",
+          "status": "ok",
+          "trench_m": 90620,
+          "kpi": 0.9994261752372545,
+          "solver_cpu_s": 1.4609079999999999,
+          "solver_rss_mib": 3.171875,
+          "answer_sha256": "d6b57681e71a7e6a3d9a3ac9fad4297abcc793f52b83f0e70e9ff1abfa5b5cb6",
+          "solver_diagnostics": "mc_decisions=32 mc_rollouts=828"
+        }
+      ]
+    },
+    "scale_gt4096": {
+      "summary_path": "results/pipes/improvement/case15_scale_offset_activation_20261018/runs/scale_gt4096/summary.json",
+      "summary_sha256": "bde044ef945fd51f82f39f044329680d5049bfa15a2eed88c461d96fe62c06c9",
+      "cases_path": "results/pipes/improvement/case15_scale_offset_activation_20261018/runs/scale_gt4096/cases.csv",
+      "cases_sha256": "0838d0084b4b331df8d6fd722cbf33085ac04c0f2c301c9092858810eecc36f0",
+      "all_ok": true,
+      "score_sum": 3.990746355332616,
+      "max_solver_cpu_s": 1.6396709999999999,
+      "max_solver_rss_mib": 4.46875,
+      "records": [
+        {
+          "case": "gate_stress_01",
+          "test_sha256": "57b07116f4ec2cf40790571d32f4705a999af9f9d66be64942314d3d74734f5f",
+          "status": "ok",
+          "trench_m": 66520,
+          "kpi": 0.9987071557426338,
+          "solver_cpu_s": 1.467594,
+          "solver_rss_mib": 4.46875,
+          "answer_sha256": "62312bd76b2e84a2f72afca24df031fae59ad33a20059eabf7621c96a7c0c393",
+          "solver_diagnostics": "mc_decisions=32 mc_rollouts=768 expansion_gate_opportunities=3326 expansion_gate_passes=2687"
+        },
+        {
+          "case": "gate_stress_02",
+          "test_sha256": "807b9f3a434844269f82ad65aeff6b096632847d2db13e9d91dda5796c9a9b1f",
+          "status": "ok",
+          "trench_m": 74000,
+          "kpi": 0.9937702702702703,
+          "solver_cpu_s": 1.6396709999999999,
+          "solver_rss_mib": 3.328125,
+          "answer_sha256": "5f9511623cdcbde0156f69e60b6fb909a8ba1bd54e98dd1126bf509164f895b0",
+          "solver_diagnostics": "mc_decisions=32 mc_rollouts=780 expansion_gate_opportunities=3700 expansion_gate_passes=3191"
+        },
+        {
+          "case": "gate_stress_03",
+          "test_sha256": "b179af5a8dbcc0ade6c42d9432c38349e960405a94f2cd3b8f8e9e52a0552402",
+          "status": "ok",
+          "trench_m": 96080,
+          "kpi": 0.9990632805995004,
+          "solver_cpu_s": 1.639085,
+          "solver_rss_mib": 3.859375,
+          "answer_sha256": "651030ac77ef2eda596334fc7cefa86c78e34a94874d9024a186d1f19fbf5407",
+          "solver_diagnostics": "mc_decisions=32 mc_rollouts=852 expansion_gate_opportunities=4804 expansion_gate_passes=3557"
+        },
+        {
+          "case": "gate_stress_04",
+          "test_sha256": "d24ec1fe3fba0ca305cf9d8957aa9f90f90202ea338ce75da5df95d21e71ecfe",
+          "status": "ok",
+          "trench_m": 90640,
+          "kpi": 0.9992056487202118,
+          "solver_cpu_s": 1.5459159999999998,
+          "solver_rss_mib": 3.875,
+          "answer_sha256": "487cdddaed7fd4bd73c7d3ab09433413b9aca158ef9105acd70c24a62b5257a8",
+          "solver_diagnostics": "mc_decisions=32 mc_rollouts=828 expansion_gate_opportunities=4532 expansion_gate_passes=942"
+        }
+      ]
+    }
+  },
+  "reproduction": {
+    "generator": {
+      "path": "results/pipes/improvement/case15_scale_offset_activation_20261018/generate_synthetics.py",
+      "sha256": "7e02892dd5b24a8dc310b7b4f3578c20ad98044fef1004e8421d523436c9aefb"
+    },
+    "manifest_path": "results/pipes/improvement/case15_scale_offset_activation_20261018/synthetic/manifest.json",
+    "manifest_sha256": "b14b1200425306c7e451cefc413a4192ee726e96e61930fdbd1939b187f7689d",
+    "harness": "tools/pipes_harness.py",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor": "results/pipes/final/bin/interactor",
+    "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+    "build_flags": "-std=c++20 -O2 -DNDEBUG -Wall -Wextra -Werror -pedantic -DMC_ROLLOUT_DIAGNOSTICS",
+    "cpu_limit_s": 5,
+    "memory_limit_mib": 256,
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "input_hashes": {
+      "synthetic/gate_stress_01.in": "57b07116f4ec2cf40790571d32f4705a999af9f9d66be64942314d3d74734f5f",
+      "synthetic/gate_stress_02.in": "807b9f3a434844269f82ad65aeff6b096632847d2db13e9d91dda5796c9a9b1f",
+      "synthetic/gate_stress_03.in": "b179af5a8dbcc0ade6c42d9432c38349e960405a94f2cd3b8f8e9e52a0552402",
+      "synthetic/gate_stress_04.in": "d24ec1fe3fba0ca305cf9d8957aa9f90f90202ea338ce75da5df95d21e71ecfe"
+    }
+  },
+  "frozen_and_canonical": {
+    "frozen_final_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  }
+}

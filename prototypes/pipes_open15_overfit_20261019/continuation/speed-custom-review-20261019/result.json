@@ -1,0 +1,603 @@
+{
+  "status": "completed_no_promotion",
+  "updated_at": "2026-10-18T21:11:53.524127+00:00",
+  "scope": "Runtime optimization only; same full-overfit plans, score and BF policy",
+  "score": 30.75747404826914,
+  "platform_submissions_this_action": 0,
+  "platform_current_source_unchanged": "speed-v8",
+  "platform_current_submission_last_verified": 1665883,
+  "server_time_measured": false,
+  "new_open15_variants": [
+    {
+      "candidate": "speed-v9",
+      "idea": "Compressed shared-prefix trie and smaller records",
+      "source_sha256": "9891e4573b694d5e5a9b9ea9258bb18cb3b6547045095db70ceec2413a484a86",
+      "pairs": 7,
+      "baseline_median": 0.819828,
+      "candidate_median": 0.8570989999999999,
+      "median_cpu_reduction_percent": -4.5461974950843365,
+      "faster_pairs": 1,
+      "paired_mean_saved_seconds": -0.05473328571428574,
+      "paired_bootstrap_95_ci_seconds": [
+        -0.10278828571428579,
+        -0.013581714285714244
+      ],
+      "all_answers_identical": true,
+      "promotion": "no_confirmed_speed_gain",
+      "evidence": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v9/timing/result.json"
+    },
+    {
+      "candidate": "speed-v10",
+      "idea": "Fixed matcher arrays, unique-table hot path, parser branch simplification",
+      "source_sha256": "9e27479b22f51b179c0e392a089e726aaab9c68dd005a7b36f45b7065e110698",
+      "pairs": 7,
+      "baseline_median": 0.782206,
+      "candidate_median": 0.803329,
+      "median_cpu_reduction_percent": -2.700439526160636,
+      "faster_pairs": 2,
+      "paired_mean_saved_seconds": -0.01753257142857142,
+      "paired_bootstrap_95_ci_seconds": [
+        -0.034825714285714224,
+        0.0027444285714285366
+      ],
+      "all_answers_identical": true,
+      "promotion": "no_confirmed_speed_gain",
+      "evidence": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v10/timing/result.json"
+    },
+    {
+      "candidate": "speed-v11",
+      "idea": "Fixed matcher arrays, no exceptions/new/STL containers, fixed BSS Best-Fit treaps",
+      "source_sha256": "e3b13cdea1a712bf0b6e8a705829d629c03c6a7b902acd42116f51df8b713052",
+      "pairs": 7,
+      "baseline_median": 0.682706,
+      "candidate_median": 0.680384,
+      "median_cpu_reduction_percent": 0.3401171221580124,
+      "faster_pairs": 2,
+      "paired_mean_saved_seconds": -0.014786857142857117,
+      "paired_bootstrap_95_ci_seconds": [
+        -0.04435542857142855,
+        0.015380857142857196
+      ],
+      "all_answers_identical": true,
+      "promotion": "no_confirmed_speed_gain",
+      "evidence": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v11/timing/result.json"
+    }
+  ],
+  "custom_allocator": {
+    "source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v11/solution.cpp",
+    "source_sha256": "e3b13cdea1a712bf0b6e8a705829d629c03c6a7b902acd42116f51df8b713052",
+    "header_sha256": "0064d25c9a6adb16b001d79b9bd58b959ae6204507f9c9ecd27185d743dd26d4",
+    "independent_native_and_winapi_logic_checks": 168,
+    "fallback_candidate_checks": 18,
+    "open_timing_candidate_checks": 105,
+    "answers_identical": true,
+    "fixed_pool_unit_commands": 500000,
+    "maximum_gap_pool_boundary": 200001,
+    "no_cpp_runtime_imports_in_local_binary": true,
+    "undefined_symbols": [
+      "___error",
+      "___stack_chk_fail",
+      "___stack_chk_guard",
+      "___stderrp",
+      "_exit",
+      "_fprintf",
+      "_memcmp",
+      "_read",
+      "_write"
+    ],
+    "full_windows_compile_this_action": false,
+    "failure_fixed": "Initial rotateUp child-side bug caused divergence timeout. Failed source/binary and evidence retained under speed-v11/attempts/rotation-failure; all reported final checks use corrected hash."
+  },
+  "fallback_timing": {
+    "pairs": 3,
+    "baseline_median": 4.237793,
+    "candidate_median": 4.220844,
+    "median_cpu_reduction_percent": 0.3999487469067087,
+    "faster_pairs": 2,
+    "max_candidate_cpu_s": 0.856598,
+    "max_candidate_rss_mib": 4.203125,
+    "per_family": {
+      "coalesce": {
+        "baseline_median": 0.6951120000000001,
+        "candidate_median": 0.666688
+      },
+      "equal_gaps": {
+        "baseline_median": 0.692188,
+        "candidate_median": 0.656864
+      },
+      "fifo": {
+        "baseline_median": 0.66695,
+        "candidate_median": 0.631163
+      },
+      "lifo": {
+        "baseline_median": 0.664834,
+        "candidate_median": 0.632845
+      },
+      "random_dense": {
+        "baseline_median": 0.726146,
+        "candidate_median": 0.8137439999999999
+      },
+      "single_size": {
+        "baseline_median": 0.689284,
+        "candidate_median": 0.732477
+      }
+    }
+  },
+  "fallback_user_cpu_reduction_percent": 20.589820504471803,
+  "accepted_v8_system_cpu_fraction_in_latest_paired_sample": 0.8751845320209575,
+  "conclusion": "No candidate established a total interactive Open15 speed improvement. Custom BF reduces local user CPU, but mixed total timings do not justify replacing accepted v8. Server speed and CPU leaderboard sorting remain unverified. Retain exact Open15 score and one-command/one-response protocol.",
+  "limitations": [
+    "Local macOS timing; native Windows/server timing unavailable.",
+    "Small paired samples; bootstrap intervals descriptive only.",
+    "Full-overfit branch remains explicitly marked, no claim of generalization.",
+    "Deterministic treap has expected logarithmic operation cost but no worst-case logarithmic guarantee."
+  ],
+  "process_audit": {
+    "tracked": [
+      {
+        "pid": 65334,
+        "created_at": 1792357718.870981,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65573,
+        "created_at": 1792357749.814915,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65877,
+        "created_at": 1792357791.175527,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62074,
+        "created_at": 1792356997.943132,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62536,
+        "created_at": 1792357034.978582,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 66152,
+        "created_at": 1792357803.030571,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63887,
+        "created_at": 1792357194.513121,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 66113,
+        "created_at": 1792357801.143582,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65553,
+        "created_at": 1792357743.851737,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62296,
+        "created_at": 1792357005.817012,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65787,
+        "created_at": 1792357787.446493,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65744,
+        "created_at": 1792357785.571724,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62652,
+        "created_at": 1792357040.570597,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63956,
+        "created_at": 1792357198.44278,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65641,
+        "created_at": 1792357761.089598,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63853,
+        "created_at": 1792357192.648507,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63310,
+        "created_at": 1792357062.26161,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63234,
+        "created_at": 1792357058.120041,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62825,
+        "created_at": 1792357047.178579,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63127,
+        "created_at": 1792357052.126135,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 64066,
+        "created_at": 1792357204.43111,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63086,
+        "created_at": 1792357049.642548,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 66230,
+        "created_at": 1792357806.349614,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 66070,
+        "created_at": 1792357799.480203,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63272,
+        "created_at": 1792357060.194127,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62434,
+        "created_at": 1792357012.823788,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62121,
+        "created_at": 1792357000.419395,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62571,
+        "created_at": 1792357036.850615,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 64148,
+        "created_at": 1792357208.370758,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63818,
+        "created_at": 1792357190.783395,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62198,
+        "created_at": 1792357002.493073,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 66266,
+        "created_at": 1792357808.220077,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 64113,
+        "created_at": 1792357206.499522,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65186,
+        "created_at": 1792357711.633606,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 64781,
+        "created_at": 1792357584.105722,
+        "status": "finished",
+        "returncode": 1,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65606,
+        "created_at": 1792357755.567132,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62229,
+        "created_at": 1792357004.157344,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65954,
+        "created_at": 1792357794.491161,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65994,
+        "created_at": 1792357796.151063,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62617,
+        "created_at": 1792357038.709455,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62744,
+        "created_at": 1792357044.701688,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65916,
+        "created_at": 1792357792.834619,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62695,
+        "created_at": 1792357042.433788,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65412,
+        "created_at": 1792357721.965547,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65280,
+        "created_at": 1792357715.376397,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65672,
+        "created_at": 1792357766.645641,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65058,
+        "created_at": 1792357706.668104,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65833,
+        "created_at": 1792357789.313087,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62401,
+        "created_at": 1792357010.965894,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63990,
+        "created_at": 1792357200.497765,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65106,
+        "created_at": 1792357709.156906,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63656,
+        "created_at": 1792357182.295861,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63695,
+        "created_at": 1792357184.173455,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 66028,
+        "created_at": 1792357797.817506,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65215,
+        "created_at": 1792357713.710865,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 62332,
+        "created_at": 1792357008.488704,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63738,
+        "created_at": 1792357187.058411,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65454,
+        "created_at": 1792357724.859276,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63200,
+        "created_at": 1792357056.046388,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 64697,
+        "created_at": 1792357579.369628,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63922,
+        "created_at": 1792357196.580631,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63164,
+        "created_at": 1792357053.986976,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 64033,
+        "created_at": 1792357202.366209,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 66188,
+        "created_at": 1792357804.688022,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 65531,
+        "created_at": 1792357738.305089,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      },
+      {
+        "pid": 63774,
+        "created_at": 1792357188.923997,
+        "status": "finished",
+        "returncode": 0,
+        "same_identity_alive": false
+      }
+    ],
+    "same_identities_alive": 0,
+    "related_executables_alive": []
+  }
+}

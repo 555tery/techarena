@@ -1,0 +1,45 @@
+{
+  "baseline": "candidate-native-dp/solution.cj",
+  "baseline_sha256": "6cbb4810a69dd70a1fd59f312dbd6f1502bf991bbf4d02a02f2b796d5dbf8f24",
+  "source_sha256": "0a57f8eaf0efca902e88cbbcaec9976c7dea42e7852a1160f3dce6de15cbf787",
+  "generator_sha256": "37f6069af30acec5b4a883d36a52cbeb8d83008bb5ba866681800c1b2c674ca7",
+  "changes": [
+    "Primal recurrence writes directly into persistent primalGapValue and rates directly into causalRequestRate.",
+    "Causal recurrence writes directly into persistent causalGapValue at model*513 offset.",
+    "Both whole-table zero fills remain, preserving index0 and all tails above maxGap.",
+    "Rate/value scratch owning fields and their two malloc allocations are removed.",
+    "Reward scratch41 persists without per-gap fill; active bits guard all subsequent reward reads.",
+    "requestReward, rr and requestRate scalar caches remove repeated immutable buffer reads."
+  ],
+  "allocations_per_allocator": {
+    "persistent": [
+      513,
+      41,
+      1026
+    ],
+    "scratch": [
+      41
+    ],
+    "count": 4,
+    "payload_bytes": 12968,
+    "rebuild_allocations": 0
+  },
+  "equivalence_review": [
+    "Every reward active bit is set only after a nonzero-rate branch writes its reward entry for this gap.",
+    "Elimination reads reward only inside its active-bit branch. Removed/zero-rate entries are never read.",
+    "Caching does not change multiplication/subtraction/addition order or stored Float64 values.",
+    "Primal tables are unobservable during recurrence: only scalar helpers execute before lifetimeModel.fit.",
+    "The two causal rows are disjoint; whole1026-entry zero fill precedes both rows.",
+    "All pointer ownership, finalizer, null checking and bounds checks from native-dp are unchanged."
+  ],
+  "memset_audit": {
+    "version": "1.0.5",
+    "source": "https://github.com/cangjielanguage/cangjie_runtime/blob/c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9/std/libs/std/core/libc.cj",
+    "finding": "No public LibC.memset API exists in the checked1.0.5 source. Public APIs are malloc/free/mallocCString plus sizeOf/alignOf functions.",
+    "applied": false,
+    "abi_caveat": "A separately declared foreign memset would require independent Windows CRT/linkage/calling-ABI verification and was not introduced."
+  },
+  "compile_executed": false,
+  "solver_executed": false,
+  "performance_status": "Experimental; no performance claim until parent compiles and measures."
+}

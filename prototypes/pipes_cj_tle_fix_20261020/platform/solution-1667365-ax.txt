@@ -1,0 +1,28 @@
+The following is a diff from the previous accessibility tree for Window: "NSUts" with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 480-501
++			507 unknown
++				508 область прокрутки
++					509 Содержимое HTML Description: NSUts, URL: olympic.nsu.ru/nsuts-new/solution?id=1667365
++						510 container
++							511 link Олимпиады > TechArena 2026, Value: olympic.nsu.ru/nsuts-new/olympiads
++							512 link Туры > Pipes, Value: olympic.nsu.ru/nsuts-new/tours
++							513 text бюро 67 ▾
++						514 container
++							515 link Новости, Value: olympic.nsu.ru/nsuts-new/news
++							516 link Сдать, Value: olympic.nsu.ru/nsuts-new/submit
++							517 link Результаты, Value: olympic.nsu.ru/nsuts-new/new_report
++							518 link Рейтинг, Value: olympic.nsu.ru/nsuts-new/ranking
++							519 link Вопросы, Value: olympic.nsu.ru/nsuts-new/questions
++							520 link Печать, Value: olympic.nsu.ru/nsuts-new/print
++							521 link Справка, Value: olympic.nsu.ru/nsuts-new/help
++						522 container
++							523 text Задача:  Трубопровод Команда:  бюро 67 Время:  22:06:59 20-10-26 Язык:  Cangjie 1.0.5
++						524 container
++							525 text ©  nsuts  тестирует решения с 2009 года. Вы можете 
++							526 link написать нам письмо, Value: mailto:nsuts@nsu.ru
++							527 text . nsuts —  new small ultimate testing system
++					528 полоса прокрутки (settable, float) 0
++					529 полоса прокрутки (settable, float) 0
++				530 кнопка Доступен перевод, ID: TranslationButton
+~				467 кнопка Перезагрузить эту страницу, ID: ReloadButton
+The focused UI element is 509 Содержимое HTML Description: NSUts, URL: olympic.nsu.ru/nsuts-new/solution?id=1667365

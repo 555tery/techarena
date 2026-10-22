@@ -1,0 +1,39 @@
+{
+  "scope": "baseline_search_only_no_evolution",
+  "started_at": "2026-10-17T23:18:04.397384+07:00",
+  "source_sha256": "38b465cdbd570c4826d863ab8213f9b54352d7d0d783ba74842ece0c5a2668ce",
+  "upstream_baseline_source_sha256": "c19945111834e5969e2f58f0b6503851b35e7642a9bd77f9f70c118ee3bb736c",
+  "search_manifest_sha256": "f02098b0140bd47146cd63ae8632b48b454ac31ce7e10e3e7e65a354a61a8336",
+  "evaluator_sha256": "c5eed752a3418d3a6899cb42476e64a81f4b0e0325829e2353fffc9c4cb538f7",
+  "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+  "interactor_source_sha256": "85672e4c3ad9fdcb97d8b601758de1f1d1b5e86d6dd20252e0f72acdb9cb122a",
+  "command": [
+    "/Users/555tery/techarena/shinka-pipes/.venv/bin/python",
+    "/Users/555tery/techarena/shinka-pipes/task-synthetic/evaluate.py",
+    "--program_path",
+    "/Users/555tery/techarena/shinka-pipes/baseline-runs/20261017T231804+0700/baseline.cpp",
+    "--results_dir",
+    "/Users/555tery/techarena/shinka-pipes/baseline-runs/20261017T231804+0700/evaluation"
+  ],
+  "compiler": "/usr/bin/g++",
+  "compiler_version": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+  "compiler_flags": [
+    "-O2",
+    "-std=c++20",
+    "-pipe"
+  ],
+  "host_platform": "macOS-26.6.2-arm64-arm-64bit",
+  "python_version": "3.12.11 (main, Jun  3 2025, 15:41:47) [Clang 17.0.0 (clang-1700.3.19.1)]",
+  "validation_accessed": false,
+  "open15_accessed": false,
+  "model_requests": 0,
+  "evolution_generations": 0,
+  "finished_at": "2026-10-17T23:19:20.791152+07:00",
+  "wall_seconds": 76.12513266596943,
+  "evaluator_returncode": 0,
+  "correct": true,
+  "audit_sha256": "f90164f5a00b82d828c7509473e79b68133b0b7c3e19f76f14a51616edd3c005",
+  "fitness": 0.9149838191013845,
+  "correct_case_count": 32,
+  "metrics_sha256": "01183850e13b1388cbaad5d2468ccaba28220bfbd0803e2436a75db3ccd5cb70"
+}

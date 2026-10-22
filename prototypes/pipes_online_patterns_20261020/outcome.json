@@ -1,0 +1,535 @@
+{
+  "created_at": "2026-10-19T20:23:24.095602+00:00",
+  "selected": "strict_improvement",
+  "source_sha256": "f7b285eee9d59f443b015de581c4622668dd1a321e0cb9ef00d4baf10412f5db",
+  "binary_sha256": "7bde270abdffdf4f26146ea73e4d1e05f584be5857c9fff334e566477c6608f0",
+  "baseline_sha256": "57c047da7ae9939d9d86dfb050458f22e1a189ec43c5fb621c578bee324821d9",
+  "selection_freeze_sha256": "fe4e062aafb739462327604b486b3e95a74de08a14f5f6830a6c3918e879f3dc",
+  "quality_gates": {
+    "positive_equal_stratum_KPI": true,
+    "positive_equal_stratum_total": true,
+    "patterns_positive": true,
+    "stratum_floor": true,
+    "individual_retention": true,
+    "worst_total_endpoint": true
+  },
+  "quality_passed": true,
+  "official_confirmation_pending": false,
+  "final_statistics": {
+    "n": 192,
+    "macro": {
+      "public_prefix": 0.9054316131807848,
+      "stable_patterns": 0.9480176870826217,
+      "changing_patterns": 0.915232408688296,
+      "neutral": 0.8534809020103741
+    },
+    "by_stratum": {
+      "public_prefix": {
+        "n": 48,
+        "family_macro_delta": 0.00045281993146205986,
+        "mean_delta": 0.00046076520522003267,
+        "family_bootstrap95": [
+          6.1267004321874315e-06,
+          0.0010575191925092347
+        ],
+        "wins": 5,
+        "ties": 40,
+        "losses": 3
+      },
+      "stable_patterns": {
+        "n": 48,
+        "family_macro_delta": -0.0003130037957953825,
+        "mean_delta": -0.0003130037957953825,
+        "family_bootstrap95": [
+          -0.0009307432559900302,
+          0.00028006890571849463
+        ],
+        "wins": 9,
+        "ties": 27,
+        "losses": 12
+      },
+      "changing_patterns": {
+        "n": 48,
+        "family_macro_delta": 0.0004995767848427873,
+        "mean_delta": 0.0004995767848427873,
+        "family_bootstrap95": [
+          -0.000682840934238318,
+          0.0019053285730891618
+        ],
+        "wins": 14,
+        "ties": 24,
+        "losses": 10
+      },
+      "neutral": {
+        "n": 48,
+        "family_macro_delta": 0.00027716562533237205,
+        "mean_delta": 0.00027716562533237205,
+        "family_bootstrap95": [
+          -0.00020606493272519225,
+          0.0008411115958742327
+        ],
+        "wins": 9,
+        "ties": 31,
+        "losses": 8
+      }
+    },
+    "mean": 0.9076297070642485,
+    "mean_delta": 0.00023112595489995237,
+    "wins": 37,
+    "ties": 122,
+    "losses": 33,
+    "min_retention": 0.9878296146044625,
+    "worst": [
+      {
+        "id": "final-066",
+        "delta": -0.011779283688268194,
+        "old_T": 9740,
+        "new_T": 9860
+      },
+      {
+        "id": "final-085",
+        "delta": -0.007643893969676796,
+        "old_T": 12540,
+        "new_T": 12640
+      },
+      {
+        "id": "final-022",
+        "delta": -0.006879469836594709,
+        "old_T": 13420,
+        "new_T": 13520
+      },
+      {
+        "id": "final-002",
+        "delta": -0.006760275246419867,
+        "old_T": 11320,
+        "new_T": 11400
+      },
+      {
+        "id": "final-068",
+        "delta": -0.005241522158236478,
+        "old_T": 17860,
+        "new_T": 17960
+      },
+      {
+        "id": "final-006",
+        "delta": -0.004842188739095921,
+        "old_T": 19400,
+        "new_T": 19500
+      },
+      {
+        "id": "final-020",
+        "delta": -0.004517268637520444,
+        "old_T": 20980,
+        "new_T": 21080
+      },
+      {
+        "id": "final-050",
+        "delta": -0.00440829726771208,
+        "old_T": 20960,
+        "new_T": 21060
+      }
+    ],
+    "weighted_score": 174.2649037563357,
+    "max_cpu": 0.060000000000000005,
+    "max_rss": 5.28125,
+    "resources_ok": true
+  },
+  "relative_to_legacy": {
+    "n": 192,
+    "macro": {
+      "public_prefix": 0.9054316131807848,
+      "stable_patterns": 0.9480176870826217,
+      "changing_patterns": 0.915232408688296,
+      "neutral": 0.8534809020103741
+    },
+    "by_stratum": {
+      "public_prefix": {
+        "n": 48,
+        "family_macro_delta": 0.008098456764748477,
+        "mean_delta": 0.008891479470405526,
+        "family_bootstrap95": [
+          0.001710322013630935,
+          0.016155304602386657
+        ],
+        "wins": 26,
+        "ties": 16,
+        "losses": 6
+      },
+      "stable_patterns": {
+        "n": 48,
+        "family_macro_delta": 0.008734590563269829,
+        "mean_delta": 0.008734590563269829,
+        "family_bootstrap95": [
+          0.005059115580080631,
+          0.012813391710682047
+        ],
+        "wins": 36,
+        "ties": 5,
+        "losses": 7
+      },
+      "changing_patterns": {
+        "n": 48,
+        "family_macro_delta": 0.01276464682140972,
+        "mean_delta": 0.01276464682140972,
+        "family_bootstrap95": [
+          0.00782170858199091,
+          0.018617162004631024
+        ],
+        "wins": 36,
+        "ties": 5,
+        "losses": 7
+      },
+      "neutral": {
+        "n": 48,
+        "family_macro_delta": 0.00982327944503087,
+        "mean_delta": 0.00982327944503087,
+        "family_bootstrap95": [
+          0.006489298808126323,
+          0.013360489887821599
+        ],
+        "wins": 31,
+        "ties": 6,
+        "losses": 11
+      }
+    },
+    "mean": 0.9076297070642485,
+    "mean_delta": 0.010053499075028987,
+    "wins": 129,
+    "ties": 32,
+    "losses": 31,
+    "min_retention": 0.9776119402985075,
+    "worst": [
+      {
+        "id": "final-010",
+        "delta": -0.021324199612623884,
+        "old_T": 20960,
+        "new_T": 21440
+      },
+      {
+        "id": "final-006",
+        "delta": -0.010719119055218607,
+        "old_T": 19280,
+        "new_T": 19500
+      },
+      {
+        "id": "final-064",
+        "delta": -0.007774997082431123,
+        "old_T": 9580,
+        "new_T": 9660
+      },
+      {
+        "id": "final-078",
+        "delta": -0.007052435834008608,
+        "old_T": 28720,
+        "new_T": 28940
+      },
+      {
+        "id": "final-075",
+        "delta": -0.006638804148871302,
+        "old_T": 32780,
+        "new_T": 33000
+      },
+      {
+        "id": "final-130",
+        "delta": -0.00523436208321848,
+        "old_T": 38000,
+        "new_T": 38200
+      },
+      {
+        "id": "final-082",
+        "delta": -0.005074470363232164,
+        "old_T": 14680,
+        "new_T": 14760
+      },
+      {
+        "id": "final-140",
+        "delta": -0.004994361608820941,
+        "old_T": 6900,
+        "new_T": 6940
+      }
+    ],
+    "weighted_score": 174.2649037563357,
+    "max_cpu": 0.060000000000000005,
+    "max_rss": 5.28125,
+    "resources_ok": true
+  },
+  "public_scores": {
+    "baseline": 30.01926429194345,
+    "legacy": 30.090967891345112,
+    "strict_improvement": 30.044314328139688,
+    "stable_ties": 30.042572068504242
+  },
+  "delta_public": 0.025050036196237357,
+  "equal_stratum_KPI_delta": 0.00022913963646045915,
+  "total_score_equal_mix_delta": 0.044297765658915925,
+  "total_score_endpoints_delta": {
+    "stable_patterns": -0.001242282650574772,
+    "changing_patterns": 0.06701448612303149,
+    "neutral": 0.04833194872415661,
+    "public_prefix": 0.06308691043905038
+  },
+  "uncertainty": {
+    "method": "Post-freeze descriptive joint bootstrap of12 generating mechanisms across stable/changing/matched controls;6 IID profiles within neutral;8 suffix families within prefix.10000 draws, fixed seed. Point estimand equals frozen macro; not used for selection.",
+    "metadata_caveat": "Raw family strings in the frozen evaluator contain variant suffixes for non-prefix inputs. Their original intervals are variant-level; this report uses broader mechanism blocks. Do not call the original intervals mechanism-block intervals.",
+    "intervals95": {
+      "stable_patterns": [
+        -0.0008271276648424026,
+        0.00015225113021169004
+      ],
+      "changing_patterns": [
+        -0.0005097138501109141,
+        0.0017684319848364147
+      ],
+      "neutral": [
+        -0.000217578460931465,
+        0.000844691645069238
+      ],
+      "public_prefix": [
+        1.011839207674914e-06,
+        0.0010559601158794348
+      ],
+      "equal_four_strata": [
+        -0.00011440034655240891,
+        0.0005985003559561997
+      ]
+    },
+    "hidden_distribution_inferred": false,
+    "coverage_guarantee": false
+  },
+  "matched_controls": {
+    "n_pairs": 24,
+    "mean_pattern_delta": -0.0009906820919136684,
+    "mean_control_delta": 0.0006168645983823338,
+    "difference_of_policy_deltas": -0.0016075466902960023,
+    "interpretation": "Descriptive matched contrast; shuffled controls alter length order and PID lifetimes together while preserving event signs and size histograms. It does not isolate one causal feature."
+  },
+  "target23": [
+    {
+      "id": "final-000",
+      "legacy_T": 7580,
+      "current_T": 7600,
+      "candidate_T": 7600,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-003",
+      "legacy_T": 14580,
+      "current_T": 14680,
+      "candidate_T": 14640,
+      "delta_KPI": 0.002511688331025441,
+      "repaired": false,
+      "result": "win"
+    },
+    {
+      "id": "final-004",
+      "legacy_T": 13380,
+      "current_T": 13420,
+      "candidate_T": 13400,
+      "delta_KPI": 0.001276886802945132,
+      "repaired": false,
+      "result": "win"
+    },
+    {
+      "id": "final-010",
+      "legacy_T": 12420,
+      "current_T": 12460,
+      "candidate_T": 12420,
+      "delta_KPI": 0.002436137023337892,
+      "repaired": true,
+      "result": "win"
+    },
+    {
+      "id": "final-012",
+      "legacy_T": 18500,
+      "current_T": 18540,
+      "candidate_T": 18540,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-014",
+      "legacy_T": 22340,
+      "current_T": 22380,
+      "candidate_T": 22380,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-017",
+      "legacy_T": 17860,
+      "current_T": 17960,
+      "candidate_T": 17960,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-022",
+      "legacy_T": 49440,
+      "current_T": 49460,
+      "candidate_T": 49440,
+      "delta_KPI": 0.00039653991260957255,
+      "repaired": true,
+      "result": "win"
+    },
+    {
+      "id": "final-023",
+      "legacy_T": 11860,
+      "current_T": 11920,
+      "candidate_T": 11920,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-024",
+      "legacy_T": 16560,
+      "current_T": 16620,
+      "candidate_T": 16620,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-025",
+      "legacy_T": 37120,
+      "current_T": 37240,
+      "candidate_T": 37240,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-032",
+      "legacy_T": 23860,
+      "current_T": 23980,
+      "candidate_T": 23980,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-049",
+      "legacy_T": 60220,
+      "current_T": 60320,
+      "candidate_T": 60320,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-054",
+      "legacy_T": 7980,
+      "current_T": 8060,
+      "candidate_T": 8080,
+      "delta_KPI": -0.002301427413212709,
+      "repaired": false,
+      "result": "loss"
+    },
+    {
+      "id": "final-055",
+      "legacy_T": 24780,
+      "current_T": 24900,
+      "candidate_T": 24840,
+      "delta_KPI": 0.0020976660264244718,
+      "repaired": false,
+      "result": "win"
+    },
+    {
+      "id": "final-072",
+      "legacy_T": 16600,
+      "current_T": 16800,
+      "candidate_T": 16780,
+      "delta_KPI": 0.0011671349111753715,
+      "repaired": false,
+      "result": "win"
+    },
+    {
+      "id": "final-078",
+      "legacy_T": 20200,
+      "current_T": 20220,
+      "candidate_T": 20220,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-082",
+      "legacy_T": 3120,
+      "current_T": 3140,
+      "candidate_T": 3140,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-087",
+      "legacy_T": 17720,
+      "current_T": 17780,
+      "candidate_T": 17780,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-092",
+      "legacy_T": 6340,
+      "current_T": 6400,
+      "candidate_T": 6400,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-100",
+      "legacy_T": 11720,
+      "current_T": 11740,
+      "candidate_T": 11740,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-117",
+      "legacy_T": 24180,
+      "current_T": 24200,
+      "candidate_T": 24200,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    },
+    {
+      "id": "final-123",
+      "legacy_T": 28340,
+      "current_T": 28420,
+      "candidate_T": 28420,
+      "delta_KPI": 0.0,
+      "repaired": false,
+      "result": "tie"
+    }
+  ],
+  "original_DEV_gain_retained": 0.9984883409002073,
+  "caveat": "Small positive point estimate with uncertainty crossing zero; independent synthetic transfer only, not a guarantee of hidden-contest gains.",
+  "no_source_edits_after_final": true,
+  "platform_actions": 0,
+  "canonical_changed": false,
+  "confirmation_passed": true,
+  "official_runs": 518,
+  "selected_official_runs": 307,
+  "maximum_cpu_s": 2.8395529999999995,
+  "maximum_rss_mib": 16.203125,
+  "native_windows_tested": false,
+  "target_G5420_tested": false,
+  "host": "macOS arm64, one solver worker, CPU user+system",
+  "source_review_sha256": "93852559b74d95b8cdae47947a981336c7e54153954ceb82758b5b5edc3db20a",
+  "recommendation": "Small incremental local candidate; passed the fixed point-estimate gates, but the incremental effect is not statistically resolved by the descriptive mechanism bootstrap.",
+  "generated_new_inputs": 292,
+  "selection_calibration_inputs": 96,
+  "independent_final_inputs": 192,
+  "packaged_tests": 307,
+  "final_now_observed": true
+}

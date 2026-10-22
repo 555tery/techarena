@@ -1,0 +1,212 @@
+{
+  "scope": "Fixed counterexamples to actual snapshots of the Open15-maximizing method; no target changes, no platform use.",
+  "profiles": {
+    "release-v1": {
+      "origin": "prototypes/pipes_open15_overfit_20261019/continuation/release-v1",
+      "source_sha256": "b940e9ae6e42667745df9f5358f896874ab79f614575884665282959f5a8473f",
+      "binary_sha256": "aa3c6db5c707fe20006c33c785448d8c91782126f1b1606bf075c95f4645e12b",
+      "audited_open15_score": 30.711106181056866,
+      "snapshot": "prototypes/pipes_open15_adversary_20261019/snapshots/release-v1"
+    },
+    "release-v2": {
+      "origin": "prototypes/pipes_open15_overfit_20261019/continuation/release-v2",
+      "source_sha256": "375010e90099c226157beeb7430278df251f590e08fa60aed9bc1f1fd88b0e2e",
+      "binary_sha256": "49184db191a14a8740892504a8868577d2eb20015b06caa1d7e9b5924f20fbd9",
+      "audited_open15_score": 30.741160572564162,
+      "snapshot": "prototypes/pipes_open15_adversary_20261019/snapshots/release-v2"
+    },
+    "release-v3": {
+      "origin": "prototypes/pipes_open15_overfit_20261019/continuation/release-v3",
+      "source_sha256": "0cf8bc500497ab08283c2384075254ccf6c6d34f504154829c39608e2c99f4cd",
+      "binary_sha256": "72ddb26d9f3d7ec114fc7dee235bc70b56d5146bc3317ce4b66b10b5e2c6ed67",
+      "audited_open15_score": 30.753692580163676,
+      "snapshot": "prototypes/pipes_open15_adversary_20261019/snapshots/release-v3"
+    },
+    "release-v4": {
+      "origin": "prototypes/pipes_open15_overfit_20261019/continuation/release-v4",
+      "source_sha256": "181c27ede79e66876b2b157fc08cc67f36b67e1889464b4ff60dc2186e13d5ba",
+      "binary_sha256": "a8e0a78bc20443ca8e397f905b4c3cd07629312cfbecf222daa23b6579ea8077",
+      "audited_open15_score": 30.754632920442994,
+      "snapshot": "prototypes/pipes_open15_adversary_20261019/snapshots/release-v4"
+    }
+  },
+  "tests": [
+    {
+      "name": "grave-01-open14-p8",
+      "version": "release-v1",
+      "case": 14,
+      "predicted_kpi": 0.001936108422071636,
+      "operations": 17,
+      "prefix": 8,
+      "F": 40,
+      "replay_prefix_trench": 20660,
+      "live_pids_at_cut": 8,
+      "weight": 1.0,
+      "test_sha256": "8ac50126049d2d5446865615d1cdc453d33c22c15ce5b86abc4dedd9d6094648",
+      "operation_count": 17,
+      "placement_count": 9,
+      "peak_live_pipe_length_m": 40,
+      "minimum_trench_lower_bound_m": 40,
+      "final_occupied_length_m": 40,
+      "kpi_upper_bound_from_live_volume": 1.0,
+      "file": "prototypes/pipes_open15_adversary_20261019/suite/grave-01-open14-p8.in",
+      "first_suffix_command": -1,
+      "targeted_releases": [
+        "release-v1",
+        "release-v2",
+        "release-v3"
+      ],
+      "public_cases_sharing_prefix": [
+        14
+      ],
+      "all_public_matching_branches_rejected_at_divergence": true
+    },
+    {
+      "name": "grave-02-open14-p9",
+      "version": "release-v3",
+      "case": 14,
+      "predicted_kpi": 0.001936108422071636,
+      "operations": 19,
+      "prefix": 9,
+      "F": 40,
+      "replay_prefix_trench": 20660,
+      "live_pids_at_cut": 9,
+      "weight": 1.0,
+      "test_sha256": "076fc56d7f57717c3f2bf74f1c7040929d346c3faee839b6d0cdc7323e6af936",
+      "operation_count": 19,
+      "placement_count": 10,
+      "peak_live_pipe_length_m": 40,
+      "minimum_trench_lower_bound_m": 40,
+      "final_occupied_length_m": 40,
+      "kpi_upper_bound_from_live_volume": 1.0,
+      "file": "prototypes/pipes_open15_adversary_20261019/suite/grave-02-open14-p9.in",
+      "first_suffix_command": -1,
+      "targeted_releases": [
+        "release-v3"
+      ],
+      "public_cases_sharing_prefix": [
+        14
+      ],
+      "all_public_matching_branches_rejected_at_divergence": true
+    },
+    {
+      "name": "grave-03-open11-p2",
+      "version": "release-v3",
+      "case": 11,
+      "predicted_kpi": 0.0036968576709796672,
+      "operations": 5,
+      "prefix": 2,
+      "F": 40,
+      "replay_prefix_trench": 10820,
+      "live_pids_at_cut": 2,
+      "weight": 1.0,
+      "test_sha256": "6ad564ebd658ed65099e251c7235c6b51638424c33844f5e07d027b2dcb5a624",
+      "operation_count": 5,
+      "placement_count": 3,
+      "peak_live_pipe_length_m": 40,
+      "minimum_trench_lower_bound_m": 40,
+      "final_occupied_length_m": 40,
+      "kpi_upper_bound_from_live_volume": 1.0,
+      "file": "prototypes/pipes_open15_adversary_20261019/suite/grave-03-open11-p2.in",
+      "first_suffix_command": -1,
+      "targeted_releases": [
+        "release-v3"
+      ],
+      "public_cases_sharing_prefix": [
+        11,
+        15
+      ],
+      "all_public_matching_branches_rejected_at_divergence": true
+    },
+    {
+      "name": "grave-04-open10-p3",
+      "version": "release-v3",
+      "case": 10,
+      "predicted_kpi": 0.0047169811320754715,
+      "operations": 7,
+      "prefix": 3,
+      "F": 40,
+      "replay_prefix_trench": 8480,
+      "live_pids_at_cut": 3,
+      "weight": 1.0,
+      "test_sha256": "f2c09c4882c32873528c024b1dd26a431fce2885905fc54d7f2d2019384d29c1",
+      "operation_count": 7,
+      "placement_count": 4,
+      "peak_live_pipe_length_m": 40,
+      "minimum_trench_lower_bound_m": 40,
+      "final_occupied_length_m": 40,
+      "kpi_upper_bound_from_live_volume": 1.0,
+      "file": "prototypes/pipes_open15_adversary_20261019/suite/grave-04-open10-p3.in",
+      "first_suffix_command": -1,
+      "targeted_releases": [
+        "release-v3"
+      ],
+      "public_cases_sharing_prefix": [
+        10
+      ],
+      "all_public_matching_branches_rejected_at_divergence": true
+    },
+    {
+      "name": "grave-05-open14-p128",
+      "version": "release-v3",
+      "case": 14,
+      "predicted_kpi": 0.013552758954501452,
+      "operations": 261,
+      "prefix": 128,
+      "F": 280,
+      "replay_prefix_trench": 20660,
+      "live_pids_at_cut": 126,
+      "minimum_prefix": 128,
+      "weight": 1.0,
+      "test_sha256": "9fcf89e2f26ec76e412097fba3b1f856201efaa592df8b88e6e0e47db16fdb41",
+      "operation_count": 261,
+      "placement_count": 134,
+      "peak_live_pipe_length_m": 280,
+      "minimum_trench_lower_bound_m": 280,
+      "final_occupied_length_m": 280,
+      "kpi_upper_bound_from_live_volume": 1.0,
+      "file": "prototypes/pipes_open15_adversary_20261019/suite/grave-05-open14-p128.in",
+      "first_suffix_command": -1,
+      "targeted_releases": [
+        "release-v3"
+      ],
+      "public_cases_sharing_prefix": [
+        14
+      ],
+      "all_public_matching_branches_rejected_at_divergence": true
+    },
+    {
+      "name": "grave-06-open15-p5002",
+      "version": "release-v3",
+      "case": 15,
+      "predicted_kpi": 0.029321872015281757,
+      "operations": 8325,
+      "prefix": 5002,
+      "F": 12280,
+      "replay_prefix_trench": 418800,
+      "live_pids_at_cut": 3016,
+      "minimum_prefix": 1024,
+      "weight": 1.0,
+      "test_sha256": "34667161bb6cbd860a3157315f8c733135da0e882d1c78e9fec73967a19b1ec1",
+      "operation_count": 8325,
+      "placement_count": 4316,
+      "peak_live_pipe_length_m": 12280,
+      "minimum_trench_lower_bound_m": 12280,
+      "final_occupied_length_m": 12280,
+      "kpi_upper_bound_from_live_volume": 1.0,
+      "file": "prototypes/pipes_open15_adversary_20261019/suite/grave-06-open15-p5002.in",
+      "first_suffix_command": -1,
+      "targeted_releases": [
+        "release-v3"
+      ],
+      "public_cases_sharing_prefix": [
+        15
+      ],
+      "all_public_matching_branches_rejected_at_divergence": true
+    }
+  ],
+  "mechanism": "An exact public prefix forces the memorized plan's irreversible future reservations; a new valid suffix clears live pipes and restores at least the causal BF prefix capacity. Final volume attains the stream peak; BF has KPI 1, replay keeps its oversized trench.",
+  "not_a_universal_all_algorithms_claim": true,
+  "selection": "Deterministic scan of public prefixes against frozen releases; one worst trap per release and four further current-release cases. Release-v4 appeared during validation and was tested as a new frozen target on the already fixed suite; no new inputs were selected for it.",
+  "platform_actions": 0
+}

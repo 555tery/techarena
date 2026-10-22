@@ -1,0 +1,79 @@
+{
+  "artifacts_sha256": {
+    "README.md": "269097a86254d7d4bbc7b71916aee3e7dcc879606dbb80b1d9d8a8e4d126c449",
+    "build/pipes_bf": "183b41c6d243a3102fab1ec9b3ac1a7325a79feadb5d0610326bdd78a38ad86d",
+    "build/pipes_bf_checked": "29c760e43a649ef56bb68f8563a86091f7ba2d08c0b45c37de0b3036a30c5b91",
+    "build/pipes_ss": "ea44ff71e605e190e293af348a0572852c2d1c90420d01ea61736095486d6f79",
+    "build/pipes_ss_checked": "d452eac371f0d2efad02aff30df499db644fbcf122513dd7b884ed16a36b5efc",
+    "correctness_report.json": "ff3a23ef1bd9aeb9fd3b7b26d2582716d1e66ef769e40acfc312154ecc53932b",
+    "pipes_exact.cpp": "5957ac938c5c2addc3dd7a1eaa06dbb8914a00ada576b666e319eee1be328836",
+    "test_correctness.py": "fa2bab6c6239f9e842564b8036cf9a7c98678cdbe7c2f8598c805f8b4d256870"
+  },
+  "bf_rank": [
+    "gap_length",
+    "start"
+  ],
+  "candidate_domain": "all current maximal physical coalesced gaps, including the free tail",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin",
+  "correctness": {
+    "commands_per_policy": 3231,
+    "fixtures": 38,
+    "full_scan_all_40_requests_per_state": true,
+    "report": "correctness_report.json",
+    "status": "passed"
+  },
+  "data_boundary": "tiny new correctness fixtures only; no final/synthetic/Open15/prior result inspection; no platform or old Shinka",
+  "extension": "only when no current gap fits; reuse current tail; minimum 20m sections",
+  "frozen": true,
+  "frozen_at_utc": "2026-10-18T16:58:51.516714+00:00",
+  "language": "C++20",
+  "last_available_codex_remaining_percent": 69,
+  "placement_side": "left",
+  "policies": {
+    "bf": {
+      "binary": "build/pipes_bf",
+      "compile_flags": [
+        "-std=c++20",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-DNDEBUG",
+        "-DPOLICY_BF"
+      ]
+    },
+    "ss": {
+      "binary": "build/pipes_ss",
+      "compile_flags": [
+        "-std=c++20",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Wpedantic",
+        "-DNDEBUG",
+        "-DPOLICY_SS"
+      ]
+    }
+  },
+  "protocol": {
+    "delete_output": "start",
+    "external_input": "stdin only",
+    "flush": "after every answer",
+    "input": "successive commands until 0 or EOF",
+    "insert_output": "digs start",
+    "pid": "1-based positive arrival number"
+  },
+  "quality_evaluation": "not performed by implementer; coordinator owns frozen-source independent and official evaluation",
+  "resource_limit_validation": "pending coordinator measurement; no CPU/RSS compliance claim",
+  "schema": "pipes.exact-bf-ss.v1",
+  "shared_physical_kernel": true,
+  "source": "pipes_exact.cpp",
+  "source_sha256": "5957ac938c5c2addc3dd7a1eaa06dbb8914a00ada576b666e319eee1be328836",
+  "ss_exact_fill_delta": "-2*c_L+1",
+  "ss_nonexact_fill_delta": "-2*c_h+2*c_(h-L)+2",
+  "ss_rank": [
+    "exact_delta_sum_positive_gap_count_squared",
+    "gap_length",
+    "start"
+  ]
+}

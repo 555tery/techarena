@@ -1,0 +1,61 @@
+{
+  "seed_base": 20261018,
+  "operations_per_case": 30000,
+  "generator": "generate_synthetic.py",
+  "cases": [
+    {
+      "name": "01_stationary_uniform_random.in",
+      "scenario": "stationary_uniform_random",
+      "seed": 20365747,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "3aaa285a253fffbf1e3419d698c218305f09101ff94c0b31f0b6e7fb73eda366"
+    },
+    {
+      "name": "02_short_to_wide_lifo.in",
+      "scenario": "short_to_wide_lifo",
+      "seed": 20470476,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "ebc53ad8cd90ac14beaa2357ca759360a20d58d3abca82ddff0b94576fab7281"
+    },
+    {
+      "name": "03_wide_to_short_fifo.in",
+      "scenario": "wide_to_short_fifo",
+      "seed": 20575205,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "51091519b8bcc3d37f4d7606db22dfabaf768c1d52b2ef36008b5133ca457408"
+    },
+    {
+      "name": "04_harmonic_boundary_mixed.in",
+      "scenario": "harmonic_boundary_mixed",
+      "seed": 20679934,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "21fcd4c251440b48f88f8d12d8302a2d8b41ab955828b5941889e58c842a7a4b"
+    },
+    {
+      "name": "05_periodic_class_cohort.in",
+      "scenario": "periodic_class_cohort",
+      "seed": 20784663,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "f37c700fd4d1f3a37a037c08ce20e12e1f45957ae70a2431540eec36c5ba65ea"
+    },
+    {
+      "name": "06_three_phase_old_bias.in",
+      "scenario": "three_phase_old_bias",
+      "seed": 20889392,
+      "operations": 30000,
+      "placements": 16250,
+      "active_at_end": 2500,
+      "sha256": "838c23374eb7d9c0155ad4aab7033bed51ec0980694ac63a8f02e5ce92c85b4f"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "created_at": "2026-10-19T19:54:06.464075+00:00",
+  "scope": "Local only; no platform actions; no edits to previous frozen sources.",
+  "evidence_before_this_file": "Agent DEV results for parity_decay64 and primal_window256 already observed. No new calibration/final policy outcomes observed.",
+  "development": "Previous closed-ready calibration64+final128 are DEV192, not independent. Open15 is an explicit weighted objective, not hidden validation.",
+  "search_budget": "At most 4 core hypotheses total (2 agent + 2 primary), and at most 1 causal combination. No threshold grid. One metadata handoff repair is tracked separately.",
+  "hypotheses": [
+    "bounded parity confidence",
+    "short primal demand window",
+    "primal opportunity cost at moderate population",
+    "one evidence-driven primary hypothesis if needed"
+  ],
+  "fresh_data": {
+    "calibration": "3f9301c41b861207eb2b900830f84a60cb5cb281c0b550ee10ffdea005686fcb",
+    "final": "23d95ac1af10bd70f68a024b919559b4d4b203ab9b773bff0d3931f03e07269f",
+    "stress": "71a3f567692b38b2a287dbca20c36007fc1cf7a4fba903604263dff95924d6b1"
+  },
+  "gates": {
+    "correctness": "All cases valid; CPU<5s and RSS<256MiB on local one-worker interactive evaluation. Target Windows/G5420 remains unverified.",
+    "development": "Reject a core with any DEV KPI loss >0.10 or negative ordinary mean. Select at most 2 core candidates for calibration.",
+    "calibration": "Require ordinary family-macro improvement >=0.001, prefix macro >= baseline-0.002, and no individual relative retention <0.85. Compare weighted Open15+84*macro at prefix mix 0 and 1; minimax regret with 0.05 tie toward simpler online.",
+    "freeze": "Select at most one core and online/hybrid policy before opening final outcomes. No changes after final.",
+    "final": "Confirm positive ordinary family-macro, prefix macro >= baseline-0.002, no retention <0.85, positive equal-stratum mean, and positive total-score sensitivity at both prefix endpoints relative to previous online. Otherwise no core promotion.",
+    "uncertainty": "Synthetic evidence only, not official hidden-score proof. Report paired family bootstrap, per-stratum outcomes, worst losses, and Open15 tradeoffs."
+  },
+  "controls": [
+    "previous fast online",
+    "previous fast hybrid"
+  ],
+  "independent_generator": "closed_inputs; no candidate/result access"
+}

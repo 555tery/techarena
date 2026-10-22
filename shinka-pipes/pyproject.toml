@@ -1,0 +1,9 @@
+[project]
+name = "techarena-shinka-pipes"
+version = "0.1.0"
+description = "Local ShinkaEvolve integration for Pipes, using Codex subscription auth"
+requires-python = ">=3.12,<3.13"
+dependencies = ["shinka-evolve"]
+
+[tool.uv.sources]
+shinka-evolve = { git = "https://github.com/SakanaAI/ShinkaEvolve.git", rev = "8adc053a2ce4511ad2ac310e004c530a73fb974a" }

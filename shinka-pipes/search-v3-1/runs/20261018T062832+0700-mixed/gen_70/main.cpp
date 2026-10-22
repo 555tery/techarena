@@ -1,0 +1,359 @@
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+// EVOLVE-BLOCK-START
+namespace {
+/*
+NAME: causal_pair_commitment
+DESCRIPTION:
+Последовательная Bellman-оценка двух будущих вставок поверх
+Markov Pair Tail Pricing.
+Для каждой первой длины действие выбирается до раскрытия второй:
+E_a[min_action(immediate_sections + E_b[next_sections])].
+Два крупнейших внутренних интервала полностью определяют
+возможные значения крупнейшего интервала после первой вставки.
+Рост разрешён только при отсутствии подходящего свободного места.
+Same-parent ablation:
+kCausalPairCommitment = false восстанавливает родительскую
+оценку совместной вместимости пары.
+*/
+class Allocator {
+    struct Pipe {
+        int start;
+        int length;
+    };
+    using FreeMap = std::map<int, int>;
+    static constexpr bool kTailLookahead = true;
+    static constexpr bool kPairTailPricing = true;
+    static constexpr bool kCausalPairCommitment = true;
+    static constexpr double kGlobalDecay = 127.0 / 128.0;
+    static constexpr double kTransitionDecay = 31.0 / 32.0;
+    static constexpr double kPriorWeight = 8.0;
+    static constexpr double kDecisionMargin = 1.0 / 64.0;
+    FreeMap holes_;
+    std::set<std::pair<int, int>> bySize_;
+    std::vector<Pipe> pipes_;
+    // above[k] — вес наблюдений с длиной строго больше k.
+    std::array<double, 41> globalAbove_{};
+    std::array<std::array<double, 41>, 41> transitionAbove_{};
+    int previousLength_ = 0;
+    int trenchLength_ = 0;
+    // Свободный хвост [frontier_, trenchLength_) хранится отдельно.
+    int frontier_ = 0;
+    void observe(int length) {
+        for (int k = 0; k < 40; ++k) {
+            const double increment = length > k ? 1.0 : 0.0;
+            globalAbove_[k] =
+                globalAbove_[k] * kGlobalDecay + increment;
+        }
+        if (previousLength_ != 0) {
+            auto& row = transitionAbove_[previousLength_];
+            for (int k = 0; k < 40; ++k) {
+                const double increment = length > k ? 1.0 : 0.0;
+                row[k] = row[k] * kTransitionDecay + increment;
+            }
+        }
+        previousLength_ = length;
+    }
+    double forecastAbove(int threshold, int currentLength) const {
+        if (threshold >= 40) {
+            return 0.0;
+        }
+        const auto& row = transitionAbove_[currentLength];
+        const double marginal =
+            globalAbove_[threshold] / globalAbove_[0];
+        return (row[threshold] + kPriorWeight * marginal) /
+               (row[0] + kPriorWeight);
+    }
+    double expectedNextGrowth(
+        int largestHole, int tailLength, int currentLength
+    ) const {
+        const int firstThreshold =
+            std::min(40, std::max(largestHole, tailLength));
+        const int secondThreshold =
+            std::min(40, std::max(largestHole, tailLength + 20));
+        return forecastAbove(firstThreshold, currentLength) +
+               forecastAbove(secondThreshold, currentLength);
+    }
+    double expectedCommittedPairGrowth(
+        int largestHole, int secondLargestHole,
+        int tailLength, int currentLength
+    ) const {
+        double expected = 0.0;
+        double previousAbove = forecastAbove(0, currentLength);
+        for (int firstLength = 1; firstLength <= 40; ++firstLength) {
+            const double above =
+                forecastAbove(firstLength, currentLength);
+            const double probability = previousAbove - above;
+            previousAbove = above;
+            if (probability <= 0.0) {
+                continue;
+            }
+            const bool canUseHole = firstLength <= largestHole;
+            const bool canUseTail = firstLength <= tailLength;
+            double best =
+                std::numeric_limits<double>::infinity();
+            if (canUseHole) {
+                // Если подходит второй интервал, крупнейший сохраняется.
+                // Иначе подходит только крупнейший: учитываем его остаток.
+                const int remainingLargest =
+                    firstLength <= secondLargestHole
+                    ? largestHole
+                    : std::max(
+                        secondLargestHole, largestHole - firstLength
+                    );
+                best = expectedNextGrowth(
+                    remainingLargest, tailLength, firstLength
+                );
+            }
+            if (canUseTail) {
+                const double tailCost = expectedNextGrowth(
+                    largestHole, tailLength - firstLength, firstLength
+                );
+                best = std::min(best, tailCost);
+            }
+            if (!canUseHole && !canUseTail) {
+                // Ни один существующий свободный интервал не подходит.
+                // Добавляем только необходимые секции.
+                const int sections =
+                    (firstLength - tailLength + 19) / 20;
+                const int remainingTail =
+                    tailLength + sections * 20 - firstLength;
+                best = static_cast<double>(sections) +
+                    expectedNextGrowth(
+                        largestHole, remainingTail, firstLength
+                    );
+            }
+            // Минимум выбран до раскрытия второй длины.
+            expected += probability * best;
+        }
+        return expected;
+    }
+    double expectedPairGrowth(
+        int largestHole, int secondLargestHole,
+        int tailLength, int currentLength
+    ) const {
+        if constexpr (kCausalPairCommitment) {
+            return expectedCommittedPairGrowth(
+                largestHole, secondLargestHole,
+                tailLength, currentLength
+            );
+        }
+        // Родительская оценка для same-parent ablation.
+        std::array<int, 4> largest{};
+        std::array<int, 4> second{};
+        int stages = 0;
+        for (int sections = 0; sections < 4; ++sections) {
+            const int extendedTail = tailLength + 20 * sections;
+            const int first = std::max(largestHole, extendedTail);
+            const int next = std::max(
+                secondLargestHole, std::min(largestHole, extendedTail)
+            );
+            if (first >= 80 || next >= 40) {
+                break;
+            }
+            largest[stages] = first;
+            second[stages] = next;
+            ++stages;
+        }
+        if (stages == 0) {
+            return 0.0;
+        }
+        double expected = 0.0;
+        double previousAbove = forecastAbove(0, currentLength);
+        for (int firstLength = 1; firstLength <= 40; ++firstLength) {
+            const double above =
+                forecastAbove(firstLength, currentLength);
+            const double probability = previousAbove - above;
+            previousAbove = above;
+            if (probability <= 0.0) {
+                continue;
+            }
+            for (int stage = 0; stage < stages; ++stage) {
+                if (firstLength > largest[stage]) {
+                    expected += probability;
+                    continue;
+                }
+                const int secondLimit =
+                    firstLength <= second[stage]
+                    ? largest[stage]
+                    : std::max(
+                        second[stage], largest[stage] - firstLength
+                    );
+                expected += probability *
+                    forecastAbove(secondLimit, firstLength);
+            }
+        }
+        return expected;
+    }
+    void addHole(int start, int length) {
+        if (length == 0) {
+            return;
+        }
+        holes_.emplace(start, length);
+        bySize_.emplace(length, start);
+    }
+    void eraseHole(FreeMap::iterator it) {
+        bySize_.erase(std::make_pair(it->second, it->first));
+        holes_.erase(it);
+    }
+public:
+    // Required compatibility counters; they may stay zero.
+    std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+    std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+    std::uint64_t unitProfileSuppressedExpansions = 0;
+    Allocator() {
+        pipes_.reserve(200001);
+        pipes_.push_back(Pipe{0, 0});
+        // Одно равномерное псевдонаблюдение.
+        for (int k = 0; k <= 40; ++k) {
+            globalAbove_[k] =
+                static_cast<double>(40 - k) / 40.0;
+        }
+    }
+    void place(int length) {
+        observe(length);
+        const int tailLength = trenchLength_ - frontier_;
+        auto fit = bySize_.lower_bound(std::make_pair(length, 0));
+        bool useHole = fit != bySize_.end();
+        const int holeLength = useHole ? fit->first : 0;
+        const int holeStart = useHole ? fit->second : 0;
+        if (useHole && tailLength >= length) {
+            // Обычный best fit определяет выбор при близких оценках.
+            useHole = holeLength <= tailLength;
+            if (kTailLookahead) {
+                const auto largestIt = bySize_.rbegin();
+                const int largestBefore = largestIt->first;
+                const auto secondIt = std::next(largestIt);
+                const int secondBefore =
+                    secondIt == bySize_.rend() ? 0 : secondIt->first;
+                int largestOther = 0;
+                int secondOther = 0;
+                // Просматривается максимум три элемента.
+                for (auto it = bySize_.rbegin();
+                     it != bySize_.rend(); ++it) {
+                    if (it->second == holeStart) {
+                        continue;
+                    }
+                    if (largestOther == 0) {
+                        largestOther = it->first;
+                    } else {
+                        secondOther = it->first;
+                        break;
+                    }
+                }
+                const int remainder = holeLength - length;
+                const int largestAfterHole =
+                    std::max(largestOther, remainder);
+                const int secondAfterHole = std::max(
+                    secondOther, std::min(largestOther, remainder)
+                );
+                const double holeCost = kPairTailPricing
+                    ? expectedPairGrowth(
+                        largestAfterHole, secondAfterHole,
+                        tailLength, length
+                    )
+                    : expectedNextGrowth(
+                        largestAfterHole, tailLength, length
+                    );
+                const double tailCost = kPairTailPricing
+                    ? expectedPairGrowth(
+                        largestBefore, secondBefore,
+                        tailLength - length, length
+                    )
+                    : expectedNextGrowth(
+                        largestBefore, tailLength - length, length
+                    );
+                if (holeCost + kDecisionMargin < tailCost) {
+                    useHole = true;
+                } else if (tailCost + kDecisionMargin < holeCost) {
+                    useHole = false;
+                }
+            }
+        }
+        int sections = 0;
+        int coordinate = 0;
+        if (useHole) {
+            coordinate = holeStart;
+            eraseHole(holes_.find(holeStart));
+            addHole(holeStart + length, holeLength - length);
+        } else {
+            coordinate = frontier_;
+            const int shortage = length - tailLength;
+            if (shortage > 0) {
+                sections = (shortage + 19) / 20;
+                trenchLength_ += sections * 20;
+            }
+            frontier_ += length;
+        }
+        pipes_.push_back(Pipe{coordinate, length});
+        std::cout << sections << ' ' << coordinate << '\n' << std::flush;
+    }
+    void remove(std::int64_t pid) {
+        const std::size_t index = static_cast<std::size_t>(pid);
+        const Pipe old = pipes_[index];
+        int mergedStart = old.start;
+        int mergedLength = old.length;
+        auto right = holes_.lower_bound(old.start);
+        if (right != holes_.begin()) {
+            auto left = std::prev(right);
+            if (left->first + left->second == mergedStart) {
+                mergedStart = left->first;
+                mergedLength += left->second;
+                eraseHole(left);
+            }
+        }
+        if (right != holes_.end() &&
+            mergedStart + mergedLength == right->first) {
+            mergedLength += right->second;
+            eraseHole(right);
+        }
+        if (mergedStart + mergedLength == frontier_) {
+            frontier_ = mergedStart;
+        } else {
+            addHole(mergedStart, mergedLength);
+        }
+        pipes_[index].length = 0;
+        std::cout << old.start << '\n' << std::flush;
+    }
+};
+}
+// EVOLVE-BLOCK-END
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                      << " expansion_gate_passes=" << allocator.expansionGatePasses
+                      << " unit_profile_suppressed_expansions="
+                      << allocator.unitProfileSuppressedExpansions << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}

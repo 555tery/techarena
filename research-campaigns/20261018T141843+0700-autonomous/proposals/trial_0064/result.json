@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0064",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0064/candidate_0.cpp",
+  "sha256": "a70776f6ae344857acd5268cf787a4b36c8240234cb37976bc18d4df0f0950cd",
+  "idea": "Compositional opportunity cost: проверять отклонение от Best-Fit через partition function допустимых заполнений щели наблюдаемыми живыми размерами.",
+  "parent": "trial_0032",
+  "weighted_score": 28.462819266657437,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 18120,
+      "kpi": 0.6790286975717439,
+      "weighted_score": 0.679028697571744
+    },
+    {
+      "case": "11",
+      "T": 22540,
+      "kpi": 0.9033274179236912,
+      "weighted_score": 0.903327417923691
+    },
+    {
+      "case": "12",
+      "T": 10340,
+      "kpi": 0.9911992263056093,
+      "weighted_score": 3.964796905222437
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37820,
+      "kpi": 0.9969328397673188,
+      "weighted_score": 3.987731359069275
+    },
+    {
+      "case": "15",
+      "T": 439820,
+      "kpi": 0.9521099540721204,
+      "weighted_score": 9.521099540721204
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0054725417009565255,
+    "worst_delta": -0.024632352941176494,
+    "wins": 17,
+    "regressions": 6,
+    "ties": 7,
+    "worst_cases": [
+      {
+        "case": "dev_27_micro",
+        "delta": -0.024632352941176494,
+        "baseline_T": 320,
+        "candidate_T": 340
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.00450209583557315,
+        "baseline_T": 87420,
+        "candidate_T": 87820
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.003964886646649068,
+        "baseline_T": 90260,
+        "candidate_T": 90620
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.001792094562433233,
+        "baseline_T": 94540,
+        "candidate_T": 94720
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.0007979189293346733,
+        "baseline_T": 24820,
+        "candidate_T": 24840
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.0006254894367712094,
+        "baseline_T": 30480,
+        "candidate_T": 30500
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8142710381725606,
+  "max_cpu_s": 0.88079,
+  "max_rss_mib": 11.5,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0064/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0064/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792324212.727832,
+  "balanced_gate": false,
+  "hypothesis": "Часть отклонений parent от Best-Fit может улучшать ожидаемый упакованный объём, одновременно уничтожая больше комплементарных вариантов заполнения. Пусть E — свободный объём, N_l — число живых труб длины l, D=E+sum(N_l), q0=E/D, q_l=N_l/D. Recurrence U(0)=1, U(c)=q0*U(c-1)+sum(q_l*U(c-l)) задаёт нормированную hard-rod partition function: Z(c)=U(c)/q0^c. При вставке с края opportunity cost равен log Z(c)-log Z(c-L). Общий для кандидатов член -L*log(q0) сокращается. Предлагается veto: возвращаться к Best-Fit, если выбранная parent большая щель теряет больше этой configurational flexibility. Это отдельная модель комплементарности, использующая текущий профиль живых труб.",
+  "causality": "Veto применяется только при обоих размерах щелей <= существующего modelCapacity; дополнительного весового коэффициента нет. partition_checks измеряет охват, partition_vetoes — фактические изменения выбранной щели, partition_exact_fit_vetoes выделяет сохранение точного соответствия, partition_log_loss_avoided измеряет эффект внутри модели. Нулевое число veto означает отсутствие проверки нового действия. Проверять нужно итоговый T относительно supplied parent и сильного trial22: улучшение слабого parent само по себе недостаточно. Профиль живых размеров может плохо предсказывать дальнейший спрос; partition function является surrogate, а не доказанной оценкой итогового trench. Дополнительная работа O(80*40) на rebuild. Без инструментов patch не компилировался и не измерялся."
+}

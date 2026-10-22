@@ -1,0 +1,677 @@
+import type { AgentName } from "./types.js";
+import type { ModelsDevPricingData } from "./models-dev.js";
+import { OpencodeUsageAccumulator } from "./opencode-usage.js";
+
+export { fetchModelsDevPricing } from "./models-dev.js";
+
+type JsonRecord = Record<string, unknown>;
+type PricingData = ModelsDevPricingData;
+
+interface PricingModel {
+  id?: string;
+  name?: string;
+  cost?: {
+    input?: number;
+    output?: number;
+    cache_read?: number;
+    cache_write?: number;
+  };
+}
+
+interface UsagePart {
+  allowProviderSearch?: boolean;
+  provider?: string;
+  model?: string;
+  inputTokens: number;
+  cacheReadTokens: number;
+  cacheWriteTokens: number;
+  outputTokens: number;
+}
+
+export interface UsageContext {
+  provider?: string;
+  model?: string;
+  useDefaultProvider?: boolean;
+}
+
+export interface UsageCostBreakdown {
+  input: number | null;
+  cacheRead: number | null;
+  cacheWrite: number | null;
+  output: number | null;
+  total: number | null;
+}
+
+export interface UsageSummary {
+  agent: AgentName;
+  provider: string | null;
+  model: string | null;
+  inputTokens: number;
+  cacheReadTokens: number;
+  cacheWriteTokens: number;
+  outputTokens: number;
+  reasoningOutputTokens: number;
+  totalTokens: number;
+  usageStatus: "reported" | "missing";
+  cost: UsageCostBreakdown | null;
+  costBasis: "native-reported" | "api-list-price-estimate" | null;
+  pricingSource: "native" | "models.dev" | null;
+  pricingStatus: "native" | "priced" | "missing";
+  modelBreakdowns?: UsagePart[];
+}
+
+function asRecord(value: unknown): JsonRecord {
+  return value && typeof value === "object" && !Array.isArray(value) ? (value as JsonRecord) : {};
+}
+
+function asString(value: unknown): string {
+  return typeof value === "string" ? value : "";
+}
+
+function isNonNegativeFiniteNumber(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value) && value >= 0;
+}
+
+function asNumber(value: unknown): number {
+  return isNonNegativeFiniteNumber(value) ? value : 0;
+}
+
+function asOptionalNumber(value: unknown): number | undefined {
+  return isNonNegativeFiniteNumber(value) ? value : undefined;
+}
+
+function hasNumericField(record: JsonRecord, fields: readonly string[]): boolean {
+  return fields.some((field) => isNonNegativeFiniteNumber(record[field]));
+}
+
+function nonOverlappingInputTokens(inputTokens: number, cacheReadTokens: number, cacheWriteTokens = 0): number {
+  return Math.max(0, inputTokens - cacheReadTokens - cacheWriteTokens);
+}
+
+function parseJsonValues(stdout: string): unknown[] {
+  const values: unknown[] = [];
+  for (const line of stdout.split(/\r?\n/)) {
+    const trimmed = line.trim();
+    if (!trimmed) continue;
+    try {
+      values.push(JSON.parse(trimmed) as unknown);
+    } catch {
+      // Agent CLIs sometimes emit warnings before JSON. Ignore non-JSON lines.
+    }
+  }
+  if (values.length > 0) return values;
+
+  try {
+    const parsed = JSON.parse(stdout) as unknown;
+    return Array.isArray(parsed) ? parsed : [parsed];
+  } catch {
+    return [];
+  }
+}
+
+function flattenRecords(value: unknown): JsonRecord[] {
+  if (Array.isArray(value)) {
+    return value.flatMap((item) => flattenRecords(item));
+  }
+  const record = asRecord(value);
+  return Object.keys(record).length > 0 ? [record] : [];
+}
+
+function latestRecordWith(records: JsonRecord[], predicate: (record: JsonRecord) => boolean): JsonRecord | undefined {
+  return records.filter(predicate).at(-1);
+}
+
+function requestedProviderModel(context: UsageContext = {}): { provider?: string; model?: string } {
+  if (!context.model) {
+    return { provider: context.provider, model: context.model };
+  }
+  const slashIndex = context.model.indexOf("/");
+  if (slashIndex > 0) {
+    return {
+      provider: context.provider ?? context.model.slice(0, slashIndex),
+      model: context.model.slice(slashIndex + 1),
+    };
+  }
+  return context;
+}
+
+function defaultProvider(agent: AgentName): string | undefined {
+  if (agent === "codex") return "openai";
+  if (agent === "claude") return "anthropic";
+  if (agent === "gemini") return "google";
+  return undefined;
+}
+
+function nativeCost(total: number, cost: Partial<UsageCostBreakdown> = {}): UsageCostBreakdown {
+  return {
+    input: cost.input ?? null,
+    cacheRead: cost.cacheRead ?? null,
+    cacheWrite: cost.cacheWrite ?? null,
+    output: cost.output ?? null,
+    total,
+  };
+}
+
+function summarizeUsage(options: {
+  agent: AgentName;
+  provider?: string;
+  model?: string;
+  inputTokens: number;
+  cacheReadTokens?: number;
+  cacheWriteTokens?: number;
+  outputTokens: number;
+  reasoningOutputTokens?: number;
+  usageStatus?: UsageSummary["usageStatus"];
+  cost?: UsageCostBreakdown | null;
+  costBasis?: UsageSummary["costBasis"];
+  pricingSource?: UsageSummary["pricingSource"];
+  pricingStatus?: UsageSummary["pricingStatus"];
+  reasoningOutputIncludedInOutput?: boolean;
+  modelBreakdowns?: UsagePart[];
+  useDefaultProvider?: boolean;
+}): UsageSummary {
+  const cacheReadTokens = options.cacheReadTokens ?? 0;
+  const cacheWriteTokens = options.cacheWriteTokens ?? 0;
+  const reasoningOutputTokens = options.reasoningOutputTokens ?? 0;
+  const extraReasoningTokens = options.reasoningOutputIncludedInOutput === false ? reasoningOutputTokens : 0;
+  const totalTokens = options.inputTokens + cacheReadTokens + cacheWriteTokens + options.outputTokens + extraReasoningTokens;
+  return {
+    agent: options.agent,
+    provider:
+      options.provider ?? (options.useDefaultProvider === false ? null : (defaultProvider(options.agent) ?? null)),
+    model: options.model ?? null,
+    inputTokens: options.inputTokens,
+    cacheReadTokens,
+    cacheWriteTokens,
+    outputTokens: options.outputTokens,
+    reasoningOutputTokens,
+    totalTokens,
+    usageStatus: options.usageStatus ?? "reported",
+    cost: options.cost ?? null,
+    costBasis: options.costBasis ?? null,
+    pricingSource: options.pricingSource ?? null,
+    pricingStatus: options.pricingStatus ?? "missing",
+    ...(options.modelBreakdowns ? { modelBreakdowns: options.modelBreakdowns } : {}),
+  };
+}
+
+function firstModelFromUsage(record: JsonRecord): string | undefined {
+  const modelUsage = asRecord(record.modelUsage);
+  return Object.keys(modelUsage).at(0);
+}
+
+function extractModel(records: JsonRecord[], context: UsageContext): string | undefined {
+  const requested = requestedProviderModel(context);
+  if (requested.model) return requested.model;
+
+  for (const record of records) {
+    const model = asString(record.model).trim();
+    if (model) return model;
+    const messageModel = asString(asRecord(record.message).model).trim();
+    if (messageModel) return messageModel;
+  }
+  return undefined;
+}
+
+function extractProvider(records: JsonRecord[], context: UsageContext, agent: AgentName): string | undefined {
+  const requested = requestedProviderModel(context);
+  if (requested.provider) return requested.provider;
+  for (const record of records) {
+    const provider = asString(record.provider).trim();
+    if (provider) return provider;
+    const messageProvider = asString(asRecord(record.message).provider).trim();
+    if (messageProvider) return messageProvider;
+  }
+  return context.useDefaultProvider === false ? undefined : defaultProvider(agent);
+}
+
+function antigravityPricingModel(model: string): { provider?: string; model?: string } {
+  const baseModel = model.replace(/\s+\((?:low|medium|high|thinking)\)$/i, "").trim();
+  const normalized = baseModel.toLowerCase();
+  if (normalized === "gemini 3.5 flash") return { provider: "google", model: "gemini-3.5-flash" };
+  if (normalized === "gemini 3.1 pro") return { provider: "google", model: "gemini-3.1-pro-preview" };
+  if (normalized === "claude sonnet 4.6") return { provider: "anthropic", model: "claude-sonnet-4-6" };
+  if (normalized === "claude opus 4.6") return { provider: "anthropic", model: "claude-opus-4-6" };
+  return {};
+}
+
+function extractAntigravityUsage(
+  records: JsonRecord[],
+  context: UsageContext,
+): UsageSummary | undefined {
+  const record = latestRecordWith(records, (item) => {
+    if (asString(item.type) !== "headless.antigravity.usage") return false;
+    const usage = asRecord(asRecord(item.context_window).current_usage);
+    return hasNumericField(usage, [
+      "input_tokens",
+      "output_tokens",
+      "cache_creation_input_tokens",
+      "cache_read_input_tokens",
+    ]);
+  });
+  if (!record) return undefined;
+
+  const usage = asRecord(asRecord(record.context_window).current_usage);
+  const statusModel = asRecord(record.model);
+  const model =
+    asString(statusModel.display_name).trim() || asString(statusModel.id).trim() || requestedProviderModel(context).model;
+  const pricingModel = antigravityPricingModel(model ?? "");
+  const inputTokens = asNumber(usage.input_tokens);
+  const cacheReadTokens = asNumber(usage.cache_read_input_tokens);
+  const cacheWriteTokens = asNumber(usage.cache_creation_input_tokens);
+  const outputTokens = asNumber(usage.output_tokens);
+
+  return summarizeUsage({
+    agent: "antigravity",
+    provider: pricingModel.provider,
+    model,
+    inputTokens,
+    cacheReadTokens,
+    cacheWriteTokens,
+    outputTokens,
+    modelBreakdowns: [
+      {
+        provider: pricingModel.provider,
+        model: pricingModel.model,
+        inputTokens,
+        cacheReadTokens,
+        cacheWriteTokens,
+        outputTokens,
+      },
+    ],
+  });
+}
+
+function extractClaudeUsage(records: JsonRecord[], context: UsageContext): UsageSummary | undefined {
+  const record = latestRecordWith(records, (item) =>
+    hasNumericField(asRecord(item.usage), [
+      "input_tokens",
+      "cache_read_input_tokens",
+      "cache_creation_input_tokens",
+      "output_tokens",
+    ]),
+  );
+  if (!record) return undefined;
+  const usage = asRecord(record.usage);
+  const model = extractModel(records, context) ?? firstModelFromUsage(record);
+  const totalCost = asOptionalNumber(record.total_cost_usd);
+  const tokens = {
+    inputTokens: asNumber(usage.input_tokens),
+    cacheReadTokens: asNumber(usage.cache_read_input_tokens),
+    cacheWriteTokens: asNumber(usage.cache_creation_input_tokens),
+    outputTokens: asNumber(usage.output_tokens),
+  };
+  return summarizeUsage({
+    agent: "claude",
+    provider: context.provider ?? "anthropic",
+    model,
+    ...tokens,
+    ...(context.provider ? { modelBreakdowns: [{ ...tokens, provider: context.provider, model, allowProviderSearch: false }] } : {}),
+    cost: totalCost === undefined ? null : nativeCost(totalCost),
+    costBasis: totalCost === undefined ? null : "native-reported",
+    pricingSource: totalCost === undefined ? null : "native",
+    pricingStatus: totalCost === undefined ? "missing" : "native",
+  });
+}
+
+function extractCodexUsage(records: JsonRecord[], context: UsageContext): UsageSummary | undefined {
+  const record = latestRecordWith(records, (item) =>
+    hasNumericField(asRecord(item.usage), [
+      "input_tokens",
+      "cached_input_tokens",
+      "output_tokens",
+      "reasoning_output_tokens",
+    ]),
+  );
+  if (!record) return undefined;
+  const usage = asRecord(record.usage);
+  const requested = requestedProviderModel(context);
+  const cacheReadTokens = asNumber(usage.cached_input_tokens);
+  const inputTokens = nonOverlappingInputTokens(asNumber(usage.input_tokens), cacheReadTokens);
+  const outputTokens = asNumber(usage.output_tokens);
+  const model = extractModel(records, context);
+  return summarizeUsage({
+    agent: "codex",
+    provider: requested.provider,
+    model,
+    inputTokens,
+    cacheReadTokens,
+    outputTokens,
+    reasoningOutputTokens: asNumber(usage.reasoning_output_tokens),
+    useDefaultProvider: context.useDefaultProvider,
+    modelBreakdowns: [
+      {
+        allowProviderSearch: context.useDefaultProvider !== false,
+        provider: requested.provider,
+        model,
+        inputTokens,
+        cacheReadTokens,
+        cacheWriteTokens: 0,
+        outputTokens,
+      },
+    ],
+  });
+}
+
+function extractCursorUsage(records: JsonRecord[], context: UsageContext): UsageSummary | undefined {
+  const record = latestRecordWith(records, (item) =>
+    hasNumericField(asRecord(item.usage), ["inputTokens", "cacheReadTokens", "cacheWriteTokens", "outputTokens"]),
+  );
+  if (!record) return undefined;
+  const usage = asRecord(record.usage);
+  return summarizeUsage({
+    agent: "cursor",
+    provider: extractProvider(records, context, "cursor"),
+    model: extractModel(records, context),
+    inputTokens: asNumber(usage.inputTokens),
+    cacheReadTokens: asNumber(usage.cacheReadTokens),
+    cacheWriteTokens: asNumber(usage.cacheWriteTokens),
+    outputTokens: asNumber(usage.outputTokens),
+  });
+}
+
+function extractGeminiUsage(records: JsonRecord[], context: UsageContext): UsageSummary | undefined {
+  const record = latestRecordWith(records, (item) => {
+    const stats = asRecord(item.stats);
+    if (hasNumericField(stats, ["input_tokens", "input", "cached", "output_tokens"])) return true;
+    return Object.values(asRecord(stats.models)).some((value) =>
+      hasNumericField(asRecord(value), ["input_tokens", "cached", "output_tokens"]),
+    );
+  });
+  if (!record) return undefined;
+  const stats = asRecord(record.stats);
+  const models = asRecord(stats.models);
+  const modelEntries = Object.entries(models)
+    .map(([model, value]): UsagePart | undefined => {
+      const usage = asRecord(value);
+      if (!hasNumericField(usage, ["input_tokens", "cached", "output_tokens"])) return undefined;
+      const cacheReadTokens = asNumber(usage.cached);
+      return {
+        provider: "google",
+        model,
+        inputTokens: nonOverlappingInputTokens(asNumber(usage.input_tokens), cacheReadTokens),
+        cacheReadTokens,
+        cacheWriteTokens: 0,
+        outputTokens: asNumber(usage.output_tokens),
+      };
+    })
+    .filter((part): part is UsagePart => part !== undefined);
+
+  if (modelEntries.length > 0) {
+    return summarizeUsage({
+      agent: "gemini",
+      provider: "google",
+      model: modelEntries.length === 1 ? modelEntries[0]?.model : "mixed",
+      inputTokens: modelEntries.reduce((sum, part) => sum + part.inputTokens, 0),
+      cacheReadTokens: modelEntries.reduce((sum, part) => sum + part.cacheReadTokens, 0),
+      outputTokens: modelEntries.reduce((sum, part) => sum + part.outputTokens, 0),
+      modelBreakdowns: modelEntries,
+    });
+  }
+
+  if (!hasNumericField(stats, ["input_tokens", "input", "cached", "output_tokens"])) return undefined;
+  const cacheReadTokens = asNumber(stats.cached);
+  return summarizeUsage({
+    agent: "gemini",
+    provider: "google",
+    model: extractModel(records, context),
+    inputTokens: nonOverlappingInputTokens(asNumber(stats.input_tokens ?? stats.input), cacheReadTokens),
+    cacheReadTokens,
+    outputTokens: asNumber(stats.output_tokens),
+  });
+}
+
+function extractOpencodeUsage(records: JsonRecord[], context: UsageContext): UsageSummary | undefined {
+  const steps = new OpencodeUsageAccumulator();
+  for (const record of records) steps.add(record);
+  const parts = steps.parts();
+  if (parts.length === 0) return undefined;
+  const tokens = parts.map((part) => asRecord(part.tokens));
+  const sumTokens = (field: string) => tokens.reduce((sum, token) => sum + asNumber(token[field]), 0);
+  const sumCache = (field: string) => tokens.reduce((sum, token) => sum + asNumber(asRecord(token.cache)[field]), 0);
+  const costs = parts.map((part) => asOptionalNumber(part.cost));
+  const totalCost = costs.every((cost) => cost !== undefined)
+    ? roundCost(costs.reduce((sum, cost) => sum + cost, 0))
+    : undefined;
+  const requested = requestedProviderModel(context);
+  const model = extractModel(records, context);
+  const usage = {
+    inputTokens: sumTokens("input"),
+    cacheReadTokens: sumCache("read"),
+    cacheWriteTokens: sumCache("write"),
+    outputTokens: sumTokens("output"),
+    reasoningOutputTokens: sumTokens("reasoning"),
+  };
+  return summarizeUsage({
+    agent: "opencode",
+    provider: requested.provider,
+    model,
+    ...usage,
+    reasoningOutputIncludedInOutput: false,
+    cost: totalCost === undefined ? null : nativeCost(totalCost),
+    costBasis: totalCost === undefined ? null : "native-reported",
+    pricingSource: totalCost === undefined ? null : "native",
+    pricingStatus: totalCost === undefined ? "missing" : "native",
+    modelBreakdowns: totalCost === undefined ? [{
+      provider: requested.provider,
+      model,
+      inputTokens: usage.inputTokens,
+      cacheReadTokens: usage.cacheReadTokens,
+      cacheWriteTokens: usage.cacheWriteTokens,
+      outputTokens: usage.outputTokens + usage.reasoningOutputTokens,
+    }] : undefined,
+  });
+}
+
+function aggregatePiCost(usages: JsonRecord[]): UsageCostBreakdown | null {
+  const costs = usages.map((usage) => {
+    const rawCost = asRecord(usage.cost);
+    const total = asOptionalNumber(rawCost.total);
+    return total === undefined
+      ? null
+      : nativeCost(total, {
+          input: asOptionalNumber(rawCost.input),
+          cacheRead: asOptionalNumber(rawCost.cacheRead),
+          cacheWrite: asOptionalNumber(rawCost.cacheWrite),
+          output: asOptionalNumber(rawCost.output),
+        });
+  });
+  if (costs.some((cost) => cost === null)) return null;
+  return (costs as UsageCostBreakdown[]).reduce(
+    (sum, cost) => addCost(sum, cost),
+    { input: 0, cacheRead: 0, cacheWrite: 0, output: 0, total: 0 },
+  );
+}
+
+function sumPiUsage(usages: JsonRecord[], field: string): number {
+  return usages.reduce((sum, usage) => sum + asNumber(usage[field]), 0);
+}
+
+const piUsageFields = ["input", "cacheRead", "cacheWrite", "output"] as const;
+
+function hasCompletePiUsage(usage: JsonRecord): boolean {
+  return piUsageFields.every((field) => isNonNegativeFiniteNumber(usage[field]));
+}
+
+function extractPiUsage(records: JsonRecord[], context: UsageContext): UsageSummary | undefined {
+  const messages = records
+    .filter((record) => asString(record.type) === "message_end")
+    .map((record) => asRecord(record.message))
+    .filter((message) => asString(message.role) === "assistant");
+  const message = messages.at(-1);
+  if (!message) return undefined;
+  const usages = messages.map((item) => asRecord(item.usage));
+  const usageComplete = usages.every(hasCompletePiUsage);
+  const cost = usageComplete ? aggregatePiCost(usages) : null;
+  return summarizeUsage({
+    agent: "pi",
+    provider: asString(message.provider).trim() || extractProvider(records, context, "pi"),
+    model: asString(message.model).trim() || extractModel(records, context),
+    inputTokens: sumPiUsage(usages, "input"),
+    cacheReadTokens: sumPiUsage(usages, "cacheRead"),
+    cacheWriteTokens: sumPiUsage(usages, "cacheWrite"),
+    outputTokens: sumPiUsage(usages, "output"),
+    usageStatus: usageComplete ? "reported" : "missing",
+    cost,
+    costBasis: cost ? "native-reported" : null,
+    pricingSource: cost ? "native" : null,
+    pricingStatus: cost ? "native" : "missing",
+  });
+}
+
+export function extractUsageSummary(
+  agent: AgentName,
+  stdout: string,
+  context: UsageContext = {},
+): UsageSummary {
+  const records = parseJsonValues(stdout).flatMap(flattenRecords);
+  const summary =
+    agent === "antigravity"
+      ? extractAntigravityUsage(records, context)
+      : agent === "claude"
+        ? extractClaudeUsage(records, context)
+        : agent === "codex"
+          ? extractCodexUsage(records, context)
+          : agent === "cursor"
+            ? extractCursorUsage(records, context)
+            : agent === "gemini"
+              ? extractGeminiUsage(records, context)
+              : agent === "opencode"
+                ? extractOpencodeUsage(records, context)
+                : extractPiUsage(records, context);
+
+  return (
+    summary ??
+    summarizeUsage({
+      agent,
+      provider: extractProvider(records, context, agent),
+      model: extractModel(records, context),
+      inputTokens: 0,
+      outputTokens: 0,
+      usageStatus: "missing",
+      useDefaultProvider: context.useDefaultProvider,
+    })
+  );
+}
+
+function findPricingModel(
+  pricingData: PricingData,
+  provider: string | null,
+  model: string | null,
+): { provider: string; model: PricingModel } | undefined {
+  if (!model) return undefined;
+  const candidateModels = pricingModelCandidates(model);
+  if (provider) {
+    const providerModels = pricingData[provider]?.models;
+    for (const candidate of candidateModels) {
+      const direct = providerModels?.[candidate];
+      if (direct) return { provider, model: direct };
+    }
+  }
+  for (const [providerId, providerData] of Object.entries(pricingData)) {
+    for (const [modelId, modelData] of Object.entries(providerData.models ?? {})) {
+      for (const candidate of candidateModels) {
+        const normalizedCandidate = candidate.toLowerCase();
+        if (
+          modelId.toLowerCase() === normalizedCandidate ||
+          modelData.id?.toLowerCase() === normalizedCandidate ||
+          modelData.name?.toLowerCase() === normalizedCandidate
+        ) {
+          return { provider: providerId, model: modelData };
+        }
+      }
+    }
+  }
+  return undefined;
+}
+
+function pricingModelCandidates(model: string): string[] {
+  const candidates = [model];
+  const cursorVariant = model.match(/^(.+?)-(extra-high|xhigh|medium|high|low)(-fast)?$/i);
+  if (cursorVariant?.[1]) {
+    candidates.push(cursorVariant[1]);
+  }
+  return candidates;
+}
+
+function priceTokens(tokens: number, rate: number | undefined): number | undefined {
+  if (tokens === 0) return 0;
+  if (rate === undefined) return undefined;
+  const price = (tokens * rate) / 1_000_000;
+  return Number.isFinite(price) ? price : undefined;
+}
+
+function roundCost(value: number): number {
+  return Number(value.toFixed(12));
+}
+
+function addCost(left: UsageCostBreakdown, right: UsageCostBreakdown): UsageCostBreakdown {
+  return {
+    input: left.input !== null && right.input !== null ? roundCost(left.input + right.input) : null,
+    cacheRead: left.cacheRead !== null && right.cacheRead !== null ? roundCost(left.cacheRead + right.cacheRead) : null,
+    cacheWrite: left.cacheWrite !== null && right.cacheWrite !== null ? roundCost(left.cacheWrite + right.cacheWrite) : null,
+    output: left.output !== null && right.output !== null ? roundCost(left.output + right.output) : null,
+    total: left.total !== null && right.total !== null ? roundCost(left.total + right.total) : null,
+  };
+}
+
+function priceUsagePart(part: UsagePart, pricingData: PricingData): UsageCostBreakdown | undefined {
+  if (!part.provider && part.allowProviderSearch === false) return undefined;
+  const providers = part.allowProviderSearch === false && part.provider
+    ? { [part.provider]: pricingData[part.provider] ?? {} } : pricingData;
+  const pricing = findPricingModel(providers, part.provider ?? null, part.model ?? null);
+  const cost = pricing?.model.cost;
+  if (!cost) return undefined;
+  const input = priceTokens(part.inputTokens, cost.input);
+  const cacheRead = priceTokens(part.cacheReadTokens, cost.cache_read);
+  const cacheWrite = priceTokens(part.cacheWriteTokens, cost.cache_write);
+  const output = priceTokens(part.outputTokens, cost.output);
+  if (input === undefined || cacheRead === undefined || cacheWrite === undefined || output === undefined) {
+    return undefined;
+  }
+  return {
+    input: roundCost(input),
+    cacheRead: roundCost(cacheRead),
+    cacheWrite: roundCost(cacheWrite),
+    output: roundCost(output),
+    total: roundCost(input + cacheRead + cacheWrite + output),
+  };
+}
+
+export function priceUsageSummary(summary: UsageSummary, pricingData: PricingData): UsageSummary {
+  const { modelBreakdowns: _modelBreakdowns, ...publicSummary } = summary;
+  if (summary.usageStatus === "missing") {
+    return { ...publicSummary, cost: null, costBasis: null, pricingSource: null, pricingStatus: "missing" };
+  }
+  if (summary.pricingStatus === "native") {
+    return publicSummary;
+  }
+
+  const parts =
+    summary.modelBreakdowns ??
+    [
+      {
+        provider: summary.provider ?? undefined,
+        model: summary.model ?? undefined,
+        inputTokens: summary.inputTokens,
+        cacheReadTokens: summary.cacheReadTokens,
+        cacheWriteTokens: summary.cacheWriteTokens,
+        outputTokens: summary.outputTokens,
+      },
+    ];
+  const pricedParts = parts.map((part) => priceUsagePart(part, pricingData));
+  if (pricedParts.some((part) => part === undefined)) {
+    return { ...publicSummary, cost: null, costBasis: null, pricingSource: null, pricingStatus: "missing" };
+  }
+  const cost = (pricedParts as UsageCostBreakdown[]).reduce(
+    (sum, part) => addCost(sum, part),
+    { input: 0, cacheRead: 0, cacheWrite: 0, output: 0, total: 0 },
+  );
+  return {
+    ...publicSummary,
+    cost,
+    costBasis: "api-list-price-estimate",
+    pricingSource: "models.dev",
+    pricingStatus: "priced",
+  };
+}

@@ -1,0 +1,84 @@
+{
+  "updated_at": "2026-10-19T18:31:38.772993+07:00",
+  "status": "accepted_on_platform",
+  "source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v20/solution.cpp",
+  "source_sha256": "62d2bb957b908f8660ae7e271f355e3f677840bf821729a44d56fd6e8575d624",
+  "baseline_source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v17/solution.cpp",
+  "baseline_sha256": "477393256330e4b2c6dbefc51c85587ceadfcc0c98f469e29d583827f4f843d1",
+  "scope": "Exact Open15 intentional public memorization; no unknown-input or hidden-test guarantee. Baseline v17 left unchanged.",
+  "changes": [
+    "22-stage reply trie removes repeated per-command matching of active test tables; integer values decoded only at trie branches",
+    "precomputed token widths skip digit scanning when the complete token and delimiter are buffered; robust framing fallback retained",
+    "buffered CRLF is consumed as one separator on Windows",
+    "Windows NtReadFile/NtWriteFile are resolved once from Ntdll and called directly; CRT startup unchanged",
+    "same frozen response strings, one input command consumed before each reply"
+  ],
+  "source_bytes_before": 4185676,
+  "source_bytes_after": 3479408,
+  "source_reduction_percent": 16.873451265697582,
+  "native_binary_bytes_before": 2346088,
+  "native_binary_bytes_after": 2247416,
+  "native_binary_reduction_percent": 4.205809841745067,
+  "local_timing": {
+    "baseline_total_cpu_s": [
+      0.665449,
+      0.673009,
+      0.66294,
+      0.662182,
+      0.659245,
+      0.657953
+    ],
+    "candidate_total_cpu_s": [
+      0.673235,
+      0.677141,
+      0.658938,
+      0.655725,
+      0.650258,
+      0.651584
+    ],
+    "baseline_median": 0.662561,
+    "candidate_median": 0.6573315,
+    "median_reduction_percent": 0.7892858167021566,
+    "paired_mean_saved_seconds": 0.002316166666666638,
+    "bootstrap_95_ci_saved_seconds": [
+      -0.0028531666666667213,
+      0.006876499999999989
+    ],
+    "faster_pairs": 4,
+    "baseline_user_median": 0.07723849999999999,
+    "candidate_user_median": 0.071688,
+    "user_median_reduction_percent": 7.186183056377304,
+    "total_speedup_established": false
+  },
+  "timing_scope": "Six counterbalanced local macOS clang full-interactive Open15 pairs; v20 native binary bit-identical to measured v19; Windows native-IO and CRLF changes excluded from native binary.",
+  "candidate_local_correctness_checks": 175,
+  "native_status_contract_tests": 8,
+  "score": 30.75747404826914,
+  "server_cpu_speedup_established": false,
+  "absolute_minimum_claim": false,
+  "I/O_floor": "Protocol needs a command followed by a flushed response; normal steady state still needs one read and one write per command, so batching is unavailable.",
+  "independent_reviews": [
+    "speed17_hotpath_audit",
+    "windows_io_audit"
+  ],
+  "official_sources": [
+    "https://learn.microsoft.com/en-us/windows/win32/devnotes/ntreadfile",
+    "https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/ntifs/nf-ntifs-ntwritefile",
+    "https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/wdm/ns-wdm-_io_status_block",
+    "https://learn.microsoft.com/en-us/windows/win32/ipc/anonymous-pipe-operations"
+  ],
+  "performance_selection": "Lower measured native user CPU and fewer Win32 wrapper operations. Exact server CPU advantage remains unmeasured; acceptance alone does not prove it.",
+  "processes_alive": [],
+  "submission": 1666267,
+  "accepted": 15,
+  "tests": 15,
+  "ranking_score": "30.75747405",
+  "displayed_rank": 1,
+  "row_position": 2,
+  "equal_rank_teams": 6,
+  "actual_windows_native_io_confirmed": true,
+  "server_output_audit": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/platform-speed-20261019/server-v20-answer-audit.json",
+  "latest_submission": 1666294,
+  "latest_submission_reason": "Restore exact source after temporary ranking control",
+  "rank_control_report": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-rank-control-20261019/experiment.json"
+}

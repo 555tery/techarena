@@ -1,0 +1,106 @@
+{
+  "base": "candidate-exact-fast/solution.cj",
+  "base_sha256": "4e7efbcfd0b3d7f1d2cd2ca6f8764afa4bdee46566294116272d27e778cbf2b9",
+  "output_sha256": "2ee9ffb76f01445286cf2d1de622194252201cbb475964c070a3493708c381a7",
+  "generator_sha256": "7238469859323212e311e23ae37ea49abc6261fa3c21e10b3e39bf97fcafc955",
+  "changed_methods": [
+    {
+      "class": "OrderedMap<V>",
+      "method": "first",
+      "old_sha256": "94c02e51f60cdbff30e3ce7e12cf479e440f4b96d78ee3a7155070afd1e56bdc",
+      "new_sha256": "0117e7cea19e5874b5f21447cc309fc6f6ecb0ce302205503d9d65b17ef68a3b"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "last",
+      "old_sha256": "111b7b09a15cb6043e3ac20b13ef4c18517734e5f11b0b3f3e0a1b8d3b2a2916",
+      "new_sha256": "6c08c38707492bc2f1e548866ee630799e712531a5e16254470cff86cb04dfd5"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "next",
+      "old_sha256": "7c74c61e82cd8d72b68e28015f447ce6040bf5f2a62e3c404a8d8f16e6dee377",
+      "new_sha256": "a28573c146bebac80fb81dc459c43c9e6d1d63388536c8b05ab068a6d26612f4"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "prev",
+      "old_sha256": "595c376a02ab6a4c89d9f968b231f130700c3f6f9d49c9ddb751157adb5e6bf6",
+      "new_sha256": "5204af4bc16e34b3bfa36ceec10e063104749dced1ee335da5b7aefa536517e5"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "find",
+      "old_sha256": "b6120a225bdbc7e13a2dd6dbe245241bb8ef946676acf1e0c82de5f050d62ab8",
+      "new_sha256": "d2dfc500338e4cd94dd22ea3239e92bde87ef7380eb56a607410183a6d17a013"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "lower",
+      "old_sha256": "ea64bb87e6691b3ad75f2193f6baa7371595517470bd5fbbb1820748cb368143",
+      "new_sha256": "de0a968c804b1fb9678261ac3a72fca7dfe53b1eea784bda75e300fc6d414ea9"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "upper",
+      "old_sha256": "811753c3eef15090f5eaaf9c063fade1406e1bc9a96494e2c5d68a3c1b07e8d7",
+      "new_sha256": "322251190ab3e89267f19320f9ff1117b4f199a38edd2e0f8da7d5d123c2b163"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "put",
+      "old_sha256": "6bb2227f266e5d07475c98a9b2f9b467a2661b9f12a7cd467660b416fa3f75e5",
+      "new_sha256": "be44623a21790ef135e81241c3be4a4266150a407b8bb97879f21b6c05d6b084"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "first",
+      "old_sha256": "94c02e51f60cdbff30e3ce7e12cf479e440f4b96d78ee3a7155070afd1e56bdc",
+      "new_sha256": "0117e7cea19e5874b5f21447cc309fc6f6ecb0ce302205503d9d65b17ef68a3b"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "last",
+      "old_sha256": "111b7b09a15cb6043e3ac20b13ef4c18517734e5f11b0b3f3e0a1b8d3b2a2916",
+      "new_sha256": "6c08c38707492bc2f1e548866ee630799e712531a5e16254470cff86cb04dfd5"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "next",
+      "old_sha256": "7c74c61e82cd8d72b68e28015f447ce6040bf5f2a62e3c404a8d8f16e6dee377",
+      "new_sha256": "a28573c146bebac80fb81dc459c43c9e6d1d63388536c8b05ab068a6d26612f4"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "prev",
+      "old_sha256": "595c376a02ab6a4c89d9f968b231f130700c3f6f9d49c9ddb751157adb5e6bf6",
+      "new_sha256": "5204af4bc16e34b3bfa36ceec10e063104749dced1ee335da5b7aefa536517e5"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "find",
+      "old_sha256": "b6120a225bdbc7e13a2dd6dbe245241bb8ef946676acf1e0c82de5f050d62ab8",
+      "new_sha256": "d2dfc500338e4cd94dd22ea3239e92bde87ef7380eb56a607410183a6d17a013"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "lower",
+      "old_sha256": "ea64bb87e6691b3ad75f2193f6baa7371595517470bd5fbbb1820748cb368143",
+      "new_sha256": "de0a968c804b1fb9678261ac3a72fca7dfe53b1eea784bda75e300fc6d414ea9"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "upper",
+      "old_sha256": "811753c3eef15090f5eaaf9c063fade1406e1bc9a96494e2c5d68a3c1b07e8d7",
+      "new_sha256": "322251190ab3e89267f19320f9ff1117b4f199a38edd2e0f8da7d5d123c2b163"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "put",
+      "old_sha256": "64b6158ba3befefc7fc21426e954d4958b7bccb25fb1ca512b04c99d1930b91b",
+      "new_sha256": "33d78bf3222ea8e538777365f2aeb52f7e70416225747e506ee83c69244cb6b6"
+    }
+  ],
+  "cangjie_compiled": false,
+  "solver_executed": false
+}

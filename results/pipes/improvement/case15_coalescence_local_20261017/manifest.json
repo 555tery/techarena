@@ -1,0 +1,130 @@
+{
+  "experiment": "case15_coalescence_local_20261017",
+  "date_local": "2026-10-17",
+  "status": "NO-GO: target +180m, sealed mean negative, Open15 total lower",
+  "selected": "endpoint; development-only selection, no retuning after final evaluation",
+  "candidate_source_sha256": "1c545d73692dd6202979d197cb03e30505a096845b78f838880fd7682b309f0d",
+  "baseline_source_sha256": "c19945111834e5969e2f58f0b6503851b35e7642a9bd77f9f70c118ee3bb736c",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "compiler_flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic; COALESCENCE_POLICY=0/1/2 for control/E/G",
+  "scope": {
+    "platform_opened": false,
+    "submissions": false,
+    "docker": false,
+    "canonical_modified": false,
+    "frozen_final_modified": false,
+    "online_inputs_only": true
+  },
+  "runs": {
+    "development_baseline": {
+      "path": "runs/development_baseline/summary.json",
+      "case_count": 12,
+      "ok_count": 12,
+      "weighted_score_sum": 8.942638335333168,
+      "max_solver_cpu_s": 0.22375099999999998,
+      "max_solver_rss_mib": 3.46875,
+      "all_within_limits": true
+    },
+    "development_endpoint": {
+      "path": "runs/development_endpoint/summary.json",
+      "case_count": 12,
+      "ok_count": 12,
+      "weighted_score_sum": 8.9864086120217,
+      "max_solver_cpu_s": 0.22884500000000002,
+      "max_solver_rss_mib": 3.640625,
+      "all_within_limits": true
+    },
+    "development_same_length_gap": {
+      "path": "runs/development_same_length_gap/summary.json",
+      "case_count": 12,
+      "ok_count": 12,
+      "weighted_score_sum": 8.971779281686267,
+      "max_solver_cpu_s": 0.22938199999999997,
+      "max_solver_rss_mib": 3.828125,
+      "all_within_limits": true
+    },
+    "sealed_baseline": {
+      "path": "runs/sealed_baseline/summary.json",
+      "case_count": 12,
+      "ok_count": 12,
+      "weighted_score_sum": 8.200513595300208,
+      "max_solver_cpu_s": 2.043155,
+      "max_solver_rss_mib": 7.09375,
+      "all_within_limits": true
+    },
+    "sealed_endpoint": {
+      "path": "runs/sealed_endpoint/summary.json",
+      "case_count": 12,
+      "ok_count": 12,
+      "weighted_score_sum": 8.17803673012881,
+      "max_solver_cpu_s": 2.049246,
+      "max_solver_rss_mib": 7.6875,
+      "all_within_limits": true
+    },
+    "open15_baseline": {
+      "path": "runs/open15_baseline/summary.json",
+      "case_count": 15,
+      "ok_count": 15,
+      "weighted_score_sum": 30.074287976405728,
+      "max_solver_cpu_s": 2.1894739999999997,
+      "max_solver_rss_mib": 8.34375,
+      "all_within_limits": true
+    },
+    "open15_endpoint": {
+      "path": "runs/open15_endpoint/summary.json",
+      "case_count": 15,
+      "ok_count": 15,
+      "weighted_score_sum": 29.975192139362818,
+      "max_solver_cpu_s": 2.253294,
+      "max_solver_rss_mib": 9.28125,
+      "all_within_limits": true
+    }
+  },
+  "total_official_harness_cases": 90,
+  "all_harness_cases_ok": true,
+  "baseline_archived_stdout_exact_matches": 15,
+  "artifact_sha256": {
+    "PREREGISTERED.md": "0d968608c9ef0d13828d40ada2b388a4ab7bde7a9c6f06e214aa7d025ba63c20",
+    "build_candidate.py": "066de2b3b2b6ae4cc4b0997ba37fe4fbceca7d8f81a6bec9bf264dec098b1501",
+    "compare.py": "63fdc9a8c75f4eac4508d8c800927aeccb42dc0cb180b36246c5034057ebf49c",
+    "audit_geometry.py": "dd4880a210ac928c79d5cf867601255bed293142d5784641dd3e418fd359ff28",
+    "model_checks.cpp": "0354ef8e2607247117850e8dc12728f91a8ab815d47501826712f4d968d0dfdf",
+    "src/baseline.cpp": "c19945111834e5969e2f58f0b6503851b35e7642a9bd77f9f70c118ee3bb736c",
+    "src/deletion_seam.cpp": "1c545d73692dd6202979d197cb03e30505a096845b78f838880fd7682b309f0d",
+    "bin/baseline": "5e2dc232ea796e23b5c7ae76e86f11ee890418623e06d362c9da70298e41e742",
+    "bin/control": "fcbf6ec8be1b7fdc419d2784835e46fbae3245cb6ef90b27d1d459bf9ece4e5a",
+    "bin/endpoint": "5ad34d944e9de4439595a3a9ceb12c83c66524873e0b5b9bab2466599bc05421",
+    "bin/same_length_gap": "4539f1d267b0eceb4207e480e19f92fc39184b591ab7a1cd98098e980b783325",
+    "freeze_before_development.json": "3819653d36f2b6e6204fd8ddb708bb969fefd1924d2050c013a0c363dfc029e6",
+    "finalist_freeze.json": "d92d43d878ba28b38742097f932153d7208dad52d2e322a15929c5284b52c549",
+    "preflight.json": "d4df6b59c02f1d64b0980c9cfe1ed6524659c4e5512245e911de8d9e4df09ef8",
+    "validation/generate.py": "05608b2ec889375f4f9f747c11ff3a8df758b79150b8e714445317c9cb790ad5",
+    "validation/manifest.json": "d51ecad803b41242362c750dd83549668d69ec8a6ec4859b761589e56973b5f2",
+    "comparison_development_endpoint.json": "3c20b535b594fd560df91470c7ca86433580e82082dee941caa2fbfbac7cc706",
+    "comparison_development_same_length_gap.json": "6f4f8a8652db103d73a1bd310803f5bef617625144485d694f901b8f357cc6fd",
+    "comparison_sealed_endpoint.json": "4b731281d0055afefbcde82c818922a04bca439f9cde67527a524e4ed884ac4b",
+    "comparison_open15_endpoint.json": "e6bad4823fe05d815991c7349e28fc5cb18fedbf4f0a1b9b24d3f9f8f0949c30",
+    "geometry_open15_baseline_15.json": "9ade087dd7a5024e2ecc3ccdba38e26f8594ba622af9572e1d43237973e89ba2",
+    "geometry_open15_endpoint_15.json": "20dfe5683a1a71c865fcd154cc869e1e9c4847efea9f29008dc0a8495bc8f65e",
+    "REPORT.md": "df465e42bef63ff13101f2126bd6444b04efd03b5898d28de844775c618b931a",
+    "provenance_recovery.json": "333c75a07e07605dc8b9ea9edf0e754e44eeb8abc35fdf81bfe4e226b6e87b23",
+    "validation/manifest_before_sealed.recovered.json": "c26c35038cb18c27375ab16ea106c9f33a29f5eb1a39025187826c696b95e216",
+    "validation/README.md": "c7e7383155f80c1c63dc4976f6e0468555c0f20acfd92da618dd4f86523ed154"
+  },
+  "preserved_external_sha256": {
+    "src/pipes.cpp": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+    "results/pipes/final/solution.cpp": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "tools/pipes_harness.py": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "tools/interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+  },
+  "benchmark_manifest": "validation/manifest.json",
+  "comparison_notes": "Synthetic score sums are for that local set only and are not added to Open15. Bootstrap uses whole trace pairs, 20000 draws, seed71527999.",
+  "reproduction": {
+    "build": "python3 results/pipes/improvement/case15_coalescence_local_20261017/build_candidate.py",
+    "compile_example": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic -DCOALESCENCE_POLICY=1 results/pipes/improvement/case15_coalescence_local_20261017/src/deletion_seam.cpp -o results/pipes/improvement/case15_coalescence_local_20261017/bin/endpoint",
+    "evaluate_example": "python3 tools/pipes_harness.py --solver ./results/pipes/improvement/case15_coalescence_local_20261017/bin/endpoint --name deletion-seam-open15_endpoint --tests data/pipes/open --out results/pipes/improvement/case15_coalescence_local_20261017/runs/open15_endpoint --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "unit_model": "clang++ -O2 -std=c++20 -Wall -Wextra -Werror -Wno-keyword-macro -pedantic results/pipes/improvement/case15_coalescence_local_20261017/model_checks.cpp -o results/pipes/improvement/case15_coalescence_local_20261017/bin/model_checks && results/pipes/improvement/case15_coalescence_local_20261017/bin/model_checks"
+  },
+  "provenance_note": "Sealed generation updates benchmark manifest as planned; original predevelopment manifest reconstructed byte-for-byte against frozen SHA. See provenance_recovery.json.",
+  "independent_review": "A separate read-only reviewer verified causal implementation, matching source/binary freeze, per-case arithmetic, protocol/resources and failed promotion gates. Root independently verified exact recovered benchmark manifest SHA."
+}

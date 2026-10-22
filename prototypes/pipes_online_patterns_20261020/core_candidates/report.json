@@ -1,0 +1,66 @@
+{
+  "status": "Two declared hypotheses completed; no threshold search or further candidates.",
+  "evidence_scope": "Old online_core calibration64 + final128 are DEV192. Open15 observed. No current patterns-round new calibration/final inputs/results inspected.",
+  "validation": "621 successful bulk stdin runs with full occupancy validation; one solver at a time. Interactive protocol and Windows/G5420 not tested.",
+  "baseline_sha256": "57c047da7ae9939d9d86dfb050458f22e1a189ec43c5fb621c578bee324821d9",
+  "candidates": {
+    "dp_stability_gate": {
+      "source_sha256": "7873ab77bfab3cf39e92be7ba272e738d9095e1ea2838f9222433b645ec37cd6",
+      "dev_n": 192,
+      "dev_mean_delta": -0.0018556585992577596,
+      "dev_wtl": [
+        33,
+        106,
+        53
+      ],
+      "dev_worst": {
+        "id": "calibration-009",
+        "group": "calibration",
+        "delta": -0.06795680428134565
+      },
+      "dev_stratum_family_macro_delta": {
+        "prefix": -0.0016968741584676163,
+        "ordinary": -0.0017714218225964272
+      },
+      "open15_weighted": 30.014751877629628,
+      "open15_delta": -0.004512414313822433,
+      "scenario_delta_open_plus84_macro": {
+        "prefix": -0.1470498436251022,
+        "ordinary": -0.15331184741192233
+      },
+      "screen_cpu_max": 0.9,
+      "screen_rss_max": 14.59375
+    },
+    "dp_recency_mix": {
+      "source_sha256": "86dac57f90e8b4353776636c3bc9574c408fbe93fdb531f5f3a93ccb0591431d",
+      "dev_n": 192,
+      "dev_mean_delta": -0.00044796740955171943,
+      "dev_wtl": [
+        44,
+        93,
+        55
+      ],
+      "dev_worst": {
+        "id": "final-083",
+        "group": "final",
+        "delta": -0.038238317757009366
+      },
+      "dev_stratum_family_macro_delta": {
+        "prefix": -0.0008812100138835146,
+        "ordinary": -5.236026304498293e-06
+      },
+      "open15_weighted": 30.041768397693108,
+      "open15_delta": 0.022504105749657555,
+      "scenario_delta_open_plus84_macro": {
+        "prefix": -0.05151753541655767,
+        "ordinary": 0.0220642795400797
+      },
+      "screen_cpu_max": 1.28,
+      "screen_rss_max": 13.75
+    }
+  },
+  "interpretation": {
+    "dp_stability_gate": "Negative on both DEV strata and Open15. Does not support replacing baseline. Distributional disagreement alone is not evidence that legacy policy is safer.",
+    "dp_recency_mix": "Public gain+0.0225041 trades against DEV mean-0.000447967 and prefix macro-0.00088121. Ordinary macro approximately unchanged. This is a distribution-sensitive tradeoff, not a confirmed general improvement. Higher rebuild cadence increased observed maximum CPU. Independent primary selection may evaluate but DEV alone does not justify promotion."
+  }
+}

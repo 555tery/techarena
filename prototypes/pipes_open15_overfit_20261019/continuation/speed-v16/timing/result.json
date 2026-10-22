@@ -1,0 +1,123 @@
+{
+  "status": "verified",
+  "candidate": "speed-v16",
+  "pairs": 1,
+  "workers": 2,
+  "source_sha256": "d3cd48d0555e6e93bf6340917bac35a4a1abcac623d683d4dd86c2e25573d83f",
+  "score": 30.75747404826914,
+  "all_answers_identical": true,
+  "baseline_cpu_sums": [
+    0.675786
+  ],
+  "candidate_cpu_sums": [
+    0.667097
+  ],
+  "baseline_median": 0.675786,
+  "candidate_median": 0.667097,
+  "median_cpu_reduction_percent": 1.285762060770712,
+  "faster_pairs": 1,
+  "paired_mean_saved_seconds": 0.008688999999999947,
+  "paired_bootstrap_95_ci_seconds": [
+    0.008688999999999947,
+    0.008688999999999947
+  ],
+  "candidate_user_cpu_median": 0.080496,
+  "baseline_user_cpu_median": 0.077384,
+  "candidate_system_cpu_median": 0.586601,
+  "baseline_system_cpu_median": 0.598402,
+  "measurements": [
+    {
+      "baseline": {
+        "source_sha256": "065707442c1d303ae148b30282f421536a9350505dd8aead5cbc6f3a77043cd3",
+        "binary_sha256": "37ecced9a173c56c61093fd60d241705d7dbefd02be24261eb28e3c98e64d869",
+        "cases": 15,
+        "score": 30.75747404826914,
+        "cpu_sum_s": 0.675786,
+        "max_cpu_s": 0.414526,
+        "max_rss_mib": 2.984375,
+        "answers": {
+          "1": "9523a42972a550ee7f7363021304d7105cbb6aec6fdffce1f0fb03f2982d1e73",
+          "2": "cacd51b09341d2381887eeca9263ca26dbd853f8afa9b5583e888bfbffe58e50",
+          "3": "f2fe5c87963dbd40530db469bc5d63664d6603fbd631dfac45993706ae55ede3",
+          "4": "a359ee4a7bf79ed03a4390e5a051df9caf566034ee3250ca3304f695a8a077f6",
+          "5": "9b420f0e7657c42234dde7cb47d02eaf4797fecfde276b9e379b736510b20d49",
+          "6": "ae944eae54a526d3ed6d36ec6615c4b8cb39b1dc11ad90e41336d2e3fe57e0c4",
+          "7": "89458e86e0107eb32bcc6a5c179f892a728916a52da49e84422b652ed30d4e65",
+          "8": "eb1297b98e967cb92e4892c793776bd2681d0ea3e2e978586b2dd2ad9394d493",
+          "9": "a6cf350b1373b8ceb2fe9daaad033e2fe2e14b31b5688feabe6735c1b6fa93c5",
+          "10": "1067d848b4261f9e92c750008e8c686a42b5f0b1791c7502221846abb9afe86f",
+          "11": "fdfbd4fe15c234c18f0c66db1b882972664641a2978f814abb462b639edfbbb2",
+          "12": "44bdfb50608edbe7dc37ae202b8170e5d7d1444136b98504b3f85f5c01bee2e0",
+          "13": "0b3605f2c11cae47d31b14ad2062d25397872c326238c75cc51c07a4bb053b9d",
+          "14": "d14509d2f0feb3fd92e38c5151548d0fca297b3b8ec6201ee68b83bc22eff8e4",
+          "15": "f18975cf4401d7bb269162cc6f5640573820ea37c8bc60ace95d5dcc4dec3571"
+        },
+        "per_case_cpu": {
+          "1": 0.001864,
+          "2": 0.001921,
+          "3": 0.0015279999999999998,
+          "4": 0.0016150000000000001,
+          "5": 0.024352,
+          "6": 0.001863,
+          "7": 0.002588,
+          "8": 0.021015,
+          "9": 0.028484000000000002,
+          "10": 0.033482,
+          "11": 0.033383,
+          "12": 0.006706,
+          "13": 0.031538,
+          "14": 0.07092100000000001,
+          "15": 0.414526
+        },
+        "user_cpu_sum_s": 0.077384,
+        "system_cpu_sum_s": 0.598402
+      },
+      "fast": {
+        "source_sha256": "d3cd48d0555e6e93bf6340917bac35a4a1abcac623d683d4dd86c2e25573d83f",
+        "binary_sha256": "f3b74159adbccd39a0022d121e1521567cb5b31557dfacdedd7fa7d8f86497e5",
+        "cases": 15,
+        "score": 30.75747404826914,
+        "cpu_sum_s": 0.667097,
+        "max_cpu_s": 0.405677,
+        "max_rss_mib": 2.984375,
+        "answers": {
+          "1": "9523a42972a550ee7f7363021304d7105cbb6aec6fdffce1f0fb03f2982d1e73",
+          "2": "cacd51b09341d2381887eeca9263ca26dbd853f8afa9b5583e888bfbffe58e50",
+          "3": "f2fe5c87963dbd40530db469bc5d63664d6603fbd631dfac45993706ae55ede3",
+          "4": "a359ee4a7bf79ed03a4390e5a051df9caf566034ee3250ca3304f695a8a077f6",
+          "5": "9b420f0e7657c42234dde7cb47d02eaf4797fecfde276b9e379b736510b20d49",
+          "6": "ae944eae54a526d3ed6d36ec6615c4b8cb39b1dc11ad90e41336d2e3fe57e0c4",
+          "7": "89458e86e0107eb32bcc6a5c179f892a728916a52da49e84422b652ed30d4e65",
+          "8": "eb1297b98e967cb92e4892c793776bd2681d0ea3e2e978586b2dd2ad9394d493",
+          "9": "a6cf350b1373b8ceb2fe9daaad033e2fe2e14b31b5688feabe6735c1b6fa93c5",
+          "10": "1067d848b4261f9e92c750008e8c686a42b5f0b1791c7502221846abb9afe86f",
+          "11": "fdfbd4fe15c234c18f0c66db1b882972664641a2978f814abb462b639edfbbb2",
+          "12": "44bdfb50608edbe7dc37ae202b8170e5d7d1444136b98504b3f85f5c01bee2e0",
+          "13": "0b3605f2c11cae47d31b14ad2062d25397872c326238c75cc51c07a4bb053b9d",
+          "14": "d14509d2f0feb3fd92e38c5151548d0fca297b3b8ec6201ee68b83bc22eff8e4",
+          "15": "f18975cf4401d7bb269162cc6f5640573820ea37c8bc60ace95d5dcc4dec3571"
+        },
+        "per_case_cpu": {
+          "1": 0.0038250000000000003,
+          "2": 0.004094,
+          "3": 0.0019229999999999998,
+          "4": 0.001576,
+          "5": 0.026554,
+          "6": 0.002597,
+          "7": 0.002893,
+          "8": 0.023766,
+          "9": 0.028717999999999997,
+          "10": 0.031126,
+          "11": 0.031222,
+          "12": 0.006581999999999999,
+          "13": 0.030501,
+          "14": 0.06604299999999999,
+          "15": 0.405677
+        },
+        "user_cpu_sum_s": 0.080496,
+        "system_cpu_sum_s": 0.586601
+      }
+    }
+  ],
+  "scope": "Local macOS interactive solver CPU; does not establish Windows/server speed. Small paired sample; bootstrap is descriptive."
+}

@@ -1,0 +1,127 @@
+{
+  "purpose": "User-authorized adversarial test construction, fixed existing replay plans; no platform use or solver optimization.",
+  "source_public_case": "data/pipes/open/15.in",
+  "source_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+  "profiles": {
+    "joint": {
+      "trench_m": 438060,
+      "final_occupied_m": 418757,
+      "full_public_plan_byte_replay": "passed",
+      "tape_sha256": "f2c169d6cacd9be3bcdcdf8ad885d9aeecc70de397f5f6c57540aa58f8aee8fd",
+      "origin": "Frozen prefix-consistent joint Open15 best-positions plan, same as the previous diagnostic.",
+      "source_sha256": "0f3fa88d9beef885c2a296305021ead6291e11798f4597a4d0a3b34b00655f39"
+    },
+    "reverse": {
+      "trench_m": 418780,
+      "final_occupied_m": 418757,
+      "full_public_plan_byte_replay": "passed",
+      "tape_sha256": "fc534a2d9c09cb29518fd277c1dcdea3550a56d3dcefc2ba86586f32229951b6",
+      "origin": "Existing future/2/15.txt, reverse permanent-pipe order with backward BF temporary packing; optimized for public case15 only, not jointly prefix-compatible with all Open15.",
+      "source_sha256": "c3e3d15bba5fa05822f8fe5286ea0b5ca7c26572a6a930e7634ce46da974f05c"
+    }
+  },
+  "tests": [
+    {
+      "name": "joint-fragmentation",
+      "file": "prototypes/pipes_guarded_traps_20261019/inputs/joint-fragmentation.in",
+      "target_profile": "joint",
+      "common_command_prefix": 32,
+      "mechanism": "Keep PIDs 11,12,13,14,22 (24 m) compact in BF, scattered in frozen joint replay; refill with 3x28 and 12x1.",
+      "parameters": {
+        "prefix_n": 32,
+        "retained_pids": [
+          11,
+          12,
+          13,
+          14,
+          22
+        ]
+      },
+      "weight": 1.0,
+      "test_sha256": "ac928c332bab253d34208e3b942d024ebe96a581f96dcb536357bc13a1343309",
+      "operation_count": 68,
+      "placement_count": 44,
+      "peak_live_pipe_length_m": 120,
+      "minimum_trench_lower_bound_m": 120,
+      "final_occupied_length_m": 120,
+      "kpi_upper_bound_from_live_volume": 1.0
+    },
+    {
+      "name": "joint-multiphase",
+      "file": "prototypes/pipes_guarded_traps_20261019/inputs/joint-multiphase.in",
+      "target_profile": "joint",
+      "common_command_prefix": 32,
+      "mechanism": "Fixed bounded-beam suffix repeatedly changes lifetimes within the same BF arena; terminal 1 m pipes restore full 120 m final loading.",
+      "parameters": {
+        "prefix_n": 32,
+        "suffix_sha256": "f877fffd9bb1288b34e67dba8c4b00f1d9908f4e0524eb21e2ec7bcdecf3c5ae"
+      },
+      "weight": 1.0,
+      "test_sha256": "7119e8fff3d4940b3071047460938a623144b0af8c1f3a462bd1a1dbf3d4bca1",
+      "operation_count": 186,
+      "placement_count": 143,
+      "peak_live_pipe_length_m": 120,
+      "minimum_trench_lower_bound_m": 120,
+      "final_occupied_length_m": 120,
+      "kpi_upper_bound_from_live_volume": 1.0
+    },
+    {
+      "name": "reverse-reservation-128",
+      "file": "prototypes/pipes_guarded_traps_20261019/inputs/reverse-reservation-128.in",
+      "target_profile": "reverse",
+      "common_command_prefix": 128,
+      "mechanism": "After a real public prefix, clear active pipes and restore at least the prefix peak volume with 40 m pipes. Frozen reverse plan has already excavated for its expected distant future.",
+      "parameters": {
+        "prefix_n": 128,
+        "refill_count_40m": 9
+      },
+      "weight": 1.0,
+      "test_sha256": "70e3c5ed6992a1370c3dc2631a1a4566a471b99b37ce85b388122f425c18ecd0",
+      "operation_count": 221,
+      "placement_count": 115,
+      "peak_live_pipe_length_m": 360,
+      "minimum_trench_lower_bound_m": 360,
+      "final_occupied_length_m": 360,
+      "kpi_upper_bound_from_live_volume": 1.0
+    },
+    {
+      "name": "reverse-reservation-4096",
+      "file": "prototypes/pipes_guarded_traps_20261019/inputs/reverse-reservation-4096.in",
+      "target_profile": "reverse",
+      "common_command_prefix": 4096,
+      "mechanism": "After a real public prefix, clear active pipes and restore at least the prefix peak volume with 40 m pipes. Frozen reverse plan has already excavated for its expected distant future.",
+      "parameters": {
+        "prefix_n": 4096,
+        "refill_count_40m": 254
+      },
+      "weight": 1.0,
+      "test_sha256": "115c36bd3979d7a64ebf7b5f35f4a7ed221a7cfd4571753a0dab74bf4b6449a2",
+      "operation_count": 6832,
+      "placement_count": 3543,
+      "peak_live_pipe_length_m": 10160,
+      "minimum_trench_lower_bound_m": 10160,
+      "final_occupied_length_m": 10160,
+      "kpi_upper_bound_from_live_volume": 1.0
+    },
+    {
+      "name": "public-case15-control",
+      "file": "prototypes/pipes_guarded_traps_20261019/inputs/public-case15-control.in",
+      "target_profile": "control",
+      "common_command_prefix": 200000,
+      "mechanism": "Unmodified public case15 commands, normalized local weight 1; validates each full frozen tape.",
+      "parameters": {
+        "prefix_n": 200000
+      },
+      "weight": 1.0,
+      "test_sha256": "786827fabe2014aabe058bf17c4461bf1a9f3c313ae0055251ed38ee5abc1745",
+      "operation_count": 200000,
+      "placement_count": 130255,
+      "peak_live_pipe_length_m": 418768,
+      "minimum_trench_lower_bound_m": 418780,
+      "final_occupied_length_m": 418757,
+      "kpi_upper_bound_from_live_volume": 0.9999450785615359
+    }
+  ],
+  "selection": "Joint probe chosen by bounded prefix-window geometry search; reverse tests target pre-existing irreversible reservations. All selected to expose known mechanisms, not an unseen benchmark.",
+  "platform_actions": 0
+}

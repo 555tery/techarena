@@ -1,0 +1,138 @@
+{
+  "purpose": "sealed final comparison set",
+  "case_count": 12,
+  "per_case": [
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-01.in",
+      "sha256": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 28003,
+      "peak_live_pipe_length_m": 330020,
+      "minimum_trench_lower_bound_m": 330020,
+      "final_occupied_length_m": 330000,
+      "kpi_upper_bound_from_live_volume": 0.9999393976122659
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-02.in",
+      "sha256": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 20001,
+      "peak_live_pipe_length_m": 419,
+      "minimum_trench_lower_bound_m": 420,
+      "final_occupied_length_m": 7,
+      "kpi_upper_bound_from_live_volume": 0.016666666666666666
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-03.in",
+      "sha256": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 20001,
+      "peak_live_pipe_length_m": 328,
+      "minimum_trench_lower_bound_m": 340,
+      "final_occupied_length_m": 52,
+      "kpi_upper_bound_from_live_volume": 0.15294117647058825
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-04.in",
+      "sha256": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 27753,
+      "peak_live_pipe_length_m": 315242,
+      "minimum_trench_lower_bound_m": 315260,
+      "final_occupied_length_m": 315242,
+      "kpi_upper_bound_from_live_volume": 0.9999429042694918
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-05.in",
+      "sha256": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 20005,
+      "peak_live_pipe_length_m": 270,
+      "minimum_trench_lower_bound_m": 280,
+      "final_occupied_length_m": 96,
+      "kpi_upper_bound_from_live_volume": 0.34285714285714286
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-06.in",
+      "sha256": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 20001,
+      "peak_live_pipe_length_m": 289,
+      "minimum_trench_lower_bound_m": 300,
+      "final_occupied_length_m": 31,
+      "kpi_upper_bound_from_live_volume": 0.10333333333333333
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-07.in",
+      "sha256": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 28025,
+      "peak_live_pipe_length_m": 465595,
+      "minimum_trench_lower_bound_m": 465600,
+      "final_occupied_length_m": 465595,
+      "kpi_upper_bound_from_live_volume": 0.9999892611683848
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-08.in",
+      "sha256": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 20005,
+      "peak_live_pipe_length_m": 752,
+      "minimum_trench_lower_bound_m": 760,
+      "final_occupied_length_m": 217,
+      "kpi_upper_bound_from_live_volume": 0.2855263157894737
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-09.in",
+      "sha256": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 20001,
+      "peak_live_pipe_length_m": 271,
+      "minimum_trench_lower_bound_m": 280,
+      "final_occupied_length_m": 28,
+      "kpi_upper_bound_from_live_volume": 0.1
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-10.in",
+      "sha256": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 27991,
+      "peak_live_pipe_length_m": 192537,
+      "minimum_trench_lower_bound_m": 192540,
+      "final_occupied_length_m": 192515,
+      "kpi_upper_bound_from_live_volume": 0.9998701568505246
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-11.in",
+      "sha256": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 20002,
+      "peak_live_pipe_length_m": 152,
+      "minimum_trench_lower_bound_m": 160,
+      "final_occupied_length_m": 21,
+      "kpi_upper_bound_from_live_volume": 0.13125
+    },
+    {
+      "file": "data/pipes/synthetic/final-holdout-v2/case-12.in",
+      "sha256": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce",
+      "weight": 1.0,
+      "operation_count": 40000,
+      "placement_count": 20001,
+      "peak_live_pipe_length_m": 286,
+      "minimum_trench_lower_bound_m": 300,
+      "final_occupied_length_m": 27,
+      "kpi_upper_bound_from_live_volume": 0.09
+    }
+  ]
+}

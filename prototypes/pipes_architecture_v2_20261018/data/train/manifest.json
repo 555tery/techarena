@@ -1,0 +1,227 @@
+{
+  "phase": "train",
+  "created_at": 1792340847.5606341,
+  "master_seed": 14401178135790975784,
+  "generator_sha256": "9b39d54e2b8ba6df2d2097a9ff3c671efa2b3f25c0d963b4bd6cddff4f980e59",
+  "streams": [
+    {
+      "name": "stationary_churn_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/stationary_churn_00.in",
+      "family": "stationary_churn",
+      "replicate": 0,
+      "n": 2000,
+      "seed": 10969515293127424400,
+      "sha256": "f5ea1b7efc8add1c801937e91a4a766dff48f88c3063d2a36267b7ce1303aee7"
+    },
+    {
+      "name": "stationary_churn_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/stationary_churn_01.in",
+      "family": "stationary_churn",
+      "replicate": 1,
+      "n": 2000,
+      "seed": 6194758798037181315,
+      "sha256": "800e6beb00b9b853ab3ca8fe35dbf181e23f7f38598904221633368863e2e159"
+    },
+    {
+      "name": "stationary_churn_02",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/stationary_churn_02.in",
+      "family": "stationary_churn",
+      "replicate": 2,
+      "n": 2000,
+      "seed": 4007945907891955220,
+      "sha256": "7c9813cadd66df6ba9ac5e4441e46cf0fd5f9de7593e75895bcc1a10045281cf"
+    },
+    {
+      "name": "stationary_churn_03",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/stationary_churn_03.in",
+      "family": "stationary_churn",
+      "replicate": 3,
+      "n": 2000,
+      "seed": 8316870892154336023,
+      "sha256": "3562d8c102e611b5a9068c7bcc82318fb496d62ab1afe730869bebe9cf775e30"
+    },
+    {
+      "name": "recent_growth_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/recent_growth_00.in",
+      "family": "recent_growth",
+      "replicate": 0,
+      "n": 2000,
+      "seed": 957028829111774797,
+      "sha256": "bbbbcccd08046d176700349566198494b7f104a634b8357fb3b7c7942a1c76e5"
+    },
+    {
+      "name": "recent_growth_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/recent_growth_01.in",
+      "family": "recent_growth",
+      "replicate": 1,
+      "n": 2000,
+      "seed": 16648263832003623192,
+      "sha256": "faa6b79c9590844ba316a68dea7eed59648c921068eb5e2881dff2174f8b65d2"
+    },
+    {
+      "name": "recent_growth_02",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/recent_growth_02.in",
+      "family": "recent_growth",
+      "replicate": 2,
+      "n": 2000,
+      "seed": 15283384062734390492,
+      "sha256": "e12bbbc92a0677f9ab91d5c83149dd1c81a7ad1d380db166ac6d64512d36163a"
+    },
+    {
+      "name": "recent_growth_03",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/recent_growth_03.in",
+      "family": "recent_growth",
+      "replicate": 3,
+      "n": 2000,
+      "seed": 15595522423583719686,
+      "sha256": "9479be91f28be2aa8032beaa4fec13a0f0084b99beb84edfa150372722309687"
+    },
+    {
+      "name": "cohort_retirement_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/cohort_retirement_00.in",
+      "family": "cohort_retirement",
+      "replicate": 0,
+      "n": 2000,
+      "seed": 9025150865359247996,
+      "sha256": "3c2c72d6634b9abfe0431caacd9f7328fd4af983e77ca29b4af32e05016fcad9"
+    },
+    {
+      "name": "cohort_retirement_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/cohort_retirement_01.in",
+      "family": "cohort_retirement",
+      "replicate": 1,
+      "n": 2000,
+      "seed": 494470995641982004,
+      "sha256": "003b72eb9a3cd402955b7e1e2771801500bc454213173f2f708af08b9795274b"
+    },
+    {
+      "name": "cohort_retirement_02",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/cohort_retirement_02.in",
+      "family": "cohort_retirement",
+      "replicate": 2,
+      "n": 2000,
+      "seed": 6926875184026235644,
+      "sha256": "5f187778f1209c275f4ce884236717bf86612504e7ed7c676c1803c9b33a43a3"
+    },
+    {
+      "name": "cohort_retirement_03",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/cohort_retirement_03.in",
+      "family": "cohort_retirement",
+      "replicate": 3,
+      "n": 2000,
+      "seed": 974020025089747512,
+      "sha256": "ffb6128f56736e89cd68ec846cbe0c76f3cd1fed5697e5417b5dd1f0ca4c654e"
+    },
+    {
+      "name": "size_blocks_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/size_blocks_00.in",
+      "family": "size_blocks",
+      "replicate": 0,
+      "n": 2000,
+      "seed": 9262928532051400949,
+      "sha256": "324f765a2bf7dc37ca2dcd224189e32674fc3e88a2b130caccd3a428b37d0369"
+    },
+    {
+      "name": "size_blocks_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/size_blocks_01.in",
+      "family": "size_blocks",
+      "replicate": 1,
+      "n": 2000,
+      "seed": 7075807101022089804,
+      "sha256": "853f92ad11eea7adeff371d46446f4bc659b2d2aa21c924fc4e0bb3f55c5bb6d"
+    },
+    {
+      "name": "size_blocks_02",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/size_blocks_02.in",
+      "family": "size_blocks",
+      "replicate": 2,
+      "n": 2000,
+      "seed": 13198149695857044823,
+      "sha256": "a809a8d1c88d7a5887acfd2f330acf9a908e09c1f42ab58d6206f7c84c597ad6"
+    },
+    {
+      "name": "size_blocks_03",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/size_blocks_03.in",
+      "family": "size_blocks",
+      "replicate": 3,
+      "n": 2000,
+      "seed": 4748787501615088472,
+      "sha256": "e3335d6f7e5e97755b226b1e4d72bef27aa684a5c26633c5b21faa9d0e8909cc"
+    },
+    {
+      "name": "fifo_bursts_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/fifo_bursts_00.in",
+      "family": "fifo_bursts",
+      "replicate": 0,
+      "n": 2000,
+      "seed": 1336742946147087717,
+      "sha256": "b983d4da0042af5d411134f8c17f6f47113e611f9854f16fd83d1e66da83512f"
+    },
+    {
+      "name": "fifo_bursts_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/fifo_bursts_01.in",
+      "family": "fifo_bursts",
+      "replicate": 1,
+      "n": 2000,
+      "seed": 4140688481225735793,
+      "sha256": "b8d08578a9b37546274e4de8bcd536a5130a252857db022f7e841edcb55f8321"
+    },
+    {
+      "name": "fifo_bursts_02",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/fifo_bursts_02.in",
+      "family": "fifo_bursts",
+      "replicate": 2,
+      "n": 2000,
+      "seed": 16460189540867648187,
+      "sha256": "17fa97aca8c6c9db26681e1938706e254c3969a25a205f10407c25e8d68024e7"
+    },
+    {
+      "name": "fifo_bursts_03",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/fifo_bursts_03.in",
+      "family": "fifo_bursts",
+      "replicate": 3,
+      "n": 2000,
+      "seed": 3629001720822363798,
+      "sha256": "2159f718114425faad982c817d63149038b5e14b898e93e50001251c1c4d8096"
+    },
+    {
+      "name": "mixed_survival_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/mixed_survival_00.in",
+      "family": "mixed_survival",
+      "replicate": 0,
+      "n": 2000,
+      "seed": 2385825879383945816,
+      "sha256": "64c94b92193c5e2a64e946af91fbd1e900d68c8fcf3db260ad4c1408b55142c1"
+    },
+    {
+      "name": "mixed_survival_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/mixed_survival_01.in",
+      "family": "mixed_survival",
+      "replicate": 1,
+      "n": 2000,
+      "seed": 3367029368107085539,
+      "sha256": "25d1c0fcb98dd7e2cf8e4e05a43f8f6d9c5adaf77ca692780cad1a51ae1c663f"
+    },
+    {
+      "name": "mixed_survival_02",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/mixed_survival_02.in",
+      "family": "mixed_survival",
+      "replicate": 2,
+      "n": 2000,
+      "seed": 8945516376363884095,
+      "sha256": "668db738ff10bd898497b35fb13cfc3fb7eed310eef776d03e4ca9afd0fed27c"
+    },
+    {
+      "name": "mixed_survival_03",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/train/mixed_survival_03.in",
+      "family": "mixed_survival",
+      "replicate": 3,
+      "n": 2000,
+      "seed": 16614805532607520941,
+      "sha256": "cfbc88047b57eec96b7f5889e58468567be84af2f458d86ef8a19bf4a800d4bd"
+    }
+  ],
+  "count": 24,
+  "official_inputs_read": false,
+  "scope": "Procedural pilot; final mechanisms held apart from this training, not a prediction of hidden distribution"
+}

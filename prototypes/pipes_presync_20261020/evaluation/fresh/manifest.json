@@ -1,0 +1,1365 @@
+{
+  "cases": [
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "001_trap_01.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 3209,
+      "name": "trap_01",
+      "operations": 6400,
+      "partition_piece_count": 17,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "1489429a19e61572b61b664dc2248105883d176f0374e489e035a7ef242f5f1e",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 240,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "002_trap_02.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 3917,
+      "name": "trap_02",
+      "operations": 7807,
+      "partition_piece_count": 27,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "8995bb2844fecbcec6b87891069c07c4a2f95f67bf7a83a7e276384e46b82bd0",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 718,
+      "target_volume_mod_20": 18
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "long",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "003_trap_03.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 34874,
+      "name": "trap_03",
+      "operations": 69714,
+      "partition_piece_count": 33,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "db839577ca24d99750e94e71f423fad0e29d77a3d88957fbf702c27644bdad35",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 539,
+      "target_volume_mod_20": 19
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "long",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "004_trap_04.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 37839,
+      "name": "trap_04",
+      "operations": 75651,
+      "partition_piece_count": 29,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "2818621815262eaf0a1e476edd7460985867ed067d89549e45f1164564472a5e",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 230,
+      "target_volume_mod_20": 10
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "short",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "005_trap_05.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 77,
+      "name": "trap_05",
+      "operations": 122,
+      "partition_piece_count": 29,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "a5e23bee82df8d76b29edb23d7d4570920929afe826d616caf33f87f4811a4ed",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 60,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "long",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "006_trap_06.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 39794,
+      "name": "trap_06",
+      "operations": 79561,
+      "partition_piece_count": 27,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "4259927df94d8b4f62cc7dde35e21daa61cb27195745fb718ed280fe076a00f1",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 390,
+      "target_volume_mod_20": 10
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "short",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "007_trap_07.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 108,
+      "name": "trap_07",
+      "operations": 199,
+      "partition_piece_count": 17,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "2c4805991366fe9aaa7af1ee45de8869801d5d1656109e80f1cd7ad4d36cf648",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 680,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "008_trap_08.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 3817,
+      "name": "trap_08",
+      "operations": 7612,
+      "partition_piece_count": 20,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "2fdcbb654b3cc4e0843c7d11daeb0d5481313d9ace28956e3712ebf5594f02e1",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 180,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "short",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "009_trap_09.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 63,
+      "name": "trap_09",
+      "operations": 102,
+      "partition_piece_count": 23,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "dcc2272538c09de4351c06fb8fdfa8f283a5b553f2bb6838052771d11ea582f8",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 920,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "short",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "010_trap_10.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 60,
+      "name": "trap_10",
+      "operations": 99,
+      "partition_piece_count": 18,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "bfcf2845c55cf2e7a5c43e9af02801228fefe689f845d48c4336d763b2f852f2",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 110,
+      "target_volume_mod_20": 10
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "011_trap_11.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 2723,
+      "name": "trap_11",
+      "operations": 5428,
+      "partition_piece_count": 19,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "664d5a48338116ab77e7d36a014dc166b08903e0e924350445c624b649124c60",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 245,
+      "target_volume_mod_20": 5
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "012_trap_12.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 3818,
+      "name": "trap_12",
+      "operations": 7618,
+      "partition_piece_count": 15,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "8e6118ee2a7b68882e96d8efb96cf6a7e3a9a75de3d5e5ef990ebfb0121ad319",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 540,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "013_trap_13.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 1954,
+      "name": "trap_13",
+      "operations": 3896,
+      "partition_piece_count": 11,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "b2f4cfbd2cb4080d56f8a6f3a87a3da9ad125fda891a8f220d0b507b1c8af27b",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 320,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "014_trap_14.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 2224,
+      "name": "trap_14",
+      "operations": 4417,
+      "partition_piece_count": 31,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "f06a2b967dab946fc5341a21915d5ec699c0517ca6bd30cf99170756babba269",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 619,
+      "target_volume_mod_20": 19
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "015_trap_15.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 2266,
+      "name": "trap_15",
+      "operations": 4506,
+      "partition_piece_count": 24,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "e3e66b08bf862f922202202f646a47859f35f6b83721249df3a19080d29b3b0c",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 682,
+      "target_volume_mod_20": 2
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "long",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "016_trap_16.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 35876,
+      "name": "trap_16",
+      "operations": 71739,
+      "partition_piece_count": 11,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "3ce2bae5af34abf878c77da873abe4045e84457f91791ba1594b4dc2bf8c79f0",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 160,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "long",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "017_trap_17.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 28381,
+      "name": "trap_17",
+      "operations": 56751,
+      "partition_piece_count": 11,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "4b1961e4766e45abe246c021269029a71a2d8fa8adcbf25ec8c9d856f183adf4",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 40,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "long",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "018_trap_18.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 22302,
+      "name": "trap_18",
+      "operations": 44578,
+      "partition_piece_count": 24,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "58311484293ca2ce0043708dc73f7814e2064032aa016e2d6cda65fa1ffe083f",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 840,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "019_trap_19.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 3272,
+      "name": "trap_19",
+      "operations": 6520,
+      "partition_piece_count": 26,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "efd63a01d462379db947557c51ce6bc0ee503fcaba952a4481486fa2f080c725",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 790,
+      "target_volume_mod_20": 10
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "020_trap_20.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 3555,
+      "name": "trap_20",
+      "operations": 7077,
+      "partition_piece_count": 32,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "faa19a65bfdef5c32d38dff205d888457ae2f5a7d650bd674ce40833f8554cd8",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 640,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "021_trap_21.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 3708,
+      "name": "trap_21",
+      "operations": 7405,
+      "partition_piece_count": 12,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "46713782b394ae828c03cf8449d42e2a24ff68a95eaeca16371f08d788e56707",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 259,
+      "target_volume_mod_20": 19
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "022_trap_22.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 760,
+      "name": "trap_22",
+      "operations": 1497,
+      "partition_piece_count": 21,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "2b8e0d4707e4c0a4a9fce92dbf42ef731fb16c66be0860fd7d07fc38d3dec66d",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 162,
+      "target_volume_mod_20": 2
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "023_trap_23.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 3339,
+      "name": "trap_23",
+      "operations": 6656,
+      "partition_piece_count": 22,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "cab587532e2aebab03c42beba40d485f51a57034b5b3e67f5f8604b28e920b81",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 470,
+      "target_volume_mod_20": 10
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "short",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "024_trap_24.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 59,
+      "name": "trap_24",
+      "operations": 90,
+      "partition_piece_count": 29,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "26ff5a0cd7b6e303a1cc4b20e804df23df99806c08d01016f975cf71b7f89944",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 922,
+      "target_volume_mod_20": 2
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "long",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "025_trap_25.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 32706,
+      "name": "trap_25",
+      "operations": 65396,
+      "partition_piece_count": 17,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "0e588bf4d23658f7dab6e39cc5fd7d579ada2a9d687d51c8004230855975efa8",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 662,
+      "target_volume_mod_20": 2
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "long",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "026_trap_26.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 38976,
+      "name": "trap_26",
+      "operations": 77919,
+      "partition_piece_count": 32,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "c9cc5e203c5be283da297da62f97af835f5ff4ede421110712bcf4712de5731c",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 120,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "027_trap_27.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 2821,
+      "name": "trap_27",
+      "operations": 5613,
+      "partition_piece_count": 28,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "ddeaa6ef56116666a57a9efb02f91e58f0eb0a3701a0c15f4ddd2f52494c699a",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 915,
+      "target_volume_mod_20": 15
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "short",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "028_trap_28.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 114,
+      "name": "trap_28",
+      "operations": 208,
+      "partition_piece_count": 21,
+      "pid2_lifetime": "80_percent",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "06f9e368405f1f8facc7cbac11e424efb7cf268f29b7cb42dd327d7734146edb",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 200,
+      "target_volume_mod_20": 0
+    },
+    {
+      "divergence_mode": "retain_pid1_pid2",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "029_trap_29.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 2883,
+      "name": "trap_29",
+      "operations": 5751,
+      "partition_piece_count": 13,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "80938cdb32df4568ebf4d23de648eb961902a6614a229f457bd9d8ed05e14963",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 290,
+      "target_volume_mod_20": 10
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "short",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "030_trap_30.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 122,
+      "name": "trap_30",
+      "operations": 213,
+      "partition_piece_count": 30,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "908c256ec9811ef7345e28e46d2aefc12dfa67c73c0ac3c9f0d7051946fc4408",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 790,
+      "target_volume_mod_20": 10
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "medium",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "031_trap_31.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 1942,
+      "name": "trap_31",
+      "operations": 3851,
+      "partition_piece_count": 33,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "5a8df1f6f0a6dcda043cc8e70cf5152f09fef791800cdc7519a275c014d2cc05",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 490,
+      "target_volume_mod_20": 10
+    },
+    {
+      "divergence_mode": "delete_pid1",
+      "duration_class": "short",
+      "family": "prefix_3_2_live_pid2",
+      "filename": "032_trap_32.in",
+      "first_divergence": 3,
+      "highest_assigned_pid": 60,
+      "name": "trap_32",
+      "operations": 97,
+      "partition_piece_count": 22,
+      "pid2_lifetime": "forever",
+      "piece_order": "fresh_seeded_random_composition_1_to_40",
+      "public_prefix": {
+        "commands": [
+          3,
+          2
+        ],
+        "source_cases": [
+          11,
+          15
+        ]
+      },
+      "sha256": "9dea983ddad619944595a3916d463763d4611d0aab1c55f012085a222a56f563",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load",
+      "target_live_volume": 205,
+      "target_volume_mod_20": 5
+    },
+    {
+      "duration_class": "long",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "033_public_01.in",
+      "first_divergence": 411,
+      "highest_assigned_pid": 10242,
+      "name": "public_01",
+      "operations": 20444,
+      "public_prefix": {
+        "commands": 410,
+        "source_case": 11
+      },
+      "sha256": "6279ed7a731d5d0d2159c04114cee43cf72e31b2be73caeb740c2ff7b5d7c754",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "034_public_02.in",
+      "first_divergence": 1001,
+      "highest_assigned_pid": 2550,
+      "name": "public_02",
+      "operations": 5067,
+      "public_prefix": {
+        "commands": 1000,
+        "source_case": 15
+      },
+      "sha256": "884099831a008b2f58a874d8f60bb0319cde99a72785c61bdd232180e7c71d8a",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "short",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "035_public_03.in",
+      "first_divergence": 9,
+      "highest_assigned_pid": 78,
+      "name": "public_03",
+      "operations": 142,
+      "public_prefix": {
+        "commands": 8,
+        "source_case": 8
+      },
+      "sha256": "0932b904adbfdfc15ad4407aea525bb904a22d0f3de8c88867aac2d01a788f12",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "036_public_04.in",
+      "first_divergence": 195,
+      "highest_assigned_pid": 2536,
+      "name": "public_04",
+      "operations": 5034,
+      "public_prefix": {
+        "commands": 194,
+        "source_case": 8
+      },
+      "sha256": "374cb74d94c40142c35ff5c43cec73043a991dcdfa6c2697d2fda9234a313202",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "037_public_05.in",
+      "first_divergence": 389,
+      "highest_assigned_pid": 1528,
+      "name": "public_05",
+      "operations": 3018,
+      "public_prefix": {
+        "commands": 388,
+        "source_case": 15
+      },
+      "sha256": "f532e707935b64d9fac665f5f009d1692336c12d0e613389e74d358c72849b56",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "038_public_06.in",
+      "first_divergence": 195,
+      "highest_assigned_pid": 2160,
+      "name": "public_06",
+      "operations": 4283,
+      "public_prefix": {
+        "commands": 194,
+        "source_case": 13
+      },
+      "sha256": "5e7e5ea8150e84fb047db80b67c5749052e9b5a354a470a5db3658eda3f187b0",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "long",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "039_public_07.in",
+      "first_divergence": 8,
+      "highest_assigned_pid": 31137,
+      "name": "public_07",
+      "operations": 62240,
+      "public_prefix": {
+        "commands": 7,
+        "source_case": 13
+      },
+      "sha256": "2f69e073b3997df707e475de6e41bc68faaaa637d83df395558859123da66c25",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "long",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "040_public_08.in",
+      "first_divergence": 9,
+      "highest_assigned_pid": 30889,
+      "name": "public_08",
+      "operations": 61744,
+      "public_prefix": {
+        "commands": 8,
+        "source_case": 13
+      },
+      "sha256": "b1709cd1639a8ce3c01489e691147c8c3f5daa154669447e947fca6f06098e99",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "041_public_09.in",
+      "first_divergence": 4,
+      "highest_assigned_pid": 626,
+      "name": "public_09",
+      "operations": 1213,
+      "public_prefix": {
+        "commands": 3,
+        "source_case": 13
+      },
+      "sha256": "08152e734db919810491410e3175682bbc374e758e88ac57422cce12452cf9d9",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "042_public_10.in",
+      "first_divergence": 18,
+      "highest_assigned_pid": 1145,
+      "name": "public_10",
+      "operations": 2261,
+      "public_prefix": {
+        "commands": 17,
+        "source_case": 8
+      },
+      "sha256": "6dfabf4651f16d317abe1457cee5195f27d046907a88ea7c5463112ad704f29f",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "short",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "043_public_11.in",
+      "first_divergence": 8,
+      "highest_assigned_pid": 113,
+      "name": "public_11",
+      "operations": 200,
+      "public_prefix": {
+        "commands": 7,
+        "source_case": 13
+      },
+      "sha256": "b3dd6b2fef8440d09ddcc6ae96525284ccbe2966d0cbdadb093d243a77a0e33d",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "short",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "044_public_12.in",
+      "first_divergence": 15,
+      "highest_assigned_pid": 65,
+      "name": "public_12",
+      "operations": 106,
+      "public_prefix": {
+        "commands": 14,
+        "source_case": 15
+      },
+      "sha256": "217093b20c5974f8cac388e0cf74617f8bc21ba5da47e31200e81a71894c6751",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "045_public_13.in",
+      "first_divergence": 411,
+      "highest_assigned_pid": 664,
+      "name": "public_13",
+      "operations": 1291,
+      "public_prefix": {
+        "commands": 410,
+        "source_case": 13
+      },
+      "sha256": "6f797ff6b9f515eb866ea513c5fa8350cb47e75e3a0ef0575e72991d6c58c85a",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "long",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "046_public_14.in",
+      "first_divergence": 403,
+      "highest_assigned_pid": 24395,
+      "name": "public_14",
+      "operations": 48754,
+      "public_prefix": {
+        "commands": 402,
+        "source_case": 15
+      },
+      "sha256": "0fd007930b2c7da7d716e7ac6bc08ad877287b391335656e59b7551dfc81d951",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "short",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "047_public_15.in",
+      "first_divergence": 4,
+      "highest_assigned_pid": 97,
+      "name": "public_15",
+      "operations": 187,
+      "public_prefix": {
+        "commands": 3,
+        "source_case": 8
+      },
+      "sha256": "83a069726ec039310b426978c7f7c97bc4acffbaeb64a745df015b52f8fa796d",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "new_seeded_public_prefix_branch",
+      "filename": "048_public_16.in",
+      "first_divergence": 15,
+      "highest_assigned_pid": 2543,
+      "name": "public_16",
+      "operations": 5052,
+      "public_prefix": {
+        "commands": 14,
+        "source_case": 8
+      },
+      "sha256": "b68392eb851863ca790c1552bc5111cb55b11735ca8771bd5cfb6c883f0364ff",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "short",
+      "family": "neutral_seeded_stream",
+      "filename": "049_neutral_01.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 134,
+      "name": "neutral_01",
+      "operations": 234,
+      "public_prefix": null,
+      "sha256": "60b596a650776d7ad600993034558f19be36d3dad2922d9d6692d3294e56a0c6",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "short",
+      "family": "neutral_seeded_stream",
+      "filename": "050_neutral_02.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 86,
+      "name": "neutral_02",
+      "operations": 165,
+      "public_prefix": null,
+      "sha256": "758a4ae6648d7d14328e544877e3d80d782a5c08dd7d09250fe9547925fc3d9e",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "short",
+      "family": "neutral_seeded_stream",
+      "filename": "051_neutral_03.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 125,
+      "name": "neutral_03",
+      "operations": 213,
+      "public_prefix": null,
+      "sha256": "80218c052c2232f544f2e49f78e649deb5c5dbf3ca9f589cd9024f5f5a257292",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "short",
+      "family": "neutral_seeded_stream",
+      "filename": "052_neutral_04.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 59,
+      "name": "neutral_04",
+      "operations": 111,
+      "public_prefix": null,
+      "sha256": "30e8d0d13b644cfa9ea52eab0358c13f575f039d01773408ae18b5b52e563b67",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "neutral_seeded_stream",
+      "filename": "053_neutral_05.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 2339,
+      "name": "neutral_05",
+      "operations": 4647,
+      "public_prefix": null,
+      "sha256": "1970b2408f195b8171a0004a867cb7fd30ffb624f9fd61784896d9976b4e4043",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "neutral_seeded_stream",
+      "filename": "054_neutral_06.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 3751,
+      "name": "neutral_06",
+      "operations": 7466,
+      "public_prefix": null,
+      "sha256": "ff6daef1e67a877bd691abdd369e1dc63a3fe767b5d684b63535fc7cbf1053df",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "neutral_seeded_stream",
+      "filename": "055_neutral_07.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 2470,
+      "name": "neutral_07",
+      "operations": 4912,
+      "public_prefix": null,
+      "sha256": "83de7fd48e6b0a4cd80672a93d60e6f38726d0cc2e99d3b5abab0a9dec65fbc0",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "neutral_seeded_stream",
+      "filename": "056_neutral_08.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 3301,
+      "name": "neutral_08",
+      "operations": 6571,
+      "public_prefix": null,
+      "sha256": "813a5b6787517b0b9eaa523586b002d29c54edd9023fe214bddb264b7510b0f8",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "neutral_seeded_stream",
+      "filename": "057_neutral_09.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 2676,
+      "name": "neutral_09",
+      "operations": 5313,
+      "public_prefix": null,
+      "sha256": "6ca5e7e841925d6ad04e05683361dcecfb0e78e6f41cf92b8fd955cf67f79ba4",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "neutral_seeded_stream",
+      "filename": "058_neutral_10.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 1326,
+      "name": "neutral_10",
+      "operations": 2613,
+      "public_prefix": null,
+      "sha256": "d7d6f679269d911bcf004edfd53c9aefdc519d3d7f2b15796733abbbdb703edb",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "neutral_seeded_stream",
+      "filename": "059_neutral_11.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 2922,
+      "name": "neutral_11",
+      "operations": 5809,
+      "public_prefix": null,
+      "sha256": "dae93bdef319c5ae8bcd2fb7943100b03e43ac38406dd5836853f6987af6f6d4",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "medium",
+      "family": "neutral_seeded_stream",
+      "filename": "060_neutral_12.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 2058,
+      "name": "neutral_12",
+      "operations": 4082,
+      "public_prefix": null,
+      "sha256": "6d18d43a15cecb7c12ff72a4e0c32070f8c2180825a574c9d6d5a0f2a76b33e4",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "long",
+      "family": "neutral_seeded_stream",
+      "filename": "061_neutral_13.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 15085,
+      "name": "neutral_13",
+      "operations": 30131,
+      "public_prefix": null,
+      "sha256": "bda8a741b0d203a98f5704f13adae28ef8e4cfa9b90a2be12c5b3bc7c669f410",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "long",
+      "family": "neutral_seeded_stream",
+      "filename": "062_neutral_14.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 36568,
+      "name": "neutral_14",
+      "operations": 73100,
+      "public_prefix": null,
+      "sha256": "aed48f64723e5a22e38e8796821ac1d76ad8cd841d4ee67d7d83366f6428e0a4",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "long",
+      "family": "neutral_seeded_stream",
+      "filename": "063_neutral_15.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 26280,
+      "name": "neutral_15",
+      "operations": 52526,
+      "public_prefix": null,
+      "sha256": "655ad07f0692d22dfb7d4e0a374e7ad50f9e5e192b0ac51ce2714358c17c6093",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    },
+    {
+      "duration_class": "long",
+      "family": "neutral_seeded_stream",
+      "filename": "064_neutral_16.in",
+      "first_divergence": null,
+      "highest_assigned_pid": 38923,
+      "name": "neutral_16",
+      "operations": 77810,
+      "public_prefix": null,
+      "sha256": "f22d7151a1d8f56e606cfbd6a216d1a2be7b1aec80bf8166dfc0c266da3a0223",
+      "static_validity": "valid_pid_lengths_1_to_40_positive_final_load"
+    }
+  ],
+  "constraints": {
+    "max_commands": 200000,
+    "monotone_unique_pids": [
+      1,
+      100000
+    ],
+    "pipe_lengths": [
+      1,
+      40
+    ],
+    "positive_final_load": true,
+    "solver_runs": 0
+  },
+  "counts": {
+    "directed_prefix_3_2": 32,
+    "long": 16,
+    "medium": 32,
+    "neutral": 16,
+    "other_public_prefixes": 16,
+    "short": 16,
+    "total": 64
+  },
+  "duration_ranges": {
+    "long": [
+      20000,
+      80000
+    ],
+    "medium": [
+      1000,
+      8000
+    ],
+    "short": [
+      80,
+      256
+    ]
+  },
+  "generator": "evaluation/generate_fresh.py",
+  "generator_sha256": "8924dabfa1eccc06e810ddea2d1d177925078e707554fa0d4e962732fe1f5efb",
+  "master_seed": 202610201059,
+  "provenance": {
+    "historical_context_consulted": "wiki/research/Prefix-lifetime-repairs.md was read for terminology and task context; its historical metrics were not used to choose test cases or parameters",
+    "public_inputs": "data/pipes/open/{8,11,13,15}.in",
+    "public_prefixes_used": "only requested prefix commands and one following command to force a new branch",
+    "selected_prefix_and_next_command_sha256": {
+      "11:2": "d105c433534ec835d73c5aa090c146a57a1ee7f758cc6b7568860be03abe1cc7",
+      "11:410": "db775d370a33fa464c4c3a611328b1778ffd0f65abc9f8c0165ca96bc55d7818",
+      "13:194": "26d8ed93d5f7d08a5ae72529f0430428d32ec45aaf541594cf71e1c1ceb8c5c3",
+      "13:3": "9a0faedced5e3b0274661fd25a7757bc3a7bd58abbff404493749be18d1e5983",
+      "13:410": "0efe7ee953e9ba90f480a9bb4395ce9b302357bafed55e5836d0301a505fadda",
+      "13:7": "de8e346fe5118b73300eeeb733bfea8e12bd52a74452114c092675f79e4db36c",
+      "13:8": "b40b844de7862c5ff87dc0edf86cb2ebc806af90a3f6ccbcbd773220501828b0",
+      "15:1000": "c72cc2e2d7e69cffe207e552aece309afad0a74e1815f6349c9d5adecc08e1e3",
+      "15:14": "10a21f087907e3755c6ae22c7b102ee3137ab0a26b9044c4dc224c3cc8cd9ca2",
+      "15:2": "d105c433534ec835d73c5aa090c146a57a1ee7f758cc6b7568860be03abe1cc7",
+      "15:388": "e75ceaee4d56e8b7ae2974b3b9f0ea5a733735a1df28a1ff3e32a7aabde7bac5",
+      "15:402": "10d3801cdc3091681fa56b31796233b62d37c9f753f4db7c32b2d391b2e0fb6c",
+      "8:14": "8a345929d5cf14175f6a49fdfd65e028dddbc86c26d40377aec5a80d1d28fa12",
+      "8:17": "5c95e78b95cfe7f0ad2fe0f38897fde17cce8d275463c899bf8b36ef3abc7f81",
+      "8:194": "26d8ed93d5f7d08a5ae72529f0430428d32ec45aaf541594cf71e1c1ceb8c5c3",
+      "8:3": "9a0faedced5e3b0274661fd25a7757bc3a7bd58abbff404493749be18d1e5983",
+      "8:8": "b40b844de7862c5ff87dc0edf86cb2ebc806af90a3f6ccbcbd773220501828b0"
+    },
+    "synthetic_continuations": "fresh fixed-seed Python random.Random; no solver output or prior fixed-control inputs"
+  },
+  "schema": "pipes-presync-fresh-suite-v1"
+}

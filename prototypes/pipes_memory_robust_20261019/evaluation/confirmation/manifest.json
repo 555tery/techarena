@@ -1,0 +1,816 @@
+{
+  "suite": "pipes-memory-generalization-final-confirmation",
+  "status": "sealed-do-not-evaluate-before-parent-freeze",
+  "generator": "generate_suite.py",
+  "solver_invoked": false,
+  "rules": {
+    "max_operations": 200000,
+    "pipe_length": [
+      1,
+      40
+    ],
+    "pid": "sequential placements; each deletion references one currently active PID",
+    "final_live_length": "> 0"
+  },
+  "test_count": 24,
+  "total_operations": 1376000,
+  "recommended_short_calibration": null,
+  "tests": [
+    {
+      "id": "B01",
+      "file": "b01-ordinary-iid-uniform.in",
+      "seed": 202610198001,
+      "family": "ordinary-iid-uniform",
+      "sha256": "7bfb03fcc3584607c0dab916ba1e1fd778122f91d50ef6c6053006ed00b072d7",
+      "n": 12000,
+      "parameters": {
+        "profile": "uniform",
+        "delete": "random",
+        "p_add": 0.5,
+        "floor": 32,
+        "cap": 800
+      },
+      "structural_validity": {
+        "operations": 12000,
+        "placements": 6094,
+        "deletions": 5906,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 259,
+        "peak_live_length": 5422,
+        "final_live_count": 188,
+        "final_live_length": 3976
+      }
+    },
+    {
+      "id": "B02",
+      "file": "b02-ordinary-short-fifo.in",
+      "seed": 202610198002,
+      "family": "ordinary-short-fifo",
+      "sha256": "e37a49aaf06ad355ac5d9dda12cef9caaeaf3f118e6be71ca4d6fde59505fe6a",
+      "n": 16000,
+      "parameters": {
+        "profile": "short",
+        "delete": "fifo",
+        "p_add": 0.5,
+        "floor": 32,
+        "cap": 900
+      },
+      "structural_validity": {
+        "operations": 16000,
+        "placements": 8057,
+        "deletions": 7943,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 143,
+        "peak_live_length": 646,
+        "final_live_count": 114,
+        "final_live_length": 496
+      }
+    },
+    {
+      "id": "B03",
+      "file": "b03-ordinary-long-lifo.in",
+      "seed": 202610198003,
+      "family": "ordinary-long-lifo",
+      "sha256": "a7ab484f35641b9e349cd85ab24cbbf85dbba6360f9e809af1170372e7b88455",
+      "n": 20000,
+      "parameters": {
+        "profile": "long",
+        "delete": "lifo",
+        "p_add": 0.5,
+        "floor": 32,
+        "cap": 1000
+      },
+      "structural_validity": {
+        "operations": 20000,
+        "placements": 10032,
+        "deletions": 9968,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 101,
+        "peak_live_length": 3292,
+        "final_live_count": 64,
+        "final_live_length": 2040
+      }
+    },
+    {
+      "id": "B04",
+      "file": "b04-ordinary-bimodal-young.in",
+      "seed": 202610198004,
+      "family": "ordinary-bimodal-young",
+      "sha256": "4f45bfde56d7e2cbcd9ff52077bc03ed79c980a6ad5d18d96bc235239f0d43c9",
+      "n": 24000,
+      "parameters": {
+        "profile": "bimodal",
+        "delete": "young",
+        "p_add": 0.5,
+        "floor": 32,
+        "cap": 1200
+      },
+      "structural_validity": {
+        "operations": 24000,
+        "placements": 12114,
+        "deletions": 11886,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 234,
+        "peak_live_length": 4789,
+        "final_live_count": 228,
+        "final_live_length": 4079
+      }
+    },
+    {
+      "id": "B05",
+      "file": "b05-ordinary-walk-longest.in",
+      "seed": 202610198005,
+      "family": "ordinary-walk-longest",
+      "sha256": "b40d4c9f722027dc96f88560b628cfd3e65cb9f2b2a240ac0792426c6e69a75a",
+      "n": 28000,
+      "parameters": {
+        "profile": "walk",
+        "delete": "longest",
+        "p_add": 0.5,
+        "floor": 32,
+        "cap": 1600
+      },
+      "structural_validity": {
+        "operations": 28000,
+        "placements": 14124,
+        "deletions": 13876,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 294,
+        "peak_live_length": 1575,
+        "final_live_count": 248,
+        "final_live_length": 673
+      }
+    },
+    {
+      "id": "B06",
+      "file": "b06-shift-short-long-uniform.in",
+      "seed": 202610198006,
+      "family": "shift-short-long-uniform",
+      "sha256": "69019bfac4a1803004fdd17193d309eeb4d948edeeb9e346b306582658f44501",
+      "n": 20000,
+      "parameters": {
+        "profile_phases": [
+          "short",
+          "long",
+          "uniform"
+        ],
+        "delete": "random",
+        "p_add_phases": [
+          0.52,
+          0.48,
+          0.52
+        ],
+        "floor": 32,
+        "cap": 1000
+      },
+      "structural_validity": {
+        "operations": 20000,
+        "placements": 10192,
+        "deletions": 9808,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 384,
+        "peak_live_length": 9325,
+        "final_live_count": 384,
+        "final_live_length": 7753
+      }
+    },
+    {
+      "id": "B07",
+      "file": "b07-shift-long-bimodal-short.in",
+      "seed": 202610198007,
+      "family": "shift-long-bimodal-short",
+      "sha256": "4983c17d50732a462585f6e2015b5bb6e7647351d1f4f985ee13a60a0e52d5ad",
+      "n": 24000,
+      "parameters": {
+        "profile_phases": [
+          "long",
+          "bimodal",
+          "short"
+        ],
+        "delete": "young",
+        "p_add": 0.5,
+        "floor": 32,
+        "cap": 1400
+      },
+      "structural_validity": {
+        "operations": 24000,
+        "placements": 12125,
+        "deletions": 11875,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 270,
+        "peak_live_length": 3905,
+        "final_live_count": 250,
+        "final_live_length": 1124
+      }
+    },
+    {
+      "id": "B08",
+      "file": "b08-shift-delete-fifo-lifo-random.in",
+      "seed": 202610198008,
+      "family": "shift-delete-fifo-lifo-random",
+      "sha256": "a059d8986a14a310c24b440a7d378b76963bc7ffac77d75a659de1dc4e5d08cd",
+      "n": 30000,
+      "parameters": {
+        "profile": "uniform",
+        "delete_phases": [
+          "fifo",
+          "lifo",
+          "random"
+        ],
+        "p_add": 0.5,
+        "floor": 32,
+        "cap": 1600
+      },
+      "structural_validity": {
+        "operations": 30000,
+        "placements": 15097,
+        "deletions": 14903,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 283,
+        "peak_live_length": 5986,
+        "final_live_count": 194,
+        "final_live_length": 3892
+      }
+    },
+    {
+      "id": "B09",
+      "file": "b09-correlated-cohort-drain.in",
+      "seed": 202610198009,
+      "family": "correlated-cohort-drain",
+      "sha256": "511b96c3806a1518960015d6b9e120756c70f428f63819aad18557592e8cb250",
+      "n": 24000,
+      "parameters": {
+        "profile": "uniform",
+        "delete": "random",
+        "correlated": "cohort",
+        "p_add": 0.52,
+        "floor": 32,
+        "cap": 900
+      },
+      "structural_validity": {
+        "operations": 24000,
+        "placements": 12017,
+        "deletions": 11983,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 66,
+        "peak_live_length": 1321,
+        "final_live_count": 34,
+        "final_live_length": 733
+      }
+    },
+    {
+      "id": "B10",
+      "file": "b10-correlated-size-band-regime.in",
+      "seed": 202610198010,
+      "family": "correlated-size-band-regime",
+      "sha256": "f4272057ed991bed37f0c85994e5a0cb89e2eb72ebf5365880d3c334bc7dd74e",
+      "n": 30000,
+      "parameters": {
+        "profile_phases": [
+          "short",
+          "long",
+          "bimodal"
+        ],
+        "delete": "random",
+        "correlated": "size-band",
+        "p_add": 0.52,
+        "floor": 32,
+        "cap": 1500
+      },
+      "structural_validity": {
+        "operations": 30000,
+        "placements": 15017,
+        "deletions": 14983,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 59,
+        "peak_live_length": 1974,
+        "final_live_count": 34,
+        "final_live_length": 1023
+      }
+    },
+    {
+      "id": "B11",
+      "file": "b11-correlated-birth-era.in",
+      "seed": 202610198011,
+      "family": "correlated-birth-era",
+      "sha256": "ed4551eaa452a9ec8b652262f6b2a1109d49633cfefbaf5d076c29fddc39faa7",
+      "n": 28000,
+      "parameters": {
+        "profile": "walk",
+        "delete": "random",
+        "correlated": "birth-era",
+        "p_add": 0.52,
+        "floor": 32,
+        "cap": 1200
+      },
+      "structural_validity": {
+        "operations": 28000,
+        "placements": 14017,
+        "deletions": 13983,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 61,
+        "peak_live_length": 1822,
+        "final_live_count": 34,
+        "final_live_length": 1214
+      }
+    },
+    {
+      "id": "B12",
+      "file": "b12-correlated-length-plus-size-shift.in",
+      "seed": 202610198012,
+      "family": "correlated-length-plus-size-shift",
+      "sha256": "0649112c6af4131ffd1934ebcfe55f60eb863ebd6d0a5716ecaf12c7a00298da",
+      "n": 30000,
+      "parameters": {
+        "profile_phases": [
+          "uniform",
+          "long",
+          "short"
+        ],
+        "delete": "random",
+        "correlated": "exact-length",
+        "p_add_phases": [
+          0.52,
+          0.49,
+          0.53
+        ],
+        "floor": 32,
+        "cap": 1800
+      },
+      "structural_validity": {
+        "operations": 30000,
+        "placements": 15018,
+        "deletions": 14982,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 97,
+        "peak_live_length": 1900,
+        "final_live_count": 36,
+        "final_live_length": 170
+      }
+    },
+    {
+      "id": "B13",
+      "file": "b13-open-prefix-switch-case5.in",
+      "seed": 202610198013,
+      "family": "open-prefix-switch-case5",
+      "sha256": "af845dc02de1327e56ef6e926f3d2f7de06fa0f880c131c3ddfd56f0a887918d",
+      "n": 20000,
+      "parameters": {
+        "prefix": {
+          "case": 5,
+          "ops": 3000
+        },
+        "profile": "short",
+        "delete": "longest",
+        "p_add": 0.51,
+        "floor": 32,
+        "cap": 1200
+      },
+      "structural_validity": {
+        "operations": 20000,
+        "placements": 10596,
+        "deletions": 9404,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 3000,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 968,
+        "peak_live_count": 1200,
+        "peak_live_length": 9440,
+        "final_live_count": 1192,
+        "final_live_length": 1240
+      }
+    },
+    {
+      "id": "B14",
+      "file": "b14-open-prefix-switch-case8.in",
+      "seed": 202610198014,
+      "family": "open-prefix-switch-case8",
+      "sha256": "9f6639418d90c86017507b0b2761e3a70e5f2f4f17d3a6fcb372bcb97f3b0046",
+      "n": 24000,
+      "parameters": {
+        "prefix": {
+          "case": 8,
+          "ops": 3500
+        },
+        "profile": "long",
+        "delete": "fifo",
+        "p_add": 0.52,
+        "floor": 32,
+        "cap": 1200
+      },
+      "structural_validity": {
+        "operations": 24000,
+        "placements": 12538,
+        "deletions": 11462,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 3500,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 128,
+        "peak_live_count": 1076,
+        "peak_live_length": 35089,
+        "final_live_count": 1076,
+        "final_live_length": 35083
+      }
+    },
+    {
+      "id": "B15",
+      "file": "b15-open-prefix-switch-case9.in",
+      "seed": 202610198015,
+      "family": "open-prefix-switch-case9",
+      "sha256": "e83a9db294a3d223f0cb20ad27e2e172834a4ba1d585c9b97192d13685ca5678",
+      "n": 30000,
+      "parameters": {
+        "prefix": {
+          "case": 9,
+          "ops": 2000
+        },
+        "profile": "walk",
+        "delete_phases": [
+          "fifo",
+          "random",
+          "young"
+        ],
+        "p_add": 0.51,
+        "floor": 32,
+        "cap": 1400
+      },
+      "structural_validity": {
+        "operations": 30000,
+        "placements": 15685,
+        "deletions": 14315,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 2000,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 970,
+        "peak_live_count": 1400,
+        "peak_live_length": 31513,
+        "final_live_count": 1370,
+        "final_live_length": 30254
+      }
+    },
+    {
+      "id": "B16",
+      "file": "b16-open-prefix-switch-case10.in",
+      "seed": 202610198016,
+      "family": "open-prefix-switch-case10",
+      "sha256": "e873c67d00dbb5060086774ddc51a31ff6485f65577e5e03cae1d2724d80ce05",
+      "n": 30000,
+      "parameters": {
+        "prefix": {
+          "case": 10,
+          "ops": 1000
+        },
+        "profile": "bimodal",
+        "delete": "random",
+        "correlated": "size-band",
+        "p_add": 0.52,
+        "floor": 32,
+        "cap": 1400
+      },
+      "structural_validity": {
+        "operations": 30000,
+        "placements": 15017,
+        "deletions": 14983,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 1000,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 1012,
+        "peak_live_length": 5615,
+        "final_live_count": 34,
+        "final_live_length": 629
+      }
+    },
+    {
+      "id": "B17",
+      "file": "b17-open-prefix-switch-case11.in",
+      "seed": 202610198017,
+      "family": "open-prefix-switch-case11",
+      "sha256": "4fb5d7725c9930db5915bd691ca640f5ef742ddbdb99935339c68768bd756e60",
+      "n": 36000,
+      "parameters": {
+        "prefix": {
+          "case": 11,
+          "ops": 1800
+        },
+        "profile_phases": [
+          "long",
+          "short",
+          "uniform"
+        ],
+        "delete": "random",
+        "p_add": 0.51,
+        "floor": 32,
+        "cap": 1600
+      },
+      "structural_validity": {
+        "operations": 36000,
+        "placements": 18783,
+        "deletions": 17217,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 1800,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 1034,
+        "peak_live_count": 1600,
+        "peak_live_length": 43181,
+        "final_live_count": 1566,
+        "final_live_length": 32520
+      }
+    },
+    {
+      "id": "B18",
+      "file": "b18-open-prefix-switch-case13.in",
+      "seed": 202610198018,
+      "family": "open-prefix-switch-case13",
+      "sha256": "34ce19fff3acd8a076144da6644447e07017746a118da1e25664d6a925bae398",
+      "n": 40000,
+      "parameters": {
+        "prefix": {
+          "case": 13,
+          "ops": 3000
+        },
+        "profile": "uniform",
+        "delete": "young",
+        "correlated": "cohort",
+        "p_add": 0.52,
+        "floor": 32,
+        "cap": 1200
+      },
+      "structural_validity": {
+        "operations": 40000,
+        "placements": 20018,
+        "deletions": 19982,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 3000,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 154,
+        "peak_live_length": 1819,
+        "final_live_count": 36,
+        "final_live_length": 667
+      }
+    },
+    {
+      "id": "B19",
+      "file": "b19-open-prefix-switch-case14.in",
+      "seed": 202610198019,
+      "family": "open-prefix-switch-case14",
+      "sha256": "7107ede5fe55f4eb951b251a76b3a6115595b85d41c9f3f53f9970dc653821f4",
+      "n": 50000,
+      "parameters": {
+        "prefix": {
+          "case": 14,
+          "ops": 1200
+        },
+        "profile_phases": [
+          "short",
+          "long",
+          "uniform"
+        ],
+        "delete_phases": [
+          "fifo",
+          "young",
+          "random"
+        ],
+        "p_add": 0.51,
+        "floor": 32,
+        "cap": 1800
+      },
+      "structural_validity": {
+        "operations": 50000,
+        "placements": 25886,
+        "deletions": 24114,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 1200,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 1192,
+        "peak_live_count": 1800,
+        "peak_live_length": 37427,
+        "final_live_count": 1772,
+        "final_live_length": 36656
+      }
+    },
+    {
+      "id": "B20",
+      "file": "b20-open-prefix-switch-case15.in",
+      "seed": 202610198020,
+      "family": "open-prefix-switch-case15",
+      "sha256": "c19f36328cbe2dea7bba80c1baa486e75857e078ade1a92b24ee94b72f7405e7",
+      "n": 60000,
+      "parameters": {
+        "prefix": {
+          "case": 15,
+          "ops": 1000
+        },
+        "profile_phases": [
+          "long",
+          "short",
+          "bimodal"
+        ],
+        "delete": "random",
+        "correlated": "exact-length",
+        "p_add": 0.52,
+        "floor": 32,
+        "cap": 1600
+      },
+      "structural_validity": {
+        "operations": 60000,
+        "placements": 30017,
+        "deletions": 29983,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 1000,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 576,
+        "peak_live_length": 9373,
+        "final_live_count": 34,
+        "final_live_length": 988
+      }
+    },
+    {
+      "id": "B21",
+      "file": "b21-stress-200k-high-live.in",
+      "seed": 202610198021,
+      "family": "stress-200k-high-live",
+      "sha256": "ec812585727151905b3aa2fcca743e4180ba067c1261789b4dd5cce89b759d66",
+      "n": 200000,
+      "parameters": {
+        "profile": "uniform",
+        "delete": "random",
+        "p_add": 0.5,
+        "floor": 5200,
+        "cap": 7000
+      },
+      "structural_validity": {
+        "operations": 200000,
+        "placements": 102689,
+        "deletions": 97311,
+        "configured_live_floor": 5200,
+        "first_floor_reached_at": 5200,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 5200,
+        "peak_live_count": 5519,
+        "peak_live_length": 114064,
+        "final_live_count": 5378,
+        "final_live_length": 109019
+      }
+    },
+    {
+      "id": "B22",
+      "file": "b22-stress-200k-small-live.in",
+      "seed": 202610198022,
+      "family": "stress-200k-small-live",
+      "sha256": "6eb74338b67de19200b780c5e56f465f7d70e50032fd2056329b2342e74a3f75",
+      "n": 200000,
+      "parameters": {
+        "profile": "short",
+        "delete": "young",
+        "correlated": "size-band",
+        "p_add": 0.5,
+        "floor": 32,
+        "cap": 128
+      },
+      "structural_validity": {
+        "operations": 200000,
+        "placements": 100017,
+        "deletions": 99983,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 75,
+        "peak_live_length": 322,
+        "final_live_count": 34,
+        "final_live_length": 153
+      }
+    },
+    {
+      "id": "B23",
+      "file": "b23-stress-200k-regime-many-gaps.in",
+      "seed": 202610198023,
+      "family": "stress-200k-regime-many-gaps",
+      "sha256": "909fed2f248e4f7c099921ef1c19eec350411f1ef17bfab2800de84eef00330d",
+      "n": 200000,
+      "parameters": {
+        "profile_phases": [
+          "long",
+          "short",
+          "long",
+          "short"
+        ],
+        "delete_phases": [
+          "fifo",
+          "young",
+          "fifo",
+          "random"
+        ],
+        "p_add_phases": [
+          0.53,
+          0.48,
+          0.53,
+          0.49
+        ],
+        "floor": 900,
+        "cap": 1600
+      },
+      "structural_validity": {
+        "operations": 200000,
+        "placements": 100468,
+        "deletions": 99532,
+        "configured_live_floor": 900,
+        "first_floor_reached_at": 900,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 900,
+        "peak_live_count": 1600,
+        "peak_live_length": 52394,
+        "final_live_count": 936,
+        "final_live_length": 4176
+      }
+    },
+    {
+      "id": "B24",
+      "file": "b24-stress-200k-late-activation.in",
+      "seed": 202610198024,
+      "family": "stress-200k-late-activation",
+      "sha256": "6934cf7f4bf489ef41ef046e66cb10b1daaca6474586fff053637bcb567f236e",
+      "n": 200000,
+      "parameters": {
+        "profile_phases": [
+          "uniform",
+          "uniform",
+          "uniform",
+          "short"
+        ],
+        "delete_phases": [
+          "random",
+          "random",
+          "random",
+          "fifo"
+        ],
+        "correlated_phases": [
+          null,
+          null,
+          null,
+          "exact-length"
+        ],
+        "p_add_phases": [
+          0.5,
+          0.5,
+          0.5,
+          0.52
+        ],
+        "floor": 32,
+        "cap": 1500
+      },
+      "structural_validity": {
+        "operations": 200000,
+        "placements": 100022,
+        "deletions": 99978,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 448,
+        "peak_live_length": 9199,
+        "final_live_count": 44,
+        "final_live_length": 193
+      }
+    }
+  ]
+}

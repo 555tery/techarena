@@ -1,0 +1,20 @@
+{
+  "schema": "pipes-hindsight-v3-implementation",
+  "source_and_binary_hashes_sha256": {
+    "Makefile": "e05db668c2edd697b0c370b96563d1281da2f0ff7fd5878ab894af39b61b0bc8",
+    "README.md": "0736d02157a3d0debe97d91cdf85cb84d880eb725b71c1fce07b1e7ecb02ee31",
+    "allocator.hpp": "ec65465a12d5ac6081e032123b617b2c78b6e9de65eca016fb105abae7d9f4d6",
+    "model.hpp": "9969ee6a4fe8748d12562efc41cf175e4e208a939421d440749d164238763690",
+    "policy.hpp": "e6c0bbf377091a8ed427b889d26c77b2ec7b42912ed0f1f77835c1c6faade7dd",
+    "smoke_report.json": "3714d2427d3346927b4cd6c45affb6db123dd3dfd98ba89ef4a88129d4358da1",
+    "solver": "0470ecbb51279271dc62952f7f0eb49f0b4d9c78848dc7fef3200b10be37f2ad",
+    "solver-bf": "34fc724a6f8274f26adab69fdb451140741a9e0a8b1f79d7fa7af72d688fc2fc",
+    "solver.cpp": "90ef3c635bc256c37d233e82f84a3e3272ffe008c29e169f6e4d9cabfb513175",
+    "teacher": "8001f9d0ceea3bf889eee4be4b7c0fa650c62678c08893bda63516caf6bc003f",
+    "teacher.cpp": "50a18b375de72d696ec7d0de42671bab79d098c48581fab9f11102af0acf499b",
+    "train.py": "f96a1e3beff4becf8ad675bcd4c4ef24908b3649d24484dccb9bf6619736cd58"
+  },
+  "default_model_trained": false,
+  "feature_schema": "causal_cross128_v1",
+  "verification": "smoke_report.json"
+}

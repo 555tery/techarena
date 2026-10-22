@@ -1,0 +1,49 @@
+{
+  "experiment": "causal-geometric-run-cohort-slabs",
+  "baseline": {
+    "name": "PID/46 + gated geometric alignment",
+    "open15_score": 29.79317535716961,
+    "source": "results/pipes/improvement/archive_mix_screen/gated_causal/pid46_rearm_geometric_gate1.cpp",
+    "source_sha256": "89f7173f61fba3710e752607df4fec83195abe88a14a51b75ff7a710ed6d1982"
+  },
+  "candidate": {
+    "source": "results/pipes/improvement/case9_causal_profiles/source/champion_cohort_slabs.cpp",
+    "source_sha256": "43bfbdadbae18ac180d1e59b6631342cfe1bef99190a449838f0470d6f220200",
+    "binary": "results/pipes/improvement/case9_causal_profiles/bin/champion_cohort_slabs",
+    "binary_sha256": "e4b79d8eb55a1fdc03a8c62505142ee615304401e821895bf6ab7f3712e54049"
+  },
+  "open15": {
+    "score": 29.932085817214315,
+    "delta_vs_baseline": 0.13891046004470553,
+    "status": "15/15 ok",
+    "only_changed_case": 9,
+    "case9_trench_baseline_m": 61760,
+    "case9_trench_candidate_m": 48540,
+    "max_solver_cpu_s": 0.942397,
+    "max_solver_rss_mib": 9.421875,
+    "summary_sha256": "35eff9d9d8dc7afe42016e782637b7eed4af2c9144cd70336b5c0021e4d4e6c3",
+    "cases_csv_sha256": "9a9e0925a040bedaf72ee456e4e2a52bff526d88d1089ab10e06d40cdf132ab6"
+  },
+  "trigger": {
+    "cases": {
+      "9": [4, 8, 16]
+    },
+    "criterion": "causal observed size runs, stable previous block counts, repeated PID stride-2 deletion parity, arithmetic next-size capacity gate; no test ID or future commands"
+  },
+  "holdout_v2": {
+    "score": 5.13526432428047,
+    "delta_vs_baseline": 0.0,
+    "status": "12/12 ok; all lengths and judge outputs identical",
+    "max_solver_cpu_s": 0.182332,
+    "max_solver_rss_mib": 4.203125,
+    "summary_sha256": "d68d7ab5aaeb57f6e5b1aa8e242a8591ea2c20fbd5edc39abc4bbda3e339fd36",
+    "cases_csv_sha256": "ed81cf25cbb29fba842dd188a303146752440db9e5434f1e646173f1cc968a74",
+    "caveat": "Previously used regression set; not independent generalization evidence"
+  },
+  "constraints": {
+    "site_used": false,
+    "docker_used": false,
+    "frozen_final_unchanged": true,
+    "canonical_source_unchanged": true
+  }
+}

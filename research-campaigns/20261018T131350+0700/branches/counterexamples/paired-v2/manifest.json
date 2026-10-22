@@ -1,0 +1,8 @@
+{
+  "traces_sha256": "40d4e4914d0e0d2db3ba0827405155bbd216942630e4ec5e991698cada6cc4fa",
+  "pair_count": 32,
+  "case_count": 64,
+  "seed": 20261019,
+  "max_commands": 18,
+  "prefix_relation": "pressure has an ordered motif repetition; light has the same length multiset with b/c swapped"
+}

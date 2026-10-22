@@ -1,0 +1,52 @@
+{
+  "date": "2026-10-20",
+  "scope": "Static feasibility and bonus economics; no Cangjie build or run",
+  "baseline_source": "prototypes/pipes_online_patterns_20261020/release/solution.cpp",
+  "baseline_sha256": "f7b285eee9d59f443b015de581c4622668dd1a321e0cb9ef00d4baf10412f5db",
+  "baseline_results": "prototypes/pipes_online_patterns_20261020/outcome.json",
+  "baseline_max_cpu_s": 2.8395529999999995,
+  "baseline_max_rss_mib": 16.203125,
+  "baseline_host": "macOS arm64",
+  "target": "Windows 10 22H2 x64, Pentium Gold G5420, one-core process CPU accounting",
+  "limits": {"cpu_s": 5, "memory_mb_as_statement": 256},
+  "cjc_available_on_path": false,
+  "cjpm_available_on_path": false,
+  "judge_sdk_version": null,
+  "judge_compiler_flags": null,
+  "cangjie_benchmarked": false,
+  "native_windows_benchmarked": false,
+  "bonus": {
+    "provenance": "User-supplied organizer messages dated 2026-10-16",
+    "formula": "10 * (best_KPI + second_best_KPI) among eligible weight-10 tests",
+    "eligible_tests_interpretation": [27, 28, 29, 30],
+    "eligibility_basis": "Organizer's first message explicitly says closed tests; later clarification says expensive group",
+    "maximum": 20,
+    "example_kpis": [0.95, 0.90],
+    "example_bonus": 18.5,
+    "base_nominal_weight_sum": 116.1,
+    "with_bonus_nominal_weight_sum": 136.1,
+    "uniform_kpi_retention_break_even_illustration": 0.8530492285084497,
+    "is_hidden_score_forecast": false
+  },
+  "verified_collection_sources": [
+    {
+      "repository": "https://github.com/cangjielanguage/cangjie_runtime",
+      "ref": "main at inspection",
+      "commit": "1e426a3198a4d37d28bb9db5bf7a3217b6e9a5ef",
+      "path": "stdlib/libs/std/collection/tree_map.cj",
+      "linear_materialization_lines": [690, 721]
+    },
+    {
+      "repository": "https://github.com/cangjielanguage/cangjie_runtime",
+      "ref": "v1.2.0",
+      "commit": "52f9e08f985ba42e23581e725e1b11f956f941d6",
+      "path": "stdlib/libs/std/collection/tree_map.cj",
+      "file_sha256": "54038ebaecd27f73756541da2cfd46a16171ed2fe6205f372bbb131d3ad7dd3f",
+      "linear_materialization_lines": [688, 717]
+    }
+  ],
+  "canonical_changed": false,
+  "platform_actions": 0,
+  "software_installed": false,
+  "new_solver_experiments": 0
+}

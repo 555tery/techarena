@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0008",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0008/candidate_0.cpp",
+  "sha256": "6aa94c667fa2f6e394f09f3bc109ec6640d048cc4c5bf4d866450436abc2d5e5",
+  "idea": "Выбирать endpoint по вероятности полезного слияния к следующей вставке и нелинейной ценности объединённой щели.",
+  "parent": "trial_0004",
+  "weighted_score": 28.441500284039567,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 18460,
+      "kpi": 0.666522210184182,
+      "weighted_score": 0.666522210184182
+    },
+    {
+      "case": "11",
+      "T": 22540,
+      "kpi": 0.9033274179236912,
+      "weighted_score": 0.903327417923691
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3320,
+      "kpi": 0.9614457831325302,
+      "weighted_score": 3.845783132530121
+    },
+    {
+      "case": "14",
+      "T": 37820,
+      "kpi": 0.9969328397673188,
+      "weighted_score": 3.987731359069275
+    },
+    {
+      "case": "15",
+      "T": 438420,
+      "kpi": 0.9551503124857442,
+      "weighted_score": 9.551503124857442
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.005927280308880881,
+    "worst_delta": -0.02911255411255409,
+    "wins": 19,
+    "regressions": 4,
+    "ties": 7,
+    "worst_cases": [
+      {
+        "case": "dev_29_micro",
+        "delta": -0.02911255411255409,
+        "baseline_T": 420,
+        "candidate_T": 440
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.004726124306626001,
+        "baseline_T": 87420,
+        "candidate_T": 87840
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.003964886646649068,
+        "baseline_T": 90260,
+        "candidate_T": 90620
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": -0.00042926456456160444,
+        "baseline_T": 46460,
+        "candidate_T": 46480
+      },
+      {
+        "case": "dev_12_large_recent",
+        "delta": 0.0,
+        "baseline_T": 14480,
+        "candidate_T": 14480
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": 0.0,
+        "baseline_T": 24820,
+        "candidate_T": 24820
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8147257767804851,
+  "max_cpu_s": 0.8078559999999999,
+  "max_rss_mib": 9.890625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0008/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0008/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792311057.063902,
+  "balanced_gate": false,
+  "hypothesis": "Для ближайшей вставки освобождение соседа полезно, если новая труба к этому моменту остаётся живой. Совместная вероятность этих событий должна давать более точный сигнал, чем отдельная оценка lifetime соседа. Переключать размещение на high-side следует только при достаточной наблюдённой выгоде.",
+  "causality": "После каждого подходящего размещения наблюдаются оба соседа независимо от выбранного endpoint. При следующей вставке фиксируется событие «сосед удалён, новая труба жива»; признаки — обе длины и logarithmic age bucket соседа. Если новая труба тоже удалена, оба размещения дают одинаковую свободную область до следующей вставки. Выгода стороны оценивается как q*max(0,V(a+r)-V(a)-V(r)), где a включает длину освобождаемого соседа и прилегающую внешнюю щель. High-side выбирается, когда нижняя Wilson-оценка левой выгоды превышает верхнюю правой. Экстраполяции V за существующий горизонт 80 нет. Wilson здесь служит эвристическим фильтром; при дрейфе гарантии отсутствуют. Основа — предоставленный trial_0004; кандидат не компилировался и не измерялся."
+}

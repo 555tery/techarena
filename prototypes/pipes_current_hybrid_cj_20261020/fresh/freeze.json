@@ -1,0 +1,12 @@
+{
+  "manifest_sha256": "ddd5f9898bc70ee7d9b947c30871c7fdd0dc14290710aa0e4bcd188ec7555f9e",
+  "generator_sha256": "5648be058fcee7986c8df7c4dabd1680b062ebac447fbf26a5f9a78692d6c14b",
+  "count": 96,
+  "corpus_canonical_sha256": "eb914a1d17f25217da7ca37d5c96b2fab8fa8425465d6bb84e307cab29513564",
+  "min_U": 0.9995685740236149,
+  "solvers_executed": 0,
+  "freeze_policy": "Do not modify or adapt inputs/generator/manifest after solver evaluation; create a new corpus for any later study.",
+  "validator_sha256": "9c55e8645079428f85d5c37ba5a79a41c6f0754c94dbf187a082aace3e9be83a",
+  "independent_validation_sha256": "4871bbed64635fd8acaf066b8d15c999e4acf7fb0f15b0224a5803805d3bf806",
+  "readonly_files": true
+}

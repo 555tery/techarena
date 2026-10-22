@@ -1,0 +1,156 @@
+{
+  "status": "completed",
+  "id": "external_d623373e6e435b34",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/pair_packing_transfer/solution.cpp",
+  "sha256": "d623373e6e435b34d2e22394a8012ddfe40c32823b676f183886a776e0a25e74",
+  "idea": "Two-gap Markov packing: compare residual-capacity pairs after the parent final gap choice, preserving protected structural routes.",
+  "parent": "trial_0022",
+  "weighted_score": 29.500841417347484,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1720,
+      "kpi": 0.975,
+      "weighted_score": 0.975
+    },
+    {
+      "case": "8",
+      "T": 4720,
+      "kpi": 0.9802966101694915,
+      "weighted_score": 0.980296610169492
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22620,
+      "kpi": 0.900132625994695,
+      "weighted_score": 0.900132625994695
+    },
+    {
+      "case": "12",
+      "T": 10360,
+      "kpi": 0.9892857142857143,
+      "weighted_score": 3.957142857142857
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37860,
+      "kpi": 0.9958795562599049,
+      "weighted_score": 3.983518225039619
+    },
+    {
+      "case": "15",
+      "T": 440280,
+      "kpi": 0.9511151994185518,
+      "weighted_score": 9.511151994185518
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.00496507951551538,
+    "worst_delta": -0.02911255411255409,
+    "wins": 17,
+    "regressions": 7,
+    "ties": 6,
+    "worst_cases": [
+      {
+        "case": "dev_29_micro",
+        "delta": -0.02911255411255409,
+        "baseline_T": 420,
+        "candidate_T": 440
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.0019863889203856067,
+        "baseline_T": 90260,
+        "candidate_T": 90440
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.0018740105915051597,
+        "baseline_T": 30480,
+        "candidate_T": 30540
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.0018057732645810898,
+        "baseline_T": 87420,
+        "candidate_T": 87580
+      },
+      {
+        "case": "dev_04_fifo_size_drift",
+        "delta": -0.0003851413631443812,
+        "baseline_T": 103520,
+        "candidate_T": 103560
+      },
+      {
+        "case": "dev_05_fifo_size_drift",
+        "delta": -0.0003637193642958003,
+        "baseline_T": 54820,
+        "candidate_T": 54840
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8137635759871196,
+  "max_cpu_s": 1.291167,
+  "max_rss_mib": 15.140625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_d623373e6e435b34/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_d623373e6e435b34/fresh_dev/harness/summary.json",
+  "finished_at": 1792323165.9774919,
+  "balanced_gate": false,
+  "hypothesis": "Transfer the donor joint two-gap accepted-volume DP with observed insertion-size transitions, reset transition context at deletion. It uses only existing gaps<=40 and preserves exact fits. Compare the chosen residual pair to using an alternative parent width representative, without changing endpoints or excavation. Parent MC still runs before this additional ordinary-mode comparison. Partial forecast: ignores deletions and the other gaps; global benefit unproved.",
+  "causality": "Current request and current free geometry plus already observed insertion/deletion history only. No test id, stream N, future input, fingerprints or external state. Parent source and donor hash verified. Source insertion scopes and bounds audited; C++20 Wall/Wextra/Werror syntax passed. No model calls for preparing this transfer. Strict full15 plus all30 development and CPU/RSS gates decide acceptance.",
+  "origin": "independent branch inbox"
+}

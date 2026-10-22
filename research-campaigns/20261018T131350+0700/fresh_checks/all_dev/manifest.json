@@ -1,0 +1,125 @@
+{
+  "cases": [
+    {
+      "name": "dev_00_0_recent_growth_shift",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/dev/dev_00_0_recent_growth_shift.in",
+      "sha256": "323139af215320fff159c8c8dd0d0a7f04a5d73b5240ef9acf15aa92487141db"
+    },
+    {
+      "name": "dev_01_0_recent_stationary",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/dev/dev_01_0_recent_stationary.in",
+      "sha256": "7b11a0ab7d78bd090be4a559863ba32cc756b8434a819a866fa4a99421e10b36"
+    },
+    {
+      "name": "dev_02_0_fifo_size_drift",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/dev/dev_02_0_fifo_size_drift.in",
+      "sha256": "1931de66465e193db8e20082f07dce7fc75cd261dc166c5cfc95528eeaabd137"
+    },
+    {
+      "name": "dev_03_0_random_mixture",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/dev/dev_03_0_random_mixture.in",
+      "sha256": "9a2aeffdad8b314c16c375f38054d320efe5b673b33a37a9af14215b590176a7"
+    },
+    {
+      "name": "dev_04_0_cohort_release",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/dev/dev_04_0_cohort_release.in",
+      "sha256": "c05cb94ef88947cdc21d57a3585c3a930d8a28737ff9dfaff1307c89502c81fb"
+    },
+    {
+      "name": "dev_05_0_repeated_sizes",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/dev/dev_05_0_repeated_sizes.in",
+      "sha256": "50b9d4ac6cabc14d42e0d86095861fe9af7959ce32dad6d77140da84d6710365"
+    },
+    {
+      "name": "dev_00_recent_uniform",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_00_recent_uniform.in",
+      "sha256": "bc1906ace2b8be52263e0f8b89913e32d23ff82474b34beb8b354675a41ccf8c"
+    },
+    {
+      "name": "dev_01_recent_uniform",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_01_recent_uniform.in",
+      "sha256": "c269019fd07ae561277a83a159dd47b8ee3abe7c110e94488d4799c20b4633a7"
+    },
+    {
+      "name": "dev_02_recent_uniform",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_02_recent_uniform.in",
+      "sha256": "197b602976a7e170c8d25a8a124ab157276dec5793a44ec1bc863f10043a3201"
+    },
+    {
+      "name": "dev_03_recent_uniform",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_03_recent_uniform.in",
+      "sha256": "c173ac30207c967304445698564cd7bb9067485c6af36390c49a0e2a3352794d"
+    },
+    {
+      "name": "dev_04_recent_geometric",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_04_recent_geometric.in",
+      "sha256": "cefc0e0d8fa6018bf2e8178b4e30fdf67331201525cc8f3ceb4a4f6afd9b6226"
+    },
+    {
+      "name": "dev_05_recent_geometric",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_05_recent_geometric.in",
+      "sha256": "b387a06e1324877512970e2773d53d55d6d5dc71f8825da436249b1a5d287410"
+    },
+    {
+      "name": "dev_06_recent_geometric",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_06_recent_geometric.in",
+      "sha256": "d3a3a4f8dfcd793e8d444b1827be672bcdc18dd3c08f8553f8a94c4a8ca0c98e"
+    },
+    {
+      "name": "dev_07_recent_geometric",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_07_recent_geometric.in",
+      "sha256": "23983db9c0ef717ce33fe1ddf43eb6b0209003e17a2cf339f2d5a7e4a054ff96"
+    },
+    {
+      "name": "dev_08_old_tail_mix",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_08_old_tail_mix.in",
+      "sha256": "2a269d08709ef793a3ece261daaf5491b26c820a2aefa0c7dc6ee537e7cd416e"
+    },
+    {
+      "name": "dev_09_old_tail_mix",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_09_old_tail_mix.in",
+      "sha256": "c314cbaecd922907b9d4c6549493c89ee40bd9da155052744af15ec4956d513b"
+    },
+    {
+      "name": "dev_10_old_tail_mix",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_10_old_tail_mix.in",
+      "sha256": "468a61896891f1c6362b8a873413c846594b40941dc3fcc0183b3101fc5cd223"
+    },
+    {
+      "name": "dev_11_old_tail_mix",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_dev/dev_11_old_tail_mix.in",
+      "sha256": "0510b63326db9df9214352466bbfa57979a94acc07baad7fe63f4c6f439d7754"
+    },
+    {
+      "name": "large_dev_00",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_dev/large_dev_00.in",
+      "sha256": "6d3a0afa5f8ca269966c609ace62636ec7529095264330cda2140d1e1de486fc"
+    },
+    {
+      "name": "large_dev_01",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_dev/large_dev_01.in",
+      "sha256": "7d1d5f323de1396be274d85c6ffc1f0069d88c5cc26bc6809282a898bc0f1332"
+    },
+    {
+      "name": "large_dev_02",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_dev/large_dev_02.in",
+      "sha256": "87562eb4d5f20d6374550215106e92e54cb3ede6e8abbd61f60b67e736acbcf0"
+    },
+    {
+      "name": "large_dev_03",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_dev/large_dev_03.in",
+      "sha256": "c7d7eb32e0b29ca13510c9a0fe224d3a5e5d925e1ef773e94c255ebb131ac260"
+    },
+    {
+      "name": "large_dev_04",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_dev/large_dev_04.in",
+      "sha256": "55b5f8289a134b3c54ea30c8f964bb4266989ce0106d01777f9d80fe255481cd"
+    },
+    {
+      "name": "large_dev_05",
+      "origin": "research-campaigns/20261018T131350+0700/fresh_checks/lifo_large_dev/large_dev_05.in",
+      "sha256": "7969f00c8012763ea3341bb089ca41c5a8f474dcce5e10625f585cbf407d9c22"
+    }
+  ],
+  "kind": "combined development, already used; not heldout"
+}

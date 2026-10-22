@@ -1,0 +1,116 @@
+--- candidate-histograms/solution.cj
++++ candidate-values-local/solution.cj
+@@ -989,8 +989,8 @@
+ public class CensoredLifetimeModel {
+     private let lower: VArray<Int64, $8> = [0, 16, 64, 256, 1024, 4096, 16384, 65536]
+     private var records = ArrayList<LifetimeRecord>([LifetimeRecord()])
+-    private var cells = VArray<LifetimeCell, $328>(repeat: LifetimeCell())
+-    private var rates = VArray<LifetimeEstimate, $328>(repeat: LifetimeEstimate())
++    private var cells = Array<LifetimeCell>(328, repeat: LifetimeCell())
++    private var rates = Array<LifetimeEstimate>(328, repeat: LifetimeEstimate())
+     private var nextCrossing = VArray<Int64, $8>(repeat: 1)
+     private var clock: Int64 = 0
+     private var referenceRate: Float64 = 0.0
+@@ -1598,21 +1598,23 @@
+     }
+ 
+     public func rebuildPrimalGapValues(maxGap: Int64): Unit {
++        let gapCounts = primalGapCounts
++        let recentRequests = primalRecentRequests
+         var rate = VArray<Float64, $41>(repeat: 0.0)
+-        var fitting = primalGapCounts[kPrimalGapValueCap + 1]
++        var fitting = gapCounts[kPrimalGapValueCap + 1]
+         var gap = kPrimalGapValueCap
+         while (gap >= 1) {
+-            fitting += primalGapCounts[gap]
+-            if (gap <= 40) { rate[gap] = Float64(primalRecentRequests[gap]) / Float64(iMax(1, fitting)) }
++            fitting += gapCounts[gap]
++            if (gap <= 40) { rate[gap] = Float64(recentRequests[gap]) / Float64(iMax(1, fitting)) }
+             gap--
+         }
+         let expiry = 2.0 * Float64(primalRecentDeletes) / Float64(iMax(1, activePipeCount))
+-        primalGapValue = VArray<Float64, $513>(repeat: 0.0)
++        var value = VArray<Float64, $513>(repeat: 0.0)
+         for (g in 1..=maxGap) {
+             let top = iMin(g, 40)
+             if (expiry == 0.0) {
+                 for (request in 1..=top) {
+-                    if (rate[request] > 0.0) { primalGapValue[g] = fMax(primalGapValue[g], Float64(request) + primalGapValue[g - request]) }
++                    if (rate[request] > 0.0) { value[g] = fMax(value[g], Float64(request) + value[g - request]) }
+                 }
+                 continue
+             }
+@@ -1623,7 +1625,7 @@
+             for (request in 1..=top) {
+                 let requestRate = rate[request]
+                 if (requestRate == 0.0) { continue }
+-                reward[request] = Float64(request) + primalGapValue[g - request]
++                reward[request] = Float64(request) + value[g - request]
+                 numerator += requestRate * reward[request]
+                 denominator += requestRate
+                 active = active | (1 << request)
+@@ -1643,8 +1645,9 @@
+                 if (!removed) { break }
+                 estimate = numerator / denominator
+             }
+-            primalGapValue[g] = fMin(fMax(estimate, 0.0), Float64(g))
+-        }
++            value[g] = fMin(fMax(estimate, 0.0), Float64(g))
++        }
++        primalGapValue = value
+         causalRequestRate = rate
+         causalBaseExpiry = expiry
+         causalComputedLimit = 0
+@@ -1663,6 +1666,8 @@
+     }
+ 
+     public func rebuildCausalGapValues(maxGap: Int64): Unit {
++        let requestRates = causalRequestRate
++        var gapValues = causalGapValue
+         for (model in 0..2) {
+             var value = VArray<Float64, $513>(repeat: 0.0)
+             let expiry = causalBaseExpiry * (if (model == 0) { 0.5 } else { 2.0 })
+@@ -1673,7 +1678,7 @@
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry
+                 for (request in 1..=top) {
+-                    let requestRate = causalRequestRate[request]
++                    let requestRate = requestRates[request]
+                     if (requestRate == 0.0) { continue }
+                     reward[request] = Float64(request) + value[gap - request]
+                     numerator += requestRate * reward[request]
+@@ -1686,8 +1691,8 @@
+                     for (request in 1..=top) {
+                         let bit: Int64 = 1 << request
+                         if ((active & bit) != 0 && reward[request] < estimate) {
+-                            numerator -= causalRequestRate[request] * reward[request]
+-                            denominator -= causalRequestRate[request]
++                            numerator -= requestRates[request] * reward[request]
++                            denominator -= requestRates[request]
+                             active = active & (!bit)
+                             removed = true
+                         }
+@@ -1697,8 +1702,9 @@
+                 }
+                 value[gap] = fMin(fMax(estimate, 0.0), Float64(gap))
+             }
+-            for (cell in 0..513) { causalGapValue[model * 513 + cell] = value[cell] }
+-        }
++            for (cell in 0..513) { gapValues[model * 513 + cell] = value[cell] }
++        }
++        causalGapValue = gapValues
+         causalComputedLimit = maxGap
+     }
+ 
+@@ -1750,7 +1756,10 @@
+         return if (alternativeScore + 1e-9 < baselineScore) { challenger } else { baselineGap }
+     }
+ 
+-    public func primalGapLoss(gapLength: Int64, length: Int64): Float64 { return primalGapValue[gapLength] - primalGapValue[gapLength - length] }
++    public func primalGapLoss(gapLength: Int64, length: Int64): Float64 {
++        let value = primalGapValue
++        return value[gapLength] - value[gapLength - length]
++    }
+ 
+     public func scoreGap(gapLength: Int64, length: Int64): Int64 {
+         let slack = gapLength - length

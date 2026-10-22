@@ -1,0 +1,275 @@
+{
+  "status": "no-go",
+  "created_at": 1792317650.331462,
+  "proposal": {
+    "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/mature_endpoint_evidence/solution.cpp",
+    "sha256": "196fd18ed2d07723a10bf07ccfbbd923ecb89590ed01926fe890320a35268748",
+    "idea": "Mature-state evidence for short-pipe high-side preference: retain parent warm-up and structured routes; require observed deletion confidence after128 live pipes.",
+    "hypothesis": "Short length alone need not justify high-side placement after a mature population exists. Keep cold-start, parity, alternating-delete and long-run routes, but require the existing observed LIFO evidence for the unstructured short-pipe high-side preference after the parent confidence model becomes eligible. Candidate domain and value formulas stay, while side/address tie preference may change. This can reduce isolated residual gaps; no gain measured yet.",
+    "causality": "Only current live population, current request length and existing rolling past deletion/profile evidence. Reuses parent128 live-population threshold; no new numeric sweep. No stream N, test identifiers, fingerprints, future input or external state. Parent source frozen SHA verified; strict C++20 Wall Wextra Werror syntax compile passed. Actual nonexact endpoint changes have separate diagnostics; rollout forecast implementation retained and must be judged by full checks.",
+    "parent": "trial_0022"
+  },
+  "model_calls": 0,
+  "evaluation_result": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_196fd18ed2d07723/result.json",
+  "evidence_report": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/analysis/recent-trials-28-35.json",
+  "checked_at": 1792317831.2250712,
+  "weighted_score": 29.962583611869128,
+  "score_delta_vs_trial22": -0.1283842794759842,
+  "balanced_gate": true,
+  "source_sha256_verified": true,
+  "comparisons": {
+    "open15": {
+      "relative_to_trial22": {
+        "mean_delta": -0.008558951965065509,
+        "worst_delta": -0.12838427947598263,
+        "wins": 0,
+        "regressions": 1,
+        "ties": 14
+      },
+      "changed_trench": [
+        {
+          "case": "10",
+          "parent_T": 15380,
+          "candidate_T": 18320,
+          "delta_T": 2940
+        }
+      ],
+      "activation": [
+        {
+          "case": "7",
+          "eligible": 21,
+          "changed_endpoints": 9
+        },
+        {
+          "case": "10",
+          "eligible": 5292,
+          "changed_endpoints": 2717
+        },
+        {
+          "case": "11",
+          "eligible": 2134,
+          "changed_endpoints": 245
+        },
+        {
+          "case": "13",
+          "eligible": 1,
+          "changed_endpoints": 0
+        },
+        {
+          "case": "14",
+          "eligible": 2930,
+          "changed_endpoints": 1124
+        },
+        {
+          "case": "15",
+          "eligible": 45951,
+          "changed_endpoints": 245
+        }
+      ]
+    },
+    "development": {
+      "relative_to_trial22": {
+        "mean_delta": 0.00046414923451795764,
+        "worst_delta": -0.003145627062706269,
+        "wins": 7,
+        "regressions": 4,
+        "ties": 19
+      },
+      "changed_trench": [
+        {
+          "case": "dev_02_recent_stationary",
+          "parent_T": 17640,
+          "candidate_T": 17560,
+          "delta_T": -80
+        },
+        {
+          "case": "dev_03_recent_stationary",
+          "parent_T": 21700,
+          "candidate_T": 21560,
+          "delta_T": -140
+        },
+        {
+          "case": "dev_04_fifo_size_drift",
+          "parent_T": 103520,
+          "candidate_T": 103300,
+          "delta_T": -220
+        },
+        {
+          "case": "dev_05_fifo_size_drift",
+          "parent_T": 54820,
+          "candidate_T": 54720,
+          "delta_T": -100
+        },
+        {
+          "case": "dev_07_random_mixture",
+          "parent_T": 42420,
+          "candidate_T": 42560,
+          "delta_T": 140
+        },
+        {
+          "case": "dev_08_cohort_release",
+          "parent_T": 25140,
+          "candidate_T": 25080,
+          "delta_T": -60
+        },
+        {
+          "case": "dev_09_cohort_release",
+          "parent_T": 11500,
+          "candidate_T": 11600,
+          "delta_T": 100
+        },
+        {
+          "case": "dev_10_repeated_sizes",
+          "parent_T": 158940,
+          "candidate_T": 159060,
+          "delta_T": 120
+        },
+        {
+          "case": "dev_17_large_recent",
+          "parent_T": 64920,
+          "candidate_T": 64900,
+          "delta_T": -20
+        },
+        {
+          "case": "dev_20_frames",
+          "parent_T": 87420,
+          "candidate_T": 87440,
+          "delta_T": 20
+        },
+        {
+          "case": "dev_22_frames",
+          "parent_T": 27140,
+          "candidate_T": 27060,
+          "delta_T": -80
+        }
+      ],
+      "activation": [
+        {
+          "case": "dev_00_recent_growth_shift",
+          "eligible": 2344,
+          "changed_endpoints": 258
+        },
+        {
+          "case": "dev_01_recent_growth_shift",
+          "eligible": 2563,
+          "changed_endpoints": 237
+        },
+        {
+          "case": "dev_02_recent_stationary",
+          "eligible": 746,
+          "changed_endpoints": 262
+        },
+        {
+          "case": "dev_03_recent_stationary",
+          "eligible": 753,
+          "changed_endpoints": 223
+        },
+        {
+          "case": "dev_04_fifo_size_drift",
+          "eligible": 2676,
+          "changed_endpoints": 1978
+        },
+        {
+          "case": "dev_05_fifo_size_drift",
+          "eligible": 1204,
+          "changed_endpoints": 864
+        },
+        {
+          "case": "dev_06_random_mixture",
+          "eligible": 4409,
+          "changed_endpoints": 1432
+        },
+        {
+          "case": "dev_07_random_mixture",
+          "eligible": 4253,
+          "changed_endpoints": 1374
+        },
+        {
+          "case": "dev_08_cohort_release",
+          "eligible": 767,
+          "changed_endpoints": 201
+        },
+        {
+          "case": "dev_09_cohort_release",
+          "eligible": 645,
+          "changed_endpoints": 298
+        },
+        {
+          "case": "dev_10_repeated_sizes",
+          "eligible": 1111,
+          "changed_endpoints": 373
+        },
+        {
+          "case": "dev_11_repeated_sizes",
+          "eligible": 1063,
+          "changed_endpoints": 367
+        },
+        {
+          "case": "dev_12_large_recent",
+          "eligible": 16753,
+          "changed_endpoints": 4339
+        },
+        {
+          "case": "dev_13_large_recent",
+          "eligible": 11518,
+          "changed_endpoints": 4169
+        },
+        {
+          "case": "dev_14_large_recent",
+          "eligible": 20054,
+          "changed_endpoints": 10069
+        },
+        {
+          "case": "dev_15_large_recent",
+          "eligible": 10438,
+          "changed_endpoints": 2468
+        },
+        {
+          "case": "dev_16_large_recent",
+          "eligible": 18456,
+          "changed_endpoints": 7171
+        },
+        {
+          "case": "dev_17_large_recent",
+          "eligible": 12582,
+          "changed_endpoints": 5875
+        },
+        {
+          "case": "dev_18_frames",
+          "eligible": 8649,
+          "changed_endpoints": 0
+        },
+        {
+          "case": "dev_19_frames",
+          "eligible": 5193,
+          "changed_endpoints": 1
+        },
+        {
+          "case": "dev_20_frames",
+          "eligible": 1139,
+          "changed_endpoints": 451
+        },
+        {
+          "case": "dev_21_frames",
+          "eligible": 3451,
+          "changed_endpoints": 4
+        },
+        {
+          "case": "dev_22_frames",
+          "eligible": 3089,
+          "changed_endpoints": 125
+        },
+        {
+          "case": "dev_23_frames",
+          "eligible": 1228,
+          "changed_endpoints": 452
+        }
+      ]
+    }
+  },
+  "max_cpu_s": 1.2072479999999999,
+  "max_rss_mib": 14.515625,
+  "release_started": false,
+  "submitted": false,
+  "conclusion": "Reject: Open7 unchanged; Open10 adds2940m, reducing official sum by0.12838428. Mature deletion confidence gate is not a safe replacement for the parent short-pipe high-side default. Development gain alone does not justify public regression. No threshold sweep."
+}

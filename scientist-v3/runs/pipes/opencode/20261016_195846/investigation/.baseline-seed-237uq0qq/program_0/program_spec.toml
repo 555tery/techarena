@@ -1,0 +1,21 @@
+schema_version = 1
+code_root = "src"
+
+[entrypoint]
+path = "pipes.cpp"
+language = "cpp20"
+type = "script"
+
+[copy]
+exclude = [
+  "**/__pycache__/**",
+  "**/*.pyc",
+  "**/*.o",
+  "**/build/**",
+  "**/dist/**",
+]
+include = []
+
+[integration]
+kind = "generic"
+notes = "C++20 source is compiled by the task evaluator and run against the official interactive Pipes interactor."

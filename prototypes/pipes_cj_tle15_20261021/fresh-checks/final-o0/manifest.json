@@ -1,0 +1,13 @@
+{
+  "binary": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/bin/final-o0",
+  "binary_sha256": "bf4d4c098ce7239bf31064f52e286b9bee1b1c5fbe71ea643d76d5046ec13971",
+  "source": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/candidate-final/solution.cj",
+  "source_sha256": "585c6e7ffa9cedc20f1dd0efeaed59fdef39c62dba0e3c57853faba3b6024ad8",
+  "input_manifest_sha256": "fb7bca76f8fd3b29b3147e4ff1554517bbadf89ef231e20602e77a7a234cb507",
+  "runner_sha256": "2b8b6f91f9b3cf3e129ceb84433258e07dc085a248d5d03363711736be080db4",
+  "workers": 1,
+  "cjProcessorNum": 1,
+  "cpu_limit_s": 5,
+  "rss_limit_mib": 256,
+  "baseline": false
+}

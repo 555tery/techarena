@@ -1,0 +1,10 @@
+{
+  "base_sha256": "7727ec11c278382b7485cbdea679d8fff9244650fb9e32e21327f1f7e1378578",
+  "source_sha256": "15a212f220ad2131977daa3db565a8979f37f4f27fc97cba2719733c551bb754",
+  "changes": [
+    "Short-read-safe byte protocol parser using standard C read/_read. Never fills the whole buffer before returning the received command.",
+    "Whitespace signed integer syntax and zero/EOF termination retained for valid task protocol.",
+    "Windows binary mode set before first input; normal blocking foreign calls.",
+    "Output code unchanged."
+  ]
+}

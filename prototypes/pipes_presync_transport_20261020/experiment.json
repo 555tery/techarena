@@ -1,0 +1,27 @@
+{
+  "started_at": "2026-10-19T19:01:30.217777+00:00",
+  "objective": "Improve pre-synchronization traps with exact Open15 maxima and no observed per-case loss",
+  "parent": "prototypes/pipes_g5420_cpu_20261020/cache32/solution.cpp",
+  "parent_sha256": "a843822451c2a7c5e07330daa33268fc77bccfbc08fd196bfaf98a673ae24cfe",
+  "scope": "local separate prototype; no platform, no canonical replacement before gate",
+  "selection": "293 previously observed streams; 227+64+2; all reused inputs are selection/regression",
+  "predeclared_search": "Keep early PID2=229. Four fixed late public repair profiles (14 all late,8 instant,6 coordinated,4 local exchange) times up to4 causal physical-follow policies; at most3 standalone finalists. No source changes after fresh freeze.",
+  "fresh": "96 independent legal seeded streams; initial64 plus32 coverage supplement on late modified allocation prefixes; no solver score tuning by generator; all read only after freeze",
+  "gate": "Exact all15 public volume ceilings, zero per-case regression on known and fresh, at least one stable directed gain; CPU<5sec,RSS<256MiB; do not filter timing losses",
+  "resources": "Single solver worker, macOS arm64 local measurement; Windows10 G5420 unmeasured",
+  "fresh64_manifest_sha256": "474285df698a2735a672e96507e2c503abdde4f7fd819bed40702e9dcb46dc47",
+  "fresh64_generator_sha256": "b9b9253a98f6b8fd8e516e7244562ce294b794b8926760bba3b4c3568fb53d3f",
+  "amendment_before_fresh": {
+    "time": "2026-10-19T19:07:52.974961+00:00",
+    "reason": "All16 broad late-repair/policy profiles regress known streams; simple relocation crosses occupied regions. Public lifetime audit found4 left shifts inside the same original free tail gap.",
+    "public_only_tail_changes": {
+      "5321": 633,
+      "5343": 792,
+      "5443": 868,
+      "5293": 557
+    },
+    "bounded_extension": "Four previous profiles with extra reference-current-parentT rule; four-tail and single-tail profiles with5 policies. Total30 distinct profiles, up to3 standalone builds.",
+    "screen_selection": "tail4 + local reflection + legal reference address no extra immediate BF dig: one known directed improvement and no loss on32 affected causal reference traces; complete standalone gate pending.",
+    "fresh_status": "Both64 and supplementary32 remain unopened."
+  }
+}

@@ -1,0 +1,79 @@
+<!doctype html><html lang="ru"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pipes: Cangjie — проверка переноса</title><style>body{max-width:1060px;margin:45px auto;padding:0 24px;font:17px/1.55 system-ui;color:#1b2838;background:#f6f8fb}h1{font-size:34px;line-height:1.2}.card{background:white;border:1px solid #dce3ec;border-radius:14px;padding:24px;margin:24px 0}.warning{background:#fff3dc}table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}td,th{padding:11px 8px;border-bottom:1px solid #dce3ec;text-align:left}pre{white-space:pre-wrap;font:14px/1.55 ui-monospace,monospace}a{color:#185abc}.small{font-size:14px;color:#53627a}</style>
+<h1>Online-ядро перенесено на Cangjie</h1><p>339 тестов · 4,195,393 ответов · KPI совпадает с C++</p>
+<div class="card"><b>Проверка логики</b><p>307 прежних тестов и 32 новые ловушки прошли официальный интерактор. Решения, итоговая траншея и KPI совпадают. Open15 у обеих версий: <b>30.044314328140 / 32.1</b>.</p><p>Алгоритмические бюджеты сохранены. Новый поиск или replay не добавлялись.</p></div>
+<div class="card"><b>Максимумы на macOS arm64</b><table><tr><th>Набор</th><th>C++ CPU</th><th>C++ RSS</th><th>Cangjie CPU</th><th>Cangjie RSS</th></tr><tr><td>Все 339</td><td>2.501 s</td><td>16.0 MiB</td><td>4.056 s</td><td>126.0 MiB</td></tr><tr><td>Прежние 307</td><td>2.244 s</td><td>16.0 MiB</td><td>3.717 s</td><td>123.7 MiB</td></tr><tr><td>Новые 32</td><td>2.501 s</td><td>9.8 MiB</td><td>4.056 s</td><td>126.0 MiB</td></tr></table><p class="small">User+system CPU всего процесса, включая runtime; один solver за раз, cjProcessorNum=1. Максимумы CPU и RSS могут относиться к разным тестам.</p></div>
+<div class="card warning"><b>Windows / Pentium G5420 ещё не измерены</b><p>Лимиты конкурса — 5 CPU-секунд и 256 MiB на тест. Замеры Mac не подтверждают прохождение на целевой машине. В комплект включён Windows runner с привязкой процесса к одному логическому CPU.</p></div>
+<p><a href="release/solution.cj">Исходник Cangjie</a> · <a href="pipes-cangjie-release.zip">Комплект с 339 тестами</a> · <a href="REPORT.json">Сводные данные</a> · <a href="official/results.json">Все парные измерения</a></p>
+<details><summary>Подробности и границы проверки</summary><pre>Перенос online-решения Pipes на Cangjie — 20 октября 2026
+
+Чистый Cangjie 1.2.0, -O2; C++ FFI не используется.
+На 339 тестах совпали все 4,195,393 числовых ответов и KPI.
+Проверка: официальный интерактор, полный поток команд и ответов.
+Прежний C++ исходник и алгоритмические бюджеты сохранены.
+Новые 32 входа заморожены до первого запуска Cangjie solver. Это новые
+экземпляры известных механизмов; новый класс генераторов не заявляется.
+Паритет порта не означает улучшение обобщаемости исходного алгоритма.
+
+Измерения: macOS-26.6.2-arm64-arm-64bit-Mach-O, arm64; один solver за раз.
+CPU=user+system всего процесса; время ожидания ввода и CPU интерактора
+не включены. cjProcessorNum=1; жёсткой affinity на Mac нет.
+Windows 10 / Pentium Gold G5420 в этом запуске не измерены.
+Пересчёт по частоте CPU не делался; целевой лимит ещё не подтверждён.
+
+Все 339
+  cpp: max CPU 2.501033 s; max RSS 16.000 MiB; sum CPU 35.810913 s
+  cj: max CPU 4.055636 s; max RSS 126.000 MiB; sum CPU 66.268564 s
+  CJ/C++ по сумме CPU: 1.851x
+Прежние 307
+  cpp: max CPU 2.244160 s; max RSS 16.000 MiB; sum CPU 18.929164 s
+  cj: max CPU 3.717005 s; max RSS 123.672 MiB; sum CPU 35.878603 s
+  CJ/C++ по сумме CPU: 1.895x
+Новые 32
+  cpp: max CPU 2.501033 s; max RSS 9.766 MiB; sum CPU 16.881749 s
+  cj: max CPU 4.055636 s; max RSS 126.000 MiB; sum CPU 30.389961 s
+  CJ/C++ по сумме CPU: 1.800x
+
+Повторы самого медленного теста: fresh/port-04-3
+  official: C++ 2.501033 s, Cangjie 4.055636 s
+  timing_repeat_1/results.json: C++ 2.030915 s, Cangjie 3.454499 s
+  timing_repeat_2/results.json: C++ 1.951678 s, Cangjie 3.835424 s
+  Ответы и локальные лимиты во всех повторах: True
+
+Все локальные ограничения 5 s / 256 MiB выполнены: True.
+Open15: 30.044314328139688 / 32.1 у обоих.
+
+Что пришлось изменить при переносе
+- Ordered indexes реализованы собственным AVL на массивах с переработкой слотов.
+- Rollout копируется независимо, включая вложенные массивы и историю.
+- UInt32 PRNG воспроизведён явными масками; tie-break и Float64 порядок сохранены.
+- Интерактивный I/O выдаёт и flush-ит один ответ на каждую команду.
+- Первый диагностический порт превысил память: 262.844 MiB на final-153.
+  Итоговая версия задаёт GC threshold 64 MiB внутри программы и вызывает
+  heavy GC после команды, если allocated heap превысил 96 MiB.
+  Настройки heap/GC из окружения для итогового прогона не использовались.
+
+Дополнительные проверки
+- AVL: 20000 случайных операций с независимым sorted-array oracle, стабильные
+  ID узлов, bounds, обход в обе стороны, successor deletion, clone, reuse.
+- Модели: независимость deepCopy и вложенных данных, обе стороны gap merge,
+  порядок при равных оценках, swap-pop, границы истории 2048 и паттерна 46.
+- Fresh32: fragmentation, adjacency, смена deletion policy, пороги MC64/4096,
+  geometric46/history2048, DP512, UInt32 wrap; восемь потоков по 200000 команд.
+  Названия обозначают цель теста, а не измеренное покрытие ветвей.
+
+Артефакты
+release/solution.cj — единый исходник для Cangjie1.2.0.
+release/solution.cpp — неизменённый C++ эталон.
+release/tests — все 339 входов; manifests содержат SHA256.
+release/windows_bench.py — нативный парный WinAPI runner, один логический CPU.
+release/build_windows.bat — сборка без установки SDK и глобальных изменений.
+Windows runner прошёл проверку синтаксиса на Mac; нативное исполнение не проверено.
+Проверка на Windows использует независимую occupancy модель, не официальный интерактор.
+Официальная версия SDK и параметры сборки на конкурсе остаются неизвестны.
+Архив, hashes и локальные ссылки HTML проверены. Визуальный просмотр
+HTML недоступен: Local browser use is disabled in Work settings.
+
+C++ SHA256: f7b285eee9d59f443b015de581c4622668dd1a321e0cb9ef00d4baf10412f5db
+Cangjie SHA256: cc2fcdf7d930bad6c75a0656c105c28399c66d5184c937740c69764a1e9e681f
+</pre></details></html>

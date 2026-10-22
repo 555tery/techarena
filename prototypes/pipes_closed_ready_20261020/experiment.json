@@ -1,0 +1,34 @@
+{
+  "created_at": "2026-10-19T19:31:50.218492+00:00",
+  "authorization": "Local comparison online/full replay/cautious hybrid; Open15 maximum released as hard constraint; prepare final candidate, no platform actions.",
+  "reference_source": "research-campaigns/20261018T141843+0700-autonomous/releases/988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4/solution.cpp",
+  "reference_sha256": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4",
+  "candidates": [
+    "online",
+    "full",
+    "hybrid"
+  ],
+  "hybrid_rule": "Replay only if physical newT <= same online shadow T and placement touches a free-gap boundary after required extension. Otherwise permanent handoff to same core from actual geometry. No guarantee after handoff.",
+  "budget": "Exactly three strategy candidates, calibration64, final128, Open15, three new 200000-command resource stress streams. Implementation correctness fixes allowed before final freeze; no policy tuning on final results.",
+  "datasets": {
+    "calibration": {
+      "ordinary": 32,
+      "prefix": 32
+    },
+    "final": {
+      "ordinary": 64,
+      "prefix": 64
+    },
+    "stress": 3
+  },
+  "selection": {
+    "validation": "All trajectories legal, official interactive confirmation, CPU<5s and RSS<256MiB on local host. Native Windows/G5420 remains separate.",
+    "metrics": "Family-macro absolute KPI in ordinary and public-prefix strata; paired relative retention, worst losses, and Open15 weighted score.",
+    "selection_rule": "Among correct candidates with ordinary and prefix family-macro KPI each >= online - 0.002 and no ordinary case KPI < 0.80*online, choose smallest maximum regret across scenario mixtures p=0 and p=1, score=Open15+84*((1-p)*ordinary_macro+p*prefix_macro). Scenario distribution is illustrative, not estimated hidden distribution. Ties within 0.01 score choose simpler online, then hybrid, then full.",
+    "confirmation_rule": "Freeze selected candidate and all binaries before opening final results. Recheck same two macro floors and ordinary per-case retention on independent final128. Failure returns recommendation to online without retuning. Report all three results, including losses.",
+    "statistical_scope": "Synthetic mechanisms, not a sample of official hidden distribution. Bootstrap family blocks, descriptive intervals only."
+  },
+  "host": "macOS arm64; one solver process at a time for official resource measurements",
+  "platform_actions": 0,
+  "canonical_modified": false
+}

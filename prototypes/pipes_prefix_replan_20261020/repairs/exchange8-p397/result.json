@@ -1,0 +1,323 @@
+{
+  "success": true,
+  "changes": {
+    "5495": 1419,
+    "8322": 1440
+  },
+  "trials": [
+    {
+      "x": 236,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 248,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 272,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 277,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 282,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 346,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 351,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 359,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 367,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 375,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 383,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 392,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 401,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 480,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 488,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 496,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 504,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 512,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 520,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 578,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 594,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 610,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 633,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 646,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 662,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 678,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 694,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 710,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 726,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 749,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 799,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 804,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 879,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 884,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 889,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 970,
+      "blocks": 3,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1010,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1022,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1034,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1057,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1087,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1107,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1127,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1147,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1159,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1171,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1183,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1195,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1207,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1219,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1247,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1259,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1275,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1291,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1307,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1323,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1339,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1355,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1371,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1387,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1403,
+      "blocks": 2,
+      "status": "INFEASIBLE"
+    },
+    {
+      "x": 1419,
+      "blocks": 2,
+      "status": "OPTIMAL"
+    }
+  ],
+  "elapsed": 1.4825086659984663,
+  "source": "prototypes/pipes_prefix_replan_20261020/exchange/solution.cpp",
+  "target": 5495,
+  "scope": "public case8 branch-only local survivor exchange; all other placements fixed; endpoints<=old public trench at birth"
+}

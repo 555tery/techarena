@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "evaluation_0",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0081/candidate_0.cpp",
+  "sha256": "231fe4286eb6f624075b4ca026c13102fb832ffdd181ca6aefc4179e1b173306",
+  "idea": "Добавить в pair DP поглощающее событие deletion: оценивать заполнение пары щелей до первого удаления или неподходящего запроса.",
+  "parent": "trial_0054",
+  "weighted_score": 28.392442251789106,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4720,
+      "kpi": 0.9802966101694915,
+      "weighted_score": 0.980296610169492
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 18460,
+      "kpi": 0.666522210184182,
+      "weighted_score": 0.666522210184182
+    },
+    {
+      "case": "11",
+      "T": 22560,
+      "kpi": 0.9025265957446809,
+      "weighted_score": 0.902526595744681
+    },
+    {
+      "case": "12",
+      "T": 10360,
+      "kpi": 0.9892857142857143,
+      "weighted_score": 3.957142857142857
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37820,
+      "kpi": 0.9969328397673188,
+      "weighted_score": 3.987731359069275
+    },
+    {
+      "case": "15",
+      "T": 441920,
+      "kpi": 0.9475855358435916,
+      "weighted_score": 9.475855358435917
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.005670898404057685,
+    "worst_delta": -0.024632352941176494,
+    "wins": 17,
+    "regressions": 8,
+    "ties": 5,
+    "worst_cases": [
+      {
+        "case": "dev_27_micro",
+        "delta": -0.024632352941176494,
+        "baseline_T": 320,
+        "candidate_T": 340
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.00868283450914542,
+        "baseline_T": 30480,
+        "candidate_T": 30760
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.00791306887414267,
+        "baseline_T": 94540,
+        "candidate_T": 95340
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.0060681557068898995,
+        "baseline_T": 87420,
+        "candidate_T": 87960
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.005060659564315673,
+        "baseline_T": 90260,
+        "candidate_T": 90720
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.0007979189293346733,
+        "baseline_T": 24820,
+        "candidate_T": 24840
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8144693948756618,
+  "max_cpu_s": 0.756057,
+  "max_rss_mib": 6.453125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0081/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0081/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792328029.8591082,
+  "balanced_gate": false
+}

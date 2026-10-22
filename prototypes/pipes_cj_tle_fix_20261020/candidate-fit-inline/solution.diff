@@ -1,0 +1,32 @@
+--- /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-dp-flat/solution.cj
++++ /Users/555tery/techarena/prototypes/pipes_cj_tle_fix_20261020/candidate-fit-inline/solution.cj
+@@ -1783,19 +1783,25 @@
+         if (!(priorHazard > 0.0)) { return false }
+         let priorEvents: Float64 = 8.0
+         for (bin in 0..8) {
++            let fitBinLower = lower[bin]
+             var pooledExposure: Float64 = 0.0
+             var pooledDeaths: Float64 = 0.0
+             for (length in 1..41) {
+-                pooledExposure += Float64(exposure(cells[(length) * 8 + (bin)], bin))
+-                pooledDeaths += Float64(cells[(length) * 8 + (bin)].deaths)
++                let cell = cells[(length) * 8 + (bin)]
++                let fitOutstanding: Int64 = if (cell.active == 0) { 0 } else { cell.active * (clock - fitBinLower) - cell.birthSum }
++                let fitExposure = cell.completedExposure + fitOutstanding
++                pooledExposure += Float64(fitExposure)
++                pooledDeaths += Float64(cell.deaths)
+             }
+             let pooledDenominator = pooledExposure + priorEvents / priorHazard
+             let pooledRate = (pooledDeaths + priorEvents) / pooledDenominator
+             let pooledError = sqrt(pooledDeaths + priorEvents) / pooledDenominator
++            let borrowedExposure = priorEvents / pooledRate
+             for (length in 1..41) {
+                 let cell = cells[(length) * 8 + (bin)]
+-                let borrowedExposure = priorEvents / pooledRate
+-                let denominator = Float64(exposure(cell, bin)) + borrowedExposure
++                let fitOutstanding: Int64 = if (cell.active == 0) { 0 } else { cell.active * (clock - fitBinLower) - cell.birthSum }
++                let fitExposure = cell.completedExposure + fitOutstanding
++                let denominator = Float64(fitExposure) + borrowedExposure
+                 let shape = Float64(cell.deaths) + priorEvents
+                 rates[(length) * 8 + (bin)] = LifetimeEstimate(shape / denominator,
+                     sqrt(shape) / denominator + borrowedExposure / denominator * pooledError)

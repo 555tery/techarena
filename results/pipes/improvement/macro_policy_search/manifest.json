@@ -1,0 +1,251 @@
+{
+  "title": "TECH ARENA Pipes macro-policy block screen",
+  "date_local": "2026-10-17",
+  "status": "screen complete; no policy passed positive-generalization gate; no Open15 candidate generated",
+  "baseline": {
+    "final_score": 29.789717928594047,
+    "weight_sum": 32.1,
+    "final_source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+    "baseline_interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+  },
+  "diagnostic_runner": {
+    "source_path": "results/pipes/improvement/macro_policy_search/source/macro_policy_runner.cpp",
+    "source_sha256": "208d556ab3f385011ce411ccc3b34f22b57220c7f685d42f2780bcdacb144063",
+    "binary_path": "results/pipes/improvement/macro_policy_search/bin/macro_policy_runner",
+    "binary_sha256": "29ae58e27ea131b59be93161f52f62e72845c50f8efa892193e8197cd6163800",
+    "harness_path": "tools/pipes_harness.py",
+    "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "policies": {
+      "1": "first_fit",
+      "2": "tail_first",
+      "3": "tail_only",
+      "4": "no_cohort"
+    }
+  },
+  "design": {
+    "case_ids": [
+      5,
+      9,
+      15
+    ],
+    "block_lengths": [
+      256,
+      512,
+      1024,
+      2048,
+      4096
+    ],
+    "unique_blocks": 30,
+    "variants": 120,
+    "protocol_ok": 120,
+    "selection": "current-state geometry/free-gap fragmentation, request length, and recent baseline growth only; states stratified as fragmented_free_volume or low_fragmentation; offline block start/length chosen for diagnosis",
+    "evaluation": "Each runner was driven through the entire official test by the interactor. The selected macro policy is active only within its specified operation range; after the range the fixed baseline policy resumes for the full remaining suffix.",
+    "full_suffix_replay_commands": {
+      "min": 0,
+      "max": 185697,
+      "zero_suffix_runs": 4
+    },
+    "note": "Operation numbers and test IDs define only offline diagnostic blocks. They are not proposed online triggers or candidate logic."
+  },
+  "baseline_controls": [
+    {
+      "case": 5,
+      "baseline_trench_m": 62760,
+      "control_trench_m": 62760,
+      "baseline_weighted_score": 0.810070108349267,
+      "control_weighted_score": 0.810070108349267,
+      "control_trace_sha256": "e78bb7900ad184037e578f13012eaae1cb8d854700ee7ddc520ac6c8a113bb63",
+      "final_trace_sha256": "e78bb7900ad184037e578f13012eaae1cb8d854700ee7ddc520ac6c8a113bb63",
+      "byte_identical": true,
+      "input_sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+    },
+    {
+      "case": 9,
+      "baseline_trench_m": 61960,
+      "control_trench_m": 61960,
+      "baseline_weighted_score": 0.508392511297611,
+      "control_weighted_score": 0.508392511297611,
+      "control_trace_sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f",
+      "final_trace_sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f",
+      "byte_identical": true,
+      "input_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+    },
+    {
+      "case": 15,
+      "baseline_trench_m": 438920,
+      "control_trench_m": 438920,
+      "baseline_weighted_score": 9.54062243689055,
+      "control_weighted_score": 9.54062243689055,
+      "control_trace_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e",
+      "final_trace_sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e",
+      "byte_identical": true,
+      "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    }
+  ],
+  "resources": {
+    "cpu_limit_s": 5,
+    "memory_limit_mib": 256,
+    "variant_max_solver_cpu_s": 2.908853,
+    "variant_max_solver_peak_rss_mib": 5.5625,
+    "all_within_limits": true,
+    "baseline_open15_max_cpu_s": 1.021344,
+    "baseline_open15_max_rss_mib": 7.6875
+  },
+  "screen_summary_by_case_policy": {
+    "5:first_fit": {
+      "n": 10,
+      "trench_improved": 2,
+      "unchanged": 3,
+      "trench_worsened": 5,
+      "delta_trench_min_m": -160,
+      "delta_trench_max_m": 220,
+      "sum_diagnostic_weighted_score_deltas": -0.0056526585756537795,
+      "avg_solver_cpu_s": 0.1025034,
+      "max_solver_cpu_s": 0.10868699999999999,
+      "max_solver_peak_rss_mib": 2.90625
+    },
+    "5:tail_first": {
+      "n": 10,
+      "trench_improved": 2,
+      "unchanged": 4,
+      "trench_worsened": 4,
+      "delta_trench_min_m": -80,
+      "delta_trench_max_m": 340,
+      "sum_diagnostic_weighted_score_deltas": -0.007193918092421869,
+      "avg_solver_cpu_s": 0.1017849,
+      "max_solver_cpu_s": 0.10804899999999999,
+      "max_solver_peak_rss_mib": 2.859375
+    },
+    "5:tail_only": {
+      "n": 10,
+      "trench_improved": 0,
+      "unchanged": 0,
+      "trench_worsened": 10,
+      "delta_trench_min_m": 160,
+      "delta_trench_max_m": 49680,
+      "sum_diagnostic_weighted_score_deltas": -1.0295776887264485,
+      "avg_solver_cpu_s": 0.10170499999999999,
+      "max_solver_cpu_s": 0.110302,
+      "max_solver_peak_rss_mib": 2.90625
+    },
+    "5:no_cohort": {
+      "n": 10,
+      "trench_improved": 1,
+      "unchanged": 2,
+      "trench_worsened": 7,
+      "delta_trench_min_m": -200,
+      "delta_trench_max_m": 1040,
+      "sum_diagnostic_weighted_score_deltas": -0.029099835227713755,
+      "avg_solver_cpu_s": 0.1005783,
+      "max_solver_cpu_s": 0.108969,
+      "max_solver_peak_rss_mib": 2.9375
+    },
+    "9:first_fit": {
+      "n": 10,
+      "trench_improved": 0,
+      "unchanged": 8,
+      "trench_worsened": 2,
+      "delta_trench_min_m": 0,
+      "delta_trench_max_m": 160,
+      "sum_diagnostic_weighted_score_deltas": -0.002618892524391958,
+      "avg_solver_cpu_s": 0.13713509999999998,
+      "max_solver_cpu_s": 0.147318,
+      "max_solver_peak_rss_mib": 2.78125
+    },
+    "9:tail_first": {
+      "n": 10,
+      "trench_improved": 0,
+      "unchanged": 9,
+      "trench_worsened": 1,
+      "delta_trench_min_m": 0,
+      "delta_trench_max_m": 20,
+      "sum_diagnostic_weighted_score_deltas": -0.00016405050380696728,
+      "avg_solver_cpu_s": 0.1361147,
+      "max_solver_cpu_s": 0.14443699999999998,
+      "max_solver_peak_rss_mib": 2.796875
+    },
+    "9:tail_only": {
+      "n": 10,
+      "trench_improved": 3,
+      "unchanged": 4,
+      "trench_worsened": 3,
+      "delta_trench_min_m": -840,
+      "delta_trench_max_m": 540,
+      "sum_diagnostic_weighted_score_deltas": 0.0036280367377171663,
+      "avg_solver_cpu_s": 0.1344872,
+      "max_solver_cpu_s": 0.147701,
+      "max_solver_peak_rss_mib": 2.609375
+    },
+    "9:no_cohort": {
+      "n": 10,
+      "trench_improved": 0,
+      "unchanged": 10,
+      "trench_worsened": 0,
+      "delta_trench_min_m": 0,
+      "delta_trench_max_m": 0,
+      "sum_diagnostic_weighted_score_deltas": 0.0,
+      "avg_solver_cpu_s": 0.13708019999999999,
+      "max_solver_cpu_s": 0.149092,
+      "max_solver_peak_rss_mib": 2.671875
+    },
+    "15:first_fit": {
+      "n": 10,
+      "trench_improved": 2,
+      "unchanged": 1,
+      "trench_worsened": 7,
+      "delta_trench_min_m": -160,
+      "delta_trench_max_m": 780,
+      "sum_diagnostic_weighted_score_deltas": -0.04429163487805532,
+      "avg_solver_cpu_s": 2.6466498,
+      "max_solver_cpu_s": 2.879587,
+      "max_solver_peak_rss_mib": 5.5625
+    },
+    "15:tail_first": {
+      "n": 10,
+      "trench_improved": 0,
+      "unchanged": 2,
+      "trench_worsened": 8,
+      "delta_trench_min_m": 0,
+      "delta_trench_max_m": 340,
+      "sum_diagnostic_weighted_score_deltas": -0.03606244137335857,
+      "avg_solver_cpu_s": 2.6140842,
+      "max_solver_cpu_s": 2.881144,
+      "max_solver_peak_rss_mib": 5.53125
+    },
+    "15:tail_only": {
+      "n": 10,
+      "trench_improved": 1,
+      "unchanged": 1,
+      "trench_worsened": 8,
+      "delta_trench_min_m": -160,
+      "delta_trench_max_m": 40460,
+      "sum_diagnostic_weighted_score_deltas": -1.5818368952438409,
+      "avg_solver_cpu_s": 2.6303843000000002,
+      "max_solver_cpu_s": 2.908853,
+      "max_solver_peak_rss_mib": 5.5
+    },
+    "15:no_cohort": {
+      "n": 10,
+      "trench_improved": 0,
+      "unchanged": 10,
+      "trench_worsened": 0,
+      "delta_trench_min_m": 0,
+      "delta_trench_max_m": 0,
+      "sum_diagnostic_weighted_score_deltas": 0.0,
+      "avg_solver_cpu_s": 2.6123054999999997,
+      "max_solver_cpu_s": 2.811712,
+      "max_solver_peak_rss_mib": 5.546875
+    }
+  },
+  "artifacts": {
+    "block_plan": "results/pipes/improvement/macro_policy_search/analysis/block_plan.json",
+    "full_per_variant_json": "results/pipes/improvement/macro_policy_search/runs/blocks/macro_screen_summary.json",
+    "full_per_variant_json_sha256": "92f64b439061a7ded639a392c747d9d34f9efcd791d06e5278fd3d5edf9a5624",
+    "per_variant_jsonl": "results/pipes/improvement/macro_policy_search/runs/blocks/variant_results.jsonl",
+    "per_variant_jsonl_sha256": "a3c2525f797d24b7dd0a77f05389b0a72a3dcba28d8520d534945675513598f0",
+    "per_variant_csv": "results/pipes/improvement/macro_policy_search/runs/blocks/variant_results.csv",
+    "per_variant_csv_sha256": "cfa68c9f9031f0c098d1e860139a2daf695bcdcf35c1ede4a76b6dec8143a74e",
+    "raw_run_logs": "results/pipes/improvement/macro_policy_search/runs/blocks/b*-c*-o*-n*-*/ (per run: summary, judge trace, solver/interactor stderr, harness stdout/stderr)"
+  }
+}

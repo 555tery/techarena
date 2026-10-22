@@ -1,0 +1,153 @@
+{
+  "simulator": "/Users/555tery/techarena/results/pipes/improvement/max_open_sequence/search_sim",
+  "simulator_sha256": "43c42646e99a7b94f410a6b85ef5864ee25472acfaf09741124887edce274058",
+  "tests": [
+    {
+      "name": "1.in",
+      "sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d"
+    },
+    {
+      "name": "2.in",
+      "sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923"
+    },
+    {
+      "name": "3.in",
+      "sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494"
+    },
+    {
+      "name": "4.in",
+      "sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f"
+    },
+    {
+      "name": "5.in",
+      "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+    },
+    {
+      "name": "6.in",
+      "sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd"
+    },
+    {
+      "name": "7.in",
+      "sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd"
+    },
+    {
+      "name": "8.in",
+      "sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7"
+    },
+    {
+      "name": "9.in",
+      "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+    },
+    {
+      "name": "10.in",
+      "sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b"
+    },
+    {
+      "name": "11.in",
+      "sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c"
+    },
+    {
+      "name": "12.in",
+      "sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984"
+    },
+    {
+      "name": "13.in",
+      "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+    },
+    {
+      "name": "14.in",
+      "sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d"
+    },
+    {
+      "name": "15.in",
+      "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    }
+  ],
+  "windows": [
+    1024,
+    2048,
+    4096
+  ],
+  "scales": [
+    50,
+    60,
+    70
+  ],
+  "right_max_values": [
+    3,
+    4,
+    5
+  ],
+  "top_10": [
+    {
+      "rank": 1,
+      "window": 2048,
+      "scale": 60,
+      "right_max": 4,
+      "weighted_score_sim": 29.441565332
+    },
+    {
+      "rank": 2,
+      "window": 2048,
+      "scale": 50,
+      "right_max": 4,
+      "weighted_score_sim": 29.44115237
+    },
+    {
+      "rank": 3,
+      "window": 2048,
+      "scale": 60,
+      "right_max": 3,
+      "weighted_score_sim": 29.436809927
+    },
+    {
+      "rank": 4,
+      "window": 1024,
+      "scale": 50,
+      "right_max": 4,
+      "weighted_score_sim": 29.436443576000002
+    },
+    {
+      "rank": 5,
+      "window": 4096,
+      "scale": 50,
+      "right_max": 4,
+      "weighted_score_sim": 29.435367241999998
+    },
+    {
+      "rank": 6,
+      "window": 1024,
+      "scale": 50,
+      "right_max": 3,
+      "weighted_score_sim": 29.427920645
+    },
+    {
+      "rank": 7,
+      "window": 2048,
+      "scale": 50,
+      "right_max": 3,
+      "weighted_score_sim": 29.425953619999998
+    },
+    {
+      "rank": 8,
+      "window": 4096,
+      "scale": 50,
+      "right_max": 3,
+      "weighted_score_sim": 29.421355001
+    },
+    {
+      "rank": 9,
+      "window": 2048,
+      "scale": 70,
+      "right_max": 3,
+      "weighted_score_sim": 29.420163153
+    },
+    {
+      "rank": 10,
+      "window": 2048,
+      "scale": 70,
+      "right_max": 4,
+      "weighted_score_sim": 29.418198152
+    }
+  ]
+}

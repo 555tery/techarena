@@ -1,0 +1,462 @@
+--- a/original.cpp
++++ b/original.cpp
+@@ -1,374 +1,451 @@
+ #include <algorithm>
+ #include <array>
+ #include <cstddef>
+ #include <cstdint>
+ #include <deque>
+ #include <iostream>
+ #include <iterator>
+ #include <limits>
+ #include <map>
+ #include <optional>
+ #include <set>
+ #include <utility>
+ #include <vector>
+ 
+ // EVOLVE-BLOCK-START
+ #include <bit>
+-// NAME: tail_pair_capacity_veto
+-// DESCRIPTION: capacity_guarded_tail with a two-request packing veto.
+-// Keep the existing capacity and one-request gates, then compare the
+-// weighted growth bound for two independent requests without deletions.
+-// The bound uses the two largest gaps and the appendable free tail.
+-// Same-parent ablation: return true after the strict one-request gate.
++// NAME: pair_priced_hole_exchange
++// DESCRIPTION: Keep the parent's residual-fit and free-tail decision.
++// In the internal-hole branch, compare its gap with Best-Fit using
++// the existing pair growth bound; exchange only on a strict cost decrease.
++// Three original gap maxima suffice to evaluate both placements.
++// Same-parent ablation: replace refineHoleChoice(length, chosen) by chosen.
+ namespace {
+ class Allocator {
+     static constexpr int kMaxLength = 40;
+     static constexpr int kSmallLimit = 80;
+     static constexpr std::int64_t kRegretScale = 8;
+     struct Pipe {
+         int start;
+         int length;
+     };
+     using HoleMap = std::map<int, int>;
+     std::vector<Pipe> pipes_;
+     HoleMap holes_;
+     std::array<std::set<int>, kSmallLimit> bins_;
+     std::set<std::pair<int, int>> large_;
+     std::uint64_t lowMask_ = 0;
+     std::uint64_t highMask_ = 0;
+     int trench_ = 0;
+     int frontier_ = 0;
+     std::size_t insertions_ = 0;
+     std::array<std::uint32_t, kMaxLength + 1> observations_{};
+     std::array<std::uint32_t, kMaxLength + 1> weights_{};
+     std::array<std::int64_t, kSmallLimit> waste_{};
+     std::int64_t totalWeight_ = 0;
+     void rebuildProfile() {
+         waste_.fill(0);
+         totalWeight_ = 0;
+         for (int k = 1; k <= kMaxLength; ++k) {
+             weights_[k] = observations_[k] + 1;
+             const std::int64_t weight = weights_[k];
+             totalWeight_ += weight;
+             int remainder = 0;
+             for (int s = 0; s < kSmallLimit; ++s) {
+                 waste_[s] += weight * remainder;
+                 if (++remainder == k) {
+                     remainder = 0;
+                 }
+             }
+         }
+     }
+     void observe(int length) {
+         ++insertions_;
+         ++observations_[length];
+         if ((insertions_ & 511u) == 0) {
+             for (int k = 1; k <= kMaxLength; ++k) {
+                 observations_[k] >>= 1;
+             }
+         }
+         if (insertions_ <= 32 || (insertions_ & 63u) == 0) {
+             rebuildProfile();
+         }
+     }
+     void addHole(int start, int length) {
+         if (length == 0) {
+             return;
+         }
+         holes_.emplace(start, length);
+         if (length < kSmallLimit) {
+             bins_[length].insert(start);
+             if (length < 64) {
+                 lowMask_ |= std::uint64_t{1} << length;
+             } else {
+                 highMask_ |= std::uint64_t{1} << (length - 64);
+             }
+         } else {
+             large_.emplace(length, start);
+         }
+     }
+     void eraseHole(HoleMap::iterator it) {
+         const int start = it->first;
+         const int length = it->second;
+         if (length < kSmallLimit) {
+             auto& bin = bins_[length];
+             bin.erase(start);
+             if (bin.empty()) {
+                 if (length < 64) {
+                     lowMask_ &= ~(std::uint64_t{1} << length);
+                 } else {
+                     highMask_ &= ~(std::uint64_t{1} << (length - 64));
+                 }
+             }
+         } else {
+             large_.erase(std::make_pair(length, start));
+         }
+         holes_.erase(it);
+     }
+     std::pair<int, int> chooseHole(int length) const {
+         if (!bins_[length].empty()) {
+             return {*bins_[length].begin(), length};
+         }
+         int bestStart = -1;
+         int bestSize = 0;
+         std::int64_t bestScore =
+             std::numeric_limits<std::int64_t>::max();
+         const auto consider = [&](int size) {
+             const int residual = size - length;
+             const std::int64_t regret =
+                 waste_[residual] + waste_[length] - waste_[size];
+             const std::int64_t score =
+                 kRegretScale * regret
+                 + totalWeight_ * std::min(residual, kMaxLength);
+             if (score < bestScore ||
+                 (score == bestScore && size < bestSize)) {
+                 bestScore = score;
+                 bestSize = size;
+                 bestStart = *bins_[size].begin();
+             }
+         };
+         std::uint64_t mask =
+             lowMask_ & (~std::uint64_t{0} << length);
+         while (mask != 0) {
+             const int size = std::countr_zero(mask);
+             mask &= mask - 1;
+             consider(size);
+         }
+         mask = highMask_;
+         while (mask != 0) {
+             const int size = 64 + std::countr_zero(mask);
+             mask &= mask - 1;
+             consider(size);
+         }
+         if (!large_.empty()) {
+             const auto candidate = *large_.begin();
+             const int size = candidate.first;
+             const int start = candidate.second;
+             if (bestStart < 0) {
+                 return {start, size};
+             }
+             // Здесь residual >= 40, а regret неотрицателен.
+             std::int64_t score = totalWeight_ * kMaxLength;
+             if (score < bestScore) {
+                 for (int k = 2; k <= kMaxLength; ++k) {
+                     const int remainder = length % k;
+                     if (remainder != 0 && size % k < remainder) {
+                         score += kRegretScale
+                                * static_cast<std::int64_t>(weights_[k]) * k;
+                         if (score >= bestScore) {
+                             break;
+                         }
+                     }
+                 }
+                 if (score < bestScore) {
+                     bestStart = start;
+                     bestSize = size;
+                 }
+             }
+         }
+         return {bestStart, bestSize};
+     }
+     std::int64_t pairGrowthCost(
+         int largest, int secondLargest, int tail,
+         const std::array<std::int64_t, kMaxLength + 1>& prefix) const {
+         std::int64_t cost = 0;
+         for (int first = 1; first <= kMaxLength; ++first) {
+             int remaining = -1;
+             if (largest >= first) {
+                 remaining = secondLargest >= first
+                     ? largest : std::max(secondLargest, largest - first);
+             }
+             // Growth for the first request requires no fitting gap.
+             const bool canUseTail = tail >= first || largest < first;
+             // A pair needs at most four sections. Sum P(cost > s).
+             for (int added = 0; added < 2 * kMaxLength; added += 20) {
+                 const int budget = tail + added;
+                 int capacity = remaining < 0
+                     ? -1 : std::max(remaining, budget);
+                 if (canUseTail && budget >= first) {
+                     capacity = std::max(
+                         capacity, std::max(largest, budget - first));
+                 }
+                 if (capacity >= kMaxLength) {
+                     break;
+                 }
+                 cost += static_cast<std::int64_t>(weights_[first])
+                     * (totalWeight_ - prefix[std::max(0, capacity)]);
+             }
+         }
+         return cost;
+     }
++    std::pair<int, int> refineHoleChoice(
++        int length, std::pair<int, int> chosen) const {
++        if (chosen.first < 0 || chosen.second == length ||
++            trench_ - frontier_ >= 2 * kMaxLength) {
++            return chosen;
++        }
++        int smallestSize = chosen.second;
++        const std::uint64_t fitting =
++            lowMask_ & (~std::uint64_t{0} << length);
++        if (fitting != 0) {
++            smallestSize = std::countr_zero(fitting);
++        } else if (highMask_ != 0) {
++            smallestSize = 64 + std::countr_zero(highMask_);
++        } else if (!large_.empty()) {
++            smallestSize = large_.begin()->first;
++        }
++        if (smallestSize >= chosen.second) {
++            return chosen;
++        }
++        // The original top three plus the residual determine the new top two.
++        std::array<int, 3> top{};
++        std::size_t count = 0;
++        for (auto it = large_.rbegin();
++             it != large_.rend() && count < top.size(); ++it) {
++            top[count++] = it->first;
++        }
++        const auto appendSmall = [&](std::uint64_t bits, int offset) {
++            while (bits != 0 && count < top.size()) {
++                const int bit = 63 - std::countl_zero(bits);
++                bits &= ~(std::uint64_t{1} << bit);
++                const int size = offset + bit;
++                const std::size_t copies = std::min(
++                    bins_[size].size(), top.size() - count);
++                for (std::size_t n = 0; n < copies; ++n) {
++                    top[count++] = size;
++                }
++            }
++        };
++        appendSmall(highMask_, 64);
++        appendSmall(lowMask_, 0);
++        std::array<std::int64_t, kMaxLength + 1> prefix{};
++        for (int k = 1; k <= kMaxLength; ++k) {
++            prefix[k] = prefix[k - 1] + weights_[k];
++        }
++        const int tail = trench_ - frontier_;
++        const auto costAfter = [&](int size) -> std::int64_t {
++            int largest = size - length;
++            int secondLargest = 0;
++            bool omitted = false;
++            for (const int gap : top) {
++                if (!omitted && gap == size) {
++                    omitted = true;
++                    continue;
++                }
++                if (gap > largest) {
++                    secondLargest = largest;
++                    largest = gap;
++                } else if (gap > secondLargest) {
++                    secondLargest = gap;
++                }
++            }
++            if (largest >= 2 * kMaxLength ||
++                secondLargest >= kMaxLength) {
++                return 0;
++            }
++            return pairGrowthCost(largest, secondLargest, tail, prefix);
++        };
++        const std::int64_t originalCost = costAfter(chosen.second);
++        if (originalCost == 0 || costAfter(smallestSize) >= originalCost) {
++            return chosen;
++        }
++        const int start = smallestSize < kSmallLimit
++            ? *bins_[smallestSize].begin()
++            : large_.begin()->second;
++        return {start, smallestSize};
++    }
+     bool preferFreeTail(int length, int holeSize) const {
+         const int tail = trench_ - frontier_;
+         if (tail < length || tail >= kMaxLength ||
+             !large_.empty() || holeSize - length >= kMaxLength) {
+             return false;
+         }
+         // Capacity guard: суммарная свободная длина одинакова,
+         // поэтому меньшая сумма остатков означает большую взвешенную
+         // вместимость для однородных продолжений каждого размера.
+         // Здесь tail < 40 и holeSize < 80: все индексы допустимы.
+         const std::int64_t wasteAfterHole =
+             waste_[holeSize - length] + waste_[tail];
+         const std::int64_t wasteAfterTail =
+             waste_[holeSize] + waste_[tail - length];
+         if (wasteAfterTail > wasteAfterHole) {
+             return false;
+         }
+         // После исключения выбранной дыры находим крупнейшую оставшуюся.
+         std::uint64_t low = lowMask_;
+         std::uint64_t high = highMask_;
+         if (bins_[holeSize].size() == 1) {
+             if (holeSize < 64) {
+                 low &= ~(std::uint64_t{1} << holeSize);
+             } else {
+                 high &= ~(std::uint64_t{1} << (holeSize - 64));
+             }
+         }
+         if (high != 0) {
+             return false;
+         }
+         const int largestOther =
+             low == 0 ? 0 : 63 - std::countl_zero(low);
+         const int largestAfterHole =
+             std::max(largestOther, holeSize - length);
+         if (largestAfterHole >= kMaxLength) {
+             return false;
+         }
+         const int largestAfterTail = std::max(largestOther, holeSize);
+         std::int64_t holeCost = 0;
+         std::int64_t tailCost = 0;
+         for (int k = 1; k <= kMaxLength; ++k) {
+             const int missingAfterHole = k > largestAfterHole
+                 ? std::max(0, k - tail) : 0;
+             const int missingAfterTail = k > largestAfterTail
+                 ? std::max(0, k - (tail - length)) : 0;
+             const std::int64_t weight = weights_[k];
+             holeCost += weight * ((missingAfterHole + 19) / 20);
+             tailCost += weight * ((missingAfterTail + 19) / 20);
+         }
+         if (tailCost >= holeCost) {
+             return false;
+         }
+         // low already excludes the selected hole instance.
+         int secondLargestOther = 0;
+         if (largestOther != 0) {
+             std::size_t multiplicity = bins_[largestOther].size();
+             if (largestOther == holeSize) {
+                 --multiplicity;
+             }
+             if (multiplicity >= 2) {
+                 secondLargestOther = largestOther;
+             } else {
+                 const std::uint64_t rest =
+                     low & ~(std::uint64_t{1} << largestOther);
+                 if (rest != 0) {
+                     secondLargestOther = 63 - std::countl_zero(rest);
+                 }
+             }
+         }
+         std::array<std::int64_t, kMaxLength + 1> prefix{};
+         for (int k = 1; k <= kMaxLength; ++k) {
+             prefix[k] = prefix[k - 1] + weights_[k];
+         }
+         const int secondAfterHole = std::max(
+             secondLargestOther,
+             std::min(largestOther, holeSize - length));
+         const int secondAfterTail = std::max(
+             secondLargestOther, std::min(largestOther, holeSize));
+         const std::int64_t holePairCost = pairGrowthCost(
+             largestAfterHole, secondAfterHole, tail, prefix);
+         const std::int64_t tailPairCost = pairGrowthCost(
+             largestAfterTail, secondAfterTail, tail - length, prefix);
+         return tailPairCost <= holePairCost;
+     }
+ public:
+     // Required compatibility counters; they may stay zero.
+     std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+     std::uint64_t expansionGateOpportunities = 0, expansionGatePasses = 0;
+     std::uint64_t unitProfileSuppressedExpansions = 0;
+     Allocator() {
+         pipes_.reserve(200001);
+         pipes_.push_back({0, 0});
+         rebuildProfile();
+     }
+     void place(int length) {
+         observe(length);
+         const auto chosen = chooseHole(length);
+         int start;
+         int sections = 0;
+         if (chosen.first >= 0 &&
+             !preferFreeTail(length, chosen.second)) {
+-            start = chosen.first;
+-            const int size = chosen.second;
++            const auto exchanged = refineHoleChoice(length, chosen);
++            start = exchanged.first;
++            const int size = exchanged.second;
+             eraseHole(holes_.find(start));
+             addHole(start + length, size - length);
+         } else {
+             start = frontier_;
+             const int missing = length - (trench_ - frontier_);
+             if (missing > 0) {
+                 sections = (missing + 19) / 20;
+                 trench_ += sections * 20;
+             }
+             frontier_ += length;
+         }
+         pipes_.push_back({start, length});
+         std::cout << sections << ' ' << start << '\n';
+         std::cout.flush();
+     }
+     void remove(std::int64_t pid) {
+         Pipe& pipe = pipes_[static_cast<std::size_t>(pid)];
+         const int originalStart = pipe.start;
+         int start = pipe.start;
+         int end = start + pipe.length;
+         pipe.length = 0;
+         auto next = holes_.lower_bound(start);
+         if (next != holes_.begin()) {
+             auto previous = std::prev(next);
+             if (previous->first + previous->second == start) {
+                 start = previous->first;
+                 eraseHole(previous);
+             }
+         }
+         if (next != holes_.end() && next->first == end) {
+             end += next->second;
+             eraseHole(next);
+         }
+         if (end == frontier_) {
+             frontier_ = start;
+         } else {
+             addHole(start, end - start);
+         }
+         std::cout << originalStart << '\n';
+         std::cout.flush();
+     }
+ };
+ }
+ // EVOLVE-BLOCK-END
+ 
+ int main() {
+     std::ios::sync_with_stdio(false);
+     std::cin.tie(nullptr);
+ 
+     Allocator allocator;
+     std::int64_t command;
+     while (std::cin >> command) {
+         if (command == 0) {
+ #if defined(MC_ROLLOUT_DIAGNOSTICS)
+             std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                       << " mc_rollouts=" << allocator.mcRolloutsRun
+                       << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                       << " expansion_gate_passes=" << allocator.expansionGatePasses
+                       << " unit_profile_suppressed_expansions="
+                       << allocator.unitProfileSuppressedExpansions << '\n';
+ #endif
+             return 0;
+         }
+         if (command > 0) {
+             allocator.place(static_cast<int>(command));
+         } else {
+             allocator.remove(-command);
+         }
+     }
+     return 0;
+ }

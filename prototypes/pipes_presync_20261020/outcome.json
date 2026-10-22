@@ -1,0 +1,28 @@
+{
+  "finished_at": "2026-10-19T18:54:29.918663+00:00",
+  "status": "completed_local_round_candidate_rejected",
+  "promoted": false,
+  "selected_candidate": "symmetry-9",
+  "source_sha256": "e1431b877f8f0c27055d9d4d2d39ac056ba49d89bb9117bfc30277176b95e4fb",
+  "report_sha256": "e9a4851d5dbfc39786c00f3d0130b283fbc06059c409e24458673de245faa4e9",
+  "freeze_sha256": "b39b187960a54ff71df839d4e5550545a3e6ead8edce30d2384a6d5857c9b3cd",
+  "open15_score": 30.75747404826914,
+  "known_gate_passed": false,
+  "fresh_gate_passed": false,
+  "fresh_result": {
+    "n": 64,
+    "wins": 3,
+    "ties": 57,
+    "losses": 4,
+    "mean_delta": 0.01121834668415311,
+    "worst_delta": -0.05395833333333333
+  },
+  "newly_observed_inputs": {
+    "seeded64": "evaluation/fresh/manifest.json",
+    "post_freeze_diagnostics2": "diagnostics/manifest.json"
+  },
+  "next_round_constraint": "These66 newly observed inputs are now regression/selection data, never independent confirmation again. Any next tuned source requires new independent inputs.",
+  "canonical_and_original_parent_changed": false,
+  "platform_actions": 0,
+  "target_hardware_run": false
+}

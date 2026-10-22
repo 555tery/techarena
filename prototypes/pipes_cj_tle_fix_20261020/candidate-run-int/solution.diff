@@ -1,0 +1,50 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-length-history/solution.cj
++++ prototypes/pipes_cj_tle_fix_20261020/candidate-run-int/solution.cj
+@@ -1350,6 +1350,34 @@
+ // Fixed-capacity owner of stdlib malloc memory. No managed references
+ // are stored in its payload; Cangjie GC never relocates this C-heap memory.
+ // Local aliases borrow this class instance. Ownership is never copied.
++// Fixed-size native Int64 owner. No raw pointer export or ownership copy.
++public class FastIntBuffer {
++    private let data: CPointer<Int64>
++    public let size: Int64
++
++    public init(capacity: Int64) {
++        if (capacity <= 0) { throw IllegalArgumentException("Invalid integer buffer capacity") }
++        this.size = capacity
++        this.data = LibC.malloc<Int64>(count: capacity)
++        if (data.isNull()) { throw IllegalMemoryException("Integer buffer allocation failed") }
++        unsafe {
++            for (i in 0..capacity) { data.write(i, 0) }
++        }
++    }
++
++    ~init() { unsafe { LibC.free(data) } }
++
++    public operator func [](index: Int64): Int64 {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Integer buffer index") }
++        return unsafe { data.read(index) }
++    }
++
++    public operator func [](index: Int64, value!: Int64): Unit {
++        if (index < 0 || index >= size) { throw IndexOutOfBoundsException("Integer buffer index") }
++        unsafe { data.write(index, value) }
++    }
++}
++
+ public class FastFloatBuffer {
+     private let data: CPointer<Float64>
+     public let size: Int64
+@@ -1450,9 +1478,9 @@
+     public var recentDeleteRanksPermille = IntRing(0)
+     public var recentTopFivePercent: Int64 = 0
+     public var lifoLaneDisabledForScale = false
+-    public var primalGapCounts = VArray<Int64, $514>(repeat: 0)
+-    public var primalEventHistory = VArray<Int64, $256>(repeat: 0)
+-    public var primalRecentRequests = VArray<Int64, $41>(repeat: 0)
++    private let primalGapCounts = FastIntBuffer(514)
++    private let primalEventHistory = FastIntBuffer(256)
++    private let primalRecentRequests = FastIntBuffer(41)
+     private let primalGapValue = FastFloatBuffer(513)
+     public var primalEventPosition: Int64 = 0
+     public var primalRecentDeletes: Int64 = 0

@@ -1,0 +1,68 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-bounded/solution.cj
++++ prototypes/pipes_cj_tle_fix_20261020/candidate-exact-fast/solution.cj
+@@ -1909,19 +1909,22 @@
+                 }
+                 let reward = dpRewardScratch.borrowData()
+                 var active: Int64 = 0
++                var minActiveReward = Float64.Inf
+                 var numerator: Float64 = 0.0
+                 var denominator = expiry
+                 for (request in firstRequest..=top) {
+                     let requestRate = rate.read(request)
+                     if (requestRate == 0.0) { continue }
+                     let requestReward = Float64(request) + value.read(g - request)
++                    if (requestReward < minActiveReward) { minActiveReward = requestReward }
+                     reward.write(request, requestReward)
+                     numerator += requestRate * requestReward
+                     denominator += requestRate
+                     active = active | (1 << request)
+                 }
+                 var estimate = numerator / denominator
+-                while (true) {
++                while (estimate > minActiveReward) {
++                    minActiveReward = Float64.Inf
+                     var removed = false
+                     for (request in firstRequest..=top) {
+                         let bit: Int64 = 1 << request
+@@ -1933,6 +1936,8 @@
+                                 denominator -= requestRate
+                                 active = active & (!bit)
+                                 removed = true
++                            } else if (rr < minActiveReward) {
++                                minActiveReward = rr
+                             }
+                         }
+                     }
+@@ -1978,19 +1983,22 @@
+                     let top = iMin(gap, lastRequest)
+                     let reward = dpRewardScratch.borrowData()
+                     var active: Int64 = 0
++                    var minActiveReward = Float64.Inf
+                     var numerator: Float64 = 0.0
+                     var denominator = expiry
+                     for (request in firstRequest..=top) {
+                         let requestRate = requestRates.read(request)
+                         if (requestRate == 0.0) { continue }
+                         let requestReward = Float64(request) + gapValues.read(offset + gap - request)
++                        if (requestReward < minActiveReward) { minActiveReward = requestReward }
+                         reward.write(request, requestReward)
+                         numerator += requestRate * requestReward
+                         denominator += requestRate
+                         active = active | (1 << request)
+                     }
+                     var estimate = numerator / denominator
+-                    while (true) {
++                    while (estimate > minActiveReward) {
++                        minActiveReward = Float64.Inf
+                         var removed = false
+                         for (request in firstRequest..=top) {
+                             let bit: Int64 = 1 << request
+@@ -2002,6 +2010,8 @@
+                                     denominator -= requestRate
+                                     active = active & (!bit)
+                                     removed = true
++                                } else if (rr < minActiveReward) {
++                                    minActiveReward = rr
+                                 }
+                             }
+                         }

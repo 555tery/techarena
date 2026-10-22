@@ -1,0 +1,36 @@
+{
+  "label": "candidate",
+  "spec": {
+    "directory": "implementation",
+    "entry": "solver.cpp",
+    "defines": [],
+    "overrides": {
+      "model.hpp": "models/M3/model.hpp"
+    }
+  },
+  "source_files_sha256": {
+    "policy.hpp": "b198599dd62e7be8cfa87736b701fa7f514b5cde6d4fa6a438a44c2a01be89e4",
+    "probe.cpp": "fa2ab4c53879434e7aa61b5be4e20e30f2ea94e5b49290faa20772b99960f4a0",
+    "allocator.hpp": "ec65465a12d5ac6081e032123b617b2c78b6e9de65eca016fb105abae7d9f4d6",
+    "smoke.cpp": "6ffd17551c22c67ee8e9ab41dc9a946fedd6993b4c1eab1f432df709c13fd038",
+    "model.hpp": "27d76eb655131831ee7f962b1dd5e0f4b69985e3782617a9c1c427c6335d1763",
+    "teacher.cpp": "57c123a4295e2caa11c45e9c32c103bd32d8882d35831ab163321827ef9ac259",
+    "solver.cpp": "164a188cebbb5435d1f007c5150c3099cd4567624ad43f4a2cbd1510d35452c9"
+  },
+  "compile_command": [
+    "/usr/bin/clang++",
+    "-std=c++20",
+    "-O2",
+    "-pipe",
+    "-Wall",
+    "-Wextra",
+    "-I",
+    "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/builds/candidate/source",
+    "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/builds/candidate/source/solver.cpp",
+    "-o",
+    "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/builds/candidate/solver"
+  ],
+  "returncode": 0,
+  "created_at": 1792346104.21601,
+  "binary_sha256": "efa06a853f70cb3a4047c7c603cd0aa9728230684b3de4243ad0a0aa0e5c9a69"
+}

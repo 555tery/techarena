@@ -1,0 +1,59 @@
+{
+  "status": "server_accepted",
+  "source": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v25/solution.cpp",
+  "source_sha256": "2abd02de6968851e40b442d0af595f9e297cc2185fda118c8cab38afbd4369b8",
+  "submission": 1666313,
+  "compiler": "GCC C++ 14.2 x64 C++20 msys2",
+  "accepted": 15,
+  "local_score": 30.75747404826914,
+  "ranking_score": "30.75747405",
+  "displayed_rank": 1,
+  "row_position": 2,
+  "first_row_achieved": false,
+  "server_cpu_time_available": false,
+  "local_memory_handshake": [
+    {
+      "arch": "native",
+      "CRLF": false,
+      "baseline_s": 0.1648215,
+      "v25_s": 0.1330845,
+      "reduction_percent": 19.25537627069285,
+      "scope": "mock NT API full protocol loop; no kernel I/O"
+    },
+    {
+      "arch": "native",
+      "CRLF": true,
+      "baseline_s": 0.207197,
+      "v25_s": 0.136583,
+      "reduction_percent": 34.08060927523081,
+      "scope": "mock NT API full protocol loop; no kernel I/O"
+    },
+    {
+      "arch": "x64",
+      "CRLF": false,
+      "baseline_s": 0.239805,
+      "v25_s": 0.1940885,
+      "reduction_percent": 19.064031192010177,
+      "scope": "mock NT API full protocol loop; no kernel I/O"
+    },
+    {
+      "arch": "x64",
+      "CRLF": true,
+      "baseline_s": 0.2925415,
+      "v25_s": 0.19765850000000001,
+      "reduction_percent": 32.43403072726433,
+      "scope": "mock NT API full protocol loop; no kernel I/O"
+    }
+  ],
+  "full_interactive_result": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/speed-v25/paired-interactive.json",
+  "full_total_speed_improvement_established": false,
+  "windows_native_perf_improvement_established": false,
+  "correctness_checks": 160,
+  "nt_contract_checks": 11,
+  "proof": "server-accepted.jpg",
+  "unknown_input_support": false,
+  "hidden_generalization_claim": false,
+  "updated_at": "2026-10-19T19:20:57.737954+07:00",
+  "initial_submission": 1666308,
+  "restored_after_rejected_v26": true
+}

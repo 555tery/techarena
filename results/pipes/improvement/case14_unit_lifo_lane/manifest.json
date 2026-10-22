@@ -1,0 +1,131 @@
+{
+  "experiment": "case14 single-edge lane for long unit-length runs after causal LIFO evidence",
+  "date_local": "2026-10-17",
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.5",
+    "compiler": "Apple Clang",
+    "flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror"
+  },
+  "policy": {
+    "trigger": "at least 32 observed removals; at least 90% have newest-rank <= 200 permille",
+    "scope": "only length 1 after a 46-placement length-1 run; use high side instead of alternating sides",
+    "future_or_test_id_used": false
+  },
+  "results": {
+    "official_case14": {
+      "baseline_score": 3.987731359069275,
+      "candidate_score": 3.987731359069275,
+      "delta_score": 0.0,
+      "baseline_trench_m": 37820,
+      "candidate_trench_m": 37820,
+      "baseline_ok": 1,
+      "candidate_ok": 1,
+      "baseline_expansion_events": 1824,
+      "candidate_expansion_events": 1824,
+      "baseline_dig_sections": 1891,
+      "candidate_dig_sections": 1891,
+      "changed_response_lines": 4473,
+      "changed_dig_responses": 4,
+      "first_diff_op": 17859,
+      "max_solver_cpu_s": 0.14720899999999998,
+      "max_solver_rss_mib": 3.90625
+    },
+    "synthetics": {
+      "count": 4,
+      "baseline_score_sum": 3.985074626865673,
+      "candidate_score_sum": 3.990049751243782,
+      "delta_score_sum": 0.004975124378108653,
+      "max_solver_cpu_s": 0.040049999999999995,
+      "max_solver_rss_mib": 2.46875
+    }
+  },
+  "decision": {
+    "promote": false,
+    "open15_run": false,
+    "holdout_run": false,
+    "reason": "No trench or score gain on target case14; synthetic gains do not pass the target gate."
+  },
+  "scope": {
+    "platform_used": false,
+    "docker_used": false,
+    "frozen_final_modified": false,
+    "canonical_source_modified": false
+  },
+  "provenance": {
+    "current_local_champion_source_sha256": "89f7173f61fba3710e752607df4fec83195abe88a14a51b75ff7a710ed6d1982",
+    "frozen_final_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+    "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+  },
+  "transcripts": [
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/baseline_case14/runs/14/judge_output.txt",
+      "sha256": "a8dfb6dc9d17d6ddbbb36d673ecd002170b3137a589f364150c5d73ef932ac2a"
+    },
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/candidate_case14/runs/14/judge_output.txt",
+      "sha256": "4b8eef953d9fa8a2b1d96539ccdd8684d72c77e1ec68ba6d5e5b02dfd6dcb57e"
+    },
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/baseline_synthetic/runs/lifo_release_10_then_pipe10/judge_output.txt",
+      "sha256": "dd8f7adc2321ae263969f0b0872dbc40e9d726fb1747aa2e2f724a16736d6545"
+    },
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/baseline_synthetic/runs/lifo_to_fifo_shift/judge_output.txt",
+      "sha256": "94dcc5760a0ca53712d3481a32fabbdebf836d09df87d5fef15bdfbe745b1f9a"
+    },
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/baseline_synthetic/runs/lifo_to_random_shift_seed2026101702/judge_output.txt",
+      "sha256": "ffdd8335abefc59340ae76391cb53cc5ec2575f953951db2d7e9c96b40dd64a2"
+    },
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/baseline_synthetic/runs/random_control_seed2026101703/judge_output.txt",
+      "sha256": "f82c6c5448fb32f2cadcb410470b8cf144ee673a661183e5762e1abfbd0843f9"
+    },
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/candidate_synthetic/runs/lifo_release_10_then_pipe10/judge_output.txt",
+      "sha256": "715f1513d2962420e1130479c724bc327bc8c3c1397c0c74b313e10333e9f14e"
+    },
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/candidate_synthetic/runs/lifo_to_fifo_shift/judge_output.txt",
+      "sha256": "6ede49d9293e44fb5fc7ef33d303786f0fa09781865163d3420ecb66bb80df9e"
+    },
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/candidate_synthetic/runs/lifo_to_random_shift_seed2026101702/judge_output.txt",
+      "sha256": "5a57e29ba19378f98049b146fe8a27efce963d02363d6136cb36f0ab7f5bcf6d"
+    },
+    {
+      "path": "results/pipes/improvement/case14_unit_lifo_lane/runs/candidate_synthetic/runs/random_control_seed2026101703/judge_output.txt",
+      "sha256": "f82c6c5448fb32f2cadcb410470b8cf144ee673a661183e5762e1abfbd0843f9"
+    }
+  ],
+  "sha256": {
+    "results/pipes/improvement/case14_unit_lifo_lane/source/champion_base.cpp": "89f7173f61fba3710e752607df4fec83195abe88a14a51b75ff7a710ed6d1982",
+    "results/pipes/improvement/case14_unit_lifo_lane/source/single_lifo_unit_lane.cpp": "4a8de72608f268ab61a172089ab048a785b40603388026b0b3129a75634a5b4a",
+    "results/pipes/improvement/case14_unit_lifo_lane/bin/baseline": "65ce6e46b66c9aecb57afbcae14473e247dc54c71318b2f6d64a43cc813c8590",
+    "results/pipes/improvement/case14_unit_lifo_lane/bin/single_lifo_unit_lane": "e5848215f0ac5de70528617c97e16bf1b72ca4975499ab8d2b1675f4d67b1363",
+    "results/pipes/improvement/case14_unit_lifo_lane/trace_case14.py": "783f86dfe60eaf59bfb523bbf6ae22dd7bd780f4477dd9a3f10813551bd2bad0",
+    "results/pipes/improvement/case14_unit_lifo_lane/trace_last50_baseline.json": "6646b1e69f07104dc830c962a78746de528fef3b37896e394e9d4348dc19e698",
+    "results/pipes/improvement/case14_unit_lifo_lane/synthetic/generate.py": "3a4ab843d37c62efeb766e0229a33ad91fd9c80827cf866c7a49301df7a4e24e",
+    "results/pipes/improvement/case14_unit_lifo_lane/synthetic/lifo_release_10_then_pipe10.in": "71be55112fd38fa5548e56cb1721c7b5afc40df9da9fb6d7d7f56b1b68dbcc6b",
+    "results/pipes/improvement/case14_unit_lifo_lane/synthetic/lifo_to_fifo_shift.in": "22195e7e58bc54d75268242543461be794dfef24a40eba70755be6f8b7223db7",
+    "results/pipes/improvement/case14_unit_lifo_lane/synthetic/lifo_to_random_shift_seed2026101702.in": "e4776858446367a7a04cd74a8e37500c15d8a3c4329c39c0345678f8e005d48b",
+    "results/pipes/improvement/case14_unit_lifo_lane/synthetic/random_control_seed2026101703.in": "0a9b0e93e80d686b1dc1258bd3a39089cb865263a74e7e3e57554e20eacda740",
+    "results/pipes/improvement/case14_unit_lifo_lane/runs/baseline_case14/summary.json": "3de3e89345b71e678787df1b6387d7c4710815e0a8353b080cd15ce8f9629bea",
+    "results/pipes/improvement/case14_unit_lifo_lane/runs/baseline_case14/cases.csv": "e81ce94befbb0f7c81b16d70715efe89341d002b410a2e323e287cc19ba397ef",
+    "results/pipes/improvement/case14_unit_lifo_lane/runs/candidate_case14/summary.json": "26f420a7cd88c90dd5deaacc06aafb3212c025ce46fbd7d942c8ea8d4b2997cf",
+    "results/pipes/improvement/case14_unit_lifo_lane/runs/candidate_case14/cases.csv": "be40fd2e99b49ad368ea69a783d9a6458efd7d796e28c562d2f795fd314bc419",
+    "results/pipes/improvement/case14_unit_lifo_lane/runs/baseline_synthetic/summary.json": "f6d32637dad4a10e9dfaf1180ca35a3426fbff77dcc784889b6f03060dc15fae",
+    "results/pipes/improvement/case14_unit_lifo_lane/runs/baseline_synthetic/cases.csv": "ba75989ccb3906eccc79c2552dfc376fbaa440e991492c05896cafdcd7a53156",
+    "results/pipes/improvement/case14_unit_lifo_lane/runs/candidate_synthetic/summary.json": "68460dfc80f578b6117a4cf5bb7e880823f0b8279873477819a863b58e45d555",
+    "results/pipes/improvement/case14_unit_lifo_lane/runs/candidate_synthetic/cases.csv": "f85fd5d8be9964b3227896ba19126532a438574b46cf33ac86ec2b3ac455c443",
+    "results/pipes/improvement/case14_unit_lifo_lane/per_case.csv": "13f3b702ed27ed925a3948c6c73968137cc44f6602d32135498000a577a2dc23",
+    "results/pipes/improvement/case14_unit_lifo_lane/REPORT.md": "670e08185871860c746e545bfedefa10c085ed402b8c6358edc8ba88a1c6331f",
+    "data/pipes/open/14.in": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+    "results/pipes/improvement/archive_mix_screen/gated_causal/pid46-open15/runs/14/judge_output.txt": "a8dfb6dc9d17d6ddbbb36d673ecd002170b3137a589f364150c5d73ef932ac2a",
+    "results/pipes/final/solution.cpp": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "src/pipes.cpp": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+    "results/pipes/final/bin/interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+  }
+}

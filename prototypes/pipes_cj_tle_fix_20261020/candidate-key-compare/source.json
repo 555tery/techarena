@@ -1,0 +1,44 @@
+{
+  "baseline": "candidate-flat-keys/solution.cj",
+  "baseline_sha256": "1d905fadb9a91a222b62ed4732b286626a257fc73cb11416f5f18342df08e710",
+  "source_sha256": "1136c5e5e39c6a127f097156ff913de44a9a95111c7c5c6300bad766f952e6f8",
+  "generator_sha256": "2d687295fbfe566d5765d08c56a2e0e3621bcccf6f01d77f7db3fc54cb3834d6",
+  "added_method": "FastKeyVector.compareAt(index,wanted)",
+  "changed_expressions": [
+    {
+      "tree": "public class OrderedMap<V>",
+      "old": "compareKey(wanted, keys[node])",
+      "new": "keys.compareAt(node, wanted)"
+    },
+    {
+      "tree": "public class OrderedMap<V>",
+      "old": "compareKey(k, keys[node])",
+      "new": "keys.compareAt(node, k)"
+    },
+    {
+      "tree": "public class IntOrderedMap",
+      "old": "compareKey(wanted, keys[node])",
+      "new": "keys.compareAt(node, wanted)"
+    },
+    {
+      "tree": "public class IntOrderedMap",
+      "old": "compareKey(k, keys[node])",
+      "new": "keys.compareAt(node, k)"
+    }
+  ],
+  "sign": "compareKey(wanted, storedKey), never the reverse",
+  "proof": [
+    "Both old compareKey and compareAt test a, then b, then c; the first unequal Int64 returns-1 iff wanted component<stored component; all equal returns0. No subtraction/overflow-dependent ordering.",
+    "The old getter checked0<=node<used then read3*node offsets0/1/2. compareAt performs exactly the same bounds check and offsets; later fields are initialized but need not be read after an earlier difference.",
+    "Replaced expressions occur only in find and put. wanted/k are primitive-field Key value parameters, node is a stable local, and neither data nor key fields mutate between comparisons. No callback, exception-prone field getter or concurrent writer is introduced.",
+    "No ownership/storage mutation, allocation/free, pointer escape, AVL instruction/tie change, DP/FP change or thread operation is added."
+  ],
+  "excluded_scope": "lower/upper reversed comparisons, all other compareKey callers, AVL mutation/rotation/repair, storage owners, DP, replay, I/O and GC remain unchanged.",
+  "source_reversal_exact": true,
+  "compile_executed": false,
+  "solver_executed": false,
+  "CPU_benchmark_executed": false,
+  "caveats": [
+    "Compiler1.0.5 compatibility, actual speed/RSS and complete transcript parity require parent verification."
+  ]
+}

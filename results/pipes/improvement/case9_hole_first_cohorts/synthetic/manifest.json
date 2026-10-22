@@ -1,0 +1,108 @@
+[
+  {
+    "name": "fresh_01",
+    "seed": 20261018,
+    "commands": 6300,
+    "placements": 4200,
+    "final_live": 2100,
+    "sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "counts": [
+      700,
+      700,
+      700,
+      700,
+      700,
+      700
+    ],
+    "deletion": "stride2",
+    "description": "six geometric runs, 700 per run, alternating PID-parity deletion"
+  },
+  {
+    "name": "fresh_02",
+    "seed": 20261019,
+    "commands": 8100,
+    "placements": 5400,
+    "final_live": 2700,
+    "sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      3,
+      6,
+      12,
+      24
+    ],
+    "counts": [
+      600,
+      600,
+      600,
+      600,
+      600,
+      600,
+      600,
+      600,
+      600
+    ],
+    "deletion": "stride2",
+    "description": "geometric runs followed by a 3x-shifted geometric phase, alternating deletion"
+  },
+  {
+    "name": "fresh_03",
+    "seed": 20261020,
+    "commands": 4560,
+    "placements": 3040,
+    "final_live": 1520,
+    "sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "counts": [
+      500,
+      520,
+      480,
+      520,
+      500,
+      520
+    ],
+    "deletion": "stride2",
+    "description": "geometric sizes with modest block-count drift, alternating deletion"
+  },
+  {
+    "name": "fresh_04",
+    "seed": 20261021,
+    "commands": 6300,
+    "placements": 4200,
+    "final_live": 2100,
+    "sizes": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "counts": [
+      700,
+      700,
+      700,
+      700,
+      700,
+      700
+    ],
+    "deletion": "random",
+    "description": "six geometric runs, random half-deletions as a no-periodicity control"
+  }
+]

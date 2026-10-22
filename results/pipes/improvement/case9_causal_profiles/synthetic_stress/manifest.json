@@ -1,0 +1,368 @@
+{
+  "suite": "case9-causal-cohort-gate-stress-v1",
+  "master_seed": 80520261017,
+  "cases": [
+    {
+      "name": "geom_alt_even_256",
+      "input": "input/geom_alt_even_256.in",
+      "sha256": "e4cad1b9c15979580e5c0ae3a52769ae27b00d51234ceafa7769fadec37cc624",
+      "operations": 2304,
+      "placement_runs": [
+        [
+          1,
+          256
+        ],
+        [
+          2,
+          256
+        ],
+        [
+          4,
+          256
+        ],
+        [
+          8,
+          256
+        ],
+        [
+          16,
+          256
+        ],
+        [
+          32,
+          256
+        ]
+      ],
+      "deletion_mode": "alternate",
+      "target_pid_parity": 0,
+      "seed": 80520261017
+    },
+    {
+      "name": "geom_alt_odd_320",
+      "input": "input/geom_alt_odd_320.in",
+      "sha256": "6e93ad92005dcdf4cc143bd9d5851969f58d81539b6a39afafb8ef12c3e7483d",
+      "operations": 2880,
+      "placement_runs": [
+        [
+          1,
+          320
+        ],
+        [
+          2,
+          320
+        ],
+        [
+          4,
+          320
+        ],
+        [
+          8,
+          320
+        ],
+        [
+          16,
+          320
+        ],
+        [
+          32,
+          320
+        ]
+      ],
+      "deletion_mode": "alternate",
+      "target_pid_parity": 1,
+      "seed": 80520261018
+    },
+    {
+      "name": "geom_count_wobble",
+      "input": "input/geom_count_wobble.in",
+      "sha256": "d13cfde89abb268b5d47bcc074d68fc0dc33f1dd1b4def7438e1334bcbc7c3f3",
+      "operations": 2460,
+      "placement_runs": [
+        [
+          1,
+          256
+        ],
+        [
+          2,
+          288
+        ],
+        [
+          4,
+          272
+        ],
+        [
+          8,
+          280
+        ],
+        [
+          16,
+          268
+        ],
+        [
+          32,
+          276
+        ]
+      ],
+      "deletion_mode": "alternate",
+      "target_pid_parity": 0,
+      "seed": 80520261019
+    },
+    {
+      "name": "geom_random_deletes",
+      "input": "input/geom_random_deletes.in",
+      "sha256": "56bb0eb343c42af8879a1e82e48796695c84a5c89e65668af7b5c3901a0060ea",
+      "operations": 2304,
+      "placement_runs": [
+        [
+          1,
+          256
+        ],
+        [
+          2,
+          256
+        ],
+        [
+          4,
+          256
+        ],
+        [
+          8,
+          256
+        ],
+        [
+          16,
+          256
+        ],
+        [
+          32,
+          256
+        ]
+      ],
+      "deletion_mode": "random",
+      "target_pid_parity": null,
+      "seed": 80520261020
+    },
+    {
+      "name": "phase_shift_geom_3x",
+      "input": "input/phase_shift_geom_3x.in",
+      "sha256": "15ef8a27149c013c7fe860dbf92ad74e5c8895e1d690b0ff3dd19d24035ddbbb",
+      "operations": 3456,
+      "placement_runs": [
+        [
+          1,
+          256
+        ],
+        [
+          2,
+          256
+        ],
+        [
+          4,
+          256
+        ],
+        [
+          8,
+          256
+        ],
+        [
+          16,
+          256
+        ],
+        [
+          3,
+          256
+        ],
+        [
+          6,
+          256
+        ],
+        [
+          12,
+          256
+        ],
+        [
+          24,
+          256
+        ]
+      ],
+      "deletion_mode": "alternate",
+      "target_pid_parity": 1,
+      "seed": 80520261021
+    },
+    {
+      "name": "phase_shift_to_linear",
+      "input": "input/phase_shift_to_linear.in",
+      "sha256": "0e57795861e61559504dc44e01f04ea31ed2eb815e6904f24807013a8d707fd0",
+      "operations": 3456,
+      "placement_runs": [
+        [
+          1,
+          256
+        ],
+        [
+          2,
+          256
+        ],
+        [
+          4,
+          256
+        ],
+        [
+          8,
+          256
+        ],
+        [
+          16,
+          256
+        ],
+        [
+          21,
+          256
+        ],
+        [
+          26,
+          256
+        ],
+        [
+          31,
+          256
+        ],
+        [
+          36,
+          256
+        ]
+      ],
+      "deletion_mode": "alternate",
+      "target_pid_parity": 0,
+      "seed": 80520261022
+    },
+    {
+      "name": "geometric_count_drift",
+      "input": "input/geometric_count_drift.in",
+      "sha256": "1d5971d0f1d6644ab14d26e3b4eeb83d17d72bb9f82fabaac470ac549255d14b",
+      "operations": 2880,
+      "placement_runs": [
+        [
+          1,
+          256
+        ],
+        [
+          2,
+          384
+        ],
+        [
+          4,
+          256
+        ],
+        [
+          8,
+          384
+        ],
+        [
+          16,
+          256
+        ],
+        [
+          32,
+          384
+        ]
+      ],
+      "deletion_mode": "alternate",
+      "target_pid_parity": 0,
+      "seed": 80520261023
+    },
+    {
+      "name": "irregular_increasing_sizes",
+      "input": "input/irregular_increasing_sizes.in",
+      "sha256": "4e7901f51cb9055f2dd071742cd43cdbd273621d70082ed4435625ddd9f5fd17",
+      "operations": 2304,
+      "placement_runs": [
+        [
+          2,
+          256
+        ],
+        [
+          4,
+          256
+        ],
+        [
+          8,
+          256
+        ],
+        [
+          15,
+          256
+        ],
+        [
+          28,
+          256
+        ],
+        [
+          35,
+          256
+        ]
+      ],
+      "deletion_mode": "alternate",
+      "target_pid_parity": 1,
+      "seed": 80520261024
+    }
+  ],
+  "baseline_source_sha256": "89f7173f61fba3710e752607df4fec83195abe88a14a51b75ff7a710ed6d1982",
+  "baseline_binary_sha256": "77116793bc43a22c219244a3218eed26630980fb9e97ccd0eaa601332ab25fe7",
+  "candidate_source_sha256": "43bfbdadbae18ac180d1e59b6631342cfe1bef99190a449838f0470d6f220200",
+  "candidate_binary_sha256": "e4b79d8eb55a1fdc03a8c62505142ee615304401e821895bf6ab7f3712e54049",
+  "trace_binary_sha256": "32f863b7dc3f09af6295342422c0dda0c9e78282c5115f7742f99c5c1e87fa9a",
+  "generator_sha256": "14fdabdfcdb89e5ae1c01eed34f75a68ed839a7745a556580a2b2dbffd84cee4",
+  "comparison_csv_sha256": "dbd9fea23067e1ddd63c02a9da6fb8d7dc0480d171a1493dee7ac6ccd97bbbcc",
+  "baseline": {
+    "sum_kpi": 4.25221582804875,
+    "max_cpu_s": 0.026292,
+    "max_rss_mib": 2.890625
+  },
+  "candidate": {
+    "sum_kpi": 4.863044937886692,
+    "delta_sum_kpi": 0.6108291098379421,
+    "max_cpu_s": 0.024285,
+    "max_rss_mib": 2.78125
+  },
+  "trigger_lengths_by_case": {
+    "irregular_increasing_sizes": [
+      "8",
+      "15"
+    ],
+    "geom_random_deletes": [],
+    "geom_count_wobble": [
+      "8",
+      "16"
+    ],
+    "geometric_count_drift": [],
+    "phase_shift_to_linear": [
+      "4",
+      "8",
+      "16",
+      "21",
+      "26",
+      "31"
+    ],
+    "geom_alt_even_256": [
+      "4",
+      "8",
+      "16"
+    ],
+    "geom_alt_odd_320": [
+      "4",
+      "8",
+      "16"
+    ],
+    "phase_shift_geom_3x": [
+      "4",
+      "8",
+      "16",
+      "12",
+      "24"
+    ]
+  },
+  "trace_max_cpu_s": 0.026782999999999998,
+  "trace_max_rss_mib": 2.75,
+  "interpretation": "Targeted synthetic stress check only; includes both gains and a phase-shift regression; not an estimate of hidden-test performance."
+}

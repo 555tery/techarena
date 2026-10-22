@@ -1,0 +1,401 @@
+{
+  "title": "Round 2 fresh attack suite for frozen candidate-v3",
+  "target_source_sha256": "a3d414a4872796fb570753c0e61db5c80dc59c1b8cbd7ec57e95dec345aff53a",
+  "target_binary_sha256": "ae7f8ce0ef4902d8a40c6b459990c1b87128c5f0dc015af3b96753d5dde1d06d",
+  "causal_bestfit_probe_sha256": "fd276b87dcb645d75d2959a4153fafa4847aa2e0cb32c118b12d42427f3be15b",
+  "selection": "New test hashes were excluded against all .in files in the prior attack and neutral catalogs listed below. Pools prioritize quiet Open2/Open3 geometry, delayed Open10/Open14 mismatches, and Open12; Open8/Open11 drain attacks were not generated.",
+  "local_screen": "Every selected candidate was run through the actual frozen candidate-v3 batch binary and actual causal Best-Fit probe. Candidate KPI results are intentionally withheld from this handoff for blind first comparison; the per-input gate was BF KPI >= 0.90 and candidate-v3 KPI < 0.90.",
+  "official_interactor_validation": "verified by root; final and frozen candidate-v3 compared",
+  "prior_catalogs": [
+    {
+      "path": "prototypes/pipes_guarded_traps_20261019/manifest.json",
+      "sha256": "45b68ec3532e6fc9d81c2a27ae2b1c9caa07989bc58993e8b4d1681d25a841a7"
+    },
+    {
+      "path": "prototypes/pipes_open15_adversary_20261019/manifest.json",
+      "sha256": "a068c73f314535f2e9645c0dd6f8e750b7d98d8de220b394f4f513529563870f"
+    },
+    {
+      "path": "prototypes/pipes_v5_graves_20261019/manifest.json",
+      "sha256": "2da61f06335cea50004cbe210a72fe15a8c0fefc59daae9a024754a9e671d360"
+    },
+    {
+      "path": "prototypes/pipes_v5_robust_20261019/new_attacks/manifest.json",
+      "sha256": "0ccdf14cf01f7b63dab6e31fb749693601c52db6e3f0aedf99a728a8e9f7193e"
+    },
+    {
+      "path": "prototypes/pipes_v5_robust_20261019/counterattacks/manifest.json",
+      "sha256": "2ae3fda51251941f137d731b2e573094388a143c9bfe3a28353030d84517fdb6"
+    },
+    {
+      "path": "prototypes/pipes_v5_robust_20261019/neutral/manifest.json",
+      "sha256": "a16e4cd291a4f979903fe2902e756e03fa26f2a1bf7201e7b679bdbb8a4f534e"
+    }
+  ],
+  "prior_input_files_excluded": 58,
+  "tests": [
+    {
+      "name": "round2-01-open2-p8",
+      "file": "round2-01-open2-p8.in",
+      "case": 2,
+      "cut": 8,
+      "common_prefix": [
+        1,
+        2,
+        1,
+        3,
+        1,
+        4,
+        1,
+        5
+      ],
+      "suffix": [
+        -1,
+        -2,
+        -7,
+        -8,
+        6,
+        3,
+        2
+      ],
+      "first_divergent_command": -1,
+      "expected_table_command_at_cut": 2,
+      "matching_open_tables_before_divergence": [
+        2
+      ],
+      "max_prefix_ratio_candidate_v3_vs_causal_BF": 1.0,
+      "prefix_T_target_m": 20,
+      "prefix_T_causal_BF_m": 20,
+      "causal_BF": {
+        "T": 20,
+        "F": 20,
+        "KPI": 1.0
+      },
+      "input_sha256": "9be87cb51231fe2a2f9e137c5fdf3ee87b88e678b324ad427202b9b2f41a983e",
+      "family": "delete-refill-gap-subset",
+      "official_KPI": {
+        "baseline": 0.5,
+        "final": 0.5,
+        "BF": 1.0
+      }
+    },
+    {
+      "name": "round2-02-open12-p6",
+      "file": "round2-02-open12-p6.in",
+      "case": 12,
+      "cut": 6,
+      "common_prefix": [
+        20,
+        20,
+        20,
+        7,
+        6,
+        15
+      ],
+      "suffix": [
+        -1,
+        -4,
+        -5,
+        -6,
+        33,
+        20,
+        7
+      ],
+      "first_divergent_command": -1,
+      "expected_table_command_at_cut": 13,
+      "matching_open_tables_before_divergence": [
+        12
+      ],
+      "max_prefix_ratio_candidate_v3_vs_causal_BF": 1.6666666666666667,
+      "prefix_T_target_m": 100,
+      "prefix_T_causal_BF_m": 100,
+      "causal_BF": {
+        "T": 100,
+        "F": 100,
+        "KPI": 1.0
+      },
+      "input_sha256": "8ef7311055a9c6f8e5f59dc53a8f0a22787a0c26defbf15edb141b8aceaf7c75",
+      "family": "delete-refill-gap-subset",
+      "official_KPI": {
+        "baseline": 0.7142857142857143,
+        "final": 1.0,
+        "BF": 1.0
+      }
+    },
+    {
+      "name": "round2-03-open2-p8",
+      "file": "round2-03-open2-p8.in",
+      "case": 2,
+      "cut": 8,
+      "common_prefix": [
+        1,
+        2,
+        1,
+        3,
+        1,
+        4,
+        1,
+        5
+      ],
+      "suffix": [
+        -1,
+        -6,
+        -7,
+        -8,
+        10,
+        2,
+        1
+      ],
+      "first_divergent_command": -1,
+      "expected_table_command_at_cut": 2,
+      "matching_open_tables_before_divergence": [
+        2
+      ],
+      "max_prefix_ratio_candidate_v3_vs_causal_BF": 1.0,
+      "prefix_T_target_m": 20,
+      "prefix_T_causal_BF_m": 20,
+      "causal_BF": {
+        "T": 20,
+        "F": 20,
+        "KPI": 1.0
+      },
+      "input_sha256": "e8ac65f43e8faed208a435ccb5016809412e35a3c39a0e2745dea37056dd9e16",
+      "family": "delete-refill-gap-subset",
+      "official_KPI": {
+        "baseline": 0.5,
+        "final": 0.5,
+        "BF": 1.0
+      }
+    },
+    {
+      "name": "round2-04-open2-p8",
+      "file": "round2-04-open2-p8.in",
+      "case": 2,
+      "cut": 8,
+      "common_prefix": [
+        1,
+        2,
+        1,
+        3,
+        1,
+        4,
+        1,
+        5
+      ],
+      "suffix": [
+        -1,
+        -5,
+        -6,
+        -7,
+        -8,
+        10,
+        3,
+        1
+      ],
+      "first_divergent_command": -1,
+      "expected_table_command_at_cut": 2,
+      "matching_open_tables_before_divergence": [
+        2
+      ],
+      "max_prefix_ratio_candidate_v3_vs_causal_BF": 1.0,
+      "prefix_T_target_m": 20,
+      "prefix_T_causal_BF_m": 20,
+      "causal_BF": {
+        "T": 20,
+        "F": 20,
+        "KPI": 1.0
+      },
+      "input_sha256": "b9b58277a43becff55ae3db4c1da1f46e086aed57a78197d3cf19929feb6150c",
+      "family": "delete-refill-gap-subset",
+      "official_KPI": {
+        "baseline": 0.5,
+        "final": 0.5,
+        "BF": 1.0
+      }
+    },
+    {
+      "name": "round2-05-open2-p8",
+      "file": "round2-05-open2-p8.in",
+      "case": 2,
+      "cut": 8,
+      "common_prefix": [
+        1,
+        2,
+        1,
+        3,
+        1,
+        4,
+        1,
+        5
+      ],
+      "suffix": [
+        -1,
+        -5,
+        -7,
+        -8,
+        6,
+        2,
+        1,
+        1
+      ],
+      "first_divergent_command": -1,
+      "expected_table_command_at_cut": 2,
+      "matching_open_tables_before_divergence": [
+        2
+      ],
+      "max_prefix_ratio_candidate_v3_vs_causal_BF": 1.0,
+      "prefix_T_target_m": 20,
+      "prefix_T_causal_BF_m": 20,
+      "causal_BF": {
+        "T": 20,
+        "F": 20,
+        "KPI": 1.0
+      },
+      "input_sha256": "7b34d1813d1c17ea50e8436e07d476476a2f1f58b4187755bf887dbb1662fd88",
+      "family": "delete-refill-gap-subset",
+      "official_KPI": {
+        "baseline": 0.5,
+        "final": 0.5,
+        "BF": 1.0
+      }
+    },
+    {
+      "name": "round2-06-open2-p8",
+      "file": "round2-06-open2-p8.in",
+      "case": 2,
+      "cut": 8,
+      "common_prefix": [
+        1,
+        2,
+        1,
+        3,
+        1,
+        4,
+        1,
+        5
+      ],
+      "suffix": [
+        -1,
+        -4,
+        -7,
+        -8,
+        6,
+        3,
+        2,
+        1
+      ],
+      "first_divergent_command": -1,
+      "expected_table_command_at_cut": 2,
+      "matching_open_tables_before_divergence": [
+        2
+      ],
+      "max_prefix_ratio_candidate_v3_vs_causal_BF": 1.0,
+      "prefix_T_target_m": 20,
+      "prefix_T_causal_BF_m": 20,
+      "causal_BF": {
+        "T": 20,
+        "F": 20,
+        "KPI": 1.0
+      },
+      "input_sha256": "66b3f872db815f02792a92f761b8c7e130972a6ee56ee4d30a75d12705c3d1e3",
+      "family": "delete-refill-gap-subset",
+      "official_KPI": {
+        "baseline": 0.5,
+        "final": 0.5,
+        "BF": 1.0
+      }
+    },
+    {
+      "name": "round2-07-open2-p8",
+      "file": "round2-07-open2-p8.in",
+      "case": 2,
+      "cut": 8,
+      "common_prefix": [
+        1,
+        2,
+        1,
+        3,
+        1,
+        4,
+        1,
+        5
+      ],
+      "suffix": [
+        -1,
+        -2,
+        -3,
+        -7,
+        -8,
+        6,
+        4,
+        2
+      ],
+      "first_divergent_command": -1,
+      "expected_table_command_at_cut": 2,
+      "matching_open_tables_before_divergence": [
+        2
+      ],
+      "max_prefix_ratio_candidate_v3_vs_causal_BF": 1.0,
+      "prefix_T_target_m": 20,
+      "prefix_T_causal_BF_m": 20,
+      "causal_BF": {
+        "T": 20,
+        "F": 20,
+        "KPI": 1.0
+      },
+      "input_sha256": "5a365f1a128bcc7a53366750a14dbe1bba45c4a2339ceaa14db1dd85e68e54b6",
+      "family": "delete-refill-gap-subset",
+      "official_KPI": {
+        "baseline": 0.5,
+        "final": 0.5,
+        "BF": 1.0
+      }
+    },
+    {
+      "name": "round2-08-open2-p8",
+      "file": "round2-08-open2-p8.in",
+      "case": 2,
+      "cut": 8,
+      "common_prefix": [
+        1,
+        2,
+        1,
+        3,
+        1,
+        4,
+        1,
+        5
+      ],
+      "suffix": [
+        -1,
+        -2,
+        -6,
+        -7,
+        -8,
+        10,
+        3,
+        2
+      ],
+      "first_divergent_command": -1,
+      "expected_table_command_at_cut": 2,
+      "matching_open_tables_before_divergence": [
+        2
+      ],
+      "max_prefix_ratio_candidate_v3_vs_causal_BF": 1.0,
+      "prefix_T_target_m": 20,
+      "prefix_T_causal_BF_m": 20,
+      "causal_BF": {
+        "T": 20,
+        "F": 20,
+        "KPI": 1.0
+      },
+      "input_sha256": "78e30210e9707fc50f18e7cf8893f92e4f9f892c539bd6483adacc50c4e3ae1e",
+      "family": "delete-refill-gap-subset",
+      "official_KPI": {
+        "baseline": 0.5,
+        "final": 0.5,
+        "BF": 1.0
+      }
+    }
+  ]
+}

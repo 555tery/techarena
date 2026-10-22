@@ -1,0 +1,20 @@
+{
+  "candidate": "coupled-buffer40",
+  "source_sha256": "b569fb6ce7cb9318a6ec85d6220df4c20d64126fde9c241a1e90431061eadedc",
+  "binary_sha256": "774939ea6fea870fdc9368f9410917730de88f418699ee945b90a87dbdc56947",
+  "frozen_at": "2026-10-19T17:59:07.798255+00:00",
+  "fresh_manifest_sha256": "2abbc4b7459c1d4e3aad416c56dc35366b7cade0b3a18f9fa099d958cd01ef68",
+  "known_gate": {
+    "cases": 155,
+    "wins": 3,
+    "ties": 152,
+    "losses": 0,
+    "timing_sensitive_case": "prior24-B23, repeat audit; not an attributed layout gain"
+  },
+  "selection": "Predeclared coupling amendment prefers buffer40 over minimal to avoid the specified dense40+29+9 obstruction; selection uses only known streams and public feasibility",
+  "confirmation": "48total:46 newly seeded known-mechanism streams +2 prompt-specified deterministic controls d11-cap-pid1,d11-cap-pid2",
+  "fresh_policy": "One frozen pass, no source changes or switching candidates after outcomes; all losses retained",
+  "limits": "Guarantee only vs internal parent after coupling. No pre-coupling final dominance; separately launched timer-dependent parent may differ.",
+  "platform_actions": 0,
+  "target_hardware_run": false
+}

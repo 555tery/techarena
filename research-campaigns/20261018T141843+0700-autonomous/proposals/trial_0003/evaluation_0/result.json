@@ -1,0 +1,153 @@
+{
+  "status": "completed",
+  "id": "evaluation_0",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0003/candidate_0.cpp",
+  "sha256": "4830f5b902d8611d0855b75162571a95af1d321371dac92ba3589a223314b24c",
+  "idea": "Frame span reuse: после фактически наблюдённого удаления live suffix повторно использовать целый освободившийся span, размещая следующую insertion-серию подряд в порядке PID.",
+  "parent": "seed_baseline",
+  "weighted_score": 30.06383189137926,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22620,
+      "kpi": 0.900132625994695,
+      "weighted_score": 0.900132625994695
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438900,
+      "kpi": 0.9541057188425609,
+      "weighted_score": 9.54105718842561
+    }
+  ],
+  "fresh": {
+    "mean_delta": 3.639302573805366e-05,
+    "worst_delta": -0.001394440194662394,
+    "wins": 3,
+    "regressions": 3,
+    "ties": 24,
+    "worst_cases": [
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.001394440194662394,
+        "baseline_T": 94540,
+        "candidate_T": 94680
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.0007979189293346733,
+        "baseline_T": 24820,
+        "candidate_T": 24840
+      },
+      {
+        "case": "dev_13_large_recent",
+        "delta": -0.00042926456456160444,
+        "baseline_T": 46460,
+        "candidate_T": 46480
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 17640,
+        "candidate_T": 17640
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 21700,
+        "candidate_T": 21700
+      },
+      {
+        "case": "dev_04_fifo_size_drift",
+        "delta": 0.0,
+        "baseline_T": 103520,
+        "candidate_T": 103520
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8088348894973422,
+  "max_cpu_s": 0.903969,
+  "max_rss_mib": 12.34375,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0003/evaluation_0/open15_recovery_1/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0003/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792309853.389143,
+  "balanced_gate": true
+}

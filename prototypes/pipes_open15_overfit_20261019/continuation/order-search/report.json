@@ -1,0 +1,15 @@
+{
+  "scope": "offline full Open15 overfit, case11",
+  "starting_H": 20799,
+  "target_T": 20760,
+  "methods": [
+    "critical-path orientation local moves with bounded escape",
+    "same, focused on temporary lifetime edges"
+  ],
+  "logs": {
+    "search.log": "INITIAL 20799\nFINAL 20799 steps=62334\n",
+    "focused.log": "INITIAL 20799\nFINAL 20799 steps=37105\n"
+  },
+  "improved": false,
+  "infeasibility_claim": false
+}

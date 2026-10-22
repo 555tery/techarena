@@ -1,0 +1,120 @@
+{
+  "base": "candidate-exact-fast/solution.cj",
+  "base_sha256": "4e7efbcfd0b3d7f1d2cd2ca6f8764afa4bdee46566294116272d27e778cbf2b9",
+  "output_sha256": "04b3ba856bb769b1eb4bb0a9169dc3eb3257c37db10519e2c8f48449e76affc0",
+  "generator_sha256": "295bfde1f98097e1692d22604cbabb5f5a59e3aa1d88b0e60dd9dbfbdf1c124d",
+  "changed_methods": [
+    {
+      "class": "OrderedMap<V>",
+      "method": "first",
+      "old_sha256": "94c02e51f60cdbff30e3ce7e12cf479e440f4b96d78ee3a7155070afd1e56bdc",
+      "new_sha256": "8d0179850e1c4b1ac8faff21cd204b821f58e541abc94fb15de03c5439ef1c06"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "last",
+      "old_sha256": "111b7b09a15cb6043e3ac20b13ef4c18517734e5f11b0b3f3e0a1b8d3b2a2916",
+      "new_sha256": "f2d6446538862f73a188c0ae37051ac1abc45b3c5a1c0f0cc6b9f66797fae8da"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "next",
+      "old_sha256": "7c74c61e82cd8d72b68e28015f447ce6040bf5f2a62e3c404a8d8f16e6dee377",
+      "new_sha256": "91c701a62b9df6738cdc3b4b9a1fe4676c4f1e81089b5743e56f0588e54e2c42"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "prev",
+      "old_sha256": "595c376a02ab6a4c89d9f968b231f130700c3f6f9d49c9ddb751157adb5e6bf6",
+      "new_sha256": "c11926073f448f78441ab848f6d2236d54ea02692dde43dd9218cdc374e1825d"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "find",
+      "old_sha256": "b6120a225bdbc7e13a2dd6dbe245241bb8ef946676acf1e0c82de5f050d62ab8",
+      "new_sha256": "568d5e14165cb55840dc83f8061ad4bd502d530eed483dfbf338509623bb58b7"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "lower",
+      "old_sha256": "ea64bb87e6691b3ad75f2193f6baa7371595517470bd5fbbb1820748cb368143",
+      "new_sha256": "a111809c8a3aac638bf8a6966e9c5e6ad8dff4f07d0b167a4d563bc989bcc3e3"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "upper",
+      "old_sha256": "811753c3eef15090f5eaaf9c063fade1406e1bc9a96494e2c5d68a3c1b07e8d7",
+      "new_sha256": "b1a4104b424abdba7f811f1a982182cf1e01066349f7d92e2219c5f07c91c12b"
+    },
+    {
+      "class": "OrderedMap<V>",
+      "method": "put",
+      "old_sha256": "6bb2227f266e5d07475c98a9b2f9b467a2661b9f12a7cd467660b416fa3f75e5",
+      "new_sha256": "546f423d90d9b2ba5d870e91a5c761175bd3ced8196b4613590c754db087e0df"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "first",
+      "old_sha256": "94c02e51f60cdbff30e3ce7e12cf479e440f4b96d78ee3a7155070afd1e56bdc",
+      "new_sha256": "8d0179850e1c4b1ac8faff21cd204b821f58e541abc94fb15de03c5439ef1c06"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "last",
+      "old_sha256": "111b7b09a15cb6043e3ac20b13ef4c18517734e5f11b0b3f3e0a1b8d3b2a2916",
+      "new_sha256": "f2d6446538862f73a188c0ae37051ac1abc45b3c5a1c0f0cc6b9f66797fae8da"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "next",
+      "old_sha256": "7c74c61e82cd8d72b68e28015f447ce6040bf5f2a62e3c404a8d8f16e6dee377",
+      "new_sha256": "91c701a62b9df6738cdc3b4b9a1fe4676c4f1e81089b5743e56f0588e54e2c42"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "prev",
+      "old_sha256": "595c376a02ab6a4c89d9f968b231f130700c3f6f9d49c9ddb751157adb5e6bf6",
+      "new_sha256": "c11926073f448f78441ab848f6d2236d54ea02692dde43dd9218cdc374e1825d"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "find",
+      "old_sha256": "b6120a225bdbc7e13a2dd6dbe245241bb8ef946676acf1e0c82de5f050d62ab8",
+      "new_sha256": "568d5e14165cb55840dc83f8061ad4bd502d530eed483dfbf338509623bb58b7"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "lower",
+      "old_sha256": "ea64bb87e6691b3ad75f2193f6baa7371595517470bd5fbbb1820748cb368143",
+      "new_sha256": "a111809c8a3aac638bf8a6966e9c5e6ad8dff4f07d0b167a4d563bc989bcc3e3"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "upper",
+      "old_sha256": "811753c3eef15090f5eaaf9c063fade1406e1bc9a96494e2c5d68a3c1b07e8d7",
+      "new_sha256": "b1a4104b424abdba7f811f1a982182cf1e01066349f7d92e2219c5f07c91c12b"
+    },
+    {
+      "class": "IntOrderedMap",
+      "method": "put",
+      "old_sha256": "64b6158ba3befefc7fc21426e954d4958b7bccb25fb1ca512b04c99d1930b91b",
+      "new_sha256": "0a91fa0058c246334c6b379186d2029ad0397e3991726dce798599f5da9fb016"
+    }
+  ],
+  "cangjie_compiled": false,
+  "solver_executed": false,
+  "owner_fence": {
+    "api": "std.runtime.blackBox<T>(input:T):T",
+    "placement": "blackBox(this) after the last pointer read in each modified method, before any put mutation/reallocation.",
+    "official_version": "1.0.5",
+    "official_runtime_commit": "c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9",
+    "contract": "Input enters an optimizer black box and cannot be subject to dead-code elimination and similar optimizations.",
+    "sources": [
+      "https://github.com/cangjielanguage/cangjie_runtime/blob/c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9/std/doc/libs/std/runtime/runtime_package_api/runtime_package_funcs.md#func-blackboxtt",
+      "https://github.com/cangjielanguage/cangjie_runtime/blob/c6aa169ce8c6aaeb65cb1262bddb3700aebe8cb9/std/libs/std/runtime/runtime_memoryInfo.cj#L25-L28"
+    ],
+    "inference": "The post-read strong Map use keeps its private owning vectors reachable throughout borrow; no vector field is changed or grown in that interval.",
+    "availability": "Public @Frozen @Intrinsic; only cjnative backend guard, no Windows/macOS OS guard.",
+    "limits": "Documented anti-DCE mechanism, not an API separately named GC keepAlive. No assembly inspection or Cangjie execution in this task."
+  }
+}

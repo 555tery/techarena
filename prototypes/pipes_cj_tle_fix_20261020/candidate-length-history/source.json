@@ -1,0 +1,11 @@
+{
+  "baseline_sha256": "86fece6427f0a240b37cc6520ce3662b4cebf0839a8b4d95f7cfd3ff76e345db",
+  "source_sha256": "308cfb12e46a276f5d47f7b587eb29f4a8cac3511f37cc83e49825316a341075",
+  "generator_sha256": "66998e48e785700fe665683291b99ff58f0452f6d0c58026f773e56ad11c9eb1",
+  "scope": "Only recentLengths storage and four run-scanning predicates; related helper signature uses LengthHistory.",
+  "proof": "Last three complete pushed runs clipped by the current suffix size equal last three actual window runs. popBack rescans because it may expose an older run.",
+  "clones_imports": "Clone deep-copies IntRing and all six cache scalars. Both deep-copy/import assignments remain unchanged; imports call existing recordLength.",
+  "pop_back_current_callsites": 0,
+  "compile_executed": false,
+  "solver_executed": false
+}

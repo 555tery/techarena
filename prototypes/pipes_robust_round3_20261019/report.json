@@ -1,0 +1,1047 @@
+{
+  "selected": "candidate-physical",
+  "build": {
+    "source_sha256": "e7a88219417219faa925ec9d91641eb15d02aafeab76fdb9ef9d7144c7c25112",
+    "binary_sha256": "30d592745c889baabefb37397c24b41b2a112352a78ad04047f9f089d39865bb",
+    "parent_source_sha256": "ce73f76781ed30a2113a748d6e15e1c443296411bd9dd295683f2e4633e74529",
+    "changed_tables": [
+      5,
+      8,
+      9,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "full_public_prefix_max_ratio": {
+      "8": 6.037037037037037,
+      "13": 3.75,
+      "11": 12.0,
+      "15": 12.0,
+      "5": 1.5,
+      "9": 1.530283505154639,
+      "12": 1.130952380952381,
+      "14": 1.0370141887723627
+    },
+    "frozen_at": "2026-10-18T21:27:03.186695+00:00",
+    "selection": "independent source invariant audit, before examining round3 final fresh/holdout scores",
+    "snapshot_fix": "gaps are the complement of actual active pipes, including unoccupied speculative reservations"
+  },
+  "Open15_score": 30.75747404826914,
+  "Open15_exact_score": "8753218892157372683/284588353335535200",
+  "final_official_checks": 96,
+  "new_attack_count": 12,
+  "paired_statistics": {
+    "known": {
+      "count": 55,
+      "wins_ties_losses": [
+        11,
+        44,
+        0
+      ],
+      "mean_KPI_delta": 0.0754528201896998,
+      "worst_KPI_delta": 0.0
+    },
+    "fresh": {
+      "count": 6,
+      "wins_ties_losses": [
+        4,
+        2,
+        0
+      ],
+      "mean_KPI_delta": 0.24881624239846256,
+      "worst_KPI_delta": 0.0
+    },
+    "counter": {
+      "count": 6,
+      "wins_ties_losses": [
+        4,
+        2,
+        0
+      ],
+      "mean_KPI_delta": 0.1557885203353526,
+      "worst_KPI_delta": 0.0
+    },
+    "holdout": {
+      "count": 14,
+      "wins_ties_losses": [
+        3,
+        7,
+        4
+      ],
+      "mean_KPI_delta": 0.004061226812159031,
+      "worst_KPI_delta": -0.008027276632302405
+    }
+  },
+  "public_prefix_risk": [
+    {
+      "case": 5,
+      "old_max_T_over_BF": 4,
+      "new_max_T_over_BF": 1.5,
+      "new_peak_step": 205,
+      "unchanged_optimal_T": 53360
+    },
+    {
+      "case": 8,
+      "old_max_T_over_BF": 77.5,
+      "new_max_T_over_BF": 6.037037037037037,
+      "new_peak_step": 402,
+      "unchanged_optimal_T": 4640
+    },
+    {
+      "case": 9,
+      "old_max_T_over_BF": 7.142857142857143,
+      "new_max_T_over_BF": 1.530283505154639,
+      "new_peak_step": 7501,
+      "unchanged_optimal_T": 47500
+    },
+    {
+      "case": 11,
+      "old_max_T_over_BF": 976,
+      "new_max_T_over_BF": 12.0,
+      "new_peak_step": 2,
+      "unchanged_optimal_T": 20760
+    },
+    {
+      "case": 12,
+      "old_max_T_over_BF": 5.153061224489796,
+      "new_max_T_over_BF": 1.130952380952381,
+      "new_peak_step": 188,
+      "unchanged_optimal_T": 10260
+    },
+    {
+      "case": 13,
+      "old_max_T_over_BF": 77.5,
+      "new_max_T_over_BF": 3.75,
+      "new_peak_step": 7,
+      "unchanged_optimal_T": 3220
+    },
+    {
+      "case": 14,
+      "old_max_T_over_BF": 1.3913491246138001,
+      "new_max_T_over_BF": 1.0370141887723627,
+      "new_peak_step": 24367,
+      "unchanged_optimal_T": 37720
+    },
+    {
+      "case": 15,
+      "old_max_T_over_BF": 976,
+      "new_max_T_over_BF": 12.0,
+      "new_peak_step": 2,
+      "unchanged_optimal_T": 418780
+    }
+  ],
+  "paired": {
+    "known": [
+      {
+        "case": "attack-01-open3-p4",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-01-open3-p4.in",
+        "sha256": "4bb8597dd34f1aa188c46b1764a73e2bb6cb03f04422ecc0725095f74350050a",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 18
+      },
+      {
+        "case": "attack-02-open6-p6",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-02-open6-p6.in",
+        "sha256": "8f0520b3c1e9abd5a23b40c52a420561f12b0f25da7fd594436b9b922033b290",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 18
+      },
+      {
+        "case": "attack-03-open4-p11",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-03-open4-p11.in",
+        "sha256": "2641115c3bbc8cc2065247180f61b4650d4e99dcffce0630ba276aeb13d657f4",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 60,
+        "candidate_T": 60,
+        "F": 54
+      },
+      {
+        "case": "attack-04-open12-p34",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-04-open12-p34.in",
+        "sha256": "f6f2c27497e5b3970e5e8e5e922007f480e289c3479dccf01772771d0043adab",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 160,
+        "candidate_T": 160,
+        "F": 144
+      },
+      {
+        "case": "attack-05-open1-p3",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-05-open1-p3.in",
+        "sha256": "4195c549112ba73de78c37807e8582dc4c5ba9b1ba3aaf2ca8324a0e868a8f7b",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 20
+      },
+      {
+        "case": "attack-06-open3-p6",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-06-open3-p6.in",
+        "sha256": "09a0d12aec659c9f63037e444991c4312d0bfaeee33c0171cd915001da15ca4a",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 18
+      },
+      {
+        "case": "attack-07-open3-p5",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-07-open3-p5.in",
+        "sha256": "c367f6c6db4cd072692c814b83c7599f847be3581b321442dabbb4ce547e7477",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 18
+      },
+      {
+        "case": "attack-08-open3-p6",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-08-open3-p6.in",
+        "sha256": "a8fd70738322710576ffa73dc7c509b4ab86a08759e7511a49fe73f042d7e089",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 18
+      },
+      {
+        "case": "attack-09-open6-p7",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-09-open6-p7.in",
+        "sha256": "be2450320341c80d6c71274179b11e05290cd6f9e927259bcd47a204b9118c07",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 18
+      },
+      {
+        "case": "attack-10-open6-p8",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-10-open6-p8.in",
+        "sha256": "aaacdbe756703fb326b962a2db14e82ba9f9893d3091c2c3799312434ac89d2c",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 18
+      },
+      {
+        "case": "attack-extra-open5-p2",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-extra-open5-p2.in",
+        "sha256": "77d2bdb03cbac0abdbdcace4caafe6b9a98c669dc833f2e6100f5a208c3856e2",
+        "baseline_KPI": 0.75,
+        "candidate_KPI": 1.0,
+        "delta": 0.25,
+        "baseline_T": 80,
+        "candidate_T": 60,
+        "F": 60
+      },
+      {
+        "case": "attack-extra-open7-p3",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-extra-open7-p3.in",
+        "sha256": "391458b037399ee79a1ee4d7feffd29fb45ae633d333043d0d282bc521ecc8ee",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 60,
+        "candidate_T": 60,
+        "F": 60
+      },
+      {
+        "case": "attack-extra-open9-p127",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/new_attacks/attack-extra-open9-p127.in",
+        "sha256": "d7844575d71ca965c430920774865b157e0b4b3a220e57e88dc8174c4440f675",
+        "baseline_KPI": 0.18,
+        "candidate_KPI": 0.9,
+        "delta": 0.72,
+        "baseline_T": 1000,
+        "candidate_T": 200,
+        "F": 180
+      },
+      {
+        "case": "control-open2-p14-large-hole",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/counterattacks/control-open2-p14-large-hole.in",
+        "sha256": "1d523f0fa78e0e330c20babd2216df692701667efc2754e20d91df8b2b184e83",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 20
+      },
+      {
+        "case": "counterattack-open10-p5-24",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/counterattacks/counterattack-open10-p5-24.in",
+        "sha256": "7307d6fb62bb76d9010f3556a2510d4a1adda85992b4f47bba114f974403cfca",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 40
+      },
+      {
+        "case": "counterattack-open2-p4-mixed-fill",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_robust_20261019/counterattacks/counterattack-open2-p4-mixed-fill.in",
+        "sha256": "383e4729bf313c32b8aaeb288edf1c8c14cbc938c910a9dba4cf9ce2d5c2debc",
+        "baseline_KPI": 0.5,
+        "candidate_KPI": 0.5,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 20
+      },
+      {
+        "case": "neutral-919301-iid",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919301-iid.in",
+        "sha256": "5be756b3e77201dddf8b074ced4d5aa341ee381dca86812686e0b3fbb04350bb",
+        "baseline_KPI": 0.9226666666666666,
+        "candidate_KPI": 0.9226666666666666,
+        "delta": 0.0,
+        "baseline_T": 4500,
+        "candidate_T": 4500,
+        "F": 4152
+      },
+      {
+        "case": "neutral-919302-lifo",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919302-lifo.in",
+        "sha256": "754cd6e99d27fa81ddf8dca6c90d253a20d81e0ff6ab597446bc848251cb5414",
+        "baseline_KPI": 0.554424778761062,
+        "candidate_KPI": 0.554424778761062,
+        "delta": 0.0,
+        "baseline_T": 2260,
+        "candidate_T": 2260,
+        "F": 1253
+      },
+      {
+        "case": "neutral-919303-fifo",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919303-fifo.in",
+        "sha256": "b164b7979e875311caf43dadda95883f114175b121e6cb3218cce57ad6bd6c3e",
+        "baseline_KPI": 0.6613122171945701,
+        "candidate_KPI": 0.6613122171945701,
+        "delta": 0.0,
+        "baseline_T": 4420,
+        "candidate_T": 4420,
+        "F": 2923
+      },
+      {
+        "case": "neutral-919304-walk",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919304-walk.in",
+        "sha256": "abd792ae15f1ff81206bb6e650f1a58d3ec7c0f468b0f3c60729820f8e4820a5",
+        "baseline_KPI": 0.5008905852417302,
+        "candidate_KPI": 0.5008905852417302,
+        "delta": 0.0,
+        "baseline_T": 7860,
+        "candidate_T": 7860,
+        "F": 3937
+      },
+      {
+        "case": "neutral-919305-young",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919305-young.in",
+        "sha256": "188408ff39133380388e8e9c6f5b1270e1c0513e982bc241b100f1be6f6b967f",
+        "baseline_KPI": 0.8622047244094488,
+        "candidate_KPI": 0.8622047244094488,
+        "delta": 0.0,
+        "baseline_T": 2540,
+        "candidate_T": 2540,
+        "F": 2190
+      },
+      {
+        "case": "neutral-919306-iid",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919306-iid.in",
+        "sha256": "bb493ed5468c907ac9adde6cb1f29b3f03fd50f6b53d99d0b0c6743295cc417c",
+        "baseline_KPI": 0.8928888888888888,
+        "candidate_KPI": 0.8928888888888888,
+        "delta": 0.0,
+        "baseline_T": 4500,
+        "candidate_T": 4500,
+        "F": 4018
+      },
+      {
+        "case": "neutral-919307-lifo",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919307-lifo.in",
+        "sha256": "2249d088e86332e4bea58dcd9ed2d1213f0e4825cb224121ef206586d1fdded4",
+        "baseline_KPI": 0.9271226415094339,
+        "candidate_KPI": 0.9271226415094339,
+        "delta": 0.0,
+        "baseline_T": 4240,
+        "candidate_T": 4240,
+        "F": 3931
+      },
+      {
+        "case": "neutral-919308-fifo",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919308-fifo.in",
+        "sha256": "e6a74583b85f422e45c729999cd19dd1ff4ec3146a103caf63e5107e70cf54a8",
+        "baseline_KPI": 0.668075117370892,
+        "candidate_KPI": 0.668075117370892,
+        "delta": 0.0,
+        "baseline_T": 4260,
+        "candidate_T": 4260,
+        "F": 2846
+      },
+      {
+        "case": "neutral-919309-walk",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919309-walk.in",
+        "sha256": "f1d5c2124b6a284da183bf676d6cbbb87477c5a59cab1dc96a064abb723d16a9",
+        "baseline_KPI": 0.863782991202346,
+        "candidate_KPI": 0.863782991202346,
+        "delta": 0.0,
+        "baseline_T": 6820,
+        "candidate_T": 6820,
+        "F": 5891
+      },
+      {
+        "case": "neutral-919310-young",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919310-young.in",
+        "sha256": "33a14906bdcd5ddf897c9da53fe7e07466094b681eafd8577788676530fe1ab7",
+        "baseline_KPI": 0.795959595959596,
+        "candidate_KPI": 0.795959595959596,
+        "delta": 0.0,
+        "baseline_T": 1980,
+        "candidate_T": 1980,
+        "F": 1576
+      },
+      {
+        "case": "neutral-919311-walk",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919311-walk.in",
+        "sha256": "d0a3369b108484ca759736aa8090a622a78dc02546484387de60b1c7f41b5f5e",
+        "baseline_KPI": 0.5769900497512438,
+        "candidate_KPI": 0.5769900497512438,
+        "delta": 0.0,
+        "baseline_T": 8040,
+        "candidate_T": 8040,
+        "F": 4639
+      },
+      {
+        "case": "neutral-919312-young",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919312-young.in",
+        "sha256": "afbf3f8cf7bf390ec3f759655ac147cd5d0d6baa09b855d30fda6f3fc8d5c65e",
+        "baseline_KPI": 0.7034782608695652,
+        "candidate_KPI": 0.7034782608695652,
+        "delta": 0.0,
+        "baseline_T": 2300,
+        "candidate_T": 2300,
+        "F": 1618
+      },
+      {
+        "case": "neutral-919313-runs",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919313-runs.in",
+        "sha256": "d6ba69fd7b5069995b36f202239ddcc81e0cc3c118c2a156ddbca92a05c9e90e",
+        "baseline_KPI": 0.21479357798165138,
+        "candidate_KPI": 0.2182983682983683,
+        "delta": 0.0035047903167169103,
+        "baseline_T": 8720,
+        "candidate_T": 8580,
+        "F": 1873
+      },
+      {
+        "case": "neutral-919314-burst",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/holdout/neutral-919314-burst.in",
+        "sha256": "6161691e11f5f58c3ab0c88cb16ee98756e91914def746bc2e678b2695d9a7ab",
+        "baseline_KPI": 0.7155367231638418,
+        "candidate_KPI": 0.7155367231638418,
+        "delta": 0.0,
+        "baseline_T": 3540,
+        "candidate_T": 3540,
+        "F": 2533
+      },
+      {
+        "case": "plateau-open12-p151",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/counterattacks/plateau-open12-p151.in",
+        "sha256": "b1c4df40a8262ff6943fa1432ec1f6cdcde3b860aed57b1fe67c3cdc3fff1415",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 1260,
+        "candidate_T": 1260,
+        "F": 1260
+      },
+      {
+        "case": "plateau-open12-p224",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/counterattacks/plateau-open12-p224.in",
+        "sha256": "6bfb9b14671672e60ba1ae8ef602df5927fba0c3f42478fda0139326cc523e76",
+        "baseline_KPI": 0.19405940594059407,
+        "candidate_KPI": 0.9333333333333333,
+        "delta": 0.7392739273927393,
+        "baseline_T": 10100,
+        "candidate_T": 2100,
+        "F": 1960
+      },
+      {
+        "case": "plateau-open14-p17565",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/counterattacks/plateau-open14-p17565.in",
+        "sha256": "8fc1416e99f833851a7d3f4f8d70ebafff781f4807e99a37a64dbb7fe12d82f0",
+        "baseline_KPI": 0.7187268689859363,
+        "candidate_KPI": 0.9979445015416238,
+        "delta": 0.27921763255568754,
+        "baseline_T": 27020,
+        "candidate_T": 19460,
+        "F": 19420
+      },
+      {
+        "case": "plateau-open9-p127",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/counterattacks/plateau-open9-p127.in",
+        "sha256": "353f5f50aaaf86b79e2bd56950877bc5d9028c2e3d58ed68b5b6ec12e91fdfa3",
+        "baseline_KPI": 0.14,
+        "candidate_KPI": 0.875,
+        "delta": 0.735,
+        "baseline_T": 1000,
+        "candidate_T": 160,
+        "F": 140
+      },
+      {
+        "case": "quiet-open1",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_graves_20261019/suite/quiet-open1.in",
+        "sha256": "1e27964ac8c6957155ce394478defd3fb8ba02135cf7470269f0d86641f8608c",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 20,
+        "candidate_T": 20,
+        "F": 20
+      },
+      {
+        "case": "quiet-open2-beam",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_graves_20261019/suite/quiet-open2-beam.in",
+        "sha256": "28c36f42fd4ecb0f1b9d26f5180bdda0c2552fdcf985f8fe151b1bfec4d9e42d",
+        "baseline_KPI": 0.6666666666666666,
+        "candidate_KPI": 0.6666666666666666,
+        "delta": 0.0,
+        "baseline_T": 60,
+        "candidate_T": 60,
+        "F": 40
+      },
+      {
+        "case": "reserve-open08-p2",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_graves_20261019/suite/reserve-open08-p2.in",
+        "sha256": "09f682b1edb0bde8ae691a61364cdc8b372613a5f7bbd2a14e66f5144152a21b",
+        "baseline_KPI": 0.012903225806451613,
+        "candidate_KPI": 1.0,
+        "delta": 0.9870967741935484,
+        "baseline_T": 3100,
+        "candidate_T": 40,
+        "F": 40
+      },
+      {
+        "case": "reserve-open10-p3",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_graves_20261019/suite/reserve-open10-p3.in",
+        "sha256": "8841c1b48e149d7d214e48145ee16edb81f722e8cd665ed2c055671e4c9aefea",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 40
+      },
+      {
+        "case": "reserve-open11-p2",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_graves_20261019/suite/reserve-open11-p2.in",
+        "sha256": "abfa350bff4d60908a8a0fb276e232faf07825766e5601b9443e07a1bb39fa8d",
+        "baseline_KPI": 0.0020491803278688526,
+        "candidate_KPI": 0.16666666666666666,
+        "delta": 0.1646174863387978,
+        "baseline_T": 19520,
+        "candidate_T": 240,
+        "F": 40
+      },
+      {
+        "case": "reserve-open14-p8",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_graves_20261019/suite/reserve-open14-p8.in",
+        "sha256": "22092ce588749fc03f00bd73020b3d5c0c372e0cd418519df94f61c1bab14ef4",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 40
+      },
+      {
+        "case": "round2-01-open2-p8",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/attacks/round2-01-open2-p8.in",
+        "sha256": "9be87cb51231fe2a2f9e137c5fdf3ee87b88e678b324ad427202b9b2f41a983e",
+        "baseline_KPI": 0.5,
+        "candidate_KPI": 0.5,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 20
+      },
+      {
+        "case": "round2-02-open12-p6",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/attacks/round2-02-open12-p6.in",
+        "sha256": "8ef7311055a9c6f8e5f59dc53a8f0a22787a0c26defbf15edb141b8aceaf7c75",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 100,
+        "candidate_T": 100,
+        "F": 100
+      },
+      {
+        "case": "round2-03-open2-p8",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/attacks/round2-03-open2-p8.in",
+        "sha256": "e8ac65f43e8faed208a435ccb5016809412e35a3c39a0e2745dea37056dd9e16",
+        "baseline_KPI": 0.5,
+        "candidate_KPI": 0.5,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 20
+      },
+      {
+        "case": "round2-04-open2-p8",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/attacks/round2-04-open2-p8.in",
+        "sha256": "b9b58277a43becff55ae3db4c1da1f46e086aed57a78197d3cf19929feb6150c",
+        "baseline_KPI": 0.5,
+        "candidate_KPI": 0.5,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 20
+      },
+      {
+        "case": "round2-05-open2-p8",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/attacks/round2-05-open2-p8.in",
+        "sha256": "7b34d1813d1c17ea50e8436e07d476476a2f1f58b4187755bf887dbb1662fd88",
+        "baseline_KPI": 0.5,
+        "candidate_KPI": 0.5,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 20
+      },
+      {
+        "case": "round2-06-open2-p8",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/attacks/round2-06-open2-p8.in",
+        "sha256": "66b3f872db815f02792a92f761b8c7e130972a6ee56ee4d30a75d12705c3d1e3",
+        "baseline_KPI": 0.5,
+        "candidate_KPI": 0.5,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 20
+      },
+      {
+        "case": "round2-07-open2-p8",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/attacks/round2-07-open2-p8.in",
+        "sha256": "5a365f1a128bcc7a53366750a14dbe1bba45c4a2339ceaa14db1dd85e68e54b6",
+        "baseline_KPI": 0.5,
+        "candidate_KPI": 0.5,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 20
+      },
+      {
+        "case": "round2-08-open2-p8",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/attacks/round2-08-open2-p8.in",
+        "sha256": "78e30210e9707fc50f18e7cf8893f92e4f9f892c539bd6483adacc50c4e3ae1e",
+        "baseline_KPI": 0.5,
+        "candidate_KPI": 0.5,
+        "delta": 0.0,
+        "baseline_T": 40,
+        "candidate_T": 40,
+        "F": 20
+      },
+      {
+        "case": "safety-open11-p5000",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/safety/safety-open11-p5000.in",
+        "sha256": "335e60a552fc362d6e8202f38bd790b7dfa7bb2c19bf053c540e1ae298bf1b99",
+        "baseline_KPI": 0.9853280141843972,
+        "candidate_KPI": 0.9923660714285715,
+        "delta": 0.007038057244174278,
+        "baseline_T": 22560,
+        "candidate_T": 22400,
+        "F": 22229
+      },
+      {
+        "case": "safety-open15-p199950",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/safety/safety-open15-p199950.in",
+        "sha256": "95986f373125b94f6390deab253a856a52a9861a8bb12853bfe9ec21c0c9bd86",
+        "baseline_KPI": 0.9998520710059171,
+        "candidate_KPI": 0.9998997852541159,
+        "delta": 4.771424819882686e-05,
+        "baseline_T": 419120,
+        "candidate_T": 419100,
+        "F": 419058
+      },
+      {
+        "case": "safety-open15-p4999",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/safety/safety-open15-p4999.in",
+        "sha256": "30f26e9a0e10e46e67f5356052ad6026946b3269d0a78accaefcd0c3c02df6fc",
+        "baseline_KPI": 0.6844894026974951,
+        "candidate_KPI": 0.9485981308411215,
+        "delta": 0.2641087281436264,
+        "baseline_T": 20760,
+        "candidate_T": 14980,
+        "F": 14210
+      },
+      {
+        "case": "safety-open8-p388",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round2_20261019/safety/safety-open8-p388.in",
+        "sha256": "8523450caec0affb3fba0fd66a53b2845581168d1c7870cb2b17af1a69dd7867",
+        "baseline_KPI": 0.9878109452736319,
+        "candidate_KPI": 0.9878109452736319,
+        "delta": 0.0,
+        "baseline_T": 4020,
+        "candidate_T": 4020,
+        "F": 3971
+      },
+      {
+        "case": "shape-case12-p34",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_graves_20261019/suite/shape-case12-p34.in",
+        "sha256": "f76f802af0f2467c831529a7e6e4bcc7e15437a1a0f9cc5d8eb5ee3c22159d5f",
+        "baseline_KPI": 0.9,
+        "candidate_KPI": 0.9,
+        "delta": 0.0,
+        "baseline_T": 160,
+        "candidate_T": 160,
+        "F": 144
+      },
+      {
+        "case": "shape-case12-p6",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_graves_20261019/suite/shape-case12-p6.in",
+        "sha256": "becbeb1117d6896d63a2a9ff246a17542c06d95157d5ac2425aa3653deb7ba7d",
+        "baseline_KPI": 0.93,
+        "candidate_KPI": 0.93,
+        "delta": 0.0,
+        "baseline_T": 100,
+        "candidate_T": 100,
+        "F": 93
+      },
+      {
+        "case": "shape-case4-p20",
+        "file": "/Users/555tery/techarena/prototypes/pipes_v5_graves_20261019/suite/shape-case4-p20.in",
+        "sha256": "12082401734dd12dbf64605f4b8bb36237ae2d985ef9b3c3bf4089b150c88c4c",
+        "baseline_KPI": 1.0,
+        "candidate_KPI": 1.0,
+        "delta": 0.0,
+        "baseline_T": 60,
+        "candidate_T": 60,
+        "F": 60
+      }
+    ],
+    "fresh": [
+      {
+        "case": "budgeted-open2-episode-36-5-delete10",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/attacks/budgeted-open2-episode-36-5-delete10.in",
+        "sha256": "26e33d27829ec960fb1193c105325a7dc205172e624a7ab43d6fa0b66cd13a00",
+        "baseline_KPI": 0.7,
+        "candidate_KPI": 0.7,
+        "delta": 0.0,
+        "baseline_T": 80,
+        "candidate_T": 80,
+        "F": 56
+      },
+      {
+        "case": "budgeted-open2-episode-36-5-delete12",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/attacks/budgeted-open2-episode-36-5-delete12.in",
+        "sha256": "28ab89146e56b6028145e93149aee9896cf2e7b6e11f64b1af3a1e28a0646990",
+        "baseline_KPI": 0.675,
+        "candidate_KPI": 0.675,
+        "delta": 0.0,
+        "baseline_T": 80,
+        "candidate_T": 80,
+        "F": 54
+      },
+      {
+        "case": "open12-p224-delete1-refill20",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/attacks/open12-p224-delete1-refill20.in",
+        "sha256": "0469c29cf7c98e1fb9e0186882b89cf806fe9b2909c6f9a052929e27c728fff7",
+        "baseline_KPI": 0.19247524752475248,
+        "candidate_KPI": 0.9257142857142857,
+        "delta": 0.7332390381895333,
+        "baseline_T": 10100,
+        "candidate_T": 2100,
+        "F": 1944
+      },
+      {
+        "case": "open12-p224-delete168-refill2",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/attacks/open12-p224-delete168-refill2.in",
+        "sha256": "7ffc5d4123f8a1b70a30b336f9a9633ebb1136ed55e54e9f9bb15664e1ae810d",
+        "baseline_KPI": 0.1899009900990099,
+        "candidate_KPI": 0.9133333333333333,
+        "delta": 0.7234323432343235,
+        "baseline_T": 10100,
+        "candidate_T": 2100,
+        "F": 1918
+      },
+      {
+        "case": "open14-late-rank-exposure-remove1550",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/attacks/open14-late-rank-exposure-remove1550.in",
+        "sha256": "125333801a89ab38f377e5b8345184497fb98ca4203733310da065064f71cd11",
+        "baseline_KPI": 0.8969569779643232,
+        "candidate_KPI": 0.915203426124197,
+        "delta": 0.018246448159873863,
+        "baseline_T": 19060,
+        "candidate_T": 18680,
+        "F": 17096
+      },
+      {
+        "case": "open14-late-rank-exposure-remove1800",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/attacks/open14-late-rank-exposure-remove1800.in",
+        "sha256": "161f0f52a08ed09a44f5e798289290d09686ad22dd8b31267f8d99da55560015",
+        "baseline_KPI": 0.8838405036726128,
+        "candidate_KPI": 0.9018201284796574,
+        "delta": 0.017979624807044625,
+        "baseline_T": 19060,
+        "candidate_T": 18680,
+        "F": 16846
+      }
+    ],
+    "counter": [
+      {
+        "case": "residual-open11-p2",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/counterattacks/residual-open11-p2.in",
+        "sha256": "5583085de8a662bb73c6c848e4dc92d9ce38154d01506de176dfec67a887912d",
+        "baseline_KPI": 0.0010245901639344263,
+        "candidate_KPI": 0.08333333333333333,
+        "delta": 0.0823087431693989,
+        "baseline_T": 19520,
+        "candidate_T": 240,
+        "F": 20
+      },
+      {
+        "case": "residual-open12-p188",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/counterattacks/residual-open12-p188.in",
+        "sha256": "9f1c7b49aae372ae1bc107df0bc79b4a9588588eab66ce4b018cc2fc410dc376",
+        "baseline_KPI": 0.34285714285714286,
+        "candidate_KPI": 0.8842105263157894,
+        "delta": 0.5413533834586466,
+        "baseline_T": 4900,
+        "candidate_T": 1900,
+        "F": 1680
+      },
+      {
+        "case": "residual-open13-p7",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/counterattacks/residual-open13-p7.in",
+        "sha256": "8e586c43423c20a8fed601920e5da99baafc0613b95e696f6428e77ad08abd38",
+        "baseline_KPI": 0.025806451612903226,
+        "candidate_KPI": 0.26666666666666666,
+        "delta": 0.24086021505376343,
+        "baseline_T": 3100,
+        "candidate_T": 300,
+        "F": 80
+      },
+      {
+        "case": "residual-open14-p24367",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/counterattacks/residual-open14-p24367.in",
+        "sha256": "a8a4fb2829abb773a9f8b199eb0d5ac13d357590f6d68fb4fefe5023a5a2218a",
+        "baseline_KPI": 0.8940981798124655,
+        "candidate_KPI": 0.9643069601427722,
+        "delta": 0.07020878033030664,
+        "baseline_T": 36260,
+        "candidate_T": 33620,
+        "F": 32420
+      },
+      {
+        "case": "residual-open8-p402",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/counterattacks/residual-open8-p402.in",
+        "sha256": "09644f90887461c18b1d839b05d4a3f6d5e2a1e8e12e77300ebb03cd3ee4f78e",
+        "baseline_KPI": 0.1656441717791411,
+        "candidate_KPI": 0.1656441717791411,
+        "delta": 0.0,
+        "baseline_T": 3260,
+        "candidate_T": 3260,
+        "F": 540
+      },
+      {
+        "case": "residual-open9-p7501",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/counterattacks/residual-open9-p7501.in",
+        "sha256": "cafea250d11792d1f4193233a52ec6c7d8a9897e08f24ec32b4fa53a0a1d831d",
+        "baseline_KPI": 0.6534736842105263,
+        "candidate_KPI": 0.6534736842105263,
+        "delta": 0.0,
+        "baseline_T": 47500,
+        "candidate_T": 47500,
+        "F": 31040
+      }
+    ],
+    "holdout": [
+      {
+        "case": "holdout-920401-iid",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920401-iid.in",
+        "sha256": "33bb999c5d1e3fc4d4e3acdc9d0a066fbe9e8ee0bba7060b765ac62440404a8b",
+        "baseline_KPI": 0.604421768707483,
+        "candidate_KPI": 0.5983164983164984,
+        "delta": -0.0061052703909846295,
+        "baseline_T": 5880,
+        "candidate_T": 5940,
+        "F": 3554
+      },
+      {
+        "case": "holdout-920402-fifo",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920402-fifo.in",
+        "sha256": "3032cb7dbefeb0b3d8ce5b5f44f4a5287645214ca84526ead4ff5b0dc70ed6a0",
+        "baseline_KPI": 0.9191756272401433,
+        "candidate_KPI": 0.9191756272401433,
+        "delta": 0.0,
+        "baseline_T": 5580,
+        "candidate_T": 5580,
+        "F": 5129
+      },
+      {
+        "case": "holdout-920403-young",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920403-young.in",
+        "sha256": "05e38b6dd5013b57c047986f37bdcf083e1dd2ad2774d823acb2464e7cf65d08",
+        "baseline_KPI": 0.7650684931506849,
+        "candidate_KPI": 0.7598639455782313,
+        "delta": -0.005204547572453588,
+        "baseline_T": 2920,
+        "candidate_T": 2940,
+        "F": 2234
+      },
+      {
+        "case": "holdout-920404-lifo",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920404-lifo.in",
+        "sha256": "1167a87eb9cb23227740f1e82f63f1308687e1018930149a0e75e8cabd1e6b5f",
+        "baseline_KPI": 0.8394793926247288,
+        "candidate_KPI": 0.8394793926247288,
+        "delta": 0.0,
+        "baseline_T": 18440,
+        "candidate_T": 18440,
+        "F": 15480
+      },
+      {
+        "case": "holdout-920405-walk",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920405-walk.in",
+        "sha256": "e922b755bbcdc5508bdb5d3599db54ffd4a69d2364e52202fa7b5f673be64ec1",
+        "baseline_KPI": 0.7138613861386138,
+        "candidate_KPI": 0.7786177105831533,
+        "delta": 0.06475632444453949,
+        "baseline_T": 10100,
+        "candidate_T": 9260,
+        "F": 7210
+      },
+      {
+        "case": "holdout-920406-burst",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920406-burst.in",
+        "sha256": "9d9b2560853915b5d4f2597588032c6244f2b0bcd14ff7c47483f6d9ed44d963",
+        "baseline_KPI": 0.25461638491547467,
+        "candidate_KPI": 0.25461638491547467,
+        "delta": 0.0,
+        "baseline_T": 15380,
+        "candidate_T": 15380,
+        "F": 3916
+      },
+      {
+        "case": "holdout-920407-iid",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920407-iid.in",
+        "sha256": "21ba96406b94ed1ba15a15e151e00d9f8b0d958bfbf2257583fc591cbb2334ab",
+        "baseline_KPI": 0.7738434163701068,
+        "candidate_KPI": 0.7738434163701068,
+        "delta": 0.0,
+        "baseline_T": 5620,
+        "candidate_T": 5620,
+        "F": 4349
+      },
+      {
+        "case": "holdout-920408-runs",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920408-runs.in",
+        "sha256": "6849686fd1f733f6323c7b3ad3b2881f8bfc535aa336c8a3a001ebcd644b33cd",
+        "baseline_KPI": 0.4257608695652174,
+        "candidate_KPI": 0.4257608695652174,
+        "delta": 0.0,
+        "baseline_T": 9200,
+        "candidate_T": 9200,
+        "F": 3917
+      },
+      {
+        "case": "holdout-920409-walk",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920409-walk.in",
+        "sha256": "7ccbcff15ce3b95ccd9767e0c77b0decb6969cd0b66f7062a75b51a0cb568a6f",
+        "baseline_KPI": 0.47260536398467434,
+        "candidate_KPI": 0.47260536398467434,
+        "delta": 0.0,
+        "baseline_T": 10440,
+        "candidate_T": 10440,
+        "F": 4934
+      },
+      {
+        "case": "holdout-920410-young",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920410-young.in",
+        "sha256": "f8d6cb81b5568315995e19937b6cc2b3c4d8f3f58070b7b12f1b4e6006ffa47d",
+        "baseline_KPI": 0.004224174984478724,
+        "candidate_KPI": 0.006550396208250019,
+        "delta": 0.0023262212237712947,
+        "baseline_T": 418780,
+        "candidate_T": 270060,
+        "F": 1769
+      },
+      {
+        "case": "holdout-920411-iid",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920411-iid.in",
+        "sha256": "35db1bfc8a63d87194d906b0e993bcc2998a26ee6b7df3e96ef4a577b7a74fd7",
+        "baseline_KPI": 0.7786458333333334,
+        "candidate_KPI": 0.770618556701031,
+        "delta": -0.008027276632302405,
+        "baseline_T": 5760,
+        "candidate_T": 5820,
+        "F": 4485
+      },
+      {
+        "case": "holdout-920412-fifo",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920412-fifo.in",
+        "sha256": "3e882fc38f19c24414b6846f0f647754861469d8a8376e538c4afecb91d07261",
+        "baseline_KPI": 0.8316602316602316,
+        "candidate_KPI": 0.8284615384615385,
+        "delta": -0.0031986931986931477,
+        "baseline_T": 5180,
+        "candidate_T": 5200,
+        "F": 4308
+      },
+      {
+        "case": "holdout-920413-young",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920413-young.in",
+        "sha256": "2c8e490f1a695f7ca69e1a8af34168dfb8766eb638899fc477f10138b61f5bf6",
+        "baseline_KPI": 0.7969325153374233,
+        "candidate_KPI": 0.7969325153374233,
+        "delta": 0.0,
+        "baseline_T": 3260,
+        "candidate_T": 3260,
+        "F": 2598
+      },
+      {
+        "case": "holdout-920414-walk",
+        "file": "/Users/555tery/techarena/prototypes/pipes_robust_round3_20261019/holdout/holdout-920414-walk.in",
+        "sha256": "d0cd6aaf491c81d0325aa9be362c4cf42b1145fbd4fd733b839e2cd77969c857",
+        "baseline_KPI": 0.5982862903225806,
+        "candidate_KPI": 0.61059670781893,
+        "delta": 0.012310417496349424,
+        "baseline_T": 9920,
+        "candidate_T": 9720,
+        "F": 5935
+      }
+    ]
+  },
+  "maximum_CPU_s": 1.379578,
+  "maximum_RSS_MiB": 10.625,
+  "platform_actions": 0,
+  "snapshot_regression": {
+    "old_exit": 1,
+    "fixed_exit": 0,
+    "scene": "T=100; active[20,30),[70,80); policy omits unoccupied[50,70); physical BF40 must fit[30,70)",
+    "result": "old transfer loses reusable capacity; rebuilt physical complement passes all in-trench placement queries"
+  },
+  "scope": "Bounded round3; 6 independent targeted inputs plus 6 post-freeze residual diagnostics; 14 fresh neutral streams. No hidden-distribution or universal robustness claim.",
+  "limitations": "Residual Open11 p2 KPI 1/12 and Open8 p402 ~.166 with BF 1; local proposal dig guarantee does not imply future-layout dominance."
+}

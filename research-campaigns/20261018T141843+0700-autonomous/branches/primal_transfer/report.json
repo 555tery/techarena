@@ -1,0 +1,1241 @@
+{
+  "status": "evaluation_completed",
+  "idea": "Transfer trial_0004 primal stochastic-knapsack marginal gap cost into the strong public seed.",
+  "parent": "seed_public_best",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/branches/primal_transfer/primal_gap_dp.cpp",
+  "source_sha256": "3aa24d9bb7b16520b29f753774283ba8062ba775ff88a710b10d13e7eb4673a3",
+  "parent_source_sha256": "c70ade5c1ecd48c8f74ed99582f974467bd2b1791a214d79ddf6e5df8729af29",
+  "mechanism": {
+    "history": "2048 most recent valid operations; placement demand is recorded after the current placement decision.",
+    "rates": "lambda_s = recent placements of size s / current number of free gaps fitting s; expiry = 2 * recent deletes / live pipes.",
+    "cost": "DP marginal value V(g) - V(g - request), minimizing over the seed’s existing distinct-gap-size candidates.",
+    "scope": "Only ordinary, non-parity allocation when activePipeCount > 4096, after all existing structural routing; MC is already disabled there.",
+    "candidate_domain": "Exactly the seed domain, including the first distinct gap size with slack > 40 before stopping; preserve its current address representatives and side-aware tie rules.",
+    "compute_cap": "Compute through the largest candidate size if <=512; if the domain exceeds 512, use the original score for the entire decision."
+  },
+  "causal_hypothesis": "A gap’s immediate slack is an incomplete proxy for reusable capacity. Empirical per-size demand adjusted for the number of currently fitting gaps, plus a global observed deletion hazard, may rank existing large-state choices better by expected future reusable space, especially in mixed-size/high-fragmentation states. It uses only past operations and current free gaps; it has no test identity or future-trace dispatch.",
+  "changes": [
+    "Added a separate 2048-operation demand/deletion window and coalesced-gap-size histogram.",
+    "Added the primal knapsack Bellman value and gated its marginal cost to ordinary non-parity states above 4096 live pipes.",
+    "Kept cohort/run/trend/LIFO routing, free-gap candidate domain, address representatives, side tie-breaks, rollout state, and all other policies unchanged.",
+    "Added end-of-run stderr counters for DP activations, changed selections, first activation event, cap fallbacks, and model rebuilds."
+  ],
+  "validation": {
+    "strict_compile": {
+      "command": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic",
+      "status": "passed"
+    },
+    "automated_evaluation": {
+      "id": "external_3aa24d9bb7b16520",
+      "status": "completed",
+      "source_sha256": "3aa24d9bb7b16520b29f753774283ba8062ba775ff88a710b10d13e7eb4673a3",
+      "open15_manifest": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_3aa24d9bb7b16520/open15/manifest.json",
+      "open15_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_3aa24d9bb7b16520/open15/harness/summary.json",
+      "open15_summary_sha256": "ece36f0f2161cb1fa6310dd5a8dbc24d4a9e7d28364fae5c93b32f0d35b870f0",
+      "fresh_dev_manifest": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_3aa24d9bb7b16520/fresh_dev/manifest.json",
+      "fresh_dev_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/evaluations/external_3aa24d9bb7b16520/fresh_dev/harness/summary.json",
+      "fresh_dev_summary_sha256": "747b67da2e395bfd211ba5e2ce1deb9b8e9706de42634f7d3d5e375c3083444a",
+      "validation_accessed": false,
+      "platform_accessed": false,
+      "workers": 2
+    },
+    "open15_per_case_scores": [
+      {
+        "case": "1",
+        "candidate_T_m": 20,
+        "baseline_T_m": 20,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.09,
+        "baseline_weighted_score": 0.09,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "2",
+        "candidate_T_m": 20,
+        "baseline_T_m": 20,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 1.0,
+        "baseline_weighted_score": 1.0,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "3",
+        "candidate_T_m": 20,
+        "baseline_T_m": 20,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.75,
+        "baseline_weighted_score": 0.75,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "4",
+        "candidate_T_m": 60,
+        "baseline_T_m": 60,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.666666666666667,
+        "baseline_weighted_score": 0.666666666666667,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "5",
+        "candidate_T_m": 54440,
+        "baseline_T_m": 54440,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.933872152828802,
+        "baseline_weighted_score": 0.933872152828802,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "6",
+        "candidate_T_m": 20,
+        "baseline_T_m": 20,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.9,
+        "baseline_weighted_score": 0.9,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "7",
+        "candidate_T_m": 1700,
+        "baseline_T_m": 1700,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.986470588235294,
+        "baseline_weighted_score": 0.986470588235294,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "8",
+        "candidate_T_m": 4700,
+        "baseline_T_m": 4700,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.984468085106383,
+        "baseline_weighted_score": 0.984468085106383,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "9",
+        "candidate_T_m": 47700,
+        "baseline_T_m": 47700,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.660377358490566,
+        "baseline_weighted_score": 0.660377358490566,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "10",
+        "candidate_T_m": 15380,
+        "baseline_T_m": 15380,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.8,
+        "baseline_weighted_score": 0.8,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "11",
+        "candidate_T_m": 22400,
+        "baseline_T_m": 22400,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 0.908973214285714,
+        "baseline_weighted_score": 0.908973214285714,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "12",
+        "candidate_T_m": 10320,
+        "baseline_T_m": 10320,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 3.972480620155039,
+        "baseline_weighted_score": 3.972480620155039,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "13",
+        "candidate_T_m": 3280,
+        "baseline_T_m": 3280,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 3.892682926829268,
+        "baseline_weighted_score": 3.892682926829268,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "14",
+        "candidate_T_m": 37840,
+        "baseline_T_m": 37840,
+        "trench_delta_m_candidate_minus_baseline": 0,
+        "candidate_weighted_score": 3.985623678646935,
+        "baseline_weighted_score": 3.985623678646935,
+        "weighted_score_delta": 0.0
+      },
+      {
+        "case": "15",
+        "candidate_T_m": 438320,
+        "baseline_T_m": 438620,
+        "trench_delta_m_candidate_minus_baseline": -300,
+        "candidate_weighted_score": 9.553682241284907,
+        "baseline_weighted_score": 9.547147872874014,
+        "weighted_score_delta": 0.0065343684108931654
+      }
+    ],
+    "fresh_dev_per_case_scores": [
+      {
+        "case": "dev_00_recent_growth_shift",
+        "candidate_T_m": 30480,
+        "baseline_T_m": 30480,
+        "candidate_kpi": 0.9538713910761155,
+        "baseline_kpi": 0.9538713910761155,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "candidate_T_m": 94120,
+        "baseline_T_m": 94540,
+        "candidate_kpi": 0.9472481937951551,
+        "baseline_kpi": 0.9430399830759467,
+        "kpi_delta": 0.004208210719208405,
+        "dp": {
+          "scored_decisions": 1495,
+          "changed_selections": 198,
+          "first_activation_event": 10605,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 176
+        }
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "candidate_T_m": 17640,
+        "baseline_T_m": 17640,
+        "candidate_kpi": 0.9619047619047619,
+        "baseline_kpi": 0.9619047619047619,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "candidate_T_m": 21700,
+        "baseline_T_m": 21700,
+        "candidate_kpi": 0.9641935483870968,
+        "baseline_kpi": 0.9641935483870968,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_04_fifo_size_drift",
+        "candidate_T_m": 103520,
+        "baseline_T_m": 103520,
+        "candidate_kpi": 0.9971309891808346,
+        "baseline_kpi": 0.9971309891808346,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 2297,
+          "changed_selections": 381,
+          "first_activation_event": 6740,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 287
+        }
+      },
+      {
+        "case": "dev_05_fifo_size_drift",
+        "candidate_T_m": 54820,
+        "baseline_T_m": 54820,
+        "candidate_kpi": 0.997318496898942,
+        "baseline_kpi": 0.997318496898942,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_06_random_mixture",
+        "candidate_T_m": 42240,
+        "baseline_T_m": 42240,
+        "candidate_kpi": 0.961813446969697,
+        "baseline_kpi": 0.961813446969697,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_07_random_mixture",
+        "candidate_T_m": 42420,
+        "baseline_T_m": 42420,
+        "candidate_kpi": 0.9562706270627063,
+        "baseline_kpi": 0.9562706270627063,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_08_cohort_release",
+        "candidate_T_m": 25140,
+        "baseline_T_m": 25140,
+        "candidate_kpi": 0.307557677008751,
+        "baseline_kpi": 0.307557677008751,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_09_cohort_release",
+        "candidate_T_m": 11500,
+        "baseline_T_m": 11500,
+        "candidate_kpi": 0.05417391304347826,
+        "baseline_kpi": 0.05417391304347826,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_10_repeated_sizes",
+        "candidate_T_m": 158980,
+        "baseline_T_m": 159840,
+        "candidate_kpi": 0.9936407095232105,
+        "baseline_kpi": 0.9882945445445446,
+        "kpi_delta": 0.005346164978665913,
+        "dp": {
+          "scored_decisions": 2935,
+          "changed_selections": 1653,
+          "first_activation_event": 5917,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 272
+        }
+      },
+      {
+        "case": "dev_11_repeated_sizes",
+        "candidate_T_m": 160620,
+        "baseline_T_m": 161120,
+        "candidate_kpi": 0.9948761050927656,
+        "baseline_kpi": 0.991788728897716,
+        "kpi_delta": 0.003087376195049618,
+        "dp": {
+          "scored_decisions": 2520,
+          "changed_selections": 1149,
+          "first_activation_event": 5986,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 261
+        }
+      },
+      {
+        "case": "dev_12_large_recent",
+        "candidate_T_m": 14460,
+        "baseline_T_m": 14480,
+        "candidate_kpi": 0.9970262793914246,
+        "baseline_kpi": 0.9956491712707183,
+        "kpi_delta": 0.0013771081207063496,
+        "dp": {
+          "scored_decisions": 9492,
+          "changed_selections": 6242,
+          "first_activation_event": 4098,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 773
+        }
+      },
+      {
+        "case": "dev_13_large_recent",
+        "candidate_T_m": 46460,
+        "baseline_T_m": 46460,
+        "candidate_kpi": 0.9976108480413258,
+        "baseline_kpi": 0.9976108480413258,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 7707,
+          "changed_selections": 1729,
+          "first_activation_event": 4098,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 783
+        }
+      },
+      {
+        "case": "dev_14_large_recent",
+        "candidate_T_m": 34500,
+        "baseline_T_m": 34560,
+        "candidate_kpi": 0.9960869565217392,
+        "baseline_kpi": 0.9943576388888888,
+        "kpi_delta": 0.0017293176328503357,
+        "dp": {
+          "scored_decisions": 9932,
+          "changed_selections": 1844,
+          "first_activation_event": 4098,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 667
+        }
+      },
+      {
+        "case": "dev_15_large_recent",
+        "candidate_T_m": 28040,
+        "baseline_T_m": 28140,
+        "candidate_kpi": 0.9920114122681883,
+        "baseline_kpi": 0.9884861407249467,
+        "kpi_delta": 0.0035252715432416704,
+        "dp": {
+          "scored_decisions": 2825,
+          "changed_selections": 856,
+          "first_activation_event": 4098,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 438
+        }
+      },
+      {
+        "case": "dev_16_large_recent",
+        "candidate_T_m": 24840,
+        "baseline_T_m": 24820,
+        "candidate_kpi": 0.9902173913043478,
+        "baseline_kpi": 0.9910153102336825,
+        "kpi_delta": -0.0007979189293346733,
+        "dp": {
+          "scored_decisions": 5658,
+          "changed_selections": 773,
+          "first_activation_event": 4098,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 499
+        }
+      },
+      {
+        "case": "dev_17_large_recent",
+        "candidate_T_m": 64900,
+        "baseline_T_m": 64880,
+        "candidate_kpi": 0.9958243451463791,
+        "baseline_kpi": 0.9961313193588163,
+        "kpi_delta": -0.00030697421243719436,
+        "dp": {
+          "scored_decisions": 7198,
+          "changed_selections": 631,
+          "first_activation_event": 4098,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 596
+        }
+      },
+      {
+        "case": "dev_18_frames",
+        "candidate_T_m": 1660,
+        "baseline_T_m": 1660,
+        "candidate_kpi": 0.9789156626506024,
+        "baseline_kpi": 0.9789156626506024,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_19_frames",
+        "candidate_T_m": 9760,
+        "baseline_T_m": 9760,
+        "candidate_kpi": 0.9980532786885246,
+        "baseline_kpi": 0.9980532786885246,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_20_frames",
+        "candidate_T_m": 87420,
+        "baseline_T_m": 87420,
+        "candidate_kpi": 0.9884351407000687,
+        "baseline_kpi": 0.9884351407000687,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 249,
+          "changed_selections": 172,
+          "first_activation_event": 18890,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 26
+        }
+      },
+      {
+        "case": "dev_21_frames",
+        "candidate_T_m": 8740,
+        "baseline_T_m": 8700,
+        "candidate_kpi": 0.9559496567505721,
+        "baseline_kpi": 0.9603448275862069,
+        "kpi_delta": -0.004395170835634787,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_22_frames",
+        "candidate_T_m": 27140,
+        "baseline_T_m": 27180,
+        "candidate_kpi": 0.9745025792188652,
+        "baseline_kpi": 0.9730684326710817,
+        "kpi_delta": 0.0014341465477835103,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_23_frames",
+        "candidate_T_m": 90220,
+        "baseline_T_m": 90260,
+        "candidate_kpi": 0.998492573708712,
+        "baseline_kpi": 0.9980500775537336,
+        "kpi_delta": 0.0004424961549783779,
+        "dp": {
+          "scored_decisions": 204,
+          "changed_selections": 135,
+          "first_activation_event": 19174,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 14
+        }
+      },
+      {
+        "case": "dev_24_micro",
+        "candidate_T_m": 140,
+        "baseline_T_m": 140,
+        "candidate_kpi": 0.21428571428571427,
+        "baseline_kpi": 0.21428571428571427,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_25_micro",
+        "candidate_T_m": 200,
+        "baseline_T_m": 200,
+        "candidate_kpi": 0.32,
+        "baseline_kpi": 0.32,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_26_micro",
+        "candidate_T_m": 260,
+        "baseline_T_m": 260,
+        "candidate_kpi": 0.5115384615384615,
+        "baseline_kpi": 0.5115384615384615,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_27_micro",
+        "candidate_T_m": 320,
+        "baseline_T_m": 320,
+        "candidate_kpi": 0.41875,
+        "baseline_kpi": 0.41875,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_28_micro",
+        "candidate_T_m": 420,
+        "baseline_T_m": 420,
+        "candidate_kpi": 0.22142857142857142,
+        "baseline_kpi": 0.22142857142857142,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      },
+      {
+        "case": "dev_29_micro",
+        "candidate_T_m": 420,
+        "baseline_T_m": 420,
+        "candidate_kpi": 0.6404761904761904,
+        "baseline_kpi": 0.6404761904761904,
+        "kpi_delta": 0.0,
+        "dp": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        }
+      }
+    ],
+    "max_cpu_s": 1.137304,
+    "max_rss_mib": 12.09375
+  },
+  "limitations": [
+    "The rate model treats requests as evenly exposed to every fitting gap and uses one global deletion hazard; it omits correlations between size, address, and survival.",
+    "Open15 score improvement came only from case 15; the mechanism was inactive in Open cases 11 and 13 at the chosen large-state gate.",
+    "The fresh/dev screen is small development evidence: 8 wins, 3 regressions, 19 ties and mean KPI delta +0.0005216676 versus campaign C199; it is not an independent holdout or proof of broad generalization.",
+    "The <=512 computational fallback can skip the DP in states with a larger first-overflow candidate domain."
+  ],
+  "evaluation": {
+    "open15": {
+      "candidate_weighted_score": 30.085297532529577,
+      "baseline_seed": "seed_public_best",
+      "baseline_weighted_score": 30.078763164118683,
+      "weighted_score_delta": 0.0065343684108931654,
+      "case_count": 15,
+      "correct_cases": 15,
+      "max_cpu_s": 1.137304,
+      "max_rss_mib": 12.09375,
+      "dp_activation_by_case": {
+        "1": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "2": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "3": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "4": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "5": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "6": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "7": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "8": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "9": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "10": {
+          "scored_decisions": 919,
+          "changed_selections": 0,
+          "first_activation_event": 4098,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 38
+        },
+        "11": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "12": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "13": {
+          "scored_decisions": 0,
+          "changed_selections": 0,
+          "first_activation_event": 0,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 0
+        },
+        "14": {
+          "scored_decisions": 17411,
+          "changed_selections": 405,
+          "first_activation_event": 4106,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 590
+        },
+        "15": {
+          "scored_decisions": 55214,
+          "changed_selections": 9060,
+          "first_activation_event": 6723,
+          "cap_fallbacks": 0,
+          "model_rebuilds": 5229
+        }
+      },
+      "only_changed_case": "15"
+    },
+    "fresh_dev": {
+      "baseline": "campaign C199 baseline-fresh.json",
+      "case_count": 30,
+      "correct_cases": 30,
+      "wins": 8,
+      "regressions": 3,
+      "ties": 19,
+      "mean_kpi_delta": 0.0005216675971692509,
+      "worst_kpi_delta": -0.004395170835634787,
+      "max_cpu_s": 0.21134199999999997,
+      "max_rss_mib": 4.8125,
+      "dp_active_cases": [
+        "dev_01_recent_growth_shift",
+        "dev_04_fifo_size_drift",
+        "dev_10_repeated_sizes",
+        "dev_11_repeated_sizes",
+        "dev_12_large_recent",
+        "dev_13_large_recent",
+        "dev_14_large_recent",
+        "dev_15_large_recent",
+        "dev_16_large_recent",
+        "dev_17_large_recent",
+        "dev_20_frames",
+        "dev_23_frames"
+      ],
+      "per_case": [
+        {
+          "case": "dev_00_recent_growth_shift",
+          "candidate_T_m": 30480,
+          "baseline_T_m": 30480,
+          "candidate_kpi": 0.9538713910761155,
+          "baseline_kpi": 0.9538713910761155,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_01_recent_growth_shift",
+          "candidate_T_m": 94120,
+          "baseline_T_m": 94540,
+          "candidate_kpi": 0.9472481937951551,
+          "baseline_kpi": 0.9430399830759467,
+          "kpi_delta": 0.004208210719208405,
+          "dp": {
+            "scored_decisions": 1495,
+            "changed_selections": 198,
+            "first_activation_event": 10605,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 176
+          }
+        },
+        {
+          "case": "dev_02_recent_stationary",
+          "candidate_T_m": 17640,
+          "baseline_T_m": 17640,
+          "candidate_kpi": 0.9619047619047619,
+          "baseline_kpi": 0.9619047619047619,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_03_recent_stationary",
+          "candidate_T_m": 21700,
+          "baseline_T_m": 21700,
+          "candidate_kpi": 0.9641935483870968,
+          "baseline_kpi": 0.9641935483870968,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_04_fifo_size_drift",
+          "candidate_T_m": 103520,
+          "baseline_T_m": 103520,
+          "candidate_kpi": 0.9971309891808346,
+          "baseline_kpi": 0.9971309891808346,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 2297,
+            "changed_selections": 381,
+            "first_activation_event": 6740,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 287
+          }
+        },
+        {
+          "case": "dev_05_fifo_size_drift",
+          "candidate_T_m": 54820,
+          "baseline_T_m": 54820,
+          "candidate_kpi": 0.997318496898942,
+          "baseline_kpi": 0.997318496898942,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_06_random_mixture",
+          "candidate_T_m": 42240,
+          "baseline_T_m": 42240,
+          "candidate_kpi": 0.961813446969697,
+          "baseline_kpi": 0.961813446969697,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_07_random_mixture",
+          "candidate_T_m": 42420,
+          "baseline_T_m": 42420,
+          "candidate_kpi": 0.9562706270627063,
+          "baseline_kpi": 0.9562706270627063,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_08_cohort_release",
+          "candidate_T_m": 25140,
+          "baseline_T_m": 25140,
+          "candidate_kpi": 0.307557677008751,
+          "baseline_kpi": 0.307557677008751,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_09_cohort_release",
+          "candidate_T_m": 11500,
+          "baseline_T_m": 11500,
+          "candidate_kpi": 0.05417391304347826,
+          "baseline_kpi": 0.05417391304347826,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_10_repeated_sizes",
+          "candidate_T_m": 158980,
+          "baseline_T_m": 159840,
+          "candidate_kpi": 0.9936407095232105,
+          "baseline_kpi": 0.9882945445445446,
+          "kpi_delta": 0.005346164978665913,
+          "dp": {
+            "scored_decisions": 2935,
+            "changed_selections": 1653,
+            "first_activation_event": 5917,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 272
+          }
+        },
+        {
+          "case": "dev_11_repeated_sizes",
+          "candidate_T_m": 160620,
+          "baseline_T_m": 161120,
+          "candidate_kpi": 0.9948761050927656,
+          "baseline_kpi": 0.991788728897716,
+          "kpi_delta": 0.003087376195049618,
+          "dp": {
+            "scored_decisions": 2520,
+            "changed_selections": 1149,
+            "first_activation_event": 5986,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 261
+          }
+        },
+        {
+          "case": "dev_12_large_recent",
+          "candidate_T_m": 14460,
+          "baseline_T_m": 14480,
+          "candidate_kpi": 0.9970262793914246,
+          "baseline_kpi": 0.9956491712707183,
+          "kpi_delta": 0.0013771081207063496,
+          "dp": {
+            "scored_decisions": 9492,
+            "changed_selections": 6242,
+            "first_activation_event": 4098,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 773
+          }
+        },
+        {
+          "case": "dev_13_large_recent",
+          "candidate_T_m": 46460,
+          "baseline_T_m": 46460,
+          "candidate_kpi": 0.9976108480413258,
+          "baseline_kpi": 0.9976108480413258,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 7707,
+            "changed_selections": 1729,
+            "first_activation_event": 4098,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 783
+          }
+        },
+        {
+          "case": "dev_14_large_recent",
+          "candidate_T_m": 34500,
+          "baseline_T_m": 34560,
+          "candidate_kpi": 0.9960869565217392,
+          "baseline_kpi": 0.9943576388888888,
+          "kpi_delta": 0.0017293176328503357,
+          "dp": {
+            "scored_decisions": 9932,
+            "changed_selections": 1844,
+            "first_activation_event": 4098,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 667
+          }
+        },
+        {
+          "case": "dev_15_large_recent",
+          "candidate_T_m": 28040,
+          "baseline_T_m": 28140,
+          "candidate_kpi": 0.9920114122681883,
+          "baseline_kpi": 0.9884861407249467,
+          "kpi_delta": 0.0035252715432416704,
+          "dp": {
+            "scored_decisions": 2825,
+            "changed_selections": 856,
+            "first_activation_event": 4098,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 438
+          }
+        },
+        {
+          "case": "dev_16_large_recent",
+          "candidate_T_m": 24840,
+          "baseline_T_m": 24820,
+          "candidate_kpi": 0.9902173913043478,
+          "baseline_kpi": 0.9910153102336825,
+          "kpi_delta": -0.0007979189293346733,
+          "dp": {
+            "scored_decisions": 5658,
+            "changed_selections": 773,
+            "first_activation_event": 4098,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 499
+          }
+        },
+        {
+          "case": "dev_17_large_recent",
+          "candidate_T_m": 64900,
+          "baseline_T_m": 64880,
+          "candidate_kpi": 0.9958243451463791,
+          "baseline_kpi": 0.9961313193588163,
+          "kpi_delta": -0.00030697421243719436,
+          "dp": {
+            "scored_decisions": 7198,
+            "changed_selections": 631,
+            "first_activation_event": 4098,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 596
+          }
+        },
+        {
+          "case": "dev_18_frames",
+          "candidate_T_m": 1660,
+          "baseline_T_m": 1660,
+          "candidate_kpi": 0.9789156626506024,
+          "baseline_kpi": 0.9789156626506024,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_19_frames",
+          "candidate_T_m": 9760,
+          "baseline_T_m": 9760,
+          "candidate_kpi": 0.9980532786885246,
+          "baseline_kpi": 0.9980532786885246,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_20_frames",
+          "candidate_T_m": 87420,
+          "baseline_T_m": 87420,
+          "candidate_kpi": 0.9884351407000687,
+          "baseline_kpi": 0.9884351407000687,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 249,
+            "changed_selections": 172,
+            "first_activation_event": 18890,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 26
+          }
+        },
+        {
+          "case": "dev_21_frames",
+          "candidate_T_m": 8740,
+          "baseline_T_m": 8700,
+          "candidate_kpi": 0.9559496567505721,
+          "baseline_kpi": 0.9603448275862069,
+          "kpi_delta": -0.004395170835634787,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_22_frames",
+          "candidate_T_m": 27140,
+          "baseline_T_m": 27180,
+          "candidate_kpi": 0.9745025792188652,
+          "baseline_kpi": 0.9730684326710817,
+          "kpi_delta": 0.0014341465477835103,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_23_frames",
+          "candidate_T_m": 90220,
+          "baseline_T_m": 90260,
+          "candidate_kpi": 0.998492573708712,
+          "baseline_kpi": 0.9980500775537336,
+          "kpi_delta": 0.0004424961549783779,
+          "dp": {
+            "scored_decisions": 204,
+            "changed_selections": 135,
+            "first_activation_event": 19174,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 14
+          }
+        },
+        {
+          "case": "dev_24_micro",
+          "candidate_T_m": 140,
+          "baseline_T_m": 140,
+          "candidate_kpi": 0.21428571428571427,
+          "baseline_kpi": 0.21428571428571427,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_25_micro",
+          "candidate_T_m": 200,
+          "baseline_T_m": 200,
+          "candidate_kpi": 0.32,
+          "baseline_kpi": 0.32,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_26_micro",
+          "candidate_T_m": 260,
+          "baseline_T_m": 260,
+          "candidate_kpi": 0.5115384615384615,
+          "baseline_kpi": 0.5115384615384615,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_27_micro",
+          "candidate_T_m": 320,
+          "baseline_T_m": 320,
+          "candidate_kpi": 0.41875,
+          "baseline_kpi": 0.41875,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_28_micro",
+          "candidate_T_m": 420,
+          "baseline_T_m": 420,
+          "candidate_kpi": 0.22142857142857142,
+          "baseline_kpi": 0.22142857142857142,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        },
+        {
+          "case": "dev_29_micro",
+          "candidate_T_m": 420,
+          "baseline_T_m": 420,
+          "candidate_kpi": 0.6404761904761904,
+          "baseline_kpi": 0.6404761904761904,
+          "kpi_delta": 0.0,
+          "dp": {
+            "scored_decisions": 0,
+            "changed_selections": 0,
+            "first_activation_event": 0,
+            "cap_fallbacks": 0,
+            "model_rebuilds": 0
+          }
+        }
+      ]
+    },
+    "overall_max_cpu_s": 1.137304,
+    "overall_max_rss_mib": 12.09375,
+    "interpretation": "Open15 gain is entirely case 15 (300 m less trench); DP did not activate in Open cases 11 or 13 under the >4096 ordinary-large gate. Fresh/dev mean gain is small, with three regressions; this is promising local evidence, not broad generalization."
+  }
+}

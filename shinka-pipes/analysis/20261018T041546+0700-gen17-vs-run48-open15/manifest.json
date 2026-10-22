@@ -1,0 +1,209 @@
+{
+  "status": "completed",
+  "started_at": "2026-10-18T04:16:44.406951+07:00",
+  "dataset": "Open15",
+  "authorization": "User requested checking generation 17 and the candidate scoring 29.79021 on Open15.",
+  "candidate_count": 2,
+  "case_count_per_candidate": 15,
+  "workers": 2,
+  "fitness": "sum of official test weight * final occupied length / final trench length",
+  "limits": {
+    "cpu_seconds_exclusive": 5,
+    "rss_mib_exclusive": 256,
+    "response_timeout_seconds": 5,
+    "wall_timeout_seconds": 180
+  },
+  "source_origins": {
+    "gen17": {
+      "path": "/Users/555tery/techarena/shinka-pipes/search-v2/runs/20261018T025030+0700-native/gen_17/main.cpp",
+      "sha256": "cbd4e966ae32a164c31b98316d64113cf84735fb8e10706587eb8f8086e87dfb"
+    },
+    "run48": {
+      "path": "/Users/555tery/techarena/results/pipes/improvement/run48_qualification/sources/run-48.cpp",
+      "sha256": "95d662fff63be90146b5ebddeff43ce4b551f34b8de5351513ba33f53be55b39"
+    }
+  },
+  "input_sha256": {
+    "1.in": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+    "2.in": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+    "3.in": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+    "4.in": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+    "5.in": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+    "6.in": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+    "7.in": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+    "8.in": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+    "9.in": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+    "10.in": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+    "11.in": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "12.in": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+    "13.in": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+    "14.in": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+    "15.in": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+  },
+  "historical_run48_summary": {
+    "path": "/Users/555tery/techarena/results/pipes/improvement/run48_qualification/runs/open15/run-48/summary.json",
+    "sha256": "6a7c9425ffc2e10242937054ce8198127941b3517fe335b31e80492d454eb13d"
+  },
+  "engine": "native-direct-v1",
+  "reference": {
+    "snapshot_sha256": "75f5aa18525a00bb83b18fd8dfbbbbdde88da0d877cb0c357bc8aabca87876d7",
+    "checked_files": {
+      "search-v2/generate.py": "2e0e4af96d52292705659e918dcef3b6a91ba4e8d32a36f8e54061ddf18462f6",
+      "search-v2/evaluator.py": "1e410eead984ecc9e59d1348642da3900a42fac766662d8fb0c6d073ff6b8ebe",
+      "search-v2/manage.py": "15c81aaf507aba03b1988a26cceb6ff5da133b11056a527dd850e5c4590e8ff0",
+      "search-v2/headless_bridge.py": "d188923ae261def1e9dced5593a9eef7cfea9655bd54afb4b406580ec8295e23",
+      "search-v2/run.sh": "d543620e3e61c097c259b2309f644c1047e93f9ff175afb24ab8bea0d36ca36a",
+      "search-v2/headless.sh": "f7d883a873214c6cd7191c7c2e2b070079b0ac1864812aebd522afcc7f4cfb37",
+      "search-v2/protocol.json": "bfcbf0bbd57c493d0774898fe016ad58ac84f9208e38b04c1377e2003c483da8",
+      "search-v2/task/initial.cpp": "e3ee5b3551a2b46fe166ca29414c5c1703aa6f9397b49aa776c9c3e8f4f4de7e",
+      "search-v2/task/evaluate.py": "88e4225afe92d9c4c533ff29be04b56da43cb7a8b49c873227621a2963ca5d65",
+      "search-v2/task/AGENTS.md": "aca31c4e5708c1cb2606e6e4e4deaea8af607362dcec43d883fef6fbadddbe26",
+      "search-v2/task/shinka.yaml": "19d7172b46f39d051720afd0dbefe9a74982ffb05adccbc98b62869b5810a640",
+      "search-v2/task/vendor/interactor.cpp": "85672e4c3ad9fdcb97d8b601758de1f1d1b5e86d6dd20252e0f72acdb9cb122a",
+      "search-v2/task/vendor/testlib.h": "235f0501f13c94ec46778a2ef264359e559222413d4e39b8b49680be77925a74",
+      "search-v2/task/tools/pipes_harness.py": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+      "search-v2/task/data/search/manifest.json": "4b15df6da2365c57ce4e090ef917021cb1555b1bfc9eb5673bf1281c8a9fd531",
+      "search-v2/research/prompt.txt": "1b54f23e52e64fad156e4f9db64317528f5ed198fcd6fab57d681be2fd48830f",
+      "search-v2/research/sources.json": "e2b5899f941560a210d7ed8fb3cb9c0520db8a496dc01f6d6ed836977776f482",
+      "search-v2/research/hypotheses.json": "1e4d9dbb5d5fbbf5e3b8680372fd91220ef64d2097b17e52e940c851235542ab",
+      "search-v2/research/reviewed-code.json": "34a9daed21d8b75862730c2a0225c37cccb994e3ef88fe8746d2ebf0149e1862",
+      "search-v2/research/ALLOCATOR_IDEAS.md": "8c4123cada6a269d06ac3f5c0dbfe0de6b8b8c42ad7b7e478106433d99d97373",
+      "search-v2/research/IDEAS.md": "a327ce3b7a91a369a4bbe321e7bce7dec0aed1738a5c72cbb4bf47f24c6818f0",
+      "search-v2/README.md": "9e8a86a7c9c94e6d1d260bc0e3292d35223d2ef88f2055555e24ef72b8e594dc",
+      "search-v2/research/ALLOCATORS.md": "8a91d02e92d248c6d5b29fc37220232e49cd32e7f7b4e434eb63a442b262cf47",
+      "search-v2/research/allocator-review.json": "e267c0ecd0290fef1acff81e5f60eee3a955828d9e631748cde79e3bd6e4ab43",
+      "search-v2/model-selection.json": "c0368d73d59ffdbb6e9de4f953dca7d78a6882d0dd3ddd9b25ebfdf5f3ebdb21",
+      "search-v2/test_preparation.py": "3302f2c3226b039bab73f9b9be5f47f284c879129c21a70b08f14c4f64646c7f",
+      "search-v2/patch_repair.py": "f2a381db9f61657ef535428e043294ddb91905ac8aae6b35eab4efe9ae7bb0cf",
+      "search-v2/test_patch_repair.py": "d84d66aa3ead8f1a6198dcfa3897e2980816d90caf1dbaba56a043e5b8d06dc4",
+      "search-v2/patch-repair-policy.json": "843e3995a4bd07b7d1006942bfd6c1716b31830961f33d1fe70e6f07596f1958",
+      "synthetic_eval.py": "d7fe1157383c90d75dfd702789add99e6cca9e2bb754d452638a6e6af21d1381",
+      "generate_synthetic.py": "4ae9edc796749765dae53679cc7050fd459aceb74974719847ad4c66727aae38",
+      "local_runtime.py": "a883896467117baef193dfc39842c1648cc935653cec1c8f0cba8cfe082c5bd7",
+      "runtime/package-lock.json": "c759db21abc42a9b90779586c0e488810a8aaca94a6c82cd5eb370483898f78d"
+    }
+  },
+  "native_harness_sha256": "8672dd34e31b3a91a2edd057598429f236044fa0c2ec092761c48ad93a8d0d71",
+  "comparison_script_sha256": "0271e90212394f5293cffeda512fd36cf5a284bbbb4419ab15c4ef29edb3fa8d",
+  "validation_accessed": false,
+  "evolution_started": false,
+  "shinka_run_modified": false,
+  "platform_accessed": false,
+  "result_not_injected_into_search_feedback": true,
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+  "checker_build": {
+    "command": [
+      "/usr/bin/g++",
+      "-O2",
+      "-std=c++17",
+      "-pipe",
+      "-pthread",
+      "-I",
+      "/Users/555tery/techarena/shinka-pipes/search-v2/task/vendor",
+      "-I",
+      "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/checker",
+      "/Users/555tery/techarena/shinka-pipes/evaluator-native/native_runner.cpp",
+      "-o",
+      "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/checker/native_runner"
+    ],
+    "official_source_sha256": "85672e4c3ad9fdcb97d8b601758de1f1d1b5e86d6dd20252e0f72acdb9cb122a",
+    "testlib_sha256": "235f0501f13c94ec46778a2ef264359e559222413d4e39b8b49680be77925a74",
+    "adapter_sha256": "888510550ce8eabc315fb5c5de2ad4345ca98797c89830404070cc2dc256e5a8",
+    "transformed_source_sha256": "cfa2843cf3396977017e6a00ad11a515b1538db3218074afebc16fc15fb3e312",
+    "transformations": {
+      "tout << cnt << \" \" << shift << endl;": "tout << cnt << \" \" << shift << '\\n';",
+      "tout << shift << endl;": "tout << shift << '\\n';"
+    },
+    "binary_sha256": "0b62cb0a755aaab7529c1dfafb82deb1d12174ce01aca460c09864054d8e5ab7"
+  },
+  "builds": {
+    "gen17": {
+      "command": [
+        "/usr/bin/g++",
+        "-O2",
+        "-std=c++20",
+        "-pipe",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/sources/gen17.cpp",
+        "-o",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/binaries/gen17"
+      ],
+      "binary_sha256": "f93e02c2b102ef64d9ee3cb3c71ccd24c221c3f3faf3b1c050d1a011d6187b2b"
+    },
+    "run48": {
+      "command": [
+        "/usr/bin/g++",
+        "-O2",
+        "-std=c++20",
+        "-pipe",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/sources/run48.cpp",
+        "-o",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/binaries/run48"
+      ],
+      "binary_sha256": "bd2e4bab2a7537a1327a1f2cb6e37bedb9128dbcd30f749a0922325e9e460733"
+    }
+  },
+  "executions": {
+    "gen17": {
+      "command": [
+        "/Users/555tery/techarena/shinka-pipes/.venv/bin/python",
+        "-B",
+        "/Users/555tery/techarena/shinka-pipes/evaluator-native/native_harness.py",
+        "--workers",
+        "2",
+        "--solver",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/binaries/gen17",
+        "--name",
+        "gen17",
+        "--interactor",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/checker/native_runner",
+        "--tests",
+        "/Users/555tery/techarena/data/pipes/open",
+        "--out",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/runs/gen17",
+        "--response-timeout",
+        "5",
+        "--wall-timeout",
+        "180",
+        "--cpu-limit",
+        "5",
+        "--memory-limit-mb",
+        "256"
+      ],
+      "returncode": 0,
+      "wall_seconds": 4.3999879170442,
+      "summary_sha256": "76bd51685db31224ceeb4dd530cbbf2ed0b3d881898760278aba3290be213156"
+    },
+    "run48": {
+      "command": [
+        "/Users/555tery/techarena/shinka-pipes/.venv/bin/python",
+        "-B",
+        "/Users/555tery/techarena/shinka-pipes/evaluator-native/native_harness.py",
+        "--workers",
+        "2",
+        "--solver",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/binaries/run48",
+        "--name",
+        "run48",
+        "--interactor",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/checker/native_runner",
+        "--tests",
+        "/Users/555tery/techarena/data/pipes/open",
+        "--out",
+        "/Users/555tery/techarena/shinka-pipes/analysis/20261018T041546+0700-gen17-vs-run48-open15/runs/run48",
+        "--response-timeout",
+        "5",
+        "--wall-timeout",
+        "180",
+        "--cpu-limit",
+        "5",
+        "--memory-limit-mb",
+        "256"
+      ],
+      "returncode": 0,
+      "wall_seconds": 2.8073193749878556,
+      "summary_sha256": "5da57c9632c98ad73379cee6cbbb0ee1ea45f818172dc56a59b0bbc1265b37bc"
+    }
+  },
+  "finished_at": "2026-10-18T04:16:55.881476+07:00",
+  "comparison_sha256": "6cc23ca666d669f0ead113cabfe2949c95afb7dfeb165468622f72c343dc5b54"
+}

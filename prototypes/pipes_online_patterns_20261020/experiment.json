@@ -1,0 +1,23 @@
+{
+  "scope": "New user-authorized local round: diagnose the previous 23 losses, improve the causal online core, and test transfer to new patterned and unpatterned streams. No platform actions.",
+  "baseline": "../pipes_online_core_20261020/release/solution.cpp",
+  "baseline_sha256": "57c047da7ae9939d9d86dfb050458f22e1a189ec43c5fb621c578bee324821d9",
+  "legacy_control": "../pipes_online_core_20261020/candidates/baseline/solution.cpp",
+  "legacy_sha256": "12c976b59455f86d322413f55ffc4f16777c4cfa4393b933902d3fd89fa317c1",
+  "development": "Both previous rounds calibration64+final128 are observed DEV384. The 23 loss cases are targeted diagnostics, not independent evidence. Open15 weighted score is a declared objective.",
+  "budget": "At most five fixed causal hypotheses (two agent, three primary) and one combination of distinct mechanisms. No threshold grid. At most three candidates enter new calibration. Freeze one selection before final; no tuning after final.",
+  "hypotheses": [
+    "Demand stability gating with reversible confidence",
+    "Blended short and long demand memory",
+    "MC abstention when its continuation policy differs from the active DP",
+    "Refreshing demand value when the physical gap supply changes",
+    "Shrunk conditional demand from observed size transitions"
+  ],
+  "fresh_design": "Independent generator: calibration96, final192, stress4x200000; equal stable_patterns, changing_patterns, neutral, public_prefix strata. Final compositions/schedules/parameter ranges differ. No score-based rejection. Prefix evidence intentionally reuses known prefixes.",
+  "development_gate": "Paired whole-stream mean KPI on DEV384 >= current baseline. No DEV loss worse than -0.02. The mean over the 23 targeted cases must not decrease. Preserve at least 95% of the previous improvement over legacy on previous online_core final128. Select at most three distinct candidates by total-score sensitivity and targeted loss recovery; raw target count alone is not the objective.",
+  "calibration_gate": "All valid and resource-safe; each stratum family-macro >= current baseline-0.002; every case retention>=0.95; equal-four-stratum mean KPI gain>0. Eligible policies compete with current baseline using minimax regret of Open15+84*stratum_macro across the four pure-stratum endpoints. Within0.02 score tie, keep baseline or simpler source. No edits based on new calibration.",
+  "final_gate": "Selected frozen candidate must have positive equal-stratum KPI gain and positive equal-stratum total-score delta, positive mean gain across stable+changing patterns, each stratum macro >= baseline-0.002, every case retention>=0.95, and worst total-score endpoint delta >= -0.05. All official interactive validation and local resource checks must pass. Otherwise retain the previous release; no final retuning.",
+  "resources": "Single solver worker, CPU user+system <5s and RSS<256MiB locally. Windows10 Pentium Gold G5420 native timing remains unverified; do not infer it from macOS timings.",
+  "evidence": "Report family-block bootstrap descriptively, all losses and gains, source/input hashes, exact split provenance and total-score scenarios. Synthetic results do not guarantee official hidden performance.",
+  "source_policy": "Keep previous frozen/canonical sources unchanged. Independent generator does not read candidate sources or results. Candidate agents do not read fresh inputs or results. No recursive agents."
+}

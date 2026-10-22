@@ -1,0 +1,17 @@
+{
+  "created_utc": "2026-10-21T10:25:51.787536+00:00",
+  "objective": "Fix remaining Cangjie 1.0.5 TLE on Open15 without changing allocator decisions/KPI; validate all2637 and independent traces before another submission.",
+  "baseline_source": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/baseline/solution.cj",
+  "baseline_source_sha256": "308d230d99b4bfd52838b9f0ff1086c8838c2ff3e05ea296903c78f1947b14cc",
+  "previous_submission": 1667365,
+  "previous_verdict": "AAAAAAAAAAAAAAT",
+  "previous_score": 20.50542,
+  "server_source_bytes_verified": false,
+  "limits": {
+    "cpu_s": 5,
+    "rss_mib": 256
+  },
+  "threads": 1,
+  "cjProcessorNum": 1,
+  "scope": "Performance only, frozen policy/replay/thresholds/RNG/FP formula ordering. Old search campaigns remain stopped."
+}

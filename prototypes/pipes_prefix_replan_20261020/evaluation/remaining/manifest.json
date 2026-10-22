@@ -1,0 +1,30 @@
+{
+  "tests": [
+    {
+      "id": "remaining-open8-p410",
+      "file": "remaining-open8-p410.in",
+      "sha256": "6d2de23c1ccf34e592633f066e393215ebf5d6774c9226f7dfbfa4ecbee4012d",
+      "case": 8,
+      "prefix": 410,
+      "prefix_T": 3300,
+      "prefix_BF_T": 600,
+      "predicted_KPI": 0.18181818181818182,
+      "construction": "delete every live PID, refill rounded BF trench with40m pipes",
+      "scope": "post-freeze candidate-targeted diagnostic, not independent confirmation"
+    },
+    {
+      "id": "remaining-open11-p8",
+      "file": "remaining-open11-p8.in",
+      "sha256": "1e333503c2bae8dfbe484deb61ae63f2d6d2438aac0a436e5d70d44d11a7562f",
+      "case": 11,
+      "prefix": 8,
+      "prefix_T": 440,
+      "prefix_BF_T": 40,
+      "predicted_KPI": 0.09090909090909091,
+      "construction": "delete every live PID, refill rounded BF trench with40m pipes",
+      "scope": "post-freeze candidate-targeted diagnostic, not independent confirmation"
+    }
+  ],
+  "selection_source_sha256": "6e7be8503ec78147e407735c6010179dd83bf22692f3f4d6cdd315f5276cc500",
+  "used_in_selection": false
+}

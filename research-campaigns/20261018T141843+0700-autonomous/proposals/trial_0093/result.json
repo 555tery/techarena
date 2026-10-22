@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0093",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0093/candidate_0.cpp",
+  "sha256": "cf1595487e27a318a26fe2e174b78fa984c1c323e2efe388031b2f6ffad906e1",
+  "idea": "Хранить вложенные spans уже состоявшегося coalescence и выбирать край parent щели, сохраняющий большую суммарную длину этих spans.",
+  "parent": "trial_0054",
+  "weighted_score": 28.348704975193744,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101700,
+      "kpi": 0.4999016715830875,
+      "weighted_score": 0.499901671583088
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 18460,
+      "kpi": 0.666522210184182,
+      "weighted_score": 0.666522210184182
+    },
+    {
+      "case": "11",
+      "T": 22620,
+      "kpi": 0.900132625994695,
+      "weighted_score": 0.900132625994695
+    },
+    {
+      "case": "12",
+      "T": 10360,
+      "kpi": 0.9892857142857143,
+      "weighted_score": 3.957142857142857
+    },
+    {
+      "case": "13",
+      "T": 3320,
+      "kpi": 0.9614457831325302,
+      "weighted_score": 3.845783132530121
+    },
+    {
+      "case": "14",
+      "T": 37820,
+      "kpi": 0.9969328397673188,
+      "weighted_score": 3.987731359069275
+    },
+    {
+      "case": "15",
+      "T": 441860,
+      "kpi": 0.9477142081202191,
+      "weighted_score": 9.47714208120219
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.010277210442113969,
+    "worst_delta": -0.009371261626083371,
+    "wins": 18,
+    "regressions": 9,
+    "ties": 3,
+    "worst_cases": [
+      {
+        "case": "dev_05_fifo_size_drift",
+        "delta": -0.009371261626083371,
+        "baseline_T": 54820,
+        "candidate_T": 55340
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.007127742891189226,
+        "baseline_T": 94540,
+        "candidate_T": 95260
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.005844738152877338,
+        "baseline_T": 87420,
+        "candidate_T": 87940
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.005600027736259006,
+        "baseline_T": 30480,
+        "candidate_T": 30660
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.005060659564315673,
+        "baseline_T": 90260,
+        "candidate_T": 90720
+      },
+      {
+        "case": "dev_04_fifo_size_drift",
+        "delta": -0.0009622958783833679,
+        "baseline_T": 103520,
+        "candidate_T": 103620
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8190757069137181,
+  "max_cpu_s": 0.850008,
+  "max_rss_mib": 14.28125,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0093/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0093/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792331318.6901,
+  "balanced_gate": true,
+  "hypothesis": "Геометрия завершённых освобождений может повторяться при stack/frame нагрузке. Сохранение целых исторических subspans может помочь следующим удалениям восстанавливать крупные свободные области. Например, если внутри свободной [0,20) ранее освобождалась [0,8), размещение L=12 справа сохраняет этот subspan. Это гипотеза: вложенные свидетельства коррелированы, а повторяемость освобождений не гарантирована. Патч не измерен и применяется к предоставленному слабому parent; улучшение verified best не заявляется.",
+  "causality": "После каждого deletion записывается получившийся максимальный свободный интервал. Запись сохраняется, пока новый allocation её не пересечёт. Для двух краёв выбранной parent щели точно вычисляется сумма длин уничтожаемых записей; справа размещаем только при строгом уменьшении этой суммы. Размер и адрес выбранной щели, текущие digs, длина остатка и число свободных компонентов сохраняются. Сигнал использует фактически наблюдавшиеся coalescence spans любой длины. Проверяемые observables: число переключений края, сохранённая сумма длин свидетельств, размеры реально образующихся spans после последующих deletion bursts и итоговый T на public/development. Каждая запись добавляется и удаляется не более одного раза; дополнительная сложность O(N(log N + log T)). Компиляция и лимит 5s здесь не проверены."
+}

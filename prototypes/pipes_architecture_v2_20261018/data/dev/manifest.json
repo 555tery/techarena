@@ -1,0 +1,119 @@
+{
+  "phase": "dev",
+  "created_at": 1792340847.68173,
+  "master_seed": 5475746067290673132,
+  "generator_sha256": "9b39d54e2b8ba6df2d2097a9ff3c671efa2b3f25c0d963b4bd6cddff4f980e59",
+  "streams": [
+    {
+      "name": "stationary_churn_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/stationary_churn_00.in",
+      "family": "stationary_churn",
+      "replicate": 0,
+      "n": 4000,
+      "seed": 16508979292919701080,
+      "sha256": "cab8fa23a068c271a3b5acf42c66750eb41ae181a1c0b6645abf1fd111c47e4d"
+    },
+    {
+      "name": "stationary_churn_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/stationary_churn_01.in",
+      "family": "stationary_churn",
+      "replicate": 1,
+      "n": 4000,
+      "seed": 4050609286352233973,
+      "sha256": "5a0665e3750e2738c4e8b76e24f14278a5ca88a3b0134a5d3e2bb59c5334c4ae"
+    },
+    {
+      "name": "recent_growth_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/recent_growth_00.in",
+      "family": "recent_growth",
+      "replicate": 0,
+      "n": 4000,
+      "seed": 16670046271568148640,
+      "sha256": "c7ff1056557d1485eb9d231265ceec228b8020abe08ca54cd4fbfbdc005f115a"
+    },
+    {
+      "name": "recent_growth_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/recent_growth_01.in",
+      "family": "recent_growth",
+      "replicate": 1,
+      "n": 4000,
+      "seed": 14341198147569623207,
+      "sha256": "2f035ba68e6a77aae294da09850d2d104eb6a658fb90f90f73fd0e4ed49ff927"
+    },
+    {
+      "name": "cohort_retirement_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/cohort_retirement_00.in",
+      "family": "cohort_retirement",
+      "replicate": 0,
+      "n": 4000,
+      "seed": 11878640901355846430,
+      "sha256": "4549133964651322e3fdcbfc31d1721d77bd619ab65b2bf9e8a4f072fda40c5b"
+    },
+    {
+      "name": "cohort_retirement_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/cohort_retirement_01.in",
+      "family": "cohort_retirement",
+      "replicate": 1,
+      "n": 4000,
+      "seed": 7803332208303505049,
+      "sha256": "016ebcdc79ccadf422cb5be8033593c4252388ad1f20cc9c0693db5c6ac78afa"
+    },
+    {
+      "name": "size_blocks_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/size_blocks_00.in",
+      "family": "size_blocks",
+      "replicate": 0,
+      "n": 4000,
+      "seed": 17077942222427281683,
+      "sha256": "f4cf14219290d58f23b12b7df629a0311a55b19f05332776d4c5326b7deb8b1f"
+    },
+    {
+      "name": "size_blocks_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/size_blocks_01.in",
+      "family": "size_blocks",
+      "replicate": 1,
+      "n": 4000,
+      "seed": 17469899918917631835,
+      "sha256": "c5c62f05d23ecd5b20c9d64d56127972d8a82bc4d2765e8a8a8ead6f33a796ac"
+    },
+    {
+      "name": "fifo_bursts_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/fifo_bursts_00.in",
+      "family": "fifo_bursts",
+      "replicate": 0,
+      "n": 4000,
+      "seed": 14269833299370379742,
+      "sha256": "9e2fe41b48d734b96189f2eeefcb957a5db443e52853977573c9c38f8f35cdd3"
+    },
+    {
+      "name": "fifo_bursts_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/fifo_bursts_01.in",
+      "family": "fifo_bursts",
+      "replicate": 1,
+      "n": 4000,
+      "seed": 2375162903395735978,
+      "sha256": "43361526d373f56f775cc1b69a5f1b81ffecaaa2d0f81baf5628c0acbe412cc2"
+    },
+    {
+      "name": "mixed_survival_00",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/mixed_survival_00.in",
+      "family": "mixed_survival",
+      "replicate": 0,
+      "n": 4000,
+      "seed": 18164045320650606556,
+      "sha256": "0bf56d61d99e8a8f7619c34ba77cb0f868872a7884a301791dfa1e54efa7e4fb"
+    },
+    {
+      "name": "mixed_survival_01",
+      "path": "/Users/555tery/techarena/prototypes/pipes_architecture_v2_20261018/data/dev/mixed_survival_01.in",
+      "family": "mixed_survival",
+      "replicate": 1,
+      "n": 4000,
+      "seed": 17503766572611670353,
+      "sha256": "99f7176e0f66f55c8472bef5caebec6a7878717c7bcd484f22ebf711a0ffe850"
+    }
+  ],
+  "count": 12,
+  "official_inputs_read": false,
+  "scope": "Procedural pilot; final mechanisms held apart from this training, not a prediction of hidden distribution"
+}

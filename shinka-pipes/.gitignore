@@ -1,0 +1,11 @@
+.venv/
+upstream/
+headless-upstream/
+runtime/node_modules/
+runs/
+baseline-runs/
+validation-results/
+.tmp/
+__pycache__/
+*.pyc
+.env

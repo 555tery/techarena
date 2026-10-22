@@ -1,0 +1,378 @@
+{
+  "audit": "prequential rank-to-neighbor-gap/coalescence bridge",
+  "decision": "negative; no placement policy implemented; no KPI screen run",
+  "created_utc_date": "2026-10-17",
+  "canonical_source": {
+    "path": "results/pipes/final/solution.cpp",
+    "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "bytes": 38729
+  },
+  "canonical_source_expected_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "instrumented_source": {
+    "path": "results/pipes/improvement/generator_audit/geometry_replay.cpp",
+    "sha256": "7dd4f4ad84c2715d9699a11d7bdae9da4d39b6c653768edca092e13ff420a3e2",
+    "bytes": 41333
+  },
+  "instrumented_binary": {
+    "path": "results/pipes/improvement/generator_audit/geometry_replay",
+    "sha256": "09b415435d12a44f3180588b71597cbc055628ce836de54b009abc0f8b5a6009",
+    "bytes": 75584
+  },
+  "compile_command": "c++ -std=c++17 -O2 -pipe -Wall -Wextra -Wpedantic -DGENERATOR_AUDIT_LOG geometry_replay.cpp -o geometry_replay",
+  "compiler": "Apple clang version 17.0.0 (clang-1700.0.13.5)",
+  "host_platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "interactor": {
+    "path": "tools/interactor",
+    "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "bytes": 234952
+  },
+  "harness": {
+    "path": "tools/pipes_harness.py",
+    "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "bytes": 25883
+  },
+  "split": {
+    "train_initial_operations_fraction": 0.4,
+    "validation_next_operations_fraction": 0.2,
+    "test_final_operations_fraction": 0.4,
+    "cases": [
+      5,
+      8,
+      9,
+      10,
+      14,
+      15
+    ]
+  },
+  "rank_definition": "rank-from-newest permille, same as final solver; band=min(3,floor(permille*4/1001))",
+  "uncertainty": "2,000 block-bootstrap replicates; non-overlapping 128-operation blocks; CI reported per case",
+  "input_hashes": {
+    "5": {
+      "path": "data/pipes/open/5.in",
+      "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+      "bytes": 35968
+    },
+    "8": {
+      "path": "data/pipes/open/8.in",
+      "sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+      "bytes": 33198
+    },
+    "9": {
+      "path": "data/pipes/open/9.in",
+      "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+      "bytes": 40456
+    },
+    "10": {
+      "path": "data/pipes/open/10.in",
+      "sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+      "bytes": 41673
+    },
+    "14": {
+      "path": "data/pipes/open/14.in",
+      "sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+      "bytes": 79838
+    },
+    "15": {
+      "path": "data/pipes/open/15.in",
+      "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+      "bytes": 1016108
+    }
+  },
+  "existing_synthetic_rank_only_inputs_not_replayed_for_geometry": {
+    "fifo.in": {
+      "path": "results/pipes/improvement/flow_predictors/synthetic/fifo.in",
+      "sha256": "aa2ce93d418c318f7cddc03ce63098358159a5f831ad4396f0b851cac54ff3ea",
+      "bytes": 61089
+    },
+    "lifo.in": {
+      "path": "results/pipes/improvement/flow_predictors/synthetic/lifo.in",
+      "sha256": "8b44389be894077fc22be517dd7f4d1757679eb4f4bdc9067ae4329c9cc9c54d",
+      "bytes": 61002
+    },
+    "periodic_size_mod2.in": {
+      "path": "results/pipes/improvement/flow_predictors/synthetic/periodic_size_mod2.in",
+      "sha256": "0fe66e436d5f1ea6fc8c4777ad11b17a138d69cd90a7222fc94b6137135296e7",
+      "bytes": 56637
+    },
+    "random_churn.in": {
+      "path": "results/pipes/improvement/flow_predictors/synthetic/random_churn.in",
+      "sha256": "69da2b30a30cf707c750c0f74414431d10f65cec972fa17d596f9c0f74fe0fdb",
+      "bytes": 60501
+    },
+    "regime_shift_mod2.in": {
+      "path": "results/pipes/improvement/flow_predictors/synthetic/regime_shift_mod2.in",
+      "sha256": "ca65a2796a8cc80bc01b55a000a2f0725ef903c00a8c0245430d218a164220f5",
+      "bytes": 56209
+    }
+  },
+  "previous_audits": {
+    "results/pipes/improvement/flow_predictors/REPORT.md": "5b28ac8c0f3c26ab5146c52a453191f6b38d1b44f81135b1dbb9c66bc8354356",
+    "results/pipes/improvement/lifetime/REPORT.md": "a300218784eb1d04cd5825e37a12b6a3e325b258bcc323f3c594d5535709322f",
+    "results/pipes/improvement/survival_hazard/REPORT.md": "0abcc350b5cdb2aa9ad6909b7b9b0a052c873fac61b49100111d6d2d129a3de5",
+    "results/pipes/improvement/generator_audit/audit.py": "a6e8c7e7401f2dc9a6e683ff49028d1beb9b69a41a6c216e9957d4b91e8c906c",
+    "results/pipes/improvement/generator_audit/audit.json": "c11cb2c4659767baef7ee1bc09a79001a03c0ec540af907da7522a9f06249160"
+  },
+  "geometry_bridge_analysis": {
+    "path": "results/pipes/improvement/generator_audit/geometry_bridge.py",
+    "sha256": "9fb0a25f358974a07065115d43f3a639c612a37b8a6b104bd1fa6892cb216fe7",
+    "bytes": 9980
+  },
+  "geometry_bridge_results": {
+    "path": "results/pipes/improvement/generator_audit/geometry_bridge.json",
+    "sha256": "7754a64b94112f3207c2d7e6d66343cdaf537ec4e4fc5b6b0eaa790af42954c9",
+    "bytes": 86225
+  },
+  "harness_summary": {
+    "path": "results/pipes/improvement/generator_audit/geometry_runs/summary.json",
+    "sha256": "4f9af5fa4084c2fa0d9e09db178138236a26f4777a3b526a036b239e678c2c44",
+    "bytes": 38516
+  },
+  "harness_cases_csv": {
+    "path": "results/pipes/improvement/generator_audit/geometry_runs/cases.csv",
+    "sha256": "a0488aa97f3a26c8fcfb20676a499a8db654739a6675f9745863376686f4b962",
+    "bytes": 29982
+  },
+  "case_resources": {
+    "5": {
+      "status": "ok",
+      "solver_cpu_total_s": 0.21517799999999998,
+      "solver_peak_rss_mb": 3.46875,
+      "wall_orchestration_s": 1.6777297500520945,
+      "trench_length_m": 62760,
+      "kpi": 0.8100701083492671
+    },
+    "8": {
+      "status": "ok",
+      "solver_cpu_total_s": 0.21593999999999997,
+      "solver_peak_rss_mb": 2.265625,
+      "wall_orchestration_s": 2.845061249914579,
+      "trench_length_m": 4700,
+      "kpi": 0.984468085106383
+    },
+    "9": {
+      "status": "ok",
+      "solver_cpu_total_s": 0.324561,
+      "solver_peak_rss_mb": 3.265625,
+      "wall_orchestration_s": 2.4955562920076773,
+      "trench_length_m": 61960,
+      "kpi": 0.5083925112976113
+    },
+    "10": {
+      "status": "ok",
+      "solver_cpu_total_s": 0.254866,
+      "solver_peak_rss_mb": 2.59375,
+      "wall_orchestration_s": 3.6391081659821793,
+      "trench_length_m": 15380,
+      "kpi": 0.8
+    },
+    "14": {
+      "status": "ok",
+      "solver_cpu_total_s": 0.34401699999999996,
+      "solver_peak_rss_mb": 3.8125,
+      "wall_orchestration_s": 5.0153201669454575,
+      "trench_length_m": 37820,
+      "kpi": 0.9969328397673188
+    },
+    "15": {
+      "status": "ok",
+      "solver_cpu_total_s": 6.2539370000000005,
+      "solver_peak_rss_mb": 9.375,
+      "wall_orchestration_s": 46.50934504100587,
+      "trench_length_m": 438920,
+      "kpi": 0.9540622436890549
+    }
+  },
+  "case_output_hashes": {
+    "5": {
+      "solver_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/5/solver_stderr.txt",
+        "sha256": "999e08598a7e4b3ce380c90f706df1d7810505ebf4e8caca750fabc8d372c62e",
+        "bytes": 152740
+      },
+      "judge_output.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/5/judge_output.txt",
+        "sha256": "e78bb7900ad184037e578f13012eaae1cb8d854700ee7ddc520ac6c8a113bb63",
+        "bytes": 50569
+      },
+      "interactor_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/5/interactor_stderr.txt",
+        "sha256": "dfdc884b03bed6f6e0b9676bb5b64c873e68982fd215e7a918ff440eecaa6677",
+        "bytes": 76
+      },
+      "score.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/5/score.txt",
+        "sha256": "fdfdf07cc7a3da7cf49c35f5750267a2ef24157d2576f161c13d405b36ade81a",
+        "bytes": 12
+      }
+    },
+    "8": {
+      "solver_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/8/solver_stderr.txt",
+        "sha256": "de00324d1b2baf05f6c00fbd6bfeebc562a89263ba249ed703c3e5e72df4e613",
+        "bytes": 176833
+      },
+      "judge_output.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/8/judge_output.txt",
+        "sha256": "a86800267292840409a96208bfeeb69c2eb787b30cdbed16e34b4199345c3cad",
+        "bytes": 36693
+      },
+      "interactor_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/8/interactor_stderr.txt",
+        "sha256": "a5a2aa359e028d245c981ccca4192bb73be4a6cb3c9c146d5b4982b1e0c4fe1a",
+        "bytes": 74
+      },
+      "score.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/8/score.txt",
+        "sha256": "4c912e5e897d261478598359ac535e1d7fa2d9b5cd0ffc45b36241f902d28b20",
+        "bytes": 12
+      }
+    },
+    "9": {
+      "solver_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/9/solver_stderr.txt",
+        "sha256": "46757d8bbcb44cf9366293097192487fb1fbe1dfeb1c8ecf89a4ecd968b72ac6",
+        "bytes": 183191
+      },
+      "judge_output.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/9/judge_output.txt",
+        "sha256": "fc4bea23ad81727480ab7d95fcabc46c2e029f41d9ec016466557b9c00f7cc7f",
+        "bytes": 58472
+      },
+      "interactor_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/9/interactor_stderr.txt",
+        "sha256": "e21eb20fcb07cc85e099698d3bc9a4f47bd3adf1c541dee572cf5b7907f5d775",
+        "bytes": 76
+      },
+      "score.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/9/score.txt",
+        "sha256": "b0c310c79f6f2e773e5df985d81e9e8909f338eb0c4f5a4ab08ff9f3413f2d61",
+        "bytes": 12
+      }
+    },
+    "10": {
+      "solver_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/10/solver_stderr.txt",
+        "sha256": "ed4ae883dd2c6e563c0d6cfcc10a43fa32997d1d080f25bcd120c1e444f617b4",
+        "bytes": 190434
+      },
+      "judge_output.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/10/judge_output.txt",
+        "sha256": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03",
+        "bytes": 66283
+      },
+      "interactor_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/10/interactor_stderr.txt",
+        "sha256": "d32c22b6f47fe55a1ee47d665ba0924a3b310f2d487106da9be3123d923038a5",
+        "bytes": 76
+      },
+      "score.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/10/score.txt",
+        "sha256": "fdf276f0183c71742823b061f7342d581e56de0af10648339b525249e26ee94f",
+        "bytes": 4
+      }
+    },
+    "14": {
+      "solver_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/14/solver_stderr.txt",
+        "sha256": "fd566e058b5593d977f0b3b0a9c1e0a726ed57ed56d8027c92372acd22e47384",
+        "bytes": 41592
+      },
+      "judge_output.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/14/judge_output.txt",
+        "sha256": "a8dfb6dc9d17d6ddbbb36d673ecd002170b3137a589f364150c5d73ef932ac2a",
+        "bytes": 191115
+      },
+      "interactor_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/14/interactor_stderr.txt",
+        "sha256": "032d12cdb2861685511e1a69a128aa1d4765c7a92db609a94410202c5eba7287",
+        "bytes": 76
+      },
+      "score.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/14/score.txt",
+        "sha256": "c10df21f2494923e8ae517178c894c97fa0889d6be8987907158195b8c8a7ebd",
+        "bytes": 11
+      }
+    },
+    "15": {
+      "solver_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/15/solver_stderr.txt",
+        "sha256": "78247a0e0964b97b1024a8c8009064af989fc7a6a369bed298d5df4268b25ae8",
+        "bytes": 4766164
+      },
+      "judge_output.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/15/judge_output.txt",
+        "sha256": "0382b67c434136d5a015c37ccd4749d35624418ec61eece53af28fe74221bd0e",
+        "bytes": 1613182
+      },
+      "interactor_stderr.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/15/interactor_stderr.txt",
+        "sha256": "f41d1634ebee6002db068895bd7f6dd3fef179c512b959a2feda4845b19f0686",
+        "bytes": 79
+      },
+      "score.txt": {
+        "path": "results/pipes/improvement/generator_audit/geometry_runs/runs/15/score.txt",
+        "sha256": "76d1e745d1e70c8ffdfabcc50c45cc3c82c9edf4c065ad81093e1f9fbd20dc30",
+        "bytes": 11
+      }
+    }
+  },
+  "audit_artifacts": [
+    {
+      "path": "results/pipes/improvement/generator_audit/GENERATOR_AUDIT.md",
+      "sha256": "d71edb27b2e9ca53c9c80ad30132484cb3c8f4de452464d692aacddfcf6c58a0",
+      "bytes": 11819
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/geometry_bridge.py",
+      "sha256": "9fb0a25f358974a07065115d43f3a639c612a37b8a6b104bd1fa6892cb216fe7",
+      "bytes": 9980
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/geometry_bridge.json",
+      "sha256": "7754a64b94112f3207c2d7e6d66343cdaf537ec4e4fc5b6b0eaa790af42954c9",
+      "bytes": 86225
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/geometry_replay.cpp",
+      "sha256": "7dd4f4ad84c2715d9699a11d7bdae9da4d39b6c653768edca092e13ff420a3e2",
+      "bytes": 41333
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/geometry_replay",
+      "sha256": "09b415435d12a44f3180588b71597cbc055628ce836de54b009abc0f8b5a6009",
+      "bytes": 75584
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/make_manifest.py",
+      "sha256": "535f83775889c91904d49f6ef52a8aed1772a2dc01580d90d854a6d9dec4e621",
+      "bytes": 4980
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/geometry_runs/summary.json",
+      "sha256": "4f9af5fa4084c2fa0d9e09db178138236a26f4777a3b526a036b239e678c2c44",
+      "bytes": 38516
+    },
+    {
+      "path": "results/pipes/improvement/generator_audit/geometry_runs/cases.csv",
+      "sha256": "a0488aa97f3a26c8fcfb20676a499a8db654739a6675f9745863376686f4b962",
+      "bytes": 29982
+    },
+    {
+      "path": "tools/pipes_harness.py",
+      "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+      "bytes": 25883
+    },
+    {
+      "path": "tools/interactor",
+      "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+      "bytes": 234952
+    }
+  ],
+  "limitations": [
+    "observational geometry generated by the baseline allocator, not an intervention",
+    "only six public open cases were geometry-instrumented",
+    "existing synthetic inputs were not used to validate rank-to-coalescence transfer",
+    "debug logging made case 15 exceed 5 CPU seconds; this is not submission-resource evidence"
+  ]
+}

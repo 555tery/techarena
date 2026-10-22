@@ -1,0 +1,18 @@
+--- prototypes/pipes_cj_tle_fix_20261020/candidate-primal-int/solution.cj
++++ prototypes/pipes_cj_tle_fix_20261020/candidate-bounded-example/solution.cj
+@@ -1845,6 +1845,7 @@
+         return false
+     }
+ 
++    @OverflowWrapping
+     public func rebuildPrimalGapValues(maxGap: Int64): Unit {
+         if (maxGap < 0 || maxGap > kPrimalGapValueCap) { throw IndexOutOfBoundsException("DP limit") }
+         // All indices are within rates/reward[0..40], value[0..512]
+@@ -1927,6 +1928,7 @@
+         return hasRecentPrimalDemand()
+     }
+ 
++    @OverflowWrapping
+     public func rebuildCausalGapValues(maxGap: Int64): Unit {
+         if (maxGap < 0 || maxGap > kPrimalGapValueCap) { throw IndexOutOfBoundsException("DP limit") }
+         // All indices are within rates/reward[0..40], value[0..512]

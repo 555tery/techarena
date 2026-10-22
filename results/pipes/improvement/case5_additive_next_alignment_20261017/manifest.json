@@ -1,0 +1,202 @@
+{
+  "experiment": "Case5 causal next-size endpoint alignment, paired against staircase-cohort candidate A",
+  "date_local": "2026-10-17",
+  "policy": {
+    "trigger": "at least 46 observed placements in each of the current and preceding two consecutive size runs, with exact +1 progression; current size L must be in [3,39]",
+    "action": "for a fitting gap, choose the endpoint that leaves the residual span start nearest a multiple of predicted next size L+1; ties preserve the incumbent side; rollout is bypassed only while this exact trigger fires",
+    "information_boundary": "online prefix and current free gaps only; no test ID or future commands"
+  },
+  "sources": {
+    "composite_reference": {
+      "path": "results/pipes/improvement/case9_hole_first_cohorts/source/hole_first_survivor_cohorts_plus_lifo_gate.cpp",
+      "sha256": "5cc564ca88d8ae3be941ca2c3dab252e0836fa8d93e937dec4c32b5168b2aa9a",
+      "binary": "results/pipes/improvement/case9_hole_first_cohorts/bin/hole_first_survivor_cohorts_plus_lifo_gate",
+      "binary_sha256": "6780b3d8537bb778ace4df6451e4d203d0e53603ef0ba271a88b49e3eea0614d"
+    },
+    "candidate_B_only": {
+      "path": "results/pipes/improvement/case5_additive_next_alignment_20261017/src/additive_next_alignment.cpp",
+      "sha256": "a850179bd8b748fc63649543b3fc197a5eebf6d986f132f65ad970cc5f8dd6de",
+      "binary": "results/pipes/improvement/case5_additive_next_alignment_20261017/bin/additive_next_alignment",
+      "binary_sha256": "17c597dc802f4ef9bcd15b75ea6c470edd1fa439666a9777c45cfd64e600a5e5"
+    },
+    "candidate_A": {
+      "path": "results/pipes/improvement/case5_staircase_cohort/src/staircase_cohort_capacity.cpp",
+      "sha256": "322b5b672c1e64f868a8016c31511d34503f940c450f4a807514aaf8af38ec16",
+      "binary": "results/pipes/improvement/case5_staircase_cohort/bin/staircase_cohort_capacity",
+      "binary_sha256": "8cb47aa8770940348c44f45303dd3a69b5a27b34f905b1d50a25c7765cdaeee5"
+    },
+    "candidate_A_plus_B": {
+      "path": "results/pipes/improvement/case5_additive_next_alignment_20261017/src/staircase_plus_additive_next_alignment.cpp",
+      "sha256": "4c3a3590eb1ad4251640af32f10f7e5b506b8cfac8ee6b9d0edaa6d4e231caae",
+      "binary": "results/pipes/improvement/case5_additive_next_alignment_20261017/bin/staircase_plus_additive_next_alignment",
+      "binary_sha256": "ca885fb8869514ab494502e2ee517cfb4d716d9d55c9d291aa9c1b4126544838"
+    }
+  },
+  "build": {
+    "compiler": "Apple clang 17.0.0",
+    "flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic",
+    "candidate_command": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic results/pipes/improvement/case5_additive_next_alignment_20261017/src/staircase_plus_additive_next_alignment.cpp -o results/pipes/improvement/case5_additive_next_alignment_20261017/bin/staircase_plus_additive_next_alignment"
+  },
+  "harness": {
+    "path": "tools/pipes_harness.py",
+    "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "interactor": "tools/interactor",
+    "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "cpu_limit_s": 5,
+    "memory_limit_mib": 256
+  },
+  "results": {
+    "B_only_vs_composite_case5": {
+      "baseline_run": "runs/baseline_case5",
+      "candidate_run": "runs/candidate_case5",
+      "baseline_trench_m": 62620,
+      "candidate_trench_m": 61800,
+      "baseline_score": 0.8118811881188119,
+      "candidate_score": 0.8226537216828479
+    },
+    "A_plus_B_vs_A_case5": {
+      "baseline_run": "runs/A_case5",
+      "candidate_run": "runs/AB_case5",
+      "baseline_trench_m": 60020,
+      "candidate_trench_m": 56040,
+      "baseline_score": 0.8470509830056647,
+      "candidate_score": 0.907209136331192
+    },
+    "A_plus_B_vs_A_four_synthetics": {
+      "baseline_runs": "runs/A_{fifo_additive,lifo_additive,stride2_additive,mixed_phase_shift}",
+      "candidate_runs": "runs/AB_{fifo_additive,lifo_additive,stride2_additive,mixed_phase_shift}",
+      "comparison_csv": "comparison.csv"
+    },
+    "A_plus_B_vs_A_open15": {
+      "baseline_run": "runs/A_open15",
+      "candidate_run": "runs/AB_open15",
+      "baseline": {
+        "cases": 15,
+        "ok": 15,
+        "weighted_score_sum": 29.982931046212293,
+        "max_solver_cpu_s": 3.544046,
+        "max_solver_rss_mib": 5.609375
+      },
+      "candidate": {
+        "cases": 15,
+        "ok": 15,
+        "weighted_score_sum": 30.04308919953782,
+        "max_solver_cpu_s": 3.512726,
+        "max_solver_rss_mib": 5.609375
+      },
+      "delta_score": 0.06015815332552776
+    },
+    "A_plus_B_vs_A_qualification20": {
+      "baseline_run": "runs/A_qualification20",
+      "candidate_run": "runs/AB_qualification20",
+      "baseline": {
+        "cases": 20,
+        "ok": 20,
+        "weighted_score_sum": 15.973226515851925,
+        "max_solver_cpu_s": 0.035255999999999996,
+        "max_solver_rss_mib": 2.84375
+      },
+      "candidate": {
+        "cases": 20,
+        "ok": 20,
+        "weighted_score_sum": 16.076328079257923,
+        "max_solver_cpu_s": 0.034613,
+        "max_solver_rss_mib": 2.734375
+      },
+      "delta_score": 0.10310156340599796,
+      "predeclared_manifest": "synthetic/qualification_v1/manifest.json"
+    },
+    "holdout_v2": {
+      "baseline_A_run": "results/pipes/improvement/case5_staircase_cohort/runs/candidate_holdout_v2",
+      "candidate_AB_run": "results/pipes/improvement/case5_staircase_cohort/runs/AB_holdout_v2",
+      "baseline_cases_sha256": "d34cce426e2c7a8e071cb5dcabc17d4531c0b1099adfdfa1229533b4fae43c13",
+      "candidate_cases_sha256": "07a452b70c05576f7e1833dcb18295fd95d040c510cc37a5936a8a37fcfaa225",
+      "cases": 12,
+      "ok": 12,
+      "baseline_score": 5.13526432428047,
+      "candidate_score": 5.13526432428047,
+      "transcript_differences": 0,
+      "max_solver_cpu_s": 0.681153,
+      "max_solver_rss_mib": 3.796875,
+      "comparison_csv": "holdout_comparison.csv"
+    }
+  },
+  "input_sha256": {
+    "open15": {
+      "data/pipes/open/1.in": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+      "data/pipes/open/10.in": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+      "data/pipes/open/11.in": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+      "data/pipes/open/12.in": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+      "data/pipes/open/13.in": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+      "data/pipes/open/14.in": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+      "data/pipes/open/15.in": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+      "data/pipes/open/2.in": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+      "data/pipes/open/3.in": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "data/pipes/open/4.in": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+      "data/pipes/open/5.in": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+      "data/pipes/open/6.in": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "data/pipes/open/7.in": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+      "data/pipes/open/8.in": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+      "data/pipes/open/9.in": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+    },
+    "screen_synthetics": {
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/fifo_additive.in": "0a2afb36f41b891ef6996ae31c846ca4a5a0e64c86094e6b896ea5e05fbbb343",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/lifo_additive.in": "52fc5e55230804191d5c8a78c4a55e0686e94ceccca05bbed869b08a02083ad9",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/mixed_phase_shift.in": "ac9b603e3ee2ca486f9b01fafd5353b05ee79cf9548e6c36365a2939c670904a",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/stride2_additive.in": "428fb15d2feb4db53aaf69b5c90cc9f24e9af16935dccc92b23f98d5b0f3a2e1"
+    },
+    "qualification20": {
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s01.in": "a72cc3c344e52a841877290f47d1c509d8daa35eb0d5b93714f86c2f9483f93b",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s02.in": "d33eed4a6098b07de431b39697a4c3d2b7fbb6161419c975d4cbcb0970065416",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s03.in": "ed74e42211d98fce0a8eba044c1acc75dab51249f23117c7038da1d08dd87d1a",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s04.in": "31008ba6d38d591750f9773f42d58922200bc42d7f3ab64a50bda72d22beb9fc",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s05.in": "d262b23e383203290ff0f7357257ebc0ad361e95b052bba1fac66123a34b0693",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s06.in": "955294b9ef44dc8388a577f73045513b6c6d337fe08fe860c1f19a05f6a86d1c",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s07.in": "2c92e445884df668c33c284741ee5ecb6f5d0e625d2fa66af48d75a687291964",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s08.in": "4a83cd5300f58931a2ca6070f1a477ec5ec161bdd28a831c572cc6495360b8ec",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s09.in": "52ade3fc53a47c9ac299f654eec69507cbdc9d164c34ff89fce9e03bd5db1ef5",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s10.in": "3a42c68bc00782694ccdc626f7f0292d948824a1e5c815c88c98e6a705d00047",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s11.in": "bb986fbbd28e742be821c5c38e107cce1fb3d430df72891bbfc6d59db21eb550",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s12.in": "3a54ed592ac0b85b9fba9e4ff7269037bdff6ba6785c9f9f788e86d650b2e83d",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s13.in": "e204cec61603863799875ae718b7dbc2b758c82d4b6e70f2bfc2e56733bba8fd",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s14.in": "fa5f5ad3d2349998fdfaf7b6465fdfb34f77fc4b78b99a53a85c7a32b7059910",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s15.in": "ae0c528e4f9eab27698bf3c1431d51d2446a2d50d0a4217ad1de3f6c09d3d30f",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s16.in": "e53c41047647d17ff983f154146b364c0a2afb6c8c8b8e5bc3e73fd958951a4b",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s17.in": "928e525b5c28bc238735fbd3e8c68b53b5341eedda8205cc0b27012aab0f8af2",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s18.in": "4083eab416c250d466b6c9e9667fc64d2005e1206900c6fce06030492644428f",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s19.in": "63958451a70443dcfa7fe8cf80e87ad852c2e241e426e9b96df76c01ee04c4ef",
+      "results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces/s20.in": "851a3554a9e6f97e0b88c81205044876943fe548960662058b7acaab0054abd9"
+    },
+    "holdout_v2": {
+      "data/pipes/synthetic/final-holdout-v2/case-01.in": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683",
+      "data/pipes/synthetic/final-holdout-v2/case-02.in": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899",
+      "data/pipes/synthetic/final-holdout-v2/case-03.in": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b",
+      "data/pipes/synthetic/final-holdout-v2/case-04.in": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83",
+      "data/pipes/synthetic/final-holdout-v2/case-05.in": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2",
+      "data/pipes/synthetic/final-holdout-v2/case-06.in": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661",
+      "data/pipes/synthetic/final-holdout-v2/case-07.in": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a",
+      "data/pipes/synthetic/final-holdout-v2/case-08.in": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1",
+      "data/pipes/synthetic/final-holdout-v2/case-09.in": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f",
+      "data/pipes/synthetic/final-holdout-v2/case-10.in": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c",
+      "data/pipes/synthetic/final-holdout-v2/case-11.in": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46",
+      "data/pipes/synthetic/final-holdout-v2/case-12.in": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce"
+    }
+  },
+  "artifact_sha256": {
+    "comparison.csv": "c6a06798760af5de95b575c2b13adb486f7ce3654cb61a244ea15b3039a0887d",
+    "holdout_comparison.csv": "b213eea004f0e4297471989f23b5684e4e85027ef0697f9ea86ef9dbf3ee9327",
+    "synthetic/manifest.json": "c7cb15781c12c2417f4db883b8f1817c085b7031259f1cefdb58027e741d2aca",
+    "synthetic/qualification_v1/manifest.json": "51299e5c89e3ec26dd84bbd7c07898f7f315f60fda5a87cfa2a33d768c7b14b5",
+    "REPORT.md": "42bc066a50e7e5d7a3ebd924bdc5c494efec93afff9c51178bf9fd44faacec0e"
+  },
+  "canonical_and_frozen_modified": false,
+  "website_used": false,
+  "docker_used": false,
+  "run_commands": [
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_additive_next_alignment_20261017/bin/staircase_plus_additive_next_alignment --interactor tools/interactor --tests data/pipes/open/5.in --out results/pipes/improvement/case5_additive_next_alignment_20261017/runs/AB_case5 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_staircase_cohort/bin/staircase_cohort_capacity --interactor tools/interactor --tests data/pipes/open --out results/pipes/improvement/case5_additive_next_alignment_20261017/runs/A_open15 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_additive_next_alignment_20261017/bin/staircase_plus_additive_next_alignment --interactor tools/interactor --tests data/pipes/open --out results/pipes/improvement/case5_additive_next_alignment_20261017/runs/AB_open15 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_staircase_cohort/bin/staircase_cohort_capacity --interactor tools/interactor --tests results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces --out results/pipes/improvement/case5_additive_next_alignment_20261017/runs/A_qualification20 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_additive_next_alignment_20261017/bin/staircase_plus_additive_next_alignment --interactor tools/interactor --tests results/pipes/improvement/case5_additive_next_alignment_20261017/synthetic/qualification_v1/traces --out results/pipes/improvement/case5_additive_next_alignment_20261017/runs/AB_qualification20 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120"
+  ]
+}

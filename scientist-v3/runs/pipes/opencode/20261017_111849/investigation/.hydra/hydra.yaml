@@ -1,0 +1,147 @@
+run:
+  dir: /Users/555tery/techarena/scientist-v3/runs/pipes/opencode/20261017_111849/investigation
+sweep:
+  dir: multirun/${now:%Y-%m-%d}/${now:%H-%M-%S}
+  subdir: ${hydra.job.num}
+launcher:
+  _target_: hydra._internal.core_plugins.basic_launcher.BasicLauncher
+sweeper:
+  _target_: hydra._internal.core_plugins.basic_sweeper.BasicSweeper
+  max_batch_size: null
+  params: null
+help:
+  app_name: ${hydra.job.name}
+  header: '${hydra.help.app_name} is powered by Hydra.
+
+    '
+  footer: 'Powered by Hydra (https://hydra.cc)
+
+    Use --hydra-help to view Hydra specific help
+
+    '
+  template: '${hydra.help.header}
+
+    == Configuration groups ==
+
+    Compose your configuration from those groups (group=option)
+
+
+    $APP_CONFIG_GROUPS
+
+
+    == Config ==
+
+    Override anything in the config (foo.bar=value)
+
+
+    $CONFIG
+
+
+    ${hydra.help.footer}
+
+    '
+hydra_help:
+  template: 'Hydra (${hydra.runtime.version})
+
+    See https://hydra.cc for more info.
+
+
+    == Flags ==
+
+    $FLAGS_HELP
+
+
+    == Configuration groups ==
+
+    Compose your configuration from those groups (For example, append hydra/job_logging=disabled
+    to command line)
+
+
+    $HYDRA_CONFIG_GROUPS
+
+
+    Use ''--cfg hydra'' to Show the Hydra config.
+
+    '
+  hydra_help: ???
+hydra_logging:
+  version: 1
+  formatters:
+    simple:
+      format: '[%(asctime)s][HYDRA] %(message)s'
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: simple
+      stream: ext://sys.stdout
+  root:
+    level: INFO
+    handlers:
+    - console
+  loggers:
+    logging_example:
+      level: DEBUG
+  disable_existing_loggers: false
+job_logging:
+  version: 1
+  formatters:
+    simple:
+      format: '[%(asctime)s][%(name)s][%(levelname)s] - %(message)s'
+  handlers:
+    console:
+      class: logging.StreamHandler
+      formatter: simple
+      stream: ext://sys.stdout
+    file:
+      class: logging.FileHandler
+      formatter: simple
+      filename: ${hydra.runtime.output_dir}/${hydra.job.name}.log
+  root:
+    level: INFO
+    handlers:
+    - console
+    - file
+  disable_existing_loggers: false
+env: {}
+mode: null
+searchpath: []
+callbacks: {}
+output_subdir: .hydra
+overrides:
+  task:
+  - agent.name='opencode'
+  - agent.model='zenpacer/glm-5.3-flash-free'
+  - agent.reasoning_effort='xhigh'
+  - paths.task_dir='/Users/555tery/techarena/scientist-v3/runs/pipes/opencode/20261017_111849/task'
+  - paths.results_dir='/Users/555tery/techarena/scientist-v3/runs/pipes/opencode/20261017_111849/investigation'
+  - run_id='20261017_111849'
+  - execution.harness_evaluated_attempts=true
+  - execution.max_idea_cycles=500
+  - execution.max_program_evals_per_attempt=2
+  - execution.run_timeout_seconds=86400
+  - execution.draft_task_if_missing=false
+  - container.enabled=true
+  - container.image='sha256:181104edc8ff1220504efb8d9b362c6bab794f1923695a1e3b82e98a9a28372f'
+  - container.network='bridge'
+  - container.auth_root='/Users/555tery/techarena/scientist-v3/opencode-auth'
+  - logging.show_run_header=false
+  - versioning.enabled=true
+  - versioning.run_root='/Users/555tery/techarena/scientist-v3/runs/pipes/opencode/20261017_111849'
+  - versioning.git_dir_name='.agentic_history'
+  - versioning.max_file_bytes=0
+  - versioning.max_total_bytes=17179869184
+  - versioning.timeout_seconds=600
+  - versioning.tag_checkpoints=true
+  - versioning.final_include_environments=false
+  - versioning.finalize_on_exit=false
+job:
+  name: wrapper
+  override_dirname: agent.name='opencode',agent.model='zenpacer/glm-5.3-flash-free',agent.reasoning_effort='xhigh',paths.task_dir='/Users/555tery/techarena/scientist-v3/runs/pipes/opencode/20261017_111849/task',paths.results_dir='/Users/555tery/techarena/scientist-v3/runs/pipes/opencode/20261017_111849/investigation',run_id='20261017_111849',execution.harness_evaluated_attempts=true,execution.max_idea_cycles=500,execution.max_program_evals_per_attempt=2,execution.run_timeout_seconds=86400,execution.draft_task_if_missing=false,container.enabled=true,container.image='sha256:181104edc8ff1220504efb8d9b362c6bab794f1923695a1e3b82e98a9a28372f',container.network='bridge',container.auth_root='/Users/555tery/techarena/scientist-v3/opencode-auth',logging.show_run_header=false,versioning.enabled=true,versioning.run_root='/Users/555tery/techarena/scientist-v3/runs/pipes/opencode/20261017_111849',versioning.git_dir_name='.agentic_history',versioning.max_file_bytes=0,versioning.max_total_bytes=17179869184,versioning.timeout_seconds=600,versioning.tag_checkpoints=true,versioning.final_include_environments=false,versioning.finalize_on_exit=false
+  config_name: config
+runtime:
+  cwd: /Users/555tery/techarena/scientist-v3/upstream
+  config_sources:
+  - schema: file
+    provider: main
+    path: /Users/555tery/techarena/scientist-v3/upstream/configs
+verbose: false

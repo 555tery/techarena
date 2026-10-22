@@ -1,0 +1,672 @@
+# System Instructions
+
+You are an expert programming assistant generating actionable recommendations for future program mutations based on successful patterns and insights.
+
+# Previous Messages
+
+[]
+
+# User Request
+
+# Global Insights
+## Успешные алгоритмические приёмы
+- **Gen61 `stratified_growth_horizon` — новый лидер среди представленных вариантов: F/T = 0,859561466.** Выигрыш составляет +0,001747828 относительно parent gen37 и +0,000700012 относительно gen52. Его ключевое изменение — восемь детерминированных сценариев по три будущие вставки, оцениваемых по числу дополнительных секций траншеи. Это уточняет прежний вывод о прогнозировании: конкретный короткий стратифицированный прогноз оказался успешным, хотя исследованные более глубокие варианты уступали лидеру.
+- **Улучшение gen61 охватывает несколько типов нагрузки.** Относительно gen52 семейства `long_heavy`, `bimodal` и `section_boundaries` прибавили соответственно +0,016797553, +0,014230775 и +0,012813208. В `s31_009_long_heavy` траншея сократилась на 80 единиц. Относительно gen37 особенно заметны `size_lifetimes` (+0,028683798) и `burst_drain` (+0,021145768).
+- **Учёт полезности будущего слияния остаётся успешным направлением, но результаты зависят от модели.** Ранее gen52 достиг 0,858861454 благодаря выбору края с учётом спроса после освобождения соседа; относительно его родителя прирост `size_lifetimes` составлял +0,047953431. Gen61 также оценивает пользу слияния, используя интенсивность удалений по размеру. Его улучшение `size_lifetimes` относительно gen37 согласуется с этим паттерном, однако отдельный вклад модели освобождений в данном сравнении не изолирован.
+- **Лидер сохраняет конкурентную основу из best-fit и оценки потери вместимости.** Gen61 использует родительское решение как fallback и заменяет его только при строго меньшем прогнозируемом расширении. Это продолжает прежние результаты gen24 (0,858725882), gen20 (около 0,858350) и gen51 (0,857615): вместимость остатка полезна как базовый критерий, поверх которого ограниченный прогноз может дать дополнительный выигрыш.
+## Неэффективные подходы
+- **Увеличение глубины прогноза само по себе не улучшило результат.** Gen60 с DP на четыре запроса получил 0,854188: выше gen49 на 0,003311, но примерно на 0,005373 ниже gen61. Его перерасход в отдельном `short_heavy` достигал 53,3%. Gen62 с четырьмя сценариями по восемь запросов и поиском до 12 кандидатов набрал 0,857350. Эти результаты вместе с прежним gen49 (0,850876912) показывают отсутствие устойчивого преимущества у исследованных более глубоких прогнозов.
+- **Теневое переключение и детектор смены спроса не подтвердили общего выигрыша.** Gen56 `shadow_trench_duel` получил 0,857908, уступив parent gen20 на 0,000440. Gen57 `shift_triggered_demand_blend` достиг 0,857358, ниже родителя на 0,000258, несмотря на улучшения в `burst_drain`. Оба уступили gen61; локальная адаптация не обеспечила улучшения среднего результата.
+- **Более сложные модели освобождений и локальных фронтов также уступили лидеру.** Gen58 получил 0,855002 — всего +0,000021 относительно родителя, с заметным отставанием в `tiny_churn` и `fifo`. Gen63 набрал 0,854469, проиграв gen61 примерно 0,005092; перерасход в `drifting_sizes` достигал 40%. Это продолжает прежние результаты gen50 и gen53: усложнение модели освобождений не гарантирует более удачную раскладку.
+- **Условный выбор между двумя размерами интервалов оказался неоднородным.** Gen59 `conditional_two_size_capacity` получил 0,857001, уступив gen52 на 0,001861. Улучшения `fifo` сопровождались регрессиями в `size_lifetimes`. Проверка условного прогноза и порог выигрыша по вместимости ограничивали вмешательство эвристики, но не устранили потери на других семействах.
+## Особенности реализации
+- **Сценарии gen61 обеспечивают равномерное покрытие оценённого спроса при небольшом горизонте.** Статистика размеров делится пополам при накоплении массы 128; каждому размеру 1–40 добавляется одна псевдонаблюдаемая заявка. Из распределения извлекаются восемь квантилей, причём каждая позиция трёхшагового горизонта использует все восемь квантилей по одному разу. Последовательности детерминированы; временные зависимости запросов и будущие удаления в симуляции не моделируются.
+- **`PackingProfile` делает прогноз компактным.** Он хранит количества интервалов по размерам до 120 и два 64-битных индикатора непустых корзин; подходящий размер находится через `std::countr_zero`. Предел 120 соответствует максимальному объёму трёх запросов длиной до 40. Свободный хвост моделируется отдельно, а стоимость выражена непосредственно в дополнительных секциях по 20 единиц.
+- **Поиск и вмешательство прогноза жёстко ограничены.** Рассматриваются fallback, минимальный подходящий размер, следующий больший размер и хвост; после удаления совпадений остаётся не более трёх размещений. Прогноз пропускается при точном совпадении размера и при гарантированном запасе вместимости. Оценка кандидата прекращается, когда он уже не может победить, а равенство сохраняет fallback. Поэтому gen61 меняет решение только при строгом выигрыше в своей модели.
+- **Оценки вместимости и освобождений учитывают конкретную структуру остатка.** `splitPenalty` штрафует случаи `space % k < length % k`, когда разрез дополнительно уменьшает число помещающихся запросов размера `k`; `scarcityAllowsExchange` учитывает дефицит подходящих дыр. Выбор края использует сглаженное отношение удалений к экспозиции живых объектов и взвешенный спрос, который станет доступен после слияния. Для выбранного размера проверяются исходный и последний по адресу интервалы, поэтому это ограниченный поиск.
+## Анализ производительности
+- **Преимущество gen61 небольшое и сопровождается ростом ресурсов относительно gen52.** Парное сравнение даёт 44 улучшения, 39 регрессий и 69 совпадений; относительно gen37 — 42/27/83. Максимальные CPU/RSS составили 1,06 с / 9,98 MiB против 0,97 с / 7,03 MiB у gen52. Gen57 экономнее — 0,92 с / 2,53 MiB, — но уступает по F/T примерно на 0,002203. Округлённый score `0,86` скрывает эти различия.
+- **Gen61 не сохраняет все сильные стороны gen52.** Средние результаты `size_biased_deletion` и `size_lifetimes` ниже на 0,016506154 и 0,015179037. В `s31_031_size_lifetimes` потеря F/T составляет 0,090454545 при дополнительных 20 единицах траншеи. Внутри `fifo` есть разнонаправленные изменения: `s31_022` экономит 240 единиц относительно gen52, тогда как `s31_024` требует дополнительных 60. Относительно gen37 семейство `drifting_sizes` ухудшилось на 0,009487948.
+- **Низкий F/T по-прежнему необходимо отделять от потерь размещения:** `F/T = (F/B) × (B/T)`. В `s31_121_short_rounding` F/T = 0,433333333 при B/T = 1; несколько `micro_partial_drain` также достигают входного потолка. Реальные потери gen61 видны в перерасходе 28% у `s31_041_drifting_sizes`, 26,06% у `s31_050_geometric_cohorts` и 25% у `s31_088_tiny_churn`. Новый максимум среднего не устранил фрагментацию.
+- **Корректность подтверждена на 152 тестах из 38 семейств; stress исключён.** Средний перерасход остаётся около 5%. Превосходство над fixed gen0 отчётом не установлено: его указанный средний F/T совпадает с gen61 до приведённой точности, при этом gen61 имеет 31 регрессию и максимальную потерю на случае 0,042631579. Подтверждено лидерство среди представленных эволюционных вариантов, но не доминирование над фиксированным baseline.
+
+# Previous Recommendations (if any)
+1. **Ограничьте переключение края при явно выраженном FIFO.** В `observeRelease()` накапливайте долю удалений с `pid == oldestLivePid_`, используя то же затухание, что и у `releaseWeight_`; при весе ≥ 8 и доле > 0,85 возвращайте `parentChoice` без поправки `kMergeUtilityEdge`. Такая изолированная мутация направлена на регрессию `s31_022_fifo` (+380 единиц траншеи относительно родителя), сохраняя новый механизм для остальных режимов.
+2. **Учитывайте свободную вместимость остальных интервалов в полезности слияния.** Для выбранной дыры вычисляйте `C = max(remainder, largestOtherHole, tailLength)` и замените полезность соседа на `max(0, forecastAbove(C, length) − forecastAbove(min(40, remainder + neighborLength), length))`. Сохраните нынешние веса освобождения, порог 1,25 и возврат к `parentChoice` при нулевых полезностях: это развивает успешную идею gen52, исключая вклад размеров, которые уже помещаются в другое свободное место.
+3. **Добавьте сглаженную поправку на частоту освобождения объектов конкретной длины.** Лениво накапливайте для каждой длины число удалений `D[k]` и exposure `E[k]` — суммарное число команд, проведённых объектами этой длины в живом состоянии; оценку задайте как `h[k] = (D[k] + 8) / (E[k] + 8 / hGlobal)`, где `hGlobal` — общая частота освобождения на единицу exposure. Умножайте текущий вес соседа на `clamp(h[k] / hGlobal, 0.5, 2.0)`, сохраняя PID-gate и порог переключения; до появления положительной общей оценки используйте множитель 1. Это объединяет успешный паттерн `releases/exposure` из gen24 с выигрышем gen52 на `size_lifetimes`, не вводя совместную модель освобождения соседей.
+4. **Ослабляйте устаревшие строки переходов по времени между вставками.** Храните индекс последнего обновления каждой строки `transitionAbove_` и лениво домножайте её на `(127/128)^gap` перед чтением или обновлением, сохраняя существующее затухание `31/32` при наблюдении перехода. При неизменном prior `8` редко используемая строка будет постепенно уступать место свежему общему профилю; это адресная проверка для `distribution_switch` и `drifting_sizes`, не требующая более глубокого прогноза.
+5. **Проверьте ограниченный выбор между двумя размерами внутренних дыр.** При отсутствии exact-fit сравнивайте best-fit только со следующим большим непустым размером, если оба остатка меньше 40, используя потерю вместимости `L(h, ℓ) = Σ p(s) · (⌊h/s⌋ − ⌊(h−ℓ)/s⌋)`, где `p(s)` берётся из текущего условного прогноза. Выбирайте альтернативу лишь при уменьшении `L` более чем на `1/64` и отсутствии роста `expectedNextGrowth`, после чего выполняйте прежнее сравнение с хвостом. Это переносит конкурентный приём gen51 в основу gen52, ограничивая расширение поиска одним дополнительным кандидатом.
+
+# Current Best Program
+# Program to Analyze
+
+```cpp
+#include <algorithm>
+#include <array>
+#include <cstddef>
+#include <cstdint>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <limits>
+#include <map>
+#include <optional>
+#include <set>
+#include <utility>
+#include <vector>
+
+// EVOLVE-BLOCK-START
+#include <bit>
+namespace {
+using Coordinate = std::int64_t;
+class Allocator {
+    static constexpr bool packingEnabled_ = true;
+    static constexpr int packingCap_ = 120;
+    static constexpr int scenarioCount_ = 8;
+    struct Pipe {
+        Coordinate start;
+        int length;
+    };
+    struct Placement {
+        Coordinate at = -1;
+        bool rightAligned = false;
+    };
+    // A simulated horizon consumes at most 120 units. Larger gaps can
+    // therefore share one bucket after the current placement is applied.
+    struct PackingProfile {
+        std::array<std::uint32_t, packingCap_ + 1> count{};
+        std::array<std::uint64_t, 2> nonempty{};
+        static int bucket(Coordinate length) {
+            return static_cast<int>(
+                std::min<Coordinate>(packingCap_, length));
+        }
+        void add(Coordinate length) {
+            if (length <= 0) return;
+            const int k = bucket(length);
+            ++count[k];
+            nonempty[(k - 1) / 64] |=
+                std::uint64_t{1} << ((k - 1) % 64);
+        }
+        void take(Coordinate length) {
+            if (length <= 0) return;
+            const int k = bucket(length);
+            if (--count[k] == 0) {
+                nonempty[(k - 1) / 64] &=
+                    ~(std::uint64_t{1} << ((k - 1) % 64));
+            }
+        }
+        int firstFit(int length) const {
+            if (length <= 0 || length > packingCap_) return 0;
+            int word = (length - 1) / 64;
+            std::uint64_t bits = nonempty[word] &
+                (~std::uint64_t{0} << ((length - 1) % 64));
+            if (bits == 0 && word == 0) {
+                word = 1;
+                bits = nonempty[1];
+            }
+            if (bits == 0) return 0;
+            return word * 64 +
+                static_cast<int>(std::countr_zero(bits)) + 1;
+        }
+    };
+    struct Scenario {
+        std::array<int, 3> lengths{};
+        int volume = 0;
+    };
+    using Scenarios = std::array<Scenario, scenarioCount_>;
+    std::vector<Pipe> pipes_{{0, 0}};
+    std::map<Coordinate, Coordinate> gaps_;
+    std::set<std::pair<Coordinate, Coordinate>> sizes_;
+    std::array<std::set<Coordinate>, 41> starts_;
+    PackingProfile packingProfile_;
+    Coordinate trench_ = 0;
+    std::array<std::uint32_t, 41> demand_{};
+    std::uint32_t demandMass_ = 0;
+    std::map<Coordinate, std::size_t> live_;
+    std::array<std::size_t, 41> population_{};
+    std::array<double, 41> deaths_{}, exposure_{};
+    std::array<std::uint64_t, 41> exposureAt_{};
+    std::uint64_t commandTick_ = 0;
+    double totalExposure_ = 0, totalDeaths_ = 0;
+    void settleExposure(int length) {
+        exposure_[length] +=
+            static_cast<double>(commandTick_ - exposureAt_[length]) *
+            static_cast<double>(population_[length]);
+        exposureAt_[length] = commandTick_;
+    }
+    void advanceReleaseClock() {
+        if (commandTick_ != 0 && commandTick_ % 128 == 0) {
+            for (int k = 1; k <= 40; ++k) {
+                settleExposure(k);
+                exposure_[k] *= 0.5;
+                deaths_[k] *= 0.5;
+            }
+            totalExposure_ *= 0.5;
+            totalDeaths_ *= 0.5;
+        }
+        ++commandTick_;
+        totalExposure_ += static_cast<double>(live_.size());
+    }
+    double releaseRate(int length) const {
+        const double exposure = exposure_[length] +
+            static_cast<double>(commandTick_ - exposureAt_[length]) *
+            static_cast<double>(population_[length]);
+        const double pooledRate =
+            totalDeaths_ / (totalExposure_ + 1.0);
+        return (deaths_[length] + 8.0 * pooledRate) /
+               (exposure + 8.0);
+    }
+    void observeLength(int length) {
+        if (demandMass_ >= 128) {
+            demandMass_ = 0;
+            for (int k = 1; k <= 40; ++k) {
+                demand_[k] /= 2;
+                demandMass_ += demand_[k];
+            }
+        }
+        ++demand_[length];
+        ++demandMass_;
+    }
+    std::uint64_t splitPenalty(Coordinate space, int length) const {
+        std::uint64_t result = 0;
+        for (int k = 1; k <= 40; ++k) {
+            if (demand_[k] != 0 && space % k < length % k) {
+                result +=
+                    static_cast<std::uint64_t>(demand_[k]) * k;
+            }
+        }
+        return result;
+    }
+    bool scarcityAllowsExchange(
+        Coordinate smaller, Coordinate larger, int length) const {
+        std::size_t fittingGaps = 0;
+        long double extraLoss = 0;
+        for (int k = 40; k >= 1; --k) {
+            fittingGaps += starts_[k].size();
+            if (demand_[k] == 0 || fittingGaps == 0) continue;
+            const int smallerLoses =
+                smaller >= k && smaller - length < k;
+            const int largerLoses =
+                larger >= k && larger - length < k;
+            if (smallerLoses != largerLoses) {
+                extraLoss +=
+                    static_cast<long double>(demand_[k]) /
+                    static_cast<long double>(fittingGaps) *
+                    (largerLoses - smallerLoses);
+            }
+        }
+        return extraLoss <= 0;
+    }
+    double releaseGain(
+        Coordinate a, Coordinate remainder, bool rightAligned,
+        const std::array<std::uint32_t, 41>& prefix) const {
+        auto neighbor = live_.lower_bound(a);
+        if (rightAligned) {
+            if (neighbor == live_.begin()) return 0;
+            --neighbor;
+        } else if (neighbor == live_.end()) {
+            return 0;
+        }
+        const Pipe& p = pipes_[neighbor->second];
+        Coordinate releasedSpace = p.length;
+        if (releasedSpace >= 40) return 0;
+        if (rightAligned) {
+            auto outside = gaps_.lower_bound(p.start);
+            if (outside != gaps_.begin()) {
+                --outside;
+                if (outside->second == p.start) {
+                    releasedSpace +=
+                        outside->second - outside->first;
+                }
+            }
+        } else {
+            const auto outside = gaps_.find(p.start + p.length);
+            if (outside != gaps_.end()) {
+                releasedSpace += outside->second - outside->first;
+            }
+        }
+        const int before = static_cast<int>(
+            std::min<Coordinate>(
+                40, std::max(remainder, releasedSpace)));
+        const int after = static_cast<int>(
+            std::min<Coordinate>(40, remainder + releasedSpace));
+        if (before == after) return 0;
+        return releaseRate(p.length) *
+            static_cast<double>(prefix[after] - prefix[before]);
+    }
+    void selectReleasePlacement(
+        int length, Coordinate& at, bool& rightAligned) const {
+        if (at < 0 || totalDeaths_ == 0) return;
+        const Coordinate space = gaps_.at(at) - at;
+        const Coordinate remainder = space - length;
+        if (remainder <= 0 || remainder >= 40) return;
+        std::array<std::uint32_t, 41> prefix{};
+        for (int k = 1; k <= 40; ++k) {
+            prefix[k] = prefix[k - 1] + demand_[k] * k;
+        }
+        const auto end = sizes_.upper_bound(
+            {space, std::numeric_limits<Coordinate>::max()});
+        const std::array<Coordinate, 2> candidates{
+            at, std::prev(end)->second};
+        double best = 0;
+        for (std::size_t i = 0; i < candidates.size(); ++i) {
+            if (i != 0 && candidates[i] == candidates[0]) continue;
+            const Coordinate a = candidates[i];
+            for (int side = 0; side < 2; ++side) {
+                if (side != 0 && a + space == trench_) continue;
+                const double score =
+                    releaseGain(a, remainder, side != 0, prefix);
+                if (score > best) {
+                    best = score;
+                    at = a;
+                    rightAligned = side != 0;
+                }
+            }
+        }
+    }
+    Scenarios buildScenarios() const {
+        // One uniform pseudo-observation per possible request length.
+        const std::uint32_t mass = demandMass_ + 40;
+        std::array<int, scenarioCount_> quantiles{};
+        int length = 1;
+        std::uint32_t cumulative = demand_[1] + 1;
+        for (int i = 0; i < scenarioCount_; ++i) {
+            const std::uint32_t target =
+                static_cast<std::uint32_t>(
+                    (static_cast<std::uint64_t>(2 * i + 1) * mass) /
+                    (2 * scenarioCount_));
+            while (length < 40 && cumulative <= target) {
+                ++length;
+                cumulative += demand_[length] + 1;
+            }
+            quantiles[i] = length;
+        }
+        // Each horizon position uses every marginal stratum once.
+        Scenarios scenarios{};
+        for (int i = 0; i < scenarioCount_; ++i) {
+            scenarios[i].lengths = {
+                quantiles[i],
+                quantiles[(3 * i + 1) % scenarioCount_],
+                quantiles[(5 * i + 2) % scenarioCount_]
+            };
+            for (int request : scenarios[i].lengths) {
+                scenarios[i].volume += request;
+            }
+        }
+        return scenarios;
+    }
+    int projectedGrowth(
+        const Placement& placement, int length,
+        const PackingProfile& interior,
+        Coordinate tailStart, Coordinate tailSpace,
+        const Scenarios& scenarios, int cutoff) const {
+        PackingProfile after = interior;
+        Coordinate remainingTail = tailSpace;
+        if (placement.at == tailStart) {
+            remainingTail -= length;
+        } else {
+            const Coordinate space =
+                gaps_.at(placement.at) - placement.at;
+            after.take(space);
+            after.add(space - length);
+        }
+        const int initialTail = static_cast<int>(
+            std::min<Coordinate>(packingCap_, remainingTail));
+        int totalGrowth = 0;
+        for (const Scenario& scenario : scenarios) {
+            // One gap holding the entire remaining volume guarantees
+            // zero growth under insertion-only Best-Fit.
+            if (initialTail >= scenario.volume ||
+                after.firstFit(scenario.volume) != 0) {
+                continue;
+            }
+            PackingProfile simulated = after;
+            int tail = initialTail;
+            for (int request : scenario.lengths) {
+                const int fit = simulated.firstFit(request);
+                // The physical tail has the largest address, so an
+                // equal-sized interior fit wins the Best-Fit tie.
+                if (fit != 0 &&
+                    (tail < request || fit <= tail)) {
+                    simulated.take(fit);
+                    simulated.add(fit - request);
+                } else if (tail >= request) {
+                    tail -= request;
+                } else {
+                    const int sections =
+                        (request - tail + 19) / 20;
+                    totalGrowth += sections;
+                    tail += sections * 20 - request;
+                }
+            }
+            // All remaining contributions are nonnegative.
+            if (totalGrowth >= cutoff) return totalGrowth;
+        }
+        return totalGrowth;
+    }
+    Placement choosePlacement(int length) const {
+        const auto first = sizes_.lower_bound({length, 0});
+        if (first == sizes_.end()) return {};
+        const auto nextSize = sizes_.upper_bound(
+            {first->first, std::numeric_limits<Coordinate>::max()});
+        auto candidate = first;
+        // Preserve the parent's complete decision as the fallback.
+        if (candidate->first > length) {
+            const auto penalty =
+                splitPenalty(candidate->first, length);
+            if (penalty != 0 && nextSize != sizes_.end() &&
+                splitPenalty(nextSize->first, length) < penalty &&
+                scarcityAllowsExchange(
+                    candidate->first, nextSize->first, length)) {
+                candidate = nextSize;
+            }
+        }
+        Placement fallback{candidate->second, false};
+        selectReleasePlacement(
+            length, fallback.at, fallback.rightAligned);
+        if constexpr (!packingEnabled_) {
+            return fallback;
+        }
+        if (first->first == length) return fallback;
+        // In either condition every candidate leaves enough guaranteed
+        // capacity for three requests of maximum length.
+        if (starts_[40].size() >= 4 ||
+            sizes_.rbegin()->first >= length + packingCap_) {
+            return fallback;
+        }
+        Coordinate tailStart = -1;
+        Coordinate tailSpace = 0;
+        if (!gaps_.empty() &&
+            gaps_.rbegin()->second == trench_) {
+            tailStart = gaps_.rbegin()->first;
+            tailSpace = trench_ - tailStart;
+        }
+        // The fallback belongs to one of the first two size classes.
+        // Four slots simplify collection; at most three are distinct.
+        std::array<Placement, 4> choices{};
+        int choiceCount = 1;
+        choices[0] = fallback;
+        auto append = [&](Coordinate start) {
+            Placement proposed{start, false};
+            selectReleasePlacement(
+                length, proposed.at, proposed.rightAligned);
+            for (int i = 0; i < choiceCount; ++i) {
+                if (choices[i].at == proposed.at) return;
+            }
+            choices[choiceCount++] = proposed;
+        };
+        append(first->second);
+        if (nextSize != sizes_.end()) append(nextSize->second);
+        if (tailSpace >= length) append(tailStart);
+        if (choiceCount == 1) return fallback;
+        PackingProfile interior = packingProfile_;
+        interior.take(tailSpace);
+        const Scenarios scenarios = buildScenarios();
+        int bestIndex = 0;
+        int bestScore = projectedGrowth(
+            choices[0], length, interior, tailStart, tailSpace,
+            scenarios, std::numeric_limits<int>::max());
+        for (int i = 1; i < choiceCount && bestScore != 0; ++i) {
+            const int score = projectedGrowth(
+                choices[i], length, interior, tailStart, tailSpace,
+                scenarios, bestScore);
+            if (score < bestScore) {
+                bestScore = score;
+                bestIndex = i;
+            }
+        }
+        return choices[bestIndex];
+    }
+    static int bucket(Coordinate n) {
+        return static_cast<int>(std::min<Coordinate>(40, n));
+    }
+    void add(Coordinate a, Coordinate b) {
+        if (a >= b) return;
+        gaps_[a] = b;
+        sizes_.insert({b - a, a});
+        starts_[bucket(b - a)].insert(a);
+        packingProfile_.add(b - a);
+    }
+    void erase(Coordinate a) {
+        const Coordinate b = gaps_.at(a);
+        sizes_.erase({b - a, a});
+        starts_[bucket(b - a)].erase(a);
+        packingProfile_.take(b - a);
+        gaps_.erase(a);
+    }
+public:
+    std::size_t mcDecisionsUsed = 0, mcRolloutsRun = 0;
+    std::uint64_t expansionGateOpportunities = 0;
+    std::uint64_t expansionGatePasses = 0;
+    std::uint64_t unitProfileSuppressedExpansions = 0;
+    void place(int length) {
+        advanceReleaseClock();
+        observeLength(length);
+        const Placement placement = choosePlacement(length);
+        Coordinate at = placement.at;
+        Coordinate digs = 0;
+        // Growth is allowed only after the global fitting-gap search
+        // has established that no existing interval can hold the pipe.
+        if (at < 0) {
+            at = trench_;
+            if (!gaps_.empty() &&
+                gaps_.rbegin()->second == trench_) {
+                at = gaps_.rbegin()->first;
+                erase(at);
+            }
+            digs = (length - (trench_ - at) + 19) / 20;
+            trench_ += digs * 20;
+            add(at, trench_);
+        }
+        const Coordinate finish = gaps_.at(at);
+        const Coordinate begin = at;
+        erase(begin);
+        if (placement.rightAligned) at = finish - length;
+        add(begin, at);
+        add(at + length, finish);
+        settleExposure(length);
+        ++population_[length];
+        live_.emplace(at, pipes_.size());
+        pipes_.push_back({at, length});
+        std::cout << digs << ' ' << at << '\n' << std::flush;
+    }
+    void remove(Coordinate pid) {
+        const Pipe p = pipes_.at(static_cast<std::size_t>(pid));
+        advanceReleaseClock();
+        settleExposure(p.length);
+        --population_[p.length];
+        deaths_[p.length] += 1.0;
+        totalDeaths_ += 1.0;
+        live_.erase(p.start);
+        Coordinate a = p.start;
+        Coordinate b = a + p.length;
+        auto right = gaps_.lower_bound(a);
+        if (right != gaps_.end() && right->first == b) {
+            b = right->second;
+            erase(right->first);
+        }
+        auto left = gaps_.lower_bound(a);
+        if (left != gaps_.begin()) {
+            --left;
+            if (left->second == a) {
+                a = left->first;
+                erase(a);
+            }
+        }
+        add(a, b);
+        std::cout << p.start << '\n' << std::flush;
+    }
+};
+}  // namespace
+// EVOLVE-BLOCK-END
+
+int main() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+
+    Allocator allocator;
+    std::int64_t command;
+    while (std::cin >> command) {
+        if (command == 0) {
+#if defined(MC_ROLLOUT_DIAGNOSTICS)
+            std::cerr << "mc_decisions=" << allocator.mcDecisionsUsed
+                      << " mc_rollouts=" << allocator.mcRolloutsRun
+                      << " expansion_gate_opportunities=" << allocator.expansionGateOpportunities
+                      << " expansion_gate_passes=" << allocator.expansionGatePasses
+                      << " unit_profile_suppressed_expansions="
+                      << allocator.unitProfileSuppressedExpansions << '\n';
+#endif
+            return 0;
+        }
+        if (command > 0) {
+            allocator.place(static_cast<int>(command));
+        } else {
+            allocator.remove(-command);
+        }
+    }
+    return 0;
+}
+```
+
+Performance metrics:
+Combined score to maximize: 0.86
+valid_cases: 152; family_count: 38; mean_raw_kpi: 0.86; worst_family_score: 0.53; mean_overrun: 0.05; mean_bound_to_trench: 0.96; max_solver_cpu_seconds: 1.06; max_solver_rss_mib: 9.98
+
+The program is correct and passes all validation tests.
+
+Text feedback:
+Fitness F/T=0.859561466483; stress excluded. B/T is diagnostic only.
+family=micro_partial_drain mean_F/T=0.533333333
+family=micro_short_churn mean_F/T=0.733333333
+family=partial_drain mean_F/T=0.737963871
+family=short_phase_churn mean_F/T=0.781231752
+family=micro_size_shift mean_F/T=0.802083333
+family=drifting_sizes mean_F/T=0.802662964
+family=short_rounding mean_F/T=0.808221691
+family=geometric_cohorts mean_F/T=0.808527948
+family=short_heavy mean_F/T=0.821278547
+family=additive_cohorts mean_F/T=0.826891209
+family=size_biased_deletion mean_F/T=0.831375197
+family=distribution_switch mean_F/T=0.834484073
+family=tiny_churn mean_F/T=0.835116112
+family=uniform_churn mean_F/T=0.836919475
+family=micro_tail_reuse mean_F/T=0.845833333
+family=long_prefill_random mean_F/T=0.847093254
+family=long_heavy mean_F/T=0.849756128
+family=fifo mean_F/T=0.864512668
+family=serial_churn mean_F/T=0.867743936
+family=size_lifetimes mean_F/T=0.876761532
+family=large_live_set mean_F/T=0.878380217
+family=micro_gap_refill mean_F/T=0.881250000
+family=recent_window_growth mean_F/T=0.882848124
+family=hotset_switching mean_F/T=0.892047313
+family=soft_recency_growth mean_F/T=0.896392595
+family=bimodal mean_F/T=0.896634947
+family=section_boundaries mean_F/T=0.901461482
+family=burst_drain mean_F/T=0.907481748
+family=serial_growth mean_F/T=0.917407304
+family=long_prefill_recent mean_F/T=0.917872355
+family=micro_neighbor_coalescence mean_F/T=0.918750000
+family=isolated_recent_churn mean_F/T=0.920999287
+family=drain_recovery mean_F/T=0.924758483
+family=hotset_growth mean_F/T=0.950641471
+family=lifo mean_F/T=0.953245266
+family=background_ephemeral mean_F/T=0.955291422
+family=striped_recycling mean_F/T=0.960486952
+family=tiny_growth mean_F/T=0.962263069
+Worst F/T; F/B is an input-only ceiling, not an allocator loss.
+case=s31_121_short_rounding family=short_rounding F/T=0.433333333 F/B=0.433333333 B/T=1.000000000 overrun=0.000000 cpu_s=0.001512 rss_mib=1.328
+case=s31_150_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001432 rss_mib=1.312
+case=s31_151_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001426 rss_mib=1.328
+case=s31_152_micro_partial_drain family=micro_partial_drain F/T=0.500000000 F/B=0.500000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001446 rss_mib=1.328
+case=s31_139_micro_short_churn family=micro_short_churn F/T=0.550000000 F/B=0.550000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001456 rss_mib=1.328
+case=s31_130_micro_gap_refill family=micro_gap_refill F/T=0.575000000 F/B=0.575000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001398 rss_mib=1.312
+case=s31_118_partial_drain family=partial_drain F/T=0.611210454 F/B=0.646045362 B/T=0.946079780 overrun=0.056993 cpu_s=0.090102 rss_mib=2.156
+case=s31_068_recent_window_growth family=recent_window_growth F/T=0.620927673 F/B=0.675406191 B/T=0.919339623 overrun=0.087737 cpu_s=0.343123 rss_mib=3.312
+case=s31_052_geometric_cohorts family=geometric_cohorts F/T=0.631455399 F/B=0.781976744 B/T=0.807511737 overrun=0.238372 cpu_s=0.344370 rss_mib=2.938
+case=s31_060_large_live_set family=large_live_set F/T=0.632458290 F/B=0.641932619 B/T=0.985240929 overrun=0.014980 cpu_s=0.447067 rss_mib=4.359
+case=s31_149_micro_partial_drain family=micro_partial_drain F/T=0.633333333 F/B=0.633333333 B/T=1.000000000 overrun=0.000000 cpu_s=0.001460 rss_mib=1.328
+case=s31_141_micro_size_shift family=micro_size_shift F/T=0.650000000 F/B=0.650000000 B/T=1.000000000 overrun=0.000000 cpu_s=0.001405 rss_mib=1.312
+case=s31_072_soft_recency_growth family=soft_recency_growth F/T=0.650950570 F/B=0.650950570 B/T=1.000000000 overrun=0.000000 cpu_s=0.003143 rss_mib=1.359
+case=s31_117_partial_drain family=partial_drain F/T=0.657471264 F/B=0.657471264 B/T=1.000000000 overrun=0.000000 cpu_s=0.013349 rss_mib=1.484
+case=s31_040_distribution_switch family=distribution_switch F/T=0.666898148 F/B=0.692548077 B/T=0.962962963 overrun=0.038462 cpu_s=0.018197 rss_mib=1.406
+case=s31_088_tiny_churn family=tiny_churn F/T=0.670000000 F/B=0.837500000 B/T=0.800000000 overrun=0.250000 cpu_s=0.003007 rss_mib=1.359
+Largest T/B-1 (diagnostic only); F/B is an input-only ceiling, not an allocator loss.
+case=s31_041_drifting_sizes family=drifting_sizes F/T=0.742187500 F/B=0.950000000 B/T=0.781250000 overrun=0.280000 cpu_s=0.353512 rss_mib=2.938
+case=s31_050_geometric_cohorts family=geometric_cohorts F/T=0.753663872 F/B=0.950045956 B/T=0.793292016 overrun=0.260570 cpu_s=0.138815 rss_mib=2.172
+case=s31_088_tiny_churn family=tiny_churn F/T=0.670000000 F/B=0.837500000 B/T=0.800000000 overrun=0.250000 cpu_s=0.003007 rss_mib=1.359
+case=s31_044_drifting_sizes family=drifting_sizes F/T=0.697903226 F/B=0.865400000 B/T=0.806451613 overrun=0.240000 cpu_s=0.078591 rss_mib=1.641
+case=s31_052_geometric_cohorts family=geometric_cohorts F/T=0.631455399 F/B=0.781976744 B/T=0.807511737 overrun=0.238372 cpu_s=0.344370 rss_mib=2.938
+case=s31_009_long_heavy family=long_heavy F/T=0.788793103 F/B=0.953125000 B/T=0.827586207 overrun=0.208333 cpu_s=0.379089 rss_mib=2.984
+case=s31_125_short_phase_churn family=short_phase_churn F/T=0.766666667 F/B=0.920000000 B/T=0.833333333 overrun=0.200000 cpu_s=0.001699 rss_mib=1.359
+case=s31_126_short_phase_churn family=short_phase_churn F/T=0.719354839 F/B=0.857692308 B/T=0.838709677 overrun=0.192308 cpu_s=0.002357 rss_mib=1.359
+case=s31_001_uniform_churn family=uniform_churn F/T=0.815384615 F/B=0.963636364 B/T=0.846153846 overrun=0.181818 cpu_s=0.060392 rss_mib=1.484
+case=s31_086_tiny_churn family=tiny_churn F/T=0.824074074 F/B=0.959051724 B/T=0.859259259 overrun=0.163793 cpu_s=0.117015 rss_mib=1.859
+case=s31_053_additive_cohorts family=additive_cohorts F/T=0.821455616 F/B=0.950170316 B/T=0.864535128 overrun=0.156691 cpu_s=0.135745 rss_mib=2.000
+case=s31_006_short_heavy family=short_heavy F/T=0.825000000 F/B=0.953333333 B/T=0.865384615 overrun=0.155556 cpu_s=0.348536 rss_mib=2.969
+case=s31_105_long_prefill_random family=long_prefill_random F/T=0.852931866 F/B=0.982097589 B/T=0.868479747 overrun=0.151437 cpu_s=0.171293 rss_mib=3.344
+case=s31_062_size_biased_deletion family=size_biased_deletion F/T=0.835978836 F/B=0.954682779 B/T=0.875661376 overrun=0.141994 cpu_s=0.037223 rss_mib=1.500
+case=s31_056_additive_cohorts family=additive_cohorts F/T=0.677577741 F/B=0.768089054 B/T=0.882160393 overrun=0.133581 cpu_s=0.021092 rss_mib=1.438
+case=s31_061_size_biased_deletion family=size_biased_deletion F/T=0.841041667 F/B=0.950054308 B/T=0.885256410 overrun=0.129616 cpu_s=0.766433 rss_mib=4.672
+
+PAIRED SEARCH EVIDENCE
+Against parent gen37: delta mean F/T=+0.001747828; improved/regressed/tied=42/27/83.
+family=size_lifetimes delta_F/T=+0.028683798
+family=burst_drain delta_F/T=+0.021145768
+family=section_boundaries delta_F/T=+0.011538194
+family=hotset_switching delta_F/T=+0.009689671
+family=drifting_sizes delta_F/T=-0.009487948
+family=additive_cohorts delta_F/T=+0.007245488
+Regressions:
+s31_041_drifting_sizes: delta_F/T=-0.036501025, delta_T=+60
+s31_039_distribution_switch: delta_F/T=-0.024810924, delta_T=+40
+s31_049_geometric_cohorts: delta_F/T=-0.021262458, delta_T=+20
+s31_024_fifo: delta_F/T=-0.019981735, delta_T=+40
+Gains:
+s31_033_burst_drain: delta_F/T=+0.083959451, delta_T=-80
+s31_031_size_lifetimes: delta_F/T=+0.075378788, delta_T=-20
+s31_030_size_lifetimes: delta_F/T=+0.057446809, delta_T=-60
+s31_017_section_boundaries: delta_F/T=+0.035552536, delta_T=-40
+
+Against leader gen52: delta mean F/T=+0.000700012; improved/regressed/tied=44/39/69.
+family=long_heavy delta_F/T=+0.016797553
+family=size_biased_deletion delta_F/T=-0.016506154
+family=size_lifetimes delta_F/T=-0.015179037
+family=bimodal delta_F/T=+0.014230775
+family=section_boundaries delta_F/T=+0.012813208
+family=distribution_switch delta_F/T=+0.009592012
+Regressions:
+s31_031_size_lifetimes: delta_F/T=-0.090454545, delta_T=+20
+s31_063_size_biased_deletion: delta_F/T=-0.062943459, delta_T=+60
+s31_024_fifo: delta_F/T=-0.030388889, delta_T=+60
+s31_103_serial_churn: delta_F/T=-0.029813837, delta_T=+40
+Gains:
+s31_009_long_heavy: delta_F/T=+0.050889878, delta_T=-80
+s31_007_short_heavy: delta_F/T=+0.041309524, delta_T=-20
+s31_030_size_lifetimes: delta_F/T=+0.039130435, delta_T=-40
+s31_022_fifo: delta_F/T=+0.035732110, delta_T=-240
+
+REGRESSIONS AGAINST FIXED BASELINE
+Fixed gen0 baseline: mean F/T=0.859561466; mean positive loss on worst 16 cases=0.016110133; max case loss=0.042631579; regressed cases=31; worst family delta F/T=-0.013784408. These are selection diagnostics; primary fitness remains mean F/T.
+
+
+
+# Instructions
+
+Based on the global insights above and the current best program, generate 5 actionable recommendations for future program mutations. Each recommendation should be:
+
+1. **Specific**: Clear about what to implement or try
+2. **Actionable**: Something that can be directly applied
+3. **Evidence-based**: Grounded in the successful patterns identified
+4. **Diverse**: Cover different types of optimizations
+5. **Best-program informed**: Consider what makes the current best program successful
+
+Format as a numbered list:
+
+1. [Specific recommendation based on successful patterns]
+2. [Another recommendation focusing on a different aspect]
+...
+
+**CRITICAL: Prioritize recommendations that build upon or extend the successful patterns from the current best program. Consider both incremental improvements to the best program's approach and novel variations that could surpass it.**
+
+Focus on the most promising approaches that have shown success in recent evaluations, especially those demonstrated by the best program. Avoid generic advice - provide 2-3 sentences per recommendation. DO NOT RECOMMEND CHANGING THE EVALUATION CODE. ONLY MAKE ALGORITHMIC RECOMMENDATIONS.

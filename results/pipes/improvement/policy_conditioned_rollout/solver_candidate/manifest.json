@@ -1,0 +1,1319 @@
+{
+  "artifact": "Causal depth-16 policy-conditioned Pipes MPC candidate",
+  "decision": "NO-GO after same-input Open15 and holdout-v2 gate; no fresh synthetic quality validation run",
+  "scope": {
+    "local_only": true,
+    "platform_or_leaderboard_opened": false,
+    "docker_used": false,
+    "protected_files_modified": false,
+    "canonical_or_frozen_source_modified": false
+  },
+  "implementation": {
+    "candidate_source": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/solution.cpp",
+    "candidate_source_sha256": "48ca01cfd7b5ee98e33db0e17ad832d1eddd44f5ec1fbe1382c29cb349635ebe",
+    "candidate_binary": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/policy_conditioned",
+    "candidate_binary_sha256": "c2b8911e4564dfdc9fe9748ad1cfddd124c0209f9808b21d98d1def7bc2e9f61",
+    "baseline_continuation_selector_binary_sha256": "2fe0aff443ee0ef2afcd8f9bb150ede18a772d64d663b6ff2ad4d1f6ab891ca7",
+    "frozen_noMC_binary_sha256": "e5256420b8a1cf23ceb4c38bac83e649ebf792336f36df2f2c4040ca215768a6",
+    "p4_binary_sha256_unscored": "e208fad981c32c6e90a0401d10df5f50a6d6b8379a879eb94c47f9e51e35edef",
+    "build_commands": {
+      "policy_conditioned": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic -DPOLICY_ROLLOUT_DIAGNOSTICS results/pipes/improvement/policy_conditioned_rollout/solver_candidate/solution.cpp -o results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/policy_conditioned",
+      "baseline_continuation_selector": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic -DPOLICY_ROLLOUT_DIAGNOSTICS -DPOLICY_BASELINE_CONTINUATION_SELECTOR results/pipes/improvement/policy_conditioned_rollout/solver_candidate/solution.cpp -o results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/baseline_continuation_selector",
+      "frozen_noMC": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic -DMC_ROLLOUT_DISABLED results/pipes/final/solution.cpp -o results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/frozen_nomc",
+      "P4_binary_unscored": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic results/pipes/improvement/strategies/policy4_baseline.cpp -o results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/p4"
+    },
+    "mode": "receding-horizon MPC; choose one first placement and recalculate at the next placement",
+    "causal_gate": {
+      "minimum_observed_events": 32,
+      "maximum_gap_count": 64,
+      "maximum_active_pipes": 1024,
+      "maximum_evaluated_decisions_per_stream": 16,
+      "use_test_id_or_future_commands": false
+    },
+    "selection_configuration": {
+      "conditioned_selector": "choose P4 only if its summed terminal trench length is at least 16 m lower than baseline; ties choose baseline",
+      "baseline_selector_control": "same rule, with both first actions followed by frozen-noMC",
+      "baseline_continuation_selector_build_macro": "POLICY_BASELINE_CONTINUATION_SELECTOR"
+    }
+  },
+  "environment": {
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "clang": "Apple clang version 17.0.0 (clang-1700.0.13.5)"
+  },
+  "test_inputs_sha256": {
+    "open": {
+      "1": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+      "2": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+      "3": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "4": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+      "5": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+      "6": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "7": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+      "8": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+      "9": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+      "10": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+      "11": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+      "12": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+      "13": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+      "14": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+      "15": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+    },
+    "holdout_v2": {
+      "case-01": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683",
+      "case-02": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899",
+      "case-03": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b",
+      "case-04": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83",
+      "case-05": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2",
+      "case-06": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661",
+      "case-07": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a",
+      "case-08": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1",
+      "case-09": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f",
+      "case-10": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c",
+      "case-11": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46",
+      "case-12": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce"
+    }
+  },
+  "comparisons": {
+    "per_case": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/comparison.csv",
+    "aggregates_and_validation": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/comparison.json",
+    "same_input_hashes_across_all_variants": true,
+    "all_candidate_and_control_cases_ok": true
+  },
+  "runs": {
+    "open": {
+      "policy_conditioned": {
+        "command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/policy_conditioned --interactor results/pipes/final/bin/interactor --tests data/pipes/open --out results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/open/policy_conditioned --name policy_conditioned --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+        "summary_path": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/open/policy_conditioned/summary.json",
+        "summary_sha256": "35a59b857fce031c1f3f2109de1b9979b141a9fe6241cbd85d29d46f0f590593",
+        "score": 29.75935672887443,
+        "case_records": [
+          {
+            "case": "1",
+            "input_sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+            "status": "ok",
+            "commands_seen_including_zero": 7,
+            "expected_commands_including_zero": 7,
+            "judge_output_lines": 6,
+            "cpu_s": 0.005058,
+            "rss_mib": 2.125
+          },
+          {
+            "case": "2",
+            "input_sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+            "status": "ok",
+            "commands_seen_including_zero": 19,
+            "expected_commands_including_zero": 19,
+            "judge_output_lines": 18,
+            "cpu_s": 0.00223,
+            "rss_mib": 2.125
+          },
+          {
+            "case": "3",
+            "input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+            "status": "ok",
+            "commands_seen_including_zero": 13,
+            "expected_commands_including_zero": 13,
+            "judge_output_lines": 12,
+            "cpu_s": 0.002253,
+            "rss_mib": 2.125
+          },
+          {
+            "case": "4",
+            "input_sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+            "status": "ok",
+            "commands_seen_including_zero": 21,
+            "expected_commands_including_zero": 21,
+            "judge_output_lines": 20,
+            "cpu_s": 0.002407,
+            "rss_mib": 2.140625
+          },
+          {
+            "case": "5",
+            "input_sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+            "status": "ok",
+            "commands_seen_including_zero": 7521,
+            "expected_commands_including_zero": 7521,
+            "judge_output_lines": 7520,
+            "cpu_s": 0.04775,
+            "rss_mib": 3.0
+          },
+          {
+            "case": "6",
+            "input_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+            "status": "ok",
+            "commands_seen_including_zero": 12,
+            "expected_commands_including_zero": 12,
+            "judge_output_lines": 11,
+            "cpu_s": 0.0020559999999999997,
+            "rss_mib": 2.125
+          },
+          {
+            "case": "7",
+            "input_sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+            "status": "ok",
+            "commands_seen_including_zero": 313,
+            "expected_commands_including_zero": 313,
+            "judge_output_lines": 312,
+            "cpu_s": 0.005620999999999999,
+            "rss_mib": 2.5625
+          },
+          {
+            "case": "8",
+            "input_sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+            "status": "ok",
+            "commands_seen_including_zero": 6566,
+            "expected_commands_including_zero": 6566,
+            "judge_output_lines": 6565,
+            "cpu_s": 0.033045,
+            "rss_mib": 2.90625
+          },
+          {
+            "case": "9",
+            "input_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+            "status": "ok",
+            "commands_seen_including_zero": 9001,
+            "expected_commands_including_zero": 9001,
+            "judge_output_lines": 9000,
+            "cpu_s": 0.058603999999999996,
+            "rss_mib": 3.171875
+          },
+          {
+            "case": "10",
+            "input_sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+            "status": "ok",
+            "commands_seen_including_zero": 9998,
+            "expected_commands_including_zero": 9998,
+            "judge_output_lines": 9997,
+            "cpu_s": 0.047233,
+            "rss_mib": 3.015625
+          },
+          {
+            "case": "11",
+            "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+            "status": "ok",
+            "commands_seen_including_zero": 10000,
+            "expected_commands_including_zero": 10000,
+            "judge_output_lines": 9999,
+            "cpu_s": 0.049822,
+            "rss_mib": 3.015625
+          },
+          {
+            "case": "12",
+            "input_sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+            "status": "ok",
+            "commands_seen_including_zero": 1502,
+            "expected_commands_including_zero": 1502,
+            "judge_output_lines": 1501,
+            "cpu_s": 0.012195999999999999,
+            "rss_mib": 3.328125
+          },
+          {
+            "case": "13",
+            "input_sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+            "status": "ok",
+            "commands_seen_including_zero": 10000,
+            "expected_commands_including_zero": 10000,
+            "judge_output_lines": 9999,
+            "cpu_s": 0.049189,
+            "rss_mib": 3.015625
+          },
+          {
+            "case": "14",
+            "input_sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+            "status": "ok",
+            "commands_seen_including_zero": 25197,
+            "expected_commands_including_zero": 25197,
+            "judge_output_lines": 25196,
+            "cpu_s": 0.121972,
+            "rss_mib": 3.75
+          },
+          {
+            "case": "15",
+            "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+            "status": "ok",
+            "commands_seen_including_zero": 200001,
+            "expected_commands_including_zero": 200001,
+            "judge_output_lines": 200000,
+            "cpu_s": 1.001944,
+            "rss_mib": 7.234375
+          }
+        ]
+      },
+      "baseline_continuation_selector": {
+        "command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/baseline_continuation_selector --interactor results/pipes/final/bin/interactor --tests data/pipes/open --out results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/open/baseline_continuation_selector --name baseline_continuation_selector --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+        "summary_path": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/open/baseline_continuation_selector/summary.json",
+        "summary_sha256": "c28575ac5deebb7c4098b945a4dda6b68914ff1d28777491e81a47c71970c08f",
+        "score": 29.770563625426153,
+        "case_records": [
+          {
+            "case": "1",
+            "input_sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+            "status": "ok",
+            "commands_seen_including_zero": 7,
+            "expected_commands_including_zero": 7,
+            "judge_output_lines": 6,
+            "cpu_s": 0.004777999999999999,
+            "rss_mib": 2.125
+          },
+          {
+            "case": "2",
+            "input_sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+            "status": "ok",
+            "commands_seen_including_zero": 19,
+            "expected_commands_including_zero": 19,
+            "judge_output_lines": 18,
+            "cpu_s": 0.002969,
+            "rss_mib": 2.125
+          },
+          {
+            "case": "3",
+            "input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+            "status": "ok",
+            "commands_seen_including_zero": 13,
+            "expected_commands_including_zero": 13,
+            "judge_output_lines": 12,
+            "cpu_s": 0.002093,
+            "rss_mib": 2.125
+          },
+          {
+            "case": "4",
+            "input_sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+            "status": "ok",
+            "commands_seen_including_zero": 21,
+            "expected_commands_including_zero": 21,
+            "judge_output_lines": 20,
+            "cpu_s": 0.002771,
+            "rss_mib": 2.140625
+          },
+          {
+            "case": "5",
+            "input_sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+            "status": "ok",
+            "commands_seen_including_zero": 7521,
+            "expected_commands_including_zero": 7521,
+            "judge_output_lines": 7520,
+            "cpu_s": 0.04979599999999999,
+            "rss_mib": 2.953125
+          },
+          {
+            "case": "6",
+            "input_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+            "status": "ok",
+            "commands_seen_including_zero": 12,
+            "expected_commands_including_zero": 12,
+            "judge_output_lines": 11,
+            "cpu_s": 0.0022459999999999997,
+            "rss_mib": 2.125
+          },
+          {
+            "case": "7",
+            "input_sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+            "status": "ok",
+            "commands_seen_including_zero": 313,
+            "expected_commands_including_zero": 313,
+            "judge_output_lines": 312,
+            "cpu_s": 0.0057339999999999995,
+            "rss_mib": 2.515625
+          },
+          {
+            "case": "8",
+            "input_sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+            "status": "ok",
+            "commands_seen_including_zero": 6566,
+            "expected_commands_including_zero": 6566,
+            "judge_output_lines": 6565,
+            "cpu_s": 0.03206199999999999,
+            "rss_mib": 2.875
+          },
+          {
+            "case": "9",
+            "input_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+            "status": "ok",
+            "commands_seen_including_zero": 9001,
+            "expected_commands_including_zero": 9001,
+            "judge_output_lines": 9000,
+            "cpu_s": 0.055848999999999996,
+            "rss_mib": 3.109375
+          },
+          {
+            "case": "10",
+            "input_sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+            "status": "ok",
+            "commands_seen_including_zero": 9998,
+            "expected_commands_including_zero": 9998,
+            "judge_output_lines": 9997,
+            "cpu_s": 0.046743999999999994,
+            "rss_mib": 3.03125
+          },
+          {
+            "case": "11",
+            "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+            "status": "ok",
+            "commands_seen_including_zero": 10000,
+            "expected_commands_including_zero": 10000,
+            "judge_output_lines": 9999,
+            "cpu_s": 0.047915,
+            "rss_mib": 2.921875
+          },
+          {
+            "case": "12",
+            "input_sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+            "status": "ok",
+            "commands_seen_including_zero": 1502,
+            "expected_commands_including_zero": 1502,
+            "judge_output_lines": 1501,
+            "cpu_s": 0.011723999999999998,
+            "rss_mib": 3.25
+          },
+          {
+            "case": "13",
+            "input_sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+            "status": "ok",
+            "commands_seen_including_zero": 10000,
+            "expected_commands_including_zero": 10000,
+            "judge_output_lines": 9999,
+            "cpu_s": 0.046419,
+            "rss_mib": 3.015625
+          },
+          {
+            "case": "14",
+            "input_sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+            "status": "ok",
+            "commands_seen_including_zero": 25197,
+            "expected_commands_including_zero": 25197,
+            "judge_output_lines": 25196,
+            "cpu_s": 0.123138,
+            "rss_mib": 3.703125
+          },
+          {
+            "case": "15",
+            "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+            "status": "ok",
+            "commands_seen_including_zero": 200001,
+            "expected_commands_including_zero": 200001,
+            "judge_output_lines": 200000,
+            "cpu_s": 0.96499,
+            "rss_mib": 9.40625
+          }
+        ]
+      },
+      "frozen_noMC": {
+        "command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/frozen_nomc --interactor results/pipes/final/bin/interactor --tests data/pipes/open --out results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/open/frozen_noMC --name frozen_noMC --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+        "summary_path": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/open/frozen_nomc/summary.json",
+        "summary_sha256": "1cb94d4cc2d28bc5723b9edfdb7032708c1ebe231e0690b4ccd87fe72c54a7df",
+        "score": 29.74840453451706,
+        "case_records": [
+          {
+            "case": "1",
+            "input_sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+            "status": "ok",
+            "commands_seen_including_zero": 7,
+            "expected_commands_including_zero": 7,
+            "judge_output_lines": 6,
+            "cpu_s": 0.007108,
+            "rss_mib": 2.109375
+          },
+          {
+            "case": "2",
+            "input_sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+            "status": "ok",
+            "commands_seen_including_zero": 19,
+            "expected_commands_including_zero": 19,
+            "judge_output_lines": 18,
+            "cpu_s": 0.003294,
+            "rss_mib": 2.109375
+          },
+          {
+            "case": "3",
+            "input_sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+            "status": "ok",
+            "commands_seen_including_zero": 13,
+            "expected_commands_including_zero": 13,
+            "judge_output_lines": 12,
+            "cpu_s": 0.0024879999999999998,
+            "rss_mib": 2.109375
+          },
+          {
+            "case": "4",
+            "input_sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+            "status": "ok",
+            "commands_seen_including_zero": 21,
+            "expected_commands_including_zero": 21,
+            "judge_output_lines": 20,
+            "cpu_s": 0.0034679999999999997,
+            "rss_mib": 2.125
+          },
+          {
+            "case": "5",
+            "input_sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+            "status": "ok",
+            "commands_seen_including_zero": 7521,
+            "expected_commands_including_zero": 7521,
+            "judge_output_lines": 7520,
+            "cpu_s": 0.045233999999999996,
+            "rss_mib": 2.65625
+          },
+          {
+            "case": "6",
+            "input_sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+            "status": "ok",
+            "commands_seen_including_zero": 12,
+            "expected_commands_including_zero": 12,
+            "judge_output_lines": 11,
+            "cpu_s": 0.002044,
+            "rss_mib": 2.109375
+          },
+          {
+            "case": "7",
+            "input_sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+            "status": "ok",
+            "commands_seen_including_zero": 313,
+            "expected_commands_including_zero": 313,
+            "judge_output_lines": 312,
+            "cpu_s": 0.003427,
+            "rss_mib": 2.15625
+          },
+          {
+            "case": "8",
+            "input_sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+            "status": "ok",
+            "commands_seen_including_zero": 6566,
+            "expected_commands_including_zero": 6566,
+            "judge_output_lines": 6565,
+            "cpu_s": 0.030101999999999997,
+            "rss_mib": 2.359375
+          },
+          {
+            "case": "9",
+            "input_sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+            "status": "ok",
+            "commands_seen_including_zero": 9001,
+            "expected_commands_including_zero": 9001,
+            "judge_output_lines": 9000,
+            "cpu_s": 0.05465299999999999,
+            "rss_mib": 2.875
+          },
+          {
+            "case": "10",
+            "input_sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+            "status": "ok",
+            "commands_seen_including_zero": 9998,
+            "expected_commands_including_zero": 9998,
+            "judge_output_lines": 9997,
+            "cpu_s": 0.045735,
+            "rss_mib": 2.65625
+          },
+          {
+            "case": "11",
+            "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+            "status": "ok",
+            "commands_seen_including_zero": 10000,
+            "expected_commands_including_zero": 10000,
+            "judge_output_lines": 9999,
+            "cpu_s": 0.046604999999999994,
+            "rss_mib": 2.578125
+          },
+          {
+            "case": "12",
+            "input_sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+            "status": "ok",
+            "commands_seen_including_zero": 1502,
+            "expected_commands_including_zero": 1502,
+            "judge_output_lines": 1501,
+            "cpu_s": 0.008558,
+            "rss_mib": 2.25
+          },
+          {
+            "case": "13",
+            "input_sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+            "status": "ok",
+            "commands_seen_including_zero": 10000,
+            "expected_commands_including_zero": 10000,
+            "judge_output_lines": 9999,
+            "cpu_s": 0.050098,
+            "rss_mib": 2.484375
+          },
+          {
+            "case": "14",
+            "input_sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+            "status": "ok",
+            "commands_seen_including_zero": 25197,
+            "expected_commands_including_zero": 25197,
+            "judge_output_lines": 25196,
+            "cpu_s": 0.13569799999999999,
+            "rss_mib": 2.890625
+          },
+          {
+            "case": "15",
+            "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+            "status": "ok",
+            "commands_seen_including_zero": 200001,
+            "expected_commands_including_zero": 200001,
+            "judge_output_lines": 200000,
+            "cpu_s": 0.983339,
+            "rss_mib": 8.296875
+          }
+        ]
+      },
+      "frozen_final_reference": {
+        "summary_path": "results/pipes/final/open-run-size-cohort-lanes/summary.json",
+        "summary_sha256": "be36bbddf38c163e0b2ca0544917ffaa84cb0bf4dd8bcd651a856ded378ff82a",
+        "source": "previously saved frozen-final harness run",
+        "source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+        "binary_sha256": "dabb6910bde7550dbf4ab03d6d7b450d0a91f53a90dc06e52d6b271c8602000c",
+        "score": 29.789717928594047
+      }
+    },
+    "holdout_v2": {
+      "policy_conditioned": {
+        "command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/policy_conditioned --interactor results/pipes/final/bin/interactor --tests data/pipes/synthetic/final-holdout-v2 --out results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/holdout-v2/policy_conditioned --name policy_conditioned --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+        "summary_path": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/holdout-v2/policy_conditioned/summary.json",
+        "summary_sha256": "a262ce6df816b26839060a7feab9c9bbfdc747851b6ebc41b1d6c92af699bf89",
+        "score": 5.135142554858521,
+        "case_records": [
+          {
+            "case": "case-01",
+            "input_sha256": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.17992799999999998,
+            "rss_mib": 4.078125
+          },
+          {
+            "case": "case-02",
+            "input_sha256": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.175852,
+            "rss_mib": 3.671875
+          },
+          {
+            "case": "case-03",
+            "input_sha256": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.175645,
+            "rss_mib": 3.765625
+          },
+          {
+            "case": "case-04",
+            "input_sha256": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.172948,
+            "rss_mib": 4.34375
+          },
+          {
+            "case": "case-05",
+            "input_sha256": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.17840299999999998,
+            "rss_mib": 3.140625
+          },
+          {
+            "case": "case-06",
+            "input_sha256": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.17638700000000002,
+            "rss_mib": 3.734375
+          },
+          {
+            "case": "case-07",
+            "input_sha256": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.18804300000000002,
+            "rss_mib": 4.1875
+          },
+          {
+            "case": "case-08",
+            "input_sha256": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.17782900000000001,
+            "rss_mib": 3.796875
+          },
+          {
+            "case": "case-09",
+            "input_sha256": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.175948,
+            "rss_mib": 3.75
+          },
+          {
+            "case": "case-10",
+            "input_sha256": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.183912,
+            "rss_mib": 4.109375
+          },
+          {
+            "case": "case-11",
+            "input_sha256": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.178593,
+            "rss_mib": 3.796875
+          },
+          {
+            "case": "case-12",
+            "input_sha256": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.177718,
+            "rss_mib": 3.734375
+          }
+        ]
+      },
+      "baseline_continuation_selector": {
+        "command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/baseline_continuation_selector --interactor results/pipes/final/bin/interactor --tests data/pipes/synthetic/final-holdout-v2 --out results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/holdout-v2/baseline_continuation_selector --name baseline_continuation_selector --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+        "summary_path": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/holdout-v2/baseline_continuation_selector/summary.json",
+        "summary_sha256": "34c9f80c093641e6dd3ecc82afdc7c511a1963731711c312000de6636e02ed1f",
+        "score": 5.135410591258962,
+        "case_records": [
+          {
+            "case": "case-01",
+            "input_sha256": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.180201,
+            "rss_mib": 4.078125
+          },
+          {
+            "case": "case-02",
+            "input_sha256": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.183126,
+            "rss_mib": 3.625
+          },
+          {
+            "case": "case-03",
+            "input_sha256": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.195884,
+            "rss_mib": 3.703125
+          },
+          {
+            "case": "case-04",
+            "input_sha256": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.186186,
+            "rss_mib": 4.34375
+          },
+          {
+            "case": "case-05",
+            "input_sha256": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.181203,
+            "rss_mib": 3.75
+          },
+          {
+            "case": "case-06",
+            "input_sha256": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.180387,
+            "rss_mib": 3.71875
+          },
+          {
+            "case": "case-07",
+            "input_sha256": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.184828,
+            "rss_mib": 4.234375
+          },
+          {
+            "case": "case-08",
+            "input_sha256": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.176581,
+            "rss_mib": 3.734375
+          },
+          {
+            "case": "case-09",
+            "input_sha256": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.185691,
+            "rss_mib": 2.828125
+          },
+          {
+            "case": "case-10",
+            "input_sha256": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.184778,
+            "rss_mib": 4.078125
+          },
+          {
+            "case": "case-11",
+            "input_sha256": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.17585800000000001,
+            "rss_mib": 3.8125
+          },
+          {
+            "case": "case-12",
+            "input_sha256": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.171868,
+            "rss_mib": 3.71875
+          }
+        ]
+      },
+      "frozen_noMC": {
+        "command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/policy_conditioned_rollout/solver_candidate/bin/frozen_nomc --interactor results/pipes/final/bin/interactor --tests data/pipes/synthetic/final-holdout-v2 --out results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/holdout-v2/frozen_noMC --name frozen_noMC --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+        "summary_path": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/holdout-v2/frozen_nomc/summary.json",
+        "summary_sha256": "ef3d8fcced5fb25835168f9ceb0351026c22fc6e0c2fc76f1b095e6b0d46b42d",
+        "score": 5.135100030340453,
+        "case_records": [
+          {
+            "case": "case-01",
+            "input_sha256": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.187448,
+            "rss_mib": 3.578125
+          },
+          {
+            "case": "case-02",
+            "input_sha256": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.180996,
+            "rss_mib": 3.40625
+          },
+          {
+            "case": "case-03",
+            "input_sha256": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.178713,
+            "rss_mib": 3.40625
+          },
+          {
+            "case": "case-04",
+            "input_sha256": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.172778,
+            "rss_mib": 3.59375
+          },
+          {
+            "case": "case-05",
+            "input_sha256": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.171486,
+            "rss_mib": 3.390625
+          },
+          {
+            "case": "case-06",
+            "input_sha256": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.17016199999999998,
+            "rss_mib": 3.390625
+          },
+          {
+            "case": "case-07",
+            "input_sha256": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.185382,
+            "rss_mib": 3.609375
+          },
+          {
+            "case": "case-08",
+            "input_sha256": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.17338599999999998,
+            "rss_mib": 3.40625
+          },
+          {
+            "case": "case-09",
+            "input_sha256": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.179643,
+            "rss_mib": 2.5
+          },
+          {
+            "case": "case-10",
+            "input_sha256": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.183887,
+            "rss_mib": 3.59375
+          },
+          {
+            "case": "case-11",
+            "input_sha256": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.173935,
+            "rss_mib": 3.390625
+          },
+          {
+            "case": "case-12",
+            "input_sha256": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce",
+            "status": "ok",
+            "commands_seen_including_zero": 40001,
+            "expected_commands_including_zero": 40001,
+            "judge_output_lines": 40000,
+            "cpu_s": 0.169509,
+            "rss_mib": 3.40625
+          }
+        ]
+      },
+      "frozen_final_reference": {
+        "summary_path": "results/pipes/final/holdout-run-size-cohort-lanes/summary.json",
+        "summary_sha256": "a6d6a7aa921760cfc3c24330b951e253eb1f0624e580f9ecec64c7f6b9d4b365",
+        "source": "previously saved frozen-final harness run",
+        "source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+        "binary_sha256": "dabb6910bde7550dbf4ab03d6d7b450d0a91f53a90dc06e52d6b271c8602000c",
+        "score": 5.13526432428047
+      }
+    }
+  },
+  "candidate_protocol_resource_summary": {
+    "open15": {
+      "cases": 15,
+      "status_counts": {
+        "ok": 15
+      },
+      "score": 29.75935672887443,
+      "max_cpu_s": 1.001944,
+      "max_rss_mib": 7.234375,
+      "cpu_over_limit": 0,
+      "rss_over_limit": 0,
+      "policy_stats": {
+        "evaluated_decisions": 160,
+        "conditioned_p4_recommendations": 28,
+        "baseline_continuation_p4_recommendations": 8,
+        "selector_flips": 20,
+        "flip_rate": 0.125,
+        "simulated_actions": 123200,
+        "rollout_transitions": 122880,
+        "per_case": [
+          {
+            "case": "1",
+            "decisions": 0,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 0,
+            "transitions": 0
+          },
+          {
+            "case": "2",
+            "decisions": 0,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 0,
+            "transitions": 0
+          },
+          {
+            "case": "3",
+            "decisions": 0,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 0,
+            "transitions": 0
+          },
+          {
+            "case": "4",
+            "decisions": 0,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 0,
+            "transitions": 0
+          },
+          {
+            "case": "5",
+            "decisions": 16,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "6",
+            "decisions": 0,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 0,
+            "transitions": 0
+          },
+          {
+            "case": "7",
+            "decisions": 16,
+            "conditioned_p4": 15,
+            "baseline_p4": 4,
+            "selector_flips": 11,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "8",
+            "decisions": 16,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "9",
+            "decisions": 16,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "10",
+            "decisions": 16,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "11",
+            "decisions": 16,
+            "conditioned_p4": 4,
+            "baseline_p4": 0,
+            "selector_flips": 4,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "12",
+            "decisions": 16,
+            "conditioned_p4": 5,
+            "baseline_p4": 4,
+            "selector_flips": 1,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "13",
+            "decisions": 16,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "14",
+            "decisions": 16,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "15",
+            "decisions": 16,
+            "conditioned_p4": 4,
+            "baseline_p4": 0,
+            "selector_flips": 4,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          }
+        ]
+      }
+    },
+    "holdout_v2": {
+      "cases": 12,
+      "status_counts": {
+        "ok": 12
+      },
+      "score": 5.135142554858521,
+      "max_cpu_s": 0.18804300000000002,
+      "max_rss_mib": 4.34375,
+      "cpu_over_limit": 0,
+      "rss_over_limit": 0,
+      "policy_stats": {
+        "evaluated_decisions": 192,
+        "conditioned_p4_recommendations": 63,
+        "baseline_continuation_p4_recommendations": 37,
+        "selector_flips": 30,
+        "flip_rate": 0.15625,
+        "simulated_actions": 147840,
+        "rollout_transitions": 147456,
+        "per_case": [
+          {
+            "case": "case-01",
+            "decisions": 16,
+            "conditioned_p4": 12,
+            "baseline_p4": 7,
+            "selector_flips": 5,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-02",
+            "decisions": 16,
+            "conditioned_p4": 1,
+            "baseline_p4": 0,
+            "selector_flips": 1,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-03",
+            "decisions": 16,
+            "conditioned_p4": 3,
+            "baseline_p4": 3,
+            "selector_flips": 2,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-04",
+            "decisions": 16,
+            "conditioned_p4": 10,
+            "baseline_p4": 6,
+            "selector_flips": 4,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-05",
+            "decisions": 16,
+            "conditioned_p4": 0,
+            "baseline_p4": 0,
+            "selector_flips": 0,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-06",
+            "decisions": 16,
+            "conditioned_p4": 1,
+            "baseline_p4": 1,
+            "selector_flips": 0,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-07",
+            "decisions": 16,
+            "conditioned_p4": 10,
+            "baseline_p4": 5,
+            "selector_flips": 5,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-08",
+            "decisions": 16,
+            "conditioned_p4": 2,
+            "baseline_p4": 0,
+            "selector_flips": 2,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-09",
+            "decisions": 16,
+            "conditioned_p4": 3,
+            "baseline_p4": 0,
+            "selector_flips": 3,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-10",
+            "decisions": 16,
+            "conditioned_p4": 12,
+            "baseline_p4": 9,
+            "selector_flips": 5,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-11",
+            "decisions": 16,
+            "conditioned_p4": 7,
+            "baseline_p4": 4,
+            "selector_flips": 3,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          },
+          {
+            "case": "case-12",
+            "decisions": 16,
+            "conditioned_p4": 2,
+            "baseline_p4": 2,
+            "selector_flips": 0,
+            "simulated_actions": 12320,
+            "transitions": 12288
+          }
+        ]
+      }
+    },
+    "open_case15_max_stream": {
+      "operations": 200000,
+      "cpu_s": 1.001944,
+      "rss_mib": 7.234375,
+      "policy_decisions": 16,
+      "rollout_transitions": 12288
+    }
+  },
+  "synthetic_gate": {
+    "run": false,
+    "reason": "candidate lost to baseline-continuation selector and frozen-final on both same-input score sets; stop before synthetic advancement per gate",
+    "quality_caveat": "previous positive exploratory ranking used frozen-noMC trajectory states and mixed continuation targets; it is not solver-performance evidence"
+  },
+  "protected_hashes": {
+    "frozen_final_source": {
+      "path": "results/pipes/final/solution.cpp",
+      "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+    },
+    "frozen_final_binary": {
+      "path": "results/pipes/final/bin/solution",
+      "sha256": "dabb6910bde7550dbf4ab03d6d7b450d0a91f53a90dc06e52d6b271c8602000c"
+    },
+    "canonical_source": {
+      "path": "src/pipes.cpp",
+      "sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+    },
+    "P4_source": {
+      "path": "results/pipes/improvement/strategies/policy4_baseline.cpp",
+      "sha256": "a524195683fc0fb2aa4815faed12a0fea37df66dc6c4bdb1ffbf53de8d0e8ae3"
+    },
+    "official_interactor": {
+      "path": "results/pipes/final/bin/interactor",
+      "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+    }
+  },
+  "artifact_hashes": {
+    "solution.cpp": {
+      "sha256": "48ca01cfd7b5ee98e33db0e17ad832d1eddd44f5ec1fbe1382c29cb349635ebe",
+      "bytes": 41369
+    },
+    "config.json": {
+      "sha256": "a5cf035c675659d1673e8f17cb2210fec05d51f546a412c4dede857ae0e97d3a",
+      "bytes": 1485
+    },
+    "REPORT.md": {
+      "sha256": "fdab6f6ac50c997b0aa5f5408fa451439ded3c3f8e4be2b19c1112e20d4d5d96",
+      "bytes": 9025
+    },
+    "comparison.csv": {
+      "sha256": "1c8b1b423011662d4675991cc49b3963568a19dd5bb30fc69302cf8afb4b1720",
+      "bytes": 4674
+    },
+    "comparison.json": {
+      "sha256": "0b637cc1c4416eef1e6132d4c1f3647f34320ba0d72ee6c456d52daba5796e16",
+      "bytes": 20446
+    },
+    "run_metrics.json": {
+      "sha256": "743751475f722e834c349c2c3cae5671342d2b2d9d377a31bdaa7a319d66d606",
+      "bytes": 9922
+    }
+  },
+  "artifacts": {
+    "report": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/REPORT.md",
+    "config": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/config.json",
+    "comparison": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/comparison.csv",
+    "metrics": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/run_metrics.json",
+    "all_interactor_runs": "results/pipes/improvement/policy_conditioned_rollout/solver_candidate/runs/"
+  }
+}

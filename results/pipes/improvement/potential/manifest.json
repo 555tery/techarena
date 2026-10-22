@@ -1,0 +1,192 @@
+{
+  "scope": "Primary evaluation: official open tests 1-15. Three bounded potential variants and exactly one literal uncapped V follow-up were tested. The older cap40 fixed synthetic diagnostic remains secondary/non-independent; the literal candidate did not pass the open-score gate and was not run on holdout.",
+  "canonical_source": "src/pipes.cpp",
+  "canonical_source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+  "interactor": "tools/interactor",
+  "interactor_sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+  "harness": "tools/pipes_harness.py",
+  "harness_sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+  "input_hashes": {
+    "1": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+    "2": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+    "3": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+    "4": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+    "5": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+    "6": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+    "7": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+    "8": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+    "9": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128",
+    "10": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+    "11": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "12": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+    "13": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+    "14": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+    "15": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+  },
+  "variants": {
+    "t46_baseline": {
+      "label": "T46 baseline",
+      "source": "results/pipes/improvement/potential/source/t46_baseline.cpp",
+      "source_sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+      "binary": "results/pipes/improvement/potential/bin/t46_baseline",
+      "binary_sha256": "88d4c3f02c19117e4faff7e146b908d96984bc5c3115f6ec90380b477aee6e52",
+      "weighted_score_sum": 29.447164543483026,
+      "case_count": 15,
+      "ok_count": 15,
+      "max_solver_cpu_s": 1.0076019999999999,
+      "sum_solver_cpu_s": 1.382755,
+      "max_solver_rss_mib": 5.828125,
+      "case_report": "results/pipes/improvement/potential/runs/t46_baseline/summary.json",
+      "secondary_holdout": {
+        "weighted_score_sum": 5.135100030340453,
+        "case_count": 12,
+        "ok_count": 12,
+        "sum_solver_cpu_s": 2.841742,
+        "max_solver_cpu_s": 0.41537,
+        "max_solver_rss_mib": 2.359375,
+        "report": "results/pipes/improvement/potential/runs/t46_baseline_holdout/summary.json"
+      }
+    },
+    "potential_all_cap40_w2048": {
+      "label": "V loss all gaps, cap 40, W 2048",
+      "source": "results/pipes/improvement/potential/source/potential_all_cap40_w2048.cpp",
+      "source_sha256": "c7d159499855b1aa253b74b2d25915ec8f3b6bf28489c5eb41ef7af3622dcd50",
+      "binary": "results/pipes/improvement/potential/bin/potential_all_cap40_w2048",
+      "binary_sha256": "88bb6825bd9d5b5eccee2b0363f955419ad73f1a21e3e0ce91dccc4c59a2b11e",
+      "weighted_score_sum": 28.846401673218136,
+      "case_count": 15,
+      "ok_count": 15,
+      "max_solver_cpu_s": 0.894304,
+      "sum_solver_cpu_s": 1.309164,
+      "max_solver_rss_mib": 5.953125,
+      "case_report": "results/pipes/improvement/potential/runs/potential_all_cap40_w2048/summary.json",
+      "secondary_holdout": {
+        "weighted_score_sum": 5.121299188924441,
+        "case_count": 12,
+        "ok_count": 12,
+        "sum_solver_cpu_s": 4.007281,
+        "max_solver_cpu_s": 0.424334,
+        "max_solver_rss_mib": 2.390625,
+        "report": "results/pipes/improvement/potential/runs/potential_all_cap40_w2048_holdout/summary.json"
+      }
+    },
+    "potential_all_cap80_w2048": {
+      "label": "V loss all gaps, cap 80, W 2048",
+      "source": "results/pipes/improvement/potential/source/potential_all_cap80_w2048.cpp",
+      "source_sha256": "eafb2dfca768c3c53fa70bacd31fd6239a0dae938d6d7ffd644386f89346009b",
+      "binary": "results/pipes/improvement/potential/bin/potential_all_cap80_w2048",
+      "binary_sha256": "637b72e01d2034314870b33c9fea2204a6851a68e33474e5371370241e94db4a",
+      "weighted_score_sum": 28.839083512575037,
+      "case_count": 15,
+      "ok_count": 15,
+      "max_solver_cpu_s": 1.012242,
+      "sum_solver_cpu_s": 1.369517,
+      "max_solver_rss_mib": 5.9375,
+      "case_report": "results/pipes/improvement/potential/runs/potential_all_cap80_w2048/summary.json"
+    },
+    "potential_internal_first_cap80_w2048": {
+      "label": "V loss internal-first, cap 80, W 2048",
+      "source": "results/pipes/improvement/potential/source/potential_internal_first_cap80_w2048.cpp",
+      "source_sha256": "50411ac43c42c9257955635b652ac46c1e56808fd0e2ccaaee7f5f8b9662a1e5",
+      "binary": "results/pipes/improvement/potential/bin/potential_internal_first_cap80_w2048",
+      "binary_sha256": "67742c17149608b87ea4a60c2687abe1b1ecb4fc6d264abb40d19f849f30c89c",
+      "weighted_score_sum": 28.34915626659727,
+      "case_count": 15,
+      "ok_count": 15,
+      "max_solver_cpu_s": 1.3502779999999999,
+      "sum_solver_cpu_s": 1.9242019999999997,
+      "max_solver_rss_mib": 5.953125,
+      "case_report": "results/pipes/improvement/potential/runs/potential_internal_first_cap80_w2048/summary.json"
+    },
+    "potential_literal_unbounded_w2048": {
+      "label": "literal unbounded V loss, W 2048; T46 endpoint and tie-break",
+      "source": "results/pipes/improvement/potential/source/potential_literal_unbounded_w2048.cpp",
+      "source_sha256": "8b1310c9bf35e894b555772be026c5e7642b729da7c9849d490cba23fcead5a7",
+      "binary": "results/pipes/improvement/potential/bin/potential_literal_unbounded_w2048",
+      "binary_sha256": "d29fce96c3d905429f463f1d98c9f8b5a84a63037d4fe70a43cf81871786397f",
+      "weighted_score_sum": 28.845139569517496,
+      "delta_vs_t46": -0.6020249739655306,
+      "case_count": 15,
+      "ok_count": 15,
+      "max_solver_cpu_s": 0.8884129999999999,
+      "sum_solver_cpu_s": 1.2435049999999999,
+      "max_solver_rss_mib": 5.875,
+      "case_report": "results/pipes/improvement/potential/runs/potential_literal_unbounded_w2048/summary.json",
+      "per_case_csv": "results/pipes/improvement/potential/per_case_comparison.csv",
+      "holdout_run": false,
+      "holdout_gate": "open weighted score below T46; no holdout run"
+    }
+  },
+  "commands": {
+    "t46_baseline": {
+      "build": "clang++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/potential/source/t46_baseline.cpp -o results/pipes/improvement/potential/bin/t46_baseline",
+      "harness": "python3 tools/pipes_harness.py --solver results/pipes/improvement/potential/bin/t46_baseline --name \"T46 baseline\" --interactor tools/interactor --tests data/pipes/open --out results/pipes/improvement/potential/runs/t46_baseline --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+      "secondary_holdout_harness": "python3 tools/pipes_harness.py --solver results/pipes/improvement/potential/bin/t46_baseline --name \"T46 baseline holdout secondary\" --interactor tools/interactor --tests data/pipes/synthetic/final-holdout-v2 --out results/pipes/improvement/potential/runs/t46_baseline_holdout --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120"
+    },
+    "potential_all_cap40_w2048": {
+      "build": "clang++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/potential/source/potential_all_cap40_w2048.cpp -o results/pipes/improvement/potential/bin/potential_all_cap40_w2048",
+      "harness": "python3 tools/pipes_harness.py --solver results/pipes/improvement/potential/bin/potential_all_cap40_w2048 --name \"V loss all gaps, cap 40, W 2048\" --interactor tools/interactor --tests data/pipes/open --out results/pipes/improvement/potential/runs/potential_all_cap40_w2048 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+      "secondary_holdout_harness": "python3 tools/pipes_harness.py --solver results/pipes/improvement/potential/bin/potential_all_cap40_w2048 --name \"potential cap40 holdout secondary\" --interactor tools/interactor --tests data/pipes/synthetic/final-holdout-v2 --out results/pipes/improvement/potential/runs/potential_all_cap40_w2048_holdout --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120"
+    },
+    "potential_all_cap80_w2048": {
+      "build": "clang++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/potential/source/potential_all_cap80_w2048.cpp -o results/pipes/improvement/potential/bin/potential_all_cap80_w2048",
+      "harness": "python3 tools/pipes_harness.py --solver results/pipes/improvement/potential/bin/potential_all_cap80_w2048 --name \"V loss all gaps, cap 80, W 2048\" --interactor tools/interactor --tests data/pipes/open --out results/pipes/improvement/potential/runs/potential_all_cap80_w2048 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120"
+    },
+    "potential_internal_first_cap80_w2048": {
+      "build": "clang++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/potential/source/potential_internal_first_cap80_w2048.cpp -o results/pipes/improvement/potential/bin/potential_internal_first_cap80_w2048",
+      "harness": "python3 tools/pipes_harness.py --solver results/pipes/improvement/potential/bin/potential_internal_first_cap80_w2048 --name \"V loss internal-first, cap 80, W 2048\" --interactor tools/interactor --tests data/pipes/open --out results/pipes/improvement/potential/runs/potential_internal_first_cap80_w2048 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120"
+    },
+    "potential_literal_unbounded_w2048": {
+      "build": "clang++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/potential/source/potential_literal_unbounded_w2048.cpp -o results/pipes/improvement/potential/bin/potential_literal_unbounded_w2048",
+      "harness": "python3 tools/pipes_harness.py --solver results/pipes/improvement/potential/bin/potential_literal_unbounded_w2048 --name \"literal unbounded V W2048\" --interactor tools/interactor --tests data/pipes/open --out results/pipes/improvement/potential/runs/potential_literal_unbounded_w2048 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120"
+    }
+  },
+  "strict_flags": "-O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror",
+  "host_platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "python_version": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]",
+  "holdout_secondary": {
+    "set": "data/pipes/synthetic/final-holdout-v2",
+    "set_manifest_sha256": "5c275428ff6404b16899ce56aacd053b7db06c11e6cfe894f3e8bc35984df0a3",
+    "input_hashes": {
+      "case-01": "bdac3f031b221506ca1ecf1e96f17f1fb7d71980da7153e8ab0469cc445ba683",
+      "case-02": "6eca4fc1cbb0e346a85ea52fded52da6f4be655b4d5b1ca3bc73316464f02899",
+      "case-03": "f2d4b987c05e7dc88edd3923a80c74aa529f1ef376d73de60fd2148e72279d5b",
+      "case-04": "de58a9777ab839f69ff0ff7707ebce3a753d4ea83990d991f0c33ad10e68ce83",
+      "case-05": "f67ab3d709b50ecb6864452d2ca4a8cf8565dfd9257205732eaab038391b51d2",
+      "case-06": "879c584e3c8324d3dcbbbedb52ea75c474c6755cad6827d04a22ed8780662661",
+      "case-07": "0ac38c1b28c29c55a01fda65887e389b311852f3b93d0a562b7875f8bf96092a",
+      "case-08": "7cce5fff5d382aae14d0e15d68c1a5ca16d184f471849e7a2ed82838093586f1",
+      "case-09": "1a583733bedb55c39678b0871031e9fced4ff8a515513e2a4029bdf022510c5f",
+      "case-10": "9f4fdd0a1fbbe7d7576bb4766d635c6cae103e3ead56a832b458c6b4611df13c",
+      "case-11": "c5913890c3e6f98f6abb85705a2ad3b903e75640dd05b0d83a3dd3d89edd4d46",
+      "case-12": "733f9b5c8e4e5048cdfe4f885a14cf1fb5c6bb684361b1150093b70da955b3ce"
+    },
+    "reports": {
+      "t46_baseline": {
+        "weighted_score_sum": 5.135100030340453,
+        "case_count": 12,
+        "ok_count": 12,
+        "sum_solver_cpu_s": 2.841742,
+        "max_solver_cpu_s": 0.41537,
+        "max_solver_rss_mib": 2.359375,
+        "report": "results/pipes/improvement/potential/runs/t46_baseline_holdout/summary.json"
+      },
+      "potential_all_cap40_w2048": {
+        "weighted_score_sum": 5.121299188924441,
+        "case_count": 12,
+        "ok_count": 12,
+        "sum_solver_cpu_s": 4.007281,
+        "max_solver_cpu_s": 0.424334,
+        "max_solver_rss_mib": 2.390625,
+        "report": "results/pipes/improvement/potential/runs/potential_all_cap40_w2048_holdout/summary.json"
+      }
+    },
+    "comparison_csv": "results/pipes/improvement/potential/holdout_per_case_comparison.csv",
+    "interpretation": "Secondary only; prior runs of this fixed set already exist in results/pipes/final-holdout-v2, so this is not an independent holdout result and was not used for tuning.",
+    "literal_candidate_decision": "Not run: literal unbounded candidate scored below T46 on the official open set."
+  },
+  "literal_preflight": {
+    "file": "results/pipes/improvement/potential/literal_preflight.json",
+    "sha256": "36d054d17e2fcb8734ba14ecc719b115f065bf1637b631e538dcdbd129c1752d"
+  }
+}

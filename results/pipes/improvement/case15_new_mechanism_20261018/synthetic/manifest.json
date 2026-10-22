@@ -1,0 +1,56 @@
+[
+  {
+    "name": "age_case_01",
+    "seed": 20261018101,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "uniform lengths, random deletions, balanced one-for-one churn",
+    "sha256": "82ed89daf9b3b6c626ac36bc5f9e847c7db17c456389bf4dcc23a69a51f2f4ea"
+  },
+  {
+    "name": "age_case_02",
+    "seed": 20261018113,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 702,
+    "description": "uniform lengths, bursts of three installs then three strict-LIFO deletes",
+    "sha256": "46406e1c08a21fa78bd9d754d2fef9c73f202611cab96df4a360814c603e697d"
+  },
+  {
+    "name": "age_case_03",
+    "seed": 20261018127,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "small-to-wide phase shift, FIFO deletes, balanced pair churn",
+    "sha256": "c1d676b8a74ff3fc75e7d91c4b87dd9c59d468f9fb0395cafb49ba65cca85eb1"
+  },
+  {
+    "name": "age_case_04",
+    "seed": 20261018139,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "small-heavy bimodal lengths, newest-5%-biased deletes, reverse bursts",
+    "sha256": "107987a80f7c53cda57bef1073cd202ebfb834b13fadb1c685f756fc55666c27"
+  },
+  {
+    "name": "age_case_05",
+    "seed": 20261018151,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "periodic length cycle, alternating median/newest deletion ranks",
+    "sha256": "63db9d349ad5f168d20311332bf628d5796cef028eeb2f3bd01466c449fa8b3d"
+  },
+  {
+    "name": "age_case_06",
+    "seed": 20261018163,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "four length phases, alternating FIFO/LIFO/mid-rank deletions",
+    "sha256": "f06106bea0d461f751ffa7a2410c4c41d3545207cd9d8e08b0e762b9ad58e489"
+  }
+]

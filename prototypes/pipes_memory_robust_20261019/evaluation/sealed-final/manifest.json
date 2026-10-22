@@ -1,0 +1,285 @@
+{
+  "suite": "pipes-memory-generalization-final",
+  "status": "sealed-do-not-evaluate-before-parent-freeze",
+  "generator": "generate_suite.py",
+  "solver_invoked": false,
+  "rules": {
+    "max_operations": 200000,
+    "pipe_length": [
+      1,
+      40
+    ],
+    "pid": "sequential placements; each deletion references one currently active PID",
+    "final_live_length": "> 0"
+  },
+  "test_count": 8,
+  "total_operations": 800000,
+  "recommended_short_calibration": null,
+  "tests": [
+    {
+      "id": "F01",
+      "file": "f01-iid-uniform-random.in",
+      "seed": 930101,
+      "family": "iid-uniform-random",
+      "sha256": "bc259113bda338fad394588655170d047fc630764b427d7a68c2af2aca391a26",
+      "n": 60000,
+      "parameters": {
+        "profile": "uniform",
+        "delete": "random",
+        "p_add": 0.49,
+        "floor": 32,
+        "cap": 900
+      },
+      "structural_validity": {
+        "operations": 60000,
+        "placements": 30033,
+        "deletions": 29967,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 154,
+        "peak_live_length": 3155,
+        "final_live_count": 66,
+        "final_live_length": 1545
+      }
+    },
+    {
+      "id": "F02",
+      "file": "f02-unseen-size-regime-order.in",
+      "seed": 930102,
+      "family": "unseen-size-regime-order",
+      "sha256": "dba2915d36818f993017cc542c7731ac5e5c8639d083d28d3c4ead3c5a833c2b",
+      "n": 80000,
+      "parameters": {
+        "profile_phases": [
+          "bimodal",
+          "long",
+          "short",
+          "uniform"
+        ],
+        "delete": "young",
+        "p_add_phases": [
+          0.53,
+          0.5,
+          0.54,
+          0.49
+        ],
+        "floor": 32,
+        "cap": 1000
+      },
+      "structural_validity": {
+        "operations": 80000,
+        "placements": 40258,
+        "deletions": 39742,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 1000,
+        "peak_live_length": 26233,
+        "final_live_count": 516,
+        "final_live_length": 9721
+      }
+    },
+    {
+      "id": "F03",
+      "file": "f03-correlated-cohort-drain.in",
+      "seed": 930103,
+      "family": "correlated-cohort-drain",
+      "sha256": "9c92be3accb295caebb77ee56e24ca079f0024bfaac654edd7e7526e5fa1b950",
+      "n": 60000,
+      "parameters": {
+        "profile": "walk",
+        "delete": "random",
+        "correlated": "cohort",
+        "p_add": 0.54,
+        "floor": 32,
+        "cap": 900
+      },
+      "structural_validity": {
+        "operations": 60000,
+        "placements": 30017,
+        "deletions": 29983,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 96,
+        "peak_live_length": 2413,
+        "final_live_count": 34,
+        "final_live_length": 372
+      }
+    },
+    {
+      "id": "F04",
+      "file": "f04-correlated-length-and-age.in",
+      "seed": 930104,
+      "family": "correlated-length-and-age",
+      "sha256": "05560f6abc97241e203820c2454fadf85a4f97e00ca2bf328161a500446b8f81",
+      "n": 60000,
+      "parameters": {
+        "profile": "bimodal",
+        "delete": "longest",
+        "correlated": "exact-length",
+        "p_add": 0.51,
+        "floor": 32,
+        "cap": 900
+      },
+      "structural_validity": {
+        "operations": 60000,
+        "placements": 30017,
+        "deletions": 29983,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 32,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 72,
+        "peak_live_length": 777,
+        "final_live_count": 34,
+        "final_live_length": 49
+      }
+    },
+    {
+      "id": "F05",
+      "file": "f05-stress-200k-high-live-set.in",
+      "seed": 930105,
+      "family": "stress-200k-high-live-set",
+      "sha256": "15f8f21c9729d1de0c024ce628f6c0020361c9ca0e6b7196483740f77c0617e0",
+      "n": 200000,
+      "parameters": {
+        "profile": "uniform",
+        "delete": "random",
+        "p_add": 0.5,
+        "floor": 5200,
+        "cap": 7000
+      },
+      "structural_validity": {
+        "operations": 200000,
+        "placements": 102872,
+        "deletions": 97128,
+        "configured_live_floor": 5200,
+        "first_floor_reached_at": 5200,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 5200,
+        "peak_live_count": 5888,
+        "peak_live_length": 120317,
+        "final_live_count": 5744,
+        "final_live_length": 117392
+      }
+    },
+    {
+      "id": "F06",
+      "file": "f06-stress-200k-regime-many-gaps.in",
+      "seed": 930106,
+      "family": "stress-200k-regime-many-gaps",
+      "sha256": "981d9dad3764846f9077959c4e3097c9f412548897dce4c8b2345a25918cc56b",
+      "n": 200000,
+      "parameters": {
+        "profile_phases": [
+          "long",
+          "short",
+          "bimodal",
+          "walk"
+        ],
+        "delete_phases": [
+          "fifo",
+          "young",
+          "random",
+          "lifo"
+        ],
+        "correlated": "birth-era",
+        "p_add_phases": [
+          0.53,
+          0.49,
+          0.54,
+          0.5
+        ],
+        "floor": 700,
+        "cap": 1050
+      },
+      "structural_validity": {
+        "operations": 200000,
+        "placements": 100351,
+        "deletions": 99649,
+        "configured_live_floor": 700,
+        "first_floor_reached_at": 700,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 700,
+        "peak_live_count": 748,
+        "peak_live_length": 24099,
+        "final_live_count": 702,
+        "final_live_length": 16973
+      }
+    },
+    {
+      "id": "F07",
+      "file": "f07-open-prefix-switch-case7.in",
+      "seed": 930107,
+      "family": "open-prefix-switch-case7",
+      "sha256": "762e0c58fdb6f44f43d178335532082537237dc5bcce3ebcf5c14566ce5ef04b",
+      "n": 60000,
+      "parameters": {
+        "prefix": {
+          "case": 7,
+          "ops": 250
+        },
+        "profile": "long",
+        "delete_phases": [
+          "young",
+          "fifo",
+          "random"
+        ],
+        "p_add": 0.52,
+        "floor": 32,
+        "cap": 900
+      },
+      "structural_validity": {
+        "operations": 60000,
+        "placements": 30448,
+        "deletions": 29552,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 250,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 151,
+        "peak_live_count": 900,
+        "peak_live_length": 29591,
+        "final_live_count": 896,
+        "final_live_length": 29123
+      }
+    },
+    {
+      "id": "F08",
+      "file": "f08-open-prefix-switch-case15.in",
+      "seed": 930108,
+      "family": "open-prefix-switch-case15",
+      "sha256": "810a8e95b4ab05fc89de3f86278974c585a719e9ee324fab9fe36a191f5564d6",
+      "n": 80000,
+      "parameters": {
+        "prefix": {
+          "case": 15,
+          "ops": 1500
+        },
+        "profile": "walk",
+        "delete": "random",
+        "correlated": "cohort",
+        "p_add": 0.53,
+        "floor": 32,
+        "cap": 1000
+      },
+      "structural_validity": {
+        "operations": 80000,
+        "placements": 40017,
+        "deletions": 39983,
+        "configured_live_floor": 32,
+        "first_floor_reached_at": 1500,
+        "min_live_count_after_command": 1,
+        "min_live_count_after_floor_reached": 32,
+        "peak_live_count": 910,
+        "peak_live_length": 13806,
+        "final_live_count": 34,
+        "final_live_length": 910
+      }
+    }
+  ]
+}

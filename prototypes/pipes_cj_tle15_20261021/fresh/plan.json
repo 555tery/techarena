@@ -1,0 +1,218 @@
+[
+  {
+    "id": "fresh-01",
+    "seed": 20261021,
+    "family": "steady_churn",
+    "operations": 200000,
+    "deletion_policy": "fifo",
+    "profile": "dense_sparse"
+  },
+  {
+    "id": "fresh-02",
+    "seed": 20261022,
+    "family": "steady_churn",
+    "operations": 200000,
+    "deletion_policy": "lifo",
+    "profile": "dense_sparse"
+  },
+  {
+    "id": "fresh-03",
+    "seed": 20261023,
+    "family": "steady_churn",
+    "operations": 200000,
+    "deletion_policy": "random_middle",
+    "profile": "dense_sparse"
+  },
+  {
+    "id": "fresh-04",
+    "seed": 20261024,
+    "family": "steady_churn",
+    "operations": 200000,
+    "deletion_policy": "cyclic",
+    "profile": "dense_sparse"
+  },
+  {
+    "id": "fresh-05",
+    "seed": 20261025,
+    "family": "coalescing_runs",
+    "operations": 200000,
+    "deletion_policy": "random_middle",
+    "profile": "sparse_dense"
+  },
+  {
+    "id": "fresh-06",
+    "seed": 20261026,
+    "family": "recycling_permuted",
+    "operations": 200000,
+    "deletion_policy": "random_middle",
+    "profile": "dense_sparse"
+  },
+  {
+    "id": "fresh-07",
+    "seed": 20261027,
+    "family": "long_survivors",
+    "operations": 200000,
+    "deletion_policy": "random_middle",
+    "profile": "dense_sparse",
+    "survivor_target_ages": [
+      16,
+      64,
+      256,
+      1024,
+      4096,
+      16384,
+      65536,
+      70000
+    ]
+  },
+  {
+    "id": "fresh-08",
+    "seed": 20261028,
+    "family": "long_survivors",
+    "operations": 200000,
+    "deletion_policy": "cyclic",
+    "profile": "sparse_dense",
+    "survivor_target_ages": [
+      15,
+      63,
+      255,
+      1023,
+      4095,
+      16383,
+      65535,
+      65537
+    ]
+  },
+  {
+    "id": "fresh-09",
+    "seed": 20261029,
+    "family": "open15_prefix_sibling",
+    "operations": 5000,
+    "deletion_policy": "fifo",
+    "profile": "dense_sparse",
+    "open15_prefix": 16
+  },
+  {
+    "id": "fresh-10",
+    "seed": 20261030,
+    "family": "open15_prefix_sibling",
+    "operations": 12000,
+    "deletion_policy": "lifo",
+    "profile": "dense_sparse",
+    "open15_prefix": 17
+  },
+  {
+    "id": "fresh-11",
+    "seed": 20261031,
+    "family": "open15_prefix_sibling",
+    "operations": 25000,
+    "deletion_policy": "random_middle",
+    "profile": "dense_sparse",
+    "open15_prefix": 31
+  },
+  {
+    "id": "fresh-12",
+    "seed": 20261032,
+    "family": "open15_prefix_sibling",
+    "operations": 50000,
+    "deletion_policy": "cyclic",
+    "profile": "dense_sparse",
+    "open15_prefix": 65
+  },
+  {
+    "id": "fresh-13",
+    "seed": 20261033,
+    "family": "run_window_boundaries",
+    "operations": 5000,
+    "deletion_policy": "fifo",
+    "profile": "run_boundary"
+  },
+  {
+    "id": "fresh-14",
+    "seed": 20261034,
+    "family": "run_window_boundaries",
+    "operations": 12000,
+    "deletion_policy": "lifo",
+    "profile": "run_boundary"
+  },
+  {
+    "id": "fresh-15",
+    "seed": 20261035,
+    "family": "run_window_boundaries",
+    "operations": 25000,
+    "deletion_policy": "random_middle",
+    "profile": "run_boundary"
+  },
+  {
+    "id": "fresh-16",
+    "seed": 20261036,
+    "family": "run_window_boundaries",
+    "operations": 50000,
+    "deletion_policy": "cyclic",
+    "profile": "run_boundary"
+  },
+  {
+    "id": "fresh-17",
+    "seed": 20261037,
+    "family": "coalescing_runs",
+    "operations": 5000,
+    "deletion_policy": "random_middle",
+    "profile": "sparse"
+  },
+  {
+    "id": "fresh-18",
+    "seed": 20261038,
+    "family": "recycling_permuted",
+    "operations": 12000,
+    "deletion_policy": "random_middle",
+    "profile": "sparse_dense"
+  },
+  {
+    "id": "fresh-19",
+    "seed": 20261039,
+    "family": "coalescing_runs",
+    "operations": 25000,
+    "deletion_policy": "random_middle",
+    "profile": "dense"
+  },
+  {
+    "id": "fresh-20",
+    "seed": 20261040,
+    "family": "recycling_permuted",
+    "operations": 50000,
+    "deletion_policy": "random_middle",
+    "profile": "dense_sparse"
+  },
+  {
+    "id": "fresh-21",
+    "seed": 20261041,
+    "family": "independent_profile_switch",
+    "operations": 20000,
+    "deletion_policy": "cyclic",
+    "profile": "sparse"
+  },
+  {
+    "id": "fresh-22",
+    "seed": 20261042,
+    "family": "independent_profile_switch",
+    "operations": 30000,
+    "deletion_policy": "random_middle",
+    "profile": "sparse_dense"
+  },
+  {
+    "id": "fresh-23",
+    "seed": 20261043,
+    "family": "independent_profile_switch",
+    "operations": 40000,
+    "deletion_policy": "fifo",
+    "profile": "dense_sparse"
+  },
+  {
+    "id": "fresh-24",
+    "seed": 20261044,
+    "family": "independent_profile_switch",
+    "operations": 45000,
+    "deletion_policy": "lifo",
+    "profile": "sparse_dense"
+  }
+]

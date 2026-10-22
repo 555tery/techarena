@@ -1,0 +1,446 @@
+{
+  "selection": "public-only: block lifetime is exactly one command in every public branch",
+  "moves": [
+    {
+      "pass": 1,
+      "block_id": 21532,
+      "length": 2,
+      "old_x": 229,
+      "new_x": 3,
+      "left_shift_m": 226,
+      "max_lifetime_commands": 1,
+      "first_local_command": 2,
+      "early_block": true,
+      "short_lived_block": true,
+      "old_risk_witness": {
+        "risk": 12.0,
+        "case": 11,
+        "step": 2,
+        "candidate_T": 240,
+        "bestfit_T": 20
+      },
+      "conflict_blocks": 1,
+      "forbidden_start_ranges_before_merge": 1,
+      "max_full_prefix_risk_before": {
+        "case": 11,
+        "step": 2,
+        "candidate_T": 240,
+        "bestfit_T": 20,
+        "ratio": 12.0
+      },
+      "max_full_prefix_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_before": {
+        "case": 11,
+        "step": 2,
+        "candidate_T": 240,
+        "bestfit_T": 20,
+        "ratio": 12.0
+      },
+      "max_first4096_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      }
+    },
+    {
+      "pass": 1,
+      "block_id": 5321,
+      "length": 6,
+      "old_x": 799,
+      "new_x": 44,
+      "left_shift_m": 755,
+      "max_lifetime_commands": 1,
+      "first_local_command": 67,
+      "early_block": true,
+      "short_lived_block": true,
+      "old_risk_witness": {
+        "risk": 3.1538461538461537,
+        "case": 8,
+        "step": 67,
+        "candidate_T": 820,
+        "bestfit_T": 260
+      },
+      "conflict_blocks": 18,
+      "forbidden_start_ranges_before_merge": 18,
+      "max_full_prefix_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_full_prefix_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      }
+    },
+    {
+      "pass": 1,
+      "block_id": 5343,
+      "length": 7,
+      "old_x": 799,
+      "new_x": 70,
+      "left_shift_m": 729,
+      "max_lifetime_commands": 1,
+      "first_local_command": 109,
+      "early_block": true,
+      "short_lived_block": true,
+      "old_risk_witness": {
+        "risk": 3.1538461538461537,
+        "case": 8,
+        "step": 109,
+        "candidate_T": 820,
+        "bestfit_T": 260
+      },
+      "conflict_blocks": 20,
+      "forbidden_start_ranges_before_merge": 20,
+      "max_full_prefix_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_full_prefix_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      }
+    },
+    {
+      "pass": 1,
+      "block_id": 5407,
+      "length": 9,
+      "old_x": 838,
+      "new_x": 87,
+      "left_shift_m": 751,
+      "max_lifetime_commands": 1,
+      "first_local_command": 233,
+      "early_block": true,
+      "short_lived_block": true,
+      "old_risk_witness": {
+        "risk": 2.8666666666666667,
+        "case": 8,
+        "step": 233,
+        "candidate_T": 860,
+        "bestfit_T": 300
+      },
+      "conflict_blocks": 24,
+      "forbidden_start_ranges_before_merge": 24,
+      "max_full_prefix_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_full_prefix_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      }
+    },
+    {
+      "pass": 1,
+      "block_id": 5418,
+      "length": 10,
+      "old_x": 838,
+      "new_x": 87,
+      "left_shift_m": 751,
+      "max_lifetime_commands": 1,
+      "first_local_command": 255,
+      "early_block": true,
+      "short_lived_block": true,
+      "old_risk_witness": {
+        "risk": 2.8666666666666667,
+        "case": 8,
+        "step": 255,
+        "candidate_T": 860,
+        "bestfit_T": 300
+      },
+      "conflict_blocks": 24,
+      "forbidden_start_ranges_before_merge": 24,
+      "max_full_prefix_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_full_prefix_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      }
+    },
+    {
+      "pass": 1,
+      "block_id": 5443,
+      "length": 11,
+      "old_x": 879,
+      "new_x": 87,
+      "left_shift_m": 792,
+      "max_lifetime_commands": 1,
+      "first_local_command": 303,
+      "early_block": true,
+      "short_lived_block": true,
+      "old_risk_witness": {
+        "risk": 2.8125,
+        "case": 8,
+        "step": 303,
+        "candidate_T": 900,
+        "bestfit_T": 320
+      },
+      "conflict_blocks": 26,
+      "forbidden_start_ranges_before_merge": 26,
+      "max_full_prefix_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_full_prefix_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      }
+    },
+    {
+      "pass": 1,
+      "block_id": 5468,
+      "length": 12,
+      "old_x": 879,
+      "new_x": 87,
+      "left_shift_m": 792,
+      "max_lifetime_commands": 1,
+      "first_local_command": 352,
+      "early_block": true,
+      "short_lived_block": true,
+      "old_risk_witness": {
+        "risk": 2.6470588235294117,
+        "case": 8,
+        "step": 352,
+        "candidate_T": 900,
+        "bestfit_T": 340
+      },
+      "conflict_blocks": 27,
+      "forbidden_start_ranges_before_merge": 27,
+      "max_full_prefix_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_full_prefix_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      }
+    },
+    {
+      "pass": 1,
+      "block_id": 5293,
+      "length": 5,
+      "old_x": 562,
+      "new_x": 44,
+      "left_shift_m": 518,
+      "max_lifetime_commands": 1,
+      "first_local_command": 17,
+      "early_block": true,
+      "short_lived_block": true,
+      "old_risk_witness": {
+        "risk": 2.6363636363636362,
+        "case": 8,
+        "step": 17,
+        "candidate_T": 580,
+        "bestfit_T": 220
+      },
+      "conflict_blocks": 12,
+      "forbidden_start_ranges_before_merge": 12,
+      "max_full_prefix_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_full_prefix_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      }
+    },
+    {
+      "pass": 1,
+      "block_id": 5291,
+      "length": 14,
+      "old_x": 480,
+      "new_x": 87,
+      "left_shift_m": 393,
+      "max_lifetime_commands": 1,
+      "first_local_command": 14,
+      "early_block": true,
+      "short_lived_block": true,
+      "old_risk_witness": {
+        "risk": 2.5,
+        "case": 8,
+        "step": 14,
+        "candidate_T": 500,
+        "bestfit_T": 200
+      },
+      "conflict_blocks": 11,
+      "forbidden_start_ranges_before_merge": 11,
+      "max_full_prefix_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_full_prefix_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_before": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      },
+      "max_first4096_risk_after": {
+        "case": 11,
+        "step": 8,
+        "candidate_T": 440,
+        "bestfit_T": 40,
+        "ratio": 11.0
+      }
+    }
+  ]
+}

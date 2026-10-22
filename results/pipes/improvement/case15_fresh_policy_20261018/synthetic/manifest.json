@@ -1,0 +1,66 @@
+[
+  {
+    "name": "fresh_01",
+    "seed": 2026101801,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "uniform lengths, random deletion"
+  },
+  {
+    "name": "fresh_02",
+    "seed": 2026101802,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "uniform lengths, strict LIFO deletion"
+  },
+  {
+    "name": "fresh_03",
+    "seed": 2026101803,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "short-to-wide phases, LIFO deletion"
+  },
+  {
+    "name": "fresh_04",
+    "seed": 2026101804,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "small/large bimodal lengths, FIFO deletion"
+  },
+  {
+    "name": "fresh_05",
+    "seed": 2026101805,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 14034,
+    "description": "periodic lengths, median-rank deletion"
+  },
+  {
+    "name": "fresh_06",
+    "seed": 2026101806,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "four demand phases, alternating LIFO/FIFO deletion"
+  },
+  {
+    "name": "fresh_07",
+    "seed": 2026101807,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 8700,
+    "description": "uniform lengths, 80% newest-5%-biased deletion"
+  },
+  {
+    "name": "fresh_08",
+    "seed": 2026101808,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 8700,
+    "description": "long-biased mixture, moderate mixed churn"
+  }
+]

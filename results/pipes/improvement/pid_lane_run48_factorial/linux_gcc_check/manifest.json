@@ -1,0 +1,118 @@
+{
+  "purpose": "Linux/GCC portability and correctness gate for the exact isolated PID/46 source; no website use or submission.",
+  "date": "2026-10-17",
+  "scope": "Only isolated source copy, solver/interactor compilation, local Open15 and holdout-v2 harness runs. No source edits outside linux_gcc_check.",
+  "source": {
+    "original_path": "results/pipes/improvement/pid_lane_run48_factorial/sources/pid_run46.cpp",
+    "copy_path": "results/pipes/improvement/pid_lane_run48_factorial/linux_gcc_check/sources/pid_run46.cpp",
+    "sha256": "1a643a2b8a560de5c7dfd7efe0b288dc93785e96400d2ae6fd4ec7eea5f55f59",
+    "byte_identical_to_original": true,
+    "source_copy_sha256": "1a643a2b8a560de5c7dfd7efe0b288dc93785e96400d2ae6fd4ec7eea5f55f59"
+  },
+  "environment": {
+    "container_image": "agentic-scientist/pipes-cpp:2b8aa392",
+    "container_image_id": "sha256:ab4699f929c48f1ad52ea426b22d66e8ce1ebcd7edbc9f8ceb316aafe8776898",
+    "platform": "Linux aarch64",
+    "os": "Debian GNU/Linux 13.7 (trixie)",
+    "compiler": "g++ (Debian 14.2.0-19) 14.2.0",
+    "python": "Python 3.12.15",
+    "container_kernel": "Linux 61436e222458 6.10.14-linuxkit #1 SMP Wed Sep  3 15:35:15 UTC 2025 aarch64 GNU/Linux",
+    "toolchain_record_path": "toolchain.txt",
+    "toolchain_record_sha256": "f67ef8bac4223a9308083be016bb8495474a6cf090149a1a5ed8a4c26de67b4f"
+  },
+  "build": {
+    "solver_command": "g++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/pid_lane_run48_factorial/linux_gcc_check/sources/pid_run46.cpp -o results/pipes/improvement/pid_lane_run48_factorial/linux_gcc_check/bin/pid_run46",
+    "solver_compile_exit_code": 0,
+    "solver_binary_path": "bin/pid_run46",
+    "solver_binary_sha256": "4456eebbd2e050b9186f26a3624695a2dd2ba26d2b83fa55612b994458833b98",
+    "strict_flags": [
+      "-O2",
+      "-std=c++20",
+      "-pipe",
+      "-Wall",
+      "-Wextra",
+      "-Wconversion",
+      "-Wshadow",
+      "-pedantic",
+      "-Werror"
+    ],
+    "compile_log_path": "compile.log",
+    "compile_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "interactor_command": "g++ -O2 -std=c++17 -pipe vendor/pipes_official/interactor.cpp -o results/pipes/improvement/pid_lane_run48_factorial/linux_gcc_check/bin/interactor",
+    "interactor_source_sha256": "85672e4c3ad9fdcb97d8b601758de1f1d1b5e86d6dd20252e0f72acdb9cb122a",
+    "interactor_binary_path": "bin/interactor",
+    "interactor_binary_sha256": "785574199a5123fe70a40575e69d849301987c7d4a118cfcd73bdc090333f119"
+  },
+  "harness": {
+    "path": "tools/pipes_harness.py",
+    "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d",
+    "per_test_limits": {
+      "cpu_seconds": 5,
+      "memory_mib": 256,
+      "wall_seconds": 120
+    },
+    "measurement": "solver child CPU and peak RSS as reported by the project harness; interactor excluded"
+  },
+  "datasets": {
+    "open15": {
+      "summary_path": "results/pipes/improvement/pid_lane_run48_factorial/linux_gcc_check/runs/open15/summary.json",
+      "summary_sha256": "60d6a33d44f62f66a1a9f37a574860bcaa9801c005d1b68b472425b48a91854e",
+      "cases_csv_path": "results/pipes/improvement/pid_lane_run48_factorial/linux_gcc_check/runs/open15/cases.csv",
+      "cases_csv_sha256": "26f8b672d990f45de09abfa3c7a9fb6aeaf13213ed03fe94723ad459db1aa4c6",
+      "case_count": 15,
+      "ok_count": 15,
+      "all_cases_ok_and_within_limits": true,
+      "weighted_score_sum": 29.791529008363593,
+      "weight_sum": 32.1,
+      "max_solver_cpu_s": 2.368678,
+      "max_solver_rss_mib": 32.98828125,
+      "cpu_limit_s_per_case": 5.0,
+      "memory_limit_mib_per_case": 256.0,
+      "byte_identical_judge_outputs_vs_prior_macos_pid46": 15,
+      "prior_output_case_count": 15,
+      "host_platform": "Linux-6.10.14-linuxkit-aarch64-with-glibc2.41",
+      "python_version": "3.12.15 (main, Oct  6 2026, 02:08:11) [GCC 14.2.0]"
+    },
+    "holdout-v2": {
+      "summary_path": "results/pipes/improvement/pid_lane_run48_factorial/linux_gcc_check/runs/holdout-v2/summary.json",
+      "summary_sha256": "4a57cf4a0e91eeefbcc015f46554ee5055631666e58c8f7e8ad4b0132138ee3d",
+      "cases_csv_path": "results/pipes/improvement/pid_lane_run48_factorial/linux_gcc_check/runs/holdout-v2/cases.csv",
+      "cases_csv_sha256": "d571c4111566176f51947afea602c914f6253e4a22852c8e9b3b59aa3e2fb0a6",
+      "case_count": 12,
+      "ok_count": 12,
+      "all_cases_ok_and_within_limits": true,
+      "weighted_score_sum": 5.13526432428047,
+      "weight_sum": 12.0,
+      "max_solver_cpu_s": 0.731831,
+      "max_solver_rss_mib": 22.859375,
+      "cpu_limit_s_per_case": 5.0,
+      "memory_limit_mib_per_case": 256.0,
+      "byte_identical_judge_outputs_vs_prior_macos_pid46": 12,
+      "prior_output_case_count": 12,
+      "host_platform": "Linux-6.10.14-linuxkit-aarch64-with-glibc2.41",
+      "python_version": "3.12.15 (main, Oct  6 2026, 02:08:11) [GCC 14.2.0]"
+    }
+  },
+  "case_results_path": "per_case.csv",
+  "case_results_sha256": "17b895997a677ec6f43fb5e336d9642eac0db4b19646f4fdc2d3957cc1d456c5",
+  "commands_path": "commands.txt",
+  "commands_sha256": "c950e39537b1f0108a4e85a78e352e0db9264b374480cc4a423952d92fed3054",
+  "report_path": "REPORT.md",
+  "report_sha256": "107546644446b0db30aea444ae4aed1bd3d7eaa5adf52ebab27d39d770b14fe4",
+  "protected_sources": {
+    "frozen_final_path": "results/pipes/final/solution.cpp",
+    "frozen_final_sha256_before": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "frozen_final_sha256_after": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "frozen_final_unchanged": true,
+    "canonical_path": "src/pipes.cpp",
+    "canonical_sha256_before": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+    "canonical_sha256_after": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+    "canonical_unchanged": true
+  },
+  "caveats": [
+    "Open15 was previously used for tuning; holdout-v2 was also reused in prior development.",
+    "This gate checks Linux/GCC compilation, correctness, resource limits, and reproduction of prior PID/46 outputs; it does not establish independent generalization or hidden-test advantage.",
+    "The tested environment is Linux aarch64, matching the Linux/GCC environment previously recorded in this project; this is not an x86_64 run.",
+    "No platform access, leaderboard visit, or submission occurred."
+  ]
+}

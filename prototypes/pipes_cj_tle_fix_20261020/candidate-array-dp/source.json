@@ -1,0 +1,9 @@
+{
+  "parent_sha256": "85fa2c3efef59dc00a4fe59b5c346374e39549bf6a0eea0817acd1c67a7eebdf",
+  "source_sha256": "269901d3bced671942b02da1f094eca4762fa6db84ec46939b800c633899c205",
+  "changes": [
+    "Large numeric VArray storage replaced by Array",
+    "One reward scratch array per DP rebuild, with identical active-bit guards"
+  ],
+  "proof": "No observation of a stale reward slot; FP operations keep their original order."
+}

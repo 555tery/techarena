@@ -1,0 +1,86 @@
+{
+  "phase": "local_validation_complete",
+  "pipeline_session": null,
+  "source_sha256": "92727e61b93e66571a68b592ade92d7ae875fd866539577edbf3a5bc6af6aaaf",
+  "source": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/candidate-hot/solution.cj",
+  "todo": [
+    "User can upload release/solution-upload-92727e61.txt manually.",
+    "Await server result; preserve older frozen source and records.",
+    "No additional report/wiki files or automatic platform submissions."
+  ],
+  "baseline_source_sha256": "308d230d99b4bfd52838b9f0ff1086c8838c2ff3e05ea296903c78f1947b14cc",
+  "old_result": {
+    "id": 1667365,
+    "accepted": 14,
+    "tle": [
+      15
+    ],
+    "score": 20.50542,
+    "cut15": 88477
+  },
+  "agents": "Audits+fresh24 completed; hotpath agent latest boundedannotationaudit failed backend403. Rootprovided bounds proof; no new delegation needed.",
+  "platform_action": "User uploads manually; do not submit duplicate.",
+  "pipeline_artifacts_complete": true,
+  "server_status": "New transcript15 source not submitted; previous1668332 has TLE15.",
+  "last_reported_submission": {
+    "id": 1668332,
+    "verdict_from_user": "TLE on15",
+    "archive": "/Users/555tery/Downloads/archive_1668332",
+    "open1_to14_response_equal": true,
+    "open15_response_prefix_equal": true,
+    "open15_completed_commands": 133152,
+    "uploaded_source_bytes_verified": false
+  },
+  "upload_file": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/release/solution-upload-92727e61.txt",
+  "validation": {
+    "source": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/candidate-hot/solution.cj",
+    "source_sha256": "92727e61b93e66571a68b592ade92d7ae875fd866539577edbf3a5bc6af6aaaf",
+    "upload_file": "/Users/555tery/techarena/prototypes/pipes_cj_tle15_20261021/release/solution-upload-92727e61.txt",
+    "source_bytes": 2113294,
+    "compiler": "Cangjie1.0.5",
+    "corpus_cases": 2661,
+    "interactive_corpus_cases": 244,
+    "batch_response_comparison_cases": 2417,
+    "new_boundary_cases": 13,
+    "boundaries_checked_both_O0_O2": true,
+    "open15_checked_both_O0_O2": true,
+    "default_runtime_open15_checked_both_O0_O2": true,
+    "correctness_failures": 0,
+    "resource_failures": 0,
+    "cpu_max_s": 4.554526,
+    "rss_max_mib": 191.46875,
+    "open15_runs": [
+      {
+        "method": "transcript15",
+        "processors": "1",
+        "cpu": 0.587464,
+        "rss": 42.359375,
+        "response_equal": true
+      },
+      {
+        "method": "hot-o0",
+        "processors": "default",
+        "cpu": 0.578616,
+        "rss": 42.421875,
+        "response_equal": true
+      },
+      {
+        "method": "hot-o2",
+        "processors": "1",
+        "cpu": 0.464905,
+        "rss": 12.65625,
+        "response_equal": true
+      },
+      {
+        "method": "hot-o2",
+        "processors": "default",
+        "cpu": 0.46699500000000005,
+        "rss": 12.734375,
+        "response_equal": true
+      }
+    ],
+    "scope": "Frozen core and hybrid policy byte-identical; causal transcript15 plus exact silent reconstruction on divergence. Local macOS timings; target Windows/G5420 not verified.",
+    "metrics": "tmp/pipes_hot_checks_20261021.jsonl",
+    "platform_action": "manual upload pending; no site actions"
+  }
+}

@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0030",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0030/candidate_0.cpp",
+  "sha256": "7a1280887663cb0bda4e46bb33318e229c3a7bada0e6257ad2327f61e60d6a86",
+  "idea": "Для предоставленного best-fit: условная цена остатка щели. Сравнивать два ближайших подходящих размера через stochastic packing value, учитывая наблюдаемую связь между последовательными длинами.",
+  "parent": "seed_standalone",
+  "weighted_score": 28.40517860858858,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 40,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "3",
+      "T": 40,
+      "kpi": 0.375,
+      "weighted_score": 0.375
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 101720,
+      "kpi": 0.4998033818324813,
+      "weighted_score": 0.499803381832481
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1680,
+      "kpi": 0.9982142857142857,
+      "weighted_score": 0.998214285714286
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 63000,
+      "kpi": 0.5,
+      "weighted_score": 0.5
+    },
+    {
+      "case": "10",
+      "T": 18460,
+      "kpi": 0.666522210184182,
+      "weighted_score": 0.666522210184182
+    },
+    {
+      "case": "11",
+      "T": 22700,
+      "kpi": 0.8969603524229075,
+      "weighted_score": 0.896960352422908
+    },
+    {
+      "case": "12",
+      "T": 10340,
+      "kpi": 0.9911992263056093,
+      "weighted_score": 3.964796905222437
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 441520,
+      "kpi": 0.9484440115963036,
+      "weighted_score": 9.484440115963036
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.003113584850215376,
+    "worst_delta": -0.02911255411255409,
+    "wins": 15,
+    "regressions": 7,
+    "ties": 8,
+    "worst_cases": [
+      {
+        "case": "dev_29_micro",
+        "delta": -0.02911255411255409,
+        "baseline_T": 420,
+        "candidate_T": 440
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.006737799186776194,
+        "baseline_T": 87420,
+        "candidate_T": 88020
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.004403485892582104,
+        "baseline_T": 90260,
+        "candidate_T": 90660
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.0031192655038461137,
+        "baseline_T": 30480,
+        "candidate_T": 30580
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.0021894132152460166,
+        "baseline_T": 94540,
+        "candidate_T": 94760
+      },
+      {
+        "case": "dev_16_large_recent",
+        "delta": -0.0007979189293346733,
+        "baseline_T": 24820,
+        "candidate_T": 24840
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8119120813218196,
+  "max_cpu_s": 0.722453,
+  "max_rss_mib": 5.90625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0030/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0030/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792316045.220741,
+  "balanced_gate": false,
+  "hypothesis": "Если длины образуют серии или повторяющиеся пары, распределение следующей длины зависит от текущей. Поэтому условный прогноз может лучше оценивать полезность остатка, чем IID histogram. Отличие от trial_0024 — обучаемый прогноз первого следующего запроса; продолжение использует общий histogram. Вес условного прогноза обновляется по ошибкам предсказаний уже пришедших запросов.",
+  "causality": "Используются только последние 4096 наблюдавшихся вставок. Вероятность очередной длины оценивается до добавления этой длины в модель. Packing value использует фиксированный геометрический горизонт со средним 32 запроса. Сохраняются exact fit, адресные ties, слияние щелей, расширение секциями по 20 и flush. Внутренние counters comparisons, overrides, conditionalFlips и logLossGain позволяют отличить активное изменение от неработающего gate; дополнительных сообщений протокола нет. Добавочная память около 25 KiB. Код не запускался: улучшение fresh и сохранение official score не подтверждены; превосходство над сильным trial_0022 не заявляется."
+}

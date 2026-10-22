@@ -1,0 +1,504 @@
+name: Release
+
+on:
+  release:
+    types:
+      - published
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Existing stable release tag to recover
+        required: true
+        type: string
+      source_run_id:
+        description: Failed release run containing verified Python artifacts
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: package-release
+  cancel-in-progress: false
+  queue: max
+
+jobs:
+  validate-release:
+    name: Validate release versions
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    outputs:
+      package-version: ${{ steps.versions.outputs.version }}
+      release-sha: ${{ steps.release-sha.outputs.value }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          ref: ${{ github.sha }}
+
+      - name: Validate package and tag versions
+        id: versions
+        env:
+          RELEASE_IS_PRERELEASE: ${{ github.event.release.prerelease }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import pathlib
+          import tomllib
+
+          npm_version = json.loads(pathlib.Path("package.json").read_text())["version"]
+          python_version = tomllib.loads(pathlib.Path("python/pyproject.toml").read_text())["project"]["version"]
+          if npm_version != python_version:
+              raise SystemExit(f"npm {npm_version} does not match PyPI {python_version}")
+
+          if os.environ["RELEASE_IS_PRERELEASE"] == "true":
+              raise SystemExit("stable package publishing requires a non-prerelease GitHub release")
+          release_tag = os.environ["RELEASE_TAG"]
+          if release_tag != f"v{npm_version}":
+              raise SystemExit(f"release tag {release_tag} does not match package version {npm_version}")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              print(f"version={npm_version}", file=output)
+          PY
+
+      - name: Record immutable release commit
+        id: release-sha
+        run: echo "value=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
+  build-npm:
+    name: Build and verify npm package
+    needs: validate-release
+    runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.npm-version.outputs.published }}
+      sha256: ${{ steps.package-artifact.outputs.sha256 }}
+      verified: ${{ steps.preflight.outputs.verified }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          ref: ${{ needs.validate-release.outputs.release-sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run checks
+        run: npm run check
+
+      - name: Check npm package contents
+        run: npm run pack:check
+
+      - name: Smoke test npx executable
+        run: |
+          mkdir npm-package
+          npm pack --pack-destination npm-package
+          shopt -s nullglob
+          tarballs=("$PWD"/npm-package/*.tgz)
+          test "${#tarballs[@]}" -eq 1
+          npx -y --package "${tarballs[0]}" headless --help
+
+      - name: Record npm package artifact
+        id: package-artifact
+        run: |
+          shopt -s nullglob
+          tarballs=(npm-package/*.tgz)
+          test "${#tarballs[@]}" -eq 1
+          echo "sha256=$(sha256sum "${tarballs[0]}" | cut -d ' ' -f 1)" >> "$GITHUB_OUTPUT"
+
+      - name: Mark npm preflight complete
+        id: preflight
+        run: echo "verified=true" >> "$GITHUB_OUTPUT"
+
+      - name: Read package version
+        id: package-version
+        run: echo "version=$(node -p "require('./package.json').version")" >> "$GITHUB_OUTPUT"
+
+      - name: Check npm package version
+        id: npm-version
+        env:
+          PACKAGE_VERSION: ${{ steps.package-version.outputs.version }}
+        run: |
+          npm_error=$(mktemp)
+          if npm view "@roberttlange/headless@$PACKAGE_VERSION" version >/dev/null 2>"$npm_error"; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          elif grep -q "E404" "$npm_error"; then
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          else
+            cat "$npm_error" >&2
+            exit 1
+          fi
+
+      - name: Upload npm package
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: npm-package
+          path: npm-package/*.tgz
+          if-no-files-found: error
+
+  publish-npm:
+    name: Publish to npm
+    needs:
+      - validate-release
+      - build-npm
+      - build-python
+    if: needs.build-npm.outputs.published != 'true'
+    runs-on: ubuntu-latest
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Setup trusted-publishing Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24.18.0
+
+      - name: Verify bundled npm
+        run: test "$(npm --version)" = "11.16.0"
+
+      - name: Download npm package
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: npm-package
+          path: npm-package/
+
+      - name: Validate npm package artifact
+        id: package-artifact
+        env:
+          EXPECTED_SHA256: ${{ needs.build-npm.outputs.sha256 }}
+          EXPECTED_VERSION: ${{ needs.validate-release.outputs.package-version }}
+        run: |
+          shopt -s nullglob
+          tarballs=("$PWD"/npm-package/*.tgz)
+          test "${#tarballs[@]}" -eq 1
+          tarball="${tarballs[0]}"
+          test "$(sha256sum "$tarball" | cut -d ' ' -f 1)" = "$EXPECTED_SHA256"
+          metadata_path="$RUNNER_TEMP/npm-package.json"
+          tar -xOf "$tarball" package/package.json > "$metadata_path"
+          METADATA_PATH="$metadata_path" node - <<'NODE'
+          const fs = require("node:fs");
+          const metadata = JSON.parse(fs.readFileSync(process.env.METADATA_PATH, "utf8"));
+          if (metadata.name !== "@roberttlange/headless") {
+            throw new Error(`unexpected npm package name: ${metadata.name}`);
+          }
+          if (metadata.version !== process.env.EXPECTED_VERSION) {
+            throw new Error(`unexpected npm package version: ${metadata.version}`);
+          }
+          if (metadata.publishConfig?.registry !== "https://registry.npmjs.org/") {
+            throw new Error(`unexpected npm registry: ${metadata.publishConfig?.registry}`);
+          }
+          NODE
+          echo "path=$tarball" >> "$GITHUB_OUTPUT"
+
+      - name: Publish to npm
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKAGE_VERSION: ${{ needs.validate-release.outputs.package-version }}
+          EXPECTED_SHA: ${{ needs.validate-release.outputs.release-sha }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          TARBALL_PATH: ${{ steps.package-artifact.outputs.path }}
+        run: |
+          remote_refs=$(git ls-remote --tags "https://github.com/$GITHUB_REPOSITORY.git" \
+            "refs/tags/$RELEASE_TAG" "refs/tags/$RELEASE_TAG^{}")
+          release_sha=$(awk '$2 ~ /\^\{\}$/ {print $1}' <<< "$remote_refs")
+          if [[ -z "$release_sha" ]]; then
+            release_sha=$(awk 'NR == 1 {print $1}' <<< "$remote_refs")
+          fi
+          if [[ "$release_sha" != "$EXPECTED_SHA" ]]; then
+            echo "::error::Release tag moved after validation."
+            exit 1
+          fi
+          latest_release_tag=$(gh api "repos/$GITHUB_REPOSITORY/releases/latest" --jq .tag_name)
+          npm_tag="release-$PACKAGE_VERSION"
+          if [[ "$RELEASE_TAG" == "$latest_release_tag" ]]; then
+            npm_tag=latest
+          fi
+          npm publish "$TARBALL_PATH" --registry https://registry.npmjs.org/ \
+            --access public --provenance --tag "$npm_tag"
+
+  build-python:
+    name: Build and verify Python SDK
+    needs: validate-release
+    runs-on: ubuntu-latest
+    outputs:
+      published: ${{ steps.pypi-version.outputs.published }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          ref: ${{ needs.validate-release.outputs.release-sha }}
+
+      - name: Setup Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Build Headless CLI
+        run: |
+          npm ci
+          npm run build
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: python/pyproject.toml
+
+      - name: Install Python SDK
+        run: python -m pip install -e "./python[test]"
+
+      - name: Verify Python SDK
+        working-directory: python
+        run: |
+          python -m ruff format --check src tests
+          python -m ruff check src tests
+          python -m mypy src tests
+          python -m coverage run -m pytest
+          python -m coverage report --fail-under=80
+
+      - name: Build Python package
+        run: python -m build --outdir python/dist python
+
+      - name: Smoke test built distributions
+        env:
+          HEADLESS_CLI_BIN: ${{ github.workspace }}/dist/cli.js
+        run: |
+          python -m venv "${{ runner.temp }}/wheel-smoke"
+          "${{ runner.temp }}/wheel-smoke/bin/python" -m pip install python/dist/*.whl
+          "${{ runner.temp }}/wheel-smoke/bin/python" -c "from headless_cli import Headless; print(Headless().version())"
+          python -m venv "${{ runner.temp }}/sdist-smoke"
+          "${{ runner.temp }}/sdist-smoke/bin/python" -m pip install python/dist/*.tar.gz
+          "${{ runner.temp }}/sdist-smoke/bin/python" -c "from headless_cli import Headless; print(Headless().version())"
+
+      - name: Read package version
+        id: package-version
+        run: |
+          python - <<'PY'
+          import os
+          import pathlib
+          import tomllib
+
+          data = tomllib.loads(pathlib.Path("python/pyproject.toml").read_text())
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              print(f"version={data['project']['version']}", file=output)
+          PY
+
+      - name: Check PyPI package version
+        id: pypi-version
+        env:
+          PACKAGE_VERSION: ${{ steps.package-version.outputs.version }}
+        run: |
+          python - <<'PY'
+          import os
+          import urllib.error
+          import urllib.request
+
+          version = os.environ["PACKAGE_VERSION"]
+          url = f"https://pypi.org/pypi/headless-cli/{version}/json"
+          try:
+              with urllib.request.urlopen(url) as response:
+                  published = response.status == 200
+          except urllib.error.HTTPError as error:
+              if error.code != 404:
+                  raise
+              published = False
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              print(f"published={str(published).lower()}", file=output)
+          PY
+
+      - name: Upload Python distributions
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: python-distributions
+          path: python/dist/
+          if-no-files-found: error
+
+  publish-pypi:
+    name: Publish Python SDK to PyPI
+    needs:
+      - validate-release
+      - build-npm
+      - build-python
+    if: >-
+      always() &&
+      needs.build-python.result == 'success' &&
+      needs.build-npm.result == 'success' &&
+      needs.build-npm.outputs.verified == 'true' &&
+      needs.build-python.outputs.published != 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/headless-cli/
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout release commit
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+          ref: ${{ needs.validate-release.outputs.release-sha }}
+
+      - name: Download Python distributions
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: python-distributions
+          path: python/dist/
+
+      - name: Verify release tag is unchanged
+        env:
+          EXPECTED_SHA: ${{ needs.validate-release.outputs.release-sha }}
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          remote_refs=$(git ls-remote --tags "https://github.com/$GITHUB_REPOSITORY.git" \
+            "refs/tags/$RELEASE_TAG" "refs/tags/$RELEASE_TAG^{}")
+          release_sha=$(awk '$2 ~ /\^\{\}$/ {print $1}' <<< "$remote_refs")
+          if [[ -z "$release_sha" ]]; then
+            release_sha=$(awk 'NR == 1 {print $1}' <<< "$remote_refs")
+          fi
+          if [[ "$release_sha" != "$EXPECTED_SHA" ]]; then
+            echo "::error::Release tag moved after validation."
+            exit 1
+          fi
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
+        with:
+          packages-dir: python/dist
+
+  recover-pypi:
+    name: Recover PyPI publication
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/headless-cli/
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Validate recovery source
+        id: recovery-source
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+          SOURCE_RUN_ID: ${{ inputs.source_run_id }}
+        run: |
+          python - <<'PY'
+          import json
+          import os
+          import re
+          import subprocess
+
+          release_tag = os.environ["RELEASE_TAG"]
+          source_run_id = os.environ["SOURCE_RUN_ID"]
+          repository = os.environ["GITHUB_REPOSITORY"]
+          if not re.fullmatch(r"v[0-9]+\.[0-9]+\.[0-9]+", release_tag):
+              raise SystemExit("release_tag must be a stable vX.Y.Z tag")
+          if not source_run_id.isascii() or not source_run_id.isdigit():
+              raise SystemExit("source_run_id must be numeric")
+          def gh_json(endpoint: str) -> dict[str, object]:
+              output = subprocess.run(
+                  ["gh", "api", endpoint], check=True, capture_output=True, text=True
+              ).stdout
+              value = json.loads(output)
+              if not isinstance(value, dict):
+                  raise SystemExit(f"unexpected GitHub response for {endpoint}")
+              return value
+          remote_refs = subprocess.run(
+              [
+                  "git", "ls-remote", "--tags",
+                  f"https://github.com/{repository}.git",
+                  f"refs/tags/{release_tag}", f"refs/tags/{release_tag}^{{}}",
+              ],
+              check=True, capture_output=True, text=True,
+          ).stdout.splitlines()
+          peeled = [line.split()[0] for line in remote_refs if line.endswith("^{}")]
+          direct = [line.split()[0] for line in remote_refs if not line.endswith("^{}")]
+          tag_sha = (peeled or direct or [None])[0]
+          if tag_sha is None:
+              raise SystemExit(f"release tag {release_tag} does not exist")
+          source = gh_json(f"repos/{repository}/actions/runs/{source_run_id}")
+          workflow = gh_json(f"repos/{repository}/actions/workflows/release.yml")
+          if source["workflow_id"] != workflow["id"]:
+              raise SystemExit("source run does not belong to the release workflow")
+          if workflow["path"] != ".github/workflows/release.yml":
+              raise SystemExit("unexpected release workflow path")
+          if source["event"] != "release" or source["path"] != workflow["path"]:
+              raise SystemExit("source run is not a release workflow run")
+          if source["status"] != "completed" or source["head_branch"] != release_tag:
+              raise SystemExit("source run is not a completed run for the requested tag")
+          if source["head_sha"] != tag_sha:
+              raise SystemExit("source run commit does not match the immutable release tag")
+          release = gh_json(f"repos/{repository}/releases/tags/{release_tag}")
+          if release["draft"] or release["prerelease"]:
+              raise SystemExit("PyPI recovery requires a published stable release")
+          if release["tag_name"] != release_tag:
+              raise SystemExit("GitHub release tag does not match recovery input")
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              print(f"tag-sha={tag_sha}", file=output)
+          PY
+
+      - name: Download verified Python distributions
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: python-distributions
+          path: python/dist/
+          github-token: ${{ github.token }}
+          run-id: ${{ inputs.source_run_id }}
+
+      - name: Validate recovered artifact names
+        env:
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          python - <<'PY'
+          import os
+          import pathlib
+          version = os.environ["RELEASE_TAG"].removeprefix("v")
+          expected = {f"headless_cli-{version}-py3-none-any.whl", f"headless_cli-{version}.tar.gz"}
+          actual = {path.name for path in pathlib.Path("python/dist").iterdir() if path.is_file()}
+          if actual != expected:
+              raise SystemExit(f"unexpected Python artifacts: {sorted(actual)}")
+          PY
+
+      - name: Verify recovery tag is unchanged
+        env:
+          EXPECTED_SHA: ${{ steps.recovery-source.outputs.tag-sha }}
+          RELEASE_TAG: ${{ inputs.release_tag }}
+        run: |
+          remote_refs=$(git ls-remote --tags "https://github.com/$GITHUB_REPOSITORY.git" \
+            "refs/tags/$RELEASE_TAG" "refs/tags/$RELEASE_TAG^{}")
+          release_sha=$(awk '$2 ~ /\^\{\}$/ {print $1}' <<< "$remote_refs")
+          if [[ -z "$release_sha" ]]; then
+            release_sha=$(awk 'NR == 1 {print $1}' <<< "$remote_refs")
+          fi
+          if [[ "$release_sha" != "$EXPECTED_SHA" ]]; then
+            echo "::error::Release tag moved after recovery validation."
+            exit 1
+          fi
+
+      - name: Publish recovered distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@dc37677b2e1c63e2034f94d8a5b11f265b73ba33 # v1.14.2
+        with:
+          packages-dir: python/dist

@@ -1,0 +1,37 @@
+{
+  "objective": "Improve retained-marker pre-synchronization traps, exact Open15 maximum, no observed per-case losses on selection and fresh tests",
+  "parent_source": "prototypes/pipes_g5420_cpu_20261020/cache32/solution.cpp",
+  "parent_source_sha256": "a843822451c2a7c5e07330daa33268fc77bccfbc08fd196bfaf98a673ae24cfe",
+  "selection_inputs": "All227 inputs already observed across prior local rounds, including24 retained-marker counterexamples",
+  "bounded_search": {
+    "marker_positions": "integer3..229, position229 is unchanged parent control",
+    "pre_sync_policies": "Nine causal physical gap rules implemented in screen.cpp; reference interval can be used only for current command",
+    "reference": "Frozen parent outputs computed from known streams; offline replay for efficient selection, then actual standalone solver verification",
+    "fast_forward": "Offline evaluator can sum remaining reference extents after coupling; not part of runtime choose()",
+    "budget": "One position/rule sweep and up to3 standalone finalists before fresh freeze"
+  },
+  "selection_gate": "All15 exact volume ceilings; no per-case loss on known227; at least one stable directed-trap improvement. Timer-sensitive unchanged branches require paired repeats, not silent exclusion.",
+  "fresh_gate": "One independently generated64-input set, half diverging while repaired PID2 is still alive. First read/evaluation only after source/binary freeze. No tuning or candidate switching after outcomes.",
+  "resources": "Official local CPU<5sec,RSS<256MiB; single solver worker; Windows/G5420 remains unmeasured",
+  "scope": "Separate prototype only, canonical and frozen parents unchanged. No platform actions. No hidden-distribution or universal before-coupling guarantee.",
+  "platform_actions": 0,
+  "amendment_before_fresh": {
+    "reason": "All2043 marker/rule combinations have at least one known loss or no gain. Boundary marker removes the permanent interior obstacle after PID1 removal, which a single-PID2 shift cannot do while keeping the initial PID1 at0.",
+    "new_profile": "Joint public component reorder: PID1 at12 acrossOpen6/10/11/15; temporaryPID2 Open11/15 at0. Exact all15 ceilings and all shared prefixes validated.",
+    "parameter_scope": "Same9 causal pre-sync rules, at most3 standalone finalists total",
+    "reference_scope": "Known affected traces expand from58 [3,2] cases to72 cases starting with3",
+    "fresh_status": "New64 ready, unopened; source not chosen or frozen yet",
+    "not_a_proof": "Failure of the finite2043-rule sweep is not impossibility for all online methods.",
+    "root12_outcome": "Every rule0..8 loses on known inputs; reserve-open10-p3 is40\u219260 because root12 blocks a length30 fill.",
+    "corrected_profile": "Root2; PID2marker0; jointly permute first physical components ofOpen6/10/11/15,17 changed blocks. All15 exact and all105 shared prefixes valid. Root2 geometry selected from known length30 fill constraint.",
+    "added_causal_rules": "9 current-step occupancy-union equality;10 fixed coordinate projection plus BF;11 projection then legal parent action below parentT thenBF;12 projection then prior rule4. Projection choice uses only commands already observed, never suffix.",
+    "bounded_selection": "Single root2 joint profile, known72 affected traces, rules0..12; up to3 standalone finalists remain. No fresh results opened or used.",
+    "root2_outcome": "Rules10..12 improve only2 known traps but all lose2. Fixed root at2 makes exact capacity [3,2,-2,40,39,39,40,40,30,9] impossible in240 because initial2m cannot fit any suffixpipe. Rejected before standalone/fresh.",
+    "next_profile": "Keep root0 and all original public plans except PID2at3, use segment projection rather than BF while unsynchronized. Projection misses only reference allocations crossing the cut3 or231; same rules10..12, no new parameter sweep.",
+    "additional_bounded_rules": "13/14 projection must not dig more than current physical BF,227markers each;15 global or PID1-fixed tail mirror certificate + BF,16 same plus projection,17 global mirror + BF,227markers each. Total known-only additional sweep681+454+681. No fresh input read.",
+    "mirror_definition": "All live PID pairs satisfy actual_x + virtual_x + length = C; apply C-virtual_x-request. Optional tail mirror excludes still-live initialPID1; fits and actualT<=virtualT are checked for every accepted mirrored action. Counts are exact, not hashes.",
+    "standalone_selection": "At most3 successful standalone finalists. Diagnostic fresh finalist: among nontrivial candidates use fewest known per-case losses, then most known wins; cannot promote unless known and fresh no-loss gates both pass.",
+    "mapped4_standalone": "227 known full rollouts:4/217/6;2 extra small wins on unchanged branches may be CPU timing effects. Known gate failed.",
+    "third_finalist": "symmetry-9-search: second Planner operates on actual physical gaps only after mirror fails, ordinary original256-command warmup and delayed confidence unchanged. Shared80MiBArena+32MiBMemo, global3.8s stop/shared CPU accounting. Separate causal histories, lazy import at first mismatch, update after each command. Max3 standalone finalists reached; no further tuning after this selection."
+  }
+}

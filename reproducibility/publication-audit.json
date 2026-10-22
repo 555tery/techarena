@@ -1,0 +1,161 @@
+{
+  "files": 582606,
+  "excluded": 2012,
+  "raw_bytes": 19667436829,
+  "unique_bytes": 12322424522,
+  "unique_files": 222488,
+  "reused_previously_scanned_files": 582586,
+  "new_or_changed_files_scanned": 2,
+  "findings": [
+    {
+      "path": "scientist-v3/upstream/tests/runtime/test_bounded_process.py",
+      "types": [
+        "private_key"
+      ],
+      "disposition": "reviewed synthetic incomplete credential fixture in upstream redaction unit test",
+      "sha256": "f5375881c20c1cd13be8418f4f08d40b4738d2c2c45591d133c07d5e97c1ad06"
+    }
+  ],
+  "top_directories": [
+    [
+      "prototypes",
+      [
+        365182,
+        9216003506
+      ]
+    ],
+    [
+      "shinka-pipes",
+      [
+        120903,
+        6683588984
+      ]
+    ],
+    [
+      "results",
+      [
+        51326,
+        2408456807
+      ]
+    ],
+    [
+      "research-campaigns",
+      [
+        41227,
+        1158473480
+      ]
+    ],
+    [
+      "scientist-v3",
+      [
+        3796,
+        186211450
+      ]
+    ],
+    [
+      "data",
+      [
+        39,
+        5815125
+      ]
+    ],
+    [
+      "experiments",
+      [
+        20,
+        5041239
+      ]
+    ],
+    [
+      "tmp",
+      [
+        10,
+        3265957
+      ]
+    ],
+    [
+      "wiki",
+      [
+        49,
+        247141
+      ]
+    ],
+    [
+      "vendor",
+      [
+        2,
+        165978
+      ]
+    ],
+    [
+      "tools",
+      [
+        5,
+        57603
+      ]
+    ],
+    [
+      "src",
+      [
+        3,
+        54477
+      ]
+    ],
+    [
+      "docs",
+      [
+        5,
+        50594
+      ]
+    ],
+    [
+      "review",
+      [
+        17,
+        31255
+      ]
+    ],
+    [
+      "AGENTS.md",
+      [
+        1,
+        2450
+      ]
+    ],
+    [
+      "README.md",
+      [
+        1,
+        1501
+      ]
+    ],
+    [
+      "Makefile",
+      [
+        1,
+        1161
+      ]
+    ],
+    [
+      "score.txt",
+      [
+        1,
+        4
+      ]
+    ]
+  ],
+  "elapsed_s": 35.9269278049469,
+  "prior_audit": "/tmp/techarena-public-audit-20261023",
+  "prior_zip_audit": {
+    "zip_archives_checked": 17,
+    "not_zip_files_with_zip_suffix": [
+      "prototypes/pipes_open15_overfit_20261019/continuation/platform-speed-20261019/archive_1665898.zip"
+    ],
+    "findings": []
+  },
+  "hardcoded_credential_files_excluded": 24,
+  "additional_review": "Extended assignment/JWT scan of all unique contents; exact credential search including gzip/zip; only synthetic upstream test fixtures retained",
+  "browsable_files_added": 9179,
+  "browsable_bytes_added": 1073430579,
+  "large_files_archive_only": []
+}

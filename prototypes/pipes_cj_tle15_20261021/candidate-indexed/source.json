@@ -1,0 +1,11 @@
+{
+  "base_sha256": "30f49f39d864cd2dd08902c2fb0bed064dc3beb83a84430ce94d2a8e03d034bf",
+  "source_sha256": "734021762a8aad25795cca0e989c27d0feb57301847bbfd647bf146d31a50781",
+  "scalar_key_reads": 52,
+  "changes": [
+    "Keep same keys/order/AVL operations; store remaining three index node IDs per stable geometry node.",
+    "Scalar-only key reads remove unneeded struct materialization.",
+    "Lazy exact integer suffix counts for misses, invalidated on every recordLength.",
+    "Fixed native Fenwick with owner lifetime fence and validated indices."
+  ]
+}

@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     'results/pipes/improvement/final-audit-adaptive/t32/candidate_ubsan'
+relocations:     []
+...

@@ -1,0 +1,65 @@
+{
+  "design_sha256": "1c2445ce8705ed649c72951f5c8e9b8ecab93927879e53c1a1d49a3ea0df8e72",
+  "cases": [
+    {
+      "name": "sealed_00_recent_geometric",
+      "sha256": "795f04608629038e3d945f3098f78505c19ef516090192089a83332b343f4b77",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_01_recent_geometric",
+      "sha256": "eded1db098f1286e7f949ce9bd9395019836ab9e09f30960eea6d09db94374f7",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_02_recent_geometric",
+      "sha256": "46b2f177e61b761bf6f8d7ffb2901d42d309a18df7b8d352c0c63b2f9f022c23",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_03_recent_geometric",
+      "sha256": "e475abd6aa9bce55cea42d95b0f39f33a58e89247d45a37801f4e8ada9df7d58",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_04_old_tail_mix",
+      "sha256": "e6c33034875c0832a58e99b2046bf11699fa5ffee724eac23535bf0fba622683",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_05_old_tail_mix",
+      "sha256": "23f3fe434684f4c129c31eb027b74f39806d1c4e12cddbb31dd06c1c6ab15ec7",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_06_old_tail_mix",
+      "sha256": "ba689c445c43b863b05aea6ebeb7982d11264cdfca07561ee903ce504dc47d5b",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_07_old_tail_mix",
+      "sha256": "d8d94fc0e46fc374549850f603046385bf21870543b967c65f891f3c3a2d7cd4",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_08_recent_uniform",
+      "sha256": "9d4a52668eb256d45b4500e1638917804e8f7a16d8e9e5791fc8c85587c7b81b",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_09_recent_uniform",
+      "sha256": "279471560b2aeddaff55ac33d655afe3785dae794cfb5ad57099b728146e98b3",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_10_recent_uniform",
+      "sha256": "d6ec3c6a35ae391dc8267e4df118b511037e67b6d10c842d71d8d09d491379f7",
+      "operations": 18000
+    },
+    {
+      "name": "sealed_11_recent_uniform",
+      "sha256": "362d775e2ace139d86118668e6d3d68b8b3155ec80cb3c7f880217ec065264cc",
+      "operations": 18000
+    }
+  ]
+}

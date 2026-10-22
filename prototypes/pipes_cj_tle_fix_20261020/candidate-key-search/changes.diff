@@ -1,0 +1,38 @@
+--- candidate-key-compare/solution.cj
++++ candidate-key-search/solution.cj
+@@ -256,7 +256,7 @@
+         var node = root
+         var answer: Int64 = 0
+         while (node != 0) {
+-            if (compareKey(keys[node], wanted) >= 0) {
++            if (keys.compareAt(node, wanted) <= 0) {
+                 answer = node; node = left[node]
+             } else { node = right[node] }
+         }
+@@ -266,7 +266,7 @@
+         var node = root
+         var answer: Int64 = 0
+         while (node != 0) {
+-            if (compareKey(keys[node], wanted) > 0) {
++            if (keys.compareAt(node, wanted) < 0) {
+                 answer = node; node = left[node]
+             } else { node = right[node] }
+         }
+@@ -469,7 +469,7 @@
+         var node = root
+         var answer: Int64 = 0
+         while (node != 0) {
+-            if (compareKey(keys[node], wanted) >= 0) {
++            if (keys.compareAt(node, wanted) <= 0) {
+                 answer = node; node = left[node]
+             } else { node = right[node] }
+         }
+@@ -479,7 +479,7 @@
+         var node = root
+         var answer: Int64 = 0
+         while (node != 0) {
+-            if (compareKey(keys[node], wanted) > 0) {
++            if (keys.compareAt(node, wanted) < 0) {
+                 answer = node; node = left[node]
+             } else { node = right[node] }
+         }

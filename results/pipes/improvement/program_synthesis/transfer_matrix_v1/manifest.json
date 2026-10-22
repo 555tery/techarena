@@ -1,0 +1,96 @@
+{
+  "experiment": "Pipes transfer matrix v1: baseline vs frozen tree #33",
+  "purpose": "Independent synthetic transfer validation; no search, tuning, official-screen extension, or platform upload.",
+  "toolchain": {
+    "compiler": "Apple clang 17.0.0 (clang-1700.0.13.5)",
+    "flags": "-O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic",
+    "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "python": "3.14.5 (main, May 10 2026, 10:21:34) [Clang 21.0.0 (clang-2100.0.123.102)]"
+  },
+  "harness": {
+    "script": "tools/pipes_harness.py",
+    "interactor": "tools/interactor",
+    "cpu_limit_s": 5,
+    "memory_limit_mb": 256,
+    "timeout_per_stream_s": 1800,
+    "stream_count": 6
+  },
+  "baseline": {
+    "source": "results/pipes/final/solution.cpp",
+    "source_sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "binary": "results/pipes/improvement/program_synthesis/transfer_matrix_v1/bin/baseline",
+    "binary_sha256": "ee9ae15f8f4879eaca8da9a0c5fdb1caeb05311893279a4eaf0734c167427290"
+  },
+  "candidate": {
+    "label": "frozen #33",
+    "source": "results/pipes/improvement/program_synthesis/src/tree_033_frozen.cpp",
+    "source_sha256": "6261cfe588945203735ea96bda850b2093f2fac5e1e02036881d879574153d63",
+    "binary": "results/pipes/improvement/program_synthesis/transfer_matrix_v1/bin/tree_033",
+    "binary_sha256": "46a54519466c5198cd80d30f7793cad33310a966ea97a6f84f08c68e058f9665"
+  },
+  "protected_file_hashes_after_run": {
+    "results/pipes/final/solution.cpp": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "src/pipes.cpp": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "generator": "results/pipes/improvement/program_synthesis/transfer_matrix_v1/run_transfer_matrix.py",
+  "generator_sha256": "3357545aaef68cdc16ac184d27a1303871010ddf8ae8dc258e0f777fba6b4ac3",
+  "input_manifest": "results/pipes/improvement/program_synthesis/transfer_matrix_v1/input_manifest.json",
+  "input_manifest_sha256": "5d302eecb4b510b34c7200f9833e6f75676ffbee2d2ecab61e5d94c7ef75f493",
+  "comparison": "results/pipes/improvement/program_synthesis/transfer_matrix_v1/comparison.json",
+  "comparison_sha256": "4b88a0006d2217bf887794d1f4705926429cbdb194432e95ef7828633db23dec",
+  "results": {
+    "weight_sum": 6.0,
+    "baseline_weighted_score_sum": 5.836248885117209,
+    "candidate_weighted_score_sum": 5.8321145116619,
+    "weighted_delta_sum": -0.004134373455308982,
+    "weighted_mean_delta_per_case": -0.000689062242551497,
+    "positive_cases": 1,
+    "negative_cases": 2,
+    "neutral_cases": 3,
+    "all_status_ok": true,
+    "all_outputs_identical": false,
+    "max_baseline_cpu_s": 0.517397,
+    "max_candidate_cpu_s": 0.535608,
+    "max_baseline_rss_mb": 3.328125,
+    "max_candidate_rss_mb": 4.9375
+  },
+  "official_open_tests": false,
+  "platform_upload": false,
+  "canonical_or_final_source_modified": false,
+  "early_identifiability": {
+    "artifact": "results/pipes/improvement/program_synthesis/search/early_identifiability/summary.json",
+    "sha256": "c05659a16d5297d70e41fd5a57e3933fdf9e4b165b57ec9b0ddca1ba646e3c63",
+    "status": "descriptive audit only; no classifier trained or evaluated as a fitted model",
+    "prefix_snapshot_events": 128,
+    "gate_confusion_counts": {
+      "TP": 3,
+      "FN": 1,
+      "FP": 6,
+      "TN": 4,
+      "correct_fraction": "7/14"
+    },
+    "rolling_gate_flips_per_stream_range": [
+      0,
+      858
+    ],
+    "decision": "stop regime-classification work: no credible early-prefix signal for actionable placement upside",
+    "additional_test_or_search_runs_after_matrix": false
+  },
+  "prior_hindsight_envelope_estimate": {
+    "reported_value": 0.04,
+    "status": "pre-existing coordinator analysis; oracle-style, noncausal upper envelope; not measured in this transfer matrix"
+  },
+  "prior_official_screen": {
+    "cases": [
+      5,
+      9,
+      15
+    ],
+    "baseline_score_sum": 10.859085056537428,
+    "candidate_score_sum": 10.859085056537428,
+    "delta": 0.0,
+    "transcripts_identical": true
+  },
+  "report": "results/pipes/improvement/program_synthesis/transfer_matrix_v1/REPORT.md",
+  "report_sha256": "3d697831b4c5768e6ed64d33ffa8014798240986b019a3e07b7cee3291a8863b"
+}

@@ -1,0 +1,30 @@
+{
+  "label": "bf",
+  "spec": {
+    "directory": "solvers",
+    "entry": "pipes_exact.cpp",
+    "defines": [
+      "POLICY_BF"
+    ]
+  },
+  "source_files_sha256": {
+    "pipes_exact.cpp": "5957ac938c5c2addc3dd7a1eaa06dbb8914a00ada576b666e319eee1be328836"
+  },
+  "compile_command": [
+    "/usr/bin/clang++",
+    "-std=c++20",
+    "-O2",
+    "-pipe",
+    "-Wall",
+    "-Wextra",
+    "-DPOLICY_BF",
+    "-I",
+    "/Users/555tery/techarena/prototypes/pipes_generalization_20261018/builds/bf/source",
+    "/Users/555tery/techarena/prototypes/pipes_generalization_20261018/builds/bf/source/pipes_exact.cpp",
+    "-o",
+    "/Users/555tery/techarena/prototypes/pipes_generalization_20261018/builds/bf/solver"
+  ],
+  "returncode": 0,
+  "created_at": 1792342765.895286,
+  "binary_sha256": "1651689abc6c9b356a6e97aa15121f71f67d4f7b3550e1a66cd45b804099e8d3"
+}

@@ -1,0 +1,1041 @@
+import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
+import test from "node:test";
+import { gzipSync } from "node:zlib";
+
+import {
+  BoundedTextCapture,
+  buildModalRunSummary,
+  collectModalEnv,
+  DEFAULT_MODAL_APP,
+  DEFAULT_MODAL_CPU,
+  DEFAULT_MODAL_IMAGE,
+  DEFAULT_MODAL_MEMORY_MIB,
+  DEFAULT_MODAL_TIMEOUT_SECONDS,
+  executeModalAgent,
+  syncWorkspace,
+  type ModalClientLike,
+  type ModalExecParams,
+  type ModalProcessLike,
+  type ModalReadStreamLike,
+  type ModalSandboxCreateParams,
+  type ModalSandboxLike,
+  type ModalWriteStreamLike,
+} from "../src/modal.ts";
+import { quoteCommand } from "../src/shell.ts";
+import { PiCompletionObserver } from "../src/pi-completion.ts";
+import { buildAgentCommand } from "../src/agents.ts";
+import { runWithBilling } from "../src/billing-run.ts";
+
+test("default Modal image is immutable", () => {
+  assert.equal(
+    DEFAULT_MODAL_IMAGE,
+    "ghcr.io/roberttlange/headless@sha256:d482f2b604f4025a8c2f2ad102bd7b3c65c1f2f84e6348cc1af91c9bf9022965",
+  );
+});
+
+test("bounded Modal capture trims large and highly fragmented streams", () => {
+  const large = new BoundedTextCapture(16);
+  large.append(`${"x".repeat(1024 * 1024)}tail`);
+  assert.equal(large.text(), "xxxxxxxxxxxxtail");
+
+  const fragmented = new BoundedTextCapture(16);
+  for (let index = 0; index < 10_000; index += 1) {
+    fragmented.append(String(index % 10));
+  }
+  assert.equal(fragmented.text(), "4567890123456789");
+
+  const evicted = new BoundedTextCapture(4 * 1024 * 1024);
+  for (let index = 0; index < 6; index += 1) {
+    evicted.append(String(index).repeat(3 * 1024 * 1024));
+  }
+  assert.equal(evicted.text(), `${"4".repeat(1024 * 1024)}${"5".repeat(3 * 1024 * 1024)}`);
+});
+
+test("builds a printable Modal sandbox summary command", () => {
+  const summary = buildModalRunSummary({
+    appName: "headless-dev",
+    command: { command: "codex", args: ["exec", "--json", "-"], stdinText: "hello" },
+    cpu: 4,
+    image: "custom/headless:modal",
+    imageSecret: "ghcr",
+    memoryMiB: 8192,
+    modalSecrets: ["openai"],
+    timeoutSeconds: 900,
+    workDir: "/repo",
+  });
+
+  assert.equal(
+    quoteCommand(summary),
+    "printf %s hello | modal-sandbox run --app headless-dev --image custom/headless:modal --cpu 4 --memory 8192 --timeout 900 --work-dir /repo --image-secret ghcr --secret openai -- codex exec --json -",
+  );
+});
+
+test("collects Modal env from curated, command, explicit, and HOME entries", () => {
+  assert.deepEqual(
+    collectModalEnv(
+      { OPENAI_API_KEY: "sk-test", SAKANA_API_KEY: "sakana-test", EXTRA_TOKEN: "extra", HOME: "/home/rob" },
+      { CURSOR_API_KEY: "cursor" },
+      ["EXTRA_TOKEN", "INLINE_TOKEN=value"],
+    ),
+    {
+      CURSOR_API_KEY: "cursor",
+      EXTRA_TOKEN: "extra",
+      HOME: "/home/node",
+      INLINE_TOKEN: "value",
+      OPENAI_API_KEY: "sk-test",
+      SAKANA_API_KEY: "sakana-test",
+    },
+  );
+});
+
+test("syncWorkspace applies remote changes and skips local conflicts", () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-sync-"));
+  try {
+    const baseline = join(dir, "baseline");
+    const result = join(dir, "result");
+    const work = join(dir, "work");
+    mkdirSync(baseline);
+    mkdirSync(result);
+    mkdirSync(work);
+    writeFileSync(join(baseline, "changed.txt"), "before");
+    writeFileSync(join(baseline, "deleted.txt"), "delete");
+    writeFileSync(join(baseline, "conflict.txt"), "base");
+    writeFileSync(join(result, "changed.txt"), "after");
+    writeFileSync(join(result, "created.txt"), "new");
+    writeFileSync(join(result, "conflict.txt"), "remote");
+    writeFileSync(join(work, "changed.txt"), "before");
+    writeFileSync(join(work, "deleted.txt"), "delete");
+    writeFileSync(join(work, "conflict.txt"), "local");
+
+    const sync = syncWorkspace({ baselineDir: baseline, resultDir: result, workDir: work });
+
+    assert.deepEqual(sync.changed.sort(), ["changed.txt", "created.txt", "deleted.txt"]);
+    assert.deepEqual(sync.conflicts, ["conflict.txt"]);
+    assert.equal(readFileSync(join(work, "changed.txt"), "utf8"), "after");
+    assert.equal(readFileSync(join(work, "created.txt"), "utf8"), "new");
+    assert.equal(readFileSync(join(work, "conflict.txt"), "utf8"), "local");
+    assert.equal(existsSync(join(work, "deleted.txt")), false);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("syncWorkspace applies remote changes under generated directories", () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-sync-generated-"));
+  try {
+    const baseline = join(dir, "baseline");
+    const result = join(dir, "result");
+    const work = join(dir, "work");
+    mkdirSync(join(baseline, "dist"), { recursive: true });
+    mkdirSync(join(result, "dist"), { recursive: true });
+    mkdirSync(join(work, "dist"), { recursive: true });
+    writeFileSync(join(baseline, "dist", "bundle.js"), "before");
+    writeFileSync(join(result, "dist", "bundle.js"), "after");
+    writeFileSync(join(work, "dist", "bundle.js"), "before");
+
+    const sync = syncWorkspace({ baselineDir: baseline, resultDir: result, workDir: work });
+
+    assert.deepEqual(sync.changed, ["dist/bundle.js"]);
+    assert.deepEqual(sync.conflicts, []);
+    assert.equal(readFileSync(join(work, "dist", "bundle.js"), "utf8"), "after");
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("syncWorkspace replaces a baseline directory with a remote file", () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-sync-dir-file-"));
+  try {
+    const baseline = join(dir, "baseline");
+    const result = join(dir, "result");
+    const work = join(dir, "work");
+    mkdirSync(join(baseline, "config"), { recursive: true });
+    mkdirSync(result);
+    mkdirSync(join(work, "config"), { recursive: true });
+    writeFileSync(join(baseline, "config", "old.json"), "{}\n");
+    writeFileSync(join(result, "config"), "remote config\n");
+    writeFileSync(join(work, "config", "old.json"), "{}\n");
+
+    const sync = syncWorkspace({ baselineDir: baseline, resultDir: result, workDir: work });
+
+    assert.deepEqual(sync.changed, ["config"]);
+    assert.deepEqual(sync.conflicts, []);
+    assert.equal(readFileSync(join(work, "config"), "utf8"), "remote config\n");
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("syncWorkspace does not delete local-only descendants when a remote directory is removed", () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-sync-local-descendant-"));
+  try {
+    const baseline = join(dir, "baseline");
+    const result = join(dir, "result");
+    const work = join(dir, "work");
+    mkdirSync(join(baseline, "config"), { recursive: true });
+    mkdirSync(result);
+    mkdirSync(join(work, "config"), { recursive: true });
+    writeFileSync(join(baseline, "config", "base.json"), "{}\n");
+    writeFileSync(join(work, "config", "base.json"), "{}\n");
+    writeFileSync(join(work, "config", "local.json"), "local\n");
+
+    const sync = syncWorkspace({ baselineDir: baseline, resultDir: result, workDir: work });
+
+    assert.deepEqual(sync.changed, []);
+    assert.deepEqual(sync.conflicts, ["config"]);
+    assert.equal(readFileSync(join(work, "config", "local.json"), "utf8"), "local\n");
+    assert.equal(readFileSync(join(work, "config", "base.json"), "utf8"), "{}\n");
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("executeModalAgent runs through a Modal client and syncs results back", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-exec-"));
+  try {
+    const work = join(dir, "work");
+    const remote = join(dir, "remote");
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    writeFileSync(join(work, "input.txt"), "local");
+    const sandbox = new FakeSandbox(remote);
+    const client = new FakeModalClient(sandbox);
+    const stderr: string[] = [];
+
+    const result = await executeModalAgent({
+      agent: "codex",
+      appName: "headless-test",
+      command: { command: "codex", args: ["exec", "--json", "-"], stdinText: "prompt" },
+      cpu: DEFAULT_MODAL_CPU,
+      env: { HOME: join(dir, "home"), OPENAI_API_KEY: "sk-test" },
+      image: DEFAULT_MODAL_IMAGE,
+      imageSecret: "ghcr",
+      includeGit: false,
+      memoryMiB: DEFAULT_MODAL_MEMORY_MIB,
+      modalEnv: ["EXTRA_TOKEN=value"],
+      modalSecrets: ["provider-secret"],
+      stderr: (text) => stderr.push(text),
+      stdout: () => {},
+      stdoutHandling: "capture",
+      timeoutSeconds: DEFAULT_MODAL_TIMEOUT_SECONDS,
+      workDir: work,
+      clientFactory: async () => client,
+    });
+
+    assert.equal(result.code, 0);
+    assert.match(result.stdout, /modal final/);
+    assert.equal(readFileSync(join(work, "input.txt"), "utf8"), "remote");
+    assert.equal(readFileSync(join(work, "created.txt"), "utf8"), "created");
+    assert.equal(sandbox.terminated, true);
+    assert.equal(client.closed, true);
+    assert.equal(client.appName, "headless-test");
+    assert.equal(client.image, DEFAULT_MODAL_IMAGE);
+    assert.equal(client.imageSecretName, "ghcr");
+    assert.equal(client.secretNames.join(","), "ghcr,provider-secret");
+    assert.equal(sandbox.createParams?.cpu, DEFAULT_MODAL_CPU);
+    assert.equal(sandbox.createParams?.env?.OPENAI_API_KEY, "sk-test");
+    assert.equal(sandbox.createParams?.env?.EXTRA_TOKEN, "value");
+    assert.ok(sandbox.commands.some((command) => command[0] === "/usr/bin/tar"));
+    assert.deepEqual(sandbox.agentCommand, ["sh", "-lc", sandbox.agentCommand?.[2], "headless-agent", "codex", "exec", "--json", "-"]);
+    assert.match(sandbox.agentCommand?.[2] ?? "", /runuser -u node/);
+    assert.equal(sandbox.agentStdin, "prompt");
+    assert.deepEqual(stderr, []);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("executeModalAgent waits for stdout drain before reading the next chunk", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-backpressure-"));
+  try {
+    const work = join(dir, "work");
+    const remote = join(dir, "remote");
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    writeFileSync(join(work, "input.txt"), "local");
+    let markFirstChunkStreamed!: () => void;
+    const firstChunkStreamed = new Promise<void>((resolve) => {
+      markFirstChunkStreamed = resolve;
+    });
+    const firstChunk = `${"x".repeat(64 * 1024)}\n`;
+    const secondChunk = "second\n";
+    const sandbox = new FakeSandbox(remote, {
+      agentStdoutChunks: [`${firstChunk}${secondChunk}`],
+    });
+    const client = new FakeModalClient(sandbox);
+    let releaseDrain!: () => void;
+    const drain = new Promise<void>((resolve) => {
+      releaseDrain = resolve;
+    });
+    const streamed: string[] = [];
+
+    const execution = executeModalAgent({
+      agent: "codex",
+      appName: "headless-test",
+      command: { command: "codex", args: ["exec", "--json", "-"], stdinText: "prompt" },
+      cpu: DEFAULT_MODAL_CPU,
+      env: { HOME: join(dir, "home"), OPENAI_API_KEY: "sk-test" },
+      image: DEFAULT_MODAL_IMAGE,
+      includeGit: false,
+      memoryMiB: DEFAULT_MODAL_MEMORY_MIB,
+      modalEnv: [],
+      modalSecrets: [],
+      stderr: () => {},
+      stdout: (text) => {
+        streamed.push(text);
+        if (streamed.length === 1) {
+          markFirstChunkStreamed();
+        }
+        return streamed.length === 1 ? false : true;
+      },
+      stdoutHandling: "stream",
+      timeoutSeconds: DEFAULT_MODAL_TIMEOUT_SECONDS,
+      waitForStdoutDrain: () => drain,
+      workDir: work,
+      clientFactory: async () => client,
+    });
+
+    await firstChunkStreamed;
+    assert.equal(sandbox.agentStdoutReadCount, 1);
+    assert.deepEqual(streamed, [firstChunk.slice(0, 64 * 1024)]);
+
+    releaseDrain();
+    const result = await execution;
+
+    assert.equal(result.code, 0);
+    assert.equal(streamed.join(""), `${firstChunk}${secondChunk}`);
+    assert.equal(sandbox.agentStdoutReadCount, 2);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("executeModalAgent seeds forwarded file-backed credentials", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-credentials-"));
+  try {
+    const home = join(dir, "home");
+    const work = join(dir, "work");
+    const remote = join(dir, "remote");
+    const googleCredentials = join(dir, "gcp.json");
+    mkdirSync(join(home, ".aws"), { recursive: true });
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    writeFileSync(join(home, ".aws", "credentials"), "[default]\naws_access_key_id=test\n");
+    writeFileSync(googleCredentials, "{}\n");
+    writeFileSync(join(work, "input.txt"), "local");
+    const sandbox = new FakeSandbox(remote);
+    const client = new FakeModalClient(sandbox);
+
+    await executeModalAgent({
+      agent: "codex",
+      appName: "headless-test",
+      command: { command: "codex", args: ["exec", "--json", "-"], stdinText: "prompt" },
+      cpu: DEFAULT_MODAL_CPU,
+      env: {
+        AWS_PROFILE: "default",
+        GOOGLE_APPLICATION_CREDENTIALS: googleCredentials,
+        HOME: home,
+        OPENAI_API_KEY: "sk-test",
+      },
+      image: DEFAULT_MODAL_IMAGE,
+      includeGit: false,
+      memoryMiB: DEFAULT_MODAL_MEMORY_MIB,
+      modalEnv: [],
+      modalSecrets: [],
+      stderr: () => {},
+      stdout: () => {},
+      stdoutHandling: "capture",
+      timeoutSeconds: DEFAULT_MODAL_TIMEOUT_SECONDS,
+      workDir: work,
+      clientFactory: async () => client,
+    });
+
+    assert.equal(
+      sandbox.createParams?.env?.GOOGLE_APPLICATION_CREDENTIALS,
+      "/home/node/.config/headless/google-application-credentials.json",
+    );
+    assert.equal(
+      sandbox.agentEnv?.GOOGLE_APPLICATION_CREDENTIALS,
+      "/home/node/.config/headless/google-application-credentials.json",
+    );
+    assert.equal(readFileSync(join(remote, "host-home", ".aws", "credentials"), "utf8"), "[default]\naws_access_key_id=test\n");
+    assert.equal(readFileSync(join(remote, "host-home", ".config", "headless", "google-application-credentials.json"), "utf8"), "{}\n");
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("executeModalAgent seeds a selected Codex profile and rewrites its catalog path", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-profile-"));
+  try {
+    const home = join(dir, "home");
+    const codexHome = join(dir, "codex-home");
+    const work = join(dir, "work");
+    const remote = join(dir, "remote");
+    const profilePath = join(codexHome, "fugu.config.toml");
+    const catalogPath = join(codexHome, "fugu.json");
+    mkdirSync(home);
+    mkdirSync(codexHome);
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    writeFileSync(join(work, "input.txt"), "local");
+    writeFileSync(join(codexHome, "config.toml"), '[model_providers.sakana]\nname = "Sakana"\n');
+    writeFileSync(profilePath, `model_catalog_json = ${JSON.stringify(catalogPath)}\n`);
+    writeFileSync(catalogPath, '{"models":[]}\n');
+    const sandbox = new FakeSandbox(remote);
+    const client = new FakeModalClient(sandbox);
+
+    await executeModalAgent({
+      agent: "codex",
+      appName: "headless-test",
+      command: { command: "codex", args: ["--profile", "fugu", "exec", "-"], stdinText: "prompt" },
+      cpu: DEFAULT_MODAL_CPU,
+      env: { CODEX_HOME: codexHome, HOME: home },
+      image: DEFAULT_MODAL_IMAGE,
+      includeGit: false,
+      memoryMiB: DEFAULT_MODAL_MEMORY_MIB,
+      modalEnv: [],
+      modalSecrets: [],
+      profile: "fugu",
+      stderr: () => {},
+      stdout: () => {},
+      stdoutHandling: "capture",
+      timeoutSeconds: DEFAULT_MODAL_TIMEOUT_SECONDS,
+      workDir: work,
+      clientFactory: async () => client,
+    });
+
+    assert.equal(
+      readFileSync(join(remote, "host-home", ".codex", "fugu.config.toml"), "utf8"),
+      'model_catalog_json = "/home/node/.codex/fugu.json"\n',
+    );
+    assert.equal(
+      readFileSync(join(remote, "host-home", ".codex", "fugu.json"), "utf8"),
+      '{"models":[]}\n',
+    );
+    assert.equal(
+      readFileSync(join(remote, "host-home", ".codex", "config.toml"), "utf8"),
+      '[model_providers.sakana]\nname = "Sakana"\n',
+    );
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("executeModalAgent validates a selected Codex profile before creating a sandbox", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-profile-preflight-"));
+  try {
+    const codexHome = join(dir, "codex-home");
+    const work = join(dir, "work");
+    mkdirSync(codexHome);
+    mkdirSync(work);
+    let clientCreated = false;
+
+    await assert.rejects(
+      () =>
+        executeModalAgent({
+          agent: "codex",
+          appName: "headless-test",
+          command: { command: "codex", args: ["--profile", "missing", "exec", "-"] },
+          cpu: DEFAULT_MODAL_CPU,
+          env: { CODEX_HOME: codexHome },
+          image: DEFAULT_MODAL_IMAGE,
+          includeGit: false,
+          memoryMiB: DEFAULT_MODAL_MEMORY_MIB,
+          modalEnv: [],
+          modalSecrets: [],
+          profile: "missing",
+          stderr: () => {},
+          stdout: () => {},
+          stdoutHandling: "capture",
+          timeoutSeconds: DEFAULT_MODAL_TIMEOUT_SECONDS,
+          workDir: work,
+          clientFactory: async () => {
+            clientCreated = true;
+            throw new Error("Modal client should not be created");
+          },
+        }),
+      /missing\.config\.toml/,
+    );
+    assert.equal(clientCreated, false);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("executeModalAgent seeds only the selected AWS profile", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-aws-profile-"));
+  try {
+    const home = join(dir, "home");
+    const work = join(dir, "work");
+    const remote = join(dir, "remote");
+    mkdirSync(join(home, ".aws", "sso", "cache"), { recursive: true });
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    writeFileSync(
+      join(home, ".aws", "credentials"),
+      [
+        "[default]",
+        "aws_access_key_id=default",
+        "[prod]",
+        "aws_access_key_id=prod",
+        "[dev]",
+        "aws_access_key_id=dev",
+        "",
+      ].join("\n"),
+    );
+    writeFileSync(
+      join(home, ".aws", "config"),
+      [
+        "[default]",
+        "region=us-west-2",
+        "[profile prod]",
+        "region=us-east-1",
+        "sso_session=prod-session",
+        "[profile dev]",
+        "region=eu-central-1",
+        "[sso-session prod-session]",
+        "sso_region=us-east-1",
+        "[sso-session dev-session]",
+        "sso_region=eu-central-1",
+        "",
+      ].join("\n"),
+    );
+    writeFileSync(join(home, ".aws", "sso", "cache", "token.json"), "{}\n");
+    writeFileSync(join(work, "input.txt"), "local");
+    const sandbox = new FakeSandbox(remote);
+    const client = new FakeModalClient(sandbox);
+
+    await executeModalAgent({
+      agent: "codex",
+      appName: "headless-test",
+      command: { command: "codex", args: ["exec", "--json", "-"], stdinText: "prompt" },
+      cpu: DEFAULT_MODAL_CPU,
+      env: { AWS_PROFILE: "prod", HOME: home, OPENAI_API_KEY: "sk-test" },
+      image: DEFAULT_MODAL_IMAGE,
+      includeGit: false,
+      memoryMiB: DEFAULT_MODAL_MEMORY_MIB,
+      modalEnv: [],
+      modalSecrets: [],
+      stderr: () => {},
+      stdout: () => {},
+      stdoutHandling: "capture",
+      timeoutSeconds: DEFAULT_MODAL_TIMEOUT_SECONDS,
+      workDir: work,
+      clientFactory: async () => client,
+    });
+
+    const remoteCredentials = readFileSync(join(remote, "host-home", ".aws", "credentials"), "utf8");
+    const remoteConfig = readFileSync(join(remote, "host-home", ".aws", "config"), "utf8");
+    assert.match(remoteCredentials, /\[prod\]/);
+    assert.doesNotMatch(remoteCredentials, /\[default\]|\[dev\]/);
+    assert.match(remoteConfig, /\[profile prod\]/);
+    assert.match(remoteConfig, /\[sso-session prod-session\]/);
+    assert.doesNotMatch(remoteConfig, /\[profile dev\]|\[sso-session dev-session\]/);
+    assert.equal(existsSync(join(remote, "host-home", ".aws", "sso", "cache", "token.json")), false);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("executeModalAgent rejects non-git workdirs instead of recursively uploading everything", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-non-git-"));
+  try {
+    const work = join(dir, "work");
+    const remote = join(dir, "remote");
+    mkdirSync(work);
+    mkdirSync(remote);
+    writeFileSync(join(work, ".env"), "SECRET=1\n");
+    const sandbox = new FakeSandbox(remote);
+    const client = new FakeModalClient(sandbox);
+
+    await assert.rejects(
+      () =>
+        executeModalAgent({
+          agent: "codex",
+          appName: "headless-test",
+          command: { command: "codex", args: ["exec", "--json", "-"], stdinText: "prompt" },
+          cpu: DEFAULT_MODAL_CPU,
+          env: { HOME: join(dir, "home"), OPENAI_API_KEY: "sk-test" },
+          image: DEFAULT_MODAL_IMAGE,
+          includeGit: false,
+          memoryMiB: DEFAULT_MODAL_MEMORY_MIB,
+          modalEnv: [],
+          modalSecrets: [],
+          stderr: () => {},
+          stdout: () => {},
+          stdoutHandling: "capture",
+          timeoutSeconds: DEFAULT_MODAL_TIMEOUT_SECONDS,
+          workDir: work,
+          clientFactory: async () => client,
+        }),
+      /Modal workspace upload requires a git workdir/,
+    );
+    assert.equal(existsSync(join(remote, "workspace", ".env")), false);
+    assert.equal(sandbox.terminated, false);
+    assert.equal(client.closed, false);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("executeModalAgent includeGit uploads git metadata without ignored files", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-include-git-"));
+  try {
+    const work = join(dir, "work");
+    const remote = join(dir, "remote");
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    writeFileSync(join(work, ".gitignore"), ".env\n");
+    writeFileSync(join(work, ".env"), "SECRET=1\n");
+    writeFileSync(join(work, "input.txt"), "local");
+    const sandbox = new FakeSandbox(remote);
+    const client = new FakeModalClient(sandbox);
+
+    await executeModalAgent({
+      agent: "codex",
+      appName: "headless-test",
+      command: { command: "codex", args: ["exec", "--json", "-"], stdinText: "prompt" },
+      cpu: DEFAULT_MODAL_CPU,
+      env: { HOME: join(dir, "home"), OPENAI_API_KEY: "sk-test" },
+      image: DEFAULT_MODAL_IMAGE,
+      includeGit: true,
+      memoryMiB: DEFAULT_MODAL_MEMORY_MIB,
+      modalEnv: [],
+      modalSecrets: [],
+      stderr: () => {},
+      stdout: () => {},
+      stdoutHandling: "capture",
+      timeoutSeconds: DEFAULT_MODAL_TIMEOUT_SECONDS,
+      workDir: work,
+      clientFactory: async () => client,
+    });
+
+    assert.equal(existsSync(join(remote, "workspace", ".git", "HEAD")), true);
+    assert.equal(existsSync(join(remote, "workspace", ".env")), false);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+test("executeModalAgent rejects unsafe result archive entries before local extraction", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-unsafe-archive-"));
+  try {
+    const work = join(dir, "work");
+    const remote = join(dir, "remote");
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    writeFileSync(join(work, "input.txt"), "local");
+    const sandbox = new FakeSandbox(remote, {
+      resultArchive: makeTarGz([{ content: "outside", name: "../../outside.txt" }]),
+    });
+    const client = new FakeModalClient(sandbox);
+
+    await assert.rejects(
+      () =>
+        executeModalAgent({
+          agent: "codex",
+          appName: "headless-test",
+          command: { command: "codex", args: ["exec", "--json", "-"], stdinText: "prompt" },
+          cpu: DEFAULT_MODAL_CPU,
+          env: { HOME: join(dir, "home"), OPENAI_API_KEY: "sk-test" },
+          image: DEFAULT_MODAL_IMAGE,
+          includeGit: false,
+          memoryMiB: DEFAULT_MODAL_MEMORY_MIB,
+          modalEnv: [],
+          modalSecrets: [],
+          stderr: () => {},
+          stdout: () => {},
+          stdoutHandling: "capture",
+          timeoutSeconds: DEFAULT_MODAL_TIMEOUT_SECONDS,
+          workDir: work,
+          clientFactory: async () => client,
+        }),
+      /unsafe Modal workspace archive entry/,
+    );
+    assert.equal(existsSync(join(dir, "outside.txt")), false);
+    assert.equal(sandbox.terminated, true);
+    assert.equal(client.closed, true);
+  } finally {
+    rmSync(dir, { force: true, recursive: true });
+  }
+});
+
+class FakeModalClient implements ModalClientLike {
+  appName = "";
+  closed = false;
+  image = "";
+  imageSecretName = "";
+  secretNames: string[] = [];
+
+  constructor(private sandbox: FakeSandbox) {}
+
+  apps = {
+    fromName: async (name: string, params?: { createIfMissing?: boolean }) => {
+      this.appName = name;
+      assert.equal(params?.createIfMissing, true);
+      return { name };
+    },
+  };
+
+  images = {
+    fromRegistry: (image: string, secret?: unknown) => {
+      this.image = image;
+      this.imageSecretName = (secret as { name?: string } | undefined)?.name ?? "";
+      return { image };
+    },
+  };
+
+  secrets = {
+    fromName: async (name: string) => {
+      this.secretNames.push(name);
+      return { name };
+    },
+  };
+
+  sandboxes = {
+    create: async (_app: unknown, _image: unknown, params?: ModalSandboxCreateParams) => {
+      this.sandbox.createParams = params;
+      return this.sandbox;
+    },
+  };
+
+  close(): void {
+    this.closed = true;
+  }
+}
+
+class FakeSandbox implements ModalSandboxLike {
+  agentStdoutReadCount = 0;
+  agentCommand?: string[];
+  agentEnv?: Record<string, string>;
+  agentStdin = "";
+  commands: string[][] = [];
+  createParams?: ModalSandboxCreateParams;
+  terminated = false;
+
+  constructor(
+    private root: string,
+    public options: {
+      agentStdoutChunks?: string[];
+      resultArchive?: Uint8Array;
+    } = {},
+  ) {}
+
+  async exec(command: string[], params?: ModalExecParams): Promise<ModalProcessLike<string | Uint8Array>> {
+    this.commands.push(command);
+    const process = new FakeProcess(command, params, this.root, this);
+    return process;
+  }
+
+  async terminate(): Promise<void> {
+    this.terminated = true;
+  }
+}
+
+class FakeProcess implements ModalProcessLike<string | Uint8Array> {
+  stdin = new FakeWriteStream();
+  stdout: ModalReadStreamLike<string | Uint8Array>;
+  stderr: ModalReadStreamLike<string | Uint8Array>;
+  private resolveDone!: () => void;
+  private stdoutValue: string | Uint8Array = "";
+  private stderrValue: string | Uint8Array = "";
+  private done = new Promise<void>((resolve) => {
+    this.resolveDone = resolve;
+  });
+
+  constructor(
+    private command: string[],
+    private params: ModalExecParams | undefined,
+    private root: string,
+    private sandbox: FakeSandbox,
+  ) {
+    const agentStdoutChunks = command[0] === "sh" ? sandbox.options.agentStdoutChunks : undefined;
+    this.stdout = agentStdoutChunks
+      ? new FakeChunkedReadStream(agentStdoutChunks, () => {
+          sandbox.agentStdoutReadCount += 1;
+        })
+      : new FakeReadStream<string | Uint8Array>(() => this.done.then(() => this.stdoutValue));
+    this.stderr = new FakeReadStream<string | Uint8Array>(() => this.done.then(() => this.stderrValue));
+  }
+
+  async wait(): Promise<number> {
+    try {
+      this.run();
+      this.resolveDone();
+      return 0;
+    } catch (error) {
+      this.stderrValue = `${(error as Error).message}\n`;
+      this.resolveDone();
+      return 1;
+    }
+  }
+
+  private run(): void {
+    if (this.command[0] === "mkdir") {
+      mkdirSync(this.mapPath(this.command[2]), { recursive: true });
+      return;
+    }
+    if (isTarCommand(this.command[0]) && this.command[1] === "-xzf") {
+      const target = this.mapPath(this.command[4]);
+      mkdirSync(target, { recursive: true });
+      const result = spawnSync("tar", ["-xzf", "-", "-C", target], { input: this.stdin.bytes });
+      if (result.status !== 0) throw new Error(result.stderr.toString());
+      return;
+    }
+    if (isTarCommand(this.command[0]) && this.command[1] === "-czf") {
+      if (this.sandbox.options.resultArchive) {
+        this.stdoutValue = this.sandbox.options.resultArchive;
+        return;
+      }
+      const source = this.mapPath(this.command[4]);
+      const result = spawnSync("tar", ["-czf", "-", "-C", source, "."], { encoding: "buffer" });
+      if (result.status !== 0) throw new Error(result.stderr.toString());
+      this.stdoutValue = result.stdout;
+      return;
+    }
+    if (this.command[0] === "sh") {
+      this.sandbox.agentCommand = this.command;
+      this.sandbox.agentEnv = this.params?.env;
+      this.sandbox.agentStdin = this.stdin.text;
+      const workspace = this.mapPath("/workspace");
+      writeFileSync(join(workspace, "input.txt"), "remote");
+      writeFileSync(join(workspace, "created.txt"), "created");
+      this.stdoutValue = JSON.stringify({ type: "agent_message", text: "modal final" });
+      assert.equal(this.params?.env?.HOME, "/home/node");
+      return;
+    }
+    throw new Error(`unexpected fake command: ${this.command.join(" ")}`);
+  }
+
+  private mapPath(path: string | undefined): string {
+    if (path === "/workspace") return join(this.root, "workspace");
+    if (path === "/tmp/headless-host-home") return join(this.root, "host-home");
+    throw new Error(`unexpected path: ${path}`);
+  }
+}
+
+function isTarCommand(command: string): boolean {
+  return command === "tar" || command === "/usr/bin/tar";
+}
+
+function initGitWorkdir(workDir: string): void {
+  const result = spawnSync("git", ["init"], { cwd: workDir, stdio: "ignore" });
+  assert.equal(result.status, 0);
+}
+
+function makeTarGz(entries: { content: string; name: string }[]): Uint8Array {
+  const chunks: Buffer[] = [];
+  for (const entry of entries) {
+    const content = Buffer.from(entry.content);
+    const header = Buffer.alloc(512);
+    header.write(entry.name, 0, 100, "utf8");
+    header.write("0000644\0", 100, 8, "ascii");
+    header.write("0000000\0", 108, 8, "ascii");
+    header.write("0000000\0", 116, 8, "ascii");
+    header.write(content.length.toString(8).padStart(11, "0") + "\0", 124, 12, "ascii");
+    header.write("00000000000\0", 136, 12, "ascii");
+    header.fill(" ", 148, 156);
+    header.write("0", 156, 1, "ascii");
+    header.write("ustar\0", 257, 6, "ascii");
+    header.write("00", 263, 2, "ascii");
+    let checksum = 0;
+    for (const byte of header) {
+      checksum += byte;
+    }
+    header.write(checksum.toString(8).padStart(6, "0") + "\0 ", 148, 8, "ascii");
+    chunks.push(header, content);
+    const padding = 512 - (content.length % 512 || 512);
+    if (padding > 0) {
+      chunks.push(Buffer.alloc(padding));
+    }
+  }
+  chunks.push(Buffer.alloc(1024));
+  return gzipSync(Buffer.concat(chunks));
+}
+
+class FakeWriteStream implements ModalWriteStreamLike<string | Uint8Array> {
+  bytes = new Uint8Array();
+  text = "";
+
+  async writeBytes(bytes: Uint8Array): Promise<void> {
+    this.bytes = bytes;
+  }
+
+  async writeText(text: string): Promise<void> {
+    this.text = text;
+  }
+
+  async close(): Promise<void> {}
+}
+
+class FakeReadStream<R extends string | Uint8Array> implements ModalReadStreamLike<R> {
+  constructor(private read: () => Promise<R>) {}
+
+  async readText(): Promise<string> {
+    const value = await this.read();
+    return typeof value === "string" ? value : new TextDecoder().decode(value);
+  }
+
+  async readBytes(): Promise<Uint8Array> {
+    const value = await this.read();
+    return typeof value === "string" ? new TextEncoder().encode(value) : value;
+  }
+}
+
+class FakeChunkedReadStream<R extends string | Uint8Array> implements ModalReadStreamLike<R> {
+  private index = 0;
+
+  constructor(
+    private chunks: R[],
+    private onRead: () => void,
+  ) {}
+
+  getReader(): ReadableStreamDefaultReader<R> {
+    return {
+      read: async () => {
+        this.onRead();
+        const value = this.chunks[this.index];
+        this.index += 1;
+        return value === undefined ? { done: true, value: undefined } : { done: false, value };
+      },
+    } as ReadableStreamDefaultReader<R>;
+  }
+}
+
+test("Modal billing retries share sandbox, observe captured output and mask inherited secrets", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-billing-"));
+  try {
+    const work = join(dir, "work");
+    const remote = join(dir, "remote");
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    const sandbox = new FakeSandbox(remote);
+    const client = new FakeModalClient(sandbox);
+    const observed: string[] = [];
+    let calls = 0;
+    const result = await executeModalAgent({
+      agent: "codex", appName: "test", command: { command: "codex", args: [] },
+      cpu: 1, env: { HOME: join(dir, "home"), OPENAI_API_KEY: "subscription-must-mask" },
+      image: DEFAULT_MODAL_IMAGE, includeGit: false, memoryMiB: 1024,
+      modalEnv: ["OPENAI_API_KEY=explicit-must-mask"], modalSecrets: ["secret"],
+      stdout: () => assert.fail("capture mode must not stream"), stderr: () => {},
+      stdoutHandling: "capture", timeoutSeconds: 60, workDir: work, clientFactory: async () => client,
+      invoke: async (execute) => {
+        await execute({ command: "codex", args: ["first"] }, { OPENAI_API_KEY: undefined }, 50, (text) => observed.push(text));
+        calls++;
+        assert.equal(sandbox.agentEnv?.OPENAI_API_KEY, undefined);
+        const first = sandbox.agentCommand!;
+        assert.ok(first.includes("-u"));
+        assert.match(first[2], /headless-host-home/);
+        const second = await execute({ command: "codex", args: ["resume"] }, { OPENAI_API_KEY: "paid" }, 20, (text) => observed.push(text));
+        calls++;
+        assert.equal(sandbox.agentEnv?.OPENAI_API_KEY, "paid");
+        assert.doesNotMatch(sandbox.agentCommand![2], /headless-host-home/);
+        return second;
+      },
+    });
+    assert.equal(calls, 2);
+    assert.equal(observed.length, 2);
+    assert.equal(result.code, 0);
+    assert.equal(sandbox.commands.filter((command) => command[0] === "/usr/bin/tar" && command[1] === "-czf").length, 1);
+    assert.equal(sandbox.terminated, true);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("Modal capacity failure resumes in the same sandbox without repeating bootstrap", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-capacity-"));
+  try {
+    const work = join(dir, "work"), remote = join(dir, "remote");
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    const nativeId = "12345678-1234-1234-1234-123456789abc";
+    const trace = [
+      { type: "thread.started", thread_id: nativeId },
+      { type: "turn.failed", error: { message: "Selected model is at capacity. Please try a different model." } },
+    ].map((event) => `${JSON.stringify(event)}\n`);
+    const sandbox = new FakeSandbox(remote, { agentStdoutChunks: trace });
+    const client = new FakeModalClient(sandbox);
+    const env = { HOME: join(dir, "home"), OPENAI_API_KEY: "test-api" };
+    const delays: number[] = [];
+    const result = await executeModalAgent({
+      agent: "codex", appName: "test", command: buildAgentCommand("codex", { prompt: "task" }, env),
+      cpu: 1, env, image: DEFAULT_MODAL_IMAGE, includeGit: false, memoryMiB: 1024,
+      modalEnv: [], modalSecrets: [], stdout: () => {}, stderr: () => {},
+      stdoutHandling: "capture", timeoutSeconds: 180, workDir: work, clientFactory: async () => client,
+      invoke: async (execute) => (await runWithBilling({
+        agent: "codex", mode: "api", env, options: { prompt: "task" }, timeoutSeconds: 180,
+        random: () => 0.5,
+        sleep: async (delay) => {
+          delays.push(delay);
+          sandbox.options.agentStdoutChunks = [
+            JSON.stringify({ type: "item.completed", item: { type: "agent_message", text: "finished" } }) + "\n",
+            JSON.stringify({ type: "turn.completed", usage: {} }) + "\n",
+          ];
+        },
+        execute: (attempt) => execute(buildAgentCommand("codex", attempt.options, attempt.env),
+          attempt.env, attempt.timeoutSeconds!, attempt.observe),
+      })).result,
+    });
+    assert.equal(result.code, 0);
+    assert.deepEqual(delays, [30000]);
+    const executions = sandbox.commands.filter((command) => command[0] === "sh");
+    assert.equal(executions.length, 2);
+    assert.match(executions[0][2], /headless-host-home/);
+    assert.doesNotMatch(executions[1][2], /headless-host-home/);
+    assert.ok(executions[1].includes("resume") && executions[1].includes(nativeId));
+    assert.equal(sandbox.terminated, true);
+    assert.equal(client.closed, true);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test("explicit undefined command credentials cannot be reintroduced by forwarding", () => {
+  assert.equal(collectModalEnv({ OPENAI_API_KEY: "parent" }, { OPENAI_API_KEY: undefined }, ["OPENAI_API_KEY=explicit"]).OPENAI_API_KEY, undefined);
+});
+
+test("Modal observes empty Pi completion before captured stdout is truncated", async () => {
+  const dir = mkdtempSync(join(tmpdir(), "headless-modal-pi-completion-"));
+  try {
+    const work = join(dir, "work"), remote = join(dir, "remote");
+    mkdirSync(work);
+    mkdirSync(remote);
+    initGitWorkdir(work);
+    const trace = [
+      { type: "agent_start" },
+      { type: "agent_end", messages: [
+        { role: "assistant", stopReason: "stop", content: [{ type: "text", text: "" }] },
+      ] },
+      { type: "agent_settled" },
+    ].map((record) => `${JSON.stringify(record)}\n`);
+    const sandbox = new FakeSandbox(remote, { agentStdoutChunks: trace });
+    const observer = new PiCompletionObserver();
+    const result = await executeModalAgent({
+      agent: "pi", appName: "test", command: { command: "pi", args: ["--mode", "json"] },
+      cpu: 1, env: { HOME: join(dir, "home") }, image: DEFAULT_MODAL_IMAGE,
+      includeGit: false, memoryMiB: 1024, modalEnv: [], modalSecrets: [],
+      stdout: () => assert.fail("capture mode must not stream"), stderr: () => {},
+      stdoutHandling: "capture", maxCapturedStdoutBytes: 30, timeoutSeconds: 60,
+      workDir: work, clientFactory: async () => new FakeModalClient(sandbox),
+      invoke: (execute) => execute({ command: "pi", args: ["--mode", "json"] }, {}, 50,
+        (text) => observer.write(text)),
+    });
+    observer.end();
+    assert.equal(result.code, 0);
+    assert.doesNotMatch(result.stdout, /agent_end/);
+    assert.deepEqual(observer.outcome, { status: "success", finalMessage: "" });
+    assert.equal(sandbox.terminated, true);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});

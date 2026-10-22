@@ -1,0 +1,21 @@
+{
+  "status": "OPTIMAL",
+  "success": true,
+  "elapsed": 7.039705708040856,
+  "changes": 1,
+  "source": "/Users/555tery/techarena/prototypes/pipes_g5420_cpu_20261020/solution.cpp",
+  "source_sha256": "a843822451c2a7c5e07330daa33268fc77bccfbc08fd196bfaf98a673ae24cfe",
+  "cases": [
+    11,
+    15
+  ],
+  "window": [
+    3,
+    412
+  ],
+  "prefix": 2,
+  "ratio": 1,
+  "parameters": "random_seed: 20261020\nmax_time_in_seconds: 45\nlog_search_progress: false\nnum_search_workers: 1",
+  "stats": "CpSolverResponse summary:\nstatus: OPTIMAL\nobjective: 0\nbest_bound: 0\nintegers: 0\nbooleans: 0\nconflicts: 0\nbranches: 0\npropagations: 0\ninteger_propagations: 0\nrestarts: 0\nlp_iterations: 0\nwalltime: 2.08175\nusertime: 2.08175\ndeterministic_time: 0.00026171\ngap_integral: 0\nsolution_fingerprint: 0xd18790091c553fb1\n",
+  "scope": "public-only offline exact lifetime feasibility, no hidden inputs"
+}

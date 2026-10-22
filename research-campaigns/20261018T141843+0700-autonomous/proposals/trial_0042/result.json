@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0042",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0042/candidate_0.cpp",
+  "sha256": "b25231a837c1d7f38c56d3b6d8c885f1cfa612e3f946963837977dbc6b970d8c",
+  "idea": "Censored lifetime-классы по контексту рождения: различать вставку сразу после удаления и продолжение серии вставок. Сохранить структурные правила donor и его primal DP; исключить recent-free-age tie.",
+  "parent": "seed_standalone",
+  "weighted_score": 30.088786187720842,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4700,
+      "kpi": 0.984468085106383,
+      "weighted_score": 0.984468085106383
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22400,
+      "kpi": 0.9089732142857143,
+      "weighted_score": 0.908973214285714
+    },
+    {
+      "case": "12",
+      "T": 10320,
+      "kpi": 0.9931201550387597,
+      "weighted_score": 3.972480620155039
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 438160,
+      "kpi": 0.9557170896476173,
+      "weighted_score": 9.557170896476173
+    }
+  ],
+  "fresh": {
+    "mean_delta": 0.0005576104269867765,
+    "worst_delta": -0.004395170835634787,
+    "wins": 8,
+    "regressions": 1,
+    "ties": 21,
+    "worst_cases": [
+      {
+        "case": "dev_21_frames",
+        "delta": -0.004395170835634787,
+        "baseline_T": 8700,
+        "candidate_T": 8740
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": 0.0,
+        "baseline_T": 30480,
+        "candidate_T": 30480
+      },
+      {
+        "case": "dev_02_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 17640,
+        "candidate_T": 17640
+      },
+      {
+        "case": "dev_03_recent_stationary",
+        "delta": 0.0,
+        "baseline_T": 21700,
+        "candidate_T": 21700
+      },
+      {
+        "case": "dev_04_fifo_size_drift",
+        "delta": 0.0,
+        "baseline_T": 103520,
+        "candidate_T": 103520
+      },
+      {
+        "case": "dev_05_fifo_size_drift",
+        "delta": 0.0,
+        "baseline_T": 54820,
+        "candidate_T": 54820
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8093561068985909,
+  "max_cpu_s": 1.022739,
+  "max_rss_mib": 16.265625,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0042/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0042/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792318829.6448672,
+  "balanced_gate": true,
+  "hypothesis": "При одинаковых length и возрасте эти два наблюдаемых контекста могут иметь разный deletion hazard. Иерархическая оценка с учётом экспозиции всех живых труб позволит уточнять выбор между двумя финалистами DP без жёстких арен и дополнительного расширения траншеи ради разделения классов.",
+  "causality": "Контекст фиксируется при рождении по предыдущей обработанной операции; конец серии не прогнозируется. События — только уже полученные удаления. Живые трубы дают экспозицию риска, но не получают метку permanent. Поправка класса применяется лишь за пределами консервативной погрешности pooled-модели. stderr отдельно считает поддержанные прогнозы и изменения выбора относительно исходного lifetime pricing. Код не скомпилирован и не измерен; прирост не утверждается."
+}

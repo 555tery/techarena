@@ -1,0 +1,248 @@
+{
+  "streams": [
+    {
+      "id": "E01",
+      "input_file": "E01.in",
+      "input_sha256": "6d00a41e462181b59cf8e31ef9d9d7d88041cc80cfcc1ec3c20f7c545b47dde1",
+      "seed": 2026102004103,
+      "family": "random-exact-capacity-partition",
+      "n": 15,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E02",
+      "input_file": "E02.in",
+      "input_sha256": "5ab0d65569d217bf5a4ae9aa462542441bf7e21a08e5fb4899279332840c06e0",
+      "seed": 2026102005112,
+      "family": "random-exact-capacity-partition",
+      "n": 14,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E03",
+      "input_file": "E03.in",
+      "input_sha256": "faaaeacb0cda0bf72e0edca26e62269e61a0c582a3642be21bd34f919010c4eb",
+      "seed": 2026102006121,
+      "family": "random-exact-capacity-partition",
+      "n": 17,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E04",
+      "input_file": "E04.in",
+      "input_sha256": "c92bc257200efe18558ec7a9e2a787b6e0cebd705e786050d952cccbf7159a81",
+      "seed": 2026102007130,
+      "family": "random-exact-capacity-partition",
+      "n": 15,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E05",
+      "input_file": "E05.in",
+      "input_sha256": "41247d6dc58f0c49aecd4d87393e4d1149893b9f0c305c83556cfcb5f258fa11",
+      "seed": 2026102008139,
+      "family": "random-exact-capacity-partition",
+      "n": 15,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E06",
+      "input_file": "E06.in",
+      "input_sha256": "3aedcd1c01d1fbfb5b97c3abdea04245c23bba81222fc28be59b51c56cbe6ccb",
+      "seed": 2026102009148,
+      "family": "random-exact-capacity-partition",
+      "n": 19,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E07",
+      "input_file": "E07.in",
+      "input_sha256": "bd633f494d172ea3208d17214e4a7deba78db48a70fb8892d36449278257867d",
+      "seed": 2026102010157,
+      "family": "random-exact-capacity-partition",
+      "n": 22,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E08",
+      "input_file": "E08.in",
+      "input_sha256": "1315621381cd55cc68570eb092f23ae086aeef0f4c11a39a92011ccc549987db",
+      "seed": 2026102011166,
+      "family": "random-exact-capacity-partition",
+      "n": 17,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E09",
+      "input_file": "E09.in",
+      "input_sha256": "95f77472a693c7cf7f42248399a77255a2b732ced68691812277c5415ccd7ee5",
+      "seed": 2026102012175,
+      "family": "retained-marker-regime-shift",
+      "n": 800,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E10",
+      "input_file": "E10.in",
+      "input_sha256": "1d7c86c61afd8b03bd18543804e43579250e15959ba1af57e14a36230b294e64",
+      "seed": 2026102013184,
+      "family": "retained-marker-regime-shift",
+      "n": 1300,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E11",
+      "input_file": "E11.in",
+      "input_sha256": "8980e9e1e7ce73cd84c6de20308fbf24257fce7142011bba8f9da993a7775cd2",
+      "seed": 2026102014193,
+      "family": "retained-marker-regime-shift",
+      "n": 1800,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E12",
+      "input_file": "E12.in",
+      "input_sha256": "797913202481d7fbd84fb07d33b00225cd73db9dbb017098edaff6a341ce90af",
+      "seed": 2026102015202,
+      "family": "retained-marker-regime-shift",
+      "n": 2300,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E13",
+      "input_file": "E13.in",
+      "input_sha256": "bae0cf2a5c5962e4d97c482a9a287559037b27482247233ed45271fb7d9b0854",
+      "seed": 2026102016211,
+      "family": "retained-marker-regime-shift",
+      "n": 800,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E14",
+      "input_file": "E14.in",
+      "input_sha256": "853209a1e044833c2258aeb2cfa296fc17d1fc51d2e5c752b93476091959cf4f",
+      "seed": 2026102017220,
+      "family": "retained-marker-regime-shift",
+      "n": 1300,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E15",
+      "input_file": "E15.in",
+      "input_sha256": "a42a582c4332569a03dc398935f1bea5a4ab06cfd26b895de207a3ac089acea6",
+      "seed": 2026102018229,
+      "family": "retained-marker-regime-shift",
+      "n": 1800,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E16",
+      "input_file": "E16.in",
+      "input_sha256": "caefef6df00a5024e673965d88eb66d8211f63f371b4ba6b078c0382b048bd63",
+      "seed": 2026102019238,
+      "family": "retained-marker-regime-shift",
+      "n": 2300,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E17",
+      "input_file": "E17.in",
+      "input_sha256": "3d80890bcd5a500d3222fb10a2be554ebc5dc273f9614eebc4044abb5d50ebc8",
+      "seed": 2026102020247,
+      "family": "retained-marker-regime-shift",
+      "n": 800,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E18",
+      "input_file": "E18.in",
+      "input_sha256": "2f490ca4f400196d89beca620395943b211de47470db73c22eb4546750ffbd3a",
+      "seed": 2026102021256,
+      "family": "retained-marker-regime-shift",
+      "n": 1300,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E19",
+      "input_file": "E19.in",
+      "input_sha256": "b5e1db159406409d07b58117de07116e15c58361598ed84c645e5be9cb83a11f",
+      "seed": 2026102022265,
+      "family": "retained-marker-regime-shift",
+      "n": 1800,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E20",
+      "input_file": "E20.in",
+      "input_sha256": "0d0dde234cc1cfccffec34e8210da742a33ee957dc1f73d34a10a4c81fdfeb42",
+      "seed": 2026102023274,
+      "family": "retained-marker-regime-shift",
+      "n": 2300,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E21",
+      "input_file": "E21.in",
+      "input_sha256": "e3f725738d6ef0e387dda6cc86a7e8efba0e8138697a3062a74efd12f1bc397f",
+      "seed": 2026102024283,
+      "family": "retained-marker-regime-shift",
+      "n": 800,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E22",
+      "input_file": "E22.in",
+      "input_sha256": "5adc7859132f83c58ab16bd961eec697667c4b281901587abf1a7c2b3fc2d645",
+      "seed": 2026102025292,
+      "family": "retained-marker-regime-shift",
+      "n": 1300,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E23",
+      "input_file": "E23.in",
+      "input_sha256": "17265d68da25bb0f87c438aeb0d81c2c220a214f2b7956b0488181a307b65aac",
+      "seed": 2026102026301,
+      "family": "retained-marker-regime-shift",
+      "n": 1800,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    },
+    {
+      "id": "E24",
+      "input_file": "E24.in",
+      "input_sha256": "fb6755fe3d372ae800d3dcb8a491bd1364ce1ca374e5245ae5c6bd9b1b2a1537",
+      "seed": 2026102027310,
+      "family": "retained-marker-regime-shift",
+      "n": 2300,
+      "prefix_commands": 2,
+      "selection": "post-freeze coverage audit, no use in model selection"
+    }
+  ],
+  "seed": 2026102004103,
+  "candidate_read": false,
+  "scope": "24 newseed inputs of retained-marker mechanism, not independent-agent confirmation or hidden-distribution sample",
+  "reason": "Independent48 set has only two deterministic controls for livePID2; add targeted pre-coupling coverage without tuning candidate"
+}

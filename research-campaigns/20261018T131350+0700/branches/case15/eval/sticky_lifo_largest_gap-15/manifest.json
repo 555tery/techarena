@@ -1,0 +1,28 @@
+{
+  "status": "compile_failed",
+  "label": "sticky_lifo_largest_gap",
+  "created_at": "2026-10-18T13:18:14.722946+07:00",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T131350+0700/branches/case15/sticky_lifo_largest_gap.cpp",
+  "source_sha256": "c26d654ef84a6ba3909393512b72bd1de974f24b03f5cc57476c03919169b31b",
+  "tests": "/Users/555tery/techarena/data/pipes/open/15.in",
+  "input_sha256": {
+    "/Users/555tery/techarena/data/pipes/open/15.in": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+  },
+  "case_count": 1,
+  "cpu_limit_exclusive_s": 5,
+  "rss_limit_exclusive_mib": 256,
+  "workers": 2,
+  "validation_accessed": false,
+  "platform_accessed": false,
+  "engine": "pinned-official-checker-native-direct",
+  "compile_returncode": 1,
+  "compile_command": [
+    "/usr/bin/clang++",
+    "-O2",
+    "-std=c++20",
+    "-pipe",
+    "/Users/555tery/techarena/research-campaigns/20261018T131350+0700/branches/case15/eval/sticky_lifo_largest_gap-15/source.cpp",
+    "-o",
+    "/Users/555tery/techarena/research-campaigns/20261018T131350+0700/branches/case15/eval/sticky_lifo_largest_gap-15/solver"
+  ]
+}

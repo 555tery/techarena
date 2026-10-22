@@ -1,0 +1,116 @@
+{
+  "artifact": "Post-hoc fresh-seed depth-16 policy-conditioned rollout probe",
+  "status": "synthetic gate passed; not an official-test or solver result",
+  "scope": {
+    "official_open_or_holdout_tests_run": false,
+    "site_or_leaderboard_accessed": false,
+    "official_inputs_used": false,
+    "solver_candidate_created": false,
+    "protected_sources_modified": false,
+    "post_hoc_exploratory_extension": true
+  },
+  "protected_sources": {
+    "frozen_final": {
+      "path": "results/pipes/final/solution.cpp",
+      "sha256": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991"
+    },
+    "canonical": {
+      "path": "src/pipes.cpp",
+      "sha256": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+    },
+    "P4": {
+      "path": "results/pipes/improvement/strategies/policy4_baseline.cpp",
+      "sha256": "a524195683fc0fb2aa4815faed12a0fea37df66dc6c4bdb1ffbf53de8d0e8ae3"
+    },
+    "imported_history_sampler": {
+      "path": "results/pipes/improvement/joint_gap_portfolio_probe/probe.py",
+      "sha256": "35cbdc6a57a6ef8cd9efc3650d034c2a6b8aa22a33819e2cc27c820cc3d19082"
+    }
+  },
+  "data": {
+    "design": "9 train and 18 fresh validation whole streams; 1800 operations; 3 length profiles x 3 deletion policies; churn 0.48",
+    "seed_base": 617000000,
+    "unique_new_seeds": 27,
+    "overlap_with_depth4_train_or_validation_seeds": 0,
+    "all_input_hashes_verified": true,
+    "manifest": "results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/input_manifest.json",
+    "manifest_sha256": "17d2c4f800f18a8257fbe42fdee08663f98b1628add36540efe0ef33442b565c",
+    "generator": "tools/generate_pipes_synthetic.py",
+    "generator_sha256": "e737770645db6a276acd7af4b30a28756879bf94c532e248b01e643541580904"
+  },
+  "implementation": {
+    "probe": "results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/depth16_probe.py",
+    "probe_sha256": "5ed6acae66867034ac2169ab7e6d491b74f4d3534dc8a0a67214edb5d925fbc2",
+    "stream_generator": "results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/generate_streams.py",
+    "stream_generator_sha256": "9464590973db202a8c4f9026519ae49f8c3a9b53861912d5eb5dcda077884adc"
+  },
+  "builds": {
+    "frozen_noMC": {
+      "command": "clang++ -O2 -std=c++20 -DMC_ROLLOUT_DISABLED results/pipes/final/solution.cpp -o results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/bin/frozen_nomc",
+      "binary": "results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/bin/frozen_nomc",
+      "binary_sha256": "e5256420b8a1cf23ceb4c38bac83e649ebf792336f36df2f2c4040ca215768a6"
+    },
+    "P4": {
+      "command": "g++ -O2 -std=c++20 -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror results/pipes/improvement/strategies/policy4_baseline.cpp -o results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/bin/p4",
+      "binary": "results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/bin/p4",
+      "binary_sha256": "e208fad981c32c6e90a0401d10df5f50a6d6b8379a879eb94c47f9e51e35edef"
+    }
+  },
+  "run": {
+    "generation_command": "python3 results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/generate_streams.py",
+    "syntax_check_command": "python3 -m py_compile results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/generate_streams.py results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/depth16_probe.py",
+    "probe_command": "python3 results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/depth16_probe.py --baseline results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/bin/frozen_nomc --p4 results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/bin/p4",
+    "python": "3.14.5",
+    "compiler": "Apple clang 17.0.0 (clang-1700.0.13.5); g++ resolves to Apple clang on this host",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "probe_wall_seconds": 16.06064412498381,
+    "transcript_checks": "27/27 streams matched for both frozen-noMC and P4",
+    "contest_solver_limits": "5 CPU seconds and 256 MiB were not measured; no solver candidate was built"
+  },
+  "parameters": {
+    "snapshot_min_command_index": 180,
+    "snapshot_cadence_commands": 60,
+    "scenario_depth": 16,
+    "scenario_trials": 16,
+    "bootstrap_samples": 20000,
+    "bootstrap_seed": 20261022,
+    "validation_used_for_parameter_tuning": false,
+    "gate_rule": "overall paired 95% stream CI favors conditioned ranking on accuracy and regret; leave-one-profile-out intervals must remain favorable"
+  },
+  "validation_results": {
+    "candidate_states": 115,
+    "informative_states": 86,
+    "informative_streams": 14,
+    "conditioned_minus_baseline_pair_accuracy": 0.0760345804988662,
+    "pair_accuracy_paired_stream_bootstrap_95_ci": [0.03869047619047617, 0.11720875850340104],
+    "conditioned_minus_baseline_top1_regret_m": -12.174036281179138,
+    "regret_paired_stream_bootstrap_95_ci_m": [-23.265518707482993, -3.928358843537433],
+    "positive_negative_tied_streams_accuracy": [9, 0, 5],
+    "positive_negative_tied_streams_regret_delta": [0, 9, 5],
+    "selected_actions": {
+      "baseline_continuation_predictor": {"baseline": 101, "P4": 14},
+      "conditioned_predictor": {"baseline": 86, "P4": 29},
+      "mixed_target_best_hindsight": {"baseline": 1, "P4": 85, "tie": 29}
+    },
+    "recommendation_flips": 15,
+    "recommendation_flip_frequency": 0.13043478260869565,
+    "informative_recommendation_flips": 11,
+    "informative_recommendation_flip_frequency": 0.12790697674418605,
+    "leave_one_profile_out_all_accuracy_and_regret_intervals_favorable": true,
+    "gate_passed": true
+  },
+  "outputs": {
+    "report": {
+      "path": "results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/REPORT.md",
+      "sha256": "7a42801598f0c4e53296e1efcb9a14cbc7732b4e63102b246607d9bf5dcb1a22"
+    },
+    "ranking_states": {
+      "path": "results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/ranking_states.csv",
+      "sha256": "ea15e14009b822660d491fd18f0d55270fe27f8ddbde785a6e55e5c4b4022ad1"
+    },
+    "summary": {
+      "path": "results/pipes/improvement/policy_conditioned_rollout/depth16_fresh/summary.json",
+      "sha256": "af1821a0d1b4c96daa647279d9672afdbb14d34641c33d797e648a99cfe68f9e"
+    }
+  }
+}

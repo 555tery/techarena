@@ -1,0 +1,78 @@
+{
+  "created_before_paired_runs": true,
+  "streams": [
+    {
+      "name": "unit_scale_2026101821",
+      "seed": 2026101821,
+      "operations": 10000,
+      "target_unit_probability": 0.95,
+      "length_mode": "iid",
+      "deletion": "2.7% churn; 98% strict newest active PID, 2% uniform",
+      "sha256": "8e5b4f5f9babd365158b5833061e758527b065851f41f75fae9486ba83f7f84f"
+    },
+    {
+      "name": "unit_scale_2026101822",
+      "seed": 2026101822,
+      "operations": 12000,
+      "target_unit_probability": 0.93,
+      "length_mode": "iid",
+      "deletion": "2.7% churn; 98% strict newest active PID, 2% uniform",
+      "sha256": "e2247e75ef60578cda60c6102d117c74512d52c66ea5309f097231ef37405b3d"
+    },
+    {
+      "name": "unit_scale_2026101823",
+      "seed": 2026101823,
+      "operations": 15000,
+      "target_unit_probability": 0.91,
+      "length_mode": "iid",
+      "deletion": "2.7% churn; 98% strict newest active PID, 2% uniform",
+      "sha256": "51f60792c47f15d3d4836cd64a97d462e567370b606952e8679a658f947ab05e"
+    },
+    {
+      "name": "unit_scale_2026101824",
+      "seed": 2026101824,
+      "operations": 18000,
+      "target_unit_probability": 0.9,
+      "length_mode": "iid",
+      "deletion": "2.7% churn; 98% strict newest active PID, 2% uniform",
+      "sha256": "904291a612757e12472322fb59e68f06d317b8534e027097fc08718179d0be1b"
+    },
+    {
+      "name": "unit_scale_2026101825",
+      "seed": 2026101825,
+      "operations": 22000,
+      "target_unit_probability": 0.88,
+      "length_mode": "iid",
+      "deletion": "2.7% churn; 98% strict newest active PID, 2% uniform",
+      "sha256": "26301bbf972dc0155b0d51a4b4073ffd558ecad6074b209e2cb201cec450ac2b"
+    },
+    {
+      "name": "unit_scale_2026101826",
+      "seed": 2026101826,
+      "operations": 25000,
+      "target_unit_probability": 0.85,
+      "length_mode": "iid",
+      "deletion": "2.7% churn; 98% strict newest active PID, 2% uniform",
+      "sha256": "97373c2f15e1759cfea8acc81d0ce21b95061573b2637c59b2eb188ade5d3909"
+    },
+    {
+      "name": "unit_scale_2026101827",
+      "seed": 2026101827,
+      "operations": 12000,
+      "target_unit_probability": 0.92,
+      "length_mode": "periodic",
+      "deletion": "2.7% churn; 98% strict newest active PID, 2% uniform",
+      "sha256": "b1589dd5ced62fcc5e55c3c66d86447ce69549de913d20ba6a6b552cf1805c42"
+    },
+    {
+      "name": "unit_scale_2026101828",
+      "seed": 2026101828,
+      "operations": 20000,
+      "target_unit_probability": 0.94,
+      "length_mode": "phase",
+      "deletion": "2.7% churn; 98% strict newest active PID, 2% uniform",
+      "sha256": "591630758499cee0420d42a390905a5b298df3a368eb42e4d07bed2637bd7be8"
+    }
+  ],
+  "count": 8
+}

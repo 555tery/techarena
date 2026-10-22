@@ -1,0 +1,430 @@
+{
+  "experiment": "case9_push_20261018",
+  "date": "2026-10-18",
+  "scope": "case 9 local search; no website, Docker, canonical or frozen-source changes",
+  "compiler": {
+    "command": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic",
+    "host": "macOS-26.6.2-arm64-arm-64bit-Mach-O"
+  },
+  "source_hashes": {
+    "case9_policy_on_ab": {
+      "path": "results/pipes/improvement/case9_push_20261018/counterfactual_coalescence/source/counterfactual_next_size_coalescence.cpp",
+      "sha256": "eeb7e575e2dfa098a353163f3bc713f8eef8f36c86073eb9fce21b7f78f5ea01"
+    },
+    "case9_policy_composition": {
+      "path": "results/pipes/improvement/case9_push_20261018/current_leader/source/current_leader_plus_case9_coalescence.cpp",
+      "sha256": "1c194e9200b6b2d670af465cb3c63c8ec9efd86eeef66fd249a00ccfbd8af940"
+    },
+    "case9_policy_binary": {
+      "path": "results/pipes/improvement/case9_push_20261018/current_leader/bin/current_leader_plus_case9_coalescence",
+      "sha256": "8645e182fa9d1e5bcf230ab5d653d3bc0d57ff4af054bdd4e6793c9544e6633d"
+    },
+    "case9_no_go": {
+      "path": "results/pipes/improvement/case9_push_20261018/owner_agnostic/source/next_class_capacity_preservation.cpp",
+      "sha256": "9d726100edaf273f3581a6125903ea434d6e4678bc8607ac2feccac84e9d2f56"
+    },
+    "baseline_ab": {
+      "path": "results/pipes/improvement/case5_additive_next_alignment_20261017/src/staircase_plus_additive_next_alignment.cpp",
+      "sha256": "4c3a3590eb1ad4251640af32f10f7e5b506b8cfac8ee6b9d0edaa6d4e231caae"
+    },
+    "baseline_composition": {
+      "path": "results/pipes/improvement/case5_push_20261018/src/relative_cohort_plus_scale_gate.cpp",
+      "sha256": "b1712f18ff3ecfb1e63e86eed038dea32e1b597c94b0d54a7d07f5836c120bf5"
+    },
+    "baseline_composition_binary": {
+      "path": "results/pipes/improvement/case5_push_20261018/bin/relative_cohort_plus_scale_gate",
+      "sha256": "f7ec39aa5a419d0dadb40a754326eea6a6277fcca49290c89d7080205477228c"
+    },
+    "harness": {
+      "path": "tools/pipes_harness.py",
+      "sha256": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d"
+    },
+    "interactor": {
+      "path": "tools/interactor",
+      "sha256": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a"
+    }
+  },
+  "inputs": {
+    "open15": {
+      "1": {
+        "path": "data/pipes/open/1.in",
+        "sha256": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d"
+      },
+      "2": {
+        "path": "data/pipes/open/2.in",
+        "sha256": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923"
+      },
+      "3": {
+        "path": "data/pipes/open/3.in",
+        "sha256": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494"
+      },
+      "4": {
+        "path": "data/pipes/open/4.in",
+        "sha256": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f"
+      },
+      "5": {
+        "path": "data/pipes/open/5.in",
+        "sha256": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b"
+      },
+      "6": {
+        "path": "data/pipes/open/6.in",
+        "sha256": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd"
+      },
+      "7": {
+        "path": "data/pipes/open/7.in",
+        "sha256": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd"
+      },
+      "8": {
+        "path": "data/pipes/open/8.in",
+        "sha256": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7"
+      },
+      "9": {
+        "path": "data/pipes/open/9.in",
+        "sha256": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+      },
+      "10": {
+        "path": "data/pipes/open/10.in",
+        "sha256": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b"
+      },
+      "11": {
+        "path": "data/pipes/open/11.in",
+        "sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c"
+      },
+      "12": {
+        "path": "data/pipes/open/12.in",
+        "sha256": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984"
+      },
+      "13": {
+        "path": "data/pipes/open/13.in",
+        "sha256": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2"
+      },
+      "14": {
+        "path": "data/pipes/open/14.in",
+        "sha256": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d"
+      },
+      "15": {
+        "path": "data/pipes/open/15.in",
+        "sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353"
+      }
+    },
+    "synthetics": {
+      "geom2_count_wobble.in": {
+        "path": "results/pipes/improvement/case9_push_20261018/synthetic/geom2_count_wobble.in",
+        "sha256": "4a0e4bdc301652f183e8cfa480596e7329593f1d5d0e9d6f42db68009aa77091"
+      },
+      "geom2_even_half_192.in": {
+        "path": "results/pipes/improvement/case9_push_20261018/synthetic/geom2_even_half_192.in",
+        "sha256": "43419e2aada7f6662128ba4a548c1355d41f056d2cd28d9db94e77818d8ff832"
+      },
+      "geom2_noisy_stride_128.in": {
+        "path": "results/pipes/improvement/case9_push_20261018/synthetic/geom2_noisy_stride_128.in",
+        "sha256": "d30dac6386ac9bac07ead7e9414912e3a4de592e69bcb3391edda5ce1e14f910"
+      },
+      "geom2_odd_40pct_256.in": {
+        "path": "results/pipes/improvement/case9_push_20261018/synthetic/geom2_odd_40pct_256.in",
+        "sha256": "44d00400e8acbae636c755eac7f655a69f7819d1339007ff4a02dcb49673a1de"
+      },
+      "geom2_odd_half_128.in": {
+        "path": "results/pipes/improvement/case9_push_20261018/synthetic/geom2_odd_half_128.in",
+        "sha256": "98592eb27029a7d2821a6bb556f1d2515b76ae7ab52b3db41a88c06f58a408d8"
+      },
+      "geom2_reverse_deletions_256.in": {
+        "path": "results/pipes/improvement/case9_push_20261018/synthetic/geom2_reverse_deletions_256.in",
+        "sha256": "5a11e0e8ccc0da055567beace5cff94f496808e95f0936a528ff00325eafd3f1"
+      },
+      "geom2_scale3_256.in": {
+        "path": "results/pipes/improvement/case9_push_20261018/synthetic/geom2_scale3_256.in",
+        "sha256": "07ae1751b92f48fcff3648c7d0ea0596a80fc9a47f2042f678909c106fbde640"
+      },
+      "geom2_start2_160.in": {
+        "path": "results/pipes/improvement/case9_push_20261018/synthetic/geom2_start2_160.in",
+        "sha256": "838841d0c5a795ed2ca3b42c8bb5f0147c234ad70645ba7917cc4b7ab6dc9ee6"
+      }
+    }
+  },
+  "tests": {
+    "baseline_open15": {
+      "report": "results/pipes/improvement/case5_push_20261018/runs/composition_open15/summary.json",
+      "score_sum": 30.071629211228668,
+      "weight_sum": 32.1,
+      "ok_count": 15
+    },
+    "candidate_case9": {
+      "report": "results/pipes/improvement/case9_push_20261018/current_leader/runs/case9/summary.json",
+      "case_count": 1,
+      "ok_count": 1,
+      "trench_m": 47700,
+      "kpi": 0.660377358490566,
+      "solver_cpu_s": 0.190995,
+      "rss_mib": 2.984375
+    },
+    "synthetic_baseline": {
+      "report": "results/pipes/improvement/case9_push_20261018/current_leader/runs/synthetic_baseline/summary.json",
+      "ok_count": 8
+    },
+    "synthetic_candidate": {
+      "report": "results/pipes/improvement/case9_push_20261018/current_leader/runs/synthetic/summary.json",
+      "ok_count": 8,
+      "deltas": {
+        "geom2_count_wobble": {
+          "baseline_trench_m": 17160,
+          "candidate_trench_m": 17160,
+          "delta_trench_m": 0
+        },
+        "geom2_even_half_192": {
+          "baseline_trench_m": 9200,
+          "candidate_trench_m": 9200,
+          "delta_trench_m": 0
+        },
+        "geom2_noisy_stride_128": {
+          "baseline_trench_m": 7940,
+          "candidate_trench_m": 7940,
+          "delta_trench_m": 0
+        },
+        "geom2_odd_40pct_256": {
+          "baseline_trench_m": 13040,
+          "candidate_trench_m": 13040,
+          "delta_trench_m": 0
+        },
+        "geom2_odd_half_128": {
+          "baseline_trench_m": 7940,
+          "candidate_trench_m": 7940,
+          "delta_trench_m": 0
+        },
+        "geom2_reverse_deletions_256": {
+          "baseline_trench_m": 15860,
+          "candidate_trench_m": 15860,
+          "delta_trench_m": 0
+        },
+        "geom2_scale3_256": {
+          "baseline_trench_m": 9580,
+          "candidate_trench_m": 9580,
+          "delta_trench_m": 0
+        },
+        "geom2_start2_160": {
+          "baseline_trench_m": 9720,
+          "candidate_trench_m": 9720,
+          "delta_trench_m": 0
+        }
+      }
+    },
+    "candidate_open15": {
+      "report": "results/pipes/improvement/case9_push_20261018/current_leader/runs/open15/summary.json",
+      "score_sum": 30.072182522798414,
+      "weight_sum": 32.1,
+      "ok_count": 15,
+      "max_solver_cpu_s": 2.2677959999999997,
+      "max_solver_rss_mib": 7.734375,
+      "case_deltas": {
+        "1": {
+          "baseline_trench_m": 20,
+          "candidate_trench_m": 20,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "2": {
+          "baseline_trench_m": 20,
+          "candidate_trench_m": 20,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "3": {
+          "baseline_trench_m": 20,
+          "candidate_trench_m": 20,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "4": {
+          "baseline_trench_m": 60,
+          "candidate_trench_m": 60,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "5": {
+          "baseline_trench_m": 54440,
+          "candidate_trench_m": 54440,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "6": {
+          "baseline_trench_m": 20,
+          "candidate_trench_m": 20,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "7": {
+          "baseline_trench_m": 1700,
+          "candidate_trench_m": 1700,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "8": {
+          "baseline_trench_m": 4700,
+          "candidate_trench_m": 4700,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "9": {
+          "baseline_trench_m": 47740,
+          "candidate_trench_m": 47700,
+          "delta_trench_m": -40,
+          "delta_weighted_score": 0.0005533115697450297
+        },
+        "10": {
+          "baseline_trench_m": 15380,
+          "candidate_trench_m": 15380,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "11": {
+          "baseline_trench_m": 22500,
+          "candidate_trench_m": 22500,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "12": {
+          "baseline_trench_m": 10320,
+          "candidate_trench_m": 10320,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "13": {
+          "baseline_trench_m": 3280,
+          "candidate_trench_m": 3280,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "14": {
+          "baseline_trench_m": 37860,
+          "candidate_trench_m": 37860,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        },
+        "15": {
+          "baseline_trench_m": 438640,
+          "candidate_trench_m": 438640,
+          "delta_trench_m": 0,
+          "delta_weighted_score": 0.0
+        }
+      }
+    }
+  },
+  "commands": [
+    "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Werror -pedantic results/pipes/improvement/case9_push_20261018/current_leader/source/current_leader_plus_case9_coalescence.cpp -o results/pipes/improvement/case9_push_20261018/current_leader/bin/current_leader_plus_case9_coalescence",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_push_20261018/current_leader/bin/current_leader_plus_case9_coalescence --name current-leader-plus-counterfactual-case9 --tests data/pipes/open/9.in --out results/pipes/improvement/case9_push_20261018/current_leader/runs/case9",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case5_push_20261018/bin/relative_cohort_plus_scale_gate --name current-leader-baseline-synthetics --tests results/pipes/improvement/case9_push_20261018/synthetic --out results/pipes/improvement/case9_push_20261018/current_leader/runs/synthetic_baseline",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_push_20261018/current_leader/bin/current_leader_plus_case9_coalescence --name current-leader-plus-counterfactual-synthetics --tests results/pipes/improvement/case9_push_20261018/synthetic --out results/pipes/improvement/case9_push_20261018/current_leader/runs/synthetic",
+    "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_push_20261018/current_leader/bin/current_leader_plus_case9_coalescence --name current-leader-plus-counterfactual-case9 --tests data/pipes/open --out results/pipes/improvement/case9_push_20261018/current_leader/runs/open15"
+  ],
+  "status": "Current-leader + C2 composition scored 30.074287976405728 on Open15 (+0.000553311569743 versus 30.073734664835985; only case 9 changed by -40 m), with all 15 passing. C3 residual-slack reservation activated but had no case 9 or fresh-synthetic gain and is no-go. No canonical/frozen/wiki/platform/Docker changes.",
+  "diagnostic_trace": {
+    "path": "results/pipes/improvement/case9_push_20261018/diagnostics/residual_microholes.json",
+    "sha256": "56b5e6e76cab5798e224943f9b6266ef5feed07289bfda880bada969d7267a23",
+    "summary": "At operation 7501, before any size-32 pipe, 200 m of the eventual peak free space was already split across 22x1 m, 81x2 m, and one 16 m interval."
+  },
+  "latest_research_update": {
+    "baseline_current_leader": {
+      "source_path": "results/pipes/improvement/case14_suppress_parity_composition_20261018/src/relative_cohort_plus_scale_gate_unit_suppression.cpp",
+      "source_sha256": "4ac5d5c36220fc10610d82ce092e77907f80a1a1c425332d25f59316fa21d450",
+      "open15_report": "results/pipes/improvement/case14_suppress_parity_composition_20261018/runs/open15_candidate/summary.json",
+      "score_sum": 30.073734664835985,
+      "ok_count": 15
+    },
+    "current_leader_plus_c2_open15": {
+      "description": "C2 counterfactual next-size coalescence transplanted onto the current case14-suppression leader; causal and online",
+      "source_path": "results/pipes/improvement/case9_push_20261018/residual_slack/source/latest_leader_plus_c2.cpp",
+      "source_sha256": "c19945111834e5969e2f58f0b6503851b35e7642a9bd77f9f70c118ee3bb736c",
+      "binary_path": "results/pipes/improvement/case9_push_20261018/residual_slack/bin/latest_leader_plus_c2",
+      "binary_sha256": "087795d04de5bdb362ec0bed791424a5d83c02bac6bfe45f6260b6d32407d520",
+      "open15_report": "results/pipes/improvement/case9_push_20261018/residual_slack/runs/open15_c2_composed/summary.json",
+      "score_sum": 30.074287976405728,
+      "weight_sum": 32.1,
+      "ok_count": 15,
+      "delta_vs_current_leader": 0.0005533115697424762,
+      "changed_cases": {
+        "9": {
+          "base_trench_m": 47740,
+          "candidate_trench_m": 47700,
+          "delta_trench_m": -40,
+          "base_weighted_score": 0.659824046920821,
+          "candidate_weighted_score": 0.660377358490566,
+          "delta_weighted_score": 0.0005533115697450297
+        }
+      },
+      "max_solver_cpu_s": 1.778829,
+      "max_solver_rss_mib": 9.375,
+      "all_within_limits": true,
+      "command": "python3 tools/pipes_harness.py --solver results/pipes/improvement/case9_push_20261018/residual_slack/bin/latest_leader_plus_c2 --name current_leader_plus_c2 --tests data/pipes/open --out results/pipes/improvement/case9_push_20261018/residual_slack/runs/open15_c2_composed --cpu-limit 5 --memory-limit-mb 256"
+    },
+    "residual_slack_c3_no_go": {
+      "description": "Reserve one next-geometric-size interval by moving current cohort pipes into already-budgeted slab rounding slack; no new trench section allowed",
+      "source_path": "results/pipes/improvement/case9_push_20261018/residual_slack/source/zero_cost_future_gap.cpp",
+      "source_sha256": "0be146ba66cfbd4b3045985a3c9723f8f15480f8da5565c7d97d391d8740b6dc",
+      "binary_path": "results/pipes/improvement/case9_push_20261018/residual_slack/bin/zero_cost_future_gap",
+      "binary_sha256": "963c912fe4fee4fdcf5a0efbdf58fff5508f1a3de71db30207520bef5d42383f",
+      "base_source_path": "results/pipes/improvement/case9_push_20261018/residual_slack/source/latest_leader_plus_c2.cpp",
+      "base_source_sha256": "c19945111834e5969e2f58f0b6503851b35e7642a9bd77f9f70c118ee3bb736c",
+      "case9_report": "results/pipes/improvement/case9_push_20261018/residual_slack/runs/case9_c3/summary.json",
+      "case9_base_report": "results/pipes/improvement/case9_push_20261018/residual_slack/runs/case9_baseline/summary.json",
+      "case9_base_trench_m": 47700,
+      "case9_candidate_trench_m": 47700,
+      "synthetic_report": "results/pipes/improvement/case9_push_20261018/residual_slack/runs/synthetic_c3/summary.json",
+      "synthetic_manifest": "results/pipes/improvement/case9_push_20261018/residual_slack/synthetic_fresh_manifest.json",
+      "synthetic_ok_count": 8,
+      "synthetic_trench_deltas": {
+        "geom2_even_184_fresh": {
+          "baseline_trench_m": 11380,
+          "candidate_trench_m": 11380,
+          "delta_trench_m": 0,
+          "input_sha256": "dfa2c009e447a0013e4c4cb4d00e233e9fc1c841aa3fa01de7269d30602d5d91"
+        },
+        "geom2_odd40_240_fresh": {
+          "baseline_trench_m": 12220,
+          "candidate_trench_m": 12220,
+          "delta_trench_m": 0,
+          "input_sha256": "42881b5505ccdc63238ce6953615413cb7fa6abed709e8351192017aefb498a6"
+        },
+        "geom2_odd_136_fresh": {
+          "baseline_trench_m": 8420,
+          "candidate_trench_m": 8420,
+          "delta_trench_m": 0,
+          "input_sha256": "7b7f1f9fc53279c952359fbc7a222607bd736b2bb28eb97b9531055e7efbd4e6"
+        },
+        "geom2_phase_shift_fresh": {
+          "baseline_trench_m": 13060,
+          "candidate_trench_m": 13060,
+          "delta_trench_m": 0,
+          "input_sha256": "4492b0a08710e5fa25b42e0596bcc181e94c4aa906065c624b378cb0e47d743e"
+        },
+        "geom2_random50_192_fresh": {
+          "baseline_trench_m": 10500,
+          "candidate_trench_m": 10500,
+          "delta_trench_m": 0,
+          "input_sha256": "0692343ab517b130ee5685485c0b4b6ce821ec18a511e1b4efdd80d483d7ebbf"
+        },
+        "geom2_reverse_160_fresh": {
+          "baseline_trench_m": 9920,
+          "candidate_trench_m": 9920,
+          "delta_trench_m": 0,
+          "input_sha256": "8a581982e95b89148d216655941d47e19165d7d2f23e37fb6f3b0c93ca2caa47"
+        },
+        "geom2_wobble_224_fresh": {
+          "baseline_trench_m": 13100,
+          "candidate_trench_m": 13100,
+          "delta_trench_m": 0,
+          "input_sha256": "4ded0034f4539516ed4d697a7fc63fbac3b074456e259b9351940b998a824a32"
+        },
+        "scale3_192_fresh": {
+          "baseline_trench_m": 10240,
+          "candidate_trench_m": 10240,
+          "delta_trench_m": 0,
+          "input_sha256": "370ade970f62d0c23c5a0373dde831e0f4304db63a076cdcdf05f85c8a589603"
+        }
+      },
+      "trace_report": "results/pipes/improvement/case9_push_20261018/residual_slack/runs/case9_c3_trace/",
+      "trace_activation": "Two slab transitions were logged, but case9 final trench did not improve over C2.",
+      "full_open15_run": "not run: case9 screen showed no target improvement; all synthetic comparisons tied",
+      "status": "no-go"
+    }
+  }
+}

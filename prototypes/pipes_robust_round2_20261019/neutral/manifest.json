@@ -1,0 +1,283 @@
+{
+  "selection": "fixed before candidate scores; no rejection by outcome",
+  "specs": [
+    [
+      918301,
+      0,
+      0,
+      "iid",
+      10000
+    ],
+    [
+      918302,
+      0,
+      0,
+      "lifo",
+      10000
+    ],
+    [
+      918303,
+      0,
+      0,
+      "fifo",
+      10000
+    ],
+    [
+      918304,
+      0,
+      0,
+      "walk",
+      10000
+    ],
+    [
+      918305,
+      1,
+      6,
+      "young",
+      10000
+    ],
+    [
+      918306,
+      2,
+      18,
+      "iid",
+      10000
+    ],
+    [
+      918307,
+      3,
+      12,
+      "lifo",
+      10000
+    ],
+    [
+      918308,
+      10,
+      1000,
+      "fifo",
+      14000
+    ],
+    [
+      918309,
+      14,
+      1000,
+      "walk",
+      14000
+    ],
+    [
+      918310,
+      12,
+      34,
+      "young",
+      10000
+    ],
+    [
+      918311,
+      0,
+      0,
+      "walk",
+      200000
+    ],
+    [
+      918312,
+      2,
+      18,
+      "young",
+      200000
+    ]
+  ],
+  "tests": [
+    {
+      "seed": 918301,
+      "family": "iid",
+      "open_case": 0,
+      "prefix_length": 0,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918301-iid.in",
+      "sha256": "0c873b63eb686d2a27032de63e82edee3d1f7d12d72d8ca963877448bd9bef22",
+      "weight": 1.0,
+      "test_sha256": "0c873b63eb686d2a27032de63e82edee3d1f7d12d72d8ca963877448bd9bef22",
+      "operation_count": 10000,
+      "placement_count": 5090,
+      "peak_live_pipe_length_m": 4182,
+      "minimum_trench_lower_bound_m": 4200,
+      "final_occupied_length_m": 3572,
+      "kpi_upper_bound_from_live_volume": 0.8504761904761905
+    },
+    {
+      "seed": 918302,
+      "family": "lifo",
+      "open_case": 0,
+      "prefix_length": 0,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918302-lifo.in",
+      "sha256": "6a17c85901b418ed5bdcbe4596aa598f563ab8c89b01d199cd126937f33b5492",
+      "weight": 1.0,
+      "test_sha256": "6a17c85901b418ed5bdcbe4596aa598f563ab8c89b01d199cd126937f33b5492",
+      "operation_count": 10000,
+      "placement_count": 5096,
+      "peak_live_pipe_length_m": 3721,
+      "minimum_trench_lower_bound_m": 3740,
+      "final_occupied_length_m": 3619,
+      "kpi_upper_bound_from_live_volume": 0.9676470588235294
+    },
+    {
+      "seed": 918303,
+      "family": "fifo",
+      "open_case": 0,
+      "prefix_length": 0,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918303-fifo.in",
+      "sha256": "df67a8cab937269c50234e295160b6d00258703632ead85093e32071bdb337b9",
+      "weight": 1.0,
+      "test_sha256": "df67a8cab937269c50234e295160b6d00258703632ead85093e32071bdb337b9",
+      "operation_count": 10000,
+      "placement_count": 5097,
+      "peak_live_pipe_length_m": 4240,
+      "minimum_trench_lower_bound_m": 4240,
+      "final_occupied_length_m": 3939,
+      "kpi_upper_bound_from_live_volume": 0.9290094339622641
+    },
+    {
+      "seed": 918304,
+      "family": "walk",
+      "open_case": 0,
+      "prefix_length": 0,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918304-walk.in",
+      "sha256": "619fcf36c25646f0fa98586f1d47009ad7b696031da7c009da98d34a5ff92fa8",
+      "weight": 1.0,
+      "test_sha256": "619fcf36c25646f0fa98586f1d47009ad7b696031da7c009da98d34a5ff92fa8",
+      "operation_count": 10000,
+      "placement_count": 5085,
+      "peak_live_pipe_length_m": 4533,
+      "minimum_trench_lower_bound_m": 4540,
+      "final_occupied_length_m": 1171,
+      "kpi_upper_bound_from_live_volume": 0.2579295154185022
+    },
+    {
+      "seed": 918305,
+      "family": "young",
+      "open_case": 1,
+      "prefix_length": 6,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918305-young.in",
+      "sha256": "43469347d6115c08429ab97f6f3614ebec08ef38b9c48bb25b9df5fdbefbfe5d",
+      "weight": 1.0,
+      "test_sha256": "43469347d6115c08429ab97f6f3614ebec08ef38b9c48bb25b9df5fdbefbfe5d",
+      "operation_count": 10000,
+      "placement_count": 5083,
+      "peak_live_pipe_length_m": 2282,
+      "minimum_trench_lower_bound_m": 2300,
+      "final_occupied_length_m": 1856,
+      "kpi_upper_bound_from_live_volume": 0.8069565217391305
+    },
+    {
+      "seed": 918306,
+      "family": "iid",
+      "open_case": 2,
+      "prefix_length": 18,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918306-iid.in",
+      "sha256": "47ff5329b4eca02ea28d8c427691cb331a6bc2decc257e4b77e30ac9b854670d",
+      "weight": 1.0,
+      "test_sha256": "47ff5329b4eca02ea28d8c427691cb331a6bc2decc257e4b77e30ac9b854670d",
+      "operation_count": 10000,
+      "placement_count": 5082,
+      "peak_live_pipe_length_m": 4122,
+      "minimum_trench_lower_bound_m": 4140,
+      "final_occupied_length_m": 3270,
+      "kpi_upper_bound_from_live_volume": 0.7898550724637681
+    },
+    {
+      "seed": 918307,
+      "family": "lifo",
+      "open_case": 3,
+      "prefix_length": 12,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918307-lifo.in",
+      "sha256": "90aba829ac5f900d43c925559530c3016348e177b28dc29c781bd75b3a607272",
+      "weight": 1.0,
+      "test_sha256": "90aba829ac5f900d43c925559530c3016348e177b28dc29c781bd75b3a607272",
+      "operation_count": 10000,
+      "placement_count": 5070,
+      "peak_live_pipe_length_m": 3977,
+      "minimum_trench_lower_bound_m": 3980,
+      "final_occupied_length_m": 2807,
+      "kpi_upper_bound_from_live_volume": 0.7052763819095478
+    },
+    {
+      "seed": 918308,
+      "family": "fifo",
+      "open_case": 10,
+      "prefix_length": 1000,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918308-fifo.in",
+      "sha256": "83fd09e4beef420254afee14650bdebf674591ead909cf25face449dcaea05a8",
+      "weight": 1.0,
+      "test_sha256": "83fd09e4beef420254afee14650bdebf674591ead909cf25face449dcaea05a8",
+      "operation_count": 14000,
+      "placement_count": 7095,
+      "peak_live_pipe_length_m": 4326,
+      "minimum_trench_lower_bound_m": 4340,
+      "final_occupied_length_m": 4056,
+      "kpi_upper_bound_from_live_volume": 0.9345622119815669
+    },
+    {
+      "seed": 918309,
+      "family": "walk",
+      "open_case": 14,
+      "prefix_length": 1000,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918309-walk.in",
+      "sha256": "e068a30387db3c33fd9935a473af53ed57916c987e600de16792f0d9db075993",
+      "weight": 1.0,
+      "test_sha256": "e068a30387db3c33fd9935a473af53ed57916c987e600de16792f0d9db075993",
+      "operation_count": 14000,
+      "placement_count": 7083,
+      "peak_live_pipe_length_m": 6339,
+      "minimum_trench_lower_bound_m": 6340,
+      "final_occupied_length_m": 5685,
+      "kpi_upper_bound_from_live_volume": 0.8966876971608833
+    },
+    {
+      "seed": 918310,
+      "family": "young",
+      "open_case": 12,
+      "prefix_length": 34,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918310-young.in",
+      "sha256": "5af87ffb81695cae227a00b116e303c0cd026c20f4eedd5b08d7208464319a05",
+      "weight": 1.0,
+      "test_sha256": "5af87ffb81695cae227a00b116e303c0cd026c20f4eedd5b08d7208464319a05",
+      "operation_count": 10000,
+      "placement_count": 5096,
+      "peak_live_pipe_length_m": 2388,
+      "minimum_trench_lower_bound_m": 2400,
+      "final_occupied_length_m": 2195,
+      "kpi_upper_bound_from_live_volume": 0.9145833333333333
+    },
+    {
+      "seed": 918311,
+      "family": "walk",
+      "open_case": 0,
+      "prefix_length": 0,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918311-walk.in",
+      "sha256": "3a39054073681ff71b9d295181a7e341592c69a78a62035389a4380ce969c59a",
+      "weight": 1.0,
+      "test_sha256": "3a39054073681ff71b9d295181a7e341592c69a78a62035389a4380ce969c59a",
+      "operation_count": 200000,
+      "placement_count": 100084,
+      "peak_live_pipe_length_m": 6800,
+      "minimum_trench_lower_bound_m": 6800,
+      "final_occupied_length_m": 4649,
+      "kpi_upper_bound_from_live_volume": 0.6836764705882353
+    },
+    {
+      "seed": 918312,
+      "family": "young",
+      "open_case": 2,
+      "prefix_length": 18,
+      "file": "prototypes/pipes_robust_round2_20261019/neutral/neutral-918312-young.in",
+      "sha256": "fc61146f75906ab0c17b9eb16a988078405bedac6ef28993ff27f7d09bc9b227",
+      "weight": 1.0,
+      "test_sha256": "fc61146f75906ab0c17b9eb16a988078405bedac6ef28993ff27f7d09bc9b227",
+      "operation_count": 200000,
+      "placement_count": 100067,
+      "peak_live_pipe_length_m": 2337,
+      "minimum_trench_lower_bound_m": 2340,
+      "final_occupied_length_m": 1579,
+      "kpi_upper_bound_from_live_volume": 0.6747863247863248
+    }
+  ]
+}

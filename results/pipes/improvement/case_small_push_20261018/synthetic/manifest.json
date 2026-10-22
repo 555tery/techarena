@@ -1,0 +1,170 @@
+{
+  "created_before_solver_pair_runs": true,
+  "count": 16,
+  "regimes": {
+    "case12_mixed_lifo": "lengths 5..39, churn 24%, most deletes sampled from newest PID quintile",
+    "case14_unit_lifo": "unit-dominant lengths, churn 2.7%, most deletes sampled from newest PID quintile"
+  },
+  "streams": [
+    {
+      "name": "case12_mixed_lifo_2026101801",
+      "regime": "case12_mixed_lifo",
+      "seed": 2026101801,
+      "operations": 1500,
+      "length_mode": "uniform5_39",
+      "length_parameter": null,
+      "deletion_rule": "newest-quintile-biased 87%, otherwise uniform",
+      "sha256": "325e8f9816edf7b70b45ca4ef42e8e1fef72c3161cba6d40c3a1448ad0794c56"
+    },
+    {
+      "name": "case12_mixed_lifo_2026101802",
+      "regime": "case12_mixed_lifo",
+      "seed": 2026101802,
+      "operations": 2500,
+      "length_mode": "bimodal5_39",
+      "length_parameter": null,
+      "deletion_rule": "newest-quintile-biased 87%, otherwise uniform",
+      "sha256": "fb41f0e9724cdccafa7a4455b31ceeb3ee015e999454c873da4b2185e1ff2c78"
+    },
+    {
+      "name": "case12_mixed_lifo_2026101803",
+      "regime": "case12_mixed_lifo",
+      "seed": 2026101803,
+      "operations": 3500,
+      "length_mode": "short_skew5_39",
+      "length_parameter": null,
+      "deletion_rule": "newest-quintile-biased 87%, otherwise uniform",
+      "sha256": "6c6b6d4118901f29ff594cabf497e5e83e61d517083b38c7d05ea6e110a438f1"
+    },
+    {
+      "name": "case12_mixed_lifo_2026101804",
+      "regime": "case12_mixed_lifo",
+      "seed": 2026101804,
+      "operations": 5000,
+      "length_mode": "phase_mix5_39",
+      "length_parameter": null,
+      "deletion_rule": "newest-quintile-biased 87%, otherwise uniform",
+      "sha256": "b8d78b57b7578742b28a27502ba39366d369b0efc7cfa28625b7ec8ab900b730"
+    },
+    {
+      "name": "case12_mixed_lifo_2026101805",
+      "regime": "case12_mixed_lifo",
+      "seed": 2026101805,
+      "operations": 2000,
+      "length_mode": "cyclic5_39",
+      "length_parameter": null,
+      "deletion_rule": "newest-quintile-biased 87%, otherwise uniform",
+      "sha256": "bfda494b28fd6c1b0c46cd2043dd63499f2d1166278431c87368a1a5d8e7084b"
+    },
+    {
+      "name": "case12_mixed_lifo_2026101806",
+      "regime": "case12_mixed_lifo",
+      "seed": 2026101806,
+      "operations": 4000,
+      "length_mode": "two_band5_39",
+      "length_parameter": null,
+      "deletion_rule": "newest-quintile-biased 87%, otherwise uniform",
+      "sha256": "0c04e52b4bf999cfffb9a0c3ff1a05014755303d0db9d4be2a5708617684b9b4"
+    },
+    {
+      "name": "case12_mixed_lifo_2026101807",
+      "regime": "case12_mixed_lifo",
+      "seed": 2026101807,
+      "operations": 3000,
+      "length_mode": "alternating_band5_39",
+      "length_parameter": null,
+      "deletion_rule": "newest-quintile-biased 87%, otherwise uniform",
+      "sha256": "c7180ddd101e3155cf807ff6c66c4d822da49b6ca09c97eedb46f603c49ab6e1"
+    },
+    {
+      "name": "case12_mixed_lifo_2026101808",
+      "regime": "case12_mixed_lifo",
+      "seed": 2026101808,
+      "operations": 5000,
+      "length_mode": "uniform_with_blocks5_39",
+      "length_parameter": null,
+      "deletion_rule": "newest-quintile-biased 87%, otherwise uniform",
+      "sha256": "02eee1b5395835b7658991a6e65e9e65a343a1e5b2f8a4fd9bf7069664b2105b"
+    },
+    {
+      "name": "case14_unit_lifo_2026101811",
+      "regime": "case14_unit_lifo",
+      "seed": 2026101811,
+      "operations": 10000,
+      "length_mode": "unit_iid",
+      "length_parameter": 0.95,
+      "deletion_rule": "newest-quintile-biased 98%, otherwise uniform",
+      "sha256": "ea453317867b2d7f4213de18f9eb3a3d8c3be3e38a58a8e21858773f602741f1"
+    },
+    {
+      "name": "case14_unit_lifo_2026101812",
+      "regime": "case14_unit_lifo",
+      "seed": 2026101812,
+      "operations": 12000,
+      "length_mode": "unit_iid",
+      "length_parameter": 0.93,
+      "deletion_rule": "newest-quintile-biased 98%, otherwise uniform",
+      "sha256": "af35c54260d91f0fc3fa6c528336a505519d63a3a6aa3a59bbd396f95b3dacb4"
+    },
+    {
+      "name": "case14_unit_lifo_2026101813",
+      "regime": "case14_unit_lifo",
+      "seed": 2026101813,
+      "operations": 15000,
+      "length_mode": "unit_iid",
+      "length_parameter": 0.92,
+      "deletion_rule": "newest-quintile-biased 98%, otherwise uniform",
+      "sha256": "5e094db836167b4e03a7935729280e67697069837727c7c4888938a9bf0450d7"
+    },
+    {
+      "name": "case14_unit_lifo_2026101814",
+      "regime": "case14_unit_lifo",
+      "seed": 2026101814,
+      "operations": 20000,
+      "length_mode": "unit_iid",
+      "length_parameter": 0.91,
+      "deletion_rule": "newest-quintile-biased 98%, otherwise uniform",
+      "sha256": "073715683b4c760dbd99e6cc31eec1ab7dbe4cbc05f4881553eb7ec50849bcc1"
+    },
+    {
+      "name": "case14_unit_lifo_2026101815",
+      "regime": "case14_unit_lifo",
+      "seed": 2026101815,
+      "operations": 10000,
+      "length_mode": "unit_bursts",
+      "length_parameter": 0.92,
+      "deletion_rule": "newest-quintile-biased 98%, otherwise uniform",
+      "sha256": "59671be9ce0423e9521c489b75ce6a201551e7e47873f2daef1d6e301e7c6717"
+    },
+    {
+      "name": "case14_unit_lifo_2026101816",
+      "regime": "case14_unit_lifo",
+      "seed": 2026101816,
+      "operations": 12000,
+      "length_mode": "unit_phase_shift",
+      "length_parameter": 0.94,
+      "deletion_rule": "newest-quintile-biased 98%, otherwise uniform",
+      "sha256": "cbb13368cf49057458f0efc22983c7de77cdb94f58ed7f5fbffea2aa3b1930e8"
+    },
+    {
+      "name": "case14_unit_lifo_2026101817",
+      "regime": "case14_unit_lifo",
+      "seed": 2026101817,
+      "operations": 15000,
+      "length_mode": "unit_periodic",
+      "length_parameter": 0.9,
+      "deletion_rule": "newest-quintile-biased 98%, otherwise uniform",
+      "sha256": "6c237b4238274d069af4a819bb781be4aa4deb4882f39612fbc72fdf60fbbbdb"
+    },
+    {
+      "name": "case14_unit_lifo_2026101818",
+      "regime": "case14_unit_lifo",
+      "seed": 2026101818,
+      "operations": 20000,
+      "length_mode": "unit_iid",
+      "length_parameter": 0.88,
+      "deletion_rule": "newest-quintile-biased 98%, otherwise uniform",
+      "sha256": "11687deea559f9f2e1fac25b15265bc252cde5db121fdcc67fde0dd78a76d384"
+    }
+  ]
+}

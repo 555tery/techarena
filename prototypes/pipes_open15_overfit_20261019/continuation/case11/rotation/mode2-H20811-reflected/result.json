@@ -1,0 +1,61 @@
+{
+  "variant": {
+    "name": "mode2-H20811-reflected.txt",
+    "H": 20811,
+    "reflected_before_rotation": true,
+    "cut_before_rotation": 450,
+    "pid1_after_rotation": 0,
+    "sha256": "af7872e581c2a67b05808280cdeac6e4dcab2174fb8975c297db9112d43625c4",
+    "case11_replay": {
+      "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+      "pipes": 6493,
+      "insertions": 6493,
+      "deletions": 3506,
+      "survivors": 2987,
+      "extent": 20811,
+      "trench_score": 20820,
+      "volume_lower_bound": 20759,
+      "valid": true
+    },
+    "case11_T": 20820
+  },
+  "pins_sha256": "05e929acab900a1b82c34669d334f47fe9d34407016c1b77f171bcb2a0337bef",
+  "pair": {
+    "11": {
+      "T": 20820,
+      "method": "rotated raw mode2",
+      "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20811-reflected.txt",
+      "sha256": "af7872e581c2a67b05808280cdeac6e4dcab2174fb8975c297db9112d43625c4",
+      "replay": {
+        "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+        "pipes": 6493,
+        "insertions": 6493,
+        "deletions": 3506,
+        "survivors": 2987,
+        "extent": 20811,
+        "trench_score": 20820,
+        "volume_lower_bound": 20759,
+        "valid": true
+      }
+    },
+    "15": {
+      "T": 419020,
+      "method": "conditioned_reverse",
+      "mode": 2,
+      "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20811-reflected/case15-conditioned_reverse-2.txt",
+      "sha256": "482bd9b04ecfbf4847e0f5b127c7382ce4e7bbfdd13b496c549ac76d63e26cef",
+      "replay": {
+        "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+        "pipes": 130255,
+        "insertions": 130255,
+        "deletions": 69745,
+        "survivors": 60510,
+        "extent": 419015,
+        "trench_score": 419020,
+        "volume_lower_bound": 418768,
+        "valid": true
+      }
+    },
+    "score": 10.97167734044457
+  }
+}

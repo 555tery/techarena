@@ -1,0 +1,155 @@
+{
+  "status": "completed",
+  "id": "trial_0009",
+  "source": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0009/candidate_0.cpp",
+  "sha256": "d23672f1bdb972403741413c165ef80dd32c28fb7267872d2ac161334a41541c",
+  "idea": "Совместить primal knapsack marginal gap cost с измеренным high-address tie для малого confident-LIFO режима. Knapsack выбирает размер щели, LIFO — её представителя среди щелей одинакового размера.",
+  "parent": "seed_baseline",
+  "weighted_score": 29.98328918467848,
+  "cases": [
+    {
+      "case": "1",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.09
+    },
+    {
+      "case": "2",
+      "T": 20,
+      "kpi": 1.0,
+      "weighted_score": 1.0
+    },
+    {
+      "case": "3",
+      "T": 20,
+      "kpi": 0.75,
+      "weighted_score": 0.75
+    },
+    {
+      "case": "4",
+      "T": 60,
+      "kpi": 0.6666666666666666,
+      "weighted_score": 0.666666666666667
+    },
+    {
+      "case": "5",
+      "T": 54440,
+      "kpi": 0.9338721528288023,
+      "weighted_score": 0.933872152828802
+    },
+    {
+      "case": "6",
+      "T": 20,
+      "kpi": 0.9,
+      "weighted_score": 0.9
+    },
+    {
+      "case": "7",
+      "T": 1700,
+      "kpi": 0.9864705882352941,
+      "weighted_score": 0.986470588235294
+    },
+    {
+      "case": "8",
+      "T": 4720,
+      "kpi": 0.9802966101694915,
+      "weighted_score": 0.980296610169492
+    },
+    {
+      "case": "9",
+      "T": 47700,
+      "kpi": 0.660377358490566,
+      "weighted_score": 0.660377358490566
+    },
+    {
+      "case": "10",
+      "T": 15380,
+      "kpi": 0.8,
+      "weighted_score": 0.8
+    },
+    {
+      "case": "11",
+      "T": 22580,
+      "kpi": 0.9017271922054916,
+      "weighted_score": 0.901727192205492
+    },
+    {
+      "case": "12",
+      "T": 10360,
+      "kpi": 0.9892857142857143,
+      "weighted_score": 3.957142857142857
+    },
+    {
+      "case": "13",
+      "T": 3280,
+      "kpi": 0.973170731707317,
+      "weighted_score": 3.892682926829268
+    },
+    {
+      "case": "14",
+      "T": 37840,
+      "kpi": 0.9964059196617336,
+      "weighted_score": 3.985623678646935
+    },
+    {
+      "case": "15",
+      "T": 441800,
+      "kpi": 0.9478429153463106,
+      "weighted_score": 9.478429153463106
+    }
+  ],
+  "fresh": {
+    "mean_delta": -0.000702831343021771,
+    "worst_delta": -0.020065649102288474,
+    "wins": 10,
+    "regressions": 12,
+    "ties": 8,
+    "worst_cases": [
+      {
+        "case": "dev_06_random_mixture",
+        "delta": -0.020065649102288474,
+        "baseline_T": 42240,
+        "candidate_T": 43140
+      },
+      {
+        "case": "dev_07_random_mixture",
+        "delta": -0.008490253230930556,
+        "baseline_T": 42420,
+        "candidate_T": 42800
+      },
+      {
+        "case": "dev_00_recent_growth_shift",
+        "delta": -0.006835560457223,
+        "baseline_T": 30480,
+        "candidate_T": 30700
+      },
+      {
+        "case": "dev_01_recent_growth_shift",
+        "delta": -0.00535592754376335,
+        "baseline_T": 94540,
+        "candidate_T": 95080
+      },
+      {
+        "case": "dev_20_frames",
+        "delta": -0.004950050784293558,
+        "baseline_T": 87420,
+        "candidate_T": 87860
+      },
+      {
+        "case": "dev_23_frames",
+        "delta": -0.004841698281407347,
+        "baseline_T": 90260,
+        "candidate_T": 90700
+      }
+    ]
+  },
+  "fresh_mean_kpi": 0.8080956651285823,
+  "max_cpu_s": 0.919316,
+  "max_rss_mib": 12.546875,
+  "public_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0009/evaluation_0/open15/harness/summary.json",
+  "fresh_summary": "/Users/555tery/techarena/research-campaigns/20261018T141843+0700-autonomous/proposals/trial_0009/evaluation_0/fresh_dev/harness/summary.json",
+  "finished_at": 1792311283.106576,
+  "balanced_gate": false,
+  "hypothesis": "Knapsack может сохранять остатки, полезные для наблюдаемого распределения длин, а узкий LIFO tie — улучшать пространственную группировку молодых труб без обхода подходящих внутренних щелей. DP восстановлен по описанию измеренного механизма: V(c)=sum_{l<=c}p(l)*(l+V(c-l)), стоимость размещения V(g)-V(g-L). Таблица точна до ёмкости 81, далее используется линейное продолжение. Exact-fit имеет абсолютный приоритет. Распределение берётся из существующей истории, таблица обновляется каждые 64 вставки после накопления 128. Измеренный исходник DP отсутствует, поэтому прежний score этому патчу не приписывается.",
+  "causality": "Наблюдаемые признаки для проверки: изменения выбранного размера щели, изменения адреса при сохранении размера под прежним LIFO gate, последующие расширения и объём непригодных остатков. Перебор размеров сохраняет одного представителя каждого размера и первый размер с slack>40; только LIFO gate заменяет минимальный адрес представителя на максимальный. Cohort-фильтры и enumeration rollout-кандидатов сохраняются. Rollout получает ту же оценку и LIFO-политику. Knapsack отключён в распознанных run/cohort режимах. Протокол, flush и расширение секциями не меняются. Компиляция и измерения не выполнялись; улучшение остаётся гипотезой."
+}

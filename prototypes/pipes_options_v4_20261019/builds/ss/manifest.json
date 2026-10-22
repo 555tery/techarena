@@ -1,0 +1,30 @@
+{
+  "label": "ss",
+  "spec": {
+    "directory": "controls",
+    "entry": "pipes_exact.cpp",
+    "defines": [
+      "POLICY_SS"
+    ]
+  },
+  "source_files_sha256": {
+    "pipes_exact.cpp": "5957ac938c5c2addc3dd7a1eaa06dbb8914a00ada576b666e319eee1be328836"
+  },
+  "compile_command": [
+    "/usr/bin/clang++",
+    "-std=c++20",
+    "-O2",
+    "-pipe",
+    "-Wall",
+    "-Wextra",
+    "-DPOLICY_SS",
+    "-I",
+    "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/builds/ss/source",
+    "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/builds/ss/source/pipes_exact.cpp",
+    "-o",
+    "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/builds/ss/solver"
+  ],
+  "returncode": 0,
+  "created_at": 1792345650.982898,
+  "binary_sha256": "a5b8c197a8194996cb125b815eca6c03a909c1228c87d42d40ee3aac8c7c73bb"
+}

@@ -1,0 +1,84 @@
+--- a/results/pipes/final/solution.cpp
++++ b/conditional_tie_candidate.cpp
+@@ -397,9 +397,17 @@
+         std::int64_t start = -1;
+         auto gap = bestFittingGap(length, highSide, sizeCohort);
+         if (gap != freeByStart.end()) {
+-            const std::int64_t selectedStart = chooseGapWithRollout(
+-                length, highSide, sizeCohort, gap);
+-            if (selectedStart >= 0) gap = freeByStart.find(selectedStart);
++            StartIter tiedGap = exactlyTwoBestEqualLengthGaps(length, sizeCohort);
++            if (tiedGap != freeByStart.end()) {
++                // Causal conditional tie-break: if exactly two equal-size
++                // gaps tie for the best local score, use the higher address.
++                // This preserves the existing endpoint policy.
++                gap = tiedGap;
++            } else {
++                const std::int64_t selectedStart = chooseGapWithRollout(
++                    length, highSide, sizeCohort, gap);
++                if (selectedStart >= 0) gap = freeByStart.find(selectedStart);
++            }
+             start = consumeAtSide(gap, length, highSide);
+         }
+ 
+@@ -744,6 +752,60 @@
+         return bestFittingGapFromSet(freeBySize, length, highSide);
+     }
+ 
++    StartIter exactlyTwoBestEqualLengthGaps(int length, int sizeCohort) {
++        const std::set<std::pair<std::int64_t, std::int64_t>>* index = &freeBySize;
++        if (parityCohortMode) {
++            const auto& preferred = freeBySizeCohort[static_cast<std::size_t>(sizeCohort)];
++            if (preferred.lower_bound({length, 0}) != preferred.end()) {
++                index = &preferred;
++            } else {
++                index = &freeBySizeShared;
++            }
++        }
++
++        auto it = index->lower_bound({length, 0});
++        if (it == index->end() || recentLengths.empty()) return freeByStart.end();
++
++        const std::int64_t historySize = static_cast<std::int64_t>(recentLengths.size());
++        std::int64_t bestScore = std::numeric_limits<std::int64_t>::max();
++        std::int64_t bestGapLength = -1;
++        std::int64_t highestAddress = -1;
++        std::size_t bestCount = 0;
++        bool mixedBestLengths = false;
++        for (; it != index->end(); ++it) {
++            const std::int64_t gapLength = it->first;
++            const std::int64_t slack = gapLength - length;
++            if (slack > 40) break;
++
++            std::int64_t score = slack * historySize;
++            if (slack > 0) {
++                int misses = 0;
++                for (int request = static_cast<int>(slack) + 1; request <= 40; ++request) {
++                    misses += recentFrequency[static_cast<std::size_t>(request)];
++                }
++                score += kUnfitPenaltyScale * misses;
++            }
++
++            if (score < bestScore) {
++                bestScore = score;
++                bestGapLength = gapLength;
++                highestAddress = it->second;
++                bestCount = 1;
++                mixedBestLengths = false;
++            } else if (score == bestScore) {
++                if (gapLength != bestGapLength) {
++                    mixedBestLengths = true;
++                } else {
++                    ++bestCount;
++                    highestAddress = std::max(highestAddress, it->second);
++                }
++            }
++        }
++
++        if (bestCount != 2 || mixedBestLengths) return freeByStart.end();
++        return freeByStart.find(highestAddress);
++    }
++
+     StartIter bestFittingGapFromSet(
+         const std::set<std::pair<std::int64_t, std::int64_t>>& gaps,
+         int length,

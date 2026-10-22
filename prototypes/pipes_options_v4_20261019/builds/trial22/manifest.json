@@ -1,0 +1,27 @@
+{
+  "label": "trial22",
+  "spec": {
+    "directory": "incumbent",
+    "entry": "solution.cpp",
+    "defines": []
+  },
+  "source_files_sha256": {
+    "solution.cpp": "988927c690b4034f3a26c839ee00bc2c0d0956e6ea9f5b6369c9d45e961242e4"
+  },
+  "compile_command": [
+    "/usr/bin/clang++",
+    "-std=c++20",
+    "-O2",
+    "-pipe",
+    "-Wall",
+    "-Wextra",
+    "-I",
+    "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/builds/trial22/source",
+    "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/builds/trial22/source/solution.cpp",
+    "-o",
+    "/Users/555tery/techarena/prototypes/pipes_options_v4_20261019/builds/trial22/solver"
+  ],
+  "returncode": 0,
+  "created_at": 1792345652.623214,
+  "binary_sha256": "a3918d0d89f9901694a21baa0137d26405685d090e2f5b645882aae2eda72bd6"
+}

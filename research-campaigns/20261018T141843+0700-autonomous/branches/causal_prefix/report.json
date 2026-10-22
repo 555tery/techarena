@@ -1,0 +1,25 @@
+{
+  "status": "no-go",
+  "scope": "Only Open15 cases11 and15; no fullOpen15, no fresh release claim",
+  "candidate_sha256": "6a2e6efa4f236febf1c4af623e9d32a3bb060ceb00a4547dcf7f83c2259bf243",
+  "baseline_sha256": "c70ade5c1ecd48c8f74ed99582f974467bd2b1791a214d79ddf6e5df8729af29",
+  "idea": "Rank-only observed LIFO tail-stack for all sizes, bypassing available interior holes; no lifetime labels or future input",
+  "deltas": [
+    {
+      "case": "11",
+      "baseline_T": 22400,
+      "candidate_T": 29260,
+      "delta_T": 6860,
+      "delta_score": -0.21310855263157902
+    },
+    {
+      "case": "15",
+      "baseline_T": 438620,
+      "candidate_T": 873760,
+      "delta_T": 435140,
+      "delta_score": -4.75456180805072
+    }
+  ],
+  "decision": "Do not promote: large tail expansion regression; PID-order LIFO alone does not justify spatial stack policy",
+  "verified_at": 1792309210.12504
+}

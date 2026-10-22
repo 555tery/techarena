@@ -1,0 +1,35 @@
+{
+  "design_sha256": "bf309785ff99721d39b6a8c8cf75b522490cd4779f76d476ade816ef41ac0e61",
+  "cases": [
+    {
+      "name": "large_sealed_00",
+      "sha256": "ac7b5c72b224d46633de0e41339fb21af3b2f0508f5a46102cd0346a9162879c",
+      "operations": 60000
+    },
+    {
+      "name": "large_sealed_01",
+      "sha256": "69ca410ac1fac156754ff2b109ae782bfa0d39d266a5f97e08c897676025c1b2",
+      "operations": 60000
+    },
+    {
+      "name": "large_sealed_02",
+      "sha256": "1340522c85e3a553a7f2c1b2ce5d0b5cfa42bb4836fc5d5f93a5f08430f6752e",
+      "operations": 60000
+    },
+    {
+      "name": "large_sealed_03",
+      "sha256": "b4832a0606c5bf7c56b38a4d284e9aba94a6c89c967fd4208593af9695949b33",
+      "operations": 60000
+    },
+    {
+      "name": "large_sealed_04",
+      "sha256": "261f50e7f5abae706b7b2fa35e01b349b29a649ac31e70e11c2c523fe9942975",
+      "operations": 60000
+    },
+    {
+      "name": "large_sealed_05",
+      "sha256": "0faeb3f978372f69f746eb3f54fb802d491cc01a8bba222896ea470a113e5aa0",
+      "operations": 60000
+    }
+  ]
+}

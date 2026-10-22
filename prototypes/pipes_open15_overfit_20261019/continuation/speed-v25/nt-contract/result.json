@@ -1,0 +1,60 @@
+{
+  "all_passed": true,
+  "scenarios": [
+    {
+      "scenario": 1,
+      "expected_code": 0,
+      "actual_code": 0
+    },
+    {
+      "scenario": 2,
+      "expected_code": 0,
+      "actual_code": 0
+    },
+    {
+      "scenario": 3,
+      "expected_code": 0,
+      "actual_code": 0
+    },
+    {
+      "scenario": 4,
+      "expected_code": 0,
+      "actual_code": 0
+    },
+    {
+      "scenario": 5,
+      "expected_code": 2,
+      "actual_code": 2
+    },
+    {
+      "scenario": 6,
+      "expected_code": 2,
+      "actual_code": 2
+    },
+    {
+      "scenario": 10,
+      "expected_code": 0,
+      "actual_code": 0
+    },
+    {
+      "scenario": 11,
+      "expected_code": 0,
+      "actual_code": 0
+    },
+    {
+      "scenario": 12,
+      "expected_code": 0,
+      "actual_code": 0
+    },
+    {
+      "scenario": 13,
+      "expected_code": 2,
+      "actual_code": 2
+    },
+    {
+      "scenario": 14,
+      "expected_code": 2,
+      "actual_code": 2
+    }
+  ]
+}

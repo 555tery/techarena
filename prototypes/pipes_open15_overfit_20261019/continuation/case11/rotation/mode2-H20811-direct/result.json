@@ -1,0 +1,62 @@
+{
+  "variant": {
+    "name": "mode2-H20811-direct.txt",
+    "H": 20811,
+    "reflected_before_rotation": false,
+    "cut_before_rotation": 20358,
+    "pid1_after_rotation": 0,
+    "sha256": "e4c914dff3d0f2bc2e761d79db029998cbd3b87b21aac5683789d91419289eb1",
+    "case11_replay": {
+      "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+      "pipes": 6493,
+      "insertions": 6493,
+      "deletions": 3506,
+      "survivors": 2987,
+      "extent": 20811,
+      "trench_score": 20820,
+      "volume_lower_bound": 20759,
+      "valid": true
+    },
+    "case11_T": 20820,
+    "canonical_copy_sha256": "e4c914dff3d0f2bc2e761d79db029998cbd3b87b21aac5683789d91419289eb1"
+  },
+  "pins_sha256": "188a4aa7395b1a24f4fa1fd90a773f913aa51f7a2f59e76c6037ac61a4d4a2f2",
+  "pair": {
+    "11": {
+      "T": 20820,
+      "method": "rotated raw mode2",
+      "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20811-direct.txt",
+      "sha256": "e4c914dff3d0f2bc2e761d79db029998cbd3b87b21aac5683789d91419289eb1",
+      "replay": {
+        "input_sha256": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+        "pipes": 6493,
+        "insertions": 6493,
+        "deletions": 3506,
+        "survivors": 2987,
+        "extent": 20811,
+        "trench_score": 20820,
+        "volume_lower_bound": 20759,
+        "valid": true
+      }
+    },
+    "15": {
+      "T": 419060,
+      "method": "conditioned_reverse",
+      "mode": 1,
+      "positions": "/Users/555tery/techarena/prototypes/pipes_open15_overfit_20261019/continuation/case11/rotation/mode2-H20811-direct/case15-conditioned_reverse-1.txt",
+      "sha256": "53422ea5c71940c5977365d29cfe857bbcbe016fad769a64196e2f856e6f760c",
+      "replay": {
+        "input_sha256": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+        "pipes": 130255,
+        "insertions": 130255,
+        "deletions": 69745,
+        "survivors": 60510,
+        "extent": 419059,
+        "trench_score": 419060,
+        "volume_lower_bound": 418768,
+        "valid": true
+      }
+    },
+    "score": 10.970723422299201
+  }
+}

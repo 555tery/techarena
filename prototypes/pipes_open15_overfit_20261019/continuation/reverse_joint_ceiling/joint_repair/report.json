@@ -1,0 +1,85 @@
+{
+  "scope": "bounded exact audit of four released endpoints; no platform or native harness",
+  "case11": {
+    "commands": 9999,
+    "allocations": 6493,
+    "H": 20799,
+    "T": 20800,
+    "peak_live_volume": 20759,
+    "peak_at_command": 9818
+  },
+  "released_pids": [
+    6135,
+    6339,
+    6213,
+    6214
+  ],
+  "domain_starts_against_fixed_background": {
+    "6135": [
+      16495,
+      16496,
+      18480,
+      18481,
+      18482,
+      18483
+    ],
+    "6339": [
+      16495,
+      16496,
+      16497,
+      18479,
+      18480,
+      18481,
+      18482,
+      18483,
+      18484,
+      18485,
+      18486,
+      18487,
+      18488,
+      18489,
+      18490
+    ],
+    "6213": [
+      18479,
+      18480,
+      18481,
+      18482
+    ],
+    "6214": [
+      18479,
+      18480,
+      18481,
+      18482,
+      18483,
+      18484
+    ]
+  },
+  "valid_joint_assignments_in_four_pid_neighborhood": 0,
+  "example_assignments": [],
+  "remaining_conflict_pairs": [
+    [
+      6135,
+      6339
+    ],
+    [
+      6213,
+      6214
+    ]
+  ],
+  "special_prefix_pids": 66,
+  "all_match_source": true,
+  "pid1_address": 0,
+  "repair_log_tail": "BEGIN movables=4 min_domain=4 max_domain=15\nMIN_BEST 2 step=0 6135:16495/6339:16497 6213:18482/6214:18481\nMIN_END best=2 steps=2035200\nEND ok=0 timeout=0 nodes=0\n",
+  "sha256": {
+    "input11": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+    "prefix_partial_source": "63cc0e9f79c6f6c4ab0462a6c70bc3ebda86f019e8ee4a6fc38733c9c3787e0d",
+    "base_invalid_plan": "dce7c40a5086483b27fa4cabe8c957a13ab706e91790cf0cf065e95bf305d88b",
+    "solver_source": "483970c209e3acf338a421dc71475aa22a1bc16e1f1e6f21610f0f7d6b83b2f7",
+    "solver_binary": "9c76171c67ec4a5fd6a7d1f46e09ab8a4fd7d073b8c92c607bb33181ef9ebbb9",
+    "partial_four": "6c98ba80155f9090f21763e9fabb6c8bb9122719092d26de21363958f6c07759",
+    "initial_invalid": "dce7c40a5086483b27fa4cabe8c957a13ab706e91790cf0cf065e95bf305d88b",
+    "attempted_invalid_best": "dce7c40a5086483b27fa4cabe8c957a13ab706e91790cf0cf065e95bf305d88b",
+    "repair_log": "c8d3553d6e8265730175bad72ec88f9b56dff1489d614bc16e68c1a6ea68227a"
+  }
+}

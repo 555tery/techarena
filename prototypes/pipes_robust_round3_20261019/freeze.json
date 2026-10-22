@@ -1,0 +1,12 @@
+{
+  "candidates": [
+    "proposal",
+    "plan-only",
+    "final"
+  ],
+  "hard_gate": "all15 volume ceilings, valid answers, CPU<5,RSS<256",
+  "runtime_gate": "no loss on old55",
+  "joint_plan_gate": "mean gain on diagnostics >=0; no individual loss >.02",
+  "fresh_gate": "holdout mean>=0 and no individual loss>.03; new targeted tests reported separately",
+  "scope": "bounded round3; finite tests, no hidden-distribution claim"
+}

@@ -1,0 +1,68 @@
+{
+  "experiment": "case15_wilderness_polarity",
+  "hypothesis": "Vary the side on which a newly extended wilderness gap is consumed: alternate left/right across no-fit expansions, or always allocate from the new right edge. This changes whether post-growth slack remains at the expandable tail or is left as an interior gap.",
+  "status": "no-go: both tested variants worsen case 15",
+  "open15_run": false,
+  "local_only": true,
+  "site_used": false,
+  "docker_used": false,
+  "files_sha256": {
+    "champion_source": "43bfbdadbae18ac180d1e59b6631342cfe1bef99190a449838f0470d6f220200",
+    "champion_binary": "e4b79d8eb55a1fdc03a8c62505142ee615304401e821895bf6ab7f3712e54049",
+    "alternating_source": "eec009827125e1b7f9b8b2305bc5d1943181f9e9ee877d69fcdc7f90cc01e75d",
+    "alternating_binary": "b027085d9ad733a74b7b44327eedc4fce51b57c7797593c85274d70b7edb6386",
+    "right_source": "9ab6a298e9ec3da5e38c52bca4af07eadcb7daf01b4c74c2babd62494864075b",
+    "right_binary": "5b61430a16f47b690dd8b1334e8826725be132f4018942a7cc24484c157d23a6",
+    "input": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+    "interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+    "frozen_final": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+    "canonical": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+  },
+  "runs": {
+    "champion_case15": {
+      "case": "15",
+      "status": "ok",
+      "judge_commands_seen_including_final_zero": 200001,
+      "trench_length_m": 438920,
+      "occupied_length_m": 418757,
+      "minimum_trench_lower_bound_m": 418780,
+      "kpi": 0.9540622436890549,
+      "weighted_score": 9.54062243689055,
+      "solver_cpu_total_s": 2.096067,
+      "solver_peak_rss_mb": 6.28125,
+      "solver_cpu_limit_exceeded": false,
+      "solver_memory_limit_exceeded": false
+    },
+    "candidate_case15": {
+      "case": "15",
+      "status": "ok",
+      "judge_commands_seen_including_final_zero": 200001,
+      "trench_length_m": 439040,
+      "occupied_length_m": 418757,
+      "minimum_trench_lower_bound_m": 418780,
+      "kpi": 0.9538014759475218,
+      "weighted_score": 9.53801475947522,
+      "solver_cpu_total_s": 2.0940149999999997,
+      "solver_peak_rss_mb": 7.15625,
+      "solver_cpu_limit_exceeded": false,
+      "solver_memory_limit_exceeded": false
+    },
+    "right_edge_case15": {
+      "case": "15",
+      "status": "ok",
+      "judge_commands_seen_including_final_zero": 200001,
+      "trench_length_m": 439500,
+      "occupied_length_m": 418757,
+      "minimum_trench_lower_bound_m": 418780,
+      "kpi": 0.9528031854379977,
+      "weighted_score": 9.528031854379977,
+      "solver_cpu_total_s": 1.6422649999999999,
+      "solver_peak_rss_mb": 7.5,
+      "solver_cpu_limit_exceeded": false,
+      "solver_memory_limit_exceeded": false
+    }
+  },
+  "champion_open15_score": 29.932085817214315,
+  "frozen_final_sha256_expected": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "canonical_sha256_expected": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8"
+}

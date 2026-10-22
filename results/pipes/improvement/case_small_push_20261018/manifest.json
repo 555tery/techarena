@@ -1,0 +1,265 @@
+{
+  "experiment": "case 12/14 LIFO neighbor ties and unit-profile expansion gate",
+  "date": "2026-10-17",
+  "baseline": {
+    "current_local_champion_score": 30.044966194731057,
+    "current_local_champion_source_sha256": "a280146cdc55c0fe8fbb6d4b7fda158f4e2189fa3463ce9d046f02a070a3571a",
+    "current_local_champion_binary_sha256": "af9110515fb0d814956f00925f2e4126f9d7abdcd5d1d08806e3fe6ee50f292c",
+    "a_plus_b_score": 30.04308919953782,
+    "a_plus_b_source_sha256": "4c3a3590eb1ad4251640af32f10f7e5b506b8cfac8ee6b9d0edaa6d4e231caae"
+  },
+  "candidate": {
+    "source": "results/pipes/improvement/case_small_push_20261018/source/unit_profile_suppress_scale_offset.cpp",
+    "source_sha256": "f10ced1644f3e18771f2fec3c1b28a85ff6e9ebe8855006c346f7cc5b58f9440",
+    "binary": "results/pipes/improvement/case_small_push_20261018/bin/unit_profile_suppress_scale_offset",
+    "binary_sha256": "085c0a56bed8ecefeff2310fea89b384a5305b913ba7058674a3fb372ae083a5",
+    "build": "clang++ -O2 -std=c++20 -pipe -Wall -Wextra -Wconversion -Wshadow -Werror -pedantic -DMC_ROLLOUT_DIAGNOSTICS source/unit_profile_suppress_scale_offset.cpp -o bin/unit_profile_suppress_scale_offset",
+    "policy": "Suppress the incumbent expansion offset when at least 85% of the latest up-to-2048 placement lengths are exactly 1m; all other incumbent offset conditions remain unchanged.",
+    "open15": {
+      "weighted_score_sum": 30.047071648338374,
+      "cases_ok": 15,
+      "delta_vs_current_champion": 0.002105453607317287,
+      "changed_cases": [
+        {
+          "case": "14",
+          "base_trench_m": "37860",
+          "candidate_trench_m": "37840",
+          "delta_score": 0.0021054536073159547
+        }
+      ],
+      "max_solver_cpu_s": 2.178341,
+      "max_solver_rss_mib": 8.265625
+    }
+  },
+  "tested_variants": {
+    "lifo_neighbor_tie": {
+      "decision": "no-go",
+      "case12_delta_trench_m": 20,
+      "case14_delta_trench_m": 0,
+      "fresh_synthetic_count": 16,
+      "open15_run": false
+    },
+    "small_mixed_lifo_expansion_offset": {
+      "decision": "no-go",
+      "case12_delta_trench_m": 240,
+      "fresh_synthetic_count": 0,
+      "open15_run": false
+    },
+    "unit_profile_suppress_scale_offset": {
+      "decision": "local_gain",
+      "case14_delta_trench_m": -20,
+      "fresh_synthetic_count": 8,
+      "open15_run": true
+    }
+  },
+  "synthetic_manifests": {
+    "neighbor_tie": "results/pipes/improvement/case_small_push_20261018/synthetic/manifest.json",
+    "unit_profile_suppression": "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/manifest.json"
+  },
+  "hashes": {
+    "sources": {
+      "source/base_ab.cpp": "4c3a3590eb1ad4251640af32f10f7e5b506b8cfac8ee6b9d0edaa6d4e231caae",
+      "source/current_champion.cpp": "a280146cdc55c0fe8fbb6d4b7fda158f4e2189fa3463ce9d046f02a070a3571a",
+      "source/lifo_neighbor_tie.cpp": "fbb04f863696d1f585a18e4c7a2427b736ff1e1c816c6e89c43d5361b3a8781a",
+      "source/small_mixed_lifo_expansion_offset.cpp": "df99eca0632053f451b9641c8d1e37c7adbd09cb192a89446ccf7a27573130af",
+      "source/unit_profile_suppress_scale_offset.cpp": "f10ced1644f3e18771f2fec3c1b28a85ff6e9ebe8855006c346f7cc5b58f9440"
+    },
+    "binaries": {
+      "bin/base_ab": "ca885fb8869514ab494502e2ee517cfb4d716d9d55c9d291aa9c1b4126544838",
+      "bin/current_champion": "af9110515fb0d814956f00925f2e4126f9d7abdcd5d1d08806e3fe6ee50f292c",
+      "bin/lifo_neighbor_tie": "627ae52ebfdec70be710e8e543a54f13d97b0461cc983a70eb5b0efd535733fc",
+      "bin/small_mixed_lifo_expansion_offset": "e193c8c57ce662bbba1da2e7b2f01715bb56e3526724734693e037370c7327f1",
+      "bin/unit_profile_suppress_scale_offset": "085c0a56bed8ecefeff2310fea89b384a5305b913ba7058674a3fb372ae083a5"
+    },
+    "open_inputs": {
+      "data/pipes/open/1.in": "5adc57a6e6a775447546abd7b72c3c44429d37f5b34d0e6c18db2c13ee72456d",
+      "data/pipes/open/10.in": "f688387c27ee3a3d13606d4aa113a5e171b1559a4249338fd1d667662300676b",
+      "data/pipes/open/11.in": "a009dd0a63400dad0c21a45e85aad7f6da2d285d7e59a9d6b3bda6b6c3224c2c",
+      "data/pipes/open/12.in": "aca29a242ae9c3856b2e6f66810c677da2f85f7d657938603114c806000c7984",
+      "data/pipes/open/13.in": "e0a28d5058aafe94c82328adbc1c2b28b235ddccb3ea7d2a141f3299115b1eb2",
+      "data/pipes/open/14.in": "a0e0b1189c5d2d7ab2abcb5ff4106104e02ab3a6f3af78832219c3a4696ba42d",
+      "data/pipes/open/15.in": "0b37a067bbe01429414ba20096e0a30fc9c424f7f364d101f71c32b85fe3a353",
+      "data/pipes/open/2.in": "4fb2e25de202250e01a99148d1bc88ac1d338d634c95ff068a12d522e8fba923",
+      "data/pipes/open/3.in": "1b0de1bcfab3da1d9fdf97f569b454d7106901afd082a3ada280e9d010d7a494",
+      "data/pipes/open/4.in": "1303e172ff34edf4a6ed6265247aa1e6de8ca18e73f7acd9e97a5c9f86b5d03f",
+      "data/pipes/open/5.in": "bae469c3ed43bba21ab4a9cd9ecef4c53bb2f99fbd9f6cc246f9c3e082f1b32b",
+      "data/pipes/open/6.in": "30303402ee57aa1185200d4cd76414d5c649a354250a33ea899f90f04d23b7dd",
+      "data/pipes/open/7.in": "96d010a3353f97e6b35434d7ed4ae7ffdff2378a94dec6e52f81e148d6d29ebd",
+      "data/pipes/open/8.in": "8cca22aa354b6bf9eab4072bfd6b839257d27d061f090df8f0195a361ba3aaf7",
+      "data/pipes/open/9.in": "cfb711efa3a9ccccc17e7170fc7c2ea19c12ed45b789da3a4b2c80750d7ca128"
+    },
+    "synthetic_inputs": {
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case12_mixed_lifo_2026101801.in": "325e8f9816edf7b70b45ca4ef42e8e1fef72c3161cba6d40c3a1448ad0794c56",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case12_mixed_lifo_2026101802.in": "fb41f0e9724cdccafa7a4455b31ceeb3ee015e999454c873da4b2185e1ff2c78",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case12_mixed_lifo_2026101803.in": "6c6b6d4118901f29ff594cabf497e5e83e61d517083b38c7d05ea6e110a438f1",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case12_mixed_lifo_2026101804.in": "b8d78b57b7578742b28a27502ba39366d369b0efc7cfa28625b7ec8ab900b730",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case12_mixed_lifo_2026101805.in": "bfda494b28fd6c1b0c46cd2043dd63499f2d1166278431c87368a1a5d8e7084b",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case12_mixed_lifo_2026101806.in": "0c04e52b4bf999cfffb9a0c3ff1a05014755303d0db9d4be2a5708617684b9b4",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case12_mixed_lifo_2026101807.in": "c7180ddd101e3155cf807ff6c66c4d822da49b6ca09c97eedb46f603c49ab6e1",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case12_mixed_lifo_2026101808.in": "02eee1b5395835b7658991a6e65e9e65a343a1e5b2f8a4fd9bf7069664b2105b",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case14_unit_lifo_2026101811.in": "ea453317867b2d7f4213de18f9eb3a3d8c3be3e38a58a8e21858773f602741f1",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case14_unit_lifo_2026101812.in": "af35c54260d91f0fc3fa6c528336a505519d63a3a6aa3a59bbd396f95b3dacb4",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case14_unit_lifo_2026101813.in": "5e094db836167b4e03a7935729280e67697069837727c7c4888938a9bf0450d7",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case14_unit_lifo_2026101814.in": "073715683b4c760dbd99e6cc31eec1ab7dbe4cbc05f4881553eb7ec50849bcc1",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case14_unit_lifo_2026101815.in": "59671be9ce0423e9521c489b75ce6a201551e7e47873f2daef1d6e301e7c6717",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case14_unit_lifo_2026101816.in": "cbb13368cf49057458f0efc22983c7de77cdb94f58ed7f5fbffea2aa3b1930e8",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case14_unit_lifo_2026101817.in": "6c237b4238274d069af4a819bb781be4aa4deb4882f39612fbc72fdf60fbbbdb",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/case14_unit_lifo_2026101818.in": "11687deea559f9f2e1fac25b15265bc252cde5db121fdcc67fde0dd78a76d384",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/unit_scale_2026101821.in": "8e5b4f5f9babd365158b5833061e758527b065851f41f75fae9486ba83f7f84f",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/unit_scale_2026101822.in": "e2247e75ef60578cda60c6102d117c74512d52c66ea5309f097231ef37405b3d",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/unit_scale_2026101823.in": "51f60792c47f15d3d4836cd64a97d462e567370b606952e8679a658f947ab05e",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/unit_scale_2026101824.in": "904291a612757e12472322fb59e68f06d317b8534e027097fc08718179d0be1b",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/unit_scale_2026101825.in": "26301bbf972dc0155b0d51a4b4073ffd558ecad6074b209e2cb201cec450ac2b",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/unit_scale_2026101826.in": "97373c2f15e1759cfea8acc81d0ce21b95061573b2637c59b2eb188ade5d3909",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/unit_scale_2026101827.in": "b1589dd5ced62fcc5e55c3c66d86447ce69549de913d20ba6a6b552cf1805c42",
+      "results/pipes/improvement/case_small_push_20261018/synthetic/unit_profile_v2/unit_scale_2026101828.in": "591630758499cee0420d42a390905a5b298df3a368eb42e4d07bed2637bd7be8"
+    },
+    "tools": {
+      "tools/interactor": "47994e837450bc4b0b683736194c2dce8023dd30f257c316c1e8e69245d15b9a",
+      "tools/pipes_harness.py": "65aaa7043ffad3f0894dbdd5990b31bd713328d8546511b143ef57dca31dd20d"
+    },
+    "run_artifacts": {
+      "results/pipes/improvement/case_small_push_20261018/runs/base_case12": {
+        "results/pipes/improvement/case_small_push_20261018/runs/base_case12/cases.csv": "985f530afb797c289b08561114503ed5948f0917be1463a55d80127f99543340",
+        "results/pipes/improvement/case_small_push_20261018/runs/base_case12/summary.json": "be953ce6a32d41e2a3bb39156ca8cc26864aa9a42b0b9444f2b2038aed94006b",
+        "results/pipes/improvement/case_small_push_20261018/runs/base_case12/runs/12/judge_output.txt": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/candidate_case12": {
+        "results/pipes/improvement/case_small_push_20261018/runs/candidate_case12/cases.csv": "9aa71afc92bbbba2ce0a441f22bea31d0a74da0a6137948b350e4b0605a427e0",
+        "results/pipes/improvement/case_small_push_20261018/runs/candidate_case12/summary.json": "25d7c68d9127d9a10545f9d1b623347fecf227b1cef72f57201c028a58d8c56d",
+        "results/pipes/improvement/case_small_push_20261018/runs/candidate_case12/runs/12/judge_output.txt": "19fbb688d4abf916f887c285f77f9ed8090c041a618bec757954e1d654663cf7"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/base_case14": {
+        "results/pipes/improvement/case_small_push_20261018/runs/base_case14/cases.csv": "2095e60a487d1c9195f1f2df328970edd7c95fa88504e35d0899855f0b5e2344",
+        "results/pipes/improvement/case_small_push_20261018/runs/base_case14/summary.json": "e915115decc5afc2ccf14e4585812646ccf11f206bfedf2b53b972636dd75256",
+        "results/pipes/improvement/case_small_push_20261018/runs/base_case14/runs/14/judge_output.txt": "480a58f0a756aa1d873a9090fa45d36c9caad916c8df598a8d0b4ce6311d64fb"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/candidate_case14": {
+        "results/pipes/improvement/case_small_push_20261018/runs/candidate_case14/cases.csv": "d4329bb52d1c51bbe89dddd30d2ce8d9202739f36a5d55aee94955461beb8d18",
+        "results/pipes/improvement/case_small_push_20261018/runs/candidate_case14/summary.json": "ce7558aef1f9806a083c7954669111dab138dfe906eebcc1b61c59e5e2fb21a9",
+        "results/pipes/improvement/case_small_push_20261018/runs/candidate_case14/runs/14/judge_output.txt": "27a2da9bb57079038d873e632a43ccab35fdd31bc7d9116c0d80c2860999e7b7"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/expansion_candidate_case12": {
+        "results/pipes/improvement/case_small_push_20261018/runs/expansion_candidate_case12/cases.csv": "6ea9e2c6925776d98a5c6cb11bc783693c783ff240e12fe912765f5963a75102",
+        "results/pipes/improvement/case_small_push_20261018/runs/expansion_candidate_case12/summary.json": "9295f39aeeb84767433e6bd8598a49cf5e1bddf9c62eb6dd547b157f710e0e16",
+        "results/pipes/improvement/case_small_push_20261018/runs/expansion_candidate_case12/runs/12/judge_output.txt": "a56d9eb19573508ebaf8b8aae6cc1521be82e637becd30289449ffbb3c0c92fc"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/unit_suppression_case14": {
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppression_case14/cases.csv": "858d997824208414387ed50dc9d7271dd46e363416d95ffe3f6ae3112cb69022",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppression_case14/summary.json": "229918e5fa5d2f5e6f8189e97b898432d409ebdbffc11742bfe00cb65d4cda19",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppression_case14/runs/14/judge_output.txt": "424ddf9a2ef99d504e7cacb5bd1c86cbe1284976c4f833e1556ea1017ed6aba6"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base": {
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/cases.csv": "56d7404817136c482df5901d4da11a7633bbea48c24eebc3b4a9daa31879b9c5",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/summary.json": "5d60714fae385f32c683842661518e00fb9aff703b5b1c9200c53aef357d78ed",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case12_mixed_lifo_2026101801/judge_output.txt": "40f5745c6bed42b8fd0e00416bd76ac855f30fee856f70f064e5ffe8ede99a97",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case12_mixed_lifo_2026101802/judge_output.txt": "59b744fe7df41237b1aa57d97be6bb46f7166131155e215b4ed10f3af0d5e9c7",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case12_mixed_lifo_2026101803/judge_output.txt": "ebaa14266434193514903820e5997c739e7376ff17e7322a66d137c551bfb0bb",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case12_mixed_lifo_2026101804/judge_output.txt": "f57e26686a24fed5429dfa685cddf7bb7994235bdf9058aa0f3cc3c7d00b32c3",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case12_mixed_lifo_2026101805/judge_output.txt": "5ecc0f52283a342758722747ba2cf3afaf6fd8d2baa45dfe96f2ba9be0b8b5a7",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case12_mixed_lifo_2026101806/judge_output.txt": "f015fef278707465844ab8951b3099ca6ca0f920c36d6d86a422d52c32c59b46",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case12_mixed_lifo_2026101807/judge_output.txt": "ff88cadfc726ef8b1503af925f0e54d6b75ec4622eda71366a71c3d23e880e20",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case12_mixed_lifo_2026101808/judge_output.txt": "0a5a2239688d1b81185c4f37cc791971d0800dce64c0ff4058f1f9a45916954c",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case14_unit_lifo_2026101811/judge_output.txt": "7b502f505c9466716da00d4d2fadfb8af9a10aa4079fb526b13e077b825bd4bd",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case14_unit_lifo_2026101812/judge_output.txt": "7b43469c58bccb73614611f4b3128fbfdc736237f3f7660c8ed92063df729c09",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case14_unit_lifo_2026101813/judge_output.txt": "066f102c8cd7f98c46d5d7b5230cc3c5386eedb1233cef2db2b2d60ac570e39f",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case14_unit_lifo_2026101814/judge_output.txt": "41cbd26778e325ffd3d2c6f95a4958b1ca660471c45ac315e127d5b738de0e53",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case14_unit_lifo_2026101815/judge_output.txt": "de3cb8afb26a8b6fd3eb7f904d258999f75d9786c019cb3adc0ed42b1e1f1f15",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case14_unit_lifo_2026101816/judge_output.txt": "69caa2c91284acc3019bbea97022f4bd4bff89d07a596c4c2cb8909f6e6beccd",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case14_unit_lifo_2026101817/judge_output.txt": "dbfe1d2573e4f679ae3b3ab3e2a9ed4c1df769d08d94564975df34c3d58ad0c3",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_base/runs/case14_unit_lifo_2026101818/judge_output.txt": "4543d8b04c4eee363e16ffdf504f3e9ce4be08106069a1d5b0c19adc8550c205"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate": {
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/cases.csv": "5797232e5398a880d057daaa0a6a5b41d171c3b5a4ea9cdd7aecab0ea8e1a564",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/summary.json": "4b7e2a90f46f3af6d82b6ed837948ed3557515cd17618f9676a8bbe46e90ea73",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case12_mixed_lifo_2026101801/judge_output.txt": "f2f96d5ca2663be851af0b8dc6b784ae64d0a5dc622cdf1b6c668f0c68492ca8",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case12_mixed_lifo_2026101802/judge_output.txt": "defd74a43d1c584a97445745642e5836ecfa41b31c5d5b92150658b73a2ea53e",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case12_mixed_lifo_2026101803/judge_output.txt": "3428361ef8949a808e1106931d2fe4dc28d5f25d49825db08cfa829d2c08afc0",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case12_mixed_lifo_2026101804/judge_output.txt": "9f8f4a0ee37772300314baf36a22675810079350877fb45650fbd195e45b3e2c",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case12_mixed_lifo_2026101805/judge_output.txt": "1679f65854dd06e70c250038ac659518e4ea34d10ff1dcab924725f0b51a2038",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case12_mixed_lifo_2026101806/judge_output.txt": "efa736f893628edf2effd144e4a0ea6d4295abef675c8a55cd6f2f696ca80a7c",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case12_mixed_lifo_2026101807/judge_output.txt": "754bcabff864e4f3ff567f799810dde4e7a05d84d70807cceffe57f421e8259c",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case12_mixed_lifo_2026101808/judge_output.txt": "5fe60c2b57ab275dcb8519c004448db7cf8b94f8e65d43a83b222769dffc553c",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case14_unit_lifo_2026101811/judge_output.txt": "63da9db4dedc7850664d926dbc01327491217c1baf9d3f18c9142305f0c58895",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case14_unit_lifo_2026101812/judge_output.txt": "ce4d1db6955e203230df6f9be7b52f0131b41742592a231964b5a06a1c9b9f7d",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case14_unit_lifo_2026101813/judge_output.txt": "31db8cf2ceadc7ff33ae2e5b419b5374d5029760113fca5b3880f604a78ab8a5",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case14_unit_lifo_2026101814/judge_output.txt": "34ad41eba4ef081519f9b5d5aaf66cad38645acb862b6583e9a297a12fafa575",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case14_unit_lifo_2026101815/judge_output.txt": "c3763a50ba3a6937962bf5033cbc2bcad1df98dbe9a7935c15af6f0692497ea6",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case14_unit_lifo_2026101816/judge_output.txt": "f4cfb215baa486b323bf29fe631412dddffa04d35ba6eb520be96f25394a65fb",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case14_unit_lifo_2026101817/judge_output.txt": "370d14af3614b6f7c9bad8d1fe2fbcd3ce61990245fd14472aa80a8d09340a59",
+        "results/pipes/improvement/case_small_push_20261018/runs/synthetic_candidate/runs/case14_unit_lifo_2026101818/judge_output.txt": "086d25a4a9c8fb265d34eb4c29f499353b877f09bc20326f481d41bb84441b1e"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base": {
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/cases.csv": "4188981f630887e4bf60db179a1ea4a7ce720fbcf2b39d2d88f1b17c24265d1c",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/summary.json": "8f72120099cb9a40107887078f3ff709dd937e27a055dad1b47b0911942dedc8",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/runs/unit_scale_2026101821/judge_output.txt": "8e982739c25e6db83f208ac3cfa0af1a1ebe7a8c3100cea107522ee3215baa02",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/runs/unit_scale_2026101822/judge_output.txt": "d72a2110210b3bd003e57ee1d2512fd1917dcf1fd52e62a3ec547027c71ea5c9",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/runs/unit_scale_2026101823/judge_output.txt": "46844cfd1022ae99f11213ff986c5cb1a91a08ca98e8d297dfbe6d535da6322c",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/runs/unit_scale_2026101824/judge_output.txt": "31f8a8ee0dbac68da349076f8821cd8b3cabbda9205ba250ba3ac756fd5bcc86",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/runs/unit_scale_2026101825/judge_output.txt": "ac975aec6171f9bae0c9b3a28d8c2001136eccf33a2921fd1e8fb7f153e6a36a",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/runs/unit_scale_2026101826/judge_output.txt": "339495c91beac413a23939465ea13a2b85e7e7fefbf058e8f2d1459a3a56312a",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/runs/unit_scale_2026101827/judge_output.txt": "ea9a4048d940c9ca0a57624ed897719a7977d8678468fe44b026b1b9387ca013",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_base/runs/unit_scale_2026101828/judge_output.txt": "0784131f698b7dbad3dae0c716db888357f24717e301dd52b22b54393668cfda"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate": {
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/cases.csv": "45c418665d1ccc443721d3d418e7b9e18d7fa64e4d937a55bc4ec4d78481bb71",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/summary.json": "4591df8b95b6fa566dcabe1b6cb4bea3040cb22cb2a7c164885c50d8523c29b5",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/runs/unit_scale_2026101821/judge_output.txt": "49a5b3e646cec5f9f7721a2998c4785dbee6fdcfb1a3ea79768440d0cd6d62a8",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/runs/unit_scale_2026101822/judge_output.txt": "be46424e73fa8c9cd171df6c847be56ad67976467c659f78c40f383d37593f96",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/runs/unit_scale_2026101823/judge_output.txt": "3615cad78f835983b57c9466bacb84c9ce71f8a3c05bef592295f26ac5b7e710",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/runs/unit_scale_2026101824/judge_output.txt": "bc6109499df6788f8c8abcecf3b8cb372b4d3c1f4635699b36270d601639389e",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/runs/unit_scale_2026101825/judge_output.txt": "04b6bfd4c5457816be8b8468f8abcea4b7e262d60f9c13c6d105d55b8ebf4cd5",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/runs/unit_scale_2026101826/judge_output.txt": "19ba9b03dadc1d1345852709ddb918be98c0183120aad5783ab29f4090a13202",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/runs/unit_scale_2026101827/judge_output.txt": "26bb600a520943bb3e77f58a8e48f7a7d2061ae2a2c7dec08cf664da98e44b1f",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_v2_candidate/runs/unit_scale_2026101828/judge_output.txt": "bb2a9d540b439b640f40d1c2adcab7aa4d443da22f9e7e9fdaeb4ad6d1975223"
+      },
+      "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15": {
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/cases.csv": "5515d108df9b56e64381dde90200545256f17669ba20f50179f98ef527e8c7d1",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/summary.json": "4638d61edc735561c9305adb172a575f01ad8cbe4e69e2236d5e76a742f6f34b",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/1/judge_output.txt": "0c17f2e9efc8a8f9a376c8bd7f26d940ee3fe78feacc07dac0608b508b63590d",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/10/judge_output.txt": "93beaada464bdb56262e7ac4dbf27dafd8722262274ec06b5ee1f37c14787f03",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/11/judge_output.txt": "36ad5e3a34ca42366b95adcc3f7f93c5917de0935fa511fee68322e6905f9bf9",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/12/judge_output.txt": "2ab1911fd5a96fc87f5b14516f70b934b7311ad41ff39130c14d0584cf5d477e",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/13/judge_output.txt": "e5da020ce8a522213ae26acc8d03d03b4dbf657a767f9eeba4503a2740f55ef6",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/14/judge_output.txt": "424ddf9a2ef99d504e7cacb5bd1c86cbe1284976c4f833e1556ea1017ed6aba6",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/15/judge_output.txt": "910f1a9e96935977d7aa2fc5676b5d3896184510d0ae8c65d66a2887c14b0625",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/2/judge_output.txt": "03d84b63a7cf1bf51d501703e2465f6ebb2ef290dd9bc92be42fb879ecc5b0e2",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/3/judge_output.txt": "14f51309b18138cfc8c504ebeb4bf9f136d509fe4af3a83d917b408f1f74264d",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/4/judge_output.txt": "c63ca4b2f4296694d7089b76daa62c064e4c5791d218c5d1b2d4f29e0c0adb2b",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/5/judge_output.txt": "75dd1889ccbf61730c62edfc0f96a56dbf0eb4037f91404d4a3cbe3f15e8682a",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/6/judge_output.txt": "c44b9007a27cf242dd34a06e4b0bafa2bfa5570e70cebc7ffa578f5505c96b05",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/7/judge_output.txt": "e93d243bb723f5c4d3951824be0d63cc283607cf0422fe3a6ccd8db289ce8979",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/8/judge_output.txt": "a86800267292840409a96208bfeeb69c2eb787b30cdbed16e34b4199345c3cad",
+        "results/pipes/improvement/case_small_push_20261018/runs/unit_suppress_open15/runs/9/judge_output.txt": "f0a354503ed638dea12d973f68e8878a3dbeb16c267e70285f1cc85445b63950"
+      }
+    },
+    "report_sha256": "5c6038ab5fc834f4e373599fe9d49a0ab24bbcd8c0ab7d8f3cea3b659e858e20",
+    "comparison_csv_sha256": "98a08e518d2b7fba7c7a4eb57215c6d5afc3400907134131c03761f0b6622dec",
+    "synthetic_manifests": {
+      "synthetic/manifest.json": "458b96dced633303b5560c26a7b2e925e2926a76e11a669b9dcad1a7c06212e1",
+      "synthetic/unit_profile_v2/manifest.json": "09ca54511919112431dffda74d6ea11d4fcc041791db546bde29fd9bbf9fefc3"
+    }
+  },
+  "limits": {
+    "cpu_s": 5,
+    "memory_mib": 256
+  },
+  "canonical_source_sha256_after": "526ba58e955476105418593ebf0b3ef213dc4fe06fa601533e0aaf512a1dfec8",
+  "frozen_source_sha256_after": "c4b737b9a14588dd9895450acaff804b140691ef4d41bf1a0d68b6f13232a991",
+  "canonical_and_frozen_modified": false,
+  "website_used": false,
+  "docker_used": false,
+  "commands": [
+    "python3 tools/pipes_harness.py --solver bin/current_champion --interactor tools/interactor --tests data/pipes/open/12.in --out runs/base_case12 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/lifo_neighbor_tie --interactor tools/interactor --tests data/pipes/open/12.in --out runs/candidate_case12 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/current_champion --interactor tools/interactor --tests data/pipes/open/14.in --out runs/base_case14 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/lifo_neighbor_tie --interactor tools/interactor --tests data/pipes/open/14.in --out runs/candidate_case14 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/small_mixed_lifo_expansion_offset --interactor tools/interactor --tests data/pipes/open/12.in --out runs/expansion_candidate_case12 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/unit_profile_suppress_scale_offset --interactor tools/interactor --tests data/pipes/open/14.in --out runs/unit_suppression_case14 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/current_champion --interactor tools/interactor --tests synthetic --out runs/synthetic_base --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/lifo_neighbor_tie --interactor tools/interactor --tests synthetic --out runs/synthetic_candidate --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/current_champion --interactor tools/interactor --tests synthetic --out runs/unit_v2_base --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/unit_profile_suppress_scale_offset --interactor tools/interactor --tests synthetic/unit_profile_v2 --out runs/unit_v2_candidate --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120",
+    "python3 tools/pipes_harness.py --solver bin/unit_profile_suppress_scale_offset --interactor tools/interactor --tests data/pipes/open --out runs/unit_suppress_open15 --cpu-limit 5 --memory-limit-mb 256 --wall-timeout 120"
+  ]
+}

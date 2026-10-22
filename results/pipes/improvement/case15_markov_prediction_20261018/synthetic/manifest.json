@@ -1,0 +1,56 @@
+[
+  {
+    "name": "markov_case_01",
+    "seed": 20261018201,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "uniform iid sizes; random deletions",
+    "sha256": "7f3383bbba29752cf4b5d247a43fb807d5bd68160f59d40847aed78311bd1565"
+  },
+  {
+    "name": "markov_case_02",
+    "seed": 20261018213,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "first-order size persistence P(same)=0.75; LIFO deletions",
+    "sha256": "1be40257a71fb3e3616676e5fa311d80679c6bb2e474762eca41609f55c71a00"
+  },
+  {
+    "name": "markov_case_03",
+    "seed": 20261018227,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "noisy six-size cycle; FIFO deletions",
+    "sha256": "2396eea9ce00a1143b6951cb56bfc016867fa303615e781b4264724b46d43f17"
+  },
+  {
+    "name": "markov_case_04",
+    "seed": 20261018239,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "bounded random walk in size; newest-5%-biased deletions",
+    "sha256": "dc451a44dc281a802ccfb6015c378f103225279a1a0a02b4bb54e699faa9d4d3"
+  },
+  {
+    "name": "markov_case_05",
+    "seed": 20261018251,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "four independent size phases; median-rank deletions",
+    "sha256": "5c300d9862343c3f37cc1af658f6e874734e8fdfae3ec873769285919e9702af"
+  },
+  {
+    "name": "markov_case_06",
+    "seed": 20261018263,
+    "commands": 40700,
+    "initial_live": 700,
+    "final_live": 700,
+    "description": "first-order anti-persistent short/long bands; alternating newest/oldest deletions",
+    "sha256": "c44de3b7cfa3e28a0815e8df2776bf488a13a5e777327772029510cad9a5124f"
+  }
+]
